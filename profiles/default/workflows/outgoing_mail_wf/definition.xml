@@ -1,0 +1,563 @@
+<?xml version="1.0"?>
+<cps-workflow workflow_id="outgoing_mail_wf"
+              title="CPS Workflow Definition"
+              state_variable="review_state"
+              meta_type="CPS Workflow">
+ <permission>Add portal content</permission>
+ <permission>Add portal folders</permission>
+ <permission>Delete objects</permission>
+ <permission>Modify Folder Properties</permission>
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <state state_id="mail_closed" title="Mail closed">
+  <exit-transition transition_id="reopen"/>
+  <exit-transition transition_id="reset"/>
+  <exit-transition transition_id="acknowledge"/>
+  <permission-map name="Add portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Add portal folders" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify Folder Properties"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>WorkspaceReader</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>Associate</permission-role>
+  </permission-map>
+  <stack-definition stackdef_id="Pilots"
+                    variable_id="Pilots"
+                    meta_type="Hierarchical Stack Definition"
+                    stack_type="MSG Hierarchical Stack">
+   <managed-roles>
+    <managed-role name="Pilot"
+                  expression="python:level == stack.getCurrentLevel()"/>
+    <managed-role name="Associate"
+                  expression="python:level &gt; stack.getCurrentLevel() or level &lt; stack.getCurrentLevel()"/>
+   </managed-roles>
+   <empty-stack-manage-guard>
+    <guard-role>Manager</guard-role>
+    <guard-role>Owner</guard-role>
+   </empty-stack-manage-guard>
+   <edit-stack-element-guard>
+   </edit-stack-element-guard>
+   <view-stack-element-guard>
+   </view-stack-element-guard>
+  </stack-definition>
+  <state-behavior behavior_id="workflow-reset"/>
+  <workflow-reset-on-workflow-variable variable_id="Pilots"/>
+ </state>
+ <state state_id="mail_sent" title="Mail sent">
+  <exit-transition transition_id="recover"/>
+  <exit-transition transition_id="reset"/>
+  <exit-transition transition_id="close_off"/>
+  <exit-transition transition_id="acknowledge"/>
+  <permission-map name="Add portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Add portal folders" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify Folder Properties"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>Associate</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>Associate</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>WorkspaceReader</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>Associate</permission-role>
+  </permission-map>
+  <stack-definition stackdef_id="Pilots"
+                    variable_id="Pilots"
+                    meta_type="Hierarchical Stack Definition"
+                    stack_type="MSG Hierarchical Stack">
+   <managed-roles>
+    <managed-role name="Pilot"
+                  expression="python:level == stack.getCurrentLevel()"/>
+    <managed-role name="Associate"
+                  expression="python:level &gt; stack.getCurrentLevel() or level &lt; stack.getCurrentLevel()"/>
+   </managed-roles>
+   <empty-stack-manage-guard>
+    <guard-role>Manager</guard-role>
+    <guard-role>Owner</guard-role>
+   </empty-stack-manage-guard>
+   <edit-stack-element-guard>
+   </edit-stack-element-guard>
+   <view-stack-element-guard>
+   </view-stack-element-guard>
+  </stack-definition>
+  <state-behavior behavior_id="workflow-reset"/>
+  <workflow-reset-on-workflow-variable variable_id="Pilots"/>
+ </state>
+ <state state_id="mail_validated" title="Mail validated">
+  <exit-transition transition_id="manage_delegatees"/>
+  <exit-transition transition_id="move_up_delegation"/>
+  <exit-transition transition_id="move_down_delegation"/>
+  <exit-transition transition_id="invalidate"/>
+  <exit-transition transition_id="send"/>
+  <exit-transition transition_id="reset"/>
+  <exit-transition transition_id="close_off"/>
+  <exit-transition transition_id="acknowledge"/>
+  <permission-map name="Add portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Add portal folders" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify Folder Properties"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>Associate</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>Associate</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>WorkspaceReader</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>Associate</permission-role>
+  </permission-map>
+  <stack-definition stackdef_id="Pilots"
+                    variable_id="Pilots"
+                    meta_type="Hierarchical Stack Definition"
+                    stack_type="MSG Hierarchical Stack">
+   <managed-roles>
+    <managed-role name="Pilot"
+                  expression="python:level == stack.getCurrentLevel()"/>
+    <managed-role name="Associate"
+                  expression="python:level &gt; stack.getCurrentLevel() or level &lt; stack.getCurrentLevel()"/>
+   </managed-roles>
+   <empty-stack-manage-guard>
+    <guard-role>Manager</guard-role>
+    <guard-role>Owner</guard-role>
+   </empty-stack-manage-guard>
+   <edit-stack-element-guard>
+   </edit-stack-element-guard>
+   <view-stack-element-guard>
+   </view-stack-element-guard>
+  </stack-definition>
+  <state-behavior behavior_id="push-delegatees"/>
+  <state-behavior behavior_id="pop-delegatees"/>
+  <state-behavior behavior_id="workflow-up"/>
+  <state-behavior behavior_id="workflow-down"/>
+  <state-behavior behavior_id="workflow-reset"/>
+  <push-on-workflow-variable variable_id="Pilots"/>
+  <pop-on-workflow-variable variable_id="Pilots"/>
+  <workflow-up-on-workflow-variable variable_id="Pilots"/>
+  <workflow-down-on-workflow-variable variable_id="Pilots"/>
+  <workflow-reset-on-workflow-variable variable_id="Pilots"/>
+ </state>
+ <state state_id="mail_writing" title="Mail writing">
+  <exit-transition transition_id="manage_delegatees"/>
+  <exit-transition transition_id="move_up_delegation"/>
+  <exit-transition transition_id="move_down_delegation"/>
+  <exit-transition transition_id="validate"/>
+  <exit-transition transition_id="reset"/>
+  <exit-transition transition_id="close_off"/>
+  <exit-transition transition_id="acknowledge"/>
+  <exit-transition transition_id="delete"/>
+  <exit-transition transition_id="initialize_stack"/>
+  <exit-transition transition_id="init_reset_stack"/>
+  <exit-transition transition_id="create_content"/>
+  <exit-transition transition_id="cut_copy_paste"/>
+  <permission-map name="Add portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Add portal folders" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Delete objects" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
+  <permission-map name="Modify Folder Properties"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>Associate</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>Associate</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>WorkspaceReader</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>Associate</permission-role>
+  </permission-map>
+  <stack-definition stackdef_id="Pilots"
+                    variable_id="Pilots"
+                    meta_type="Hierarchical Stack Definition"
+                    stack_type="MSG Hierarchical Stack">
+   <managed-roles>
+    <managed-role name="Pilot"
+                  expression="python:level == stack.getCurrentLevel()"/>
+    <managed-role name="Associate"
+                  expression="python:level &gt; stack.getCurrentLevel() or level &lt; stack.getCurrentLevel()"/>
+   </managed-roles>
+   <empty-stack-manage-guard>
+    <guard-role>Manager</guard-role>
+    <guard-role>Owner</guard-role>
+   </empty-stack-manage-guard>
+   <edit-stack-element-guard>
+   </edit-stack-element-guard>
+   <view-stack-element-guard>
+   </view-stack-element-guard>
+  </stack-definition>
+  <state-behavior behavior_id="push-delegatees"/>
+  <state-behavior behavior_id="pop-delegatees"/>
+  <state-behavior behavior_id="workflow-up"/>
+  <state-behavior behavior_id="workflow-down"/>
+  <state-behavior behavior_id="workflow-reset"/>
+  <push-on-workflow-variable variable_id="Pilots"/>
+  <pop-on-workflow-variable variable_id="Pilots"/>
+  <workflow-up-on-workflow-variable variable_id="Pilots"/>
+  <workflow-down-on-workflow-variable variable_id="Pilots"/>
+  <workflow-reset-on-workflow-variable variable_id="Pilots"/>
+ </state>
+ <transition transition_id="acknowledge" title="Acknowledge"
+             new_state="" trigger="USER"
+             before_script="acknowledge" after_script="">
+
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Pilot</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="close_off" title="Close off"
+             new_state="mail_closed" trigger="USER"
+             before_script=""
+             after_script="mark_incoming_mail_as_answered">
+  <action url="msg_outgoing_close_off_transition_form?workflow_action=close_off"
+          category="workflow">msg_outgoing_close_off_action</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Pilot</guard-role>
+   <guard-role>Associate</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="create" title="Initial creation"
+             new_state="mail_writing" trigger="USER"
+             before_script=""
+             after_script="initialize_stack">
+
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>Pilot</guard-role>
+   <guard-role>Associate</guard-role>
+  </guard>
+  <transition-behavior behavior_id="initial-create"/>
+ </transition>
+ <transition transition_id="create_content"
+             title="Create content" new_state=""
+             trigger="USER" before_script="" after_script="">
+
+  <guard>
+   <guard-role>Manager</guard-role>
+  </guard>
+  <transition-behavior behavior_id="allow-sub-create"/>
+ </transition>
+ <transition transition_id="cut_copy_paste"
+             title="Cut/Copy/Paste" new_state=""
+             trigger="USER" before_script="" after_script="">
+
+  <guard>
+   <guard-role>Manager</guard-role>
+  </guard>
+  <transition-behavior behavior_id="allow-sub-delete"/>
+  <transition-behavior behavior_id="allow-sub-copy"/>
+  <transition-behavior behavior_id="allow-sub-move"/>
+ </transition>
+ <transition transition_id="delete" title="Delete"
+             new_state="" trigger="USER" before_script=""
+             after_script="">
+  <action url="msg_outgoing_transition_form?workflow_action=delete"
+          category="workflow">msg_outgoing_delete_action</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Pilot</guard-role>
+  </guard>
+  <transition-behavior behavior_id="delete"/>
+ </transition>
+ <transition transition_id="init_reset_stack"
+             title="Initialize stack resetting" new_state=""
+             trigger="USER" before_script="" after_script="">
+
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Owner</guard-role>
+  </guard>
+  <transition-behavior behavior_id="workflow-reset"/>
+  <workflow-reset-on-workflow-variable variable_id="Pilots"/>
+ </transition>
+ <transition transition_id="initialize_stack"
+             title="Initialize stack pushing" new_state=""
+             trigger="USER" before_script="" after_script="">
+
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Owner</guard-role>
+  </guard>
+  <transition-behavior behavior_id="push-delegatees"/>
+  <push-on-workflow-variable variable_id="Pilots"/>
+ </transition>
+ <transition transition_id="invalidate"
+             title="Invalidate answer"
+             new_state="mail_writing" trigger="USER"
+             before_script="" after_script="">
+  <action url="msg_outgoing_transition_form?workflow_action=invalidate"
+          category="workflow">msg_outgoing_invalidate_action</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Pilot</guard-role>
+   <guard-role>Associate</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="manage_delegatees"
+             title="Manage delegatees" new_state=""
+             trigger="USER" before_script="" after_script="">
+  <action url="msg_outgoing_manage_delegatees_form?workflow_action=manage_delegatees"
+          category="workflow">msg_outgoing_manage_delegatees_action</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Pilot</guard-role>
+  </guard>
+  <transition-behavior behavior_id="push-delegatees"/>
+  <transition-behavior behavior_id="pop-delegatees"/>
+  <push-on-workflow-variable variable_id="Pilots"/>
+  <pop-on-workflow-variable variable_id="Pilots"/>
+ </transition>
+ <transition transition_id="move_down_delegation"
+             title="Move down delegation stack" new_state=""
+             trigger="USER" before_script="treat"
+             after_script="">
+  <action url="msg_outgoing_move_delegation_form?workflow_action=move_down_delegation"
+          category="workflow">msg_outgoing_move_down_delegation_action</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Pilot</guard-role>
+  </guard>
+  <transition-behavior behavior_id="workflow-down"/>
+  <workflow-down-on-workflow-variable variable_id="Pilots"/>
+ </transition>
+ <transition transition_id="move_up_delegation"
+             title="Move up delegation stack" new_state=""
+             trigger="USER" before_script="treat"
+             after_script="">
+  <action url="msg_outgoing_move_delegation_form?workflow_action=move_up_delegation"
+          category="workflow">msg_outgoing_move_up_delegation_action</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Pilot</guard-role>
+  </guard>
+  <transition-behavior behavior_id="workflow-up"/>
+  <workflow-up-on-workflow-variable variable_id="Pilots"/>
+ </transition>
+ <transition transition_id="recover" title="Recover"
+             new_state="mail_validated" trigger="USER"
+             before_script="" after_script="">
+  <action url="msg_outgoing_transition_form?workflow_action=recover"
+          category="workflow">msg_outgoing_recover_action</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Pilot</guard-role>
+   <guard-role>Associate</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="reopen" title="Reopen"
+             new_state="mail_sent" trigger="USER"
+             before_script="" after_script="">
+  <action url="msg_outgoing_transition_form?workflow_action=reopen"
+          category="workflow">msg_outgoing_reopen_action</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Pilot</guard-role>
+   <guard-role>Associate</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="reset" title="Reset"
+             new_state="mail_writing" trigger="USER"
+             before_script="" after_script="">
+  <action url="msg_outgoing_reset_delegation_form?workflow_action=reset"
+          category="workflow">msg_outgoing_reset_action</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Pilot</guard-role>
+  </guard>
+  <transition-behavior behavior_id="workflow-reset"/>
+  <transition-behavior behavior_id="push-delegatees"/>
+  <push-on-workflow-variable variable_id="Pilots"/>
+  <workflow-reset-on-workflow-variable variable_id="Pilots"/>
+ </transition>
+ <transition transition_id="send" title="Send"
+             new_state="mail_sent" trigger="USER"
+             before_script="" after_script="">
+  <action url="msg_outgoing_transition_form?workflow_action=send"
+          category="workflow">msg_outgoing_send_action</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Pilot</guard-role>
+   <guard-role>Associate</guard-role>
+  </guard>
+ </transition>
+ <transition transition_id="validate"
+             title="Validate answer"
+             new_state="mail_validated" trigger="USER"
+             before_script="" after_script="">
+  <action url="msg_outgoing_transition_form?workflow_action=validate"
+          category="workflow">msg_outgoing_validate_action</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Pilot</guard-role>
+   <guard-role>Associate</guard-role>
+  </guard>
+ </transition>
+ <variable variable_id="Pilots" for_catalog="False"
+           for_status="True" update_always="False">
+  <description>Variable holding a stack</description>
+  <default>
+
+   <expression>python:state_change.getStackFor(var_id='Pilots')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="action" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The last transition</description>
+  <default>
+
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The ID of the user who performed the last transition</description>
+  <default>
+
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Comments about the last transition</description>
+  <default>
+
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="dest_container" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Destination container for the last paste/publish</description>
+  <default>
+
+   <expression>python:state_change.kwargs.get('dest_container', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="language_revs" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The language revisions of the proxy</description>
+  <default>
+
+   <expression>state_change/getLanguageRevisions</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False"
+           for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>WorkspaceReader</guard-role>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Time of the last transition</description>
+  <default>
+
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <script script_id="acknowledge" type="Script (Python)"
+         filename="workflows/msg_outgoing_wf/scripts/acknowledge.py"/>
+ <script script_id="initialize_stack" type="Script (Python)"
+         filename="workflows/msg_outgoing_wf/scripts/initialize_stack.py"/>
+ <script script_id="mark_incoming_mail_as_answered"
+         type="Script (Python)"
+         filename="workflows/msg_outgoing_wf/scripts/mark_incoming_mail_as_answered.py"/>
+ <script script_id="treat" type="Script (Python)"
+         filename="workflows/msg_outgoing_wf/scripts/treat.py"/>
+</cps-workflow>

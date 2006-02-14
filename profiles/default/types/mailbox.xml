@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<object name="courrier_dashboard" meta_type="CPS Flexible Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property
+    name="title">label_courriers_documents_dashboard_type_title</property>
+ <property
+    name="description">label_courriers_documents_dashboard_type_description</property>
+ <property name="content_icon">ico_folder_empty.gif</property>
+ <property name="big_icon"></property>
+ <property name="content_meta_type">CPS Document</property>
+ <property name="product">CPSDocument</property>
+ <property name="factory">addCPSDocument</property>
+ <property name="immediate_view">view</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types">
+  <element value="incoming_mail"/>
+  <element value="outgoing_mail"/>
+  <element value="spontaneous_mail"/>
+ </property>
+ <property name="allow_discussion">True</property>
+ <property name="cps_is_searchable">True</property>
+ <property name="cps_proxy_type">btreefolder</property>
+ <property name="cps_display_as_document_in_listing">True</property>
+ <property name="schemas">
+  <element value="metadata"/>
+  <element value="common"/>
+ </property>
+ <property name="layouts">
+  <element value="courriers_documents_dashboard"/>
+  <element value="dashboard_cartouche"/>
+ </property>
+ <property name="layout_clusters">
+  <element value="default:"/>
+  <element value="cartouche:dashboard_cartouche"/>
+ </property>
+ <property name="flexible_layouts"/>
+ <property name="storage_methods"/>
+ <property name="cps_is_portlet">False</property>
+ <property name="msg_params">msg_courrier_dashboard_params</property>
+ <alias from="(Default)" to="msgdashboard_view"/>
+ <alias from="view" to="msgdashboard_view"/>
+ <action title="action_view_dashboard" action_id="view" category="object_tab"
+    condition_expr="" url_expr="string:${object_url}/msgdashboard_view"
+    visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="action_local_roles" action_id="localroles"
+    category="object_tab"
+    condition_expr="python:object.getTypeInfo().cps_proxy_type != 'document'"
+    url_expr="string:${object_url}/folder_localrole_form" visible="True">
+  <permission value="Change permissions"/>
+ </action>
+ <action title="button_cut" action_id="cut" category="object_manage"
+    condition_expr="" url_expr="string:folder_cut:method" visible="True">
+  <permission value="Delete objects"/>
+  <permission value="Add portal content"/>
+ </action>
+ <action title="button_copy" action_id="copy" category="object_manage"
+    condition_expr="" url_expr="string:folder_copy:method" visible="True">
+  <permission value="Add portal content"/>
+ </action>
+ <action title="button_paste" action_id="paste" category="object_manage"
+    condition_expr="python:object.cb_dataValid()"
+    url_expr="string:folder_paste:method" visible="True">
+  <permission value="Add portal content"/>
+ </action>
+ <action title="button_delete" action_id="delete" category="object_manage"
+    condition_expr="" url_expr="string:folder_delete:method" visible="True">
+  <permission value="Delete objects"/>
+ </action>
+</object>

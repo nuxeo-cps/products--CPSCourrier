@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<object name="spontaneous_mail" meta_type="CPS Flexible Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title">label_spontaneous_mail_type_title</property>
+ <property
+    name="description">label_spontaneous_mail_type_description</property>
+ <property name="content_icon">ico_document_small.gif</property>
+ <property name="big_icon">ico_document.gif</property>
+ <property name="content_meta_type">CPS Document</property>
+ <property name="product">CPSDocument</property>
+ <property name="factory">addCPSDocument</property>
+ <property name="immediate_view">view</property>
+ <property name="global_allow">True</property>
+ <property name="filter_content_types">True</property>
+ <property name="allowed_content_types"/>
+ <property name="allow_discussion">True</property>
+ <property name="cps_is_searchable">True</property>
+ <property name="cps_proxy_type">folder</property>
+ <property name="cps_display_as_document_in_listing">True</property>
+ <property name="schemas">
+  <element value="common"/>
+  <element value="metadata"/>
+  <element value="incoming_mail"/>
+  <element value="flexible_files"/>
+ </property>
+ <property name="layouts">
+  <element value="incoming_mail"/>
+  <element value="flexible_files"/>
+ </property>
+ <property name="layout_clusters">
+  <element value="default:incoming_mail,flexible_files"/>
+  <element value="cartouche:incoming_mail_cartouche"/>
+ </property>
+ <property name="flexible_layouts">
+  <element value="flexible_files:flexible_files"/>
+ </property>
+ <property name="storage_methods"/>
+ <property name="cps_is_portlet">False</property>
+ <property name="msg_params">msg_document_params</property>
+ <alias from="(Default)" to="msgdocument_view"/>
+ <alias from="view" to="msgdocument_view"/>
+ <action title="action_view_resume" action_id="view" category="object_tab"
+    condition_expr="" url_expr="string:${object_url}/msgdocument_view"
+    visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="action_create" action_id="create" category="object"
+    condition_expr="" url_expr="string:${object_url}/msgdocument_create_form"
+    visible="False">
+  <permission value="Add portal content"/>
+ </action>
+ <action title="action_new_content" action_id="new_content"
+    category="object_manage"
+    condition_expr="python:object.getTypeInfo().cps_proxy_type != 'document'"
+    url_expr="string:${object_url}/msg_folder_factories" visible="False">
+  <permission value="Add portal content"/>
+ </action>
+ <action title="action_edit" action_id="edit" category="object_manage"
+    condition_expr="" url_expr="string:${object_url}/msgdocument_edit_form"
+    visible="False">
+  <permission value="Modify portal content"/>
+ </action>
+ <action title="action_view_metadata" action_id="metadata"
+    category="object_tab"
+    condition_expr="not:portal/portal_membership/isAnonymousUser"
+    url_expr="string:${object_url}/msgdocument_metadata" visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="action_view_data_import" action_id="data_import"
+    category="object_tab"
+    condition_expr="python:getattr(object.getContent(),'donnees_non_reprises','')"
+    url_expr="string:${object_url}/msgdocument_data_import_view"
+    visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="action_local_roles" action_id="localroles"
+    category="object_tab"
+    condition_expr="python:object.getTypeInfo().cps_proxy_type != 'document'"
+    url_expr="string:${object_url}/folder_localrole_form" visible="False">
+  <permission value="Change permissions"/>
+ </action>
+</object>
