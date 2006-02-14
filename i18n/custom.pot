@@ -20,6 +20,12 @@ msgstr ""
 # Document types labels
 #
 
+msgid "portal_type_MailboxGroup_title"
+msgstr ""
+
+msgid "portal_type_MailboxGroup_description"
+msgstr ""
+
 msgid "portal_type_Mailbox_title"
 msgstr ""
 

@@ -1,24 +1,19 @@
 <?xml version="1.0"?>
-<object name="Mailbox" meta_type="CPS Flexible Type Information"
+<object name="Mailbox Group" meta_type="CPS Flexible Type Information"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">portal_type_Mailbox_title</property>
- <property name="description">portal_type_Mailbox_description</property>
- <property name="content_icon">mailbox_icon.png</property>
+ <property name="title">portal_type_MailboxGroup_title</property>
+ <property name="description">portal_type_MailboxGroup_description</property>
+ <property name="content_icon">mailbox_group_icon.png</property>
  <property name="product">CPSCourrier</property>
 
- <!-- A Mailbox is a container type similar to a workspace -->
+ <!-- A Mailbox Group is a container type similar to a workspace to organise
+ Mailboxes -->
  <property name="factory">addFolder</property>
  <property name="immediate_view">folder_contents</property>
-
- <!-- Use a BTree type to scale to potentially large mail collections -->
- <property name="cps_proxy_type">btreefolder</property>
-
- <!-- A mailbox is not a regular workspace: it is only used to store mail
-      documents (and potentially sub mailboxes for archiving matters) -->
+ <property name="cps_proxy_type">folder</property>
  <property name="allowed_content_types">
-  <element value="Incoming Mail"/>
-  <element value="Outgoing Mail"/>
   <element value="Mailbox"/>
+  <element value="Mailbox Group"/>
  </property>
 
  <!-- Currently use the same schemas and layouts as standard workspaces -->
