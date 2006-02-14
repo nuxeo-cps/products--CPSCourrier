@@ -4,7 +4,7 @@
  <property name="title">portal_type_OutgoingMail_title</property>
  <property name="description">portal_type_OutgoingMail_description</property>
  <property name="content_icon">outgoing_mail_icon.png</property>
- <property name="product">CPSCourrier</property>
+ <property name="product">CPSDocument</property>
  <property name="immediate_view">cpsdocument_edit_form</property>
 
  <!-- Flexible schemas and layout -->

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!-- Same rolemap as for workspaces -->
+<rolemap>
+  <permissions>
+    <permission name="Add portal content" acquire="False">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+      <role name="WorkspaceMember"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="Add portal folders" acquire="False">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+    </permission>
+    <permission name="Change permissions" acquire="False">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+    </permission>
+    <permission name="Change subobjects order" acquire="False">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+      <role name="WorkspaceMember"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="Delete objects" acquire="False">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+      <role name="WorkspaceMember"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="List folder contents" acquire="False">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+      <role name="WorkspaceMember"/>
+      <role name="Contributor"/>
+      <role name="WorkspaceReader"/>
+    </permission>
+    <permission name="Modify Folder Properties" acquire="False">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+    </permission>
+    <permission name="Modify portal content" acquire="False">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+      <role name="WorkspaceMember"/>
+      <role name="Contributor"/>
+      <role name="Owner"/>
+    </permission>
+    <permission name="View archived revisions" acquire="False">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+      <role name="WorkspaceMember"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="View management screens" acquire="False">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+      <role name="WorkspaceMember"/>
+      <role name="Contributor"/>
+    </permission>
+    <permission name="View" acquire="False">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+      <role name="WorkspaceMember"/>
+      <role name="Contributor"/>
+      <role name="WorkspaceReader"/>
+    </permission>
+    <permission name="WebDAV Lock items" acquire="False">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+      <role name="WorkspaceMember"/>
+      <role name="Contributor"/>
+      <role name="Owner"/>
+    </permission>
+    <permission name="WebDAV Unlock items" acquire="False">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+      <role name="WorkspaceMember"/>
+      <role name="Owner"/>
+    </permission>
+  </permissions>
+</rolemap>

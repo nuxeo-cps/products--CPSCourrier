@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="mailboxes">
+ <rolemap file="rolemap.xml"/>
+ <property name="title_msgid">mailboxes_root_title</property>
+ <object name=".cps_workflow_configuration"
+         meta_type="CPS Workflow Configuration"/>
+</object>

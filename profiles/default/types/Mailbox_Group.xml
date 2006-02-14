@@ -3,8 +3,9 @@
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title">portal_type_MailboxGroup_title</property>
  <property name="description">portal_type_MailboxGroup_description</property>
+ <property name="content_meta_type">Folder</property>
  <property name="content_icon">mailbox_group_icon.png</property>
- <property name="product">CPSCourrier</property>
+ <property name="product">CPSDefault</property>
 
  <!-- A Mailbox Group is a container type similar to a workspace to organise
  Mailboxes -->

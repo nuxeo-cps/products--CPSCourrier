@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<object name=".cps_workflow_configuration"
+        meta_type="CPS Workflow Configuration">
+
+  <local-workflows>
+
+    <!-- The root of mailboxes only hosts Mailbox Groups folders -->
+    <type name="Mailbox Group" wf="workspace_folder_wf"/>
+
+  </local-workflows>
+
+  <below-workflows>
+
+    <!-- Mailbox Groups cannot get nested (except for the root) -->
+    <type name="Mailbox Group" wf=""/>
+
+    <!--
+      Mailbox Groups only host mailboxes that cannot get created at the root
+      of mailboxes
+    -->
+    <type name="Mailbox" wf="workspace_folder_wf"/>
+
+    <!--
+      Put here workflow associations for mailbox contents.
+      Messages document cannot be directly created at the Mailbox groups level
+      since the do not belong to their allowed_content_types property
+    -->
+    <!--
+      XXX: use specific stack based wf chains here instead of
+           workspace_content_wf
+    -->
+    <type name="Incoming Mail" wf="workspace_content_wf"/>
+    <type name="Outgoing Mail" wf="workspace_content_wf"/>
+
+  </below-workflows>
+</object>

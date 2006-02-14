@@ -4,7 +4,8 @@
  <property name="title">portal_type_Mailbox_title</property>
  <property name="description">portal_type_Mailbox_description</property>
  <property name="content_icon">mailbox_icon.png</property>
- <property name="product">CPSCourrier</property>
+ <property name="content_meta_type">Folder</property>
+ <property name="product">CPSDefault</property>
 
  <!-- A Mailbox is a container type similar to a workspace -->
  <property name="factory">addFolder</property>

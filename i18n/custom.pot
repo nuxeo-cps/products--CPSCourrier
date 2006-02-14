@@ -44,3 +44,10 @@ msgstr ""
 msgid "portal_type_OutgoingMail_description"
 msgstr ""
 
+#
+# Root of mailboxes area
+#
+
+msgid "mailboxes_root_title"
+msgstr ""
+
