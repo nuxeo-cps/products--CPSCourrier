@@ -17,8 +17,10 @@
 
 from Products.GenericSetup import profile_registry
 from Products.GenericSetup import EXTENSION
-
+from Products.CMFCore.DirectoryView import registerDirectory
 from Products.CPSCore.interfaces import ICPSSite
+
+registerDirectory('skins', globals())
 
 def initialize(registrar):
     # Extension profile registration
