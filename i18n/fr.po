@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-14 15:16default\n"
+"POT-Creation-Date: 2006-02-14 18:26default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -15,4 +15,25 @@ msgstr ""
 "Language-Name: French\n"
 "Preferred-encodings: latin9 utf-8\n"
 "Domain: default\n"
+
+#
+# Document types labels
+#
+msgid "portal_type_Mailbox_title"
+msgstr "Boîte aux lettres"
+
+msgid "portal_type_Mailbox_description"
+msgstr "Espace dédié au stockage du courrier"
+
+msgid "portal_type_IncomingMail_title"
+msgstr "Courrier entrant"
+
+msgid "portal_type_IncomingMail_description"
+msgstr "Message électronique ou numérisé"
+
+msgid "portal_type_OutgoingMail_title"
+msgstr "Courrier sortant"
+
+msgid "portal_type_OutgoingMail_description"
+msgstr "Message contenant une réponse à un courrier entrant"
 

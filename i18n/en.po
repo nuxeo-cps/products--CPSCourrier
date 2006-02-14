@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-14 15:16default\n"
+"POT-Creation-Date: 2006-02-14 18:26default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -16,3 +16,23 @@ msgstr ""
 "Preferred-encodings: latin9 utf-8\n"
 "Domain: default\n"
 
+#
+# Document types labels
+#
+msgid "portal_type_Mailbox_title"
+msgstr "Mailbox"
+
+msgid "portal_type_Mailbox_description"
+msgstr "Area to store and manage message documents"
+
+msgid "portal_type_IncomingMail_title"
+msgstr "Incoming mail"
+
+msgid "portal_type_IncomingMail_description"
+msgstr "Incoming electronic or digitalised message"
+
+msgid "portal_type_OutgoingMail_title"
+msgstr "Outgoing mail"
+
+msgid "portal_type_OutgoingMail_description"
+msgstr "Outgoing message that holds an answer to some incoming mail"

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-14 16:58default\n"
+"POT-Creation-Date: 2006-02-14 18:26default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -16,3 +16,23 @@ msgstr ""
 "Preferred-encodings: latin9 utf-8\n"
 "Domain: default\n"
 
+#
+# Document types labels
+#
+msgid "portal_type_Mailbox_title"
+msgstr ""
+
+msgid "portal_type_Mailbox_description"
+msgstr ""
+
+msgid "portal_type_IncomingMail_title"
+msgstr ""
+
+msgid "portal_type_IncomingMail_description"
+msgstr ""
+
+msgid "portal_type_OutgoingMail_title"
+msgstr ""
+
+msgid "portal_type_OutgoingMail_description"
+msgstr ""

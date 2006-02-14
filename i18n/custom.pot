@@ -16,3 +16,25 @@ msgstr ""
 "Preferred-encodings: utf-8 latin1\n"
 "Domain: default\n"
 
+#
+# Document types labels
+#
+
+msgid "portal_type_Mailbox_title"
+msgstr ""
+
+msgid "portal_type_Mailbox_description"
+msgstr ""
+
+msgid "portal_type_IncomingMail_title"
+msgstr ""
+
+msgid "portal_type_IncomingMail_description"
+msgstr ""
+
+msgid "portal_type_OutgoingMail_title"
+msgstr ""
+
+msgid "portal_type_OutgoingMail_description"
+msgstr ""
+
