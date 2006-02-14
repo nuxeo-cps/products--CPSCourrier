@@ -3,5 +3,4 @@
  <object name="mailbox" meta_type="CPS Flexible Type Information"/>
  <object name="incoming_mail" meta_type="CPS Flexible Type Information"/>
  <object name="outgoing_mail" meta_type="CPS Flexible Type Information"/>
- <object name="spontaneous_mail" meta_type="CPS Flexible Type Information"/>
 </object>
