@@ -1,0 +1,31 @@
+=========================
+CPS Courrier widgets
+=========================
+
+:Revision: $Id$
+
+.. sectnum::    :depth: ??
+.. contents::   :depth: ??
+
+CPS Workflow Stack Widget
+=========================
+
+This is a simple widget to call stack renders from within a layout. 
+The workflow variable holding the stack is declared in the property 
+'stack_var_id'. What the widget does is:
+
+- fetch the stack
+- call the stack's render method with the requested mode and additional keywords
+
+This widget is intended mostly to be used in 'view', although any mode
+(even bogus ones) are currently forwarded to the stack.
+
+
+.. Emacs
+.. Local Variables:
+.. mode: rst
+.. End:
+.. Vim
+.. vim: set filetype=rst:
+
+
