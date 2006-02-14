@@ -1,6 +1,5 @@
 # (C) Copyright 2006 Nuxeo SAS <http://nuxeo.com>
-# Authors: Olivier Grisel <ogrisel@nuxeo.com>
-#          Georges Racinet <gracinet@nuxeo.com>
+# Author: Georges Racinet <gracinet@nuxeo.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 2 as published
@@ -18,16 +17,14 @@
 #
 # $Id$
 
-from zope.interface import Interface, Attribute
+import unittest
+from StringIO import StringIO
 
-from OFS.interfaces import IPropertyManager, IFolder
+from Testing.ZopeTestCase import doctest
 
-class IColumnDefinition(IPropertyManager):
-    """ Configuration object that defines a type of column to display contents 
-    """
 
-class IColumnDefinitionsTool(IFolder):
-    """ Configuration object that defines a type of column to display contents 
-    """
-
-    
+def test_suite():
+    return unittest.TestSuite((
+        doctest.DocTestSuite('Products.CPSCourrier.columndefinitions',
+                             optionflags=doctest.NORMALIZE_WHITESPACE),
+        ))

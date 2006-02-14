@@ -1,0 +1,19 @@
+<h1 tal:replace="structure context/manage_page_header">PAGE HEADER</h1>
+<h2 tal:define="manage_tabs_message request/manage_tabs_message | nothing"
+    tal:replace="structure context/manage_tabs">TABS</h2>
+
+<h3> Add CPS Column Definition
+</h3>
+
+<p>
+<form action="manage_addColumnDefinition" method="POST">
+  <span class="form-label">
+    Id
+  </span>
+  <input type="text" name="id" size="40" />
+  <input class="form-element" type="submit" name="submit" 
+     value=" Add " /> 
+</form>
+</p>
+
+<h1 tal:replace="structure context/manage_page_footer">PAGE FOOTER</h1>

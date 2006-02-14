@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<import-steps>
+ <import-step id="columndeftool" version="20060218-01"
+              handler="Products.CPSCourrier.exportimport.importColumnDefinitionsTool"
+              title="Column Definitions Tool">
+  <dependency step="toolset"/>
+  Import column definitions tool and its contents.
+ </import-step>
+</import-steps>
