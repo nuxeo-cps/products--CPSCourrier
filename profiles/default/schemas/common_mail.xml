@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- fields in common for both in and out messages types -->
+<object name="common_mail" meta_type="CPS Schema">
+  <field name="content" meta_type="CPS String Field">
+    <property name="is_searchabletext">True</property>
+  </field>
+  <field name="deadline" meta_type="CPS DateTime Field"/>
+  <field name="priority" meta_type="CPS String Field"/>
+  <field name="size" meta_type="CPS Float Field"/>
+  <field name="original_sender_address" meta_type="CPS String Field">
+    <property name="is_searchabletext">True</property>
+  </field>
+</object>
+

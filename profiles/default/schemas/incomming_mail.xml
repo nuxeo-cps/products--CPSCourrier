@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!-- specific fields for incoming messages -->
+<object name="incoming_mail" meta_type="CPS Schema">
+  <field name="smtp_headers" meta_type="CPS String List Field"/>
+</object>
+

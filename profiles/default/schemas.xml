@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<object name="portal_schemas" meta_type="CPS Schemas Tool">
+ <object name="common_mail" meta_type="CPS Schema"/>
+ <object name="incoming_mail" meta_type="CPS Schema"/>
+ <object name="outgoing_mail" meta_type="CPS Schema"/>
+ <object name="common_mail" meta_type="CPS Schema"/>
+ <object name="mailbox" meta_type="CPS Schema"/>
+</object>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- specific fields for mailboxes -->
+<object name="mailbox" meta_type="CPS Schema">
+  <field name="sender_email_addresses" meta_type="CPS String Field"/>
+
+  <!-- default settings for messages created in the mailbox: -->
+  <field name="replier_email_addresses" meta_type="CPS String List Field"/>
+  <field name="priority" meta_type="CPS String Field"/>
+  <field name="allowed_reply_time" meta_type="CPS Int Field"/>
+</object>
+
