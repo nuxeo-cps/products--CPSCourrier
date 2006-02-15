@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<object name="mailboxes" meta_type="CPS Tree Cache">
+ <!-- tree cache for the mailboxes hierarchy -->
+ <property name="title"></property>
+ <property name="root">mailboxes</property>
+ <property name="type_names">
+  <element value="Mailbox Group"/>
+  <element value="Mailbox"/>
+ </property>
+ <property name="meta_types">
+  <element value="CPS Proxy Folder"/>
+  <element value="CPS Proxy BTree Folder"/>
+ </property>
+ <property name="excluded_rpaths"/>
+ <property name="info_method">getFolderInfo</property>
+</object>
