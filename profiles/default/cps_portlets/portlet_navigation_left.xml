@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<object name="portlet_navigation_left" meta_type="CPS Portlet"
+   portal_type="Navigation Portlet">
+ <!-- Add the mailboxes to the navigation portlet -->
+ <f id="root_uids" purge="False">
+  <e v="mailboxes"/>
+ </f>
+</object>
