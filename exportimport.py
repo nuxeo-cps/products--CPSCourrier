@@ -111,7 +111,6 @@ class ColumnDefinitionXMLAdapter(XMLAdapterBase, PropertyManagerHelpers):
         if self.environ.shouldPurge():
             self._purgeProperties()
         self._initProperties(node)
-        self._initObjects(node)
         self._logger.info("Column definition imported.")
 
     node = property(_exportNode, _importNode)

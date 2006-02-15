@@ -1,4 +1,11 @@
 <?xml version="1.0"?>
 <object name="portal_columns" meta_type="CPS Column Definition Tool">
- <object name="rirle" meta_type="CPS Column Definition"/>
+ <object name="objecttitle" meta_type="CPS Column Definition">
+  <property name="title">Title</property>
+  <property name="attribute">title</property>
+  <property name="href"></property>
+  <property name="label">label_column_title</property>
+  <property name="is_i18n">False</property>
+  <property name="sortable">True</property>
+ </object>
 </object>
