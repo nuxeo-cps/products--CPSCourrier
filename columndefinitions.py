@@ -39,8 +39,8 @@ _zmidir = os.path.join(package_home(globals()), 'zmi')
 class ColumnDefinition(SimpleItemWithProperties):
     """ A definition of a display column.
 
-    >>> ColumnDefinition()
-    <ColumnDefinition at >
+    >>> ColumnDefinition('the_col')
+    <ColumnDefinition at the_col>
     """
 
     implements(IColumnDefinition)
@@ -101,7 +101,7 @@ class ColumnDefinitionsTool(UniqueObject, Folder):
         >>> tool = ColumnDefinitionsTool()
         >>> tool.manage_addColumnDefinition(id='col')
         >>> tool.col
-        <ColumnDefinition at portal_columns/>
+        <ColumnDefinition at portal_columns/col>
         """
         
         if not id:
