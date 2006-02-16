@@ -45,8 +45,25 @@ class TestingTabPortletWidget(TabularPortletWidget):
         ]]
 
     def listItems(self):
-        return self.brains 
-    
+        return self.brains
+
+class TestingTabPortletWidgetCustomMethods(TestingTabPortletWidget):
+    """ A subclass that make use custom variants of layout_xxx methods."""
+
+    last_render_call = None
+
+    def getMethodContext(self, datastructure):
+        return self
+
+    def clearHistory(self):
+        self.last_render_call = None
+
+    def layout_default_view(self, layout=None, **kw):
+        self.last_called = 'view'
+        return '|'.join([row[0]['widget_rendered']
+                          for row in layout['rows']]
+                         )
+
 class IntegrationTestTablePortlet(CPSTestCase):
 
     layer = CPSCourrierLayer
@@ -57,6 +74,11 @@ class IntegrationTestTablePortlet(CPSTestCase):
         # a portlet widget
         self.widget = TestingTabPortletWidget('the_id')
         self.widget.manage_changeProperties(row_layout='test_row')
+
+        # one with custom methods
+        self.widget_custom = TestingTabPortletWidgetCustomMethods(
+            'the_id_custom')
+        self.widget_custom.manage_changeProperties(row_layout='test_row')
 
         # a portlet context for the widget
         ptltool = self.portal.portal_cpsportlets
@@ -73,9 +95,9 @@ class IntegrationTestTablePortlet(CPSTestCase):
         self.ds = DataStructure(datamodel=dm)
 
     def beforeTearDown(self):
-        ## TODO: remove portlet 
+        ## TODO: remove portlet
         pass
-    
+
     def test_widget_registration(self):
         self.assert_(
             'Tabular Portlet Widget' in widgetRegistry.listWidgetMetaTypes())
@@ -91,7 +113,16 @@ class IntegrationTestTablePortlet(CPSTestCase):
         self.assertEquals(ptl_wi.row_layout, 'test_row')
 
     def test_view_render(self):
+        # Check that there's no problem with standard layout_view
         rendered = self.widget.render('view', self.ds)
+
+    def test_view_render_custom(self):
+        # Check with custom layout methods
+        rendered = self.widget_custom.render('view', self.ds)
+        self.assertEquals(rendered.split('\n'), [
+            'Title 1|<div class="ddefault">Pending</div>',
+            'Title 2|<div class="ddefault">Rejected</div>',
+            ])
 
 def test_suite():
     return unittest.TestSuite((

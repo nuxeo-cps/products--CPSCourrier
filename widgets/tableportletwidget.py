@@ -68,10 +68,11 @@ class TabularPortletWidget(CPSPortletWidget):
         """Return the context from where to lookup the layout rendering method.
 
         Override this if you want to replace a slow zpt parsing by fixed python
-        code. 
-
+        code.
+        
         To do this for widgets would require to pass the context at
-        datastructure init time.
+        datamodel init time or hack it afterwards. 
+        This could be dangerous because of ACL checks and local roles. 
         """
         
         return datastructure.getDataModel().getContext()
