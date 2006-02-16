@@ -20,6 +20,8 @@ from Products.GenericSetup import EXTENSION
 from Products.CMFCore.DirectoryView import registerDirectory
 from Products.CPSCore.interfaces import ICPSSite
 
+import widgets
+
 registerDirectory('skins', globals())
 
 def initialize(registrar):
