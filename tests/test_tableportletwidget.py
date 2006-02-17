@@ -26,7 +26,7 @@ from Products.CPSDefault.tests.CPSTestCase import CPSTestCase
 
 from CPSCourrierIntegrationTestCase import CPSCourrierLayer
 from Products.CPSSchemas.tests.testWidgets import FakeDataStructure
-from Products.CPSCourrier.braindatamodel import FakeBrain
+from Products.CPSCourrier.braindatamodel import FakeBrain, BrainDataModel
 
 
 # things to be tested
@@ -37,15 +37,15 @@ from Products.CPSCourrier.widgets.tableportletwidget import TabularPortletWidget
 
 
 class TestingTabPortletWidget(TabularPortletWidget):
-    """ A subclass to implement listItems. """
+    """ A subclass to implement listRowDataModels. """
 
     brains = [FakeBrain(d) for d in [
         {'Title' : 'Title 1', 'Description' : 'Pending'},
         {'Title' : 'Title 2', 'Description' : 'Rejected'},
         ]]
 
-    def listItems(self):
-        return self.brains
+    def listRowDataModels(self):
+        return (BrainDataModel(brain) for brain in self.brains)
 
 class TestingTabPortletWidgetCustomMethods(TestingTabPortletWidget):
     """ A subclass that make use custom variants of layout_xxx methods."""

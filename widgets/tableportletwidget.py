@@ -20,8 +20,6 @@
 
 """ Portlet Widgets. """
 
-from copy import deepcopy
-
 from zLOG import LOG, DEBUG
 from Globals import InitializeClass
 
@@ -29,18 +27,15 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
-from Products.CPSSchemas.DataModel import DataModel
 from Products.CPSSchemas.DataStructure import DataStructure
 
 from Products.CPSPortlets.CPSPortletWidget import CPSPortletWidget
 
-from Products.CPSCourrier.braindatamodel import BrainDataModel
-
 class TabularPortletWidget(CPSPortletWidget):
     """ A generic portlet widget to display tabular contents.
 
-    Uses a layout to apply on search results (brains) to render the rows.
-    This layout is fetched from the portlet.
+    Uses a layout to render the rows. This layout is fetched from the portlet.
+    Subclasses have to override the 'listRowDataModels' method. 
 
     The (optional) render method will get those keyword args:
     - mode: the widget's rendering mode
@@ -67,11 +62,11 @@ class TabularPortletWidget(CPSPortletWidget):
     row_layout = ''
     render_method = ''
 
-    def listItems(self):
+    def listRowDataModels(self):
         """To be implemented by subclasses.
 
-        Returns brains or objects according to the type of query one
-        might want to implement.
+        The row_layout layout will work on these.
+        It's probably a good idea to return an iterator.
         """
         raise NotImplementedError
 
@@ -108,22 +103,22 @@ class TabularPortletWidget(CPSPortletWidget):
 
         meth_context = self.getMethodContext(datastructure)
 
-        rendered_brains = []
-        for brain in self.listItems():
-            # layout machinery wants a data structure
-            row_dm = BrainDataModel(brain)
+        rendered_rows = []
+        for row_dm in self.listRowDataModels():
+            # prepare a data structure
             row_ds = DataStructure(datamodel=row_dm)
+            row_layout.prepareLayoutWidgets(row_ds)
 
-            row_layout.prepareLayoutWidgets(row_ds) # fill data structure
+            # render from row_ds
             rendered = fti._renderLayouts(layout_structures,
                                           row_ds,
                                           context=meth_context,
                                           layout_mode=mode,
                                           )
-            rendered_brains.append(rendered)
+            rendered_rows.append(rendered)
 
         if not self.render_method: # default behaviour that can still be useful
-            return '\n'.join(rendered_brains)
+            return '\n'.join(rendered_rows)
 
         meth = getattr(meth_context, self.render_method, None)
         if meth is None:
@@ -132,7 +127,7 @@ class TabularPortletWidget(CPSPortletWidget):
 
         layout_structure = layout_structures[0] # only one layout
         columns = self.extractColumns(layout_structure)
-        return meth(mode=mode, columns=columns, rows=rendered_brains)
+        return meth(mode=mode, columns=columns, rows=rendered_rows)
 
 
 widgetRegistry.register(TabularPortletWidget)
