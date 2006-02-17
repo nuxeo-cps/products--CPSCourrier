@@ -18,8 +18,6 @@
 
 #$Id$
 
-# testing module imports and profile registration
-
 import unittest
 from zope.testing import doctest
 
