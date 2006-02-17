@@ -30,17 +30,17 @@ from Products.CPSSchemas.DataStructure import DataStructure
 
 from Products.CPSPortlets.CPSPortletWidget import CPSPortletWidget
 
-from Products.CPSCourrier.widgets.tableportletwidget import TabularPortletWidget
+from Products.CPSCourrier.widgets.tabular import TabularWidget
 
-class FolderContentsPortletWidget(TabularPortletWidget):
+class FolderContentsWidget(TabularWidget):
     """ A tabular portlet widget that performs a simple folder listing.
 
-    >>> FolderContentsPortletWidget('the_id')
-    <FolderContentsPortletWidget at the_id>
+    >>> FolderContentsWidget('the_id')
+    <FolderContentsWidget at the_id>
     """
 
-    meta_type = "Folder Contents Portlet Widget"
-    _properties = TabularPortletWidget._properties + (
+    meta_type = "Folder Contents Widget"
+    _properties = TabularWidget._properties + (
         {'id': 'listed_meta_types', 'type': 'list', 'mode': 'w',
          'label': 'Meta types to list', 'is_required' : 1},
         )
@@ -61,4 +61,4 @@ class FolderContentsPortletWidget(TabularPortletWidget):
         return (doc.getTypeInfo().getDataModel(doc, proxy=proxy, context=folder)
                 for doc, proxy in iterdocs)
 
-widgetRegistry.register(FolderContentsPortletWidget)
+widgetRegistry.register(FolderContentsWidget)

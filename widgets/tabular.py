@@ -31,7 +31,7 @@ from Products.CPSSchemas.DataStructure import DataStructure
 
 from Products.CPSPortlets.CPSPortletWidget import CPSPortletWidget
 
-class TabularPortletWidget(CPSPortletWidget):
+class TabularWidget(CPSPortletWidget):
     """ A generic portlet widget to display tabular contents.
 
     Uses a layout to render the rows. This layout is fetched from the portlet.
@@ -49,10 +49,10 @@ class TabularPortletWidget(CPSPortletWidget):
     render this column as a row. To get rid of this assumption, subclasses
     can override the extractColumns method. 
     
-    >>> wi = TabularPortletWidget('spam')
+    >>> wi = TabularWidget('spam')
     """
 
-    meta_type = "Tabular Portlet Widget"
+    meta_type = "Tabular Widget"
 
     _properties = _properties = CPSPortletWidget._properties + (
         {'id': 'row_layout', 'type': 'string', 'mode': 'w',
@@ -70,8 +70,17 @@ class TabularPortletWidget(CPSPortletWidget):
         """
         raise NotImplementedError
 
-    def getPortlet(self, datastructure):
-        return datastructure.getDataModel().getObject()
+    def getCallingObject(self, datastructure):
+        """Get the object for which this widget is called.
+
+        Typically a portlet."""
+        
+        dm = datastructure.getDataModel()
+        proxy = dm.getProxy()
+        if proxy is None:
+            return dm.getObject()
+        else:
+            return proxy
 
     def getMethodContext(self, datastructure):
         """Return the context from where to lookup the layout rendering method.
@@ -92,14 +101,14 @@ class TabularPortletWidget(CPSPortletWidget):
         return [ row[0]['widget'] for row in layout_structure['rows'] ]
     
     def render(self, mode, datastructure, **kw):
-        portlet = self.getPortlet(datastructure)
+        calling_obj = self.getCallingObject(datastructure)
 
         lid = self.row_layout
-        fti = portlet.getTypeInfo()
+        fti = calling_obj.getTypeInfo()
         layout_structures = fti._computeLayoutStructures(
-            datastructure, 'view', layout_id=lid, ob=portlet)
+            datastructure, 'view', layout_id=lid, ob=calling_obj)
         # maybe can be fetched from the layout structures as well (perf)
-        row_layout = fti.getLayout(lid, portlet)
+        row_layout = fti.getLayout(lid, calling_obj)
 
         meth_context = self.getMethodContext(datastructure)
 
@@ -130,4 +139,4 @@ class TabularPortletWidget(CPSPortletWidget):
         return meth(mode=mode, columns=columns, rows=rendered_rows)
 
 
-widgetRegistry.register(TabularPortletWidget)
+widgetRegistry.register(TabularWidget)

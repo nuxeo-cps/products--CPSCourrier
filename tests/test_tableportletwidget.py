@@ -33,11 +33,11 @@ from Products.CPSCourrier.braindatamodel import FakeBrain, BrainDataModel
 from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSDocument.FlexibleTypeInformation import FlexibleTypeInformation
-from Products.CPSCourrier.widgets.tableportletwidget import TabularPortletWidget
-from Products.CPSCourrier.widgets.foldercontentsportletwidget import FolderContentsPortletWidget
+from Products.CPSCourrier.widgets.tabular import TabularWidget
+from Products.CPSCourrier.widgets.folder_contents import FolderContentsWidget
 
 
-class TestingTabPortletWidget(TabularPortletWidget):
+class TestingTabularWidget(TabularWidget):
     """ A subclass to implement listRowDataModels. """
 
     brains = [FakeBrain(d) for d in [
@@ -49,7 +49,7 @@ class TestingTabPortletWidget(TabularPortletWidget):
         return (BrainDataModel(brain) for brain in self.brains)
 
 
-class CustomMethodsWidget:
+class CustomMethods:
     """ A subclass that make use custom variants of layout_xxx methods."""
 
     # attributes for introspection after method calls
@@ -75,8 +75,7 @@ class CustomMethodsWidget:
         self.passed_rows = rows
         
 
-class TestingTabPortletWidgetCustomMethods(CustomMethodsWidget,
-                                           TestingTabPortletWidget):
+class TestingTabularWidgetCustomMethods(CustomMethods, TestingTabularWidget):
     pass
 
 
@@ -107,20 +106,20 @@ class IntegrationTestCase(CPSTestCase):
         pass
 
 #
-# Generic Tabular Portlet Widget
+# Generic Tabular Widget
 #
 
 class IntegrationTestTabularPortlet(IntegrationTestCase):
 
     def afterAfterSetUp(self):
         # a portlet widget with custom rendering methods
-        self.widget = TestingTabPortletWidgetCustomMethods(
+        self.widget = TestingTabularWidgetCustomMethods(
             'the_id_custom')
         self.widget.manage_changeProperties(row_layout='test_row')
 
     def test_widget_registration(self):
         self.assert_(
-            'Tabular Portlet Widget' in widgetRegistry.listWidgetMetaTypes())
+            'Tabular Widget' in widgetRegistry.listWidgetMetaTypes())
 
     def test_layer(self):
         # some of these can be discarded to get more flexibility back
@@ -134,7 +133,7 @@ class IntegrationTestTabularPortlet(IntegrationTestCase):
 
     def test_render_layout_default_view(self):
         # layout render context will be the usual one
-        widget = TestingTabPortletWidget('the_id')
+        widget = TestingTabularWidget('the_id')
         widget.manage_changeProperties(row_layout='test_row')
 
         rendered = widget.render('view', self.ds)
@@ -170,15 +169,15 @@ class IntegrationTestTabularPortlet(IntegrationTestCase):
 # Sub classes
 #
 
-class TestingFolderContentsPortletWidget(CustomMethodsWidget,
-                                         FolderContentsPortletWidget):
+class TestingFolderContentsWidget(CustomMethods,
+                                  FolderContentsWidget):
     pass
 
 
-class IntegrationTestFolderContents(IntegrationTestCase):
+class IntegrationTestFolderContentsPortlet(IntegrationTestCase):
 
     def afterAfterSetUp(self):
-        self.widget = TestingFolderContentsPortletWidget('the widget')
+        self.widget = TestingFolderContentsWidget('the widget')
         self.widget.manage_changeProperties(row_layout='test_row')
         
     def test_folder_contents(self):
@@ -204,6 +203,6 @@ class IntegrationTestFolderContents(IntegrationTestCase):
 def test_suite():
     return unittest.TestSuite((
         unittest.makeSuite(IntegrationTestTabularPortlet),
-        unittest.makeSuite(IntegrationTestFolderContents),
-        doctest.DocTestSuite('Products.CPSCourrier.widgets.tableportletwidget'),
+        unittest.makeSuite(IntegrationTestFolderContentsPortlet),
+        doctest.DocTestSuite('Products.CPSCourrier.widgets.tabular'),
         ))
