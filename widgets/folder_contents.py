@@ -22,6 +22,10 @@
 
 from zLOG import LOG, DEBUG
 from Globals import InitializeClass
+from AccessControl import Unauthorized
+
+from Products.CMFCore.utils import _checkPermission
+from Products.CMFCore.permissions import ListFolderContents
 
 from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
@@ -35,6 +39,9 @@ from Products.CPSCourrier.widgets.tabular import TabularWidget
 class FolderContentsWidget(TabularWidget):
     """ A tabular portlet widget that performs a simple folder listing.
 
+    Information is fetched from the folder's objects of a given meta-type.
+    There's no batching or sorting. 
+
     >>> FolderContentsWidget('the_id')
     <FolderContentsWidget at the_id>
     """
@@ -47,13 +54,19 @@ class FolderContentsWidget(TabularWidget):
 
     listed_meta_types = (
        'CPS Proxy Document',
+       'CPS Proxy Folder',
        'CPS Proxy Folderish Document',
        )
 
     def listRowDataModels(self, datastructure, **kw):
         """Return an iterator for folder contents datamodels
         """
-        folder = kw['context_obj'] # not protected on purpose
+        folder = kw.get('context_obj') # typical of portlets
+        if folder is None:
+            folder = datastructure.getDataModel().getProxy()
+        
+        if not _checkPermission(ListFolderContents, folder):
+            raise Unauthorized("You are not allowed to list this folder")
         meta_types = datastructure.get('meta_types') or self.listed_meta_types
 
         iterprox = (folder[p_id] for p_id in folder.objectIds(meta_types))
