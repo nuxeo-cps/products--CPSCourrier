@@ -1,5 +1,13 @@
 <?xml version="1.0"?>
 <object name=".cps_portlets" meta_type="CPS Placeful Portlets Container">
+
+ <!-- navigation portlets for new theme (with new slot structure) -->
+ <object name="portlet_navigation_3tabs" meta_type="CPS Portlet"
+    portal_type="Navigation Portlet"/>
+ <object name="portlet_navigation_mailboxes" meta_type="CPS Portlet"
+    portal_type="Navigation Portlet"/>
+
+ <!-- navigation for themes with old slot structure -->
  <object name="portlet_navigation_left" meta_type="CPS Portlet"
     portal_type="Navigation Portlet"/>
 </object>

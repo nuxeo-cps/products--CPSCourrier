@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<object name="portlet_mailboxes" meta_type="CPS Portlet"
+   portal_type="Navigation Portlet">
+ <f id="Description" v="(mailboxes)"/>
+ <f id="Title" v="Navigation"/>
+ <f id="allow_discussion" v="False"/>
+ <f id="display" v="expandable_tree"/>
+ <f id="display_description" v="False"/>
+ <f id="display_hidden_folders" v="False"/>
+ <f id="display_managers" v="0"/>
+ <f id="dummy" v=""/>
+ <f id="end_depth" v="0"/>
+ <f id="identifier" v="portlet_navigation_mailboxes"/>
+ <f id="javascript" v="widget_portlet_navigation_js"/>
+ <f id="order" v="10"/>
+ <f id="portlet" v=""/>
+ <f id="preview"/>
+ <f id="provider" v=""/>
+ <f id="rel_depth" v="0"/>
+ <f id="root_uids">
+  <e v="mailboxes"/>
+ </f>
+ <f id="short_syndication_formats" v="0"/>
+ <f id="show_docs" v="0"/>
+ <f id="show_icons" v="True"/>
+ <f id="slot" v="treeview"/>
+ <f id="visibility_range" v="0-0"/>
+ <guard groups="" permissions=""
+    roles="">python:rpath_slash.startswith('mailboxes/')</guard>
+</object>
