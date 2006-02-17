@@ -39,8 +39,21 @@ from Products.CPSCourrier.braindatamodel import BrainDataModel
 class TabularPortletWidget(CPSPortletWidget):
     """ A generic portlet widget to display tabular contents.
 
-    Uses a layout to apply on search results (brains). If flexible, this
-    layout is attached to the portlet.
+    Uses a layout to apply on search results (brains) to render the rows.
+    This layout is fetched from the portlet.
+
+    The (optional) render method will get those keyword args:
+    - mode: the widget's rendering mode
+    - rows: list of rendered rows
+    - columns: the common list of widget objects that were used to render
+               rows. 
+
+    We assume that the 'layout' part of the row layout definition is
+    actually a column, because that's what flexible widgets manipulation
+    methods are comfortable with. It's up to the layout's render method to
+    render this column as a row. To get rid of this assumption, subclasses
+    can override the extractColumns method. 
+    
     >>> wi = TabularPortletWidget('spam')
     """
 
@@ -51,7 +64,8 @@ class TabularPortletWidget(CPSPortletWidget):
          'label': 'Layout to use for the rows', 'is_required' : 1},
         )
 
-    row_layout = '' # handy for tests
+    row_layout = ''
+    render_method = ''
 
     def listItems(self):
         """To be implemented by subclasses.
@@ -76,6 +90,11 @@ class TabularPortletWidget(CPSPortletWidget):
         """
         
         return datastructure.getDataModel().getContext()
+
+    def extractColumns(self, layout_structure):
+        """ Extract column info for render method from a layout structure. """
+
+        return [ row[0]['widget'] for row in layout_structure['rows'] ]
     
     def render(self, mode, datastructure, **kw):
         portlet = self.getPortlet(datastructure)
@@ -102,7 +121,18 @@ class TabularPortletWidget(CPSPortletWidget):
                                           layout_mode=mode,
                                           )
             rendered_brains.append(rendered)
-        return '\n'.join(rendered_brains)
+
+        if not self.render_method: # default behaviour that can still be useful
+            return '\n'.join(rendered_brains)
+
+        meth = getattr(meth_context, self.render_method, None)
+        if meth is None:
+            raise RuntimeError("Unknown Render Method %s for widget type %s"
+                               % (self.render_method, self.getId()))
+
+        layout_structure = layout_structures[0] # only one layout
+        columns = self.extractColumns(layout_structure)
+        return meth(mode=mode, columns=columns, rows=rendered_brains)
 
 
 widgetRegistry.register(TabularPortletWidget)

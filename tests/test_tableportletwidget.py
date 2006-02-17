@@ -50,7 +50,10 @@ class TestingTabPortletWidget(TabularPortletWidget):
 class TestingTabPortletWidgetCustomMethods(TestingTabPortletWidget):
     """ A subclass that make use custom variants of layout_xxx methods."""
 
+    # attributes for introspection after method calls
     last_render_call = None
+    passed_rows = None
+    passed_columns = None
 
     def getMethodContext(self, datastructure):
         return self
@@ -63,6 +66,12 @@ class TestingTabPortletWidgetCustomMethods(TestingTabPortletWidget):
         return '|'.join([row[0]['widget_rendered']
                           for row in layout['rows']]
                          )
+    def widget_render_method(self, columns=None, rows=None, **kw):
+        # deepcopy would not work
+        # (Can't pickle objects in acquisition wrappers.) 
+        self.passed_columns = columns 
+        self.passed_rows = rows
+        
 
 class IntegrationTestTablePortlet(CPSTestCase):
 
@@ -123,6 +132,27 @@ class IntegrationTestTablePortlet(CPSTestCase):
             'Title 1|<div class="ddefault">Pending</div>',
             'Title 2|<div class="ddefault">Rejected</div>',
             ])
+
+    def test_vidget_render_method(self):
+        # call the widget with our testing render_method
+        self.widget_custom.render_method = 'widget_render_method'
+        rendered = self.widget_custom.render('view', self.ds)
+
+        # retrieved what was passed to the render method
+        columns = self.widget_custom.passed_columns
+        rows = self.widget_custom.passed_rows
+
+        # rows hold the rendering of each item
+        self.assert_(rows[0].find('Title 1') != -1)
+        self.assert_(rows[1].find('Title 2') != -1)
+
+        # columns hold the widget objects
+        self.assert_(columns[0].meta_type == 'String Widget')
+        self.assert_(columns[0].getId() == 'w__Title')
+
+        self.assert_(columns[1].meta_type == 'Text Widget')
+        self.assert_(columns[1].getId() == 'w__Description')
+        
 
 def test_suite():
     return unittest.TestSuite((
