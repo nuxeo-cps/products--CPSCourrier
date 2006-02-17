@@ -34,6 +34,9 @@ from Products.CPSCourrier.widgets.tableportletwidget import TabularPortletWidget
 
 class FolderContentsPortletWidget(TabularPortletWidget):
     """ A tabular portlet widget that performs a simple folder listing.
+
+    >>> FolderContentsPortletWidget('the_id')
+    <FolderContentsPortletWidget at the_id>
     """
 
     meta_type = "Folder Contents Portlet Widget"

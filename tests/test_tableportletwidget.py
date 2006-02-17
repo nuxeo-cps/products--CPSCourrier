@@ -34,6 +34,7 @@ from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSDocument.FlexibleTypeInformation import FlexibleTypeInformation
 from Products.CPSCourrier.widgets.tableportletwidget import TabularPortletWidget
+from Products.CPSCourrier.widgets.foldercontentsportletwidget import FolderContentsPortletWidget
 
 
 class TestingTabPortletWidget(TabularPortletWidget):
@@ -46,6 +47,7 @@ class TestingTabPortletWidget(TabularPortletWidget):
 
     def listRowDataModels(self, datastructure, **kw):
         return (BrainDataModel(brain) for brain in self.brains)
+
 
 class CustomMethodsWidget:
     """ A subclass that make use custom variants of layout_xxx methods."""
@@ -73,43 +75,48 @@ class CustomMethodsWidget:
         self.passed_rows = rows
         
 
-class TestingTabPortletWidgetCustomMethods(CustomMethodsWidget, TestingTabPortletWidget):
+class TestingTabPortletWidgetCustomMethods(CustomMethodsWidget,
+                                           TestingTabPortletWidget):
     pass
 
 
-class IntegrationTestTablePortlet(CPSTestCase):
+class IntegrationTestCase(CPSTestCase):
 
     layer = CPSCourrierLayer
 
     def afterSetUp(self):
         self.login('manager')
 
-        # a portlet widget
-        self.widget = TestingTabPortletWidget('the_id')
-        self.widget.manage_changeProperties(row_layout='test_row')
-
-        # one with custom methods
-        self.widget_custom = TestingTabPortletWidgetCustomMethods(
-            'the_id_custom')
-        self.widget_custom.manage_changeProperties(row_layout='test_row')
-
-        # a portlet context for the widget
+        # a common datastructure for portlet widget tests
         ptltool = self.portal.portal_cpsportlets
-        ptl_id = ptltool.createPortlet(ptype_id='Test Tabular Portlet',
+        self.ptl_id = ptltool.createPortlet(ptype_id='Test Tabular Portlet',
                                        context=self.portal,
                                        slot='slot',
                                        order=1)
         portlets_container = ptltool.getPortletContainer(
             context=self.portal)
-        portlet = portlets_container.getPortletById(ptl_id)
+        portlet = portlets_container.getPortletById(self.ptl_id)
         self.portlet = portlet
-
         dm = self.portlet.getTypeInfo().getDataModel(portlet, context=portlet)
         self.ds = DataStructure(datamodel=dm)
+
+        self.afterAfterSetUp()
 
     def beforeTearDown(self):
         ## TODO: remove portlet
         pass
+
+#
+# Generic Tabular Portlet Widget
+#
+
+class IntegrationTestTabularPortlet(IntegrationTestCase):
+
+    def afterAfterSetUp(self):
+        # a portlet widget with custom rendering methods
+        self.widget = TestingTabPortletWidgetCustomMethods(
+            'the_id_custom')
+        self.widget.manage_changeProperties(row_layout='test_row')
 
     def test_widget_registration(self):
         self.assert_(
@@ -125,13 +132,15 @@ class IntegrationTestTablePortlet(CPSTestCase):
         self.failIf(ptl_wi is None)
         self.assertEquals(ptl_wi.row_layout, 'test_row')
 
-    def test_view_render(self):
-        # Check that there's no problem with standard layout_view
-        rendered = self.widget.render('view', self.ds)
+    def test_render_layout_default_view(self):
+        # layout render context will be the usual one
+        widget = TestingTabPortletWidget('the_id')
+        widget.manage_changeProperties(row_layout='test_row')
 
-    def test_view_render_custom(self):
-        # Check with custom layout methods
-        rendered = self.widget_custom.render('view', self.ds)
+        rendered = widget.render('view', self.ds)
+
+    def test_render_view(self):
+        rendered = self.widget.render('view', self.ds)
         self.assertEquals(rendered.split('\n'), [
             'Title 1|<div class="ddefault">Pending</div>',
             'Title 2|<div class="ddefault">Rejected</div>',
@@ -139,12 +148,12 @@ class IntegrationTestTablePortlet(CPSTestCase):
 
     def test_vidget_render_method(self):
         # call the widget with our testing render_method
-        self.widget_custom.render_method = 'widget_render_method'
-        rendered = self.widget_custom.render('view', self.ds)
+        self.widget.render_method = 'widget_render_method'
+        rendered = self.widget.render('view', self.ds)
 
         # retrieved what was passed to the render method
-        columns = self.widget_custom.passed_columns
-        rows = self.widget_custom.passed_rows
+        columns = self.widget.passed_columns
+        rows = self.widget.passed_rows
 
         # rows hold the rendering of each item
         self.assert_(rows[0].find('Title 1') != -1)
@@ -157,16 +166,23 @@ class IntegrationTestTablePortlet(CPSTestCase):
         self.assert_(columns[1].meta_type == 'Text Widget')
         self.assert_(columns[1].getId() == 'w__Description')
 
-    def test_folder_contents(self):
-        # XXX move to another test case and get rid of monkey patching
-        from Products.CPSCourrier.widgets.foldercontentsportletwidget import FolderContentsPortletWidget
-        class TestingFolderContentsPortletWidget(
-            CustomMethodsWidget,
-            FolderContentsPortletWidget):
-            pass
-        widget = TestingFolderContentsPortletWidget('the widget')
-        widget.manage_changeProperties(row_layout='test_row')
+#
+# Sub classes
+#
+
+class TestingFolderContentsPortletWidget(CustomMethodsWidget,
+                                         FolderContentsPortletWidget):
+    pass
+
+
+class IntegrationTestFolderContents(IntegrationTestCase):
+
+    def afterAfterSetUp(self):
+        self.widget = TestingFolderContentsPortletWidget('the widget')
+        self.widget.manage_changeProperties(row_layout='test_row')
         
+    def test_folder_contents(self):
+        # creating some content to list
         wftool = self.portal.portal_workflow
         container = self.portal.workspaces
         item1 = wftool.invokeFactoryFor(container, 'News Item', 'item1',
@@ -176,7 +192,8 @@ class IntegrationTestTablePortlet(CPSTestCase):
         item2 = wftool.invokeFactoryFor(container, 'News Item', 'item2',
                                         Title='Title 2',
                                         Description='Description 2')
-        rendered = widget.render('view', self.ds, context_obj=container)
+
+        rendered = self.widget.render('view', self.ds, context_obj=container)
         self.assertEquals(rendered.split('\n'), [
             'Title 1|<div class="ddefault">Description 1</div>',
             'Title 2|<div class="ddefault">Description 2</div>',
@@ -186,6 +203,7 @@ class IntegrationTestTablePortlet(CPSTestCase):
 
 def test_suite():
     return unittest.TestSuite((
-        unittest.makeSuite(IntegrationTestTablePortlet),
+        unittest.makeSuite(IntegrationTestTabularPortlet),
+        unittest.makeSuite(IntegrationTestFolderContents),
         doctest.DocTestSuite('Products.CPSCourrier.widgets.tableportletwidget'),
         ))
