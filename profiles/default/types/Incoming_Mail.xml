@@ -7,21 +7,23 @@
  <property name="product">CPSDocument</property>
  <property name="immediate_view">cpsdocument_edit_form</property>
 
- <!-- Flexible schemas and layout -->
+ <!-- Schemas and layout -->
  <property name="schemas">
   <element value="metadata"/>
   <element value="common"/>
-  <element value="flexible_content"/>
+  <element value="common_mail" />
+  <element value="incoming_mail" />
  </property>
  <property name="layouts">
-  <element value="common"/>
-  <element value="flexible_content"/>
+  <element value="common_mail"/>
+  <element value="flexible_mail"/>
  </property>
  <property name="layout_clusters">
+  <element value="header:header_mail"/>
   <element value="metadata:metadata"/>
  </property>
  <property name="flexible_layouts">
-  <element value="flexible_content:flexible_content"/>
+  <element value="flexible_mail:file"/>
  </property>
 
  <!-- Standard CPSDocument aliases and actions (might change) -->

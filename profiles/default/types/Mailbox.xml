@@ -22,22 +22,26 @@
   <element value="Mailbox"/>
  </property>
 
- <!-- Currently use the same schemas and layouts as standard workspaces -->
+ <!-- Currently use the same schemas as standard workspaces -->
  <property name="schemas">
   <element value="metadata"/>
   <element value="common"/>
   <element value="folder"/>
  </property>
+ <!-- The layouts as clustered use to play well with document portlets -->
  <property name="layouts">
-  <element value="common"/>
-  <element value="folder"/>
+  <element value="mailbox_contents"/>
  </property>
  <property name="layout_clusters">
+  <element value="header:common,folder"/>
   <element value="metadata:metadata"/>
  </property>
  <property name="flexible_layouts"/>
- <alias from="(Default)" to="folder_contents"/>
- <alias from="view" to="folder_view"/>
+
+ <!-- use standard document view as content listing is done as a widget in
+      the default layout -->
+ <alias from="(Default)" to="cpsdocument_view"/>
+ <alias from="view" to="cpsdocument_view"/>
 
  <!-- Same actions as Workspaces -->
  <action title="action_new_content" action_id="new_content" category="object"
