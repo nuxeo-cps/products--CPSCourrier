@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- Override the content_well slot to remove the guard and specify the
+     'header' slot id -->
+<object name="portlet_documents" meta_type="CPS Portlet"
+   portal_type="Document Portlet">
+ <f id="Title" v="Document Portlet"/>
+ <f id="cluster_id" v="header"/>
+ <f id="cluster_no_fallback" v="1"/>
+ <f id="context_rpath" v=""/>
+ <f id="disable_override" v="0"/>
+ <f id="identifier" v="portlet_774132493"/>
+ <f id="javascript" v=""/>
+ <f id="order" v="10"/>
+ <f id="portlet" v=""/>
+ <f id="render_container" v="0"/>
+ <f id="slot" v="content_well"/>
+ <f id="slot_override" v="1"/>
+ <f id="visibility_range" v="0-0"/>
+ <guard groups="" permissions="" roles="" />
+</object>
