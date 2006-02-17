@@ -44,7 +44,7 @@ class TestingTabPortletWidget(TabularPortletWidget):
         {'Title' : 'Title 2', 'Description' : 'Rejected'},
         ]]
 
-    def listRowDataModels(self):
+    def listRowDataModels(self, datastructure, **kw):
         return (BrainDataModel(brain) for brain in self.brains)
 
 class TestingTabPortletWidgetCustomMethods(TestingTabPortletWidget):

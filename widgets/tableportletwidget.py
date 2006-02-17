@@ -62,7 +62,7 @@ class TabularPortletWidget(CPSPortletWidget):
     row_layout = ''
     render_method = ''
 
-    def listRowDataModels(self):
+    def listRowDataModels(self, datastructure, **kw):
         """To be implemented by subclasses.
 
         The row_layout layout will work on these.
@@ -104,7 +104,7 @@ class TabularPortletWidget(CPSPortletWidget):
         meth_context = self.getMethodContext(datastructure)
 
         rendered_rows = []
-        for row_dm in self.listRowDataModels():
+        for row_dm in self.listRowDataModels(datastructure, **kw):
             # prepare a data structure
             row_ds = DataStructure(datamodel=row_dm)
             row_layout.prepareLayoutWidgets(row_ds)
