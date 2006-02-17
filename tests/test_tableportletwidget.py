@@ -47,7 +47,7 @@ class TestingTabPortletWidget(TabularPortletWidget):
     def listRowDataModels(self, datastructure, **kw):
         return (BrainDataModel(brain) for brain in self.brains)
 
-class TestingTabPortletWidgetCustomMethods(TestingTabPortletWidget):
+class CustomMethodsWidget:
     """ A subclass that make use custom variants of layout_xxx methods."""
 
     # attributes for introspection after method calls
@@ -72,6 +72,10 @@ class TestingTabPortletWidgetCustomMethods(TestingTabPortletWidget):
         self.passed_columns = columns 
         self.passed_rows = rows
         
+
+class TestingTabPortletWidgetCustomMethods(CustomMethodsWidget, TestingTabPortletWidget):
+    pass
+
 
 class IntegrationTestTablePortlet(CPSTestCase):
 
@@ -152,7 +156,33 @@ class IntegrationTestTablePortlet(CPSTestCase):
 
         self.assert_(columns[1].meta_type == 'Text Widget')
         self.assert_(columns[1].getId() == 'w__Description')
+
+    def test_folder_contents(self):
+        # XXX move to another test case and get rid of monkey patching
+        from Products.CPSCourrier.widgets.foldercontentsportletwidget import FolderContentsPortletWidget
+        class TestingFolderContentsPortletWidget(
+            CustomMethodsWidget,
+            FolderContentsPortletWidget):
+            pass
+        widget = TestingFolderContentsPortletWidget('the widget')
+        widget.manage_changeProperties(row_layout='test_row')
         
+        wftool = self.portal.portal_workflow
+        container = self.portal.workspaces
+        item1 = wftool.invokeFactoryFor(container, 'News Item', 'item1',
+                                        Title='Title 1',
+                                        Description='Description 1')
+
+        item2 = wftool.invokeFactoryFor(container, 'News Item', 'item2',
+                                        Title='Title 2',
+                                        Description='Description 2')
+        rendered = widget.render('view', self.ds, context_obj=container)
+        self.assertEquals(rendered.split('\n'), [
+            'Title 1|<div class="ddefault">Description 1</div>',
+            'Title 2|<div class="ddefault">Description 2</div>',
+            ])
+        
+
 
 def test_suite():
     return unittest.TestSuite((
