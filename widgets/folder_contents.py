@@ -32,8 +32,6 @@ from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.DataModel import DataModel
 from Products.CPSSchemas.DataStructure import DataStructure
 
-from Products.CPSPortlets.CPSPortletWidget import CPSPortletWidget
-
 from Products.CPSCourrier.widgets.tabular import TabularWidget
 
 class FolderContentsWidget(TabularWidget):
