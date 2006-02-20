@@ -89,6 +89,9 @@ msgstr ""
 msgid "cpscourrier_type_label"
 msgstr ""
 
+msgid "cpscourrier_review_state_label"
+msgstr ""
+
 #
 # Vocabularies
 #
