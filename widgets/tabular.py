@@ -145,6 +145,8 @@ class TabularWidget(CPSPortletWidget):
             raise RuntimeError("Unknown Render Method %s for widget type %s"
                                % (self.render_method, self.getId()))
 
+        if layout_structures is None:
+            return ''
         layout_structure = layout_structures[0] # only one layout
         columns = self.extractColumns(layout_structure)
         return meth(mode=mode, columns=columns, rows=rendered_rows)
