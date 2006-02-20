@@ -1,5 +1,5 @@
 # Copyright (c) 2006 Nuxeo SAS <http://nuxeo.com>
-# Author : Georges Racinet <gracinet@nuxeo.com>  
+# Author : Georges Racinet <gracinet@nuxeo.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 2 as published
@@ -48,7 +48,7 @@ class CPSStackWidget(CPSWidget):
         XXX GR Such a lightweight method doesn't seem to be part of the base
         class API. Probably should.
         """
-        
+
         dm = datastructure.getDataModel()
         context = dm.getProxy()
         if context is None:
@@ -88,7 +88,7 @@ class CPSStackWidget(CPSWidget):
         wftool = getToolByName(self, 'portal_workflow')
 
         context = self.getContext(datastructure)
-        try: 
+        try:
             stack = wftool.getInfoFor(context, stack_var_id)
         except KeyError, err:
             if str(err) == "'%s'" % stack_var_id:
@@ -100,7 +100,7 @@ class CPSStackWidget(CPSWidget):
         if not isinstance(stack, Stack):
             raise ValueError("Workflow variable %s is not a stack"
                              % stack_var_id)
-            
+
         return stack.render(context=context, mode=mode, **kw)
 
 InitializeClass(CPSStackWidget)
