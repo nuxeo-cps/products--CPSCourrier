@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- 
+Layout that present mailbox contents
+-->
+
+<object name="mailbox_contents" meta_type="CPS Layout">
+<!-- Later
+ <property name="layout_view_method">layout_mailbox_contents_view</property>
+-->
+ <property name="style_prefix">layout_default_</property>
+ <widget name="Table" meta_type="Folder Contents Widget">
+  <property name="row_layout">mailbox_contents_row</property>
+  <property name="hidden_layout_modes">edit create</property>
+ </widget>
+ <table>
+  <row>
+   <cell name="Table"/>
+  </row>
+ </table>
+</object>

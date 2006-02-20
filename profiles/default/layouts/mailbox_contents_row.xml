@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!-- 
+Layouts for rows in the content view of mailboxes
+-->
+
+<object name="mailbox_contents_row" meta_type="CPS Layout">
+ <property name="layout_view_method">layout_row_view</property>
+ <widget name="Type" meta_type="Type Icon Widget">
+  <property name="label">cpscourrier_type_label</property>
+  <property name="is_i18n">True</property>
+ </widget>
+
+ <widget name="From" meta_type="String Widget">
+  <property name="fields">
+   <element value="from"/>
+  </property>
+  <property name="label">cpscourrier_from_label</property>
+  <property name="is_i18n">True</property>
+  <property name="size_max">50</property>
+ </widget>
+
+ <widget name="To" meta_type="Lines Widget">
+  <property name="fields">
+   <element value="to"/>
+  </property>
+  <property name="label">cpscourrier_to_label</property>
+  <property name="is_i18n">True</property>
+  <property name="width">50</property>
+  <property name="height">3</property>
+ </widget>
+
+ <widget name="Title" meta_type="String Widget">
+  <property name="fields">
+   <element value="Title"/>
+  </property>
+  <property name="is_i18n">True</property>
+  <property name="label">cpscourrier_object_label</property>
+  <property name="size_max">50</property>
+ </widget>
+
+ <widget name="Date" meta_type="Date Widget">
+  <property name="label">cpscourrier_date_label</property>
+  <property name="fields">
+   <element value="CreationDate"/>
+  </property>
+  <property name="is_i18n">True</property>
+ </widget>
+
+ <widget name="State" meta_type="Workflow Variable Widget">
+  <property name="wf_var_id">
+    <element value="review_state" />
+  </property>
+  <property name="label">cpscourrier_review_state_label</property>
+  <property name="is_i18n">True</property>
+ </widget>
+
+ <table>
+  <row>
+   <cell name="Type"/>
+  </row>
+  <row>
+   <cell name="Title"/>
+  </row>
+  <row>
+   <cell name="From"/>
+  </row>
+  <row>
+   <cell name="To"/>
+  </row>
+  <row>
+   <cell name="Description"/>
+  </row>
+ </table>
+</object>

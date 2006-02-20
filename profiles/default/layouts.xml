@@ -11,5 +11,8 @@
  <object name="mailbox_contents" meta_type="CPS Layout"/>
  <object name="mailbox_group_contents" meta_type="CPS Layout"/>
 
-</object>
+ <!-- layouts for rows of contents views -->
+ <object name="mailbox_contents_row" meta_type="CPS Layout"/>
+ <object name="mailbox_group_contents_row" meta_type="CPS Layout"/>
 
+</object>

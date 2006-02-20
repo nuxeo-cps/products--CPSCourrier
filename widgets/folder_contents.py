@@ -31,6 +31,7 @@ from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.DataModel import DataModel
 from Products.CPSSchemas.DataStructure import DataStructure
+from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 
 from Products.CPSCourrier.widgets.tabular import TabularWidget
 
@@ -38,13 +39,13 @@ class FolderContentsWidget(TabularWidget):
     """ A tabular portlet widget that performs a simple folder listing.
 
     Information is fetched from the folder's objects of a given meta-type.
-    There's no batching or sorting. 
+    There's no batching or sorting.
 
     >>> FolderContentsWidget('the_id')
     <FolderContentsWidget at the_id>
     """
 
-    meta_type = "Folder Contents Widget"
+    meta_type = 'Folder Contents Widget'
     _properties = TabularWidget._properties + (
         {'id': 'listed_meta_types', 'type': 'list', 'mode': 'w',
          'label': 'Meta types to list', 'is_required' : 1},
@@ -56,6 +57,25 @@ class FolderContentsWidget(TabularWidget):
        'CPS Proxy Folderish Document',
        )
 
+    render_method = 'widget_folder_contents'
+
+    def layout_row_view(self, layout=None, **kw):
+        """Render method for rows layouts in 'view' mode.
+        """
+
+        if layout is None:
+            raise ValueError("Computed layout is None")
+        cells = (row[0] for row in layout['rows'])
+        tags = (renderHtmlTag('td',
+                              css_class=cell.get('widget_css_class'),
+                              contents=cell['widget_rendered'],
+                              )
+                for cell in cells)
+        return ''.join(tags)
+
+    def getMethodContext(self, datastructure):
+        return self
+    
     def listRowDataModels(self, datastructure, **kw):
         """Return an iterator for folder contents datamodels
         """
@@ -71,5 +91,7 @@ class FolderContentsWidget(TabularWidget):
         iterdocs = ( (proxy.getContent(), proxy) for proxy in iterprox)
         return (doc.getTypeInfo().getDataModel(doc, proxy=proxy, context=folder)
                 for doc, proxy in iterdocs)
+
+InitializeClass(FolderContentsWidget)
 
 widgetRegistry.register(FolderContentsWidget)
