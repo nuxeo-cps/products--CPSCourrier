@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!-- common view for all mail documents -->
+<object name="mail_common" meta_type="CPS Layout">
+ <widget name="content" meta_type="Text Widget">
+  <property name="fields">
+   <element value="content"/>
+   <element value="content_position"/>
+   <element value="content_format"/>
+  </property>
+  <property name="label_edit">cpsdoc_flex_content_label_edit</property>
+  <property name="is_i18n">True</property>
+  <property name="css_class">dcontent</property>
+  <property name="width">72</property>
+  <property name="height">20</property>
+  <property name="file_uploader">True</property>
+  <property name="render_format">html</property>
+  <property name="configurable">format</property>
+ </widget>
+ <widget name="subject" meta_type="Subject Widget">
+  <property name="fields">
+   <element value="Subject"/>
+  </property>
+  <property name="label">cpsdoc_NewsItem_label_related_subjects</property>
+  <property
+     name="label_edit">cpsdoc_NewsItem_label_related_subjects</property>
+  <property name="is_i18n">True</property>
+  <property name="hidden_empty">True</property>
+  <property name="vocabulary">subject_voc</property>
+  <property name="size">5</property>
+ </widget>
+ <table>
+   <row>
+     <cell name="content"/>
+     <cell name="subject"/>
+   </row>
+ </table>
+ </object>
