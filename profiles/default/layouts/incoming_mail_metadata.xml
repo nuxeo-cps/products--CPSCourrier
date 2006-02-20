@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- medata/properties view for incoming mail documents -->
+<object name="incoming_mail_metadata" meta_type="CPS Layout">
+ <widget name="smtp_headers" meta_type="Lines Widget">
+  <property name="fields">
+   <element value="smtp_headers"/>
+  </property>
+  <property name="readonly_layout_modes">
+   <element value="create"/>
+   <element value="edit"/>
+  </property>
+  <property name="label">cpscourrier_smtp_headers_label</property>
+  <property name="label_edit">cpscourrier_smtp_headers_label</property>
+  <property name="is_i18n">True</property>
+  <property name="hidden_empty">True</property>
+  <property name="view_mode_separator">&lt;br/&gt;</property>
+ </widget>
+ <table>
+   <row>
+     <cell name="smtp_headers"/>
+   </row>
+ </table>
+</object>
