@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="form_of_address" meta_type="CPS Vocabulary">
+ <property name="title"></property>
+ <property name="title_msgid"></property>
+ <property name="description"></property>
+ <property name="acl_write_roles">Manager</property>
+ <item key="1" msgid="cpscourrier_mp_voc_low">low</item>
+ <item key="2" msgid="cpscourrier_mp_voc_normal">normal</item>
+ <item key="3" msgid="cpscourrier_mp_voc_high">high</item>
+ <item key="4" msgid="cpscourrier_mp_voc_very_high">very high</item>
+</object>
