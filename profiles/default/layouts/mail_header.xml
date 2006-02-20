@@ -35,10 +35,16 @@
  </widget>
  <table>
   <row>
-   <cell name="Object"/>
+   <cell name="object"/>
   </row>
   <row>
-   <cell name="CreationDate"/>
+   <cell name="from"/>
+  </row>
+  <row>
+   <cell name="to"/>
+  </row>
+  <row>
+   <cell name="creation_date"/>
   </row>
  </table>
 </object>
