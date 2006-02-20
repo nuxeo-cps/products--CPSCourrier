@@ -82,6 +82,9 @@ msgstr ""
 msgid "cpscourrier_priority_label"
 msgstr ""
 
+msgid "cpscourrier_smtp_headers_label"
+msgstr ""
+
 #
 # Tabular widgets labels
 #

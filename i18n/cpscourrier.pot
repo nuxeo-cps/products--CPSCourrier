@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-20 23:14default\n"
+"POT-Creation-Date: 2006-02-21 00:33default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -79,10 +79,16 @@ msgstr ""
 msgid "cpscourrier_priority_label"
 msgstr ""
 
+msgid "cpscourrier_smtp_headers_label"
+msgstr ""
+
 #
 # Tabular widgets labels
 #
 msgid "cpscourrier_type_label"
+msgstr ""
+
+msgid "cpscourrier_review_state_label"
 msgstr ""
 
 #

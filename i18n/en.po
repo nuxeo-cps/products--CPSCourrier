@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-20 23:14default\n"
+"POT-Creation-Date: 2006-02-21 00:33default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -79,8 +79,14 @@ msgstr "Dealine: "
 msgid "cpscourrier_priority_label"
 msgstr "Priority: "
 
+msgid "cpscourrier_smtp_headers_label"
+msgstr "SMTP Headers: "
+
 msgid "cpscourrier_type_label"
 msgstr "Type"
+
+msgid "cpscourrier_review_state_label"
+msgstr "State"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Best regards, "
