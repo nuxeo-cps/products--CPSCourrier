@@ -11,19 +11,20 @@
  <property name="schemas">
   <element value="metadata"/>
   <element value="common"/>
-  <element value="common_mail" />
+  <element value="mail_common"/>
   <element value="outgoing_mail" />
+  <element value="file"/>
  </property>
  <property name="layouts">
-  <element value="common_mail"/>
-  <element value="flexible_mail"/>
+  <element value="mail_common"/>
+  <element value="mail_fexible"/>
  </property>
  <property name="layout_clusters">
   <element value="header:header_mail"/>
   <element value="metadata:metadata"/>
  </property>
  <property name="flexible_layouts">
-  <element value="flexible_mail:file"/>
+  <element value="mail_flexible:file"/>
  </property>
 
  <!-- Standard CPSDocument aliases and actions (might change) -->

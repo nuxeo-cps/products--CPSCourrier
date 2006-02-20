@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- flexible attached file for mail documents -->
+<object name="mail_flexible" meta_type="CPS Layout">
+ <property name="flexible_widgets">
+   <element value="file"/>
+ </property>
+ <widget name="file" meta_type="AttachedFile Widget">
+  <property name="fields">
+   <element value="file"/>
+   <element value="file_text"/>
+   <element value="file_html"/>
+  </property>
+  <property name="label">cpsdoc_attachedFile_label</property>
+  <property name="label_edit">cpsdoc_attachedFile_label</property>
+  <property name="description">cpsdoc_attachedFile_description</property>
+  <property name="is_i18n">True</property>
+  <property name="hidden_empty">True</property>
+  <property name="css_class">ddefault</property>
+ </widget>
+ <table/>
+</object>
