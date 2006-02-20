@@ -1,6 +1,46 @@
 <?xml version="1.0"?>
 <!-- common view for all mail documents -->
 <object name="mail_common" meta_type="CPS Layout">
+ <widget name="object" meta_type="String Widget">
+  <property name="fields">
+   <element value="Title"/>
+  </property>
+  <property name="hidden_layout_modes">
+   <element value="view"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_object_label</property>
+  <property name="label_edit">cpscourrier_object_label</property>
+  <property name="is_i18n">True</property>
+  <property name="display_width">70</property>
+ </widget>
+ <widget name="from" meta_type="String Widget">
+  <property name="fields">
+   <element value="from"/>
+  </property>
+  <property name="hidden_layout_modes">
+   <element value="view"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_from_label</property>
+  <property name="label_edit">cpscourrier_from_label</property>
+  <property name="is_i18n">True</property>
+  <property name="display_width">70</property>
+ </widget>
+ <widget name="to" meta_type="Lines Widget">
+  <property name="fields">
+   <element value="to"/>
+  </property>
+  <property name="hidden_layout_modes">
+   <element value="view"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_to_label</property>
+  <property name="label_edit">cpscourrier_to_label</property>
+  <property name="is_i18n">True</property>
+  <property name="width">70</property>
+  <property name="height">5</property>
+ </widget>
  <widget name="content" meta_type="Text Widget">
   <property name="fields">
    <element value="content"/>
@@ -26,9 +66,18 @@
   <property name="is_i18n">True</property>
   <property name="hidden_empty">True</property>
   <property name="vocabulary">subject_voc</property>
-  <property name="size">5</property>
+  <property name="size">10</property>
  </widget>
  <table>
+   <row>
+     <cell name="object"/>
+   </row>
+   <row>
+     <cell name="from"/>
+   </row>
+   <row>
+     <cell name="to"/>
+   </row>
    <row>
      <cell name="content"/>
      <cell name="subject"/>

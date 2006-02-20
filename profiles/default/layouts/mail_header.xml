@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <object name="mail_header" meta_type="CPS Layout">
  <property name="style_prefix">layout_default_</property>
- <widget name="object" meta_type="Text Widget">
+ <widget name="object" meta_type="String Widget">
   <property name="fields">
    <element value="Title"/>
   </property>
@@ -9,7 +9,7 @@
   <property name="label">cpscourrier_object_label</property>
   <property name="is_i18n">True</property>
  </widget>
- <widget name="from" meta_type="Text Widget">
+ <widget name="from" meta_type="String Widget">
   <property name="fields">
    <element value="from"/>
   </property>
