@@ -5,14 +5,11 @@
    <element value="file"/>
  </property>
  <widget name="file" meta_type="AttachedFile Widget">
+  <property name="title">cpsdoc_flex_attachedFile_title</property>
   <property name="fields">
-   <element value="file"/>
-   <element value="file_text"/>
-   <element value="file_html"/>
+   <element value="?"/>
   </property>
-  <property name="label">cpsdoc_attachedFile_label</property>
-  <property name="label_edit">cpsdoc_attachedFile_label</property>
-  <property name="description">cpsdoc_attachedFile_description</property>
+  <property name="label">cpsdoc_flex_attachedFile_label</property>
   <property name="is_i18n">True</property>
   <property name="hidden_empty">True</property>
   <property name="css_class">ddefault</property>
