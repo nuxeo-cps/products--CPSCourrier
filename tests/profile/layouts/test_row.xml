@@ -1,26 +1,12 @@
 <?xml version="1.0"?>
 <!-- 
-A nice layout for tests, based on common, but without the Heading 
-widget, whose call of object.getIcon cannot apply to brains at this 
-point 
+A layout for tests. 
+$Id$
 -->
 
 <object name="common" meta_type="CPS Layout">
- <property name="layout_create_method"></property>
- <property name="layout_edit_method"></property>
- <property name="layout_view_method"></property>
  <property name="style_prefix">layout_default_</property>
- <property name="flexible_widgets"/>
- <property name="validate_values_expr"></property>
- <widget name="Byline" meta_type="Byline Widget">
-  <property name="fields"/>
-  <property name="readonly_layout_modes"/>
-  <property name="hidden_layout_modes">
-   <element value="edit"/>
-   <element value="create"/>
-  </property>
-  <property name="hidden_readonly_layout_modes"/>
- </widget>
+
  <widget name="Content" meta_type="Text Widget">
   <property name="fields">
    <element value="content"/>
@@ -30,18 +16,16 @@ point
   <property name="css_class">ddescription</property>
   <property name="width">72</property>
  </widget>
+
  <widget name="Title" meta_type="String Widget">
   <property name="fields">
    <element value="Title"/>
   </property>
   <property name="is_required">True</property>
   <property name="label_edit">cpsdoc_title_label_edit</property>
-  <property name="is_i18n">True</property>
-  <property name="readonly_layout_modes"/>
-  <property name="hidden_layout_modes"/>
-  <property name="hidden_readonly_layout_modes"/>
   <property name="size_max">200</property>
  </widget>
+
  <table>
   <row>
    <cell name="Title"/>
