@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- fields in common for both in and out messages types -->
-<object name="common_mail" meta_type="CPS Schema">
+<object name="mail_common" meta_type="CPS Schema">
   <field name="content" meta_type="CPS String Field">
     <property name="is_searchabletext">True</property>
   </field>

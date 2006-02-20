@@ -3,6 +3,6 @@
  <object name="common_mail" meta_type="CPS Schema"/>
  <object name="incoming_mail" meta_type="CPS Schema"/>
  <object name="outgoing_mail" meta_type="CPS Schema"/>
- <object name="common_mail" meta_type="CPS Schema"/>
+ <object name="mail_common" meta_type="CPS Schema"/>
  <object name="mailbox" meta_type="CPS Schema"/>
 </object>
