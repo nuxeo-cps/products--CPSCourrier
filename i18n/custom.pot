@@ -73,6 +73,15 @@ msgstr ""
 msgid "cpscourrier_signature_label"
 msgstr ""
 
+msgid "cpscourrier_size_label"
+msgstr ""
+
+msgid "cpscourrier_deadline_label"
+msgstr ""
+
+msgid "cpscourrier_priority_label"
+msgstr ""
+
 #
 # Tabular widgets labels
 #
@@ -89,3 +98,16 @@ msgstr ""
 
 msgid "cpscourrier_foa_voc_sincerely"
 msgstr ""
+
+msgid "cpscourrier_mp_voc_low"
+msgstr ""
+
+msgid "cpscourrier_mp_voc_normal"
+msgstr ""
+
+msgid "cpscourrier_mp_voc_high"
+msgstr ""
+
+msgid "cpscourrier_mp_voc_very_high"
+msgstr ""
+

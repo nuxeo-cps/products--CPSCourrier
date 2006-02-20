@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-20 22:07default\n"
+"POT-Creation-Date: 2006-02-20 23:14default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -70,6 +70,15 @@ msgstr "Formule de politesse : "
 msgid "cpscourrier_signature_label"
 msgstr "Signature : "
 
+msgid "cpscourrier_size_label"
+msgstr "Taille (ko) : "
+
+msgid "cpscourrier_deadline_label"
+msgstr "Date d'échéance : "
+
+msgid "cpscourrier_priority_label"
+msgstr "Degré d'urgence : "
+
 msgid "cpscourrier_type_label"
 msgstr "Type"
 
@@ -78,3 +87,15 @@ msgstr "Cordialement, "
 
 msgid "cpscourrier_foa_voc_sincerely"
 msgstr "Bien à vous, "
+
+msgid "cpscourrier_mp_voc_low"
+msgstr "Non urgent "
+
+msgid "cpscourrier_mp_voc_normal"
+msgstr "Signalé"
+
+msgid "cpscourrier_mp_voc_high"
+msgstr "Urgent"
+
+msgid "cpscourrier_mp_voc_very_high"
+msgstr "Très urgent"
