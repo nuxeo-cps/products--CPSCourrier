@@ -17,7 +17,7 @@
  </property>
  <property name="layouts">
   <element value="mail_common"/>
-  <element value="mail_fexible"/>
+  <element value="mail_flexible"/>
  </property>
  <property name="layout_clusters">
   <element value="header:mail_header"/>
