@@ -69,3 +69,10 @@ msgstr ""
 
 msgid "cpscourrier_signature_label"
 msgstr ""
+
+#
+# Tabular widgets labels
+#
+
+msgid "cpscourrier_type_label"
+msgstr ""
