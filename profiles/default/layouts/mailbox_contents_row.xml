@@ -5,6 +5,7 @@ Layouts for rows in the content view of mailboxes
 
 <object name="mailbox_contents_row" meta_type="CPS Layout">
  <property name="layout_view_method">layout_row_view</property>
+
  <widget name="Type" meta_type="Type Icon Widget">
   <property name="label">cpscourrier_type_label</property>
   <property name="is_i18n">True</property>
@@ -29,13 +30,13 @@ Layouts for rows in the content view of mailboxes
   <property name="height">3</property>
  </widget>
 
- <widget name="Title" meta_type="String Widget">
+ <widget name="Title" meta_type="Qualified Link Widget">
   <property name="fields">
    <element value="Title"/>
+   <element value="Description"/>
   </property>
   <property name="is_i18n">True</property>
   <property name="label">cpscourrier_object_label</property>
-  <property name="size_max">50</property>
  </widget>
 
  <widget name="Date" meta_type="Date Widget">
@@ -47,9 +48,7 @@ Layouts for rows in the content view of mailboxes
  </widget>
 
  <widget name="State" meta_type="Workflow Variable Widget">
-  <property name="wf_var_id">
-    <element value="review_state" />
-  </property>
+  <property name="wf_var_id">review_state</property>
   <property name="label">cpscourrier_review_state_label</property>
   <property name="is_i18n">True</property>
  </widget>
@@ -68,7 +67,7 @@ Layouts for rows in the content view of mailboxes
    <cell name="To"/>
   </row>
   <row>
-   <cell name="Description"/>
+   <cell name="State"/>
   </row>
  </table>
 </object>
