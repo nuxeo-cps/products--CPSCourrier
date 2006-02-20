@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-20 19:07default\n"
+"POT-Creation-Date: 2006-02-20 19:45default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -65,4 +65,19 @@ msgid "cpscourrier_form_of_address_label"
 msgstr ""
 
 msgid "cpscourrier_signature_label"
+msgstr ""
+
+#
+# Tabular widgets labels
+#
+msgid "cpscourrier_type_label"
+msgstr ""
+
+#
+# Vocabularies
+#
+msgid "cpscourrier_foa_voc_regards"
+msgstr ""
+
+msgid "cpscourrier_foa_voc_sincerely"
 msgstr ""

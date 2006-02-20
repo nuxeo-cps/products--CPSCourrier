@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-20 19:07default\n"
+"POT-Creation-Date: 2006-02-20 19:45default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -66,3 +66,12 @@ msgstr "Formule de politesse : "
 
 msgid "cpscourrier_signature_label"
 msgstr "Signature : "
+
+msgid "cpscourrier_type_label"
+msgstr "Type"
+
+msgid "cpscourrier_foa_voc_regards"
+msgstr "Cordialement, "
+
+msgid "cpscourrier_foa_voc_sincerely"
+msgstr "Bien à vous, "

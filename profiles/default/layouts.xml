@@ -5,6 +5,7 @@
  <object name="mail_header" meta_type="CPS Layout"/>
  <object name="mail_common" meta_type="CPS Layout"/>
  <object name="mail_flexible" meta_type="CPS Layout"/>
+ <object name="outgoing_mail" meta_type="CPS Layout"/>
 
  <!-- layout for the Mailbox and Mailbox Group document types -->
  <object name="mailbox_contents" meta_type="CPS Layout"/>

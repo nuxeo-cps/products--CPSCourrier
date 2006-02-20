@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- specific input for outgoing mail documents -->
+<object name="outgoing_mail" meta_type="CPS Layout">
+ <widget name="form_of_address" meta_type="Select Widget">
+  <property name="fields">
+   <element value="form_of_address"/>
+  </property>
+  <property name="label_edit">cpscourrier_form_of_address_label</property>
+  <property name="is_i18n">True</property>
+  <property name="vocabulary">form_of_address</property>
+  <property name="translated">True</property>
+ </widget>
+ <widget name="signature" meta_type="String Widget">
+  <property name="fields">
+   <element value="signature"/>
+  </property>
+  <property name="label_edit">cpscourrier_signature_label</property>
+  <property name="is_i18n">True</property>
+  <property name="display_width">30</property>
+ </widget>
+ <table>
+   <row>
+     <cell name="form_of_address"/>
+     <cell name="signature"/>
+   </row>
+ </table>
+</object>

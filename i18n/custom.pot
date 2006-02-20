@@ -76,3 +76,13 @@ msgstr ""
 
 msgid "cpscourrier_type_label"
 msgstr ""
+
+#
+# Vocabularies
+#
+
+msgid "cpscourrier_foa_voc_regards"
+msgstr ""
+
+msgid "cpscourrier_foa_voc_sincerely"
+msgstr ""

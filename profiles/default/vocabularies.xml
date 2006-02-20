@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<object name="portal_vocabularies" meta_type="CPS Vocabularies Tool">
+ <object name="form_of_address" meta_type="CPS Vocabulary"/>
+</object>
