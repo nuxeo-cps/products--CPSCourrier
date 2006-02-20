@@ -1,0 +1,16 @@
+<!-- $Id$ -->
+<table class="listing"
+       tal:define="columns options/columns;
+		   rows options/rows;
+		   ">
+  <tr>
+    <td tal:repeat="col columns">
+      <tal:block content="col/label"
+		 i18n:translate=""
+		 tal:condition="col/is_i18n" />
+    </td>
+  </tr>
+  <tr tal:repeat="row rows">
+    <tal:block replace="structure row" />
+  </tr>
+</table>
