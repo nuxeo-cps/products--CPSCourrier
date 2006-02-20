@@ -21,7 +21,7 @@
  </property>
  <property name="layout_clusters">
   <element value="header:mail_header"/>
-  <element value="metadata:metadata"/>
+  <element value="metadata:mail_metadata"/>
  </property>
  <property name="flexible_layouts">
   <element value="mail_flexible:file"/>
