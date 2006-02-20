@@ -7,7 +7,10 @@
   <field name="deadline" meta_type="CPS DateTime Field"/>
   <field name="priority" meta_type="CPS String Field"/>
   <field name="size" meta_type="CPS Float Field"/>
-  <field name="original_sender_address" meta_type="CPS String Field">
+  <field name="from" meta_type="CPS String Field">
+    <property name="is_searchabletext">True</property>
+  </field>
+  <field name="to" meta_type="CPS String List Field">
     <property name="is_searchabletext">True</property>
   </field>
 </object>
