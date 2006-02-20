@@ -4,11 +4,11 @@
 		   rows options/rows;
 		   ">
   <tr>
-    <td tal:repeat="col columns">
+    <th tal:repeat="col columns">
       <tal:block content="col/label"
 		 i18n:translate=""
 		 tal:condition="col/is_i18n" />
-    </td>
+    </th>
   </tr>
   <tr tal:repeat="row rows">
     <tal:block replace="structure row" />
