@@ -17,7 +17,7 @@
   <property name="label">cpscourrier_from_label</property>
   <property name="is_i18n">True</property>
  </widget>
- <widget name="to" meta_type="Text Widget">
+ <widget name="to" meta_type="Lines Widget">
   <property name="fields">
    <element value="to"/>
   </property>
