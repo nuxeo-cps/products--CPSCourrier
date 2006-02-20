@@ -46,9 +46,9 @@ class BrainDataModel(DataModel):
     NotImplementedError
     """
 
-    _forbidden_widgets = []
 
     def __init__(self, brain):
+        self._forbidden_widgets = []
         self._brain = brain
 
     def getObject(self):
