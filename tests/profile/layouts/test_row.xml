@@ -21,9 +21,9 @@ point
   </property>
   <property name="hidden_readonly_layout_modes"/>
  </widget>
- <widget name="Description" meta_type="Text Widget">
+ <widget name="Content" meta_type="Text Widget">
   <property name="fields">
-   <element value="Description"/>
+   <element value="content"/>
   </property>
   <property name="label_edit">cpsdoc_description_label_edit</property>
   <property name="is_i18n">True</property>
@@ -47,7 +47,7 @@ point
    <cell name="Title"/>
   </row>
   <row>
-   <cell name="Description"/>
+   <cell name="Content"/>
   </row>
  </table>
 </object>

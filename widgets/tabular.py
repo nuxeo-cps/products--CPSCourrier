@@ -101,19 +101,30 @@ class TabularWidget(CPSPortletWidget):
         return [ row[0]['widget'] for row in layout_structure['rows'] ]
     
     def render(self, mode, datastructure, **kw):
-        calling_obj = self.getCallingObject(datastructure)
+        """ Render datastructure according to mode.
 
+        Rows layout structures are computed once and for all, on the first
+        object to display. 
+        """
+        calling_obj = self.getCallingObject(datastructure)
+        if calling_obj is None: # happens on creation
+            return ''
+
+        # lookup of row layout 
         lid = self.row_layout
         fti = calling_obj.getTypeInfo()
-        layout_structures = fti._computeLayoutStructures(
-            datastructure, 'view', layout_id=lid, ob=calling_obj)
-        # maybe can be fetched from the layout structures as well (perf)
-        row_layout = fti.getLayout(lid, calling_obj)
+        row_layout = fti.getLayout(lid, calling_obj) 
+        layout_structures = None
 
         meth_context = self.getMethodContext(datastructure)
 
         rendered_rows = []
         for row_dm in self.listRowDataModels(datastructure, **kw):
+            # compute layout_structures if needed
+            if layout_structures is None: 
+                layout_structures = [
+                    row_layout.computeLayoutStructure(mode, row_dm)]
+
             # prepare a data structure
             row_ds = DataStructure(datamodel=row_dm)
             row_layout.prepareLayoutWidgets(row_ds)

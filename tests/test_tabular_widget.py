@@ -41,8 +41,8 @@ class TestingTabularWidget(TabularWidget):
     """ A subclass to implement listRowDataModels. """
 
     brains = [FakeBrain(d) for d in [
-        {'Title' : 'Title 1', 'Description' : 'Pending'},
-        {'Title' : 'Title 2', 'Description' : 'Rejected'},
+        {'Title' : 'Title 1', 'content' : 'Pending', 'Description' : '',},
+        {'Title' : 'Title 2', 'content' : 'Rejected', 'Description' : '',},
         ]]
 
     def listRowDataModels(self, datastructure, **kw):
@@ -163,7 +163,7 @@ class IntegrationTestTabularPortlet(IntegrationTestCase):
         self.assert_(columns[0].getId() == 'w__Title')
 
         self.assert_(columns[1].meta_type == 'Text Widget')
-        self.assert_(columns[1].getId() == 'w__Description')
+        self.assert_(columns[1].getId() == 'w__Content')
 
 #
 # Sub classes
@@ -186,16 +186,16 @@ class IntegrationTestFolderContentsPortlet(IntegrationTestCase):
         container = self.portal.workspaces
         item1 = wftool.invokeFactoryFor(container, 'News Item', 'item1',
                                         Title='Title 1',
-                                        Description='Description 1')
+                                        content='content 1')
 
         item2 = wftool.invokeFactoryFor(container, 'News Item', 'item2',
                                         Title='Title 2',
-                                        Description='Description 2')
+                                        content='content 2')
 
         rendered = self.widget.render('view', self.ds, context_obj=container)
         self.assertEquals(rendered.split('\n'), [
-            'Title 1|<div class="ddefault">Description 1</div>',
-            'Title 2|<div class="ddefault">Description 2</div>',
+            'Title 1|<div class="ddefault">content 1</div>',
+            'Title 2|<div class="ddefault">content 2</div>',
             ])
         
 
