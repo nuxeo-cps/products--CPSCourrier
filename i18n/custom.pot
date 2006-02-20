@@ -64,6 +64,9 @@ msgstr ""
 msgid "cpscourrier_to_label"
 msgstr ""
 
+msgid "cpscourrier_creation_date_label"
+msgstr ""
+
 msgid "cpscourrier_form_of_address_label"
 msgstr ""
 
