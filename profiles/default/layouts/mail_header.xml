@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<object name="mail_header" meta_type="CPS Layout">
+ <property name="style_prefix">layout_default_</property>
+ <widget name="object" meta_type="Text Widget">
+  <property name="fields">
+   <element value="Title"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_object_label</property>
+  <property name="is_i18n">True</property>
+ </widget>
+ <widget name="from" meta_type="Text Widget">
+  <property name="fields">
+   <element value="from"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_from_label</property>
+  <property name="is_i18n">True</property>
+ </widget>
+ <widget name="to" meta_type="Text Widget">
+  <property name="fields">
+   <element value="to"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_to_label</property>
+  <property name="is_i18n">True</property>
+ </widget>
+ <widget name="creation_date" meta_type="DateTime Widget">
+  <property name="fields">
+   <element value="CreationDate"/>
+  </property>
+  <property name="label">time_creation_date</property>
+  <property name="is_i18n">True</property>
+  <property name="view_format">long</property>
+ </widget>
+ <table>
+  <row>
+   <cell name="Object"/>
+  </row>
+  <row>
+   <cell name="CreationDate"/>
+  </row>
+ </table>
+</object>
