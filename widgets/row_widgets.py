@@ -97,13 +97,9 @@ class CPSWorkflowVariableWidget(CPSWidget):
     def render(self, mode, datastructure, **kw):
         """Render in mode from datastructure."""
 
-        dm = datastructure.getDataModel()
-        proxy = dm.getProxy()
-        if proxy is None:
-            return ''
-        wftool = getToolByName(self, 'portal_workflow')
-        # TODO translate
-        return escape(wftool.getInfoFor(proxy, wf_var_id))
+        cpsmcat = getToolByName(self, 'translation_service')
+        state = datastructure[self.getWidgetId()]
+        return cpsmcat(state)
 
 
 InitializeClass(CPSWorkflowVariableWidget)
