@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <!-- specific fields for outgoing messages -->
 <object name="outgoing_mail" meta_type="CPS Schema">
-  <field name="replier_email_addresses" meta_type="CPS String List Field"/>
   <field name="signature" meta_type="CPS String Field"/>
   <field name="form_of_address" meta_type="CPS String Field"/>
   <field name="issue_date" meta_type="CPS DateTime Field"/>
