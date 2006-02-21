@@ -1,4 +1,8 @@
+# -*- encoding: iso-8859-15 -*-
+#$Id$
+
 # A script to make a default cps dev site
+# modified to use CPSCourrier extension profile
 
 
 
@@ -34,5 +38,23 @@ app.manage_addProduct['CPSDefault'].addConfiguredCPSSite(
     profile_id='CPSDefault:default',
     extension_ids=('CPSCourrier:default',)
     )
+
+# create some mailboxes & groups
+
+mailboxes = app.cps.mailboxes
+wftool = mailboxes.portal_workflow
+
+grp1_id = wftool.invokeFactoryFor(mailboxes, 'Mailbox Group', 'mailbox_grp_1',
+                                  Title='Groupe un')
+grp2_id = wftool.invokeFactoryFor(mailboxes, 'Mailbox Group', 'mailbox_grp_2',
+                                  Title='Groupe deux')
+grp1 = getattr(mailboxes, grp1_id)
+grp2 = getattr(mailboxes, grp2_id)
+
+mbox1 = wftool.invokeFactoryFor(grp1, 'Mailbox', 'mbox1',
+                               Title='Boîte fonctionnelle')
+mbox2 = wftool.invokeFactoryFor(grp2, 'Mailbox', 'mbox2',
+                                Title='Boîte en plus')
+
 
 transaction.commit()
