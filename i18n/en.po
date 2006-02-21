@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-21 00:33default\n"
+"POT-Creation-Date: 2006-02-21 14:27default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -87,6 +87,9 @@ msgstr "Type"
 
 msgid "cpscourrier_review_state_label"
 msgstr "State"
+
+msgid "cpscourrier_empty_box_msg"
+msgstr "This box is empty"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Best regards, "

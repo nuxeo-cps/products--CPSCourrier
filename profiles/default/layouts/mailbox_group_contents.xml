@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- 
+<!--
 Layout that present mailbox contents
 -->
 
@@ -11,10 +11,13 @@ Layout that present mailbox contents
  <widget name="Table" meta_type="Folder Contents Widget">
   <property name="row_layout">mailbox_group_contents_row</property>
   <property name="hidden_layout_modes">edit create</property>
+  <property name="empty_message">cpscourrier_empty_box_msg</property>
+  <property name="is_empty_message_i18n">True</property>
   <property name="listed_meta_types">
     <element value="CPS Proxy BTree Folder" />
     <element value="CPS Proxy Folder" />
   </property>
+
  </widget>
  <table>
   <row>
