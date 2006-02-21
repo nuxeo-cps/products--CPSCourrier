@@ -1,1 +1,1 @@
-/home/ogrisel/instances/dgme/Products/CPSCourrier/i18n/cpscourrier.pot
+cpscourrier.pot
