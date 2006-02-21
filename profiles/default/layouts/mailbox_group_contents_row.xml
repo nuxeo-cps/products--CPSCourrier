@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!-- 
+Layouts for rows in the content view of mailboxes
+-->
+
+<object name="mailbox_group_contents_row" meta_type="CPS Layout">
+ <property name="layout_view_method">layout_row_view</property>
+
+ <widget name="Type" meta_type="Type Icon Widget">
+  <property name="label">cpscourrier_type_label</property>
+  <property name="is_i18n">True</property>
+ </widget>
+
+ <widget name="Title" meta_type="String Widget">
+  <property name="fields">
+   <element value="Title"/>
+  </property>
+  <property name="is_i18n">True</property>
+  <property name="label">cpsdoc_title_label_edit</property>
+ </widget>
+
+ <widget name="Date" meta_type="Date Widget">
+  <property name="label">cpscourrier_date_label</property>
+  <property name="fields">
+   <element value="CreationDate"/>
+  </property>
+  <property name="is_i18n">True</property>
+ </widget>
+
+ <table>
+  <row>
+   <cell name="Type"/>
+  </row>
+  <row>
+   <cell name="Title"/>
+  </row>
+ </table>
+</object>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- 
+Layout that present mailbox contents
+-->
+
+<object name="mailbox_group_contents" meta_type="CPS Layout">
+<!-- Later
+ <property name="layout_view_method">layout_mailbox_contents_view</property>
+-->
+ <property name="style_prefix">layout_default_</property>
+ <widget name="Table" meta_type="Folder Contents Widget">
+  <property name="row_layout">mailbox_group_contents_row</property>
+  <property name="hidden_layout_modes">edit create</property>
+  <property name="listed_meta_types">
+    <element value="CPS Proxy BTree Folder" />
+    <element value="CPS Proxy Folder" />
+  </property>
+ </widget>
+ <table>
+  <row>
+   <cell name="Table"/>
+  </row>
+ </table>
+</object>
