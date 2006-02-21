@@ -47,7 +47,7 @@ class FolderContentsWidget(TabularWidget):
 
     meta_type = 'Folder Contents Widget'
     _properties = TabularWidget._properties + (
-        {'id': 'listed_meta_types', 'type': 'list', 'mode': 'w',
+        {'id': 'listed_meta_types', 'type': 'lines', 'mode': 'w',
          'label': 'Meta types to list', 'is_required' : 1},
         )
 
