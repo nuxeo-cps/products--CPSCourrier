@@ -17,8 +17,8 @@
       <tal:block replace="structure row" />
     </tr>
   </table>
-    
-  <input type="submit" 
+
+  <input type="submit"
 	 class="context"
 	 tal:repeat="action actions"
 	 tal:attributes="value action/title;
