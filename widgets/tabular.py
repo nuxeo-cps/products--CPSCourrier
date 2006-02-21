@@ -35,20 +35,20 @@ class TabularWidget(CPSPortletWidget):
     """ A generic portlet widget to display tabular contents.
 
     Uses a layout to render the rows. This layout is fetched from the portlet.
-    Subclasses have to override the 'listRowDataModels' method. 
+    Subclasses have to override the 'listRowDataModels' method.
 
     The (optional) render method will get those keyword args:
     - mode: the widget's rendering mode
     - rows: list of rendered rows
     - columns: the common list of widget objects that were used to render
-               rows. 
+               rows.
 
     We assume that the 'layout' part of the row layout definition is
     actually a column, because that's what flexible widgets manipulation
     methods are comfortable with. It's up to the layout's render method to
     render this column as a row. To get rid of this assumption, subclasses
-    can override the extractColumns method. 
-    
+    can override the extractColumns method.
+
     >>> wi = TabularWidget('spam')
     """
 
@@ -61,12 +61,18 @@ class TabularWidget(CPSPortletWidget):
          'label': 'Message to display if listing is empty',},
         {'id': 'is_empty_message_i18n', 'type': 'boolean', 'mode': 'w',
          'label': 'Is the message of emptiness to be translated?'},
+        {'id': 'actions_category', 'type': 'string', 'mode': 'w',
+         'label': 'Actions category for buttons'},
+#        {'id': 'actions', 'type': 'tokens', 'mode': 'w',
+#         'label': 'Actions'},
         )
 
     row_layout = ''
     render_method = ''
     empty_message = ''
     is_empty_message_i18n = False
+    actions_category = ''
+    actions = ()
 
     def listRowDataModels(self, datastructure, **kw):
         """To be implemented by subclasses.
@@ -80,7 +86,7 @@ class TabularWidget(CPSPortletWidget):
         """Get the object for which this widget is called.
 
         Typically a portlet."""
-        
+
         dm = datastructure.getDataModel()
         proxy = dm.getProxy()
         if proxy is None:
@@ -93,33 +99,49 @@ class TabularWidget(CPSPortletWidget):
 
         Override this if you want to replace a slow zpt parsing by fixed python
         code.
-        
+
         To do this for widgets would require to pass the context at
-        datamodel init time or hack it afterwards. 
-        This could be dangerous because of ACL checks and local roles. 
+        datamodel init time or hack it afterwards.
+        This could be dangerous because of ACL checks and local roles.
         """
-        
+
         return datastructure.getDataModel().getContext()
 
     def extractColumns(self, layout_structure):
         """ Extract column info for render method from a layout structure. """
 
         return [ row[0]['widget'] for row in layout_structure['rows'] ]
-    
+
+    def getActions(self, datastructure):
+        if not self.actions_category:
+            return None
+
+        atool = getToolByName(self, 'portal_actions')
+
+        proxy = datastructure.get('context_obj') # if from portlet
+        if proxy is None:
+            proxy = datastructure.getDataModel().getProxy()
+
+        cat = self.actions_category or 'object'
+        actions = atool.listFilteredActionsFor(proxy)[self.actions_category]
+        return [{'title': action['name'],
+                'url': action['url'],}
+                for action in actions]
+
     def render(self, mode, datastructure, **kw):
         """ Render datastructure according to mode.
 
         Rows layout structures are computed once and for all, on the first
-        object to display. 
+        object to display.
         """
         calling_obj = self.getCallingObject(datastructure)
         if calling_obj is None: # happens on creation
             return ''
 
-        # lookup of row layout 
+        # lookup of row layout
         lid = self.row_layout
         fti = calling_obj.getTypeInfo()
-        row_layout = fti.getLayout(lid, calling_obj) 
+        row_layout = fti.getLayout(lid, calling_obj)
         layout_structures = None
 
         meth_context = self.getMethodContext(datastructure)
@@ -127,7 +149,7 @@ class TabularWidget(CPSPortletWidget):
         rendered_rows = []
         for row_dm in self.listRowDataModels(datastructure, **kw):
             # compute layout_structures if needed
-            if layout_structures is None: 
+            if layout_structures is None:
                 layout_structures = [
                     row_layout.computeLayoutStructure(mode, row_dm)]
 
@@ -159,10 +181,13 @@ class TabularWidget(CPSPortletWidget):
             if isinstance(msg, unicode):
                 msg = msg.encode('iso-8859-15')
             return msg
-        
+
         layout_structure = layout_structures[0] # only one layout
         columns = self.extractColumns(layout_structure)
-        return meth(mode=mode, columns=columns, rows=rendered_rows)
+        actions = self.getActions(datastructure)
+
+        return meth(mode=mode, columns=columns,
+                    rows=rendered_rows, actions=actions)
 
 
 widgetRegistry.register(TabularWidget)

@@ -98,7 +98,7 @@ class CPSWorkflowVariableWidget(CPSWidget):
         """Render in mode from datastructure."""
 
         cpsmcat = getToolByName(self, 'translation_service')
-        state = datastructure[self.getWidgetId()])
+        state = datastructure[self.getWidgetId()]
         return cpsmcat(state).encode('iso-8859-15')
 
 
@@ -157,3 +157,45 @@ class CPSQualifiedLinkWidget(CPSWidget):
 InitializeClass(CPSQualifiedLinkWidget)
 
 widgetRegistry.register(CPSQualifiedLinkWidget)
+
+class CPSListCheckboxWidget(CPSWidget):
+    """widget making a checkbox, to be posted as a list.
+
+    This will probably be extended in the future to take complex visibility
+    conditions into account."""
+
+    meta_type = 'List Checkbox Widget'
+
+    _properties = CPSWidget._properties + (
+        {'id': 'list_name', 'type' : 'string', 'mode' : 'w',
+         'label': 'Name of the posted list', 'is_required': 1},
+        )
+
+    list_name = ''
+
+    def prepare(self, datastructure, **kw):
+        """Prepare datastructure. """
+        pass
+
+    def validate(self, datastructure, **kw):
+        """Validate datastructure and update datamodel."""
+        return 1
+
+    def render(self, mode, datastructure, **kw):
+        """Render in mode from datastructure."""
+
+        proxy = datastructure.getDataModel().getProxy()
+        if proxy is None:
+            return ''
+        name = '%s:list' % self.list_name
+        item_id = proxy.getId()
+
+        # XXX: content_lib_info_detail_tab uses  item.getContextUrl(utool=utool)
+        # investigate ?
+        return renderHtmlTag('input', type='checkbox',
+                             name=name, value=item_id)
+
+
+InitializeClass(CPSListCheckboxWidget)
+
+widgetRegistry.register(CPSListCheckboxWidget)

@@ -6,6 +6,10 @@ Layouts for rows in the content view of mailboxes
 <object name="mailbox_contents_row" meta_type="CPS Layout">
  <property name="layout_view_method">layout_row_view</property>
 
+ <widget name="Checkbox" meta_type="List Checkbox Widget">
+  <property name="list_name">ids</property>
+ </widget>
+
  <widget name="Type" meta_type="Type Icon Widget">
   <property name="label">cpscourrier_type_label</property>
   <property name="is_i18n">True</property>
@@ -54,6 +58,9 @@ Layouts for rows in the content view of mailboxes
  </widget>
 
  <table>
+  <row>
+   <cell name="Checkbox"/>
+  </row>
   <row>
    <cell name="Type"/>
   </row>

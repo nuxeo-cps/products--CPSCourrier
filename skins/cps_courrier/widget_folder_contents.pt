@@ -1,16 +1,28 @@
-<!-- $Id$ -->
-<table class="listing"
-       tal:define="columns options/columns;
-		   rows options/rows;
-		   ">
-  <tr>
-    <th tal:repeat="col columns">
-      <tal:block content="col/label"
-		 i18n:translate=""
-		 tal:condition="col/is_i18n" />
-    </th>
-  </tr>
-  <tr tal:repeat="row rows">
-    <tal:block replace="structure row" />
-  </tr>
-</table>
+<tal:comment replace="nothing"> $Id$ </tal:comment>
+<form method="post"
+      tal:define="actions options/actions;
+		  ">
+  <table class="listing"
+	 tal:define="columns options/columns;
+		     rows options/rows;
+		     ">
+    <tr>
+      <th tal:repeat="col columns">
+	<tal:block content="col/label"
+		   i18n:translate=""
+		   tal:condition="col/is_i18n" />
+      </th>
+    </tr>
+    <tr tal:repeat="row rows">
+      <tal:block replace="structure row" />
+    </tr>
+  </table>
+    
+  <input type="submit" 
+	 class="context"
+	 tal:repeat="action actions"
+	 tal:attributes="value action/title;
+			 name string:${action/url}:method"
+	 i18n:attributes="value" />
+</form>
+
