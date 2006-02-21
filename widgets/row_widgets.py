@@ -57,6 +57,8 @@ class CPSTypeIconWidget(CPSWidget):
         title = fti.title_or_id()
         cpsmcat = getToolByName(self, 'translation_service')
         title = cpsmcat(title)
+        if isinstance(title, unicode):
+            title = title.encode('iso-8859-15')
         return renderHtmlTag('img', src=uri, alt=title)
 
 
