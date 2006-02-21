@@ -57,10 +57,16 @@ class TabularWidget(CPSPortletWidget):
     _properties = _properties = CPSPortletWidget._properties + (
         {'id': 'row_layout', 'type': 'string', 'mode': 'w',
          'label': 'Layout to use for the rows', 'is_required' : 1},
+        {'id': 'empty_message', 'type': 'string', 'mode': 'w',
+         'label': 'Message to display if listing is empty',},
+        {'id': 'is_empty_message_i18n', 'type': 'boolean', 'mode': 'w',
+         'label': 'Is the message of emptiness to be translated?'},
         )
 
     row_layout = ''
     render_method = ''
+    empty_message = ''
+    is_empty_message_i18n = False
 
     def listRowDataModels(self, datastructure, **kw):
         """To be implemented by subclasses.
@@ -145,8 +151,15 @@ class TabularWidget(CPSPortletWidget):
             raise RuntimeError("Unknown Render Method %s for widget type %s"
                                % (self.render_method, self.getId()))
 
-        if layout_structures is None:
-            return ''
+        if layout_structures is None: # listing is empty
+            msg = self.empty_message
+            cpsmcat = getToolByName(self, 'translation_service')
+            if self.is_empty_message_i18n:
+                msg = cpsmcat(msg)
+            if isinstance(msg, unicode):
+                msg = msg.encode('iso-8859-15')
+            return msg
+        
         layout_structure = layout_structures[0] # only one layout
         columns = self.extractColumns(layout_structure)
         return meth(mode=mode, columns=columns, rows=rendered_rows)
