@@ -9,7 +9,7 @@
   <field name="deadline" meta_type="CPS DateTime Field">
     <property name="default_expr">python:DateTime()+3</property>
   </field>
-  <field name="priority" meta_type="CPS Int Field">
+  <field name="priority" meta_type="CPS String Field">
     <property name="default_expr">string:1</property>
   </field>
   <field name="size" meta_type="CPS Float Field"/>
