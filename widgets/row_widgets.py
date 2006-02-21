@@ -56,9 +56,7 @@ class CPSTypeIconWidget(CPSWidget):
 
         title = fti.title_or_id()
         cpsmcat = getToolByName(self, 'translation_service')
-        title = cpsmcat(title)
-        if isinstance(title, unicode):
-            title = title.encode('iso-8859-15')
+        title = cpsmcat(title).encode('iso-8859-15')
         return renderHtmlTag('img', src=uri, alt=title)
 
 
@@ -100,10 +98,8 @@ class CPSWorkflowVariableWidget(CPSWidget):
         """Render in mode from datastructure."""
 
         cpsmcat = getToolByName(self, 'translation_service')
-        state = cpsmcat(datastructure[self.getWidgetId()])
-        if isinstance(state, unicode):
-            state = state.encode('iso-8859-15')
-        return state
+        state = datastructure[self.getWidgetId()])
+        return cpsmcat(state).encode('iso-8859-15')
 
 
 InitializeClass(CPSWorkflowVariableWidget)
