@@ -125,7 +125,8 @@ class TabularWidget(CPSPortletWidget):
         cat = self.actions_category or 'object'
         actions = atool.listFilteredActionsFor(proxy)[self.actions_category]
         return [{'title': action['name'],
-                'url': action['url'],}
+                'url': action['url'],
+                 'id' : action['id'],}
                 for action in actions]
 
     def render(self, mode, datastructure, **kw):

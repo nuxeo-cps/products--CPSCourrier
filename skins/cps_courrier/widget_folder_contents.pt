@@ -1,5 +1,6 @@
 <tal:comment replace="nothing"> $Id$ </tal:comment>
 <form method="post"
+      action="cpscourrier_batch_perform"
       tal:define="actions options/actions;
 		  ">
   <table class="listing"
@@ -22,7 +23,7 @@
 	 class="context"
 	 tal:repeat="action actions"
 	 tal:attributes="value action/title;
-			 name string:${action/url}:method"
+			 name string:${action/id}"
 	 i18n:attributes="value" />
 </form>
 
