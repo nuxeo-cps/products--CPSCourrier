@@ -75,14 +75,14 @@ class FolderContentsWidget(TabularWidget):
 
     def getMethodContext(self, datastructure):
         return self
-    
+
     def listRowDataModels(self, datastructure, **kw):
         """Return an iterator for folder contents datamodels
         """
         folder = kw.get('context_obj') # typical of portlets
         if folder is None:
             folder = datastructure.getDataModel().getProxy()
-        
+
         if not _checkPermission(ListFolderContents, folder):
             raise Unauthorized("You are not allowed to list this folder")
         meta_types = datastructure.get('meta_types') or self.listed_meta_types
