@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!-- specific fields for filtering in mail listings -->
+<object name="mail_filter_params" meta_type="CPS Schema">
+  <field name="filter_review_state" meta_type="CPS String Field"/>
+  <field name="filter_priority" meta_type="CPS String Field"/>
+  <field name="filter_type" meta_type="CPS String Field"/>
+</object>
+

@@ -27,6 +27,7 @@
   <element value="metadata"/>
   <element value="common"/>
   <element value="folder"/>
+  <element value="mail_filter_params" />
  </property>
  <!-- The layouts as clustered use to play well with document portlets -->
  <property name="layouts">

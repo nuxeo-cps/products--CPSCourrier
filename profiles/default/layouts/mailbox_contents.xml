@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
-<!-- 
+<!--
 Layout that present mailbox contents
 -->
 
 <object name="mailbox_contents" meta_type="CPS Layout">
-<!-- Later
- <property name="layout_view_method">layout_mailbox_contents_view</property>
--->
+ <property name="layout_view_method">layout_tabular_view</property>
  <property name="style_prefix">layout_default_</property>
+
  <widget name="Table" meta_type="Folder Contents Widget">
   <property name="row_layout">mailbox_contents_row</property>
   <property name="hidden_layout_modes">edit create</property>
@@ -15,9 +14,48 @@ Layout that present mailbox contents
   <property name="is_empty_message_i18n">True</property>
   <property name="actions_category">courrier</property>
  </widget>
+
+ <widget name="Filter Review State" meta_type="Select Widget">
+   <property name="widget_mode_expr">string:edit</property>
+   <property name="label">search_review_state</property>
+   <property name="is_i18n">True</property>
+   <property name="vocabulary">mail_priority</property>
+   <property name="translated">False</property>
+   <property name="fields">
+     <element value="filter_review_state" />
+   </property>
+ </widget>
+
+ <widget name="Filter Priority" meta_type="Select Widget">
+   <property name="widget_mode_expr">string:edit</property>
+   <property name="label">cpscourrier_priority_label</property>
+   <property name="is_i18n">True</property>
+   <property name="vocabulary">mail_priority</property>
+   <property name="translated">True</property>
+   <property name="fields">
+     <element value="filter_review_state" />
+   </property>
+ </widget>
+
+ <widget name="Filter Type" meta_type="Select Widget">
+   <property name="widget_mode_expr">string:edit</property>
+   <property name="label">cpscourrier_type_label</property>
+   <property name="is_i18n">True</property>
+   <property name="vocabulary">mailbox_allowed_ptype</property>
+   <property name="translated">False</property>
+   <property name="fields">
+     <element value="filter_type" />
+   </property>
+ </widget>
+
  <table>
-  <row>
-   <cell name="Table"/>
-  </row>
+   <row>
+     <cell name="Filter Review State" />
+     <cell name="Filter Priority" />
+     <cell name="Filter Type" />
+   </row>
+   <row>
+     <cell name="Table"/>
+   </row>
  </table>
 </object>

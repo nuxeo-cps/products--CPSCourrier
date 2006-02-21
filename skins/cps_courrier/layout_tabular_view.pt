@@ -1,0 +1,35 @@
+<tal:comment replace="nothing">
+  This special layout expects to find a tabular widget in the last row.
+  All other widgets are used to govern filtering/sorting parameters and make up
+  a form.
+
+  $Id$
+</tal:comment>
+
+<tal:block define="layout options/layout;
+		   rows layout/rows;
+		   tabular_cell python:rows[-1][0];
+		   param_rows python:rows[:-1];
+		   ">
+  <form action="" method="post">
+    <div tal:repeat="row param_rows" style="float:left">
+      <tal:block repeat="cell row">
+	<tal:block define="widget cell/widget">
+	  <span class="dlabel" i18n:translate="" tal:condition="widget/is_i18n"
+		tal:content="widget/label">label</span>
+	  <span class="dlabel" tal:condition="not:widget/is_i18n"
+		tal:content="widget/label">label</span>
+	</tal:block>
+	<tal:block replace="structure cell/widget_rendered" />
+      </tal:block>
+    </div>
+    <input type="submit" name="filter" value="cpscourrier_filter_button"
+	   style="float:right"
+	   tal:condition="param_rows"
+	   i18n:attributes="value" />
+  </form>
+  <div style="clear:both"> </div>
+  <div style="margin-top:2ex">
+    <tal:block replace="structure tabular_cell/widget_rendered" />
+  </div>
+</tal:block>
