@@ -9,7 +9,7 @@
 
  <!-- A Mailbox is a container type similar to a workspace -->
  <property name="factory">addFolder</property>
- <property name="immediate_view">folder_contents</property>
+ <property name="immediate_view">view</property>
 
  <!-- Use a BTree type to scale to potentially large mail collections -->
  <property name="cps_proxy_type">btreefolder</property>
