@@ -20,6 +20,7 @@
 """ This module holds simple widget definitions for CPSCourrier row layouts.
 """
 from cgi import escape
+from zLOG import LOG, DEBUG
 from Globals import InitializeClass
 
 from Products.CMFCore.utils import getToolByName
@@ -27,10 +28,12 @@ from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSSchemas.BasicWidgets import CPSSelectWidget
+from Products.CPSSkins.cpsskins_utils import unserializeFromCookie
 
 from Products.CPSSchemas.tests.testWidgets import (FakePortal,
                                                    FakeDataStructure,
                                                    FakeDataModel)
+
 
 # XXX this should be importable from CPSSchemas.Widget
 WIDGET_PREFIX = 'widget__'
@@ -44,6 +47,35 @@ class CPSSelectFilterWidget(CPSSelectWidget):
     """A widget that prepares datastructure from dm, request and cookie."""
 
     meta_type = 'Select Filter Widget'
+
+    _properties = CPSSelectWidget._properties + (
+        {'id': 'cookie_id', 'type': 'string', 'mode': 'w',
+         'label': 'Name of cookie for filter params (no cookie if empty)', },
+        )
+
+    cookie_id = ''
+
+    def readCookie(self, wid):
+        """Read a value for datastructure from cookie.
+
+        XXX should go in a mixin class
+        """
+        if not self.cookie_id:
+            return
+        cookie = self.REQUEST.cookies.get(self.cookie_id)
+        if cookie is None:
+            return
+
+        # we have to convert from unicode. There should be only identifiers
+        # so we don't catch UnicodeEncodeErrors
+        c_filters = unserializeFromCookie(string=cookie)
+        LOG('CPSSelectFilterWidget:cookie', DEBUG, c_filters)
+        LOG('CPSSelectFilterWidget:wid', DEBUG, wid)
+        try:
+            return str(c_filters.get(wid))
+        except (AttributeError, KeyError):
+            pass
+
 
     def prepare(self, datastructure, **kw):
         """ prepare datastructure from datamodel, request and cookie.
@@ -61,10 +93,16 @@ class CPSSelectFilterWidget(CPSSelectWidget):
         # from datamodel
         CPSSelectWidget.prepare(self, datastructure, **kw)
 
-        # from request
+        # from cookie
+        from_cookie = self.readCookie(wid)
+        if from_cookie is not None:
+            datastructure[wid] = from_cookie
+
+        # from request form
         posted = self.REQUEST.form.get(WIDGET_PREFIX + wid)
         if posted is not None:
             datastructure[wid] = posted
+
 
 
 InitializeClass(CPSSelectFilterWidget)

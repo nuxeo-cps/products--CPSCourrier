@@ -32,6 +32,7 @@ from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.DataModel import DataModel
 from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
+from Products.CPSSkins.cpsskins_utils import serializeForCookie
 
 from Products.CPSCourrier.widgets.tabular import TabularWidget
 
@@ -61,6 +62,10 @@ class FolderContentsWidget(TabularWidget):
     _properties = TabularWidget._properties + (
         {'id': 'listed_meta_types', 'type': 'lines', 'mode': 'w',
          'label': 'Meta types to list', 'is_required' : 1},
+        {'id': 'cookie_id', 'type': 'string', 'mode': 'w',
+         'label': 'Name of cookie for filter params (no cookie if empty)', },
+        {'id': 'filter_button', 'type': 'string', 'mode': 'w',
+         'label': 'Name of the button used to trigger filtering', },
         )
 
     listed_meta_types = (
@@ -69,6 +74,10 @@ class FolderContentsWidget(TabularWidget):
        'CPS Proxy Folderish Document',
        )
 
+    cookie_id = ''
+
+    filter_button = ''
+    
     render_method = 'widget_folder_contents'
 
     def layout_row_view(self, layout=None, **kw):
@@ -124,20 +133,27 @@ class FolderContentsWidget(TabularWidget):
         """
 
         # extract filters from datastructure
-        filters = dict( (key[FILTER_PREFIX_LEN:], item)
+        filters = dict( (key, item)
                         for key, item in datastructure.items()
                         if key.startswith(FILTER_PREFIX) )
 
+        # if filtering uses a post, set cookie
+        request = self.REQUEST
+        if self.cookie_id and request.form.get(self.filter_button):
+            cookie = serializeForCookie(filters)
+            request.RESPONSE.setCookie(self.cookie_id, cookie)
+
         # empty filter value means not to filter
-        filters = dict( (key, item) for key, item in filters.items() if item)
+        filters = dict( (key[FILTER_PREFIX_LEN:], item)
+                        for key, item in filters.items() if item)
 
         return filters
 
     def listRowDataStructures(self, datastructure, layout, **kw):
         """Return an iterator for folder contents datastructures
 
-        We cannot avoid finally fetching all objects, but we try to avoid fetching all of
-        them at once.
+        We cannot avoid finally fetching all objects, but we try to
+        avoid fetching all of them at once.
         """
         folder = kw.get('context_obj') # typical of portlets
         if folder is None:
