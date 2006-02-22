@@ -1,0 +1,21 @@
+*******************************************
+** CPSCourrier V0.1.0 [R1 build 2006/02/22-03:53 by gracinet]
+** SVN URL: http://svn/pub/CPSCourrier/trunk Revision: 33273
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Full profile. Many things, esp new portal types:
+  Incoming Mail, Outgoing Mail, Mailbox, Mailbox Group
+- Folder Contents Widget, applied for Mailbox contents view
+- 
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Tabular generic widget: can render list of items using an auxiliairy layout
+  and provides batch actions capabilities 
+
+
