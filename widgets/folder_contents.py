@@ -35,8 +35,8 @@ from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 
 from Products.CPSCourrier.widgets.tabular import TabularWidget
 
-FILTER_PREFIX = "Filter "
-FILTER_PREFIX_LEN = len(FILTER_PREFIX)
+FILTER_PREFIX = 'Filter '
+_missed = object()
 
 def removeFilterPrefix(wid):
     """Remove a filter prefix in a widget id. """
@@ -92,8 +92,61 @@ class FolderContentsWidget(TabularWidget):
         layout.prepareLayoutWidgets(datastructure)
         return datastructure
 
+    def passFilters(self, item, filters):
+        """True if filters is a subdict of filter.
+        TODO check if there is something in the dict api for this
+
+        >>> widg = FolderContentsWidget('')
+        >>> widg.passFilters({'ab':1, 'cd':2}, {})
+        True
+        >>> widg.passFilters({'ab':1, 'cd':2}, {'ab': 1})
+        True
+        >>> widg.passFilters({'ab':1, 'cd':2}, {'ab': 2})
+        False
+        >>> widg.passFilters({'ab':1, 'cd':2, 'spam': 'a'}, {'ab': 1, 'spam':'a'})
+        True
+        >>> widg.passFilters({'ab':1, 'cd':2, 'spam': 'a'}, {'ab': 1, 'spam':'b'})
+        False
+        """
+
+        import pdb; pdb.set_trace()
+        if not filters:
+            return True
+        for key, value in filters.items():
+            if item.get(key, _missed) != value:
+                return False
+        else:
+            return True
+
+    def buildFilters(self, datastructure):
+        """Build filters according to datastructure, query and cookies.
+
+        Cookies not implemented.
+        Assumptions: the post is made with widgets whose ids start all with 'Filter '
+        and correspond to other widget ids present in items.
+        """
+
+        # extract filters from datastructure
+        filters = dict( (key, item) for key, item in datastructure.items()
+                        if key.startswith(FILTER_PREFIX) )
+        # extract filters from request
+        posted = self.REQUEST.form
+        if posted.get('filter') is not None:
+            prefix = 'widget__' + FILTER_PREFIX
+            prefix_len = len(prefix)
+            filters.update( dict( (key[prefix_len:], item) for key, item in posted.items()
+                                  if key.startswith(prefix) ))
+
+        # empty filter value means not to filter
+        filters = dict( (key, item) for key, item in filters.items() if item)
+
+        return filters
+
     def listRowDataStructures(self, datastructure, layout, **kw):
         """Return an iterator for folder contents datastructures
+
+        We cannot avoid finally fetching all objects, but we try to avoid fetching all of
+        them at once.
         """
         folder = kw.get('context_obj') # typical of portlets
         if folder is None:
@@ -110,7 +163,8 @@ class FolderContentsWidget(TabularWidget):
                    for doc, proxy in iterdocs)
         iterds = (self.prepareDataStructure(layout, DataStructure(datamodel=dm))
                   for dm in iterdms)
-        return iterds
+        filters = self.buildFilters(datastructure)
+        return (ds for ds in iterds if self.passFilters(ds, filters))
 
 InitializeClass(FolderContentsWidget)
 

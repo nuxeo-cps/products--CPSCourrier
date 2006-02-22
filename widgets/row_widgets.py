@@ -34,7 +34,12 @@ class CPSTypeIconWidget(CPSWidget):
 
     def prepare(self, datastructure, **kw):
         """Prepare datastructure from datamodel."""
-        pass
+        dm = datastructure.getDataModel()
+        obj = dm.getObject()
+        context = dm.getContext()
+        if obj is None or context is None:
+            return
+        datastructure[self.getWidgetId()] = obj.portal_type
 
     def validate(self, datastructure, **kw):
         """Validate datastructure and update datamodel."""
@@ -43,17 +48,16 @@ class CPSTypeIconWidget(CPSWidget):
     def render(self, mode, datastructure, **kw):
         """Render in mode from datastructure."""
 
-        dm = datastructure.getDataModel()
-        obj = dm.getObject()
-        context = dm.getContext()
-        if obj is None or context is None:
+        ptype = datastructure.get(self.getWidgetId())
+        if ptype is None:
             return ''
 
-        utool = getToolByName(self, 'portal_url')
-        fti = obj.getTypeInfo()
+        ttool = getToolByName(self, 'portal_types')
+        fti = getattr(ttool, ptype)
         icon = fti.getIcon()
-        uri = utool.getBaseUrl() + icon
 
+        utool = getToolByName(self, 'portal_url')
+        uri = utool.getBaseUrl() + icon
         title = fti.title_or_id()
         cpsmcat = getToolByName(self, 'translation_service')
         title = cpsmcat(title).encode('iso-8859-15')
