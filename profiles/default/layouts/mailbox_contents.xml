@@ -15,7 +15,7 @@ Layout that present mailbox contents
   <property name="actions_category">courrier</property>
  </widget>
 
- <widget name="Filter Review State" meta_type="Select Widget">
+ <widget name="Filter State" meta_type="Select Widget">
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">search_review_state</property>
    <property name="is_i18n">True</property>
