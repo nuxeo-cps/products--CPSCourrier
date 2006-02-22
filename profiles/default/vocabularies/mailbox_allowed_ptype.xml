@@ -4,6 +4,4 @@
  <property name="title_msgid"></property>
  <property name="description"></property>
  <property name="get_vocabulary_method">getVocabularyCourrierAllowedPType</property>
- <property name="empty_key_pos">first</property>
- <property name="empty_key_value_i18n">all</property>
 </object>

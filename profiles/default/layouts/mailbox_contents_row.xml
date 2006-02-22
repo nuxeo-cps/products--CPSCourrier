@@ -57,6 +57,16 @@ Layouts for rows in the content view of mailboxes
   <property name="is_i18n">True</property>
  </widget>
 
+ <widget name="Priority" meta_type="Select Widget">
+   <property name="label">cpscourrier_priority_label</property>
+   <property name="is_i18n">True</property>
+   <property name="vocabulary">mail_priority</property>
+   <property name="translated">True</property>
+   <property name="fields">
+     <element value="priority" />
+   </property>
+ </widget>
+
  <table>
   <row>
    <cell name="Checkbox"/>
@@ -74,7 +84,13 @@ Layouts for rows in the content view of mailboxes
    <cell name="To"/>
   </row>
   <row>
+   <cell name="Date"/>
+  </row>
+  <row>
    <cell name="State"/>
+  </row>
+  <row>
+   <cell name="Priority"/>
   </row>
  </table>
 </object>

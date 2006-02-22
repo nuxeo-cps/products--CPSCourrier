@@ -17,9 +17,9 @@ Layout that present mailbox contents
 
  <widget name="Filter State" meta_type="Select Widget">
    <property name="widget_mode_expr">string:edit</property>
-   <property name="label">search_review_state</property>
+   <property name="label">label_search_status</property>
    <property name="is_i18n">True</property>
-   <property name="vocabulary">mail_priority</property>
+   <property name="vocabulary">search_review_state</property>
    <property name="translated">False</property>
    <property name="fields">
      <element value="filter_review_state" />
@@ -30,10 +30,10 @@ Layout that present mailbox contents
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_priority_label</property>
    <property name="is_i18n">True</property>
-   <property name="vocabulary">mail_priority</property>
+   <property name="vocabulary">mailbox_filter_priority</property>
    <property name="translated">True</property>
    <property name="fields">
-     <element value="filter_review_state" />
+     <element value="filter_priority" />
    </property>
  </widget>
 
@@ -50,7 +50,7 @@ Layout that present mailbox contents
 
  <table>
    <row>
-     <cell name="Filter Review State" />
+     <cell name="Filter State" />
      <cell name="Filter Priority" />
      <cell name="Filter Type" />
    </row>
