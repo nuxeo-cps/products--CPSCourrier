@@ -36,6 +36,7 @@ from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSCourrier.widgets.tabular import TabularWidget
 
 FILTER_PREFIX = 'Filter '
+FILTER_PREFIX_LEN = len('Filter ')
 _missed = object()
 
 def removeFilterPrefix(wid):
@@ -104,6 +105,8 @@ class FolderContentsWidget(TabularWidget):
         False
         """
 
+        LOG('passFilters:item', DEBUG, item)
+        LOG('passFilters:ilters', DEBUG, filters)
         if not filters:
             return True
         for key, value in filters.items():
@@ -121,15 +124,9 @@ class FolderContentsWidget(TabularWidget):
         """
 
         # extract filters from datastructure
-        filters = dict( (key, item) for key, item in datastructure.items()
+        filters = dict( (key[FILTER_PREFIX_LEN:], item)
+                        for key, item in datastructure.items()
                         if key.startswith(FILTER_PREFIX) )
-        # extract filters from request
-        posted = self.REQUEST.form
-        if posted.get('filter') is not None:
-            prefix = 'widget__' + FILTER_PREFIX
-            prefix_len = len(prefix)
-            filters.update( dict( (key[prefix_len:], item) for key, item in posted.items()
-                                  if key.startswith(prefix) ))
 
         # empty filter value means not to filter
         filters = dict( (key, item) for key, item in filters.items() if item)
