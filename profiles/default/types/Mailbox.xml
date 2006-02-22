@@ -19,7 +19,6 @@
  <property name="allowed_content_types">
   <element value="Incoming Mail"/>
   <element value="Outgoing Mail"/>
-  <element value="Mailbox"/>
  </property>
 
  <!-- Currently use the same schemas as standard workspaces -->
