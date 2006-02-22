@@ -72,10 +72,10 @@ class CustomMethods:
                          )
     def widget_render_method(self, columns=None, rows=None, **kw):
         # deepcopy would not work
-        # (Can't pickle objects in acquisition wrappers.) 
-        self.passed_columns = columns 
+        # (Can't pickle objects in acquisition wrappers.)
+        self.passed_columns = columns
         self.passed_rows = rows
-        
+
 
 class TestingTabularWidgetCustomMethods(CustomMethods, TestingTabularWidget):
     pass
@@ -182,7 +182,7 @@ class IntegrationTestFolderContentsPortlet(IntegrationTestCase):
         self.widget = TestingFolderContentsWidget('the widget').__of__(self.portal)
         self.widget.manage_changeProperties(row_layout='test_row',
                                             render_method='')
-        
+
     def test_folder_contents(self):
         # creating some content to list
         wftool = self.portal.portal_workflow
@@ -200,7 +200,7 @@ class IntegrationTestFolderContentsPortlet(IntegrationTestCase):
             'Title 1|<div class="ddefault">content 1</div>',
             'Title 2|<div class="ddefault">content 2</div>',
             ])
-        
+
 
 
 def test_suite():
