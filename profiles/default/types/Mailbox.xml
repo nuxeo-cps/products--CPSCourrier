@@ -21,7 +21,8 @@
   <element value="Outgoing Mail"/>
  </property>
 
- <!-- Currently use the same schemas as standard workspaces -->
+ <!-- One schema on top of those of standard workspaces holds default
+      filtering parameters -->
  <property name="schemas">
   <element value="metadata"/>
   <element value="common"/>

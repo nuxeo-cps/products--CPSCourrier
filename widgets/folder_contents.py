@@ -25,7 +25,7 @@ from Globals import InitializeClass
 from AccessControl import Unauthorized
 
 from Products.CMFCore.utils import _checkPermission
-from Products.CMFCore.permissions import ListFolderContents
+from Products.CMFCore.permissions import View, ListFolderContents
 
 from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
@@ -164,6 +164,8 @@ class FolderContentsWidget(TabularWidget):
         meta_types = datastructure.get('meta_types') or self.listed_meta_types
 
         iterprox = (folder[p_id] for p_id in folder.objectIds(meta_types))
+        iterprox = (proxy for proxy in iterprox
+                    if _checkPermission(View, proxy))
         iterdocs = ( (proxy.getContent(), proxy) for proxy in iterprox)
         iterdms = (doc.getTypeInfo().getDataModel(doc,
                                                   proxy=proxy, context=folder)

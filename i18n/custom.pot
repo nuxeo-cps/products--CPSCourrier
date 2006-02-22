@@ -44,6 +44,12 @@ msgstr ""
 msgid "portal_type_OutgoingMail_description"
 msgstr ""
 
+msgid "portal_type_Dashboard_title"
+msgstr ""
+
+msgid "portal_type_Dashboard_description"
+msgstr ""
+
 #
 # Root of mailboxes area
 #
