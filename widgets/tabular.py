@@ -74,10 +74,9 @@ class TabularWidget(CPSPortletWidget):
     actions_category = ''
     actions = ()
 
-    def listRowDataModels(self, datastructure, **kw):
-        """To be implemented by subclasses.
+    def listRowDataStructures(self, datastructure, layout, **kw):
+        """Return items datastructures, prepared by layout
 
-        The row_layout layout will work on these.
         It's probably a good idea to return an iterator.
         """
         raise NotImplementedError
@@ -148,15 +147,13 @@ class TabularWidget(CPSPortletWidget):
         meth_context = self.getMethodContext(datastructure)
 
         rendered_rows = []
-        for row_dm in self.listRowDataModels(datastructure, **kw):
+        for row_ds in self.listRowDataStructures(datastructure,
+                                                 row_layout, **kw):
             # compute layout_structures if needed
             if layout_structures is None:
+                row_dm = row_ds.getDataModel()
                 layout_structures = [
                     row_layout.computeLayoutStructure(mode, row_dm)]
-
-            # prepare a data structure
-            row_ds = DataStructure(datamodel=row_dm)
-            row_layout.prepareLayoutWidgets(row_ds)
 
             # render from row_ds
             rendered = fti._renderLayouts(layout_structures,

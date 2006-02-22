@@ -35,6 +35,17 @@ from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 
 from Products.CPSCourrier.widgets.tabular import TabularWidget
 
+FILTER_PREFIX = "Filter "
+FILTER_PREFIX_LEN = len(FILTER_PREFIX)
+
+def removeFilterPrefix(wid):
+    """Remove a filter prefix in a widget id. """
+
+    if wid.startswith(FILTER_PREFIX):
+        return wid[FILTER_PREFIX_LEN:]
+    else:
+        return wid
+
 class FolderContentsWidget(TabularWidget):
     """ A tabular portlet widget that performs a simple folder listing.
 
@@ -76,8 +87,13 @@ class FolderContentsWidget(TabularWidget):
     def getMethodContext(self, datastructure):
         return self
 
-    def listRowDataModels(self, datastructure, **kw):
-        """Return an iterator for folder contents datamodels
+    def prepareDataStructure(self, layout, datastructure):
+        """Get layout to prepare datastructure and return it."""
+        layout.prepareLayoutWidgets(datastructure)
+        return datastructure
+
+    def listRowDataStructures(self, datastructure, layout, **kw):
+        """Return an iterator for folder contents datastructures
         """
         folder = kw.get('context_obj') # typical of portlets
         if folder is None:
@@ -89,8 +105,12 @@ class FolderContentsWidget(TabularWidget):
 
         iterprox = (folder[p_id] for p_id in folder.objectIds(meta_types))
         iterdocs = ( (proxy.getContent(), proxy) for proxy in iterprox)
-        return (doc.getTypeInfo().getDataModel(doc, proxy=proxy, context=folder)
-                for doc, proxy in iterdocs)
+        iterdms = (doc.getTypeInfo().getDataModel(doc,
+                                                  proxy=proxy, context=folder)
+                   for doc, proxy in iterdocs)
+        iterds = (self.prepareDataStructure(layout, DataStructure(datamodel=dm))
+                  for dm in iterdms)
+        return iterds
 
 InitializeClass(FolderContentsWidget)
 
