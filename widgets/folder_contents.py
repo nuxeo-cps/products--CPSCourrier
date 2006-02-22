@@ -109,7 +109,6 @@ class FolderContentsWidget(TabularWidget):
         False
         """
 
-        import pdb; pdb.set_trace()
         if not filters:
             return True
         for key, value in filters.items():
