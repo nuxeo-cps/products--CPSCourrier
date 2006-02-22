@@ -103,7 +103,7 @@ class CPSWorkflowVariableWidget(CPSWidget):
 
         cpsmcat = getToolByName(self, 'translation_service')
         state = datastructure[self.getWidgetId()]
-        return cpsmcat(state).encode('iso-8859-15')
+        return escape(cpsmcat(state).encode('iso-8859-15'))
 
 
 InitializeClass(CPSWorkflowVariableWidget)
