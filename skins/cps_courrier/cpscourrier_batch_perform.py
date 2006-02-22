@@ -4,7 +4,7 @@
 # or IObjectManager
 
 form = REQUEST.form
-ids = form.pop('ids')
+ids = form.pop('ids', ())
 #return str(REQUEST.form)
 
 if len(form) > 1:
