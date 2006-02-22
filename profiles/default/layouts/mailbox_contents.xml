@@ -15,7 +15,7 @@ Layout that present mailbox contents
   <property name="actions_category">courrier</property>
  </widget>
 
- <widget name="Filter State" meta_type="Select Widget">
+ <widget name="Filter State" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">label_search_status</property>
@@ -27,7 +27,7 @@ Layout that present mailbox contents
    </property>
  </widget>
 
- <widget name="Filter Priority" meta_type="Select Widget">
+ <widget name="Filter Priority" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_priority_label</property>
@@ -39,7 +39,7 @@ Layout that present mailbox contents
    </property>
  </widget>
 
- <widget name="Filter Type" meta_type="Select Widget">
+ <widget name="Filter Type" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_type_label</property>
