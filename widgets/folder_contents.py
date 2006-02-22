@@ -87,11 +87,6 @@ class FolderContentsWidget(TabularWidget):
     def getMethodContext(self, datastructure):
         return self
 
-    def prepareDataStructure(self, layout, datastructure):
-        """Get layout to prepare datastructure and return it."""
-        layout.prepareLayoutWidgets(datastructure)
-        return datastructure
-
     def passFilters(self, item, filters):
         """True if filters is a subdict of filter.
         TODO check if there is something in the dict api for this
@@ -160,7 +155,8 @@ class FolderContentsWidget(TabularWidget):
         iterdms = (doc.getTypeInfo().getDataModel(doc,
                                                   proxy=proxy, context=folder)
                    for doc, proxy in iterdocs)
-        iterds = (self.prepareDataStructure(layout, DataStructure(datamodel=dm))
+        iterds = (self.prepareRowDataStructure(layout,
+                                               DataStructure(datamodel=dm))
                   for dm in iterdms)
         filters = self.buildFilters(datastructure)
         return (ds for ds in iterds if self.passFilters(ds, filters))

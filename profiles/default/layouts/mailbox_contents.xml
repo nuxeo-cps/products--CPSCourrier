@@ -16,6 +16,7 @@ Layout that present mailbox contents
  </widget>
 
  <widget name="Filter State" meta_type="Select Widget">
+   <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">label_search_status</property>
    <property name="is_i18n">True</property>
@@ -27,6 +28,7 @@ Layout that present mailbox contents
  </widget>
 
  <widget name="Filter Priority" meta_type="Select Widget">
+   <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_priority_label</property>
    <property name="is_i18n">True</property>
@@ -38,6 +40,7 @@ Layout that present mailbox contents
  </widget>
 
  <widget name="Filter Type" meta_type="Select Widget">
+   <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_type_label</property>
    <property name="is_i18n">True</property>

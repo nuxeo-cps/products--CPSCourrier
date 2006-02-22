@@ -45,8 +45,10 @@ class TestingTabularWidget(TabularWidget):
         {'Title' : 'Title 2', 'content' : 'Rejected', 'Description' : '',},
         ]]
 
-    def listRowDataModels(self, datastructure, **kw):
-        return (BrainDataModel(brain) for brain in self.brains)
+    def listRowDataStructures(self, datastructure, row_layout, **kw):
+        gendss = (DataStructure(datamodel=BrainDataModel(brain))
+                              for brain in self.brains)
+        return (self.prepareRowDataStructure(row_layout, ds) for ds in gendss)
 
 
 class CustomMethods:
@@ -177,8 +179,9 @@ class TestingFolderContentsWidget(CustomMethods,
 class IntegrationTestFolderContentsPortlet(IntegrationTestCase):
 
     def afterAfterSetUp(self):
-        self.widget = TestingFolderContentsWidget('the widget')
-        self.widget.manage_changeProperties(row_layout='test_row')
+        self.widget = TestingFolderContentsWidget('the widget').__of__(self.portal)
+        self.widget.manage_changeProperties(row_layout='test_row',
+                                            render_method='')
         
     def test_folder_contents(self):
         # creating some content to list

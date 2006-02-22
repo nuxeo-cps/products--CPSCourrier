@@ -74,6 +74,11 @@ class TabularWidget(CPSPortletWidget):
     actions_category = ''
     actions = ()
 
+    def prepareRowDataStructure(self, layout, datastructure):
+        """Have layout prepare row datastructure and return it."""
+        layout.prepareLayoutWidgets(datastructure)
+        return datastructure
+
     def listRowDataStructures(self, datastructure, layout, **kw):
         """Return items datastructures, prepared by layout
 
