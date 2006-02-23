@@ -112,16 +112,12 @@ widgetRegistry.register(CPSWorkflowVariableWidget)
 class CPSQualifiedLinkWidget(CPSWidget):
     """widget that makes a single <a> tag out of three informations.
 
-    If only two fields are provided they serve as text an optional text.
-    If there's a third, it holds the link destination (absolute)
+    If only two fields are provided they are used as text and optional text.
+    If there's a third, it holds the link destination (absolute).
+    Otherwise the widget uses the proxy's url.
     """
 
     meta_type = 'Qualified Link Widget'
-
-#    _properties = CPSWidget._properties + (
-#        {'id': 'wf_var_id', 'type' : 'string', 'mode' : 'w',
-#         'label': 'Name of the workflow variable to pick'},
-#        )
 
     field_types = ('CPS String Field', 'CPS String Field', 'CPS String Field')
 
