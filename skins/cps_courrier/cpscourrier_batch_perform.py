@@ -4,12 +4,18 @@
 # or IObjectManager
 
 form = REQUEST.form
-ids = form.pop('ids', ())
-#return str(REQUEST.form)
+list_ids = ('ids', 'rpaths',)
+refs = ()
+for l_id in list_ids:
+    vals = form.pop(l_id, ())
+    if not refs:
+        refs = vals
+        name = l_id
 
 if len(form) > 1:
     raise ValueError("Got more than one transition")
 
 transition = form.keys()[0]
-return "You asked to perform transition %s\nObjects: %s" % (transition,
-                                                            ', '.join(ids))
+return "You asked to perform transition '%s'\n%s: %s" % (transition,
+                                                       name,
+                                                       ', '.join(refs))

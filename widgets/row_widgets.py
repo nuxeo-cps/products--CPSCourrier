@@ -162,7 +162,11 @@ class CPSListCheckboxWidget(CPSWidget):
     """widget making a checkbox, to be posted as a list.
 
     This will probably be extended in the future to take complex visibility
-    conditions into account."""
+    conditions into account.
+
+    If no field provided, try and find the associated proxy's id for the list
+    otherwise pick the field value.
+    """
 
     meta_type = 'List Checkbox Widget'
 
@@ -175,7 +179,17 @@ class CPSListCheckboxWidget(CPSWidget):
 
     def prepare(self, datastructure, **kw):
         """Prepare datastructure. """
-        pass
+
+        dm = datastructure.getDataModel()
+        if self.fields:
+            value = dm[self.fields[0]]
+        else:
+            proxy = dm.getProxy()
+            if proxy is None:
+                raise ValueError(
+                    "No field, and datamodel is not associated to a proxy")
+            value = proxy.getId()
+        datastructure[self.getWidgetId()] = value
 
     def validate(self, datastructure, **kw):
         """Validate datastructure and update datamodel."""
@@ -184,16 +198,12 @@ class CPSListCheckboxWidget(CPSWidget):
     def render(self, mode, datastructure, **kw):
         """Render in mode from datastructure."""
 
-        proxy = datastructure.getDataModel().getProxy()
-        if proxy is None:
-            return ''
         name = '%s:list' % self.list_name
-        item_id = proxy.getId()
-
+        value = datastructure[self.getWidgetId()]
         # XXX: content_lib_info_detail_tab uses  item.getContextUrl(utool=utool)
         # investigate ?
         return renderHtmlTag('input', type='checkbox',
-                             name=name, value=item_id)
+                             name=name, value=value)
 
 
 InitializeClass(CPSListCheckboxWidget)
