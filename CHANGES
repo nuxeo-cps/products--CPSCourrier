@@ -11,4 +11,4 @@ Bug fixes:
 - Allow the creation of dashboards in members folders
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- removed useless actions to improve perf
