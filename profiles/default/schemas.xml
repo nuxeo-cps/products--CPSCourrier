@@ -5,4 +5,5 @@
  <object name="mail_common" meta_type="CPS Schema"/>
  <object name="mailbox" meta_type="CPS Schema"/>
  <object name="mail_filter_params" meta_type="CPS Schema"/>
+ <object name="mail_query_params" meta_type="CPS Schema"/>
 </object>

@@ -27,7 +27,8 @@ from Products.CMFCore.utils import getToolByName
 from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
-from Products.CPSSchemas.BasicWidgets import CPSSelectWidget
+from Products.CPSSchemas.BasicWidgets import (CPSSelectWidget,
+                                              CPSMultiSelectWidget)
 from Products.CPSSkins.cpsskins_utils import unserializeFromCookie
 
 from Products.CPSSchemas.tests.testWidgets import (FakePortal,
@@ -43,12 +44,10 @@ class FakeRequest:
     def __init__(self, **kw):
         self.form = kw
 
-class CPSSelectFilterWidget(CPSSelectWidget):
-    """A widget that prepares datastructure from dm, request and cookie."""
+class RequestCookiesMixin:
+    """prepare datastructure from dm, request and cookie."""
 
-    meta_type = 'Select Filter Widget'
-
-    _properties = CPSSelectWidget._properties + (
+    _properties = (
         {'id': 'cookie_id', 'type': 'string', 'mode': 'w',
          'label': 'Name of cookie for filter params (no cookie if empty)', },
         )
@@ -90,8 +89,7 @@ class CPSSelectFilterWidget(CPSSelectWidget):
 
         wid = self.getWidgetId()
 
-        # from datamodel
-        CPSSelectWidget.prepare(self, datastructure, **kw)
+        # from datamodel already done in subclass
 
         # from cookie
         from_cookie = self.readCookie(wid)
@@ -103,8 +101,36 @@ class CPSSelectFilterWidget(CPSSelectWidget):
         if posted is not None:
             datastructure[wid] = posted
 
+#
+# Widgets
+#
 
+class CPSSelectFilterWidget(RequestCookiesMixin, CPSSelectWidget):
+    """A multiselect widget that prepares from request and cookies. """
+
+    meta_type = 'Select Filter Widget'
+    _properties = CPSSelectWidget._properties + RequestCookiesMixin._properties
+
+    def prepare(self, ds, **kw):
+        CPSSelectWidget.prepare(self, ds, **kw)
+        RequestCookiesMixin.prepare(self, ds, **kw)
 
 InitializeClass(CPSSelectFilterWidget)
 
 widgetRegistry.register(CPSSelectFilterWidget)
+
+
+class CPSMultiSelectFilterWidget(RequestCookiesMixin, CPSMultiSelectWidget):
+    """A multiselect widget that prepares from request and cookies. """
+
+    meta_type = 'MultiSelect Filter Widget'
+    _properties = CPSMultiSelectWidget._properties + RequestCookiesMixin._properties
+
+    def prepare(self, ds, **kw):
+        CPSMultiSelectWidget.prepare(self, ds, **kw)
+        RequestCookiesMixin.prepare(self, ds, **kw)
+
+
+InitializeClass(CPSMultiSelectFilterWidget)
+
+widgetRegistry.register(CPSMultiSelectFilterWidget)

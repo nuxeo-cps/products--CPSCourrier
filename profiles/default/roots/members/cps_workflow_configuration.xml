@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name=".cps_workflow_configuration"
+        meta_type="CPS Workflow Configuration">
+
+  <below-workflows>
+    <!-- Member spaces can host dashboards -->
+    <type name="Dashboard" wf="workspace_folder_wf"/>
+  </below-workflows>
+
+</object>

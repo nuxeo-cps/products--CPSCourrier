@@ -3,7 +3,8 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- Dashboards: documents holding search parameters for easy replay and
+  post-filtering as in mailboxes.
 Bug fixes:
 ~~~~~~~~~~
 -

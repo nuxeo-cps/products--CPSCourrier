@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+Layout that presents catalog search results
+-->
+
+<object name="mail_dashboard" meta_type="CPS Layout">
+ <property name="layout_view_method">layout_tabular_view</property>
+ <property name="style_prefix">layout_default_</property>
+
+ <widget name="Table" meta_type="Catalog Tabular Widget">
+  <property name="row_layout">mail_dashboard_row</property>
+  <property name="hidden_layout_modes">edit create</property>
+  <property name="empty_message">cpscourrier_empty_box_msg</property>
+  <property name="is_empty_message_i18n">True</property>
+  <property name="actions_category">courrier</property>
+  <property name="cookie_id">cpscourrier</property>
+  <property name="filter_button">filter</property>
+ </widget>
+
+ <widget name="Query review_state" meta_type="Select Filter Widget">
+   <property name="hidden_layout_modes"></property>
+   <property name="widget_mode_expr">string:edit</property>
+   <property name="label">label_search_status</property>
+   <property name="is_i18n">True</property>
+   <property name="vocabulary">search_review_state</property>
+   <property name="translated">False</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="fields">
+     <element value="filter_review_state" />
+   </property>
+ </widget>
+
+<!--
+ <widget name="Query Priority" meta_type="Select Filter Widget">
+   <property name="hidden_layout_modes">create</property>
+   <property name="widget_mode_expr">string:edit</property>
+   <property name="label">cpscourrier_priority_label</property>
+   <property name="is_i18n">True</property>
+   <property name="vocabulary">mailbox_filter_priority</property>
+   <property name="translated">True</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="fields">
+     <element value="filter_priority" />
+   </property>
+ </widget>
+
+-->
+
+ <widget name="Query portal_type" meta_type="MultiSelect Filter Widget">
+   <property name="hidden_layout_modes">create</property>
+   <property name="widget_mode_expr">string:edit</property>
+   <property name="label">cpscourrier_type_label</property>
+   <property name="is_i18n">True</property>
+   <property name="vocabulary">mailbox_allowed_ptype</property>
+   <property name="translated">False</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="fields">
+     <element value="filter_type" />
+   </property>
+ </widget>
+
+ <table>
+   <row>
+     <cell name="Query review_state" />
+<!--     <cell name="Query Priority" /> -->
+     <cell name="Query portal_type" />
+   </row>
+   <row>
+     <cell name="Table"/>
+   </row>
+ </table>
+</object>

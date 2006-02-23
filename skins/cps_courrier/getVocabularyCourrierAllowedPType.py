@@ -2,10 +2,12 @@
 #$Id$
 """Return a portal type vocabulary, used as MethodVocabulary."""
 
-# This is taken from CPSDefault's getVocabularySearchPortalType.py
-# modifications: allowed=1, decode
+# We use the list of types allowed in container as searchable types
 
-types = context.getSortedContentTypes(allowed=1)
+ttool = context.portal_types
+type_ids = ttool[context.portal_type].allowed_content_types
+types = [ttool[tid] for tid in type_ids]
+
 l10n = context.translation_service
 res = [(item.getId(), l10n(item.Title()).encode('iso-8859-15'))
        for item in types]

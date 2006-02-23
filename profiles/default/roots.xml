@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <roots>
  <object name="mailboxes" portal_type="Mailbox Group"/>
+ <object name="members" />
 </roots>
 

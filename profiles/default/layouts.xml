@@ -13,8 +13,12 @@
  <object name="mailbox_contents" meta_type="CPS Layout"/>
  <object name="mailbox_group_contents" meta_type="CPS Layout"/>
 
+ <!-- layout for the Dashboard document type -->
+ <object name="mail_dashboard" meta_type="CPS Layout"/>
+
  <!-- layouts for rows of contents views -->
  <object name="mailbox_contents_row" meta_type="CPS Layout"/>
  <object name="mailbox_group_contents_row" meta_type="CPS Layout"/>
+ <object name="mail_dashboard_row" meta_type="CPS Layout"/>
 
 </object>

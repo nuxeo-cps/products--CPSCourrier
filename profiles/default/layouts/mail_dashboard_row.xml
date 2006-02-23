@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!-- 
+Layouts for rows in the content view of mailboxes
+-->
+
+<object name="mailbox_contents_row" meta_type="CPS Layout">
+ <property name="layout_view_method">layout_row_view</property>
+
+ <widget name="Checkbox" meta_type="List Checkbox Widget">
+  <property name="list_name">rpaths</property>
+  <property name="fields">
+   <element value="rpath"/>
+  </property>
+ </widget>
+
+ <widget name="portal_type" meta_type="Type Icon Widget">
+  <property name="label">cpscourrier_type_label</property>
+  <property name="is_i18n">True</property>
+ </widget>
+
+<!--
+ <widget name="From" meta_type="String Widget">
+  <property name="fields">
+   <element value="from"/>
+  </property>
+  <property name="label">cpscourrier_from_label</property>
+  <property name="is_i18n">True</property>
+  <property name="size_max">50</property>
+ </widget>
+
+ <widget name="To" meta_type="Lines Widget">
+  <property name="fields">
+   <element value="to"/>
+  </property>
+  <property name="label">cpscourrier_to_label</property>
+  <property name="is_i18n">True</property>
+  <property name="width">50</property>
+  <property name="height">3</property>
+ </widget>
+-->
+
+ <widget name="Title" meta_type="Qualified Link Widget">
+  <property name="fields">
+   <element value="Title"/>
+   <element value="Description"/>
+   <element value="url" />
+  </property>
+  <property name="is_i18n">True</property>
+  <property name="label">cpscourrier_object_label</property>
+ </widget>
+
+ <widget name="Date" meta_type="String Widget">
+  <property name="label">cpscourrier_creation_date_label</property>
+  <property name="fields">
+   <element value="CreationDate"/>
+  </property>
+  <property name="is_i18n">True</property>
+ </widget>
+
+ <widget name="review_state" meta_type="String Widget">
+  <property name="label">cpscourrier_review_state_label</property>
+  <property name="is_i18n">True</property>
+  <property name="fields">
+   <element value="review_state"/>
+  </property>
+ </widget>
+
+<!--
+ <widget name="Priority" meta_type="Select Widget">
+   <property name="label">cpscourrier_priority_label</property>
+   <property name="is_i18n">True</property>
+   <property name="vocabulary">mail_priority</property>
+   <property name="translated">True</property>
+   <property name="fields">
+     <element value="priority" />
+   </property>
+ </widget>
+-->
+
+ <table>
+  <row>
+   <cell name="Checkbox"/>
+  </row>
+  <row>
+   <cell name="portal_type"/>
+  </row>
+  <row>
+   <cell name="Title"/>
+  </row>
+  <row>
+   <cell name="From"/>
+  </row>
+  <row>
+   <cell name="To"/>
+  </row>
+  <row>
+   <cell name="Date"/>
+  </row>
+  <row>
+   <cell name="review_state"/>
+  </row>
+  <row>
+   <cell name="Priority"/>
+  </row>
+ </table>
+</object>
