@@ -14,7 +14,9 @@
 		   tal:condition="col/is_i18n" />
       </th>
     </tr>
-    <tr tal:repeat="row rows">
+    <tr tal:repeat="row rows"
+	  tal:attributes="class python:test(repeat['row'].odd(),
+			  'odd', 'even')">
       <tal:block replace="structure row" />
     </tr>
   </table>
