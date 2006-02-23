@@ -26,6 +26,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
+from Products.CPSSchemas.BasicWidgets import CPSStringWidget
 
 
 class CPSTypeIconWidget(CPSWidget):
@@ -109,6 +110,26 @@ class CPSWorkflowVariableWidget(CPSWidget):
 InitializeClass(CPSWorkflowVariableWidget)
 
 widgetRegistry.register(CPSWorkflowVariableWidget)
+
+class CPSReviewStateStringWidget(CPSStringWidget):
+    """Special widget for the rendering of a string like the review state.
+    """
+
+    meta_type = 'Review State String Widget'
+
+    def render(self, mode, datastructure, **kw):
+        if mode != 'view':
+            return ''
+        value = datastructure[self.getWidgetId()]
+        cpsmcat = getToolByName(self, 'translation_service')
+        xlated = cpsmcat(value).encode('iso-8859-15')
+        return renderHtmlTag('span', css_class=value, contents=value)
+
+InitializeClass(CPSReviewStateStringWidget)
+
+widgetRegistry.register(CPSReviewStateStringWidget)
+
+
 class CPSQualifiedLinkWidget(CPSWidget):
     """widget that makes a single <a> tag out of three informations.
 

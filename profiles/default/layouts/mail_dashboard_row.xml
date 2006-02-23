@@ -56,7 +56,7 @@ Layouts for rows in the content view of mailboxes
   <property name="is_i18n">True</property>
  </widget>
 
- <widget name="review_state" meta_type="String Widget">
+ <widget name="review_state" meta_type="Review State String Widget">
   <property name="label">cpscourrier_review_state_label</property>
   <property name="is_i18n">True</property>
   <property name="fields">
