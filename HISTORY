@@ -1,4 +1,21 @@
 *******************************************
+** CPSCourrier V0.2.0 [R1 build 2006/02/23-00:32 by ogrisel]
+** SVN URL: https://svn.nuxeo.org/pub/CPSCourrier/trunk Revision: 33350
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Filtering is persistent via cookies
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Filtering is done through datastructure only. The filtering widgets have to
+  prepare it accordingly.
+
+*******************************************
 ** CPSCourrier V0.1.1 [R1 build 2006/02/22-05:00 by gracinet]
 ** SVN URL: http://svn/pub/CPSCourrier/trunk Revision: 33277
 Requires:
