@@ -69,7 +69,7 @@ class BrainDataModel(DataModel):
         if value is not None:
             return value
 
-        # fallback to brain attribute
+        # not in cache
         try:
             value = getattr(self._brain, key)
         except AttributeError:
@@ -88,6 +88,7 @@ class BrainDataModel(DataModel):
             else:
                 raise KeyError(key)
 
+        # remember value
         self.data[key] = value
         return value
 
