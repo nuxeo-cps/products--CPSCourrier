@@ -24,12 +24,12 @@
       </tal:block>
     </div>
     <input type="submit" name="filter" value="cpscourrier_filter_button"
-	   style="float:right"
+	   style="float:right" class="context"
 	   tal:condition="param_rows"
 	   i18n:attributes="value" />
   </form>
   <div style="clear:both"> </div>
-  <div style="margin-top:2ex">
+  <p>
     <tal:block replace="structure tabular_cell/widget_rendered" />
-  </div>
+  </p>
 </tal:block>
