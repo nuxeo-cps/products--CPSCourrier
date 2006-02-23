@@ -7,7 +7,7 @@ New features:
   post-filtering as in mailboxes.
 Bug fixes:
 ~~~~~~~~~~
--
+- Mailbox Group row layout has now a clickable title
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

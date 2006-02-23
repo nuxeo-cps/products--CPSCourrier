@@ -11,9 +11,10 @@ Layouts for rows in the content view of mailboxes
   <property name="is_i18n">True</property>
  </widget>
 
- <widget name="Title" meta_type="String Widget">
+ <widget name="Title" meta_type="Qualified Link Widget">
   <property name="fields">
    <element value="Title"/>
+   <element value="Description"/>
   </property>
   <property name="is_i18n">True</property>
   <property name="label">cpsdoc_title_label_edit</property>
