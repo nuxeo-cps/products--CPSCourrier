@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- 
+<!--
 Layouts for rows in the content view of mailboxes
 -->
 
@@ -44,7 +44,7 @@ Layouts for rows in the content view of mailboxes
  </widget>
 
  <widget name="Date" meta_type="Date Widget">
-  <property name="label">cpscourrier_date_label</property>
+  <property name="label">cpscourrier_creation_date_label</property>
   <property name="fields">
    <element value="CreationDate"/>
   </property>
