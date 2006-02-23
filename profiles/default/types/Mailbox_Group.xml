@@ -8,7 +8,7 @@
  <property name="product">CPSDefault</property>
 
  <!-- A Mailbox Group is a container type similar to a workspace to organise
- Mailboxes -->
+      Mailboxes -->
  <property name="factory">addFolder</property>
  <property name="immediate_view">folder_contents</property>
  <property name="cps_proxy_type">folder</property>
@@ -43,12 +43,6 @@
     condition_expr="" url_expr="string:${object_url}/folder_factories"
     visible="True">
   <permission value="Add portal content"/>
- </action>
- <action title="action_import_documents" action_id="import_documents"
-    category="object" condition_expr=""
-    url_expr="string:${object_url}/cpsdocument_import_zip_form"
-    visible="False">
-  <permission value="Modify portal content"/>
  </action>
  <action title="action_edit" action_id="edit" category="object"
     condition_expr="" url_expr="string:${object_url}/cpsdocument_edit_form"
