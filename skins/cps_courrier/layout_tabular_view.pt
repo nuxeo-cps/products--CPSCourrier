@@ -12,17 +12,25 @@
 		   param_rows python:rows[:-1];
 		   ">
   <form action="" method="post">
-    <div tal:repeat="row param_rows" style="float:left">
-      <tal:block repeat="cell row">
-	<tal:block define="widget cell/widget">
-	  <span class="dlabel" i18n:translate="" tal:condition="widget/is_i18n"
-		tal:content="widget/label">label</span>
-	  <span class="dlabel" tal:condition="not:widget/is_i18n"
-		tal:content="widget/label">label</span>
-	</tal:block>
-	<tal:block replace="structure cell/widget_rendered" />
-      </tal:block>
-    </div>
+    <table width="100%" cellpadding="2" cellspacing="2"
+	   summary="filter options">
+      <tr tal:repeat="row param_rows">
+	<td tal:repeat="cell row" tal:attributes="colspan cell/ncols">
+	  <tal:block define="widget cell/widget">
+	    <span class="dlabel"
+		  tal:condition="widget/is_i18n"
+		  tal:content="widget/label"
+		  i18n:translate=""
+		  >
+	      label
+	    </span>
+	    <span class="dlabel" tal:condition="not:widget/is_i18n"
+		  tal:content="widget/label">label</span>
+	  </tal:block>
+	  <tal:block replace="structure cell/widget_rendered" />
+	</td>
+      </tr>
+    </table>
     <input type="submit" name="filter" value="cpscourrier_filter_button"
 	   style="float:right" class="context"
 	   tal:condition="param_rows"
