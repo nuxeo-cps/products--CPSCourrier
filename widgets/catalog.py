@@ -40,6 +40,8 @@ from Products.CPSCourrier.widgets.tabular import TabularWidget
 
 FILTER_PREFIX = 'Query '
 FILTER_PREFIX_LEN = len('Query ')
+SCOPE_SUFFIX = '_scope' # see explanations in filter_widgets
+
 _missed = object()
 
 def removeFilterPrefix(wid):
@@ -49,6 +51,7 @@ def removeFilterPrefix(wid):
         return wid[FILTER_PREFIX_LEN:]
     else:
         return wid
+
 
 class CatalogTabularWidget(TabularWidget):
     """ A tabular portlet widget that performs a simple folder listing.
@@ -109,20 +112,29 @@ class CatalogTabularWidget(TabularWidget):
         """
 
         # extract filters from datastructure
-        filters = dict( (key, item)
-                        for key, item in datastructure.items()
-                        if key.startswith(FILTER_PREFIX) )
+        prefilt = dict( (key, item)
+                       for key, item in datastructure.items()
+                       if key.startswith(FILTER_PREFIX)
+                       and not key.endswith(SCOPE_SUFFIX))
 
         # if filtering uses a post, set cookie
         request = self.REQUEST
         if self.cookie_id and request.form.get(self.filter_button):
-            cookie = serializeForCookie(filters)
+            cookie = serializeForCookie(prefilt)
             request.RESPONSE.setCookie(self.cookie_id, cookie)
 
-        # empty filter value means not to filter
-        filters = dict( (key[FILTER_PREFIX_LEN:], item)
-                        for key, item in filters.items() if item)
+        # replace some empty filters by the corresponding total scope
+        # and remove the others
+        filters = {}
+        for key, item in prefilt.items():
+            if item:
+                filters[key[FILTER_PREFIX_LEN:]] = item
+                continue
+            scope = datastructure.get(key + SCOPE_SUFFIX)
+            if scope is not None:
+                filters[key[FILTER_PREFIX_LEN:]] = scope
 
+        LOG('Catalog Tabular Widget; filters:', DEBUG, filters)
         return filters
 
     def listRowDataStructures(self, datastructure, layout, **kw):

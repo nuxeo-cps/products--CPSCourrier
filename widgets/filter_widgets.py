@@ -106,14 +106,48 @@ class RequestCookiesMixin:
 #
 
 class CPSSelectFilterWidget(RequestCookiesMixin, CPSSelectWidget):
-    """A multiselect widget that prepares from request and cookies. """
+    """A select widget that prepares from request and cookies.
+
+    Problem fixed by ugly hack: catalog would want a singleton instead of
+    a string and multiselect inappropriate.
+    """
 
     meta_type = 'Select Filter Widget'
-    _properties = CPSSelectWidget._properties + RequestCookiesMixin._properties
+    _properties = (CPSSelectWidget._properties
+                   + RequestCookiesMixin._properties
+                   + ({'id': 'defines_scope', 'type': 'boolean', 'mode': 'w',
+ 'label': "Is the union of all values is more restrictive than no filtering?"},)
+                   )
+
+    defines_scope = False
+
+    def getScope(self, datastructure):
+        """return a total scope that might not be equivalent for query
+        engines than dropping the value.
+
+        Use-case for this oddity:
+        voc of locally accepted portal_types.
+        '' is used at position 0 to mean 'all',
+        but the query maker will use the list of all existing portal_types
+        and datastructure cannot hold lists, because of type inconsistency.
+
+        #XXX TODO factorize in mixin class
+        """
+
+        items = self._getVocabulary(datastructure).keys()
+        if not items[0]: # raise on empty voc (good thing)
+            return list(items[1:]) # see use-case in docstring
+        else:
+            return list(items)
+
 
     def prepare(self, ds, **kw):
+        """Prepare datastructure from datamodel."""
         CPSSelectWidget.prepare(self, ds, **kw)
         RequestCookiesMixin.prepare(self, ds, **kw)
+        wid = self.getWidgetId()
+        if self.defines_scope and not ds[wid]:
+            ds[wid+'_scope'] = self.getScope(ds)
 
 InitializeClass(CPSSelectFilterWidget)
 

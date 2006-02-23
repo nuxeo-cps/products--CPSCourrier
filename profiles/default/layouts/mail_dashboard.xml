@@ -18,7 +18,7 @@ Layout that presents catalog search results
  </widget>
 
  <widget name="Query review_state" meta_type="Select Filter Widget">
-   <property name="hidden_layout_modes"></property>
+   <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">label_search_status</property>
    <property name="is_i18n">True</property>
@@ -46,7 +46,7 @@ Layout that presents catalog search results
 
 -->
 
- <widget name="Query portal_type" meta_type="MultiSelect Filter Widget">
+ <widget name="Query portal_type" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_type_label</property>
@@ -57,6 +57,7 @@ Layout that presents catalog search results
    <property name="fields">
      <element value="filter_type" />
    </property>
+   <property name="defines_scope">True</property>
  </widget>
 
  <table>
