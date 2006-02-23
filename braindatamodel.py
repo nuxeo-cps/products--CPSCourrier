@@ -17,6 +17,8 @@
 #
 # $Id$
 
+from Products.CMFCore.utils import getToolByName
+
 from Products.CPSSchemas.DataModel import DataModel
 
 class FakeBrain:
@@ -28,7 +30,9 @@ class FakeBrain:
 class BrainDataModel(DataModel):
     """ To use brain catalog results as a datamodel.
 
-    Proof-of-concept level implementation.
+    This is basically an indirection to the brains attributes, plus some
+    computed ones (url etc.).
+    XXX GR leverage schema/adapters and use a regular datamodel ?
 
     >>> d = FakeBrain({'spam': 'eggs', 'a': 'b'})
     >>> dm =  BrainDataModel(d)
@@ -50,6 +54,7 @@ class BrainDataModel(DataModel):
     def __init__(self, brain):
         self._forbidden_widgets = []
         self._brain = brain
+        self.data = {}
 
     def getObject(self):
         meth = getattr(self._brain, 'getObject', None)
@@ -59,10 +64,32 @@ class BrainDataModel(DataModel):
             return meth()
 
     def __getitem__(self, key):
+        # If already computed, return value
+        value = self.data.get(key)
+        if value is not None:
+            return value
+
+        # fallback to brain attribute
         try:
-            return getattr(self._brain, key)
+            value = getattr(self._brain, key)
         except AttributeError:
-            raise KeyError(key)
+            # try and compute some values (see XXX in docstring for improvement)
+            brain = self._brain
+            if key == 'rpath':
+                utool = getattr(self, 'utool', None)
+                if utool is None:
+                     utool = getToolByName(self._brain, 'portal_url')
+                     self.utool = utool
+                value = utool.getRpathFromPath(brain.getPath())
+            elif key == 'url':
+                rpath = self.__getitem__('rpath')
+                # we are now sure that self.utool has been set
+                value = self.utool.getUrlFromRpath(rpath)
+            else:
+                raise KeyError(key)
+
+        self.data[key] = value
+        return value
 
     def __setitem__(self, key, item):
         raise NotImplementedError
