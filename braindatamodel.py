@@ -19,6 +19,7 @@
 
 from Products.CMFCore.utils import getToolByName
 
+from Products.CPSCore.interfaces import ICPSProxy
 from Products.CPSSchemas.DataModel import DataModel
 
 class FakeBrain:
@@ -26,6 +27,11 @@ class FakeBrain:
     def __init__(self, d):
         for key, item in d.items():
             setattr(self, key, item)
+
+    def getObject():
+        return self
+
+_lazy = object()
 
 class BrainDataModel(DataModel):
     """ To use brain catalog results as a datamodel.
@@ -51,17 +57,56 @@ class BrainDataModel(DataModel):
     """
 
 
-    def __init__(self, brain):
-        self._forbidden_widgets = []
+    def __init__(self, brain, context=None):
         self._brain = brain
+        if context is None:
+            self._context = self._brain
+        else:
+            self._context = context
+
+        self._forbidden_widgets = []
         self.data = {}
 
+        self._brain_obj = _lazy
+        self._object = _lazy
+        self._proxy = _lazy
+
     def getObject(self):
+        """ Return the object as if self was a regular datamodel. """
+
+        if self._object is not _lazy:
+            return self._object
+
+        proxy = self.getProxy()
+        if proxy is not None:
+            obj = proxy.getContent()
+        else:
+            obj = self._brainGetObject()
+        return obj
+
+    def getProxy(self):
+        if self._proxy is not _lazy:
+            return self._proxy
+
+        proxy = self._brainGetObject()
+        if not ICPSProxy.providedBy(proxy):
+            proxy = None
+
+        self._proxy = proxy
+        return proxy
+
+    def _brainGetObject(self):
+        if self._brain_obj is not _lazy:
+            return self._brain_obj
+
         meth = getattr(self._brain, 'getObject', None)
         if meth is None:
-            return self._brain
+            obj = None
         else:
-            return meth()
+            obj = meth()
+
+        self._brain_obj = obj
+        return obj
 
     def __getitem__(self, key):
         # If already computed, return value
