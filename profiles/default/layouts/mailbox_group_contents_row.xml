@@ -34,5 +34,8 @@ Layouts for rows in the content view of mailboxes
   <row>
    <cell name="Title"/>
   </row>
+  <row>
+   <cell name="Date"/>
+  </row>
  </table>
 </object>
