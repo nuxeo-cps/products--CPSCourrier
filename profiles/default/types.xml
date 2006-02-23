@@ -5,4 +5,5 @@
  <object name="Incoming Mail" meta_type="CPS Flexible Type Information"/>
  <object name="Outgoing Mail" meta_type="CPS Flexible Type Information"/>
  <object name="Dashboard" meta_type="CPS Flexible Type Information"/>
+ <object name="Workspace" meta_type="CPS Flexible Type Information"/>
 </object>

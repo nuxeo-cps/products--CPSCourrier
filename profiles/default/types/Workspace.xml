@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<object name="Workspace" meta_type="CPS Flexible Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <!-- Add Dashboard to the folder factories list of types -->
+ <property name="allowed_content_types" purge="False">
+  <element value="Dashboard"/>
+ </property>
+</object>

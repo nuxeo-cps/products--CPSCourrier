@@ -8,6 +8,7 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - Mailbox Group row layout has now a clickable title
+- Allow the creation of dashboards in members folders
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
