@@ -30,8 +30,7 @@ Layout that presents catalog search results
    </property>
  </widget>
 
-<!--
- <widget name="Query Priority" meta_type="Select Filter Widget">
+ <widget name="Query priority" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_priority_label</property>
@@ -44,7 +43,6 @@ Layout that presents catalog search results
    </property>
  </widget>
 
--->
 
  <widget name="Query portal_type" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
@@ -63,7 +61,7 @@ Layout that presents catalog search results
  <table>
    <row>
      <cell name="Query review_state" />
-<!--     <cell name="Query Priority" /> -->
+     <cell name="Query priority" />
      <cell name="Query portal_type" />
    </row>
    <row>

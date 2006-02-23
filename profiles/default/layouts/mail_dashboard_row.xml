@@ -18,7 +18,7 @@ Layouts for rows in the content view of mailboxes
   <property name="is_i18n">True</property>
  </widget>
 
-<!--
+
  <widget name="From" meta_type="String Widget">
   <property name="fields">
    <element value="from"/>
@@ -37,7 +37,6 @@ Layouts for rows in the content view of mailboxes
   <property name="width">50</property>
   <property name="height">3</property>
  </widget>
--->
 
  <widget name="Title" meta_type="Qualified Link Widget">
   <property name="fields">
@@ -65,8 +64,7 @@ Layouts for rows in the content view of mailboxes
   </property>
  </widget>
 
-<!--
- <widget name="Priority" meta_type="Select Widget">
+ <widget name="priority" meta_type="Select Widget">
    <property name="label">cpscourrier_priority_label</property>
    <property name="is_i18n">True</property>
    <property name="vocabulary">mail_priority</property>
@@ -75,7 +73,6 @@ Layouts for rows in the content view of mailboxes
      <element value="priority" />
    </property>
  </widget>
--->
 
  <table>
   <row>
@@ -100,7 +97,10 @@ Layouts for rows in the content view of mailboxes
    <cell name="review_state"/>
   </row>
   <row>
-   <cell name="Priority"/>
+   <cell name="priority"/>
+  </row>
+  <row>
+   <cell name="deadline"/>
   </row>
  </table>
 </object>
