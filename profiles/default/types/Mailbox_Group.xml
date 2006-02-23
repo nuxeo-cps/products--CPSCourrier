@@ -38,7 +38,8 @@
  <alias from="(Default)" to="cpsdocument_view"/>
  <alias from="view" to="cpsdocument_view"/>
 
- <!-- Same actions as Workspaces -->
+ <!-- Almost the same actions as Workspaces -->
+ </action>
  <action title="action_new_content" action_id="new_content" category="object"
     condition_expr="" url_expr="string:${object_url}/folder_factories"
     visible="True">

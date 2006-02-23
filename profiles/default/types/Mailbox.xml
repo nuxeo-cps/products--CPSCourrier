@@ -44,17 +44,11 @@
  <alias from="(Default)" to="cpsdocument_view"/>
  <alias from="view" to="cpsdocument_view"/>
 
- <!-- Same actions as Workspaces -->
+ <!-- Almost the same actions as Workspaces -->
  <action title="action_new_content" action_id="new_content" category="object"
     condition_expr="" url_expr="string:${object_url}/folder_factories"
     visible="True">
   <permission value="Add portal content"/>
- </action>
- <action title="action_import_documents" action_id="import_documents"
-    category="object" condition_expr=""
-    url_expr="string:${object_url}/cpsdocument_import_zip_form"
-    visible="False">
-  <permission value="Modify portal content"/>
  </action>
  <action title="action_edit" action_id="edit" category="object"
     condition_expr="" url_expr="string:${object_url}/cpsdocument_edit_form"
