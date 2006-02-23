@@ -4,4 +4,5 @@
  <property name="title_msgid"></property>
  <property name="description"></property>
  <property name="get_vocabulary_method">getVocabularyCourrierAllowedPType</property>
+ <property name="add_empty_key">False</property>
 </object>
