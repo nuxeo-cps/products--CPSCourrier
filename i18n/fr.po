@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-21 23:48default\n"
+"POT-Creation-Date: 2006-02-23 13:34default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -47,6 +47,12 @@ msgstr "Courrier sortant"
 
 msgid "portal_type_OutgoingMail_description"
 msgstr "Message contenant une réponse à un courrier entrant"
+
+msgid "portal_type_Dashboard_title"
+msgstr "Tableau de bord"
+
+msgid "portal_type_Dashboard_description"
+msgstr "Document affichant des résultats de recherche"
 
 #
 # Root of mailboxes area

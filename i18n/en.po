@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-21 23:48default\n"
+"POT-Creation-Date: 2006-02-23 13:34default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -18,7 +18,6 @@ msgstr ""
 
 #.   <input style="float:right" name="filter" type="submit" value="cpscourrier_filter_button" condition="param_rows" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
-
 msgid "cpscourrier_filter_button"
 msgstr "Filter"
 
@@ -48,6 +47,12 @@ msgstr "Outgoing mail"
 
 msgid "portal_type_OutgoingMail_description"
 msgstr "Outgoing message that holds an answer to some incoming mail"
+
+msgid "portal_type_Dashboard_title"
+msgstr "Dashboard"
+
+msgid "portal_type_Dashboard_description"
+msgstr "A document presenting search results"
 
 #
 # Root of mailboxes area
