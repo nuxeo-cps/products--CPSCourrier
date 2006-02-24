@@ -123,7 +123,7 @@ class CPSReviewStateStringWidget(CPSStringWidget):
         value = datastructure[self.getWidgetId()]
         cpsmcat = getToolByName(self, 'translation_service')
         xlated = cpsmcat(value).encode('iso-8859-15')
-        return renderHtmlTag('span', css_class=value, contents=value)
+        return renderHtmlTag('span', css_class=value, contents=xlated)
 
 InitializeClass(CPSReviewStateStringWidget)
 
