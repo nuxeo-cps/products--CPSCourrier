@@ -10,7 +10,7 @@
  <!-- A Mailbox Group is a container type similar to a workspace to organise
       Mailboxes -->
  <property name="factory">addFolder</property>
- <property name="immediate_view">folder_contents</property>
+ <property name="immediate_view">view</property>
  <property name="cps_proxy_type">folder</property>
  <property name="allowed_content_types">
   <element value="Mailbox"/>
