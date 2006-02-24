@@ -5,6 +5,7 @@ New features:
 ~~~~~~~~~~~~~
 - Dashboards: documents holding search parameters for easy replay and
   post-filtering as in mailboxes.
+- Better layouts for the mailbox / mailbox groups (still missing things)
 Bug fixes:
 ~~~~~~~~~~
 - Mailbox Group row layout has now a clickable title
