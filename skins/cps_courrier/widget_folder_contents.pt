@@ -17,11 +17,12 @@
 			   ">
 	  <a href="" tal:omit-tag="not:widget/sortable|nothing"
 	     tal:attributes="href string:${here_url}${toggle_get}">
+	    <img tal:condition="is_sort" src=""
+		  tal:attributes="src python:here_url + test(sort_token,
+				   '/arrow_down.png', '/arrow_up.png')" />
 	    <tal:block content="widget/label"
 		       i18n:translate=""
 		       tal:condition="widget/is_i18n" />
-	    <span tal:condition="is_sort"
-		  tal:content="sort_token" />
 	  </a>
 	</tal:block>
       </th>
