@@ -71,10 +71,14 @@ class RequestCookiesMixin:
         LOG('CPSSelectFilterWidget:cookie', DEBUG, c_filters)
         LOG('CPSSelectFilterWidget:wid', DEBUG, wid)
         try:
-            return str(c_filters.get(wid))
-        except (AttributeError, KeyError):
-            pass
+            read = c_filters.get(wid)
+        except AttributeError: # not a dict
+            return
 
+        if isinstance(read, unicode):  # minjson makes all strings unicode
+            read = read.encode('iso-8859.15')
+
+        return read
 
     def prepare(self, datastructure, **kw):
         """ prepare datastructure from datamodel, request and cookie.
@@ -168,3 +172,92 @@ class CPSMultiSelectFilterWidget(RequestCookiesMixin, CPSMultiSelectWidget):
 InitializeClass(CPSMultiSelectFilterWidget)
 
 widgetRegistry.register(CPSMultiSelectFilterWidget)
+
+TOKEN_SUFFIX = '_token'
+
+class CPSToggableCriterionWidget(RequestCookiesMixin, CPSWidget):
+    """A widget that manipulates a decorated criterion.
+
+    typical use-case: key to sort on and sort direction. In this use-case, one
+    might use the <wid><ref_suffix> to indicate the name of the column (might
+    differ from the sort-on key.
+    """
+
+    meta_type = 'Toggable Criterion Widget'
+
+    _properties = CPSWidget._properties + RequestCookiesMixin._properties + (
+        {'id': 'toggle_tokens', 'type': 'tokens', 'mode': 'w',
+         'label': 'Tokens to toggle'}, # we could use a vocabulary, too
+        {'id': 'criterion_suffix', 'type': 'string', 'mode': 'w',
+         'label': 'Suffix for the criterion'},
+        {'id': 'token_suffix', 'type': 'string', 'mode': 'w',
+         'label': 'Suffix for the token'},
+        {'id': 'ref_suffix', 'type': 'string', 'mode': 'w',
+         'label': 'Suffix for a further associated reference'},
+        )
+
+    def validate(self, ds, **kw):
+        return 1
+
+    def prepare(self, ds, **kw):
+        """prepare datastructure from datamodel, request and cookie. """
+
+        wid = self.getWidgetId()
+        crit_key = wid + self.criterion_suffix
+        token_key = wid + self.token_suffix
+        ref_key = wid + self.ref_suffix
+
+        keys = (crit_key, token_key, ref_key)
+
+        dm = ds.getDataModel()
+
+        for key, field in zip(keys, self.fields):
+            # from datamodel
+            ds[key] = dm[field]
+
+            # from cookie
+            from_cookie = self.readCookie(key)
+            if from_cookie is not None:
+                ds[key] = from_cookie
+
+
+        # from request form: criterion
+        posted = self.REQUEST.form.get(WIDGET_PREFIX + crit_key)
+
+        # do toggle token
+        LOG('ToggleWidget.prepare; posted=', DEBUG, posted)
+        if posted is not None:
+            if posted != ds[crit_key]:
+                ds[crit_key] = posted
+                ds[token_key] = self.toggle_tokens[0]
+            else:
+                i = list(self.toggle_tokens).index(ds[token_key])
+                order = len(self.toggle_tokens)
+                ds[token_key] = self.toggle_tokens[(i+1) % order]
+
+        # from request: ref
+        posted = self.REQUEST.form.get(WIDGET_PREFIX + ref_key)
+        if posted is not None:
+            ds[ref_key] = posted
+        LOG('ToggeWidget.prepare, ref:', DEBUG, ds.get(ref_key))
+        LOG('ToggeWidget.prepare, crit:', DEBUG, ds.get(crit_key))
+        LOG('ToggeWidget.prepare, token:', DEBUG, ds.get(token_key))
+
+
+    def render(self, mode, datastructure, **kw):
+        """ render in mode from datastructure.
+
+        This is used for test/debug purposes only, currently. """
+
+        wid = self.getWidgetId()
+        crit_key = wid + self.criterion_suffix
+        token_key = wid + self.token_suffix
+
+        crit = datastructure[wid]
+        token = datastructure[token_key]
+        return '<div>%s, %s</div>' % (crit, token)
+
+
+InitializeClass(CPSToggableCriterionWidget)
+
+widgetRegistry.register(CPSToggableCriterionWidget)

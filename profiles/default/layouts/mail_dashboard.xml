@@ -58,6 +58,41 @@ Layout that presents catalog search results
    <property name="defines_scope">True</property>
  </widget>
 
+ <widget name="Query portal_type" meta_type="Select Filter Widget">
+   <property name="hidden_layout_modes">create</property>
+   <property name="widget_mode_expr">string:edit</property>
+   <property name="label">cpscourrier_type_label</property>
+   <property name="is_i18n">True</property>
+   <property name="vocabulary">mailbox_allowed_ptype</property>
+   <property name="translated">False</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="fields">
+     <element value="filter_type" />
+   </property>
+   <property name="defines_scope">True</property>
+ </widget>
+
+ <widget name="Query sort" meta_type="Toggable Criterion Widget">
+   <property name="hidden_layout_modes">create</property>
+<!--   <property name="widget_mode_expr">string:edit</property>
+   <property name="label">cpscourrier_type_label</property>
+   <property name="is_i18n">True</property>
+   <property name="vocabulary">mailbox_allowed_ptype</property>
+   <property name="translated">False</property> -->
+   <property name="cookie_id">cpscourrier</property>
+   <property name="toggle_tokens">
+     <element value="" />
+     <element value="reverse" />
+   </property>
+   <property name="criterion_suffix">-on</property>
+   <property name="token_suffix">-order</property>
+   <property name="ref_suffix">-col</property>
+   <property name="fields">
+     <element value="filter_sort_on" />
+     <element value="filter_sort_order" />
+   </property>
+ </widget>
+
  <table>
    <row>
      <cell name="Query review_state" />

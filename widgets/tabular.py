@@ -20,6 +20,8 @@
 
 """ Portlet Widgets. """
 
+from urllib import quote
+
 from zLOG import LOG, DEBUG
 from Globals import InitializeClass
 
@@ -30,6 +32,8 @@ from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.DataStructure import DataStructure
 
 from Products.CPSPortlets.CPSPortletWidget import CPSPortletWidget
+
+WIDGET_PREFIX = 'widget__'
 
 class TabularWidget(CPSPortletWidget):
     """ A generic portlet widget to display tabular contents.
@@ -111,10 +115,53 @@ class TabularWidget(CPSPortletWidget):
 
         return datastructure.getDataModel().getContext()
 
-    def extractColumns(self, layout_structure):
+    def columnFromWidget(self, widget, datastructure,
+                         sort_wid='Query sort'):
+        """ make column info from a widget object.
+
+        Return (widget, boolean, token, get_req) where:
+        - boolean tells whether this column is used as sorting reference
+        - token is the associated token (e.g, 'ascending' etc)
+        - get_req is the get part of the url to toggle sort.
+        XXX might break with flexible layouts because it relies on the column
+        id.
+        XXX might be a good idea to make a property out of 'sort_widget'
+        XXX this currently uses -col,-token and -on suffixes to exchange info
+        with
+        a toggable widget of the current object (we have a corresponding
+        datastructure but cannot have this widget in itself).
+        Make these strings default values of props on the tabular
+        widget (an sort widget also) for flexibility and and tight default
+        config
+        """
+
+        sortable = getattr(widget, 'sortable', None)
+        if not sortable:
+            return (widget, False, '', '')
+
+        # prepare the get request
+        wid = widget.getWidgetId()
+        prefixed = WIDGET_PREFIX + sort_wid
+        get_req = '?%s-on=%s&%s-col=%s&%s=go' % (prefixed,
+                                           quote(sortable),
+                                           prefixed,
+                                           wid,
+                                           self.filter_button,
+                                           )
+
+        sort_col = datastructure.get(sort_wid+'-col') # make -col a prop
+        if sort_col != wid:
+            return (widget, False, '', get_req)
+
+        # this column is the sorting reference.
+        token = datastructure.get(sort_wid+'-token')
+        return (widget, True, token, get_req)
+
+    def extractColumns(self, datastructure, layout_structure):
         """ Extract column info for render method from a layout structure. """
 
-        return [ row[0]['widget'] for row in layout_structure['rows'] ]
+        return [ self.columnFromWidget(row[0]['widget'], datastructure)
+                 for row in layout_structure['rows'] ]
 
     def getActions(self, datastructure):
         if not self.actions_category:
@@ -142,6 +189,12 @@ class TabularWidget(CPSPortletWidget):
         calling_obj = self.getCallingObject(datastructure)
         if calling_obj is None: # happens on creation
             return ''
+
+        # GR tired of this duplication. refactor after tests are written
+        proxy = datastructure.get('context_obj') # if from portlet
+        if proxy is None:
+            proxy = datastructure.getDataModel().getProxy()
+
 
         # lookup of row layout
         lid = self.row_layout
@@ -186,11 +239,12 @@ class TabularWidget(CPSPortletWidget):
             return msg
 
         layout_structure = layout_structures[0] # only one layout
-        columns = self.extractColumns(layout_structure)
+        columns = self.extractColumns(datastructure, layout_structure)
         actions = self.getActions(datastructure)
 
         return meth(mode=mode, columns=columns,
-                    rows=rendered_rows, actions=actions)
+                    rows=rendered_rows, actions=actions,
+                    here_url=proxy.absolute_url())
 
 
 widgetRegistry.register(TabularWidget)

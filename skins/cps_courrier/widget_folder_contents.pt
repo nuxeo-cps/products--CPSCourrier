@@ -9,9 +9,20 @@
 		     ">
     <tr>
       <th tal:repeat="col columns">
-	<tal:block content="col/label"
-		   i18n:translate=""
-		   tal:condition="col/is_i18n" />
+	<tal:block define="widget python:col[0];
+			   is_sort python:col[1];
+			   sort_token python:col[2];
+			   toggle_get python:col[3];
+			   here_url options/here_url;
+			   ">
+	  <a href="" tal:attributes="href string:${here_url}${toggle_get}">
+	    <tal:block content="widget/label"
+		       i18n:translate=""
+		       tal:condition="widget/is_i18n" />
+	    <span tal:condition="is_sort"
+		  tal:content="sort_token" />
+	  </a>
+	</tal:block>
       </th>
     </tr>
     <tr tal:repeat="row rows"

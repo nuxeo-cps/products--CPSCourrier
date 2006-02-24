@@ -50,6 +50,7 @@ Layouts for rows in the content view of mailboxes
   <property name="is_i18n">True</property>
   <property name="label">cpscourrier_object_label</property>
   <property name="label_edit">cpscourrier_object_label</property>
+  <property name="sortable" type="string">Title</property>
  </widget>
 
  <widget name="Date" meta_type="String Widget">
@@ -59,6 +60,7 @@ Layouts for rows in the content view of mailboxes
    <element value="CreationDate"/>
   </property>
   <property name="is_i18n">True</property>
+  <property name="sortable" type="string">created</property>
  </widget>
 
  <widget name="review_state" meta_type="Review State String Widget">
