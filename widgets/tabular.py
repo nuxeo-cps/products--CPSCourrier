@@ -154,7 +154,7 @@ class TabularWidget(CPSPortletWidget):
             return (widget, False, '', get_req)
 
         # this column is the sorting reference.
-        token = datastructure.get(sort_wid+'-token')
+        token = datastructure.get(sort_wid+'-order') # make -order a prop
         return (widget, True, token, get_req)
 
     def extractColumns(self, datastructure, layout_structure):
