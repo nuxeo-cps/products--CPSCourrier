@@ -94,7 +94,7 @@ msgid "cpscourrier_smtp_headers_label"
 msgstr "Entêtes SMTP : "
 
 msgid "cpscourrier_mailbox_addresses_label"
-msgstr "Addresses de la boîte : "
+msgstr "Adresses de la boîte : "
 
 msgid "cpscourrier_type_label"
 msgstr "Type"
