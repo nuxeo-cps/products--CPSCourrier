@@ -48,16 +48,5 @@
     visible="True">
   <permission value="Modify portal content"/>
  </action>
- <action title="action_metadata" action_id="metadata" category="object"
-    condition_expr="not:portal/portal_membership/isAnonymousUser"
-    url_expr="string:${object_url}/cpsdocument_metadata" visible="True">
-  <permission value="View"/>
- </action>
- <action title="action_status_history" action_id="status_history"
-    category="workflow"
-    condition_expr="not:portal/portal_membership/isAnonymousUser"
-    url_expr="string:${object_url}/content_status_history" visible="True">
-  <permission value="View"/>
- </action>
 
 </object>
