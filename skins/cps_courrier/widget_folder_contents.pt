@@ -15,7 +15,8 @@
 			   toggle_get python:col[3];
 			   here_url options/here_url;
 			   ">
-	  <a href="" tal:attributes="href string:${here_url}${toggle_get}">
+	  <a href="" tal:omit-tag="not:is_sort"
+	     tal:attributes="href string:${here_url}${toggle_get}">
 	    <tal:block content="widget/label"
 		       i18n:translate=""
 		       tal:condition="widget/is_i18n" />
