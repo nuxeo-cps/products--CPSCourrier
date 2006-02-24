@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- 
+<!--
 Layouts for rows in the content view of mailboxes
 -->
 
@@ -15,6 +15,7 @@ Layouts for rows in the content view of mailboxes
 
  <widget name="portal_type" meta_type="Type Icon Widget">
   <property name="label">cpscourrier_type_label</property>
+  <property name="label_edit">cpscourrier_type_label</property>
   <property name="is_i18n">True</property>
  </widget>
 
@@ -24,6 +25,7 @@ Layouts for rows in the content view of mailboxes
    <element value="from"/>
   </property>
   <property name="label">cpscourrier_from_label</property>
+  <property name="label_edit">cpscourrier_type_label</property>
   <property name="is_i18n">True</property>
   <property name="size_max">50</property>
  </widget>
@@ -33,6 +35,7 @@ Layouts for rows in the content view of mailboxes
    <element value="to"/>
   </property>
   <property name="label">cpscourrier_to_label</property>
+  <property name="label_edit">cpscourrier_to_label</property>
   <property name="is_i18n">True</property>
   <property name="width">50</property>
   <property name="height">3</property>
@@ -46,10 +49,12 @@ Layouts for rows in the content view of mailboxes
   </property>
   <property name="is_i18n">True</property>
   <property name="label">cpscourrier_object_label</property>
+  <property name="label_edit">cpscourrier_object_label</property>
  </widget>
 
  <widget name="Date" meta_type="String Widget">
   <property name="label">cpscourrier_creation_date_label</property>
+  <property name="label_edit">cpscourrier_creation_date_label</property>
   <property name="fields">
    <element value="CreationDate"/>
   </property>
@@ -58,6 +63,7 @@ Layouts for rows in the content view of mailboxes
 
  <widget name="review_state" meta_type="Review State String Widget">
   <property name="label">cpscourrier_review_state_label</property>
+  <property name="label_edit">cpscourrier_review_state_label</property>
   <property name="is_i18n">True</property>
   <property name="fields">
    <element value="review_state"/>
@@ -66,6 +72,7 @@ Layouts for rows in the content view of mailboxes
 
  <widget name="priority" meta_type="Select Widget">
    <property name="label">cpscourrier_priority_label</property>
+   <property name="label_edit">cpscourrier_priority_label</property>
    <property name="is_i18n">True</property>
    <property name="vocabulary">mail_priority</property>
    <property name="translated">True</property>
