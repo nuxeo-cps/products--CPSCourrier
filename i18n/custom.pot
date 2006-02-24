@@ -91,6 +91,9 @@ msgstr ""
 msgid "cpscourrier_smtp_headers_label"
 msgstr ""
 
+msgid "cpscourrier_mailbox_addresses_label"
+msgstr ""
+
 #
 # Tabular widgets labels
 #
