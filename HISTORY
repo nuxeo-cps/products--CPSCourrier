@@ -1,4 +1,24 @@
 *******************************************
+** CPSCourrier V0.3.0 [R1 build 2006/02/24-04:16 by ogrisel]
+** SVN URL: https://svn.nuxeo.org/pub/CPSCourrier/trunk Revision: 33426
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Dashboards: documents holding search parameters for easy replay and
+  post-filtering as in mailboxes.
+- Better layouts for the mailbox / mailbox groups (still missing things)
+Bug fixes:
+~~~~~~~~~~
+- Mailbox Group row layout has now a clickable title
+- Allow the creation of dashboards in members folders
+- fixed wrong immediate view for Mailbox Group type
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- removed useless actions to improve perf
+
+*******************************************
 ** CPSCourrier V0.2.0 [R1 build 2006/02/23-00:32 by ogrisel]
 ** SVN URL: https://svn.nuxeo.org/pub/CPSCourrier/trunk Revision: 33350
 Requires:
