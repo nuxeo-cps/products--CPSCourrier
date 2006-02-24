@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!-- edit only fields for the mailboxes -->
+<object name="mailbox_common" meta_type="CPS Layout">
+ <widget name="Title" meta_type="Heading Widget">
+  <property name="fields">
+   <element value="Title"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label_edit">cpsdoc_title_label_edit</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes">
+    <!-- only the header cluster is used in view mode -->
+    <element value="view"/>
+  </property>
+  <property name="display_width">35</property>
+ </widget>
+ <widget name="Subject" meta_type="Select Widget">
+  <property name="fields">
+   <element value="Subject"/>
+  </property>
+  <property name="label_edit">label_subject</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes">
+    <!-- only the header cluster is used in view mode -->
+    <element value="view"/>
+  </property>
+  <property name="vocabulary">subject_voc</property>
+  <property name="translated">True</property>
+ </widget>
+ <widget name="Description" meta_type="Text Widget">
+  <property name="fields">
+   <element value="Description"/>
+  </property>
+  <property name="label_edit">cpsdoc_description_label_edit</property>
+  <property name="hidden_layout_modes">
+    <!-- only the header cluster is used in view mode -->
+    <element value="view"/>
+  </property>
+  <property name="is_i18n">True</property>
+  <property name="css_class">ddescription</property>
+  <property name="width">35</property>
+ </widget>
+ <widget name="mailbox_addresses" meta_type="Lines Widget">
+  <property name="fields">
+   <element value="mailbox_addresses"/>
+  </property>
+  <property name="label_edit">cpscourrier_mailbox_addresses_label</property>
+  <property name="hidden_layout_modes">
+    <!-- only the header cluster is used in view mode -->
+    <element value="view"/>
+  </property>
+  <property name="is_i18n">True</property>
+  <property name="width">35</property>
+ </widget>
+ <table>
+  <row>
+   <cell name="Title"/>
+   <cell name="Subject"/>
+  </row>
+  <row>
+   <cell name="Description"/>
+   <cell name="mailbox_addresses"/>
+  </row>
+ </table>
+</object>

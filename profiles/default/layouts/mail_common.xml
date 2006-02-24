@@ -80,7 +80,9 @@
    </row>
    <row>
      <cell name="content"/>
+   </row>
+   <row>
      <cell name="subject"/>
    </row>
- </table>
+  </table>
  </object>

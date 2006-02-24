@@ -25,10 +25,12 @@
  </property>
  <!-- The layouts as clustered use to play well with document portlets -->
  <property name="layouts">
+  <element value="mailbox_group_common"/>
   <element value="mailbox_group_contents"/>
+  <element value="folder"/>
  </property>
  <property name="layout_clusters">
-  <element value="header:common,folder"/>
+  <element value="header:mailbox_header"/>
   <element value="metadata:metadata"/>
  </property>
  <property name="flexible_layouts"/>

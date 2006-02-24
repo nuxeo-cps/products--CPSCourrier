@@ -21,6 +21,7 @@ Layout that present mailbox contents
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">label_search_status</property>
+   <property name="label_edit">label_search_status</property>
    <property name="is_i18n">True</property>
    <property name="vocabulary">search_review_state</property>
    <property name="translated">False</property>
@@ -34,6 +35,7 @@ Layout that present mailbox contents
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_priority_label</property>
+   <property name="label_edit">cpscourrier_priority_label</property>
    <property name="is_i18n">True</property>
    <property name="vocabulary">mailbox_filter_priority</property>
    <property name="translated">True</property>
@@ -47,6 +49,7 @@ Layout that present mailbox contents
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_type_label</property>
+   <property name="label_edit">cpscourrier_type_label</property>
    <property name="is_i18n">True</property>
    <property name="vocabulary">mailbox_allowed_ptype</property>
    <property name="translated">False</property>

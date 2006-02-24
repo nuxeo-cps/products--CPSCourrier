@@ -27,14 +27,17 @@
   <element value="metadata"/>
   <element value="common"/>
   <element value="folder"/>
+  <element value="mailbox"/>
   <element value="mail_filter_params" />
  </property>
- <!-- The layouts as clustered use to play well with document portlets -->
+ <!-- The layouts as clustered to play well with document portlets -->
  <property name="layouts">
+  <element value="mailbox_common"/>
+  <element value="folder"/>
   <element value="mailbox_contents"/>
  </property>
  <property name="layout_clusters">
-  <element value="header:common,folder"/>
+  <element value="header:mailbox_header"/>
   <element value="metadata:metadata"/>
  </property>
  <property name="flexible_layouts"/>

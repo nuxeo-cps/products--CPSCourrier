@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!-- edit only fields for the mailbox groups -->
+<object name="mailbox_group_common" meta_type="CPS Layout">
+ <widget name="Title" meta_type="Heading Widget">
+  <property name="fields">
+   <element value="Title"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label_edit">cpsdoc_title_label_edit</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes">
+    <!-- only the header cluster is used in view mode -->
+    <element value="view"/>
+  </property>
+ </widget>
+ <widget name="Description" meta_type="Text Widget">
+  <property name="fields">
+   <element value="Description"/>
+  </property>
+  <property name="label_edit">cpsdoc_description_label_edit</property>
+  <property name="hidden_layout_modes">
+    <!-- only the header cluster is used in view mode -->
+    <element value="view"/>
+  </property>
+  <property name="is_i18n">True</property>
+  <property name="css_class">ddescription</property>
+  <property name="width">72</property>
+ </widget>
+ <table>
+  <row>
+   <cell name="Title"/>
+  </row>
+  <row>
+   <cell name="Description"/>
+  </row>
+ </table>
+</object>
