@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- read only header for the mailboxes/mailbox groups -->
+<object name="mailbox_header" meta_type="CPS Layout">
+ <widget name="Title" meta_type="Heading Widget">
+  <property name="fields">
+   <element value="Title"/>
+  </property>
+ </widget>
+ <widget name="Description" meta_type="Text Widget">
+  <property name="fields">
+   <element value="Description"/>
+  </property>
+  <property name="css_class">ddescription</property>
+ </widget>
+ <table>
+  <row>
+   <cell name="Title"/>
+  </row>
+  <row>
+   <cell name="Description"/>
+  </row>
+ </table>
+</object>

@@ -1,23 +1,17 @@
 <?xml version="1.0"?>
-<!-- read only header for the mailboxes/mailbox groups -->
+<!-- read only header for the mailboxes -->
 <object name="mailbox_header" meta_type="CPS Layout">
- <widget name="Title" meta_type="Heading Widget">
+ <widget name="Addresses" meta_type="Lines Widget">
   <property name="fields">
-   <element value="Title"/>
+   <element value="mailbox_addresses"/>
   </property>
- </widget>
- <widget name="Description" meta_type="Text Widget">
-  <property name="fields">
-   <element value="Description"/>
-  </property>
+  <property name="label">cpscourrier_mailbox_addresses_label</property>
+  <property name="is_i18n">True</property>
   <property name="css_class">ddescription</property>
  </widget>
  <table>
   <row>
-   <cell name="Title"/>
-  </row>
-  <row>
-   <cell name="Description"/>
+   <cell name="Addresses"/>
   </row>
  </table>
 </object>

@@ -37,7 +37,7 @@
   <element value="mailbox_contents"/>
  </property>
  <property name="layout_clusters">
-  <element value="header:mailbox_header"/>
+  <element value="header:mailbox_common_header,mailbox_header"/>
   <element value="metadata:metadata"/>
  </property>
  <property name="flexible_layouts"/>

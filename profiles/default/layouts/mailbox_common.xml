@@ -15,7 +15,7 @@
   </property>
   <property name="display_width">35</property>
  </widget>
- <widget name="Subject" meta_type="Select Widget">
+ <widget name="Subject" meta_type="Subject Widget">
   <property name="fields">
    <element value="Subject"/>
   </property>
