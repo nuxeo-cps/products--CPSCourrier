@@ -56,5 +56,17 @@ mbox1 = wftool.invokeFactoryFor(grp1, 'Mailbox', 'mbox1',
 mbox2 = wftool.invokeFactoryFor(grp2, 'Mailbox', 'mbox2',
                                 Title='Boîte en plus')
 
+# create some users
+mdir = app.cps.portal_directories.members
+entries = [{'id': 'test%d' % i,
+            'sn': 'Test %d' %i,
+            'fullname' : 'Test user %d' %i,
+            'givenName' : 'User',
+            'userPassword' : 'test'}
+           for i in range(5)]
+
+for entry in entries:
+    mdir._createEntry(entry)
+
 
 transaction.commit()
