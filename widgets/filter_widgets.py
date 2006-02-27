@@ -270,6 +270,8 @@ class CPSPathWidget(CPSWidget):
     def prepare(self, datastructure, **kw):
         proxy = (kw.get('context_obj', False)
                  or datastructure.getDataModel().getProxy())
+        if proxy is None:
+            return
         utool = getToolByName(proxy, 'portal_url')
 
         # taken from search.py
