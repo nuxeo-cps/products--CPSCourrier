@@ -85,7 +85,6 @@ Layout that present mailbox contents
      <cell name="Query review_state"/>
      <cell name="Query priority"/>
      <cell name="Query portal_type"/>
-     <cell name="Query rpath"/>
    </row>
    <row>
      <cell name="Table"/>

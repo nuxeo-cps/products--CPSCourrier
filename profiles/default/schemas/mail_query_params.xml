@@ -13,6 +13,6 @@ should probably use only one schema. This will get clearer later
   <field name="filter_sort_order" meta_type="CPS String Field">
     <property name="default_expr">string:reverse</property>
   </field>
-  <field name="filter_relative_path" meta_type="CPS String Field" />
+  <field name="filter_path" meta_type="CPS String Field" />
 </object>
 
