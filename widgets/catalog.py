@@ -119,9 +119,10 @@ class CatalogTabularWidget(TabularWidget):
 
         # if filtering uses a post, set cookie
         request = self.REQUEST
+        path = request['URLPATH1'] # need to validate this
         if self.cookie_id and request.form.get(self.filter_button):
             cookie = serializeForCookie(prefilt)
-            request.RESPONSE.setCookie(self.cookie_id, cookie)
+            request.RESPONSE.setCookie(self.cookie_id, cookie, path=path)
 
         # replace some empty filters by the corresponding total scope
         # and remove the others
