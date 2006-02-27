@@ -80,6 +80,14 @@ class RequestCookiesMixin:
 
         return read
 
+    def expireCookie(self):
+        if not self.cookie_id:
+            return
+
+        request = self.REQUEST
+        path = request['URLPATH1']
+        request.RESPONSE.expireCookie(self.cookie_id, path=path)
+
     def prepare(self, datastructure, **kw):
         """ prepare datastructure from datamodel, request and cookie.
 
@@ -153,6 +161,14 @@ class CPSSelectFilterWidget(RequestCookiesMixin, CPSSelectWidget):
         if self.defines_scope and not ds[wid]:
             ds[wid+'_scope'] = self.getScope(ds)
 
+    def validate(self, ds, **kw):
+        if not CPSSelectWidget.validate(self, ds, **kw):
+            return False
+
+        self.expireCookie()
+        return True
+
+
 InitializeClass(CPSSelectFilterWidget)
 
 widgetRegistry.register(CPSSelectFilterWidget)
@@ -167,6 +183,13 @@ class CPSMultiSelectFilterWidget(RequestCookiesMixin, CPSMultiSelectWidget):
     def prepare(self, ds, **kw):
         CPSMultiSelectWidget.prepare(self, ds, **kw)
         RequestCookiesMixin.prepare(self, ds, **kw)
+
+    def validate(self, ds, **kw):
+        if not CPSSelectWidget.validate(self, ds, **kw):
+            return False
+
+        self.expireCookie()
+        return True
 
 
 InitializeClass(CPSMultiSelectFilterWidget)
