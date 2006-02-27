@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-24 02:02default\n"
+"POT-Creation-Date: 2006-02-27 12:21default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Preferred-encodings: latin9 utf-8\n"
 "Domain: default\n"
 
-#.   <input condition="param_rows" style="float:right" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
+#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr ""
@@ -106,6 +106,9 @@ msgid "cpscourrier_review_state_label"
 msgstr ""
 
 msgid "cpscourrier_empty_box_msg"
+msgstr ""
+
+msgid "cpscourrier_no_result_msg"
 msgstr ""
 
 #
