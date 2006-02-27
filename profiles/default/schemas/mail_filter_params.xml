@@ -10,5 +10,6 @@
   <field name="filter_sort_order" meta_type="CPS String Field">
     <property name="default_expr">string:reverse</property>
   </field>
+  <field name="filter_Subject" meta_type="CPS String Field" />
 </object>
 

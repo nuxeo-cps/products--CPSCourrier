@@ -45,6 +45,20 @@ Layout that present mailbox contents
    </property>
  </widget>
 
+ <widget name="Query Subject" meta_type="Select Filter Widget">
+   <property name="widget_mode_expr">string:edit</property>
+   <property name="label">cpscourrier_subject_label</property>
+   <property name="label_edit">cpscourrier_subject_label</property>
+   <property name="is_i18n">True</property>
+   <property name="vocabulary">mailbox_filter_subject</property>
+   <property name="translated">True</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="fields">
+     <element value="filter_Subject"/>
+   </property>
+ </widget>
+
+
  <widget name="Query portal_type" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
@@ -80,11 +94,15 @@ Layout that present mailbox contents
    <property name="hidden_empty">True</property>
  </widget>
 
- <table>
+<table>
    <row>
-     <cell name="Query review_state"/>
-     <cell name="Query priority"/>
-     <cell name="Query portal_type"/>
+     <cell name="Query Subject"/>
+     <cell name="Query portal_type" />
+   </row>
+   <row>
+     <cell name="Query path"/>
+     <cell name="Query review_state" />
+     <cell name="Query priority" />
    </row>
    <row>
      <cell name="Table"/>
