@@ -81,6 +81,7 @@ Layouts for rows in the content view of mailboxes
    <property name="fields">
      <element value="priority" />
    </property>
+   <property name="sortable" type="string">priority</property>
  </widget>
 
  <table>
