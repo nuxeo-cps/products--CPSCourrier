@@ -1,4 +1,21 @@
 *******************************************
+** CPSCourrier V0.4.1 [R1 build 2006/02/27-18:18 by gracinet]
+** SVN URL: http://svn/pub/CPSCourrier/trunk Revision: 33535
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- filtering params edition seemed not to have been done because cookie wasn't
+  invalidated
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCourrier V0.4.0 [R1 build 2006/02/27-15:59 by gracinet]
 ** SVN URL: http://svn/pub/CPSCourrier/trunk Revision: 33519
 Requires:
