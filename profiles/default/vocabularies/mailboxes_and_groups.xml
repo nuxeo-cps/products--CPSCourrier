@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<object name="mailbox_allowed_ptype" meta_type="CPS Method Vocabulary">
+ <property name="title"></property>
+ <property name="title_msgid"></property>
+ <property name="description"></property>
+ <property name="get_vocabulary_method">getVocabularyMailboxesAndGroups</property>
+ <property name="add_empty_key">False</property>
+</object>

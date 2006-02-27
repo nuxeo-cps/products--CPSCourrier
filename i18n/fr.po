@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-27 14:35default\n"
+"POT-Creation-Date: 2006-02-27 16:10default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -96,6 +96,12 @@ msgstr "Entêtes SMTP : "
 msgid "cpscourrier_mailbox_addresses_label"
 msgstr "Adresses de la boîte : "
 
+#
+# Layout labels
+#
+msgid "cpscourrier_search_path_label"
+msgstr "Boîtes concernées"
+
 msgid "cpscourrier_type_label"
 msgstr "Type"
 
@@ -128,3 +134,6 @@ msgstr "Urgent"
 
 msgid "cpscourrier_mp_voc_very_high"
 msgstr "Très urgent"
+
+msgid "cpscourrier_all_boxes"
+msgstr "Toutes"

@@ -94,6 +94,9 @@ msgstr ""
 msgid "cpscourrier_mailbox_addresses_label"
 msgstr ""
 
+msgid "cpscourrier_search_path_label"
+msgstr ""
+
 #
 # Tabular widgets labels
 #
@@ -135,3 +138,5 @@ msgstr ""
 msgid "cpscourrier_mp_voc_very_high"
 msgstr ""
 
+msgid "cpscourrier_all_boxes"
+msgstr "Toutes"
