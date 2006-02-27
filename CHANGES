@@ -3,9 +3,7 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
-- usable layouts for dashboard editing
-- (even) better layouting for mailboxes
-- tabular widgets support column-based sorting
+-
 Bug fixes:
 ~~~~~~~~~~
 -

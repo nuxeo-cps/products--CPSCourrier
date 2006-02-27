@@ -1,4 +1,22 @@
 *******************************************
+** CPSCourrier V0.4.0 [R1 build 2006/02/27-15:59 by gracinet]
+** SVN URL: http://svn/pub/CPSCourrier/trunk Revision: 33519
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- usable layouts for dashboard editing
+- (even) better layouting for mailboxes
+- tabular widgets support column-based sorting
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCourrier V0.3.0 [R1 build 2006/02/24-04:16 by ogrisel]
 ** SVN URL: https://svn.nuxeo.org/pub/CPSCourrier/trunk Revision: 33426
 Requires:
