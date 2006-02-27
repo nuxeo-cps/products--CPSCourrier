@@ -140,3 +140,8 @@ msgstr ""
 
 msgid "cpscourrier_all_boxes"
 msgstr "Toutes"
+
+msgid "cpscourrier_subject_label"
+msgstr ""
+
+
