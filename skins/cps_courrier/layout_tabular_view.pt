@@ -15,20 +15,24 @@
     <table width="100%" cellpadding="2" cellspacing="2"
 	   summary="filter options">
       <tr tal:repeat="row param_rows">
-	<td tal:repeat="cell row" tal:attributes="colspan cell/ncols">
-	  <tal:block define="widget cell/widget">
-	    <span class="dlabel"
-		  tal:condition="widget/is_i18n"
-		  tal:content="widget/label"
-		  i18n:translate=""
-		  >
-	      label
-	    </span>
-	    <span class="dlabel" tal:condition="not:widget/is_i18n"
-		  tal:content="widget/label">label</span>
-	  </tal:block>
-	  <tal:block replace="structure cell/widget_rendered" />
-	</td>
+	<tal:block repeat="cell row">
+	  <td>
+	    <tal:block define="widget cell/widget">
+	      <span class="dlabel"
+		    tal:condition="widget/is_i18n"
+		    tal:content="widget/label"
+		    i18n:translate=""
+		    >
+		label
+	      </span>
+	      <span class="dlabel" tal:condition="not:widget/is_i18n"
+		    tal:content="widget/label">label</span>
+	    </tal:block>
+	  </td>
+	  <td>
+	    <tal:block replace="structure cell/widget_rendered" />
+	  </td>
+	</tal:block>
       </tr>
     </table>
     <p style="text-align:right; margin:1em">
