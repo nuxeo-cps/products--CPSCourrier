@@ -7,8 +7,8 @@ Layout that present mailbox contents
  <property name="layout_view_method">layout_tabular_view</property>
  <property name="style_prefix">layout_default_</property>
 
- <widget name="Table" meta_type="Folder Contents Widget">
-  <property name="row_layout">mailbox_contents_row</property>
+ <widget name="Table" meta_type="Catalog Tabular Widget">
+  <property name="row_layout">mail_dashboard_row</property>
   <property name="hidden_layout_modes">edit create</property>
   <property name="empty_message">cpscourrier_empty_box_msg</property>
   <property name="is_empty_message_i18n">True</property>
@@ -17,7 +17,7 @@ Layout that present mailbox contents
   <property name="filter_button">filter</property>
  </widget>
 
- <widget name="Filter State" meta_type="Select Filter Widget">
+ <widget name="Query review_state" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">label_search_status</property>
@@ -31,7 +31,7 @@ Layout that present mailbox contents
    </property>
  </widget>
 
- <widget name="Filter Priority" meta_type="Select Filter Widget">
+ <widget name="Query priority" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_priority_label</property>
@@ -45,7 +45,7 @@ Layout that present mailbox contents
    </property>
  </widget>
 
- <widget name="Filter Type" meta_type="Select Filter Widget">
+ <widget name="Query portal_type" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_type_label</property>
@@ -57,13 +57,35 @@ Layout that present mailbox contents
    <property name="fields">
      <element value="filter_type" />
    </property>
+   <property name="defines_scope">True</property>
+ </widget>
+
+ <widget name="Query sort" meta_type="Toggable Criterion Widget">
+   <property name="hidden_layout_modes">create</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="toggle_tokens">
+     <element value="" />
+     <element value="reverse" />
+   </property>
+   <property name="criterion_suffix">-on</property>
+   <property name="token_suffix">-order</property>
+   <property name="ref_suffix">-col</property>
+   <property name="fields">
+     <element value="filter_sort_on" />
+     <element value="filter_sort_order" />
+   </property>
+ </widget>
+
+ <widget name="Query path" meta_type="Path Widget">
+   <property name="hidden_empty">True</property>
  </widget>
 
  <table>
    <row>
-     <cell name="Filter State" />
-     <cell name="Filter Priority" />
-     <cell name="Filter Type" />
+     <cell name="Query review_state"/>
+     <cell name="Query priority"/>
+     <cell name="Query portal_type"/>
+     <cell name="Query rpath"/>
    </row>
    <row>
      <cell name="Table"/>

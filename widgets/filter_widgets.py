@@ -261,3 +261,30 @@ class CPSToggableCriterionWidget(RequestCookiesMixin, CPSWidget):
 InitializeClass(CPSToggableCriterionWidget)
 
 widgetRegistry.register(CPSToggableCriterionWidget)
+
+class CPSPathWidget(CPSWidget):
+    """ This widget is a quick & dirty convenience."""
+
+    meta_type = 'Path Widget'
+
+    def prepare(self, datastructure, **kw):
+        proxy = (kw.get('context_obj', False)
+                 or datastructure.getDataModel().getProxy())
+        utool = getToolByName(proxy, 'portal_url')
+
+        # taken from search.py
+        portal_path = utool.getPhysicalPath()[1]
+        datastructure[self.getWidgetId()] = '/%s/%s' % (portal_path,
+                                                        utool.getRpath(proxy),
+                                                        )
+
+    def validate(self, datastructure, **kw):
+        return 1
+
+    def render(self, mode, datastructure, **kw):
+        return ''
+
+
+InitializeClass(CPSPathWidget)
+
+widgetRegistry.register(CPSPathWidget)
