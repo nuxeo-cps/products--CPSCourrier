@@ -48,7 +48,7 @@ Layout that presents catalog search results
    <property name="label">cpscourrier_subject_label</property>
    <property name="label_edit">cpscourrier_subject_label</property>
    <property name="is_i18n">True</property>
-   <property name="vocabulary">subject_voc</property>
+   <property name="vocabulary">mailbox_filter_subject</property>
    <property name="translated">True</property>
    <property name="cookie_id">cpscourrier</property>
    <property name="fields">

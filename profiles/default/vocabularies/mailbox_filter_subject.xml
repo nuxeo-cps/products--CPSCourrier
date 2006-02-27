@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<object name="mailbox_filter_priority" meta_type="CPS Method Vocabulary">
+ <property name="title"></property>
+ <property name="title_msgid"></property>
+ <property name="description"></property>
+ <property name="get_vocabulary_method">getVocabularyFilterSubject</property>
+ <property name="add_empty_key">True</property>
+ <property name="empty_key_pos">first</property>
+ <property name="empty_key_value_i18n">cpscourrier_all_subjects</property>
+</object>
