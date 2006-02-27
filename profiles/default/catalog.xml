@@ -3,7 +3,11 @@
  <index name="priority" meta_type="FieldIndex">
   <indexed_attr value="priority"/>
  </index>
+ <index name="priority" meta_type="DateTimeIndex">
+  <indexed_attr value="deadline"/>
+ </index>
  <column value="priority"/>
  <column value="from"/>
  <column value="to"/>
+ <column value="deadline"/>
 </object>
