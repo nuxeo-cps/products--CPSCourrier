@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-27 12:21default\n"
+"POT-Creation-Date: 2006-02-27 14:35default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -107,6 +107,9 @@ msgstr "Il n'y a pas de courrier répondant à vos critères dans cette boîte"
 
 msgid "cpscourrier_no_result_msg"
 msgstr "Aucun courrier ne satisfait à vos critères"
+
+msgid "cpscourrier_timeleft_label"
+msgstr "Délai"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Cordialement, "
