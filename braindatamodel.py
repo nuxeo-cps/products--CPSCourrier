@@ -59,7 +59,6 @@ class BrainDataModel(DataModel):
 
 
     def __init__(self, brain, context=None):
-        LOG('braindatamodel', DEBUG, brain.created)
         self._brain = brain
         if context is None:
             self._context = self._brain
