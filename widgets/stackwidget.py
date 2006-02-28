@@ -29,7 +29,7 @@ from Products.CPSWorkflow.stack import Stack
 class CPSStackWidget(CPSWidget):
     """ A widget that wraps a stack rendering. """
 
-    meta_type = "CPS Workflow Stack Widget"
+    meta_type = "Workflow Stack Widget"
 
     security = ClassSecurityInfo()
 
