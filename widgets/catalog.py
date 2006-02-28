@@ -54,10 +54,10 @@ def removeFilterPrefix(wid):
 
 
 class CatalogTabularWidget(TabularWidget):
-    """ A tabular portlet widget that performs a simple folder listing.
+    """ A tabular portlet widget that performs a catalog query.
 
-    Information is fetched from the folder's objects of a given meta-type.
-    There's no batching or sorting.
+    Key, values from datastructure starting from FILTER_PREFIX are forwarded
+    to the catalog, after stripping the prefix.
 
     >>> CatalogTabularWidget('the id')
     <CatalogTabularWidget at the_id>
