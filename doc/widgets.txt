@@ -4,11 +4,82 @@ CPS Courrier widgets
 
 :Revision: $Id$
 
-.. sectnum::    :depth: ??
-.. contents::   :depth: ??
+.. contents:: :depth: 2
 
-CPS Workflow Stack Widget
-=========================
+.. sectnum::
+
+Tabular Widgets
+===============
+
+The purpose of tabular widgets is to list elements, for example search
+results or folder contents. They share a common rendering system,
+defined in base class widgets.tabular.TabularWidget. The lookup of
+items to display depends on the widget type. They can be used in
+portlets as well as in ordinary documents.
+
+The row layout
+--------------
+
+Property: row_layout
+
+The rendering makes use of an auxiliairy layout, that will work on
+each item being listed to render the rows. Each widget in this layout
+will produce a column in the table.
+
+For technical reasons, the row layout must be actually organized as a
+column: one cell per line. It will be nevertheless rendered as a row.
+
+The row layout can be flexible, in which
+case it will attached to the portlet or document object on which
+the tabular widget depends.
+
+Actions
+-------
+
+If the 'actions_category' property is filled, the widget will render
+the actions of this category available for the object for which it is
+called, for example as form buttons.
+
+Empty listings
+--------------
+
+If there is no element to list, the widget will render as the string
+provided by propery 'empty_message'
+
+
+The rendering method
+--------------------
+
+Like many widgets, the final rendering is delegated to a rendering method,
+most likely a page template. This method is passed the following
+arguments:
+
+:mode: the widget's mode
+:columns: a list of tuples made of
+
+          #. the widget that was used to render the column. Its properties can
+	     then serve as global column info. For instance, the label can be
+	     used for column headings.
+  	  #. a boolean telling whether the column is currently used as the
+	     sorting reference.
+	  #. the sorting mode (currently '' and 'reversed')
+  	  #. the GET part of url to trigger sort or toggle sorting
+	     mode (including '?')
+
+:rows: the list of rendered rows
+:actions: the list of actions associated to the document the tabular
+	  widget was called for. This is a triple (title, url, id)
+:here_url: the url of the proxy the tabular widget was called for.
+
+In case the rendering method isn't supplied by subclass or property,
+the rendered rows are sequentially dumped.
+
+*Example*: https://svn.nuxeo.org/pub/CPSCourrier/trunk/skins/cps_courrier/widget_folder_contents.pt
+
+
+
+Workflow Stack Widget
+=====================
 
 This is a simple widget to call stack renders from within a layout.
 The workflow variable holding the stack is declared in the property
