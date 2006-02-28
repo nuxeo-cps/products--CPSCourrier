@@ -1,3 +1,4 @@
+
 # (C) Copyright 2006 Nuxeo SAS <http://nuxeo.com>
 # Author: Georges Racinet <gracinet@nuxeo.com>
 #
@@ -138,12 +139,14 @@ class TabularWidget(CPSPortletWidget):
         # prepare the get request
         wid = widget.getWidgetId()
         prefixed = WIDGET_PREFIX + sort_wid
-        get_req = '?%s-on=%s&%s-col=%s&%s=go' % (prefixed,
+        get_req = '?%s-on=%s&%s-col=%s' % (prefixed,
                                            quote(sortable),
                                            prefixed,
                                            wid,
-                                           self.filter_button,
                                            )
+        filt_butt = getattr(self, 'filter_button', '')
+        if filt_butt:
+            get_req += '&%s=go' % filt_butt
 
         sort_col = datastructure.get(sort_wid+'-col') # make -col a prop
         if sort_col != wid:

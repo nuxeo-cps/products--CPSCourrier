@@ -219,6 +219,12 @@ class CPSToggableCriterionWidget(RequestCookiesMixin, CPSWidget):
          'label': 'Suffix for a further associated reference'},
         )
 
+    # default values for catalog sort use-case
+    toggle_tokens = ('', 'reversed')
+    criterion_suffix = '-on'
+    token_suffix = '-order'
+    ref_suffix = '-col'
+
     def validate(self, ds, **kw):
         return 1
 

@@ -40,6 +40,8 @@ from Products.CPSCourrier.widgets.folder_contents import FolderContentsWidget
 class TestingTabularWidget(TabularWidget):
     """ A subclass to implement listRowDataModels. """
 
+    meta_type = 'Testing Tabular Widget'
+
     brains = [FakeBrain(d) for d in [
         {'Title' : 'Title 1', 'content' : 'Pending', 'Description' : '',},
         {'Title' : 'Title 2', 'content' : 'Rejected', 'Description' : '',},
@@ -208,4 +210,6 @@ def test_suite():
         unittest.makeSuite(IntegrationTestTabularPortlet),
         unittest.makeSuite(IntegrationTestFolderContentsPortlet),
         doctest.DocTestSuite('Products.CPSCourrier.widgets.tabular'),
+        doctest.DocFileTest('doc/developer/tabular_widget.txt',
+                            package='Products.CPSCourrier'),
         ))

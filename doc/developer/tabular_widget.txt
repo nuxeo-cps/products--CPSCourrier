@@ -1,0 +1,102 @@
+==============
+Tabular Widget
+==============
+
+:Revision: $Id$
+
+.. sectnum::
+
+TabularWidget is a base class that provides the rendering mechanism
+and helper methods::
+
+    >>> from Products.CPSCourrier.widgets.tabular import TabularWidget
+
+Like most CPS objects, we need to provide the id in the constructor::
+
+    >>> tab = TabularWidget('spam')
+    >>> tab.getId()
+    'spam'
+
+Most of widget methods manipulate DataStructure instances::
+    >>> from Products.CPSSchemas.DataStructure import DataStructure
+
+Global column information
+-------------------------
+
+At the end of the rendering process, the tabular passes column
+information to the rendering method. It is extracted from the widgets that
+are present in the row layout and the datastructure. So let's make a
+basic widget::
+
+    >>> from Products.CPSSchemas.Widget import CPSWidget
+    >>> col_wi = CPSWidget('mycol')
+
+In the simplest case, the widget itself is the extracted info::
+
+    >>> ds = DataStructure()
+    >>> tab.columnFromWidget(col_wi, ds)
+    (<CPSWidget at mycol>, False, '', '')
+
+Additional info is related to the sorting by column feature. The row
+widget has to know its related sorting index. This is done via the
+'sortable' property::
+
+    >>> col_wi.sortable = 'myindex'
+
+*Warning*: this is not a standard CPSWidget property. To
+set it via XML GenericSetup configuration, one needs to make its type
+explicit, like this::
+
+    <property name="sortable" type="str">myindex</property>
+
+The method now can provide info to build a link that triggers/toggles
+sorting on the column::
+
+    >>> tab.columnFromWidget(col_wi, ds)[3]
+    '?widget__Query sort-on=myindex&widget__Query sort-col=mycol'
+
+Obviously, this link has then to point to a document that parses that
+kind of request. This is what Toggable Criterion Widgets are meant
+for. Let's build one and simulate the above request to check this::
+
+    >>> from Products.CPSCourrier.widgets.filter_widgets import\
+    ...               CPSToggableCriterionWidget, FakeRequest
+    >>> sort_wid = CPSToggableCriterionWidget('Query sort')
+    >>> sort_wid.REQUEST = FakeRequest(**{'widget__Query sort-on':'myindex',
+    ...                                   'widget__Query sort-col':'mycol'})
+
+We need a DataStructure instance and cheat a bit with it (sorry)::
+    >>> other_ds = DataStructure()
+    >>> for x in ['Query sort-on', 'Query sort-col', 'Query sort-col']:
+    ...     other_ds[x] = None
+
+This is how the widget interprets the request and writes to the datastructure
+    >>> sort_wid.prepare(other_ds)
+    >>> from pprint import PrettyPrinter
+    >>> pprint=PrettyPrinter(width=50).pprint
+    >>> pprint(other_ds)
+    {'Query sort-order': '', 'Query sort-col': 'mycol', 'Query sort-on': 'myindex'}
+
+Let's get back to the tabular widget itself. One can change the
+prefix to use in the get request::
+
+    >>> tab.columnFromWidget(col_wi, ds, sort_wid='PREF')[3]
+    '?widget__PREF-on=myindex&widget__PREF-col=mycol'
+
+If the filter_button property is non-empty, we get an additional key
+in the built GET request. This is used to trigger cookie setting on
+the receiving side::
+
+    >>> tab.filter_button = 'filter'
+    >>> tab.columnFromWidget(col_wi, ds)[3]
+    '?widget__Query sort-on=myindex&widget__Query sort-col=mycol&filter=go'
+
+
+.. Emacs
+.. Local Variables:
+.. mode: rst
+.. End:
+.. Vim
+.. vim: set filetype=rst:
+
+
