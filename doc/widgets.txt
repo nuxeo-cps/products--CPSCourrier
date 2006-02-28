@@ -10,8 +10,8 @@ CPS Courrier widgets
 CPS Workflow Stack Widget
 =========================
 
-This is a simple widget to call stack renders from within a layout. 
-The workflow variable holding the stack is declared in the property 
+This is a simple widget to call stack renders from within a layout.
+The workflow variable holding the stack is declared in the property
 'stack_var_id'. What the widget does is:
 
 - fetch the stack
