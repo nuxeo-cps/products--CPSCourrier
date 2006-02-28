@@ -56,8 +56,6 @@ class TabularWidget(CPSPortletWidget):
     >>> wi = TabularWidget('spam')
     """
 
-    meta_type = "Tabular Widget"
-
     _properties = _properties = CPSPortletWidget._properties + (
         {'id': 'row_layout', 'type': 'string', 'mode': 'w',
          'label': 'Layout to use for the rows', 'is_required' : 1},
@@ -67,8 +65,6 @@ class TabularWidget(CPSPortletWidget):
          'label': 'Is the message of emptiness to be translated?'},
         {'id': 'actions_category', 'type': 'string', 'mode': 'w',
          'label': 'Actions category for buttons'},
-#        {'id': 'actions', 'type': 'tokens', 'mode': 'w',
-#         'label': 'Actions'},
         )
 
     row_layout = ''
