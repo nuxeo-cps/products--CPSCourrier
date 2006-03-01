@@ -18,6 +18,7 @@ Like most CPS objects, we need to provide the id in the constructor::
     'spam'
 
 Most of widget methods manipulate DataStructure instances::
+
     >>> from Products.CPSSchemas.DataStructure import DataStructure
 
 Global column information
@@ -31,23 +32,67 @@ basic widget::
     >>> from Products.CPSSchemas.Widget import CPSWidget
     >>> col_wi = CPSWidget('mycol')
 
-In the simplest case, the widget itself is the extracted info::
+In the simplest case, the **widget instance** itself is the extracted info::
 
     >>> ds = DataStructure()
     >>> tab.columnFromWidget(col_wi, ds)
     (<CPSWidget at mycol>, False, '', '')
 
-Additional info is related to the sorting by column feature. The row
-widget has to know its related sorting index. This is done via the
-'sortable' property::
+The three other returned values are, respectively
 
-    >>> col_wi.sortable = 'myindex'
+* a boolean telling whether this column is the current sort reference
+* additional reference about the sorting process that has been done.
+* the GET part of a link to trigger/toggle sorting by this column
+
+For these other values to be set, the column widget has to specify that it's
+sortable and on which index (or key) the sort has to be made. This is done by
+setting the 'sortable' property on it.
+
+    >>> col_wi.manage_addProperty('sortable', 'myindex', 'str')
 
 *Warning*: this is not a standard CPSWidget property. To
 set it via XML GenericSetup configuration, one needs to make its type
 explicit, like this::
 
     <property name="sortable" type="str">myindex</property>
+
+
+Is the column the sort reference ?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is based on info from the datastructure, so it means that some
+widget has to take care of this in its prepare method::
+
+    >>> ds = DataStructure()
+    >>> ds['Query sort-col'] = 'mycol'
+    >>> tab.columnFromWidget(col_wi, ds)[1]
+    True
+    >>> ds['Query sort-col'] = 'another'
+    >>> tab.columnFromWidget(col_wi, ds)[1]
+    False
+
+Additional sorting info
+~~~~~~~~~~~~~~~~~~~~~~~
+
+This is any information about the sorting that the triggering widget
+may have put in the datastructure for the column renderer::
+
+    >>> ds = DataStructure()
+    >>> ds['Query sort-col'] = 'mycol'
+    >>> ds['Query sort-order'] = 'spiced-lexico'
+    >>> tab.columnFromWidget(col_wi, ds)[1:3]
+    (True, 'spiced-lexico')
+
+This shouldn't matter, but by default this is the empty string::
+
+    >>> ds = DataStructure()
+    >>> ds['Query sort-col'] = 'other'
+    >>> ds['Query sort-order'] = 'spiced-lexico'
+    >>> tab.columnFromWidget(col_wi, ds)[1:3]
+    (False, '')
+
+Link to trigger/toggle sort by this column
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The method now can provide info to build a link that triggers/toggles
 sorting on the column::
@@ -66,26 +111,32 @@ for. Let's build one and simulate the above request to check this::
     ...                                   'widget__Query sort-col':'mycol'})
 
 We need a DataStructure instance and cheat a bit with it (sorry)::
+
     >>> other_ds = DataStructure()
     >>> for x in ['Query sort-on', 'Query sort-col', 'Query sort-col']:
     ...     other_ds[x] = None
 
-This is how the widget interprets the request and writes to the datastructure
+This is how the Toggable Criterion widget interprets the request and writes to
+the datastructure::
+
     >>> sort_wid.prepare(other_ds)
     >>> from pprint import PrettyPrinter
     >>> pprint=PrettyPrinter(width=50).pprint
     >>> pprint(other_ds)
     {'Query sort-order': '', 'Query sort-col': 'mycol', 'Query sort-on': 'myindex'}
 
-Let's get back to the tabular widget itself. One can change the
-prefix to use in the get request::
+Options
+~~~~~~~
+
+Let's get back to what the tabular widget does. One can change the
+prefix of the target widget::
 
     >>> tab.columnFromWidget(col_wi, ds, sort_wid='PREF')[3]
     '?widget__PREF-on=myindex&widget__PREF-col=mycol'
 
 If the filter_button property is non-empty, we get an additional key
-in the built GET request. This is used to trigger cookie setting on
-the receiving side::
+in the built GET request. This is useful for some receiving widgets
+that explicity check this before setting a cookie, for example::
 
     >>> tab.filter_button = 'filter'
     >>> tab.columnFromWidget(col_wi, ds)[3]
