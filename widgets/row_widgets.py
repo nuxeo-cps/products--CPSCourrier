@@ -37,8 +37,7 @@ class CPSTypeIconWidget(CPSWidget):
         """Prepare datastructure from datamodel."""
         dm = datastructure.getDataModel()
         obj = dm.getObject()
-        context = dm.getContext()
-        if obj is None or context is None:
+        if obj is None:
             return
         datastructure[self.getWidgetId()] = obj.portal_type
 
@@ -143,7 +142,7 @@ class CPSQualifiedLinkWidget(CPSWidget):
     field_types = ('CPS String Field', 'CPS String Field', 'CPS String Field')
 
     def prepare(self, datastructure, **kw):
-        """Prepare datastructure from workflow var."""
+        """Prepare datastructure from datamodel."""
 
         w_id = self.getWidgetId()
         dm = datastructure.getDataModel()
