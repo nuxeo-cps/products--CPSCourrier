@@ -6,7 +6,7 @@
  <property name="style_prefix">layout_default_</property>
  <property name="flexible_widgets"/>
  <property name="validate_values_expr"></property>
- <widget name="portlet" meta_type="Tabular Widget">
+ <widget name="portlet" meta_type="Testing Tabular Widget">
   <property name="title">Widget tabulaire</property>
   <property name="fields"/>
   <property name="readonly_layout_modes"/>

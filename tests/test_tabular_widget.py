@@ -22,6 +22,7 @@
 
 import unittest
 from zope.testing import doctest
+
 from Products.CPSDefault.tests.CPSTestCase import CPSTestCase
 
 from CPSCourrierIntegrationTestCase import CPSCourrierLayer
@@ -30,6 +31,7 @@ from Products.CPSCourrier.braindatamodel import FakeBrain, BrainDataModel
 
 
 # things to be tested
+from Globals import InitializeClass
 from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSDocument.FlexibleTypeInformation import FlexibleTypeInformation
@@ -51,6 +53,9 @@ class TestingTabularWidget(TabularWidget):
         gendss = (DataStructure(datamodel=BrainDataModel(brain))
                               for brain in self.brains)
         return (self.prepareRowDataStructure(row_layout, ds) for ds in gendss)
+
+InitializeClass(TestingTabularWidget)
+widgetRegistry.register(TestingTabularWidget)
 
 
 class CustomMethods:
@@ -123,7 +128,7 @@ class IntegrationTestTabularPortlet(IntegrationTestCase):
 
     def test_widget_registration(self):
         self.assert_(
-            'Tabular Widget' in widgetRegistry.listWidgetMetaTypes())
+            'Testing Tabular Widget' in widgetRegistry.listWidgetMetaTypes())
 
     def test_layer(self):
         # some of these can be discarded to get more flexibility back
@@ -162,12 +167,13 @@ class IntegrationTestTabularPortlet(IntegrationTestCase):
         self.assert_(rows[0].find('Title 1') != -1)
         self.assert_(rows[1].find('Title 2') != -1)
 
-        # columns hold the widget objects
-        self.assert_(columns[0].meta_type == 'String Widget')
-        self.assert_(columns[0].getId() == 'w__Title')
+        # columns hold the widget objects and more info
+        # see also doctest.
+        self.assert_(columns[0][0].meta_type == 'String Widget')
+        self.assert_(columns[0][0].getId() == 'w__Title')
 
-        self.assert_(columns[1].meta_type == 'Text Widget')
-        self.assert_(columns[1].getId() == 'w__Content')
+        self.assert_(columns[1][0].meta_type == 'Text Widget')
+        self.assert_(columns[1][0].getId() == 'w__Content')
 
 #
 # Sub classes
@@ -184,6 +190,10 @@ class IntegrationTestFolderContentsPortlet(IntegrationTestCase):
         self.widget = TestingFolderContentsWidget('the widget').__of__(self.portal)
         self.widget.manage_changeProperties(row_layout='test_row',
                                             render_method='')
+
+    def test_widget_registration(self):
+        self.assert_(
+            'Folder Contents Widget' in widgetRegistry.listWidgetMetaTypes())
 
     def test_folder_contents(self):
         # creating some content to list
