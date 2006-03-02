@@ -98,7 +98,7 @@ class FolderContentsWidget(TabularWidget):
         return self
 
     def passFilters(self, item, filters):
-        """True if filters is a subdict of filter.
+        """True if filters is a subdict of item.
         TODO check if there is something in the dict api for this
 
         >>> widg = FolderContentsWidget('')
