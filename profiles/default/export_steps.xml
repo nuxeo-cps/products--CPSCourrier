@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<export-steps>
- <export-step id="columndefs"
-              handler="Products.CPSCourrier.exportimport.exportColumnDefinitionsTool"
-              title="Column Definitions Tool">
-  Export column definitions tool and its contents.
- </export-step>
-</export-steps>
