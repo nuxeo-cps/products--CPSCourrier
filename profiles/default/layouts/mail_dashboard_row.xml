@@ -13,6 +13,12 @@ Layouts for rows in the content view of mailboxes
   </property>
  </widget>
 
+ <widget name="has_attachment" meta_type="Boolean Widget">
+  <property name="fields">
+   <element value="has_attachment"/>
+  </property>
+ </widget>
+
  <widget name="portal_type" meta_type="Type Icon Widget">
   <property name="label">cpscourrier_type_label</property>
   <property name="label_edit">cpscourrier_type_label</property>
@@ -90,6 +96,9 @@ Layouts for rows in the content view of mailboxes
   </row>
   <row>
    <cell name="portal_type"/>
+  </row>
+  <row>
+   <cell name="has_attachment"/>
   </row>
   <row>
    <cell name="Title"/>

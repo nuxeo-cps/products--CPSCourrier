@@ -6,6 +6,7 @@
  <index name="priority" meta_type="DateTimeIndex">
   <indexed_attr value="deadline"/>
  </index>
+ <column value="has_attachment"/>
  <column value="priority"/>
  <column value="from"/>
  <column value="to"/>
