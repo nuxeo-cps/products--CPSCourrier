@@ -19,5 +19,9 @@
   <field name="to" meta_type="CPS String List Field">
     <property name="is_searchabletext">True</property>
   </field>
+  <field name="has_attachment" meta_type="CPS String List Field">
+    <property name="write_process_expr">
+      python: object.hasFlexibleFields(data=data)
+    </property>
+  </field>
 </object>
-
