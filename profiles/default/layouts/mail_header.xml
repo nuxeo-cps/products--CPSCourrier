@@ -8,6 +8,10 @@
   <property name="is_required">True</property>
   <property name="label">cpscourrier_object_label</property>
   <property name="is_i18n">True</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
  </widget>
  <widget name="from" meta_type="String Widget">
   <property name="fields">
@@ -16,6 +20,10 @@
   <property name="is_required">True</property>
   <property name="label">cpscourrier_from_label</property>
   <property name="is_i18n">True</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
  </widget>
  <widget name="to" meta_type="Lines Widget">
   <property name="fields">
@@ -24,6 +32,10 @@
   <property name="is_required">True</property>
   <property name="label">cpscourrier_to_label</property>
   <property name="is_i18n">True</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
  </widget>
  <widget name="creation_date" meta_type="DateTime Widget">
   <property name="fields">
@@ -32,6 +44,10 @@
   <property name="label">cpscourrier_creation_date_label</property>
   <property name="is_i18n">True</property>
   <property name="view_format">long</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
  </widget>
  <table>
   <row>

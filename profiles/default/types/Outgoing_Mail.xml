@@ -16,6 +16,7 @@
   <element value="file"/>
  </property>
  <property name="layouts">
+  <element value="mail_header"/>
   <element value="mail_common"/>
   <element value="outgoing_mail"/>
   <element value="mail_flexible"/>
