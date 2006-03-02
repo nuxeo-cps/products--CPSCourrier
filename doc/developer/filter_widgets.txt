@@ -1,0 +1,132 @@
+==============
+Filter Widgets
+==============
+
+:Revision: $Id$
+
+.. contents:: :depth: 1
+.. sectnum::
+
+This is the developer's documentation for the widgets that manipulate
+filtering and sorting for CPSCourrier's dashboards.
+
+The general idea is that these widgets put in datastructure all
+elements that tabular widgets, like the Catalog Tabular Widget will
+use to perform their lookup of items to display.
+
+The source of data for these widgets is (in ascending priority):
+
+* the datamodel. Typically, this comes from the document or portlet
+  used for the whole dashboard and can be used as persistent default
+  parameters.
+* a cookie. This makes for session-time persistent parameters.
+* the request. For example, if one of these widgets is rendered in
+  edit mode, along with a submit <input> tag, then submission will
+  have the effect of putting new parameters in the datastructure,
+  hence triggering a new lookup and rendering of the tabular widgets.
+
+We'll use a fake DataModel throughout in order not to be bothered in
+the examples by the numerous security checks that the full-featured
+one provides::
+
+    >>> from Products.CPSSchemas.tests.testWidgets import FakeDataModel
+    >>> from Products.CPSSchemas.DataStructure import DataStructure
+
+RequestCookieMixin
+------------------
+
+  This is a mixin class that provides the preparation of datastructure
+  from request and cookie. Widgets that subclass this and a widget
+  class can call explicitely the usual prepare methode and the one
+  provided by RequestCookieMixin.
+
+  The cookie parsing is optional and depends on the non-emptiness of
+  the 'cookie' property.
+
+CPSSelectFilterWidget
+---------------------
+
+  This is a widget that subclasses CPSSelectWidget and parses request
+  and cookies.
+
+  It also has an additional property, 'defines-scope' (a boolean). If
+  this is set to true, it puts the full vocabulary list of adds
+  another (key, item) pair in the
+  datastructure in case the normal value is empty. This tells the
+  query mechanism the full scope of the search, which might be more
+  restrictive than no search.
+
+CPSToggableCriterionWidget
+--------------------------
+
+This widget is meant to trigger/toggle a criterion (typically a sort)
+It manipulates three fields, in that order:
+
+#. the criterion (e.g, on what to sort)
+#. the token (e.g, how to sort)
+#. an additional reference (e.g, where the request comes from).
+
+Namings in the datastructure are based on the following properties:
+
+* criterion_suffix (defaults to '-on')
+* token_suffix (defaults to '-order')
+* ref_suffix. (defaults to '-col')
+
+    >>> from Products.CPSCourrier.widgets.filter_widgets import\
+    ...               CPSToggableCriterionWidget, FakeRequest
+    >>> sort_wid = CPSToggableCriterionWidget('Query sort')
+    >>> sort_wid.fields = ['crit', 'token', 'ref']
+
+The token possible values are stored as a property, too::
+
+    >>> sort_wid.manage_changeProperties(toggle_tokens=('usual', 'alternate',))
+
+Let's simulate a request::
+
+    >>> sort_wid.REQUEST = FakeRequest(**{'widget__Query sort-on':'myindex',
+    ...                                   'widget__Query sort-col':'mycol'})
+
+The widget really needs to start with a datamodel which has the three
+mentionned fields, so let's make one and start with empty fields::
+
+    >>> dm = FakeDataModel()
+    >>> for x in ['crit', 'token', 'ref']:
+    ...     dm[x] = None
+    >>> ds = DataStructure(datamodel=dm)
+
+This is how the Toggable Criterion widget interprets the request and writes to
+the datastructure::
+
+    >>> sort_wid.prepare(ds)
+    >>> from pprint import PrettyPrinter
+    >>> pprint=PrettyPrinter(width=50).pprint
+    >>> pprint(ds)
+    {'Query sort-order': 'usual', 'Query sort-col': 'mycol', 'Query sort-on': 'myindex'}
+
+The request parsing takes place after loading from datamodel and cookie.
+If the request's criterion is the same as the one in datastructure after
+these two steps, the widget iterates the token (here, sort-order). So let's
+fill the datamodel with values that give the same datastructure as the last
+one before request parsing::
+
+    >>> dm['crit'] = 'myindex'
+    >>> dm['token'] = 'usual'
+    >>> sort_wid.prepare(ds)
+    >>> pprint(ds)
+    {'Query sort-order': 'alternate', 'Query sort-col': 'mycol', 'Query sort-on': 'myindex'}
+
+A change of criterion doesn't toggle but resets the token to its first value::
+
+    >>> sort_wid.REQUEST.form['widget__Query sort-on'] = 'another'
+    >>> sort_wid.prepare(ds)
+    >>> pprint(ds)
+    {'Query sort-order': 'usual', 'Query sort-col': 'mycol', 'Query sort-on': 'another'}
+
+
+
+.. Emacs
+.. Local Variables:
+.. mode: rst
+.. End:
+.. Vim
+.. vim: set filetype=rst:
