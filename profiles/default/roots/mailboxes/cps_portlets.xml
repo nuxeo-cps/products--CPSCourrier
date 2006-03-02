@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<object name=".cps_portlets" meta_type="CPS Placeful Portlets Container">
-
-  <!-- override the default folder view in order to use a different
-       layout scheme based on cluster for the rendering of the mailboxes -->
-  <object name="portlet_documents" meta_type="CPS Portlet"
-    portal_type="Document Portlet"/>
-</object>

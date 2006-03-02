@@ -25,6 +25,7 @@
  </property>
  <!-- The layouts as clustered use to play well with document portlets -->
  <property name="layouts">
+  <element value="mailbox_common_header"/>
   <element value="mailbox_group_common"/>
   <element value="folder"/>
   <element value="mailbox_group_contents"/>

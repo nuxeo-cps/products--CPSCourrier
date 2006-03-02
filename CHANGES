@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- better layouting of the mailboxes that do not rely on a document portlet
+  override
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
