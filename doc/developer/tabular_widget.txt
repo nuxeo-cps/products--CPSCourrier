@@ -4,6 +4,7 @@ Tabular Widget
 
 :Revision: $Id$
 
+.. contents:: :depth: 2
 .. sectnum::
 
 TabularWidget is a base class that provides the rendering mechanism
@@ -20,6 +21,92 @@ Like most CPS objects, we need to provide the id in the constructor::
 Most of widget methods manipulate DataStructure instances::
 
     >>> from Products.CPSSchemas.DataStructure import DataStructure
+
+It will be convenient for examples to have a pretty printer::
+
+    >>> from pprint import PrettyPrinter
+    >>> pretty_print=PrettyPrinter(width=50).pprint
+
+Items lookup parameters
+-----------------------
+
+TabularWidget provides the helper method buildFilters to fetch lookup
+parameters from datastructure. Subclasses are supposed to base their
+queries upon these parameters.
+
+Fetching parameters
+~~~~~~~~~~~~~~~~~~~
+
+The datastructure extraction is based on a prefix::
+
+    >>> datastructure1 = DataStructure(data = {
+    ...              'Query one': 'value',
+    ...              'other' : 'to_discard'})
+    >>> tab.buildFilters(datastructure1)
+    {'one': 'value'}
+
+Empty values get removed by default::
+
+    >>> datastructure2 = DataStructure(data = {'Query one': '',
+    ...                                       'Query eggs': 'spam'})
+    >>> tab.buildFilters(datastructure2)
+    {'eggs': 'spam'}
+
+Empty values are replaced by a default value (postfixed '_scope' in
+datastructure)::
+
+    >>> datastructure3 = DataStructure(data = {'Query one': '',
+    ...                                       'Query one_scope': [1,2]})
+
+    >>> tab.buildFilters(datastructure3)
+    {'one': [1, 2]}
+
+Cookie setting
+~~~~~~~~~~~~~~
+
+The cookie identifier is given by the 'cookie_id' property on the tabular
+widget. If empty, the cookie setting is completely skipped. So let's
+set it::
+
+    >>> tab.manage_changeProperties(cookie_id='test_cook', filter_button='go')
+
+To see what the cookie setting does, we'll need to simulate HTTP requests
+and read the cookie.
+
+    >>> from Products.CPSCourrier.widgets.tabular import FakeRequestWithCookies
+    >>> tab.REQUEST = FakeRequestWithCookies()
+    >>> from Products.CPSCourrier.widgets.tabular import unserializeFromCookie
+
+Cookie setting will not be done if request lacks the filter_button::
+
+    >>> res = tab.buildFilters(datastructure1)
+    >>> tab.REQUEST.RESPONSE.cookies
+    {}
+
+Let's add this to the request, then::
+
+    >>> tab.REQUEST.form['go'] = 1
+
+The cookie holds the interesting part of datastructure, including empty
+values & scopes::
+
+    >>> res = tab.buildFilters(datastructure1)
+    >>> cookie = tab.REQUEST.RESPONSE.cookies['test_cook']['value']
+    >>> unserializeFromCookie(cookie)
+    {u'Query one': u'value'}
+    >>> res = tab.buildFilters(datastructure2)
+    >>> cookie = tab.REQUEST.RESPONSE.cookies['test_cook']['value']
+    >>> pretty_print(unserializeFromCookie(cookie))
+    {u'Query eggs': u'spam', u'Query one': u''}
+    >>> res = tab.buildFilters(datastructure3)
+    >>> cookie = tab.REQUEST.RESPONSE.cookies['test_cook']['value']
+    >>> pretty_print(unserializeFromCookie(cookie))
+    {u'Query one': u'', u'Query one_scope': [1, 2]}
+
+Finally we revert to the default value for filter_button::
+
+    >>> tab.manage_changeProperties(filter_button='')
+
 
 Global column information
 -------------------------
@@ -120,9 +207,7 @@ This is how the Toggable Criterion widget interprets the request and writes to
 the datastructure::
 
     >>> sort_wid.prepare(other_ds)
-    >>> from pprint import PrettyPrinter
-    >>> pprint=PrettyPrinter(width=50).pprint
-    >>> pprint(other_ds)
+    >>> pretty_print(other_ds)
     {'Query sort-order': '', 'Query sort-col': 'mycol', 'Query sort-on': 'myindex'}
 
 Options
@@ -135,8 +220,7 @@ prefix of the target widget::
     '?widget__PREF-on=myindex&widget__PREF-col=mycol'
 
 If the filter_button property is non-empty, we get an additional key
-in the built GET request. This is useful for some receiving widgets
-that explicity check this before setting a cookie, for example::
+in the built GET request (see the section on buildFilter)
 
     >>> tab.filter_button = 'filter'
     >>> tab.columnFromWidget(col_wi, ds)[3]

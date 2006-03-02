@@ -32,25 +32,9 @@ from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.DataModel import DataModel
 from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
-from Products.CPSSkins.cpsskins_utils import serializeForCookie
 
 from Products.CPSCourrier.braindatamodel import BrainDataModel
 from Products.CPSCourrier.widgets.tabular import TabularWidget
-
-
-FILTER_PREFIX = 'Query '
-FILTER_PREFIX_LEN = len('Query ')
-SCOPE_SUFFIX = '_scope' # see explanations in filter_widgets
-
-_missed = object()
-
-def removeFilterPrefix(wid):
-    """Remove a filter prefix in a widget id. """
-
-    if wid.startswith(FILTER_PREFIX):
-        return wid[FILTER_PREFIX_LEN:]
-    else:
-        return wid
 
 
 class CatalogTabularWidget(TabularWidget):
@@ -64,22 +48,6 @@ class CatalogTabularWidget(TabularWidget):
     """
 
     meta_type = 'Catalog Tabular Widget'
-    _properties = TabularWidget._properties + (
-        {'id': 'cookie_id', 'type': 'string', 'mode': 'w',
-         'label': 'Name of cookie for filter params (no cookie if empty)', },
-        {'id': 'filter_button', 'type': 'string', 'mode': 'w',
-         'label': 'Name of the button used to trigger filtering', },
-        )
-
-    listed_meta_types = (
-       'CPS Proxy Document',
-       'CPS Proxy Folder',
-       'CPS Proxy Folderish Document',
-       )
-
-    cookie_id = ''
-
-    filter_button = ''
 
     render_method = 'widget_folder_contents'
 
@@ -99,44 +67,6 @@ class CatalogTabularWidget(TabularWidget):
 
     def getMethodContext(self, datastructure):
         return self
-
-    def buildFilters(self, datastructure):
-        """Build query according to datastructure, query and cookies.
-
-        Cookies not implemented.
-        Assumptions: the post is made with widgets whose ids start all with
-        'Query '
-        and correspond to other widget ids present in items.
-
-        XXX TODO this is a cc from folder_contents. Factorize to base class
-        """
-
-        # extract filters from datastructure
-        prefilt = dict( (key, item)
-                       for key, item in datastructure.items()
-                       if key.startswith(FILTER_PREFIX)
-                       and not key.endswith(SCOPE_SUFFIX))
-
-        # if filtering uses a post, set cookie
-        request = self.REQUEST
-        path = request['URLPATH1'] # need to validate this
-        if self.cookie_id and request.form.get(self.filter_button):
-            cookie = serializeForCookie(prefilt)
-            request.RESPONSE.setCookie(self.cookie_id, cookie, path=path)
-
-        # replace some empty filters by the corresponding total scope
-        # and remove the others
-        filters = {}
-        for key, item in prefilt.items():
-            if item:
-                filters[key[FILTER_PREFIX_LEN:]] = item
-                continue
-            scope = datastructure.get(key + SCOPE_SUFFIX)
-            if scope is not None:
-                filters[key[FILTER_PREFIX_LEN:]] = scope
-
-        LOG('Catalog Tabular Widget; filters:', DEBUG, filters)
-        return filters
 
     def listRowDataStructures(self, datastructure, layout, **kw):
         """Return datastructures filled with search results meta-data
