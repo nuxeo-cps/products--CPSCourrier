@@ -3,7 +3,7 @@
  <index name="priority" meta_type="FieldIndex">
   <indexed_attr value="priority"/>
  </index>
- <index name="deadline" meta_type="DateTimeIndex">
+ <index name="deadline" meta_type="FieldIndex">
   <indexed_attr value="deadline"/>
  </index>
  <column value="has_attachment"/>
