@@ -34,6 +34,7 @@ Layouts for rows in the content view of mailboxes
   <property name="label_edit">cpscourrier_type_label</property>
   <property name="is_i18n">True</property>
   <property name="size_max">50</property>
+  <property name="sortable" type="string">mail_from</property>
  </widget>
 
  <widget name="To" meta_type="Lines Widget">
@@ -45,6 +46,7 @@ Layouts for rows in the content view of mailboxes
   <property name="is_i18n">True</property>
   <property name="width">50</property>
   <property name="height">3</property>
+  <property name="sortable" type="string">mail_to</property>
  </widget>
 
  <widget name="Title" meta_type="Qualified Link Widget">

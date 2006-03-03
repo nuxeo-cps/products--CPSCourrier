@@ -3,6 +3,12 @@
  <index name="priority" meta_type="FieldIndex">
   <indexed_attr value="priority"/>
  </index>
+ <index name="mail_from" meta_type="FieldIndex">
+  <indexed_attr value="from"/>
+ </index>
+ <index name="mail_to" meta_type="FieldIndex">
+  <indexed_attr value="to"/>
+ </index>
  <index name="deadline" meta_type="FieldIndex">
   <indexed_attr value="deadline"/>
  </index>
