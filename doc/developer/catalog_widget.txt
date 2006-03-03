@@ -32,10 +32,12 @@ query for fulltext searches.
 
 The ``fulltext_or`` property is the incoming key for or searches.
 
-Let's make a typical CPS setup::
+Default values are set for a typical CPS setup::
 
-    >>> cat.manage_changeProperties(fulltext_key='SearchableText',
-    ...                             fulltext_or='ZCText_or')
+    >>> cat.fulltext_key
+    'SearchableText'
+    >>> cat.fulltext_or
+    'ZCText_or'
 
 Process
 -------

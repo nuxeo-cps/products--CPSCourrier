@@ -58,8 +58,8 @@ class CatalogTabularWidget(TabularWidget):
          'label': 'Input filter used for fulltext OR',},
         )
 
-    fulltext_key = ''
-    fulltext_or = ''
+    fulltext_key = 'SearchableText'
+    fulltext_or = 'ZCText_or'
 
     def layout_row_view(self, layout=None, **kw):
         """Render method for rows layouts in 'view' mode.
