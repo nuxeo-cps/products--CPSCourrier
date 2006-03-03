@@ -61,6 +61,9 @@ Now let's see what happens with several tokens:
     >>> filters
     {'SearchableText': '(foo OR eggs)'}
 
+Of course we don't fail if the keys are missing::
+    >>> filters = {}
+    >>> cat.filtersToQuery(filters)
 
 .. Emacs
 .. Local Variables:

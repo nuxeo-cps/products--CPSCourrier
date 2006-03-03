@@ -86,7 +86,7 @@ class CatalogTabularWidget(TabularWidget):
         if not self.fulltext_or or not self.fulltext_key:
             return
 
-        filter_or = filters.pop(self.fulltext_or).strip()
+        filter_or = filters.pop(self.fulltext_or, '').strip()
         tokens = [token.strip() for token in filter_or.split()]
         nb_tok = len(tokens)
 
