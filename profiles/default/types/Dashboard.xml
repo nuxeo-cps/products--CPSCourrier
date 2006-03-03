@@ -23,11 +23,13 @@
 
  <!-- The layouts as clustered use to play well with document portlets -->
  <property name="layouts">
-  <element value="common"/>
+  <element value="mailbox_common_header"/>
+  <element value="mailbox_group_common"/>
   <element value="mail_dashboard"/>
  </property>
  <property name="layout_clusters">
   <element value="metadata:metadata"/>
+  <element value="header:mailbox_common_header"/>
  </property>
  <property name="flexible_layouts"/>
 
