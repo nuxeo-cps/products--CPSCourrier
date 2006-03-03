@@ -71,12 +71,10 @@ Layout that presents catalog search results
  </widget>
 
  <widget name="Query sort" meta_type="Toggable Criterion Widget">
-   <property name="hidden_layout_modes">create</property>
-<!--   <property name="widget_mode_expr">string:edit</property>
+   <property name="hidden_layout_modes">create edit</property>
+   <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_type_label</property>
    <property name="is_i18n">True</property>
-   <property name="vocabulary">mailbox_allowed_ptype</property>
-   <property name="translated">False</property> -->
    <property name="cookie_id">cpscourrier</property>
    <property name="toggle_tokens">
      <element value="" />
@@ -88,8 +86,22 @@ Layout that presents catalog search results
    <property name="fields">
      <element value="filter_sort_on" />
      <element value="filter_sort_order" />
+     <element value="filter_sort_ref" />
    </property>
  </widget>
+
+<widget name="default_sort" meta_type="Select Filter Widget">
+   <property name="hidden_layout_modes">view</property>
+   <property name="widget_mode_expr">string:edit</property>
+   <property name="label_edit">label_sort_by</property>
+   <property name="is_i18n">True</property>
+   <property name="vocabulary">dashboard_sort_criteria</property>
+   <property name="translated">False</property>
+   <property name="fields">
+     <element value="filter_sort_on" />
+   </property>
+    <property name="cookie_id">cpscourrier</property>
+</widget>
 
  <widget name="Query path" meta_type="Select Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
@@ -128,6 +140,9 @@ Layout that presents catalog search results
      <cell name="Query path"/>
      <cell name="Query review_state" />
      <cell name="Query priority" />
+   </row>
+   <row>
+     <cell name="default_sort"/>
    </row>
    <row>
      <cell name="Table"/>

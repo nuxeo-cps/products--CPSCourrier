@@ -6,4 +6,5 @@
  <object name="mailboxes_and_groups" meta_type="CPS Method Vocabulary"/>
  <object name="mailbox_filter_priority" meta_type="CPS Method Vocabulary"/>
  <object name="mailbox_filter_subject" meta_type="CPS Method Vocabulary"/>
+ <object name="dashboard_sort_criteria" meta_type="CPS Method Vocabulary"/>
 </object>
