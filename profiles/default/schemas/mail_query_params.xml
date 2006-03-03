@@ -15,5 +15,6 @@ should probably use only one schema. This will get clearer later
   </field>
   <field name="filter_path" meta_type="CPS String Field" />
   <field name="filter_Subject" meta_type="CPS String Field" />
+  <field name="filter_fulltext" meta_type="CPS String Field" />
 </object>
 

@@ -116,6 +116,12 @@ msgstr ""
 msgid "cpscourrier_timeleft_label"
 msgstr ""
 
+msgid "cpscourrier_has_attachment_label"
+msgstr ""
+
+msgid "cpscourrier_fulltext_search"
+msgstr ""
+
 #
 # Vocabularies
 #

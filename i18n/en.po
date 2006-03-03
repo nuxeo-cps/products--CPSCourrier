@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-02-27 18:16default\n"
+"POT-Creation-Date: 2006-03-03 12:03default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -116,6 +116,12 @@ msgstr "No mail matches your search criteria"
 
 msgid "cpscourrier_timeleft_label"
 msgstr "Time left"
+
+msgid "cpscourrier_has_attachment_label"
+msgstr "Att."
+
+msgid "cpscourrier_fulltext_search"
+msgstr "Keywords"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Best regards, "
