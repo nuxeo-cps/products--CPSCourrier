@@ -1,0 +1,68 @@
+======================
+Catalog Tabular Widget
+======================
+
+:Revision: $Id$
+
+.. contents:: :depth: 1
+.. sectnum::
+
+The Catalog Tabular Widget is a Tabular Widget that performs a
+ZCatalog query.
+
+In terms of classes, this is a simple subclass of
+TabularWidget that provides an implementation of listRowDataStructures
+through the portal_catalog tool.
+
+Let's make one::
+
+    >>> from Products.CPSCourrier.widgets.catalog import CatalogTabularWidget
+    >>> cat = CatalogTabularWidget('thecat')
+
+We'll need the pretty printer::
+
+    >>> from pprint import PrettyPrinter
+    >>> pretty_print=PrettyPrinter(width=50).pprint
+
+Properties
+----------
+
+The ``fulltext_key`` property will be used as the key in the Catalog Tool
+query for fulltext searches.
+
+The ``fulltext_or`` property is the incoming key for or searches.
+
+Let's make a typical CPS setup::
+
+    >>> cat.manage_changeProperties(fulltext_key='SearchableText',
+    ...                             fulltext_or='ZCText_or')
+
+Process
+-------
+As incoming parameters, the widget uses the result of base class'
+buildFilters method. It processes them with the filterToQuery method
+before forwarding to the Catalog Tool. Finally, it adapts the
+resulting brains as dastructures.
+
+The filterToQuery method takes only care of fulltext searches, using the
+widget's properties to find them.
+
+    >>> filters = {'ZCText_or': 'abc', 'other': 'other'}
+    >>> cat.filtersToQuery(filters)
+    >>> pretty_print(filters)
+    {'other': 'other', 'SearchableText': 'abc'}
+
+Now let's see what happens with several tokens:
+
+    >>> filters = {'ZCText_or': 'foo eggs'}
+    >>> cat.filtersToQuery(filters)
+    >>> filters
+    {'SearchableText': '(foo OR eggs)'}
+
+
+.. Emacs
+.. Local Variables:
+.. mode: rst
+.. End:
+.. Vim
+.. vim: set filetype=rst:

@@ -18,7 +18,7 @@
 # $Id$
 
 
-""" Folder Contents Portlet Widgets. """
+""" Catalog Tabular Widgets. """
 
 from zLOG import LOG, DEBUG
 from Globals import InitializeClass
@@ -51,6 +51,16 @@ class CatalogTabularWidget(TabularWidget):
 
     render_method = 'widget_folder_contents'
 
+    _properties = TabularWidget._properties + (
+        {'id': 'fulltext_key', 'type': 'string', 'mode': 'w',
+         'label': 'Catalog key for fulltext searchs'},
+        {'id': 'fulltext_or', 'type': 'string', 'mode': 'w',
+         'label': 'Input filter used for fulltext OR',},
+        )
+
+    fulltext_key = ''
+    fulltext_or = ''
+
     def layout_row_view(self, layout=None, **kw):
         """Render method for rows layouts in 'view' mode.
         """
@@ -68,6 +78,27 @@ class CatalogTabularWidget(TabularWidget):
     def getMethodContext(self, datastructure):
         return self
 
+    def filtersToQuery(self, filters):
+        """Updates dict to build a query from filters.
+
+        Takes care of fulltext issues. """
+
+        if not self.fulltext_or or not self.fulltext_key:
+            return
+
+        filter_or = filters.pop(self.fulltext_or).strip()
+        tokens = [token.strip() for token in filter_or.split()]
+        nb_tok = len(tokens)
+
+        if not(nb_tok):
+            return
+        elif nb_tok == 1:
+            query_or = tokens[0]
+        else:
+            query_or = '(%s)' % ' OR '.join(tokens)
+
+        filters[self.fulltext_key] = query_or
+
     def listRowDataStructures(self, datastructure, layout, **kw):
         """Return datastructures filled with search results meta-data
         """
@@ -75,6 +106,8 @@ class CatalogTabularWidget(TabularWidget):
         catalog = getToolByName(self, 'portal_catalog')
 
         query = self.buildFilters(datastructure)
+        self.filtersToQuery(query)
+
         brains = catalog(**query)
         dms = (BrainDataModel(brain) for brain in brains)
         datastructures = (DataStructure(datamodel=dm) for dm in dms)
