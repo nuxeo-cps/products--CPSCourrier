@@ -64,37 +64,37 @@ msgstr "Mailboxes"
 # Layout labels
 #
 msgid "cpscourrier_object_label"
-msgstr "Object: "
+msgstr "Object"
 
 msgid "cpscourrier_from_label"
-msgstr "From: "
+msgstr "From"
 
 msgid "cpscourrier_to_label"
-msgstr "To: "
+msgstr "To"
 
 msgid "cpscourrier_creation_date_label"
-msgstr "Date: "
+msgstr "Date"
 
 msgid "cpscourrier_form_of_address_label"
-msgstr "Form of address: "
+msgstr "Form of address"
 
 msgid "cpscourrier_signature_label"
-msgstr "Signature: "
+msgstr "Signature"
 
 msgid "cpscourrier_size_label"
 msgstr "Size (kB):"
 
 msgid "cpscourrier_deadline_label"
-msgstr "Dealine: "
+msgstr "Dealine"
 
 msgid "cpscourrier_priority_label"
-msgstr "Priority: "
+msgstr "Priority"
 
 msgid "cpscourrier_smtp_headers_label"
-msgstr "SMTP Headers: "
+msgstr "SMTP Headers"
 
 msgid "cpscourrier_mailbox_addresses_label"
-msgstr "Mailbox addresses: "
+msgstr "Mailbox addresses"
 
 #
 # Layout labels

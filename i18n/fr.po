@@ -64,37 +64,37 @@ msgstr "Boîtes aux lettres"
 # Layout labels
 #
 msgid "cpscourrier_object_label"
-msgstr "Objet : "
+msgstr "Objet"
 
 msgid "cpscourrier_from_label"
-msgstr "De : "
+msgstr "De"
 
 msgid "cpscourrier_to_label"
-msgstr "Pour : "
+msgstr "Pour"
 
 msgid "cpscourrier_creation_date_label"
-msgstr "Date : "
+msgstr "Date"
 
 msgid "cpscourrier_form_of_address_label"
-msgstr "Formule de politesse : "
+msgstr "Formule de politesse"
 
 msgid "cpscourrier_signature_label"
-msgstr "Signature : "
+msgstr "Signature"
 
 msgid "cpscourrier_size_label"
-msgstr "Taille (ko) : "
+msgstr "Taille (ko)"
 
 msgid "cpscourrier_deadline_label"
-msgstr "Date d'échéance : "
+msgstr "Date d'échéance"
 
 msgid "cpscourrier_priority_label"
-msgstr "Degré d'urgence : "
+msgstr "Degré d'urgence"
 
 msgid "cpscourrier_smtp_headers_label"
-msgstr "Entêtes SMTP : "
+msgstr "Entêtes SMTP"
 
 msgid "cpscourrier_mailbox_addresses_label"
-msgstr "Adresses de la boîte : "
+msgstr "Adresses de la boîte"
 
 #
 # Layout labels
