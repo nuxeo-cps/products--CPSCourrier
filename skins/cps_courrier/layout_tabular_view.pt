@@ -10,8 +10,17 @@
 		   rows layout/rows;
 		   tabular_cell python:rows[-1][0];
 		   param_rows python:rows[:-1];
+		   formaction string:;
+		   first_layout options/first_layout|python:0;
+		   last_layout options/last_layout|python:0;
 		   ">
-  <form action="" method="post">
+
+  <tal:block condition="first_layout">
+    <tal:block
+	content="structure string:<form action='${formaction}' method='post'
+					enctype='multipart/form-data'> "/>
+  </tal:block>
+
     <table width="100%" cellpadding="2" cellspacing="2"
 	   summary="filter options">
       <tr tal:repeat="row param_rows">
@@ -41,9 +50,14 @@
 	     tal:condition="param_rows"
 	     i18n:attributes="value" />
     </p>
-  </form>
 
   <p>
     <tal:block replace="structure tabular_cell/widget_rendered" />
   </p>
+
+  <tal:block condition="last_layout">
+    <tal:block content="structure string:</form>"/>
+  </tal:block>
+
+
 </tal:block>
