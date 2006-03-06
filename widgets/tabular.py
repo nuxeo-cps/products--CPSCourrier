@@ -30,12 +30,14 @@ from Products.CMFCore.utils import getToolByName
 from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.DataStructure import DataStructure
-
+from Products.CPSDocument.FlexibleTypeInformation import FlexibleTypeInformation
 from Products.CPSPortlets.CPSPortletWidget import CPSPortletWidget
 
 # second import not used here, but imported from tests.
 from Products.CPSSkins.cpsskins_utils import (serializeForCookie,
                                               unserializeFromCookie)
+
+from Products.CPSDocument.interfaces import ICPSDocument
 
 WIDGET_PREFIX = 'widget__' #XXX this should be importable from CPSSchemas
 
@@ -299,8 +301,17 @@ class TabularWidget(CPSPortletWidget):
 
         # lookup of row layout
         lid = self.row_layout
-        fti = calling_obj.getTypeInfo()
-        row_layout = fti.getLayout(lid, calling_obj)
+
+        ## LayoutsTool.renderLayout sets proxy=context, but context might be
+        #  anything, e.g, if we are rendering global search results
+        if ICPSDocument.providedBy(calling_obj):
+            fti = calling_obj.getTypeInfo()
+            row_layout = fti.getLayout(lid, calling_obj)
+        else:
+            ltool = getToolByName(calling_obj, 'portal_layouts')
+            row_layout = getattr(ltool, lid)
+            fti = FlexibleTypeInformation('transient')
+
         layout_structures = None
 
         meth_context = self.getMethodContext(datastructure)

@@ -33,6 +33,7 @@ from Products.CPSCourrier.braindatamodel import FakeBrain, BrainDataModel
 # things to be tested
 from Globals import InitializeClass
 from Products.CPSSchemas.DataStructure import DataStructure
+from Products.CPSSchemas.DataModel import DataModel
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSDocument.FlexibleTypeInformation import FlexibleTypeInformation
 from Products.CPSCourrier.widgets.tabular import TabularWidget
@@ -174,6 +175,16 @@ class IntegrationTestTabularPortlet(IntegrationTestCase):
 
         self.assert_(columns[1][0].meta_type == 'Text Widget')
         self.assert_(columns[1][0].getId() == 'w__Content')
+
+    def test_not_from_CPSDocument(self):
+        # use-case: global search form with a tabular widget
+        dm = DataModel({}, [], proxy=self.portal, context=self.portal)
+        ds = DataStructure(datamodel=dm)
+        rendered = self.widget.render('view', ds)
+        self.assertEquals(rendered.split('\n'), [
+            'Title 1|<div class="ddefault">Pending</div>',
+            'Title 2|<div class="ddefault">Rejected</div>',
+            ])
 
 #
 # Sub classes
