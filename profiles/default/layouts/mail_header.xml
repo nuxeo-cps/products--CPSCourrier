@@ -49,6 +49,15 @@
     <element value="edit"/>
   </property>
  </widget>
+ <widget name="timeleft" meta_type="Time Left Widget">
+  <property name="fields">
+   <element value="deadline"/>
+  </property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
+ </widget>
  <table>
   <row>
    <cell name="object"/>
@@ -61,6 +70,9 @@
   </row>
   <row>
    <cell name="creation_date"/>
+  </row>
+  <row>
+   <cell name="timeleft"/>
   </row>
  </table>
 </object>
