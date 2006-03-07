@@ -11,7 +11,7 @@ Layout that present mailbox contents
  <widget name="Table" meta_type="Folder Contents Widget">
   <property name="row_layout">mailbox_group_contents_row</property>
   <property name="hidden_layout_modes">edit create</property>
-  <property name="empty_message">cpscourrier_empty_box_msg</property>
+  <property name="empty_message">cpscourrier_empty_boxgroup_msg</property>
   <property name="is_empty_message_i18n">True</property>
   <property name="listed_meta_types">
     <element value="CPS Proxy BTree Folder" />

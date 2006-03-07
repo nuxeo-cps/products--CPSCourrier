@@ -110,6 +110,9 @@ msgstr ""
 msgid "cpscourrier_empty_box_msg"
 msgstr ""
 
+msgid "cpscourrier_empty_boxgroup_msg"
+msgstr ""
+
 msgid "cpscourrier_no_result_msg"
 msgstr ""
 
