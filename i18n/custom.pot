@@ -152,3 +152,10 @@ msgstr ""
 
 msgid "cpscourrier_all_subjects"
 msgstr ""
+
+#
+# Actions
+#
+
+msgid "action_mail_accept"
+msgstr ""
