@@ -363,13 +363,22 @@ class TabularWidget(CPSPortletWidget):
         actions = self.getActions(datastructure)
 
         if proxy is not None:
-            proxy_url = proxy.absolute_url()
+            here_url = proxy.absolute_url()
         else:
-            proxy_url = None
+            here_url = None
+
+        # in search mode, proxy is actually the context, so 
+        # here_url must take the view name into account
+        # PUBLISHED would be the view class instance or the skin zpt or py
+        if mode == 'search':
+            request = self.REQUEST
+            if request is not None:
+                view_name = self.REQUEST['URLPATH0'].split('/')[-1]
+                here_url += '/' + view_name
 
         return meth(mode=mode, columns=columns,
                     rows=rendered_rows, actions=actions,
-                    here_url=proxy_url)
+                    here_url=here_url)
 
 
 widgetRegistry.register(TabularWidget)
