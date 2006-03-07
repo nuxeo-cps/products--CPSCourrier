@@ -21,12 +21,13 @@
 """
 from cgi import escape
 from Globals import InitializeClass
+from DateTime import DateTime
 
 from Products.CMFCore.utils import getToolByName
 from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
-from Products.CPSSchemas.BasicWidgets import CPSStringWidget
+from Products.CPSSchemas.BasicWidgets import CPSStringWidget, CPSIntWidget
 
 
 class CPSTypeIconWidget(CPSWidget):
@@ -229,3 +230,36 @@ class CPSListCheckboxWidget(CPSWidget):
 InitializeClass(CPSListCheckboxWidget)
 
 widgetRegistry.register(CPSListCheckboxWidget)
+
+class CPSTimeLeftWidget(CPSIntWidget):
+    """ A widget that displays time left.
+
+    This is a temporary hack: won't be necessary once the braindatamodel
+    thing has all schemas features, like read_process_expr
+    """
+
+    meta_type = 'Time Left Widget'
+
+    def prepare(self, datastructure, **kw):
+        dm = datastructure.getDataModel()
+        due = DateTime(dm[self.fields[0]])
+        datastructure[self.getWidgetId()] = str(int(DateTime()-due))
+
+    def render(self, mode, datastructure, **kw):
+        base_rendered = CPSIntWidget.render(self, mode, datastructure)
+        if mode != 'view':
+            return base_rendered
+
+        value = int(datastructure[self.getWidgetId()])
+        if value >= 0:
+            css_class = 'late'
+        elif value in [-1, -2]:
+            css_class = 'shortly'
+        else:
+            css_class = 'inTime'
+
+        return '<span class=%s>%s</span>' % (css_class, base_rendered)
+
+
+InitializeClass(CPSTimeLeftWidget)
+widgetRegistry.register(CPSTimeLeftWidget)

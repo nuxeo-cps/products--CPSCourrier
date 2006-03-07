@@ -94,6 +94,17 @@ Layouts for rows in the content view of mailboxes
    <property name="sortable" type="string">priority</property>
  </widget>
 
+ <widget name="timeleft" meta_type="Time Left Widget">
+   <property name="label">cpscourrier_timeleft_label</property>
+   <property name="label_edit">cpscourrier_timeleft_label</property>
+   <property name="css_class">timeleft</property>
+   <property name="is_i18n">True</property>
+   <property name="fields">
+     <element value="deadline" />
+   </property>
+  <property name="sortable" type="string">Title</property>
+ </widget>
+
  <table>
   <row>
    <cell name="Checkbox"/>
@@ -123,7 +134,8 @@ Layouts for rows in the content view of mailboxes
    <cell name="priority"/>
   </row>
   <row>
-   <cell name="deadline"/>
+   <cell name="timeleft"/>
   </row>
  </table>
 </object>
+
