@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <object name="portal_actions" meta_type="CMF Actions Tool">
  <action-provider name="portal_actions">
-  <action title="action_accept" action_id="accept" category="courrier"
+  <action title="action_mail_accept" action_id="accept" category="courrier"
      condition_expr="member"
      url_expr="string:accept"
      visible="True">
