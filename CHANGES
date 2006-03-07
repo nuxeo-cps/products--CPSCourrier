@@ -14,3 +14,4 @@ New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - extraction of lookup parameters has been moved to TabularWidget
 - documentation and tests for widgets
+- tabular widget has a 'search' mode in which it doesn't render forms

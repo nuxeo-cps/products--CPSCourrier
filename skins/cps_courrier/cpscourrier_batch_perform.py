@@ -12,10 +12,12 @@ for l_id in list_ids:
         refs = vals
         name = l_id
 
-if len(form) > 1:
+PREFIX = "cpscourrier_batch_"
+trans = [key for key in form if key.startswith(PREFIX)]
+if len(trans) > 1:
     raise ValueError("Got more than one transition")
 
-transition = form.keys()[0]
+transition = trans[0][len(PREFIX):]
 return "You asked to perform transition '%s'\n%s: %s" % (transition,
                                                        name,
                                                        ', '.join(refs))

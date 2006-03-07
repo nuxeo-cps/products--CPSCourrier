@@ -284,6 +284,14 @@ class TabularWidget(CPSPortletWidget):
                  'id' : action['id'],}
                 for action in actions]
 
+    def getModeFromLayoutMode(self, layout_mode, datamodel):
+        """ Allow some fine tweakings about forms. """
+
+        if layout_mode == 'search_results':
+            return 'search'
+        else:
+            return CPSWidget.getModeFromLayoutMode(self, layout_mode, datamodel)
+
     def render(self, mode, datastructure, **kw):
         """ Render datastructure according to mode.
 
@@ -323,13 +331,13 @@ class TabularWidget(CPSPortletWidget):
             if layout_structures is None:
                 row_dm = row_ds.getDataModel()
                 layout_structures = [
-                    row_layout.computeLayoutStructure(mode, row_dm)]
+                    row_layout.computeLayoutStructure('view', row_dm)]
 
             # render from row_ds
             rendered = fti._renderLayouts(layout_structures,
                                           row_ds,
                                           context=meth_context,
-                                          layout_mode=mode,
+                                          layout_mode='view',
                                           )
             rendered_rows.append(rendered)
 

@@ -1,8 +1,14 @@
 <tal:comment replace="nothing"> $Id$ </tal:comment>
-<form method="post"
-      action="cpscourrier_batch_perform"
-      tal:define="actions options/actions;
-		  ">
+
+<tal:block define="actions options/actions;
+		   make_form python: options['mode'] != 'search'
+		   ">
+  <tal:block condition="make_form">
+    <tal:block
+	content="structure string:<form action='cpscourrier_batch_perform'
+					method='post'
+					enctype='multipart/form-data'> "/>
+  </tal:block>
   <table class="listing"
 	 tal:define="columns options/columns;
 		     rows options/rows;
@@ -37,8 +43,12 @@
   <input type="submit"
 	 class="context"
 	 tal:repeat="action actions"
-	 tal:attributes="value action/title;
-			 name string:${action/id}"
+         tal:attributes="value action/title;
+                         name string:cpscourrier_batch_${action/id}"
 	 i18n:attributes="value" />
-</form>
 
+  <tal:block condition="make_form">
+    <tal:block content="structure string:</form>"/>
+  </tal:block>
+
+</tal:block>

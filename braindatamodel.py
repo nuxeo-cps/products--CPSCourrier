@@ -141,4 +141,5 @@ class BrainDataModel(DataModel):
     def __setitem__(self, key, item):
         raise NotImplementedError
 
-
+    def checkWriteAccess(self, key):
+        return False
