@@ -1,4 +1,21 @@
 *******************************************
+** CPSCourrier V0.6.0 [R1 build 2006/03/07-19:14 by gracinet]
+** SVN URL: http://svn/pub/CPSCourrier/trunk Revision: 34150
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Highlighting of timeleft column
+- Attachments presence materialized by icon
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCourrier V0.5.0 [R1 build 2006/03/07-14:10 by gracinet]
 ** SVN URL: http://svn/pub/CPSCourrier/trunk Revision: 34124
 Requires:
