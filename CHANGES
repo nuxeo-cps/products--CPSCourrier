@@ -3,13 +3,14 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- the dealine of mails is initialized to creation date + deadline of the mailbox
 Bug fixes:
 ~~~~~~~~~~
 - scope of empty searches was not dumped in cookie
 - better layouting of the mailboxes that do not rely on a document portlet
   override
 - removed colons in i18n labels
+- added missing widget to the mailbox layout
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - extraction of lookup parameters has been moved to TabularWidget

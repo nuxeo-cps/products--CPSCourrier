@@ -122,6 +122,15 @@ msgstr ""
 msgid "cpscourrier_fulltext_search"
 msgstr ""
 
+msgid "cpscourrier_mailbox_priority_label"
+msgstr ""
+
+msgid "cpscourrier_mailbox_from_label"
+msgstr ""
+
+msgid "cpscourrier_allowed_reply_time"
+msgstr ""
+
 #
 # Vocabularies
 #

@@ -54,6 +54,43 @@
   <property name="is_i18n">True</property>
   <property name="width">35</property>
  </widget>
+ <widget name="priority" meta_type="Select Widget">
+  <property name="fields">
+   <element value="priority"/>
+  </property>
+  <property name="label_edit">cpscourrier_mailbox_priority_label</property>
+  <property name="hidden_layout_modes">
+    <!-- only the header cluster is used in view mode -->
+    <element value="view"/>
+  </property>
+  <property name="is_i18n">True</property>
+  <property name="vocabulary">mail_priority</property>
+  <property name="translated">True</property>
+ </widget>
+ <widget name="from" meta_type="Email Widget">
+  <property name="fields">
+   <element value="from"/>
+  </property>
+  <property name="label_edit">cpscourrier_mailbox_from_label</property>
+  <property name="hidden_layout_modes">
+    <!-- only the header cluster is used in view mode -->
+    <element value="view"/>
+  </property>
+  <property name="is_i18n">True</property>
+  <property name="display_width">35</property>
+  <property name="is_required">True</property>
+ </widget>
+ <widget name="allowed_reply_time" meta_type="Int Widget">
+  <property name="fields">
+   <element value="allowed_reply_time"/>
+  </property>
+  <property name="label_edit">cpscourrier_allowed_reply_time</property>
+  <property name="hidden_layout_modes">
+    <!-- only the header cluster is used in view mode -->
+    <element value="view"/>
+  </property>
+  <property name="is_i18n">True</property>
+ </widget>
  <table>
   <row>
    <cell name="Title"/>
@@ -62,6 +99,13 @@
   <row>
    <cell name="Description"/>
    <cell name="mailbox_addresses"/>
+  </row>
+  <row>
+   <cell name="priority"/>
+   <cell name="from"/>
+  </row>
+  <row>
+   <cell name="allowed_reply_time"/>
   </row>
  </table>
 </object>

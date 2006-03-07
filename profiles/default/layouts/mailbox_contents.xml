@@ -46,6 +46,7 @@ Layout that present mailbox contents
  </widget>
 
  <widget name="Query Subject" meta_type="Select Filter Widget">
+   <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_subject_label</property>
    <property name="label_edit">cpscourrier_subject_label</property>

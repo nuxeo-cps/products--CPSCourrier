@@ -16,7 +16,7 @@ msgstr ""
 "Preferred-encodings: latin9 utf-8\n"
 "Domain: default\n"
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filtrer"
@@ -122,6 +122,15 @@ msgstr "PJ"
 
 msgid "cpscourrier_fulltext_search"
 msgstr "Mots clés"
+
+msgid "cpscourrier_mailbox_priority_label"
+msgstr "Degré d'urgence par défaut"
+
+msgid "cpscourrier_mailbox_from_label"
+msgstr "Adresse émetteur par défaut"
+
+msgid "cpscourrier_allowed_reply_time"
+msgstr "Délais par défaut"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Cordialement, "
