@@ -91,7 +91,7 @@ Layout that presents catalog search results
  </widget>
 
 <widget name="default_sort" meta_type="Select Filter Widget">
-   <property name="hidden_layout_modes">view</property>
+   <property name="hidden_layout_modes">view search_results</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label_edit">label_sort_by</property>
    <property name="is_i18n">True</property>
