@@ -3,7 +3,8 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- Highlighting of timeleft column
+- Attachments presence materialized by icon
 Bug fixes:
 ~~~~~~~~~~
 -

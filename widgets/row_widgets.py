@@ -27,7 +27,9 @@ from Products.CMFCore.utils import getToolByName
 from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
-from Products.CPSSchemas.BasicWidgets import CPSStringWidget, CPSIntWidget
+from Products.CPSSchemas.BasicWidgets import (CPSStringWidget,
+                                              CPSIntWidget,
+                                              CPSBooleanWidget)
 
 
 class CPSTypeIconWidget(CPSWidget):
@@ -263,3 +265,41 @@ class CPSTimeLeftWidget(CPSIntWidget):
 
 InitializeClass(CPSTimeLeftWidget)
 widgetRegistry.register(CPSTimeLeftWidget)
+
+class CPSIconBooleanWidget(CPSBooleanWidget):
+    """ A boolean widget that renders as an icon.
+
+    TODO: backport as an option of CPS Boolean Widget. """
+
+    meta_type = "Icon Boolean Widget"
+
+    _properties = CPSBooleanWidget._properties + (
+        {'id': 'icon_true', 'type':'string', 'mode':'w',
+         'label': 'Icon to display if value is True',},
+        {'id': 'icon_false', 'type':'string', 'mode':'w',
+         'label': 'Icon to display if value is False',}
+        )
+
+
+    def render(self, mode, datastructure, **kw):
+        """Render in mode from datastructure."""
+        value = datastructure[self.getWidgetId()]
+        if mode != 'view':
+            return CPSBooleanWidget.render(self, mode, datastructure, **kw)
+
+        utool = getToolByName(self, 'portal_url')
+        if value:
+            icon = self.icon_true
+            label = self.label_true
+        else:
+            icon = self.icon_false
+            label = self.label_false
+        uri = utool.getBaseUrl() + icon
+
+        cpsmcat = getToolByName(self, 'translation_service')
+        label = cpsmcat(label).encode('iso-8859--15')
+
+        return renderHtmlTag('img', src=uri, alt=label)
+
+InitializeClass(CPSIconBooleanWidget)
+widgetRegistry.register(CPSIconBooleanWidget)
