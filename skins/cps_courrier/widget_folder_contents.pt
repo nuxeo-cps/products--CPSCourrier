@@ -1,5 +1,21 @@
 <tal:comment replace="nothing"> $Id$ </tal:comment>
 
+
+<script type="text/javascript">
+  isChecked = false
+
+  function toggleSelectAll(toggleCheckbox) {
+    inputElements = toggleCheckbox.form.getElementsByTagName("input");
+
+    for (i = 0; i < inputElements.length; i++) {
+       element = inputElements[i]
+       if (element.type == "checkbox") {
+           element.checked = ! (isChecked); }
+     }
+     isChecked = !(isChecked);
+   }
+</script>
+
 <tal:block define="actions options/actions;
 		   make_form python: options['mode'] != 'search'
 		   ">
@@ -21,6 +37,10 @@
 			   toggle_get python:col[3];
 			   here_url options/here_url;
 			   ">
+	  <input type="checkbox" name="select_all"
+		 onclick="toggleSelectAll(this);"
+		 tal:condition="python:widget.meta_type == 'List Checkbox Widget'" />
+
 	  <a href="" tal:omit-tag="not:widget/sortable|nothing"
 	     tal:attributes="href string:${here_url}${toggle_get}">
 	    <img tal:condition="is_sort" src=""
