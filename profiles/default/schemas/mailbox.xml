@@ -6,6 +6,8 @@
   <!-- default settings for messages created in the mailbox: -->
   <field name="from" meta_type="CPS String Field"/>
   <field name="priority" meta_type="CPS String Field"/>
-  <field name="allowed_reply_time" meta_type="CPS Int Field"/>
+  <field name="allowed_reply_time" meta_type="CPS Int Field">
+    <property name="default_expr">python:3</property>
+  </field>
 </object>
 

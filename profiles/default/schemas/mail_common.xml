@@ -7,7 +7,11 @@
   <field name="content_position" meta_type="CPS String Field"/>
   <field name="content_format" meta_type="CPS String Field"/>
   <field name="deadline" meta_type="CPS DateTime Field">
-    <property name="default_expr">python:DateTime()+3</property>
+    <property name="default_expr">python:None</property>
+    <!-- This is a hack to initialize the value of the deadline from the delay
+         value defined in the mailbox container: the default_expr has no idea of
+         the container, thus we use a complex write_process_expr -->
+    <property name="write_process_expr">python:value is None and DateTime()+proxy.aq_parent.getContent()['allowed_reply_time'] or value</property>
   </field>
   <field name="priority" meta_type="CPS String Field">
     <property name="default_expr">string:1</property>
