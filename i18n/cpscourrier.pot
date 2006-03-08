@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-08 16:21default\n"
+"POT-Creation-Date: 2006-03-08 16:35default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -25,7 +25,7 @@ msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
 
-#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
+#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr ""
@@ -172,12 +172,6 @@ msgid "cpscourrier_subject_label"
 msgstr ""
 
 msgid "cpscourrier_all_subjects"
-msgstr ""
-
-#
-# Actions
-#
-msgid "action_mail_accept"
 msgstr ""
 
 #
