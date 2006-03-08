@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-08 16:09default\n"
+"POT-Creation-Date: 2006-03-08 16:21default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -180,8 +180,9 @@ msgstr "Handle"
 #
 # Workflows
 #
-msgid "heading_workflow_handle"
-msgstr ""
+#, fuzzy
+msgid "heading_workflow_handle_of ${item_id}"
+msgstr "Handle"
 
 msgid "help_workflow_handle"
 msgstr ""
@@ -189,8 +190,12 @@ msgstr ""
 msgid "button_handle"
 msgstr ""
 
-msgid "heading_workflow_forward"
-msgstr ""
+#
+# Workflows
+#
+#, fuzzy
+msgid "heading_workflow_forward_of ${item_id}"
+msgstr "Handle"
 
 msgid "help_workflow_forward"
 msgstr ""
@@ -198,8 +203,12 @@ msgstr ""
 msgid "button_forward"
 msgstr ""
 
-msgid "heading_workflow_discard"
-msgstr ""
+#
+# Workflows
+#
+#, fuzzy
+msgid "heading_workflow_discard_of ${item_id}"
+msgstr "Handle"
 
 msgid "help_workflow_discard"
 msgstr ""
@@ -207,8 +216,12 @@ msgstr ""
 msgid "button_discard"
 msgstr ""
 
-msgid "heading_workflow_delete"
-msgstr ""
+#
+# Workflows
+#
+#, fuzzy
+msgid "heading_workflow_delete_of ${item_id}"
+msgstr "Handle"
 
 msgid "help_workflow_delete"
 msgstr ""
@@ -216,8 +229,12 @@ msgstr ""
 msgid "button_delete"
 msgstr ""
 
-msgid "heading_workflow_answer"
-msgstr ""
+#
+# Workflows
+#
+#, fuzzy
+msgid "heading_workflow_answer_of ${item_id}"
+msgstr "Handle"
 
 msgid "help_workflow_answer"
 msgstr ""
@@ -225,8 +242,12 @@ msgstr ""
 msgid "button_answer"
 msgstr ""
 
-msgid "heading_workflow_close"
-msgstr ""
+#
+# Workflows
+#
+#, fuzzy
+msgid "heading_workflow_close_of ${item_id}"
+msgstr "Handle"
 
 msgid "help_workflow_close"
 msgstr ""
@@ -234,8 +255,12 @@ msgstr ""
 msgid "button_close"
 msgstr ""
 
-msgid "heading_workflow_reopen"
-msgstr ""
+#
+# Workflows
+#
+#, fuzzy
+msgid "heading_workflow_reopen_of ${item_id}"
+msgstr "Handle"
 
 msgid "help_workflow_reopen"
 msgstr ""
@@ -243,8 +268,12 @@ msgstr ""
 msgid "button_reopen"
 msgstr ""
 
-msgid "heading_workflow_validate"
-msgstr ""
+#
+# Workflows
+#
+#, fuzzy
+msgid "heading_workflow_validate_of ${item_id}"
+msgstr "Handle"
 
 msgid "help_workflow_validate"
 msgstr ""
@@ -252,8 +281,12 @@ msgstr ""
 msgid "button_validate"
 msgstr ""
 
-msgid "heading_workflow_send"
-msgstr ""
+#
+# Workflows
+#
+#, fuzzy
+msgid "heading_workflow_send_of ${item_id}"
+msgstr "Handle"
 
 msgid "help_workflow_send"
 msgstr ""
@@ -261,8 +294,12 @@ msgstr ""
 msgid "button_send"
 msgstr ""
 
-msgid "heading_workflow_reactivate"
-msgstr ""
+#
+# Workflows
+#
+#, fuzzy
+msgid "heading_workflow_reactivate_of ${item_id}"
+msgstr "Handle"
 
 msgid "help_workflow_reactivate"
 msgstr ""
@@ -270,8 +307,12 @@ msgstr ""
 msgid "button_reactivate"
 msgstr ""
 
-msgid "heading_workflow_reset"
-msgstr ""
+#
+# Workflows
+#
+#, fuzzy
+msgid "heading_workflow_reset_of ${item_id}"
+msgstr "Handle"
 
 msgid "help_workflow_reset"
 msgstr ""

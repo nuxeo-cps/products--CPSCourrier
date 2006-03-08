@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-08 16:09default\n"
+"POT-Creation-Date: 2006-03-08 16:21default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -183,7 +183,7 @@ msgstr ""
 #
 # Workflows
 #
-msgid "heading_workflow_handle"
+msgid "heading_workflow_handle_of ${item_id}"
 msgstr ""
 
 msgid "help_workflow_handle"
@@ -192,7 +192,7 @@ msgstr ""
 msgid "button_handle"
 msgstr ""
 
-msgid "heading_workflow_forward"
+msgid "heading_workflow_forward_of ${item_id}"
 msgstr ""
 
 msgid "help_workflow_forward"
@@ -201,7 +201,7 @@ msgstr ""
 msgid "button_forward"
 msgstr ""
 
-msgid "heading_workflow_discard"
+msgid "heading_workflow_discard_of ${item_id}"
 msgstr ""
 
 msgid "help_workflow_discard"
@@ -210,7 +210,7 @@ msgstr ""
 msgid "button_discard"
 msgstr ""
 
-msgid "heading_workflow_delete"
+msgid "heading_workflow_delete_of ${item_id}"
 msgstr ""
 
 msgid "help_workflow_delete"
@@ -219,7 +219,7 @@ msgstr ""
 msgid "button_delete"
 msgstr ""
 
-msgid "heading_workflow_answer"
+msgid "heading_workflow_answer_of ${item_id}"
 msgstr ""
 
 msgid "help_workflow_answer"
@@ -228,7 +228,7 @@ msgstr ""
 msgid "button_answer"
 msgstr ""
 
-msgid "heading_workflow_close"
+msgid "heading_workflow_close_of ${item_id}"
 msgstr ""
 
 msgid "help_workflow_close"
@@ -237,7 +237,7 @@ msgstr ""
 msgid "button_close"
 msgstr ""
 
-msgid "heading_workflow_reopen"
+msgid "heading_workflow_reopen_of ${item_id}"
 msgstr ""
 
 msgid "help_workflow_reopen"
@@ -246,7 +246,7 @@ msgstr ""
 msgid "button_reopen"
 msgstr ""
 
-msgid "heading_workflow_validate"
+msgid "heading_workflow_validate_of ${item_id}"
 msgstr ""
 
 msgid "help_workflow_validate"
@@ -255,7 +255,7 @@ msgstr ""
 msgid "button_validate"
 msgstr ""
 
-msgid "heading_workflow_send"
+msgid "heading_workflow_send_of ${item_id}"
 msgstr ""
 
 msgid "help_workflow_send"
@@ -264,7 +264,7 @@ msgstr ""
 msgid "button_send"
 msgstr ""
 
-msgid "heading_workflow_reactivate"
+msgid "heading_workflow_reactivate_of ${item_id}"
 msgstr ""
 
 msgid "help_workflow_reactivate"
@@ -273,7 +273,7 @@ msgstr ""
 msgid "button_reactivate"
 msgstr ""
 
-msgid "heading_workflow_reset"
+msgid "heading_workflow_reset_of ${item_id}"
 msgstr ""
 
 msgid "help_workflow_reset"
