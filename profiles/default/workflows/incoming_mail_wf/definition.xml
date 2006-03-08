@@ -36,7 +36,7 @@
   </guard>
  </transition>
  <transition transition_id="back_to_handled" title=""
-             new_state="handled" trigger="AUTOMATIC"
+             new_state="handled" trigger="USER"
              before_script="" after_script="">
   
   <guard>
@@ -75,7 +75,7 @@
   </guard>
  </transition>
  <transition transition_id="flag_answered" title=""
-             new_state="answered" trigger="AUTOMATIC"
+             new_state="answered" trigger="USER"
              before_script="" after_script="">
   
   <guard>
