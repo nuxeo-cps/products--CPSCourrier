@@ -1,0 +1,275 @@
+<?xml version="1.0"?>
+<cps-workflow workflow_id="outgoing_mail_wf"
+              title="CPS Workflow Definition"
+              state_variable="review_state"
+              meta_type="CPS Workflow">
+ <permission>Modify portal content</permission>
+ <permission>View</permission>
+ <permission>WebDAV Lock items</permission>
+ <permission>WebDAV Unlock items</permission>
+ <state state_id="draft" title="Draft">
+  <exit-transition transition_id="checkin_draft"/>
+  <exit-transition transition_id="abandon_draft"/>
+  <exit-transition transition_id="unlock"/>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="WebDAV Lock items" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+  <permission-map name="WebDAV Unlock items"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>Owner</permission-role>
+  </permission-map>
+ </state>
+ <state state_id="locked" title="Locked">
+  <exit-transition transition_id="unlock"/>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>WorkspaceReader</permission-role>
+  </permission-map>
+  <permission-map name="WebDAV Lock items" acquired="False">
+  </permission-map>
+  <permission-map name="WebDAV Unlock items"
+                  acquired="False">
+  </permission-map>
+ </state>
+ <state state_id="sent" title="">
+  <exit-transition transition_id="reactivate"/>
+ </state>
+ <state state_id="validated" title="">
+  <exit-transition transition_id="invalidate"/>
+  <exit-transition transition_id="send"/>
+ </state>
+ <state state_id="work" title="Work">
+  <exit-transition transition_id="copy_submit"/>
+  <exit-transition transition_id="checkout_draft"/>
+  <exit-transition transition_id="cut_copy_paste"/>
+  <exit-transition transition_id="modify"/>
+  <exit-transition transition_id="translate"/>
+  <exit-transition transition_id="delete_translation"/>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>WorkspaceReader</permission-role>
+  </permission-map>
+  <permission-map name="WebDAV Lock items" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+  </permission-map>
+  <permission-map name="WebDAV Unlock items"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
+  </permission-map>
+ </state>
+ <transition transition_id="abandon_draft"
+             title="Abandon draft" new_state=""
+             trigger="USER"
+             before_script="unlock_locked_before_abandon"
+             after_script="">
+  <action url="%(content_url)s/content_abandon_draft_form"
+          category="workflow">action_abandon_draft</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>Owner</guard-role>
+  </guard>
+  <transition-behavior behavior_id="delete"/>
+ </transition>
+ <transition transition_id="checkin_draft"
+             title="Checkin draft" new_state="locked"
+             trigger="USER" before_script="" after_script="">
+  <action url="%(content_url)s/content_checkin_draft_form"
+          category="workflow">action_checkin_draft</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>Owner</guard-role>
+  </guard>
+  <transition-behavior behavior_id="checkin"/>
+  <checkin-allowed-transition transition_id="unlock"/>
+ </transition>
+ <transition transition_id="checkout_draft"
+             title="Checkout content into a draft"
+             new_state="locked" trigger="USER"
+             before_script="" after_script="">
+  <action url="%(content_url)s/content_checkout_draft_form"
+          category="workflow">action_checkout_draft</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>WorkspaceMember</guard-role>
+  </guard>
+  <transition-behavior behavior_id="checkout"/>
+  <checkout-allowed-initial-transition
+    transition_id="checkout_draft_in"/>
+ </transition>
+ <transition transition_id="checkout_draft_in"
+             title="Draft is created" new_state="draft"
+             trigger="USER" before_script="" after_script="">
+  
+  <guard>
+  </guard>
+  <transition-behavior behavior_id="initial-checkout"/>
+  <transition-behavior behavior_id="freeze"/>
+ </transition>
+ <transition transition_id="create" title="Initial creation"
+             new_state="work" trigger="USER"
+             before_script="" after_script="">
+  
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>WorkspaceMember</guard-role>
+  </guard>
+  <transition-behavior behavior_id="initial-create"/>
+ </transition>
+ <transition transition_id="invalidate"
+             title="Undo validation" new_state="work"
+             trigger="USER" before_script="" after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=invalidate"
+          category="workflow">action_invalidate</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="reactivate"
+             title="Rework a sent mail" new_state="work"
+             trigger="USER" before_script="" after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=reactivate"
+          category="workflow">action_reactivate</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="send" title="" new_state="sent"
+             trigger="USER" before_script="" after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=send"
+          category="workflow">action_send</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="unlock"
+             title="Unlock content after a draft is done"
+             new_state="work" trigger="USER"
+             before_script="" after_script="">
+  
+  <guard>
+  </guard>
+  <transition-behavior behavior_id="allow-checkin"/>
+ </transition>
+ <transition transition_id="validate" title=""
+             new_state="validated" trigger="USER"
+             before_script="" after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=validate"
+          category="workflow">action_validate</action>
+  <guard>
+  </guard>
+ </transition>
+ <variable variable_id="action" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The last transition</description>
+  <default>
+   
+   <expression>transition/getId|nothing</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="actor" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The ID of the user who performed</description>
+  <default>
+   
+   <expression>user/getId</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="comments" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Comments about the last transition</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('comment', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="dest_container" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>Destination container for the last paste/publish</description>
+  <default>
+   
+   <expression>python:state_change.kwargs.get('dest_container', '')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="language_revs" for_catalog="False"
+           for_status="True" update_always="True">
+  <description>The language revisions of the proxy</description>
+  <default>
+   
+   <expression>state_change/getLanguageRevisions</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <variable variable_id="review_history" for_catalog="False"
+           for_status="False" update_always="False">
+  <description>Provides access to workflow history</description>
+  <default>
+   
+   <expression>state_change/getHistory</expression>
+  </default>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>WorkspaceReader</guard-role>
+  </guard>
+ </variable>
+ <variable variable_id="time" for_catalog="True"
+           for_status="True" update_always="True">
+  <description>Time of the last transition</description>
+  <default>
+   
+   <expression>state_change/getDateTime</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
+ <script script_id="unlock_locked_before_abandon"
+         type="Script (Python)"
+         filename="workflows/outgoing_mail_wf/scripts/unlock_locked_before_abandon.py"/>
+</cps-workflow>
