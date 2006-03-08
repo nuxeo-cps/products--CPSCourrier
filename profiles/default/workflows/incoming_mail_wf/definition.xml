@@ -38,7 +38,7 @@
  <transition transition_id="back_to_handled" title=""
              new_state="handled" trigger="USER"
              before_script="" after_script="">
-  
+
   <guard>
   </guard>
  </transition>
@@ -53,7 +53,7 @@
  <transition transition_id="create" title=""
              new_state="received" trigger="USER"
              before_script="" after_script="">
-  
+
   <guard>
   </guard>
   <transition-behavior behavior_id="initial-create"/>
@@ -77,7 +77,7 @@
  <transition transition_id="flag_answered" title=""
              new_state="answered" trigger="USER"
              before_script="" after_script="">
-  
+
   <guard>
   </guard>
  </transition>
@@ -91,14 +91,14 @@
  <transition transition_id="forward_email" title=""
              new_state="closed" trigger="USER"
              before_script="" after_script="">
-  
+
   <guard>
   </guard>
  </transition>
  <transition transition_id="forward_move" title=""
              new_state="received" trigger="USER"
              before_script="" after_script="">
-  
+
   <guard>
   </guard>
  </transition>
