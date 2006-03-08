@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-08 16:35default\n"
+"POT-Creation-Date: 2006-03-08 19:24default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -25,7 +25,7 @@ msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filter"
@@ -182,8 +182,15 @@ msgstr ""
 "By choose to handle the incoming mail document you will be in charge of the "
 "future processing of the mail (answering, delegating, deleting, ... )."
 
-
 msgid "button_handle"
+msgstr "Handle"
+
+#, fuzzy
+msgid "action_handle"
+msgstr "Handle"
+
+#, fuzzy
+msgid "handle"
 msgstr "Handle"
 
 #
@@ -194,11 +201,19 @@ msgstr "Forward ${item_id}"
 
 msgid "help_workflow_forward"
 msgstr ""
-"You are about to forward (move) the mail to another Mailbox or to an external "
-"email address. Forwarding the mail document to an external email address "
-"will close the local copy of the document."
+"You are about to forward (move) the mail to another Mailbox or to an "
+"external email address. Forwarding the mail document to an external email "
+"address will close the local copy of the document."
 
 msgid "button_forward"
+msgstr "Forward"
+
+#, fuzzy
+msgid "action_forward"
+msgstr "Forward"
+
+#, fuzzy
+msgid "forward"
 msgstr "Forward"
 
 #
@@ -213,6 +228,14 @@ msgstr "You are about to to put the mail to trash."
 msgid "button_discard"
 msgstr "Discard"
 
+#, fuzzy
+msgid "action_discard"
+msgstr "Discard"
+
+#, fuzzy
+msgid "discard"
+msgstr "Discard"
+
 #
 # Workflows
 #
@@ -225,6 +248,14 @@ msgstr "You are about to permanently delete to mail document."
 msgid "button_delete"
 msgstr "Delete"
 
+#, fuzzy
+msgid "action_delete"
+msgstr "Delete"
+
+#, fuzzy
+msgid "delete"
+msgstr "Delete"
+
 #
 # Workflows
 #
@@ -233,10 +264,18 @@ msgstr "Answer ${item_id}"
 
 msgid "help_workflow_answer"
 msgstr ""
-"By answering the mail document, you will create a new outgoing mail "
-"linked to the original incoming mail."
+"By answering the mail document, you will create a new outgoing mail linked "
+"to the original incoming mail."
 
 msgid "button_answer"
+msgstr "Répondre"
+
+#, fuzzy
+msgid "action_answer"
+msgstr "Répondre"
+
+#, fuzzy
+msgid "answer"
 msgstr "Répondre"
 
 #
@@ -248,13 +287,19 @@ msgstr "Close ${item_id}"
 msgid "help_workflow_close"
 msgstr ""
 "Close the incoming mail to end the answering process. Please note that "
-"closed mail documents are hidden by default in mailboxes and dashboards. "
-"You have to explicitely set the \"state\" filter parameter to \"closed\" to "
-"view the list of closed mail documents."
-
+"closed mail documents are hidden by default in mailboxes and dashboards. You "
+"have to explicitely set the \"state\" filter parameter to \"closed\" to view "
+"the list of closed mail documents."
 
 msgid "button_close"
 msgstr "Close"
+
+#, fuzzy
+msgid "action_close"
+msgstr "Close"
+
+msgid "close"
+msgstr ""
 
 #
 # Workflows
@@ -264,10 +309,16 @@ msgstr "Reopen ${item_id}"
 
 msgid "help_workflow_reopen"
 msgstr ""
-"You are about to reopen the mail document. This will allow you to "
-"further reply to that incoming mail."
+"You are about to reopen the mail document. This will allow you to further "
+"reply to that incoming mail."
 
 msgid "button_reopen"
+msgstr ""
+
+msgid "action_reopen"
+msgstr ""
+
+msgid "reopen"
 msgstr ""
 
 #
@@ -284,6 +335,14 @@ msgstr ""
 msgid "button_validate"
 msgstr "Validate"
 
+#, fuzzy
+msgid "action_validate"
+msgstr "Validate"
+
+#, fuzzy
+msgid "validate"
+msgstr "Validate"
+
 #
 # Workflows
 #
@@ -296,6 +355,13 @@ msgstr "You are about to send the document to the orginal user."
 msgid "button_send"
 msgstr "Send"
 
+#, fuzzy
+msgid "action_send"
+msgstr "Send"
+
+msgid "send"
+msgstr ""
+
 #
 # Workflows
 #
@@ -305,10 +371,17 @@ msgstr "Reactivate ${item_id}"
 msgid "help_workflow_reactivate"
 msgstr ""
 "You are about to reactivate a sent outgoing mail document. This will allow "
-"you to rework the content of the reply and to resend it to the original "
-"user."
+"you to rework the content of the reply and to resend it to the original user."
 
 msgid "button_reactivate"
+msgstr "Reactivate"
+
+#, fuzzy
+msgid "action_reactivate"
+msgstr "Reactivate"
+
+#, fuzzy
+msgid "reactivate"
 msgstr "Reactivate"
 
 #
@@ -319,8 +392,15 @@ msgstr "Reset ${item_id}"
 
 msgid "help_workflow_reset"
 msgstr ""
-"Reseting the mail document will put it back to it's initial state "
-"and clear the roadmap."
+"Reseting the mail document will put it back to it's initial state and clear "
+"the roadmap."
 
 msgid "button_reset"
 msgstr "Reset"
+
+#, fuzzy
+msgid "action_reset"
+msgstr "Reset"
+
+msgid "reset"
+msgstr ""

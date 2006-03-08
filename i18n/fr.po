@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-08 16:35default\n"
+"POT-Creation-Date: 2006-03-08 19:24default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -25,7 +25,7 @@ msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filtrer"
@@ -178,21 +178,39 @@ msgid "heading_workflow_handle_of ${item_id}"
 msgstr "Prendre en charge le courrier «${item_id}»"
 
 msgid "help_workflow_handle"
-msgstr "Vous vous apprêtez à prendre en charge le courrier entrant&nbsp;; vous "
+msgstr ""
+"Vous vous apprêtez à prendre en charge le courrier entrant&nbsp;; vous "
 "deviendrez de fait l'agent en charge de son traitement&nbsp;: répondre, "
 "déléguer, mettre au rebut"
 
 msgid "button_handle"
 msgstr "Prendre en charge"
 
+#, fuzzy
+msgid "action_handle"
+msgstr "Prendre en charge"
+
+#, fuzzy
+msgid "handle"
+msgstr "Prendre en charge"
+
 msgid "heading_workflow_forward_of ${item_id}"
 msgstr "Transférer le courrier entrant «${item_id}»"
 
 msgid "help_workflow_forward"
-msgstr "Vous vous apprêtez à transférer ce courrier entrant."
-" Choisissez une destination&nbsp;:"
+msgstr ""
+"Vous vous apprêtez à transférer ce courrier entrant. Choisissez une "
+"destination&nbsp;:"
 
 msgid "button_forward"
+msgstr "Transférer"
+
+#, fuzzy
+msgid "action_forward"
+msgstr "Transférer"
+
+#, fuzzy
+msgid "forward"
 msgstr "Transférer"
 
 msgid "heading_workflow_discard_of ${item_id}"
@@ -204,6 +222,14 @@ msgstr "Vous vous apprêtez à mettre ce courrier entrant au rebut"
 msgid "button_discard"
 msgstr "Mettre au rebut"
 
+#, fuzzy
+msgid "action_discard"
+msgstr "Mettre au rebut"
+
+#, fuzzy
+msgid "discard"
+msgstr "Mettre au rebut"
+
 msgid "heading_workflow_delete_of ${item_id}"
 msgstr "Détruire le courrier «${item_id}»"
 
@@ -211,6 +237,14 @@ msgid "help_workflow_delete"
 msgstr "Vous vous apprêtez à détruire définitivement ce courrier"
 
 msgid "button_delete"
+msgstr "Détruire"
+
+#, fuzzy
+msgid "action_delete"
+msgstr "Détruire"
+
+#, fuzzy
+msgid "delete"
 msgstr "Détruire"
 
 msgid "heading_workflow_answer_of ${item_id}"
@@ -222,6 +256,14 @@ msgstr "Vous vous apprêtez à créer une réponse à ce courrier"
 msgid "button_answer"
 msgstr "Répondre"
 
+#, fuzzy
+msgid "action_answer"
+msgstr "Répondre"
+
+#, fuzzy
+msgid "answer"
+msgstr "Répondre"
+
 msgid "heading_workflow_close_of ${item_id}"
 msgstr "Clôturer le courrier «${item_id}»"
 
@@ -231,6 +273,13 @@ msgstr "Vous vous apprêtez à clôturer ce courrier entrant"
 msgid "button_close"
 msgstr "Clôturer"
 
+#, fuzzy
+msgid "action_close"
+msgstr "Clôturer"
+
+msgid "close"
+msgstr ""
+
 msgid "heading_workflow_reopen_of ${item_id}"
 msgstr "Dé-clôturer le courrier «${item_id}»"
 
@@ -238,6 +287,14 @@ msgid "help_workflow_reopen"
 msgstr "Vous vous apprêtez à dé-clôturer ce courrier entrant"
 
 msgid "button_reopen"
+msgstr "Dé-clôturer"
+
+#, fuzzy
+msgid "action_reopen"
+msgstr "Dé-clôturer"
+
+#, fuzzy
+msgid "reopen"
 msgstr "Dé-clôturer"
 
 msgid "heading_workflow_validate_of ${item_id}"
@@ -249,6 +306,14 @@ msgstr "Vous vous apprêtez à valider ce courrier."
 msgid "button_validate"
 msgstr "Valider"
 
+#, fuzzy
+msgid "action_validate"
+msgstr "Valider"
+
+#, fuzzy
+msgid "validate"
+msgstr "Valider"
+
 msgid "heading_workflow_send_of ${item_id}"
 msgstr "Envoyer le courrier sortant «${item_id}»"
 
@@ -257,6 +322,13 @@ msgstr "Vous vous apprêtez à envoyer ce courrier à ses destinataires."
 
 msgid "button_send"
 msgstr "Envoyer"
+
+#, fuzzy
+msgid "action_send"
+msgstr "Envoyer"
+
+msgid "send"
+msgstr ""
 
 msgid "heading_workflow_reactivate_of ${item_id}"
 msgstr "Réactiver le courrier sortant «${item_id}»"
@@ -267,16 +339,28 @@ msgstr "Vous vous apprêtez à réactiver ce courrier."
 msgid "button_reactivate"
 msgstr "Réactiver"
 
+#, fuzzy
+msgid "action_reactivate"
+msgstr "Réactiver"
+
+#, fuzzy
+msgid "reactivate"
+msgstr "Réactiver"
+
 msgid "heading_workflow_reset_of ${item_id}"
 msgstr "Réinitialiser le courrier «${item_id}»"
 
 msgid "help_workflow_reset"
-msgstr "Vous vous apprêtez à réinitialiser le courrier."
-" Son état reviendra à «Reçu», la feuille de route sera abandonnée mais les"
-" propriétés resteront inchangées."
+msgstr ""
+"Vous vous apprêtez à réinitialiser le courrier. Son état reviendra à «Reçu», "
+"la feuille de route sera abandonnée mais les propriétés resteront inchangées."
 
 msgid "button_reset"
 msgstr "Réinitialiser"
 
+#, fuzzy
+msgid "action_reset"
+msgstr "Réinitialiser"
 
-
+msgid "reset"
+msgstr ""

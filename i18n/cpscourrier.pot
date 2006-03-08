@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-08 16:35default\n"
+"POT-Creation-Date: 2006-03-08 19:24default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -25,7 +25,7 @@ msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr ""
@@ -186,6 +186,12 @@ msgstr ""
 msgid "button_handle"
 msgstr ""
 
+msgid "action_handle"
+msgstr ""
+
+msgid "handle"
+msgstr ""
+
 msgid "heading_workflow_forward_of ${item_id}"
 msgstr ""
 
@@ -193,6 +199,12 @@ msgid "help_workflow_forward"
 msgstr ""
 
 msgid "button_forward"
+msgstr ""
+
+msgid "action_forward"
+msgstr ""
+
+msgid "forward"
 msgstr ""
 
 msgid "heading_workflow_discard_of ${item_id}"
@@ -204,6 +216,12 @@ msgstr ""
 msgid "button_discard"
 msgstr ""
 
+msgid "action_discard"
+msgstr ""
+
+msgid "discard"
+msgstr ""
+
 msgid "heading_workflow_delete_of ${item_id}"
 msgstr ""
 
@@ -211,6 +229,12 @@ msgid "help_workflow_delete"
 msgstr ""
 
 msgid "button_delete"
+msgstr ""
+
+msgid "action_delete"
+msgstr ""
+
+msgid "delete"
 msgstr ""
 
 msgid "heading_workflow_answer_of ${item_id}"
@@ -222,6 +246,12 @@ msgstr ""
 msgid "button_answer"
 msgstr ""
 
+msgid "action_answer"
+msgstr ""
+
+msgid "answer"
+msgstr ""
+
 msgid "heading_workflow_close_of ${item_id}"
 msgstr ""
 
@@ -229,6 +259,12 @@ msgid "help_workflow_close"
 msgstr ""
 
 msgid "button_close"
+msgstr ""
+
+msgid "action_close"
+msgstr ""
+
+msgid "close"
 msgstr ""
 
 msgid "heading_workflow_reopen_of ${item_id}"
@@ -240,6 +276,12 @@ msgstr ""
 msgid "button_reopen"
 msgstr ""
 
+msgid "action_reopen"
+msgstr ""
+
+msgid "reopen"
+msgstr ""
+
 msgid "heading_workflow_validate_of ${item_id}"
 msgstr ""
 
@@ -247,6 +289,12 @@ msgid "help_workflow_validate"
 msgstr ""
 
 msgid "button_validate"
+msgstr ""
+
+msgid "action_validate"
+msgstr ""
+
+msgid "validate"
 msgstr ""
 
 msgid "heading_workflow_send_of ${item_id}"
@@ -258,6 +306,12 @@ msgstr ""
 msgid "button_send"
 msgstr ""
 
+msgid "action_send"
+msgstr ""
+
+msgid "send"
+msgstr ""
+
 msgid "heading_workflow_reactivate_of ${item_id}"
 msgstr ""
 
@@ -267,6 +321,12 @@ msgstr ""
 msgid "button_reactivate"
 msgstr ""
 
+msgid "action_reactivate"
+msgstr ""
+
+msgid "reactivate"
+msgstr ""
+
 msgid "heading_workflow_reset_of ${item_id}"
 msgstr ""
 
@@ -274,4 +334,10 @@ msgid "help_workflow_reset"
 msgstr ""
 
 msgid "button_reset"
+msgstr ""
+
+msgid "action_reset"
+msgstr ""
+
+msgid "reset"
 msgstr ""
