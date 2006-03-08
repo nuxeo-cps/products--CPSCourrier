@@ -171,3 +171,107 @@ msgstr ""
 
 msgid "action_mail_accept"
 msgstr ""
+
+#
+# Workflows
+#
+
+
+msgid "heading_workflow_handle"
+msgstr ""
+
+msgid "help_workflow_handle"
+msgstr ""
+
+msgid "button_handle"
+msgstr ""
+
+msgid "heading_workflow_forward"
+msgstr ""
+
+msgid "help_workflow_forward"
+msgstr ""
+
+msgid "button_forward"
+msgstr ""
+
+msgid "heading_workflow_discard"
+msgstr ""
+
+msgid "help_workflow_discard"
+msgstr ""
+
+msgid "button_discard"
+msgstr ""
+
+msgid "heading_workflow_delete"
+msgstr ""
+
+msgid "help_workflow_delete"
+msgstr ""
+
+msgid "button_delete"
+msgstr ""
+
+msgid "heading_workflow_answer"
+msgstr ""
+
+msgid "help_workflow_answer"
+msgstr ""
+
+msgid "button_answer"
+msgstr ""
+
+msgid "heading_workflow_close"
+msgstr ""
+
+msgid "help_workflow_close"
+msgstr ""
+
+msgid "button_close"
+msgstr ""
+
+msgid "heading_workflow_reopen"
+msgstr ""
+
+msgid "help_workflow_reopen"
+msgstr ""
+
+msgid "button_reopen"
+msgstr ""
+
+msgid "heading_workflow_validate"
+msgstr ""
+
+msgid "help_workflow_validate"
+msgstr ""
+
+msgid "button_validate"
+msgstr ""
+
+msgid "heading_workflow_send"
+msgstr ""
+
+msgid "help_workflow_send"
+msgstr ""
+
+msgid "button_send"
+msgstr ""
+
+msgid "heading_workflow_reactivate"
+msgstr ""
+
+msgid "help_workflow_reactivate"
+msgstr ""
+
+msgid "button_reactivate"
+msgstr ""
+
+msgid "heading_workflow_reset"
+msgstr ""
+
+msgid "help_workflow_reset"
+msgstr ""
+
+msgid "button_reset"
+msgstr ""

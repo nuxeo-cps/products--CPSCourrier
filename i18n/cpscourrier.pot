@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-07 17:52default\n"
+"POT-Creation-Date: 2006-03-08 16:09default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -16,7 +16,16 @@ msgstr ""
 "Preferred-encodings: latin9 utf-8\n"
 "Domain: default\n"
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <title fill-slot="title">
+#.           <span replace="string:heading_workflow_${transition}_of" />
+#.           ${item_id (tal replace="here/title_or_id")}
+#.         </title>
+#: from ../skins/cps_courrier/workflow_transition_form.pt
+msgid ""
+"<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
+msgstr ""
+
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr ""
@@ -169,4 +178,106 @@ msgstr ""
 # Actions
 #
 msgid "action_mail_accept"
+msgstr ""
+
+#
+# Workflows
+#
+msgid "heading_workflow_handle"
+msgstr ""
+
+msgid "help_workflow_handle"
+msgstr ""
+
+msgid "button_handle"
+msgstr ""
+
+msgid "heading_workflow_forward"
+msgstr ""
+
+msgid "help_workflow_forward"
+msgstr ""
+
+msgid "button_forward"
+msgstr ""
+
+msgid "heading_workflow_discard"
+msgstr ""
+
+msgid "help_workflow_discard"
+msgstr ""
+
+msgid "button_discard"
+msgstr ""
+
+msgid "heading_workflow_delete"
+msgstr ""
+
+msgid "help_workflow_delete"
+msgstr ""
+
+msgid "button_delete"
+msgstr ""
+
+msgid "heading_workflow_answer"
+msgstr ""
+
+msgid "help_workflow_answer"
+msgstr ""
+
+msgid "button_answer"
+msgstr ""
+
+msgid "heading_workflow_close"
+msgstr ""
+
+msgid "help_workflow_close"
+msgstr ""
+
+msgid "button_close"
+msgstr ""
+
+msgid "heading_workflow_reopen"
+msgstr ""
+
+msgid "help_workflow_reopen"
+msgstr ""
+
+msgid "button_reopen"
+msgstr ""
+
+msgid "heading_workflow_validate"
+msgstr ""
+
+msgid "help_workflow_validate"
+msgstr ""
+
+msgid "button_validate"
+msgstr ""
+
+msgid "heading_workflow_send"
+msgstr ""
+
+msgid "help_workflow_send"
+msgstr ""
+
+msgid "button_send"
+msgstr ""
+
+msgid "heading_workflow_reactivate"
+msgstr ""
+
+msgid "help_workflow_reactivate"
+msgstr ""
+
+msgid "button_reactivate"
+msgstr ""
+
+msgid "heading_workflow_reset"
+msgstr ""
+
+msgid "help_workflow_reset"
+msgstr ""
+
+msgid "button_reset"
 msgstr ""
