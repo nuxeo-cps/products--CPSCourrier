@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<cps-workflow workflow_id="incoming_mail_wf"
+              title="CPS Workflow Definition"
+              state_variable="review_state"
+              meta_type="CPS Workflow">
+ <state state_id="answered" title="">
+  <exit-transition transition_id="answer"/>
+  <exit-transition transition_id="close"/>
+ </state>
+ <state state_id="answering" title="">
+  <exit-transition transition_id="back_to_handled"/>
+  <exit-transition transition_id="flag_answered"/>
+ </state>
+ <state state_id="closed" title="">
+  <exit-transition transition_id="reopen"/>
+ </state>
+ <state state_id="handled" title="">
+  <exit-transition transition_id="answer"/>
+  <exit-transition transition_id="discard"/>
+  <exit-transition transition_id="forward"/>
+  <exit-transition transition_id="forward_email"/>
+  <exit-transition transition_id="forward_move"/>
+ </state>
+ <state state_id="received" title="">
+  <exit-transition transition_id="handle"/>
+ </state>
+ <state state_id="trash" title="">
+  <exit-transition transition_id="delete"/>
+ </state>
+ <transition transition_id="answer" title=""
+             new_state="answering" trigger="USER"
+             before_script="" after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=answer"
+          category="workflow">action_answer</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="back_to_handled" title=""
+             new_state="handled" trigger="AUTOMATIC"
+             before_script="" after_script="">
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="close" title=""
+             new_state="closed" trigger="USER"
+             before_script="" after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=close"
+          category="workflow">action_close</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="create" title=""
+             new_state="received" trigger="USER"
+             before_script="" after_script="">
+  
+  <guard>
+  </guard>
+  <transition-behavior behavior_id="initial-create"/>
+ </transition>
+ <transition transition_id="delete" title="" new_state=""
+             trigger="USER" before_script="" after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=delete"
+          category="workflow">action_delete</action>
+  <guard>
+  </guard>
+  <transition-behavior behavior_id="delete"/>
+ </transition>
+ <transition transition_id="discard" title=""
+             new_state="trash" trigger="USER"
+             before_script="" after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=discard"
+          category="workflow">action_discard</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="flag_answered" title=""
+             new_state="answered" trigger="AUTOMATIC"
+             before_script="" after_script="">
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="forward" title="" new_state=""
+             trigger="USER" before_script="" after_script="">
+  <action url="%(content_url)s/content_forward"
+          category="workflow">action_forward</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="forward_email" title=""
+             new_state="closed" trigger="USER"
+             before_script="" after_script="">
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="forward_move" title=""
+             new_state="received" trigger="USER"
+             before_script="" after_script="">
+  
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="handle" title=""
+             new_state="handled" trigger="USER"
+             before_script="" after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=handle"
+          category="workflow">action_handle</action>
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="reopen" title=""
+             new_state="answered" trigger="USER"
+             before_script="" after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=reopen"
+          category="workflow">action_reopen</action>
+  <guard>
+  </guard>
+ </transition>
+</cps-workflow>
