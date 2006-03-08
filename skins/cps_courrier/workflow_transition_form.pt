@@ -1,4 +1,5 @@
 <metal:html use-macro="here/content_lib_master/macros/master">
+  <metal:header fill-slot="header"/>
   <metal:main fill-slot="main"
     tal:define='transition request/form/transition|string:'>
     <metal:std_main use-macro="here/content_lib_std_main/macros/std_main">
