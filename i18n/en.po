@@ -174,90 +174,98 @@ msgstr "All"
 #
 # Workflows
 #
-#, fuzzy
 msgid "heading_workflow_handle_of ${item_id}"
-msgstr "Handle"
+msgstr "Handle ${item_id}"
 
 msgid "help_workflow_handle"
 msgstr ""
+"By choose to handle the incoming mail document you will be in charge of the "
+"future processing of the mail (answering, delegating, deleting, ... )."
+
 
 msgid "button_handle"
-msgstr ""
+msgstr "Handle"
 
 #
 # Workflows
 #
-#, fuzzy
 msgid "heading_workflow_forward_of ${item_id}"
-msgstr "Handle"
+msgstr "Forward ${item_id}"
 
 msgid "help_workflow_forward"
 msgstr ""
+"You are about to forward (move) the mail to another Mailbox or to an external "
+"email address. Forwarding the mail document to an external email address "
+"will close the local copy of the document."
 
 msgid "button_forward"
-msgstr ""
+msgstr "Forward"
 
 #
 # Workflows
 #
-#, fuzzy
 msgid "heading_workflow_discard_of ${item_id}"
-msgstr "Handle"
+msgstr "Discard ${item_id}"
 
 msgid "help_workflow_discard"
-msgstr ""
+msgstr "You are about to to put the mail to trash."
 
 msgid "button_discard"
-msgstr ""
+msgstr "Discard"
 
 #
 # Workflows
 #
-#, fuzzy
 msgid "heading_workflow_delete_of ${item_id}"
-msgstr "Handle"
+msgstr "Delete ${item_id}"
 
 msgid "help_workflow_delete"
-msgstr ""
+msgstr "You are about to permanently delete to mail document."
 
 msgid "button_delete"
-msgstr ""
+msgstr "Delete"
 
 #
 # Workflows
 #
-#, fuzzy
 msgid "heading_workflow_answer_of ${item_id}"
-msgstr "Handle"
+msgstr "Answer ${item_id}"
 
 msgid "help_workflow_answer"
 msgstr ""
+"By answering the mail document, you will create a new outgoing mail "
+"linked to the original incoming mail."
 
 msgid "button_answer"
-msgstr ""
+msgstr "Répondre"
 
 #
 # Workflows
 #
-#, fuzzy
 msgid "heading_workflow_close_of ${item_id}"
-msgstr "Handle"
+msgstr "Close ${item_id}"
 
 msgid "help_workflow_close"
 msgstr ""
+"Close the incoming mail to end the answering process. Please note that "
+"closed mail documents are hidden by default in mailboxes and dashboards. "
+"You have to explicitely set the \"state\" filter parameter to \"closed\" to "
+"view the list of closed mail documents."
+
 
 msgid "button_close"
-msgstr ""
+msgstr "Close"
 
 #
 # Workflows
 #
-#, fuzzy
 msgid "heading_workflow_reopen_of ${item_id}"
-msgstr "Handle"
+msgstr "Reopen ${item_id}"
 
 msgid "help_workflow_reopen"
 msgstr ""
+"You are about to reopen the mail document. This will allow you to "
+"further reply to that incoming mail."
 
 msgid "button_reopen"
 msgstr ""
@@ -265,57 +273,54 @@ msgstr ""
 #
 # Workflows
 #
-#, fuzzy
 msgid "heading_workflow_validate_of ${item_id}"
-msgstr "Handle"
+msgstr "Validate ${item_id}"
 
 msgid "help_workflow_validate"
 msgstr ""
+"You are about to validate the current outgoing mail document. Once validated "
+"It will be ready to be sent back to the original user. "
 
 msgid "button_validate"
-msgstr ""
+msgstr "Validate"
 
 #
 # Workflows
 #
-#, fuzzy
 msgid "heading_workflow_send_of ${item_id}"
-msgstr "Handle"
+msgstr "Send ${item_id}"
 
 msgid "help_workflow_send"
-msgstr ""
+msgstr "You are about to send the document to the orginal user."
 
 msgid "button_send"
-msgstr ""
+msgstr "Send"
 
 #
 # Workflows
 #
-#, fuzzy
 msgid "heading_workflow_reactivate_of ${item_id}"
-msgstr "Handle"
+msgstr "Reactivate ${item_id}"
 
 msgid "help_workflow_reactivate"
 msgstr ""
+"You are about to reactivate a sent outgoing mail document. This will allow "
+"you to rework the content of the reply and to resend it to the original "
+"user."
 
 msgid "button_reactivate"
-msgstr ""
+msgstr "Reactivate"
 
 #
 # Workflows
 #
-#, fuzzy
 msgid "heading_workflow_reset_of ${item_id}"
-msgstr "Handle"
+msgstr "Reset ${item_id}"
 
 msgid "help_workflow_reset"
 msgstr ""
+"Reseting the mail document will put it back to it's initial state "
+"and clear the roadmap."
 
 msgid "button_reset"
-msgstr ""
-
-#
-# Actions
-#
-#~ msgid "action_mail_accept"
-#~ msgstr "Handle"
+msgstr "Reset"
