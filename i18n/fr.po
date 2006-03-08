@@ -175,106 +175,108 @@ msgstr "Toutes"
 # Workflows
 #
 msgid "heading_workflow_handle_of ${item_id}"
-msgstr ""
+msgstr "Prendre en charge le courrier «${item_id}»"
 
 msgid "help_workflow_handle"
-msgstr ""
+msgstr "Vous vous apprêtez à prendre en charge le courrier entrant&nbsp;; vous "
+"deviendrez de fait l'agent en charge de son traitement&nbsp;: répondre, "
+"déléguer, mettre au rebut"
 
 msgid "button_handle"
-msgstr ""
+msgstr "Prendre en charge"
 
 msgid "heading_workflow_forward_of ${item_id}"
-msgstr ""
+msgstr "Transférer le courrier entrant «${item_id}»"
 
 msgid "help_workflow_forward"
-msgstr ""
+msgstr "Vous vous apprêtez à transférer ce courrier entrant."
+" Choisissez une destination&nbsp;:"
 
 msgid "button_forward"
-msgstr ""
+msgstr "Transférer"
 
 msgid "heading_workflow_discard_of ${item_id}"
-msgstr ""
+msgstr "Mettre au rebut le courrier «${item_id}»"
 
 msgid "help_workflow_discard"
-msgstr ""
+msgstr "Vous vous apprêtez à mettre ce courrier entrant au rebut"
 
 msgid "button_discard"
-msgstr ""
+msgstr "Mettre au rebut"
 
 msgid "heading_workflow_delete_of ${item_id}"
-msgstr ""
+msgstr "Détruire le courrier «${item_id}»"
 
 msgid "help_workflow_delete"
-msgstr ""
+msgstr "Vous vous apprêtez à détruire définitivement ce courrier"
 
 msgid "button_delete"
-msgstr ""
+msgstr "Détruire"
 
 msgid "heading_workflow_answer_of ${item_id}"
-msgstr ""
+msgstr "Répondre au courrier entrant «${item_id}»"
 
 msgid "help_workflow_answer"
-msgstr ""
+msgstr "Vous vous apprêtez à créer une réponse à ce courrier"
 
 msgid "button_answer"
-msgstr ""
+msgstr "Répondre"
 
 msgid "heading_workflow_close_of ${item_id}"
-msgstr ""
+msgstr "Clôturer le courrier «${item_id}»"
 
 msgid "help_workflow_close"
-msgstr ""
+msgstr "Vous vous apprêtez à clôturer ce courrier entrant"
 
 msgid "button_close"
-msgstr ""
+msgstr "Clôturer"
 
 msgid "heading_workflow_reopen_of ${item_id}"
-msgstr ""
+msgstr "Dé-clôturer le courrier «${item_id}»"
 
 msgid "help_workflow_reopen"
-msgstr ""
+msgstr "Vous vous apprêtez à dé-clôturer ce courrier entrant"
 
 msgid "button_reopen"
-msgstr ""
+msgstr "Dé-clôturer"
 
 msgid "heading_workflow_validate_of ${item_id}"
-msgstr ""
+msgstr "Valider le courrier sortant «${item_id}»"
 
 msgid "help_workflow_validate"
-msgstr ""
+msgstr "Vous vous apprêtez à valider ce courrier."
 
 msgid "button_validate"
-msgstr ""
+msgstr "Valider"
 
 msgid "heading_workflow_send_of ${item_id}"
-msgstr ""
+msgstr "Envoyer le courrier sortant «${item_id}»"
 
 msgid "help_workflow_send"
-msgstr ""
+msgstr "Vous vous apprêtez à envoyer ce courrier à ses destinataires."
 
 msgid "button_send"
-msgstr ""
+msgstr "Envoyer"
 
 msgid "heading_workflow_reactivate_of ${item_id}"
-msgstr ""
+msgstr "Réactiver le courrier sortant «${item_id}»"
 
 msgid "help_workflow_reactivate"
-msgstr ""
+msgstr "Vous vous apprêtez à réactiver ce courrier."
 
 msgid "button_reactivate"
-msgstr ""
+msgstr "Réactiver"
 
 msgid "heading_workflow_reset_of ${item_id}"
-msgstr ""
+msgstr "Réinitialiser le courrier «${item_id}»"
 
 msgid "help_workflow_reset"
-msgstr ""
+msgstr "Vous vous apprêtez à réinitialiser le courrier."
+" Son état reviendra à «Reçu», la feuille de route sera abandonnée mais les"
+" propriétés resteront inchangées."
 
 msgid "button_reset"
-msgstr ""
+msgstr "Réinitialiser"
 
-#
-# Actions
-#
-#~ msgid "action_mail_accept"
-#~ msgstr "Prendre en charge"
+
+
