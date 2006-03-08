@@ -60,12 +60,8 @@
   <exit-transition transition_id="send"/>
  </state>
  <state state_id="work" title="Work">
-  <exit-transition transition_id="copy_submit"/>
   <exit-transition transition_id="checkout_draft"/>
-  <exit-transition transition_id="cut_copy_paste"/>
-  <exit-transition transition_id="modify"/>
-  <exit-transition transition_id="translate"/>
-  <exit-transition transition_id="delete_translation"/>
+  <exit-transition transition_id="validate"/>
   <permission-map name="Modify portal content"
                   acquired="False">
    <permission-role>Manager</permission-role>
