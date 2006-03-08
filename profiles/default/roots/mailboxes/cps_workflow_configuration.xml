@@ -20,12 +20,8 @@
       Messages document cannot be directly created at the Mailbox groups level
       since the do not belong to their allowed_content_types property
     -->
-    <!--
-      XXX: use specific stack based wf chains here instead of
-           workspace_content_wf
-    -->
-    <type name="Incoming Mail" wf="workspace_content_wf"/>
-    <type name="Outgoing Mail" wf="workspace_content_wf"/>
+    <type name="Incoming Mail" wf="incoming_mail_wf"/>
+    <type name="Outgoing Mail" wf="outgoing_mail_wf"/>
 
   </below-workflows>
 </object>
