@@ -1,0 +1,13 @@
+<metal:block use-macro="here/layout_lib_div_view/macros/div_view" />
+<hr />
+<tal:block define="
+    proxy nocall:options/proxy;
+    stack python:proxy.portal_workflow.getInfoFor(proxy, 'Reviewers', None);
+   ">
+  <tal:block condition="stack">
+    <h2 i18n:translate="label_reviewers">
+      Reviewers
+    </h2>
+    <tal:block replace="structure python:stack.render(context=proxy, mode='view')" />
+  </tal:block>
+</tal:block>

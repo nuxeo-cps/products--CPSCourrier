@@ -1,0 +1,210 @@
+<tal:block define="
+  stack_context nocall:options/context;
+  stack options/stack;
+  mode options/mode;
+  stack_content python:stack.getStackContent(type='object', context=here);
+  current_level stack/getCurrentLevel;
+  levels stack/getAllLevels;
+">
+
+<tal:block condition="python:mode=='view'">
+
+  <div class="group">
+
+  <tal:block condition="not:stack_content">
+    <strong i18n:translate="label_delegatees_stack_empty">
+      There are no delegatees within this workflow stack yet
+    </strong>
+  </tal:block>
+
+  <tal:block condition="stack_content">
+
+    <p i18n:translate="label_delegatees_below">
+      Below, stands the members / groups which have been already added to this
+      workflow stack.
+    </p>
+    <tal:block i18n:translate="label_delegatees_current_level_delegatees_highlighted">
+      Current level delegatees are highlighted
+    </tal:block>
+
+    <br />
+
+    <table class="hierarchicalStack"
+      tal:define="dummy_sort levels/reverse">
+    <tal:block repeat="level levels">
+      <tr tal:attributes="class python:test(repeat['level'].even(), 'even', 'odd')"
+          tal:define="level_content python:stack_content[level]">
+        <td>
+          <table class="hierarchicalStack">
+            <tr tal:repeat="elt level_content">
+              <td>
+                <strong tal:content="python:elt.getIdWithoutPrefix()"
+                        tal:condition="python:level == current_level">
+                  Delegatee
+                </strong>
+                <span tal:content="python:elt.getIdWithoutPrefix()"
+                      tal:condition="python:level != current_level">
+                  Delegatee
+                </span>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </tal:block>
+    </table>
+
+  </tal:block>
+  </div>
+
+</tal:block>
+
+<tal:block condition="python:mode=='edit'">
+
+  <div class="group">
+
+  <tal:block condition="not:stack_content">
+    <strong i18n:translate="label_delegatees_stack_empty">
+      There are no delegatees within this workflow stack yet
+    </strong>
+  </tal:block>
+
+  <tal:block condition="stack_content">
+
+    <p i18n:translate="label_delegatees_below">
+      Below, stands the members / groups which have been already added to this
+      workflow stack.
+    </p>
+    <tal:block i18n:translate="label_delegatees_current_level_delegatees_highlighted">
+      Current level delegatees are highlighted
+    </tal:block>
+
+    <br />
+
+    <table class="hierarchicalStack"
+      tal:define="dummy_sort levels/reverse">
+    <tal:block repeat="level levels">
+      <tr tal:attributes="class python:test(repeat['level'].even(), 'even', 'odd')"
+          tal:define="level_content python:stack_content[level];
+                      level_str python:str(level);
+                     ">
+        <td>
+          <table class="hierarchicalStack">
+            <tr tal:repeat="elt level_content">
+              <tal:block define="id python:elt.getId();
+                                 id_wo_prefix python:elt.getIdWithoutPrefix();
+                                ">
+                <td class="stackCheckBox">
+                  <input type="checkbox" name="pop_ids:list"
+                    tal:attributes="value string:${level_str},${id};
+                                    id string:delegatee_${level_str},${id};
+                                   " />
+                </td>
+                <td>
+                  <label tal:attributes="for string:delegatee_${level_str},${id}">
+                    <strong tal:content="id_wo_prefix"
+                            tal:condition="python:level == current_level">
+                      Delegatee
+                    </strong>
+                    <span tal:content="id_wo_prefix"
+                          tal:condition="python:level != current_level">
+                      Delegatee
+                    </span>
+                  </label>
+                </td>
+              </tal:block>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </tal:block>
+    </table>
+
+  </tal:block>
+  </div>
+
+</tal:block>
+
+
+<tal:block condition="python:mode=='insert'">
+  <div class="group">
+
+  <input type="hidden" name="get_level:int" value="1" />
+  <tal:block define="all_non_empty_levels levels;
+                     all_levels python:not all_non_empty_levels and [] or all_non_empty_levels and range(all_non_empty_levels[0]-1, all_non_empty_levels[-1]+2);
+                     dummy python:all_levels.reverse();
+                    ">
+    <table class="hierarchicalStack">
+      <tal:comment condition="nothing"
+        content="string: no delegation, display 0 level checked" />
+      <tr tal:condition="not:all_levels">
+        <tal:block define="level python:0;
+                           checked python:1;">
+          <metal:block define-macro="hierarchical_stack_choose_empty_level">
+            <tal:block define="level_str python:str(level);">
+              <td tal:condition="checked|nothing">
+                <tal:block i18n:translate="label_delegatees_user_in_charge">
+                  User in charge
+                </tal:block>
+              </td>
+              <td>
+                <input type="radio" name="level" value="---"
+                       tal:attributes="value level;
+                                       id level_str;
+                                       checked checked|nothing" />
+              </td>
+              <td>
+                <label tal:attributes="for level_str">
+                  ----------------------
+                </label>
+              </td>
+            </tal:block>
+          </metal:block>
+        </tal:block>
+      </tr>
+      <tal:block repeat="level all_levels">
+      <tr tal:attributes="class python:test(repeat['level'].even(), 'even', 'odd')">
+        <tal:block condition="python:level in all_non_empty_levels">
+          <tal:block define="level_content python:stack_content[level];
+                             level_str python:str(level);">
+            <td class="stackCheckBox">
+              <input type="radio" name="level" value="---"
+                     tal:attributes="value level;
+                                     id level_str;" />
+            </td>
+            <td>
+              <table class="hierarchicalStack">
+                <tal:block repeat="elt level_content">
+                  <tr tal:define="id python:elt.getId();
+                                  id_wo_prefix python:elt.getIdWithoutPrefix();
+                                 ">
+                    <td>
+                      <label tal:attributes="for level_str">
+                        <strong tal:content="id_wo_prefix"
+                                tal:condition="python:level == current_level">
+                          Delegatee
+                        </strong>
+                        <span tal:content="id_wo_prefix"
+                              tal:condition="python:level != current_level">
+                          Delegatee
+                        </span>
+                      </label>
+                    </td>
+                  </tr>
+                </tal:block>
+              </table>
+            </td>
+          </tal:block>
+        </tal:block>
+        <tal:block condition="python:level not in all_non_empty_levels">
+          <metal:block use-macro="here/stack_hierarchical_method/macros/hierarchical_stack_choose_empty_level" />
+        </tal:block>
+      </tr>
+      </tal:block>
+    </table>
+  </tal:block>
+  </div>
+
+</tal:block>
+
+</tal:block>

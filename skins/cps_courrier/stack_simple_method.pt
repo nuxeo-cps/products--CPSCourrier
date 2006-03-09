@@ -1,0 +1,69 @@
+<tal:block define="
+  stack_context nocall:options/context;
+  stack options/stack;
+  mode options/mode;
+  stack_content python:stack.getStackContent(type='object', context=here);
+  ">
+
+<tal:block condition="python:mode=='view'">
+
+  <div class="group">
+
+  <tal:block condition="not:stack_content">
+    <strong i18n:translate="label_delegatees_stack_empty">
+      There are no delegatees within this workflow stack yet
+    </strong>
+  </tal:block>
+
+  <tal:block condition="stack_content">
+    <p i18n:translate="label_delegatees_below">
+      Below, stands the members / groups which have been already added to this
+      workflow stack.
+    </p>
+    <ul tal:repeat="elt stack_content">
+      <li tal:content="python:elt.getIdWithoutPrefix()">
+        Delegatee
+      </li>
+    </ul>
+  </tal:block>
+
+  </div>
+
+</tal:block>
+
+<tal:block condition="python:mode=='edit'">
+
+  <div class="group">
+
+  <tal:block condition="not:stack_content">
+    <strong i18n:translate="label_delegatees_stack_empty">
+      There are no delegatees within this workflow stack yet
+    </strong>
+  </tal:block>
+
+  <tal:block condition="stack_content">
+    <p i18n:translate="label_delegatees_below">
+      Below, stands the members / groups which have been already added to this
+      workflow stack.
+    </p>
+    <tal:block repeat="elt stack_content">
+      <tal:block define="id python:elt.getId();
+                         id_wo_prefix python:elt.getIdWithoutPrefix();
+                        ">
+        <input type="checkbox" value="" name="pop_ids:list"
+               tal:attributes="value id;
+                               id string:delegatee_${id}" />
+        <label tal:content="id_wo_prefix"
+               tal:attributes="for string:delegatee_${id}">
+          Delegatee
+        </label>
+        <br />
+      </tal:block>
+    </tal:block>
+  </tal:block>
+
+  </div>
+
+</tal:block>
+
+</tal:block>

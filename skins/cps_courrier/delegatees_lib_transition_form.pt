@@ -1,0 +1,14 @@
+<metal:block define-macro="transition_form">
+  <form class="workflow" method="post" action="a_script_path_that_will_be_replaced"
+    tal:attributes="action string:${proxy/absolute_url}/${workflow_action_script}">
+    <input type="hidden" name="workflow_action"
+      tal:attributes="value workflow_action" />
+    <input type="hidden" name="workflow_action_form"
+      tal:attributes="value workflow_action_form" />
+    <metal:block metal:define-slot="button">
+      <!-- Put your buttons here: these are examples -->
+      <input type="hidden" name="workflow_action" value="transition" />
+      <input type="submit" value="button_publish" i18n:attributes="value" />
+    </metal:block>
+  </form>
+</metal:block>

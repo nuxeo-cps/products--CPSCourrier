@@ -1,0 +1,35 @@
+<metal:html use-macro="here/content_lib_master/macros/master">
+<metal:block fill-slot="header" />
+
+<metal:main fill-slot="main">
+<metal:std_main use-macro="here/content_lib_std_main/macros/std_main">
+
+<metal:title fill-slot="title" />
+
+<metal:help fill-slot="help" />
+
+<metal:main fill-slot="main"
+  tal:define="global info python:proxy.getContentInfo(proxy, doc=doc, level=3);
+              workflow_action_script string:content_assignment_level_move;
+              workflow_action string:move_up_delegatees;
+              workflow_action_form string:content_move_up_delegatees_form;
+              current_var_id request/current_var_id;
+             ">
+  <metal:block use-macro="here/delegatees_lib/macros/delegatees_view" />
+  <metal:block use-macro="here/delegatees_lib_transition_form/macros/transition_form">
+    <metal:block fill-slot="button">
+      <input type="hidden" name="current_var_id"
+             tal:attributes="value current_var_id" />
+      <tal:block define="can_manage python:here.portal_workflow.canManageStack(here, current_var_id);">
+        <tal:block condition="can_manage">
+          <input type="submit" class="context" value="button_move_up"
+            i18n:attributes="value" />
+        </tal:block>
+      </tal:block>
+    </metal:block>
+  </metal:block>
+</metal:main>
+
+</metal:std_main>
+</metal:main>
+</metal:html>

@@ -1,0 +1,57 @@
+<tal:comment condition="nothing">
+Macro needs:
+- found: list of found members results
+</tal:comment>
+<metal:block define-macro="search_results">
+
+<tal:block condition="found">
+
+  <table cellpadding="0" cellspacing="0" border="0" width="100%"
+    summary="members search result list">
+    <tr>
+      <td width="16"><br /></td>
+      <th style="text-align: left;"
+        i18n:translate="label_user">
+        User
+      </th>
+      <th style="text-align: left;"
+        i18n:translate="label_user_name">
+        User login
+      </th>
+      <th style="text-align: left;"
+        i18n:translate="label_email">
+        Email address
+      </th>
+    </tr>
+    <tr tal:repeat="member found">
+      <tal:block define="entry python:member[1]">
+        <td width="16">
+          <input type="checkbox" name="push_ids:list" value=""
+                 tal:attributes="value string:user:${entry/id};
+                                 id string:user_${entry/id};
+                                " />
+        </td>
+        <td>
+          <label tal:content="python:(entry.get('givenName', '') + ' ' + entry.get('sn', '')).strip() or entry['id']"
+                 tal:attributes="for string:user_${entry/id}">
+            Username 1
+          </label>
+        </td>
+        <td tal:content="entry/id">
+          User Login 1
+        </td>
+        <td tal:content="entry/email|nothing"> Email 1 </td>
+      </tal:block>
+    </tr>
+  </table>
+
+</tal:block>
+
+<tal:block condition="not:found">
+ <p i18n:translate="legend_local_roles_no_results_members">
+    Sorry, no members matched your search.
+ </p>
+</tal:block>
+
+</metal:block>
+
