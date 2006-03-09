@@ -314,6 +314,7 @@ class TabularWidget(CPSPortletWidget):
         #  anything, e.g, if we are rendering global search results
         if ICPSDocument.providedBy(calling_obj):
             fti = calling_obj.getTypeInfo()
+            # get the layout from object because it might be flexible
             row_layout = fti.getLayout(lid, calling_obj)
         else:
             ltool = getToolByName(calling_obj, 'portal_layouts')
