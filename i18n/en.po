@@ -185,13 +185,11 @@ msgstr ""
 msgid "button_handle"
 msgstr "Handle"
 
-#, fuzzy
 msgid "action_handle"
 msgstr "Handle"
 
-#, fuzzy
 msgid "handle"
-msgstr "Handle"
+msgstr "Handling"
 
 #
 # Workflows
@@ -208,13 +206,11 @@ msgstr ""
 msgid "button_forward"
 msgstr "Forward"
 
-#, fuzzy
 msgid "action_forward"
 msgstr "Forward"
 
-#, fuzzy
 msgid "forward"
-msgstr "Forward"
+msgstr "Forwarding"
 
 #
 # Workflows
@@ -228,13 +224,11 @@ msgstr "You are about to to put the mail to trash."
 msgid "button_discard"
 msgstr "Discard"
 
-#, fuzzy
 msgid "action_discard"
 msgstr "Discard"
 
-#, fuzzy
 msgid "discard"
-msgstr "Discard"
+msgstr "Discarding"
 
 #
 # Workflows
@@ -248,13 +242,11 @@ msgstr "You are about to permanently delete to mail document."
 msgid "button_delete"
 msgstr "Delete"
 
-#, fuzzy
 msgid "action_delete"
 msgstr "Delete"
 
-#, fuzzy
 msgid "delete"
-msgstr "Delete"
+msgstr "Deletion"
 
 #
 # Workflows
@@ -268,15 +260,13 @@ msgstr ""
 "to the original incoming mail."
 
 msgid "button_answer"
-msgstr "Répondre"
+msgstr "Reply"
 
-#, fuzzy
 msgid "action_answer"
-msgstr "Répondre"
+msgstr "Reply"
 
-#, fuzzy
 msgid "answer"
-msgstr "Répondre"
+msgstr "Reply"
 
 #
 # Workflows
@@ -294,12 +284,11 @@ msgstr ""
 msgid "button_close"
 msgstr "Close"
 
-#, fuzzy
 msgid "action_close"
 msgstr "Close"
 
 msgid "close"
-msgstr ""
+msgstr "Closure"
 
 #
 # Workflows
@@ -313,13 +302,13 @@ msgstr ""
 "reply to that incoming mail."
 
 msgid "button_reopen"
-msgstr ""
+msgstr "Reopen"
 
 msgid "action_reopen"
-msgstr ""
+msgstr "Reopen"
 
 msgid "reopen"
-msgstr ""
+msgstr "Reopening"
 
 #
 # Workflows
@@ -335,13 +324,11 @@ msgstr ""
 msgid "button_validate"
 msgstr "Validate"
 
-#, fuzzy
 msgid "action_validate"
 msgstr "Validate"
 
-#, fuzzy
 msgid "validate"
-msgstr "Validate"
+msgstr "Validation"
 
 #
 # Workflows
@@ -355,12 +342,11 @@ msgstr "You are about to send the document to the orginal user."
 msgid "button_send"
 msgstr "Send"
 
-#, fuzzy
 msgid "action_send"
 msgstr "Send"
 
 msgid "send"
-msgstr ""
+msgstr "Sending"
 
 #
 # Workflows
@@ -376,13 +362,11 @@ msgstr ""
 msgid "button_reactivate"
 msgstr "Reactivate"
 
-#, fuzzy
 msgid "action_reactivate"
 msgstr "Reactivate"
 
-#, fuzzy
 msgid "reactivate"
-msgstr "Reactivate"
+msgstr "Reactivation"
 
 #
 # Workflows
@@ -398,9 +382,8 @@ msgstr ""
 msgid "button_reset"
 msgstr "Reset"
 
-#, fuzzy
 msgid "action_reset"
 msgstr "Reset"
 
 msgid "reset"
-msgstr ""
+msgstr "Reseting"
