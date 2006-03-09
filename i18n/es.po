@@ -1,0 +1,146 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CPSCourrier\n"
+"POT-Creation-Date: 2006-02-27 18:16default\n"
+"PO-Revision-Date: 2006-03-04 10:43+0100\n"
+"Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
+"Language-Team: español <jesusmartin@lasalle.es>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Preferred-encodings: latin9 utf-8\n"
+"Domain: default\n"
+"Language-Code: es\n"
+"Language-Name: Spanish\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: SPAIN\n"
+
+#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#: from ../skins/cps_courrier/layout_tabular_view.pt
+msgid "cpscourrier_filter_button"
+msgstr "Filtro"
+
+#
+# Document types labels
+#
+msgid "portal_type_MailboxGroup_title"
+msgstr "Grupo de buzones"
+
+msgid "portal_type_MailboxGroup_description"
+msgstr "Espacio que integra a un conjunto de buzones"
+
+msgid "portal_type_Mailbox_title"
+msgstr "Buzón"
+
+msgid "portal_type_Mailbox_description"
+msgstr "Espacio dedicado a almacenar y gestionar correos"
+
+msgid "portal_type_IncomingMail_title"
+msgstr "Correo entrante"
+
+msgid "portal_type_IncomingMail_description"
+msgstr "Mensaje electrónico o digitalizado"
+
+msgid "portal_type_OutgoingMail_title"
+msgstr "Correo saliente"
+
+msgid "portal_type_OutgoingMail_description"
+msgstr "Mensaje que responde a un correo entrante"
+
+msgid "portal_type_Dashboard_title"
+msgstr "Tablón"
+
+msgid "portal_type_Dashboard_description"
+msgstr "Documento con los resultados de las búsquedas"
+
+#
+# Root of mailboxes area
+#
+msgid "mailboxes_root_title"
+msgstr "Buzones"
+
+#
+# Layout labels
+#
+msgid "cpscourrier_object_label"
+msgstr "Objeto:"
+
+msgid "cpscourrier_from_label"
+msgstr "De: "
+
+msgid "cpscourrier_to_label"
+msgstr "Para: "
+
+msgid "cpscourrier_creation_date_label"
+msgstr "Fecha:"
+
+msgid "cpscourrier_form_of_address_label"
+msgstr "Fórmula de cortesía"
+
+msgid "cpscourrier_signature_label"
+msgstr "Firma:"
+
+msgid "cpscourrier_size_label"
+msgstr "Tamaño (kB):"
+
+msgid "cpscourrier_deadline_label"
+msgstr "Fecha de caducidad:"
+
+msgid "cpscourrier_priority_label"
+msgstr "Prioridad: "
+
+msgid "cpscourrier_smtp_headers_label"
+msgstr "Cabeceras SMTP: "
+
+msgid "cpscourrier_mailbox_addresses_label"
+msgstr "Direcciones del buzón: "
+
+#
+# Layout labels
+#
+msgid "cpscourrier_search_path_label"
+msgstr "Cajas referidas"
+
+msgid "cpscourrier_type_label"
+msgstr "Tipo"
+
+msgid "cpscourrier_review_state_label"
+msgstr "Estado"
+
+msgid "cpscourrier_empty_box_msg"
+msgstr "No hay ningún correo que responda a los criterios de búsqueda"
+
+msgid "cpscourrier_no_result_msg"
+msgstr "Ningún correo responde a los criterios."
+
+msgid "cpscourrier_timeleft_label"
+msgstr "Tiempo restante"
+
+msgid "cpscourrier_foa_voc_regards"
+msgstr "Mis mejores deseos, "
+
+msgid "cpscourrier_foa_voc_sincerely"
+msgstr "Suyo, sinceramente, "
+
+msgid "cpscourrier_mp_voc_low"
+msgstr "Baja"
+
+msgid "cpscourrier_mp_voc_normal"
+msgstr "Normal"
+
+msgid "cpscourrier_mp_voc_high"
+msgstr "Alta"
+
+msgid "cpscourrier_mp_voc_very_high"
+msgstr "Muy alta"
+
+msgid "cpscourrier_all_boxes"
+msgstr "Todos"
+
+msgid "cpscourrier_subject_label"
+msgstr "Tema"
+
+msgid "cpscourrier_all_subjects"
+msgstr "Todos"
+
