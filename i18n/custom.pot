@@ -333,3 +333,33 @@ msgstr ""
 
 msgid "reset"
 msgstr ""
+
+#
+# Workflow states
+#
+
+msgid "received"
+msgstr ""
+
+msgid "handled"
+msgstr ""
+
+msgid "trash"
+msgstr ""
+
+msgid "answering"
+msgstr ""
+
+msgid "answered"
+msgstr ""
+
+msgid "closed"
+msgstr ""
+
+msgid "validated"
+msgstr ""
+
+msgid "sent"
+msgstr ""
+
+

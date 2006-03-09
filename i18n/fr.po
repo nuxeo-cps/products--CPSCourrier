@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-08 19:24default\n"
+"POT-Creation-Date: 2006-03-09 13:17default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -345,3 +345,27 @@ msgstr "Réinitialiser"
 
 msgid "reset"
 msgstr "Réinitialisation"
+
+msgid "received"
+msgstr "reçu"
+
+msgid "handled"
+msgstr "pris en charge"
+
+msgid "trash"
+msgstr "rebut"
+
+msgid "answering"
+msgstr "en réponse"
+
+msgid "answered"
+msgstr "répondu"
+
+msgid "closed"
+msgstr "clôturé"
+
+msgid "validated"
+msgstr "validé"
+
+msgid "sent"
+msgstr "envoyé"

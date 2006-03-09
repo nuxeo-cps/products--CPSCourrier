@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-08 19:24default\n"
+"POT-Creation-Date: 2006-03-09 13:17default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -386,4 +386,28 @@ msgid "action_reset"
 msgstr "Reset"
 
 msgid "reset"
-msgstr "Reseting"
+msgstr "reset"
+
+msgid "received"
+msgstr "received"
+
+msgid "handled"
+msgstr "handled"
+
+msgid "trash"
+msgstr "trash"
+
+msgid "answering"
+msgstr "replying"
+
+msgid "answered"
+msgstr "replied"
+
+msgid "closed"
+msgstr "closed"
+
+msgid "validated"
+msgstr "validated"
+
+msgid "sent"
+msgstr "sent"
