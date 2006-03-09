@@ -61,33 +61,60 @@
  </state>
  <state state_id="work" title="Work">
   <exit-transition transition_id="checkout_draft"/>
+  <exit-transition transition_id="manage_delegatees"/>
+  <exit-transition transition_id="move_down_delegatees"/>
   <exit-transition transition_id="validate"/>
   <permission-map name="Modify portal content"
                   acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
+   <permission-role>Pilot</permission-role>
    <permission-role>WorkspaceManager</permission-role>
-   <permission-role>WorkspaceMember</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Pilot</permission-role>
    <permission-role>WorkspaceManager</permission-role>
-   <permission-role>WorkspaceMember</permission-role>
    <permission-role>WorkspaceReader</permission-role>
   </permission-map>
   <permission-map name="WebDAV Lock items" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
+   <permission-role>Pilot</permission-role>
    <permission-role>WorkspaceManager</permission-role>
-   <permission-role>WorkspaceMember</permission-role>
   </permission-map>
   <permission-map name="WebDAV Unlock items"
                   acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>Owner</permission-role>
+   <permission-role>Pilot</permission-role>
    <permission-role>WorkspaceManager</permission-role>
-   <permission-role>WorkspaceMember</permission-role>
   </permission-map>
+  <stack-definition stackdef_id="Pilots"
+                    variable_id="Pilots"
+                    meta_type="Hierarchical Stack Definition"
+                    stack_type="Hierarchical Stack">
+   <managed-roles>
+    <managed-role name="Pilot"
+                  expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
+   </managed-roles>
+   <empty-stack-manage-guard>
+    <guard-role>Owner</guard-role>
+    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>Manager</guard-role>
+    <guard-role></guard-role>
+   </empty-stack-manage-guard>
+   <edit-stack-element-guard>
+   </edit-stack-element-guard>
+   <view-stack-element-guard>
+   </view-stack-element-guard>
+  </stack-definition>
+  <state-behavior behavior_id="push-delegatees"/>
+  <state-behavior behavior_id="pop-delegatees"/>
+  <state-behavior behavior_id="workflow-down"/>
+  <state-behavior behavior_id="workflow-reset"/>
+  <push-on-workflow-variable variable_id="Pilots"/>
+  <pop-on-workflow-variable variable_id="Pilots"/>
+  <workflow-down-on-workflow-variable variable_id="Pilots"/>
+  <workflow-reset-on-workflow-variable variable_id="Pilots"/>
  </state>
  <transition transition_id="abandon_draft"
              title="Abandon draft" new_state=""
@@ -134,7 +161,7 @@
  <transition transition_id="checkout_draft_in"
              title="Draft is created" new_state="draft"
              trigger="USER" before_script="" after_script="">
-
+  
   <guard>
   </guard>
   <transition-behavior behavior_id="initial-checkout"/>
@@ -143,7 +170,7 @@
  <transition transition_id="create" title="Initial creation"
              new_state="work" trigger="USER"
              before_script="" after_script="">
-
+  
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>WorkspaceManager</guard-role>
@@ -158,6 +185,32 @@
           category="workflow">action_invalidate</action>
   <guard>
   </guard>
+ </transition>
+ <transition transition_id="manage_delegatees" title=""
+             new_state="" trigger="USER" before_script=""
+             after_script="">
+  <action url="%(content_url)s/content_manage_delegatees_form"
+          category="workflow">action_manage_delegatees</action>
+  <guard>
+   <guard-role>Pilot</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+  </guard>
+  <transition-behavior behavior_id="push-delegatees"/>
+  <transition-behavior behavior_id="pop-delegatees"/>
+  <push-on-workflow-variable variable_id="Pilots"/>
+  <pop-on-workflow-variable variable_id="Pilots"/>
+ </transition>
+ <transition transition_id="move_down_delegatees" title=""
+             new_state="" trigger="USER" before_script=""
+             after_script="">
+  <action url="%(content_url)s/content_move_down_delegatees_form"
+          category="workflow">action_move_down_delegatees</action>
+  <guard>
+   <guard-role>Pilot</guard-role>
+  </guard>
+  <transition-behavior behavior_id="workflow-down"/>
+  <workflow-down-on-workflow-variable variable_id="Pilots"/>
  </transition>
  <transition transition_id="reactivate"
              title="Rework a sent mail" new_state="work"
@@ -178,7 +231,7 @@
              title="Unlock content after a draft is done"
              new_state="work" trigger="USER"
              before_script="" after_script="">
-
+  
   <guard>
   </guard>
   <transition-behavior behavior_id="allow-checkin"/>
@@ -191,11 +244,21 @@
   <guard>
   </guard>
  </transition>
+ <variable variable_id="Pilots" for_catalog="False"
+           for_status="True" update_always="False">
+  <description>Variable holding a stack</description>
+  <default>
+   
+   <expression>python:state_change.getStackFor(var_id='Pilots')</expression>
+  </default>
+  <guard>
+  </guard>
+ </variable>
  <variable variable_id="action" for_catalog="False"
            for_status="True" update_always="True">
   <description>The last transition</description>
   <default>
-
+   
    <expression>transition/getId|nothing</expression>
   </default>
   <guard>
@@ -205,7 +268,7 @@
            for_status="True" update_always="True">
   <description>The ID of the user who performed</description>
   <default>
-
+   
    <expression>user/getId</expression>
   </default>
   <guard>
@@ -215,7 +278,7 @@
            for_status="True" update_always="True">
   <description>Comments about the last transition</description>
   <default>
-
+   
    <expression>python:state_change.kwargs.get('comment', '')</expression>
   </default>
   <guard>
@@ -225,7 +288,7 @@
            for_status="True" update_always="True">
   <description>Destination container for the last paste/publish</description>
   <default>
-
+   
    <expression>python:state_change.kwargs.get('dest_container', '')</expression>
   </default>
   <guard>
@@ -235,7 +298,7 @@
            for_status="True" update_always="True">
   <description>The language revisions of the proxy</description>
   <default>
-
+   
    <expression>state_change/getLanguageRevisions</expression>
   </default>
   <guard>
@@ -245,7 +308,7 @@
            for_status="False" update_always="False">
   <description>Provides access to workflow history</description>
   <default>
-
+   
    <expression>state_change/getHistory</expression>
   </default>
   <guard>
@@ -259,7 +322,7 @@
            for_status="True" update_always="True">
   <description>Time of the last transition</description>
   <default>
-
+   
    <expression>state_change/getDateTime</expression>
   </default>
   <guard>
