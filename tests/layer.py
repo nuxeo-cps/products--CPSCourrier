@@ -20,9 +20,11 @@
 
 import unittest
 from zope.testing import doctest
+from Testing import ZopeTestCase
 from Products.GenericSetup import profile_registry
 from Products.GenericSetup import EXTENSION
 from Products.CPSCore.interfaces import ICPSSite
+
 
 from Products.CPSSchemas.tests.testWidgets import (
     FakeDataModel, FakeDataStructure, fakePortal,
@@ -34,9 +36,10 @@ from Products.CPSDefault.tests.CPSTestCase import (
 from Products.CPSCourrier.tests import widgets
 
 
-# register profile
+# register profiles
+ZopeTestCase.installProduct('CPSCourrier')
 
-# CPSCourrier:tests
+# CPSCourrier:tests : add more layouts to test the widgets
 profile_registry.registerProfile(
     'tests',
     'CPS Courrier Tests',
