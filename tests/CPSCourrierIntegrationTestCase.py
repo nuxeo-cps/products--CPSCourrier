@@ -42,7 +42,7 @@ profile_registry.registerProfile(
 
 
 class CPSCourrierPortletsLayerClass(ExtensionProfileLayerClass):
-    extension_ids = ('CPSCourrier:tests',)
+    extension_ids = ('CPSCourrier:default', 'CPSCourrier:tests',)
 
 CPSCourrierLayer = CPSCourrierPortletsLayerClass(
     __name__,
