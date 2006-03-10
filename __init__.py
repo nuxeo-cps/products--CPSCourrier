@@ -15,12 +15,18 @@
 # 02111-1307, USA.
 """Initialise the extension profile for the CPSCourrier product"""
 
+from AccessControl import ModuleSecurityInfo
+
 from Products.GenericSetup import profile_registry
 from Products.GenericSetup import EXTENSION
 from Products.CMFCore.DirectoryView import registerDirectory
 from Products.CPSCore.interfaces import ICPSSite
 
 import widgets
+
+# Module security for workflow scripts
+ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
+    'reply_to_incoming')
 
 registerDirectory('skins', globals())
 
