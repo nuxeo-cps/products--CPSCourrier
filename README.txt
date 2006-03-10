@@ -8,11 +8,10 @@ Installation
 
 - install CPS 3.4 and create a `CPS Default Site`
 - add this product to the `Products` directory of your Zope instance and restart
-  Zope
+  Zope. You will also need the CPSRelation product.
 - In the ZMI, in your CPS instance, goto to the `portal_setup` and select the
   "Profiles" tab
-- Select "CPS Courier" and "Import all steps" on the "Import" tab
-- that's it
+- Import the 'CPS Courrier' profile
 
 Usage
 -----
@@ -22,7 +21,8 @@ that holds all the mail boxes of the portal. You can create new mailboxes by
 using the `New` action. Mailboxes can get organized into "Groups of mailboxes"
 to manage access rights for several mailboxes.
 
-Users have a new management interface on their mailboxes from their home folder.
+Users can create new 'Dashboards' documents in their homefolder. A dashboard is
+a document that display the filtered result of a query.
 
 Technical Overview
 ------------------
@@ -30,6 +30,15 @@ Technical Overview
 CPS Courrier is an extension profile for the CPSDefault base profiles that
 brings the following:
 
-  - new document types: "Mailbox Group", "Mailbox" and "In"/"Outgoing mail
-  - new portlets to manage mailboxes
-  - new (stack-based) workflow chains
+  - new document types: "Mailbox Group", "Mailbox", "In"/"Outgoing mail and
+    Dashboards
+  - new (stack-based) workflow chains for the mail documents. This WF chains are
+    set available in the root of Mailboxes.
+  - a new powerful Tabular Widget to display the result of queries as
+    configurable tables that are built from a layout of atomic widgets (one for
+    each column).
+
+CPSCourrier uses a CPSRelation graph to store the relations between incoming and
+ougoing mail documents (replies). By default this uses the IOBTree (ZODB)
+storage but it can be setup to store the relation in some RDF graph in MySQL
+database.
