@@ -25,7 +25,7 @@ from zope.testing import doctest
 
 from Products.CPSDefault.tests.CPSTestCase import CPSTestCase
 
-from CPSCourrierIntegrationTestCase import CPSCourrierLayer
+from Products.CPSCourrier.tests.layer import CPSCourrierLayer
 from Products.CPSSchemas.tests.testWidgets import FakeDataStructure
 from Products.CPSCourrier.braindatamodel import FakeBrain, BrainDataModel
 
