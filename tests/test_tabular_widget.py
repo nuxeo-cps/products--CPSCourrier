@@ -27,36 +27,15 @@ from Products.CPSDefault.tests.CPSTestCase import CPSTestCase
 
 from Products.CPSCourrier.tests.layer import CPSCourrierLayer
 from Products.CPSSchemas.tests.testWidgets import FakeDataStructure
-from Products.CPSCourrier.braindatamodel import FakeBrain, BrainDataModel
-
 
 # things to be tested
-from Globals import InitializeClass
 from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSSchemas.DataModel import DataModel
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSDocument.FlexibleTypeInformation import FlexibleTypeInformation
-from Products.CPSCourrier.widgets.tabular import TabularWidget
+
+from Products.CPSCourrier.tests.widgets import TestingTabularWidget
 from Products.CPSCourrier.widgets.folder_contents import FolderContentsWidget
-
-
-class TestingTabularWidget(TabularWidget):
-    """ A subclass to implement listRowDataModels. """
-
-    meta_type = 'Testing Tabular Widget'
-
-    brains = [FakeBrain(d) for d in [
-        {'Title' : 'Title 1', 'content' : 'Pending', 'Description' : '',},
-        {'Title' : 'Title 2', 'content' : 'Rejected', 'Description' : '',},
-        ]]
-
-    def listRowDataStructures(self, datastructure, row_layout, **kw):
-        gendss = (DataStructure(datamodel=BrainDataModel(brain))
-                              for brain in self.brains)
-        return (self.prepareRowDataStructure(row_layout, ds) for ds in gendss)
-
-InitializeClass(TestingTabularWidget)
-widgetRegistry.register(TestingTabularWidget)
 
 
 class CustomMethods:

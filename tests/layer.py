@@ -31,6 +31,12 @@ from Products.CPSDefault.tests.CPSTestCase import (
     CPSTestCase,
     ExtensionProfileLayerClass)
 
+from Products.CPSCourrier.tests import widgets
+
+
+# register profile
+
+# CPSCourrier:tests
 profile_registry.registerProfile(
     'tests',
     'CPS Courrier Tests',
@@ -41,10 +47,10 @@ profile_registry.registerProfile(
     for_=ICPSSite)
 
 
-class CPSCourrierPortletsLayerClass(ExtensionProfileLayerClass):
+class CPSCourrierLayerClass(ExtensionProfileLayerClass):
     extension_ids = ('CPSCourrier:default', 'CPSCourrier:tests',)
 
-CPSCourrierLayer = CPSCourrierPortletsLayerClass(
+CPSCourrierLayer = CPSCourrierLayerClass(
     __name__,
     'CPSCourrierLayer'
     )
