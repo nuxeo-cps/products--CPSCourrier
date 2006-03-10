@@ -10,3 +10,4 @@ Bug fixes:
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - internal backbone for mail WFs (states + transitions)
+- simple config.py module to hosts non ZODB config parameters
