@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<export-steps>
+ <export-step id="relation"
+              handler="Products.CPSRelation.exportimport.exportRelationTool"
+              title="Relation Tool">
+  Export relation tool and relation graphs.
+ </export-step>
+</export-steps>

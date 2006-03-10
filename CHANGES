@@ -11,3 +11,4 @@ New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - internal backbone for mail WFs (states + transitions)
 - simple config.py module to hosts non ZODB config parameters
+- new default IOBTree graph to store relations between mail documents

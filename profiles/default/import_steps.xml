@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<import-steps>
+ <import-step id="relation" version="20060213-01"
+              handler="Products.CPSRelation.exportimport.importRelationTool"
+              title="Relation Tool">
+  <dependency step="toolset"/>
+  Import relation tool and relation graphs.
+ </import-step>
+</import-steps>
