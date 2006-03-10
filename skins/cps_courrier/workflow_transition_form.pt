@@ -1,7 +1,8 @@
 <metal:html use-macro="here/content_lib_master/macros/master">
   <metal:header fill-slot="header"/>
   <metal:main fill-slot="main"
-    tal:define='transition request/form/transition|string:'>
+    tal:define='transition request/form/transition|string:;
+                do_redirect request/do_redirect|python:1'>
     <metal:std_main use-macro="here/content_lib_std_main/macros/std_main">
 
       <metal:title fill-slot="title" i18n:translate="">
@@ -26,6 +27,8 @@
         <metal:block
           use-macro="here/content_lib_transition_form/macros/transition_form">
           <metal:block fill-slot="button">
+            <input type="hidden" name="do_redirect:int"
+              tal:attributes="value do_redirect" />
             <input type="hidden" name="workflow_action"
               tal:attributes="value transition" />
             <input type="submit" class="standalone"
