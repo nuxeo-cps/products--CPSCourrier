@@ -40,5 +40,5 @@ brings the following:
 
 CPSCourrier uses a CPSRelation graph to store the relations between incoming and
 ougoing mail documents (replies). By default this uses the IOBTree (ZODB)
-storage but it can be setup to store the relation in some RDF graph in MySQL
+storage but it can be setup to store the relations in some RDF graph in a MySQL
 database.
