@@ -106,6 +106,7 @@ class UserStackElementWithData(StackElementWithData):
     """User Stack Element With Data
     """
     meta_type = 'User Stack Element With Data'
+    hidden_meta_type = 'Hidden User Stack Element'
     prefix = 'user_wdata'
 
     implements(IStackElement)
@@ -116,6 +117,7 @@ class GroupStackElementWithData(StackElementWithData):
     """User Stack Element With Data
     """
     meta_type = 'User Stack Element With Data'
+    hidden_meta_type = 'Hidden Group Stack Element'
     prefix = 'group_wdata'
 
     implements(IStackElement)
