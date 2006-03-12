@@ -40,7 +40,8 @@ from ZODB.PersistentMapping import PersistentMapping
 
 from Products.CPSWorkflow.stackregistries import WorkflowStackElementRegistry
 from Products.CPSWorkflow.stackelement import StackElement
-from Products.CPSWorkflow.interfaces import IStackElement
+
+from Products.CPSCourrier.interfaces import IStackElementWithData
 
 _missing = object()
 
@@ -49,7 +50,7 @@ class StackElementWithData(StackElement, PersistentMapping):
     """
     meta_type = 'Stack Element With Data'
 
-    implements(IStackElement)
+    implements(IStackElementWithData)
 
     # keys that have default values, and a callable
     # or method id to compute it
@@ -102,6 +103,7 @@ class StackElementWithData(StackElement, PersistentMapping):
                                   for key, how in self._default_writes.items()
                                   if not key in self))
 
+
 class UserStackElementWithData(StackElementWithData):
     """User Stack Element With Data
     """
@@ -109,9 +111,8 @@ class UserStackElementWithData(StackElementWithData):
     hidden_meta_type = 'Hidden User Stack Element'
     prefix = 'user_wdata'
 
-    implements(IStackElement)
-
 InitializeClass(UserStackElementWithData)
+
 
 class GroupStackElementWithData(StackElementWithData):
     """User Stack Element With Data
@@ -120,7 +121,6 @@ class GroupStackElementWithData(StackElementWithData):
     hidden_meta_type = 'Hidden Group Stack Element'
     prefix = 'group_wdata'
 
-    implements(IStackElement)
 
     def getIdForRoleSettings(self):
         # set the 'group:' prefix for role settings
