@@ -22,7 +22,8 @@ from Products.GenericSetup import EXTENSION
 from Products.CMFCore.DirectoryView import registerDirectory
 from Products.CPSCore.interfaces import ICPSSite
 
-import widgets
+# various registrations are done therein
+import widgets, workflows
 
 # Module security for workflow scripts
 ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
