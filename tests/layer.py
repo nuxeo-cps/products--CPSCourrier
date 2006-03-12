@@ -33,7 +33,7 @@ from Products.CPSDefault.tests.CPSTestCase import (
     CPSTestCase,
     ExtensionProfileLayerClass)
 
-from Products.CPSCourrier.tests import widgets
+from Products.CPSCourrier.tests import widgets, stackelements
 
 
 # register profiles

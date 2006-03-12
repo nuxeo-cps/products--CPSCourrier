@@ -21,32 +21,24 @@ elements and provides a few further utilities
     >>> from Products.CPSCourrier.workflows.stacks import \
     ...                  HierarchicalStackWithData
 
-    >>> from Products.CPSCourrier.interfaces import IHierarchicalStackWithData
+    >>> from Products.CPSCourrier.interfaces import (IHierarchicalStackWithData,
+    ...                                              IStackElementWithData,)
     >>> stack = HierarchicalStackWithData()
     >>> IHierarchicalStackWithData.providedBy(stack)
     True
 
-Let's make an element class:
-    >>> from Globals import InitializeClass
-    >>> from Products.CPSWorkflow.stackregistries import WorkflowStackElementRegistry
-    >>> from Products.CPSCourrier.workflows.stackelements import \
-    ...	                     StackElementWithData
-    >>> class ExampleStackElement(StackElementWithData):
-    ...     meta_type = 'Example Stack Element'
-    ...     hidden_meta_type = 'Hidden User Stack Element'
-    ...     prefix = 'example'
+We'll also use an example stack element that's basically a stack
+element with data not tied to users/groups::
 
-Doing the registration (return code 1 means everything went fine)    
-    >>> WorkflowStackElementRegistry.register(ExampleStackElement)
-    1
+    >>> from Products.CPSCourrier.tests.stackelements import \
+    ...	                     ExampleStackElement
+    >>> IStackElementWithData.implementedBy(ExampleStackElement)
+    True
 
 Let's demonstrate how pushing elements work. Let's try with a single element::
 
-    >>> from Products.CPSCore.CPSMembershipTool import CPSUnrestrictedUser
-    >>> 
-
-    >>> data_lists = ('date', 'comment')
     >>> from DateTime import DateTime
+    >>> data_lists = ('date', 'comment')
     >>> date = DateTime('2006/03/10')
     >>> stack.push(push_ids=('example:el',), data_lists=data_lists,
     ...         date=(date,), comment=('a comment',), levels=(0,))
@@ -59,6 +51,22 @@ Let's demonstrate how pushing elements work. Let's try with a single element::
     'a comment'
     >>> str(elt['date'])
     '2006/03/10'
+
+Now several elements at once::
+
+    >>> stack.push(push_ids=('example:A', 'example:B'),
+    ...                 levels=(0,1,),
+    ...                 data_lists=('d1', 'd2'),
+    ...                 d1=('A1', 'B1',),
+    ...                 d2=('A2', 'B2',))
+    >>> stack.getAllLevels()
+    [0, 1]
+    >>> eltA = stack._getLevelContentValues()[1]
+    >>> eltB = stack._getLevelContentValues(level=1)[0]
+    >>> pretty_print(eltA())
+    {'d2': 'A2', 'd1': 'A1'}
+    >>> pretty_print(eltB())
+    {'d2': 'B2', 'd1': 'B1'}
 
 .. Emacs
 .. Local Variables:
