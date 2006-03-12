@@ -1,0 +1,71 @@
+==============
+Stack Elements
+==============
+
+:Revision: $Id$
+
+.. contents:: :depth: 1
+.. sectnum::
+
+It will be convenient for examples to have a pretty printer::
+
+    >>> from pprint import PrettyPrinter
+    >>> pretty_print=PrettyPrinter(width=50).pprint
+
+Hierarchical Stack With Data
+------------------------------------
+
+This is a workflow stack that can hold Stack Element With Data
+elements and provides a few further utilities
+
+    >>> from Products.CPSCourrier.workflows.stacks import \
+    ...                  HierarchicalStackWithData
+
+    >>> from Products.CPSCourrier.interfaces import IHierarchicalStackWithData
+    >>> stack = HierarchicalStackWithData()
+    >>> IHierarchicalStackWithData.providedBy(stack)
+    True
+
+Let's make an element class:
+    >>> from Globals import InitializeClass
+    >>> from Products.CPSWorkflow.stackregistries import WorkflowStackElementRegistry
+    >>> from Products.CPSCourrier.workflows.stackelements import \
+    ...	                     StackElementWithData
+    >>> class ExampleStackElement(StackElementWithData):
+    ...     meta_type = 'Example Stack Element'
+    ...     hidden_meta_type = 'Hidden User Stack Element'
+    ...     prefix = 'example'
+
+Doing the registration (return code 1 means everything went fine)    
+    >>> WorkflowStackElementRegistry.register(ExampleStackElement)
+    1
+
+Let's demonstrate how pushing elements work. Let's try with a single element::
+
+    >>> from Products.CPSCore.CPSMembershipTool import CPSUnrestrictedUser
+    >>> 
+
+    >>> data_lists = ('date', 'comment')
+    >>> from DateTime import DateTime
+    >>> date = DateTime('2006/03/10')
+    >>> stack.push(push_ids=('example:el',), data_lists=data_lists,
+    ...         date=(date,), comment=('a comment',), levels=(0,))
+    >>> stack.getAllLevels()
+    [0]
+    >>> elt = stack._getLevelContentValues()[0]
+    >>> elt.meta_type
+    'Example Stack Element'
+    >>> elt['comment']
+    'a comment'
+    >>> str(elt['date'])
+    '2006/03/10'
+
+.. Emacs
+.. Local Variables:
+.. mode: rst
+.. End:
+.. Vim
+.. vim: set filetype=rst:
+
+
+
