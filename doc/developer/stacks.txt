@@ -1,6 +1,6 @@
-==============
-Stack Elements
-==============
+==================
+CPSCourrier Stacks
+==================
 
 :Revision: $Id$
 
@@ -67,6 +67,9 @@ Now several elements at once::
     {'d2': 'A2', 'd1': 'A1'}
     >>> pretty_print(eltB())
     {'d2': 'B2', 'd1': 'B1'}
+
+
+
 
 .. Emacs
 .. Local Variables:
