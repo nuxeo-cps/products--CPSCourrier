@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name="mail_directives" meta_type="CPS Vocabulary">
+ <property name="title"></property>
+ <property name="title_msgid"></property>
+ <property name="description"></property>
+ <property name="acl_write_roles">Manager</property>
+ <item key="advice" msgid="cpscourrier_for_advice">For advice</item>
+ <item key="response" msgid="cpscourrier_for_reply">For reply project</item>
+</object>
