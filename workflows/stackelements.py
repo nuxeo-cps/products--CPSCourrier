@@ -104,12 +104,15 @@ class StackElementWithData(StackElement, PersistentMapping):
                                   if not key in self))
 
 
-class UserStackElementWithData(StackElementWithData):
+class UserStackElementWithData(StackElementWithData, ):
     """User Stack Element With Data
     """
     meta_type = 'User Stack Element With Data'
     hidden_meta_type = 'Hidden User Stack Element'
     prefix = 'user_wdata'
+
+    def getIdForRoleSettings(self):
+        return self.getIdWithoutPrefix()
 
 InitializeClass(UserStackElementWithData)
 

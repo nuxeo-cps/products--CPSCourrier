@@ -28,6 +28,7 @@ from zope.interface import implements
 
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
+from DateTime import DateTime
 
 from Products.CMFCore.utils import getToolByName
 
@@ -69,11 +70,15 @@ class HierarchicalStackWithData(HierarchicalStack):
         if not push_ids:
             return
 
-        # also required
         levels = kw.get('levels', ())
 
+        # compat with standard stack management screens
+        if not levels:
+            level = self.getCurrentLevel()
+            levels = len(push_ids) * [level]
+
         # optional data
-        # XXX we get a pack of lists because that's what's come from
+        # XXX we get a pack of lists because that's what comes from
         # HTTP request. Let a view take care of this ?
         data_lists = dict( (key, kw.get(key))
                            for key in kw.get('data_lists', ()))
@@ -308,14 +313,15 @@ class HierarchicalStackWithData(HierarchicalStack):
         # help to define stack content to display
         dirtool = getToolByName(context, 'portal_directories')
         aclu = context.acl_users
-        assert_(aclu.meta_type == 'CPS User Folder')
-        members_dir = getattr(dirtool, aclu.members_dir)
+        assert(aclu.meta_type == 'CPS User Folder')
+        members_dir = getattr(dirtool, aclu.users_dir)
         groups_dir = getattr(dirtool, aclu.groups_dir)
+        cpsmcat = context.translation_service
         kwargs = {
             # for members
             'members': members_dir,
             'groups': groups_dir,
-            'cpsmcat': context.translation_service,
+            'cpsmcat': cpsmcat,
             'date_format': cpsmcat('cpscourrier_date_format').encode(
                           'iso-8859-15'),
             }
