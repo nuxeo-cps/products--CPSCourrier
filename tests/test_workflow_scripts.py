@@ -89,10 +89,11 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
         self.assertEquals(doc1['to'], ['bar@foo.com'])
 
         # check that they are related
-        res = rtool.getValueFor(RELATION_GRAPH_ID,
+        res = rtool.getRelationsFor(RELATION_GRAPH_ID,
                                 int(out_mail1.getDocid()),
                                 'is_reply_to')
-        self.assertEquals(int(self.in_mail1.getDocid()), res)
+        expected = (int(self.in_mail1.getDocid()),)
+        self.assertEquals(expected, res)
 
         # do not add the 'Re:' prefix twice
         out_mail2 = reply_to_incoming(self.in_mail2)
@@ -102,10 +103,11 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
         self.assertEquals(doc2['to'], ['foo@foo.com'])
 
         # check that they are related
-        res = rtool.getValueFor(RELATION_GRAPH_ID,
+        res = rtool.getRelationsFor(RELATION_GRAPH_ID,
                                 int(out_mail2.getDocid()),
                                 'is_reply_to')
-        self.assertEquals(int(self.in_mail2.getDocid()), res)
+        expected = (int(self.in_mail2.getDocid()),)
+        self.assertEquals(expected, res)
 
 
 def test_suite():
