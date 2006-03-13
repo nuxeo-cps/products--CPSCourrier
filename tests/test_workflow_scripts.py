@@ -31,6 +31,8 @@ from Products.CPSCourrier.tests.layer import CPSCourrierLayer
 
 # import things to test
 from Products.CPSCourrier.workflows.scripts import reply_to_incoming
+from Products.CPSCourrier.config import RELATION_GRAPH_ID
+
 
 class WorkflowScriptsIntegrationTestCase(CPSTestCase):
     layer = CPSCourrierLayer
@@ -77,12 +79,20 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
         self.logout()
 
     def test_reply_to_incoming(self):
+        rtool = getToolByName(self.portal, 'portal_relations')
+
         # add 'Re:' to the incoming mail title
         out_mail1 = reply_to_incoming(self.in_mail1)
         self.assertEquals(out_mail1.Title(), 'Re: Test mail 1')
         doc1 = out_mail1.getContent()
         self.assertEquals(doc1['from'], 'test_mailbox@cpscourrier.com')
         self.assertEquals(doc1['to'], ['bar@foo.com'])
+
+        # check that they are related
+        res = rtool.getValueFor(RELATION_GRAPH_ID,
+                                int(out_mail1.getDocid()),
+                                'is_reply_to')
+        self.assertEquals(int(self.in_mail1.getDocid()), res)
 
         # do not add the 'Re:' prefix twice
         out_mail2 = reply_to_incoming(self.in_mail2)
@@ -91,6 +101,11 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
         self.assertEquals(doc2['from'], 'test_mailbox@cpscourrier.com')
         self.assertEquals(doc2['to'], ['foo@foo.com'])
 
+        # check that they are related
+        res = rtool.getValueFor(RELATION_GRAPH_ID,
+                                int(out_mail2.getDocid()),
+                                'is_reply_to')
+        self.assertEquals(int(self.in_mail2.getDocid()), res)
 
 
 def test_suite():

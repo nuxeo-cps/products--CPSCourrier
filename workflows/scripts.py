@@ -57,12 +57,11 @@ def reply_to_incoming(incoming_proxy):
     outgoing_proxy = getattr(container, oid)
 
     # update the relation between both docids
-    #rtool = getToolByName(incoming_proxy, 'portal_relations')
-    #graph = rtool[RELATION_GRAPH_ID]
-
+    rtool = getToolByName(incoming_proxy, 'portal_relations')
+    rtool.addRelationFor(RELATION_GRAPH_ID,
+                         int(outgoing_proxy.getDocid()),
+                         'is_reply_to',
+                         int(incoming_proxy.getDocid()))
     return outgoing_proxy
-
-
-
 
 
