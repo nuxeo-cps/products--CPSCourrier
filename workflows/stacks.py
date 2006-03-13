@@ -322,8 +322,7 @@ class HierarchicalStackWithData(HierarchicalStack):
             'members': members_dir,
             'groups': groups_dir,
             'cpsmcat': cpsmcat,
-            'date_format': cpsmcat('cpscourrier_date_format').encode(
-                          'iso-8859-15'),
+            'date_format': cpsmcat('date_short').encode('iso-8859-15'),
             }
 
         infos = {}
