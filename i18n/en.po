@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-09 13:17default\n"
+"POT-Creation-Date: 2006-03-13 11:22default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -25,10 +25,175 @@ msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
 
-#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
+#.   <h2 content="current_var_id">
+#.       Stack content
+#.     </h2>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "Stack content"
+msgstr ""
+
+#.   <input type="submit" value="button_push_delegatees" />
+#: from ../skins/cps_courrier/delegatees_lib.pt
+#, fuzzy
+msgid "button_push_delegatees"
+msgstr "Delete"
+
+#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filter"
+
+#.   <h2 condition="not:searching">
+#.     Assign to the workflow: search members
+#.   </h2>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "heading_content_assign_search_members"
+msgstr ""
+
+#.   <h2 condition="searching">
+#.     Assign to the workflow: search results
+#.   </h2>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "heading_content_assign_search_results"
+msgstr ""
+
+#.   <th>
+#.           Acknowledge Date
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_acknowledge_date"
+msgstr ""
+
+#.   <th>
+#.           State
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+#, fuzzy
+msgid "label_action_state"
+msgstr "Reactivate"
+
+#.   <p>
+#.         Below, stands the members / groups which have been already added to this
+#.         workflow stack.
+#.       </p>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+#: ../skins/cps_courrier/stack_simple_method.pt
+msgid "label_delegatees_below"
+msgstr ""
+
+#.   <block>
+#.         Current level delegatees are highlighted
+#.       </block>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+msgid "label_delegatees_current_level_delegatees_highlighted"
+msgstr ""
+
+#.   <h2>
+#.         Select members:
+#.       </h2>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "label_delegatees_select_members"
+msgstr ""
+
+#.   <strong>
+#.         There are no delegatees within this workflow stack yet
+#.       </strong>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+#: ../skins/cps_courrier/stack_simple_method.pt
+msgid "label_delegatees_stack_empty"
+msgstr ""
+
+#.   <block>
+#.                     User in charge
+#.                   </block>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+msgid "label_delegatees_user_in_charge"
+msgstr ""
+
+#.   <th>
+#.           Directive
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_directive"
+msgstr ""
+
+#.   <th>
+#.           Comment
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_directive_comment"
+msgstr ""
+
+#.   <th>
+#.           Expiry Date
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_expiry_date"
+msgstr ""
+
+#.   <block>
+#.                     Expiry
+#.                   </block>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_expiry_date_short"
+msgstr ""
+
+#.   <option attributes="selected python:search_param=='fullname'" value="fullname">Full name</option>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "label_full_name"
+msgstr ""
+
+#.   <th>
+#.           Identite
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_identite"
+msgstr ""
+
+#.   <th>Search by</th>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "label_local_roles_search_by"
+msgstr ""
+
+#.   <th>Search Term</th>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "label_local_roles_search_term"
+msgstr ""
+
+#.   <th>
+#.           Relance Date
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_relance_date"
+msgstr ""
+
+#.   <block>
+#.                     Relance
+#.                   </block>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_relance_date_short"
+msgstr ""
+
+#.   <h2>
+#.         Reviewers
+#.       </h2>
+#: from ../skins/cps_courrier/layout_schedule_view.pt
+msgid "label_reviewers"
+msgstr ""
+
+#.   <th>
+#.           Transmision Date
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_transmission_date"
+msgstr ""
+
+#.   <p>
+#.       Sorry, no members matched your search.
+#.    </p>
+#: from ../skins/cps_courrier/stack_members_search_results.pt
+msgid "legend_local_roles_no_results_members"
+msgstr ""
 
 #
 # Document types labels
@@ -170,6 +335,9 @@ msgstr "Subject"
 
 msgid "cpscourrier_all_subjects"
 msgstr "All"
+
+msgid "action_roadmap"
+msgstr "Roadmap"
 
 #
 # Workflows

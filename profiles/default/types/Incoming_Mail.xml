@@ -28,6 +28,14 @@
   <element value="mail_flexible:file"/>
  </property>
 
+ <!-- Specific CPSCourrier actions -->
+ <action title="action_roadmap"	action_id="roadmap" category="object"
+	 condition_expr="" visible="True"
+	 url_expr="string:${object_url}/cpscourrier_roadmap_view">
+   <permission value="View" />
+ </action>
+
+
  <!-- Standard CPSDocument aliases and actions (might change) -->
  <alias from="(Default)" to="cpsdocument_view"/>
  <alias from="view" to="cpsdocument_view"/>

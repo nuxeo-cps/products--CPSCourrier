@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-02-27 18:16default\n"
+"POT-Creation-Date: 2006-03-13 11:22default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -16,10 +16,182 @@ msgstr ""
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-Country: SPAIN\n"
 
+#.   <title fill-slot="title">
+#.           <span replace="string:heading_workflow_${transition}_of" />
+#.           ${item_id (tal replace="here/title_or_id")}
+#.         </title>
+#: from ../skins/cps_courrier/workflow_transition_form.pt
+msgid ""
+"<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
+msgstr ""
+
+#.   <h2 content="current_var_id">
+#.       Stack content
+#.     </h2>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "Stack content"
+msgstr ""
+
+#.   <input type="submit" value="button_push_delegatees" />
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "button_push_delegatees"
+msgstr ""
+
 #.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filtro"
+
+#.   <h2 condition="not:searching">
+#.     Assign to the workflow: search members
+#.   </h2>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "heading_content_assign_search_members"
+msgstr ""
+
+#.   <h2 condition="searching">
+#.     Assign to the workflow: search results
+#.   </h2>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "heading_content_assign_search_results"
+msgstr ""
+
+#.   <th>
+#.           Acknowledge Date
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_acknowledge_date"
+msgstr ""
+
+#.   <th>
+#.           State
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_action_state"
+msgstr ""
+
+#.   <p>
+#.         Below, stands the members / groups which have been already added to this
+#.         workflow stack.
+#.       </p>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+#: ../skins/cps_courrier/stack_simple_method.pt
+msgid "label_delegatees_below"
+msgstr ""
+
+#.   <block>
+#.         Current level delegatees are highlighted
+#.       </block>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+msgid "label_delegatees_current_level_delegatees_highlighted"
+msgstr ""
+
+#.   <h2>
+#.         Select members:
+#.       </h2>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "label_delegatees_select_members"
+msgstr ""
+
+#.   <strong>
+#.         There are no delegatees within this workflow stack yet
+#.       </strong>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+#: ../skins/cps_courrier/stack_simple_method.pt
+msgid "label_delegatees_stack_empty"
+msgstr ""
+
+#.   <block>
+#.                     User in charge
+#.                   </block>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+msgid "label_delegatees_user_in_charge"
+msgstr ""
+
+#.   <th>
+#.           Directive
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_directive"
+msgstr ""
+
+#.   <th>
+#.           Comment
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_directive_comment"
+msgstr ""
+
+#.   <th>
+#.           Expiry Date
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_expiry_date"
+msgstr ""
+
+#.   <block>
+#.                     Expiry
+#.                   </block>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_expiry_date_short"
+msgstr ""
+
+#.   <option attributes="selected python:search_param=='fullname'" value="fullname">Full name</option>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "label_full_name"
+msgstr ""
+
+#.   <th>
+#.           Identite
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_identite"
+msgstr ""
+
+#.   <th>Search by</th>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "label_local_roles_search_by"
+msgstr ""
+
+#.   <th>Search Term</th>
+#: from ../skins/cps_courrier/delegatees_lib.pt
+msgid "label_local_roles_search_term"
+msgstr ""
+
+#.   <th>
+#.           Relance Date
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_relance_date"
+msgstr ""
+
+#.   <block>
+#.                     Relance
+#.                   </block>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_relance_date_short"
+msgstr ""
+
+#.   <h2>
+#.         Reviewers
+#.       </h2>
+#: from ../skins/cps_courrier/layout_schedule_view.pt
+msgid "label_reviewers"
+msgstr ""
+
+#.   <th>
+#.           Transmision Date
+#.         </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_transmission_date"
+msgstr ""
+
+#.   <p>
+#.       Sorry, no members matched your search.
+#.    </p>
+#: from ../skins/cps_courrier/stack_members_search_results.pt
+msgid "legend_local_roles_no_results_members"
+msgstr ""
 
 #
 # Document types labels
@@ -111,11 +283,35 @@ msgstr "Estado"
 msgid "cpscourrier_empty_box_msg"
 msgstr "No hay ningún correo que responda a los criterios de búsqueda"
 
+#, fuzzy
+msgid "cpscourrier_empty_boxgroup_msg"
+msgstr "Empty mailbox group"
+
 msgid "cpscourrier_no_result_msg"
 msgstr "Ningún correo responde a los criterios."
 
 msgid "cpscourrier_timeleft_label"
 msgstr "Tiempo restante"
+
+#, fuzzy
+msgid "cpscourrier_has_attachment_label"
+msgstr "Att."
+
+#, fuzzy
+msgid "cpscourrier_fulltext_search"
+msgstr "Keywords"
+
+#, fuzzy
+msgid "cpscourrier_mailbox_priority_label"
+msgstr "Default priority"
+
+#, fuzzy
+msgid "cpscourrier_mailbox_from_label"
+msgstr "Default sender adress"
+
+#, fuzzy
+msgid "cpscourrier_allowed_reply_time"
+msgstr "Default allowed reply time"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Mis mejores deseos, "
@@ -144,3 +340,200 @@ msgstr "Tema"
 msgid "cpscourrier_all_subjects"
 msgstr "Todos"
 
+msgid "action_roadmap"
+msgstr ""
+
+#
+# Workflows
+#
+msgid "heading_workflow_handle_of ${item_id}"
+msgstr ""
+
+msgid "help_workflow_handle"
+msgstr ""
+
+msgid "button_handle"
+msgstr ""
+
+msgid "action_handle"
+msgstr ""
+
+msgid "handle"
+msgstr ""
+
+msgid "heading_workflow_forward_of ${item_id}"
+msgstr ""
+
+msgid "help_workflow_forward"
+msgstr ""
+
+msgid "button_forward"
+msgstr ""
+
+msgid "action_forward"
+msgstr ""
+
+msgid "forward"
+msgstr ""
+
+msgid "heading_workflow_discard_of ${item_id}"
+msgstr ""
+
+msgid "help_workflow_discard"
+msgstr ""
+
+msgid "button_discard"
+msgstr ""
+
+msgid "action_discard"
+msgstr ""
+
+msgid "discard"
+msgstr ""
+
+msgid "heading_workflow_delete_of ${item_id}"
+msgstr ""
+
+msgid "help_workflow_delete"
+msgstr ""
+
+msgid "button_delete"
+msgstr ""
+
+msgid "action_delete"
+msgstr ""
+
+msgid "delete"
+msgstr ""
+
+msgid "heading_workflow_answer_of ${item_id}"
+msgstr ""
+
+msgid "help_workflow_answer"
+msgstr ""
+
+msgid "button_answer"
+msgstr ""
+
+msgid "action_answer"
+msgstr ""
+
+msgid "answer"
+msgstr ""
+
+msgid "heading_workflow_close_of ${item_id}"
+msgstr ""
+
+msgid "help_workflow_close"
+msgstr ""
+
+msgid "button_close"
+msgstr ""
+
+msgid "action_close"
+msgstr ""
+
+msgid "close"
+msgstr ""
+
+msgid "heading_workflow_reopen_of ${item_id}"
+msgstr ""
+
+msgid "help_workflow_reopen"
+msgstr ""
+
+msgid "button_reopen"
+msgstr ""
+
+msgid "action_reopen"
+msgstr ""
+
+msgid "reopen"
+msgstr ""
+
+msgid "heading_workflow_validate_of ${item_id}"
+msgstr ""
+
+msgid "help_workflow_validate"
+msgstr ""
+
+msgid "button_validate"
+msgstr ""
+
+msgid "action_validate"
+msgstr ""
+
+msgid "validate"
+msgstr ""
+
+msgid "heading_workflow_send_of ${item_id}"
+msgstr ""
+
+msgid "help_workflow_send"
+msgstr ""
+
+msgid "button_send"
+msgstr ""
+
+msgid "action_send"
+msgstr ""
+
+msgid "send"
+msgstr ""
+
+msgid "heading_workflow_reactivate_of ${item_id}"
+msgstr ""
+
+msgid "help_workflow_reactivate"
+msgstr ""
+
+msgid "button_reactivate"
+msgstr ""
+
+msgid "action_reactivate"
+msgstr ""
+
+msgid "reactivate"
+msgstr ""
+
+msgid "heading_workflow_reset_of ${item_id}"
+msgstr ""
+
+msgid "help_workflow_reset"
+msgstr ""
+
+msgid "button_reset"
+msgstr ""
+
+msgid "action_reset"
+msgstr ""
+
+msgid "reset"
+msgstr ""
+
+#
+# Workflow states
+#
+msgid "received"
+msgstr ""
+
+msgid "handled"
+msgstr ""
+
+msgid "trash"
+msgstr ""
+
+msgid "answering"
+msgstr ""
+
+msgid "answered"
+msgstr ""
+
+msgid "closed"
+msgstr ""
+
+msgid "validated"
+msgstr ""
+
+msgid "sent"
+msgstr ""
