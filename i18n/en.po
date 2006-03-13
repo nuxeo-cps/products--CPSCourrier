@@ -36,7 +36,7 @@ msgstr ""
 #: from ../skins/cps_courrier/delegatees_lib.pt
 #, fuzzy
 msgid "button_push_delegatees"
-msgstr "Delete"
+msgstr "Add"
 
 #.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
