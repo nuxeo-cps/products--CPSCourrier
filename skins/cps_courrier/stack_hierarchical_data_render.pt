@@ -12,7 +12,7 @@
   portal_url python:portal.absolute_url()+'/';
   ">
 
-<tal:block condition="python:mode in ['view', 'edit']">
+<tal:block define="insert_mode python:mode == 'insert'">
   <table summary="stack content"
     class="listing" border="0"
     cellspacing="0" cellpadding="0">
@@ -39,84 +39,96 @@
         &nbsp;
       </th>
     </tr>
-    <tal:block repeat="level levels">
-      <tal:block define="level_infos python:infos[level];
-                         level_items python:level_infos['items'];
-                        ">
-        <tr tal:repeat="content level_items"
+    <tr tal:repeat="level levels"
 	    tal:attributes="class python:test(repeat['level'].odd(),
 			    'odd', 'even')">
-	  <td> 
-            <input type="checkbox" name="pop_ids:list"
-              tal:condition="not:content/not_deletable|nothing"
-              tal:attributes="value content/input_id;
-                              id content/label_id;
-                             " />
-	  </td>
-          <td>
-            <tal:block  condition="level_infos/current_level"
-	      replace="structure python:here.getImgTag(
-	                             'stack_current_level.png',
-				     base_url=portal_url,
-				     alt='Niveau courant')" />
-          </td>
-          <td>
-            <tal:block content="content/identite">
-              Delegatee
-            </tal:block>
-            &nbsp;
-          </td>
-          <td>
-            <tal:block content="content/delegation_date_str|string:">
+
+      <tal:block define="level_infos python:infos[level];
+			 level_items python:level_infos['items'];
+                        ">
+	<td>
+	  <tal:block  condition="level_infos/current_level"
+		      replace="structure python:here.getImgTag(
+			       'stack_current_level.png',
+			       base_url=portal_url,
+			       alt='Niveau courant')" />
+	</td>
+	<td tal:condition="insert_mode">
+	    <input type="radio" name="level" value="level"
+		   tal:attributes="value level_infos/level_str" />
+	</td>
+	<td tal:condition="not:insert_mode">
+	  <div tal:repeat="content level_items">
+	       <input type="checkbox" name="push_ids:list"
+		      tal:condition="python: not content.get('not_deletable', False)"
+		      tal:attributes="value content/input_id;
+				      id content/label_id;"
+		      />
+	  </div>
+	</td>
+	<td>
+	  <div tal:repeat="content level_items">
+	    <tal:block content="content/identite">
+	      Delegatee
+	    </tal:block>
+	    &nbsp;
+	  </div>
+	</td>
+	<td>
+	  <div tal:repeat="content level_items">
+	    <tal:block content="content/delegation_date_str|string:">
               Delegation date
             </tal:block>
             &nbsp;
-          </td>
-          <td>
-            <tal:block define="voc_key content/directive|string:"
-              content="python:vocabulary.get(voc_key, voc_key) or ' '">
-              Directive
-            </tal:block>
-            &nbsp;
-            <div class="field"
-              tal:define="directive content/directive|string:">
-              <select name="directives:list"
-		      tal:define="list python:[(voc[1].strip(), voc) for voc in vocabulary.items()];
-				  sort_list python:list.sort();
-				  vocabulary_list python:[item[1] for item in list];
-				  ">
-                <tal:block repeat="item vocabulary_list">
-                  <option
-                    tal:define="k python:item[0];
-                                w python:item[1];"
-                    tal:content="w"
-                    tal:attributes="value k;
-                                    selected python:directive == k;" />
-                </tal:block>
-                <option
-                  tal:condition="python:directive not in vocabulary.keys()"
-                  tal:content="directive"
-                  tal:attributes="value directive"
-                  selected="selected" />
-              </select>
-            </div>
-          </td>
-          <td>
-            <tal:block content="content/comment|string:">
-              Comment
-            </tal:block>
-            &nbsp;
-          </td>
-        </tr>
+	  </div>
+	</td>
+        <td>
+	  <div tal:repeat="content level_items">
+	    <tal:block define="voc_key content/directive|string:">
+	      <tal:content condition="insert_mode"
+			   content="python:vocabulary.get(voc_key, voc_key) or ' '">
+		Directive
+	      </tal:content>
+	      <tal:content condition="not:insert_mode">
+		<select name="directives:list"
+			tal:define="list python:[(voc[1].strip(), voc) for voc in vocabulary.items()];
+				    sort_list python:list.sort();
+				    vocabulary_list python:[item[1] for item in list];
+				    ">
+		  <tal:block repeat="item vocabulary_list">
+		    <option
+			tal:define="k python:item[0];
+				    w python:item[1];"
+			tal:content="w"
+			tal:attributes="value k;
+					selected python:voc_key == k;" />
+		  </tal:block>
+		  <option
+		      tal:condition="python:voc_key not in vocabulary.keys()"
+		      tal:content="voc_key"
+		      tal:attributes="value voc_key"
+		      selected="selected" />
+		</select>
+	      </tal:content>
+	    </tal:block>
+	  </div>
+	</td>
+	<td>
+	  <div tal:repeat="content level_items">
+	    <tal:block content="content/comment|string:">
+	      Comment
+	    </tal:block>
+	    &nbsp;
+	  </div>
+	</td>
       </tal:block>
-    </tal:block>
+    </tr>
   </table>
 </tal:block>
 
-<tal:block condition="python:mode=='edit'">
-  <table summary="stack content for edit"
-    class="Docs" border="0"
-    cellspacing="0" cellpadding="0">
+<tal:block condition="python:mode==''">
+  <table summary="stack content for insertion"
+    class="listing">
     <tr>
       <th>
         &nbsp;
