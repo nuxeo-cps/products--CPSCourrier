@@ -4,14 +4,14 @@
 
   <metal:block fill-slot="style_slot">
     <link rel="Stylesheet" type="text/css" href=""
-      tal:attributes="href string:${base_url}document.css" />
+	  tal:attributes="href string:${base_url}document.css" />
     <link rel="Stylesheet" type="text/css" href=""
-      tal:attributes="href string:${base_url}forum.css" />
+	  tal:attributes="href string:${base_url}forum.css" />
   </metal:block>
 
   <metal:main fill-slot="main"
-	    tal:define="mode request/form/stack_mode|string:view;
-			wf_var_id string:Pilots">
+	      tal:define="mode request/form/stack_mode|string:view;
+			  wf_var_id string:Pilots">
     <form action="cpscourrier_stack_modify" method="POST"
 	  enctype="multipart/form-data">
       <tal:block replace="structure python:here.portal_workflow.getInfoFor(here,
@@ -25,6 +25,116 @@
 	     value="button_delete" />
       <input type="submit" class="context" name="submit_edit"
 	     value="button_modify" />
-    </form>
-  </metal:main>
+
+    <tal:comment condition="nothing">
+      Search part is directly taken from folder_localrole_form. This is good enough to
+      play with the insertion process while there aren't so many entry fields.
+    </tal:comment>
+
+    <tal:search define="search_param python:request.get('search_param', '');
+			search_term python:request.get('search_term', '');
+			search_limit python:int(request.get('search_limit', 100));
+			searching search_param;
+			cps_roles python:here.getCPSCandidateLocalRoles();
+			found python:searching and here.folder_localrole_search(search_param, search_term);
+			">
+
+      <tal:endform condition="not:searching" replace="structure string:</form>" />
+      <h3 i18n:translate="search_for_delegatees"
+	  tal:condition="not:searching">
+	Add new delegatees to the roadmap
+      </h3>
+      <h3 i18n:translate="delegatees_search_results"
+	  tal:condition="searching">
+	Add delegatees: search results
+      </h3>
+
+      <div class="user_roles">
+	<form method="post" action="cpscourrier_roadmap_view"
+	      tal:condition="not:searching"
+	      tal:attributes="action string:${here_url}/cpscourrier_roadmap_view">
+
+	  <input type="hidden" name="stack_mode" value="insert" />
+	  <table summary="search layout">
+	    <tr>
+	      <td>
+		<select name="search_param" id ="search_param">
+		  <option i18n:translate="label_user_surname"
+			  tal:attributes="selected python:search_param == 'sn'"
+			  value="sn">User surname</option>
+		  <option i18n:translate="label_user_givenName"
+			  tal:attributes="selected python:search_param == 'givenName'"
+			  value="givenName">User first name</option>
+		  <option i18n:translate="label_user_id"
+			  tal:attributes="selected python:search_param == 'id'"
+			  value="id">User id</option>
+		  <option i18n:translate="label_user_email"
+			  tal:attributes="selected python:search_param == 'email'"
+			  value="email">Email address</option>
+		  <option i18n:translate="label_group_name"
+			  tal:attributes="selected python:search_param == 'groupname'"
+			  value="groupname" >Group name</option>
+		</select>
+	      </td>
+	      <td>
+		<input type="text" name="search_term" id="search_term" size="30"
+		       tal:attributes="value search_term" />
+		<input type="submit" name="role_submit" value="button_search"
+		       class="standalone" i18n:attributes="value" />
+	      </td>
+	    </tr>
+	  </table>
+	</form>
+      </div>
+
+    <tal:search-results condition="python:searching">
+      <tal:block
+	  define="search_members python:search_param and search_param in ('id', 'givenName', 'sn', 'email');
+		  search_groups python:search_param and search_param == 'groupname';
+		  search_limit_exceeded python:len(found)>search_limit;
+		  ">
+	<div tal:condition="not:found">
+	  <tal:block condition="search_members">
+	    <metal:block use-macro="here/folder_localrole_members_search_results/macros/search_results" />
+	  </tal:block>
+	  <tal:block condition="search_groups">
+	    <metal:block use-macro="here/folder_localrole_groups_search_results/macros/search_results" />
+	  </tal:block>
+	</div>
+	<div tal:condition="python:found and search_limit_exceeded">
+	  <p i18n:translate="legend_local_roles_search_limit_exceeded">
+	    Sorry, your query gave too many results, please refine your search criteria
+	  </p>
+	</div>
+	<div tal:condition="python:found and not search_limit_exceeded" class="user_roles">
+	  <p i18n:translate="legend_local_roles_select_members_and_role"
+	     tal:condition="search_members">
+	    Select member(s) and a role to assign:
+	  </p>
+	  <p i18n:translate="legend_local_roles_select_groups_and_role"
+	     tal:condition="search_groups">
+	    Select groups(s) and a role to assign:
+	  </p>
+	  <tal:block condition="search_members">
+	    <metal:block use-macro="here/cpscourrier_stack_members_search_results/macros/search_results" />
+	  </tal:block>
+	  <tal:block condition="search_groups">
+	    <metal:block
+		use-macro="here/folder_localrole_groups_search_results/macros/search_results" />
+	  </tal:block>
+	  <input type="submit" class="context"
+		 name="submit_add" value="button_validate"
+		 i18n:attributes="value"/>
+	  <input type="button" class="context"
+		 name="cancel" value="button_cancel"
+		 i18n:attributes="value"
+		 onclick="history.back();"/>
+	</div>
+      </tal:block>
+
+    </tal:search-results>
+    <tal:endform condition="searching" replace="structure string:</form>" />
+
+  </tal:search>
+</metal:main>
 </metal:html>
