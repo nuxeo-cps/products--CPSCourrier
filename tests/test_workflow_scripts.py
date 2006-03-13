@@ -30,7 +30,8 @@ from Products.CPSDefault.tests.CPSTestCase import CPSTestCase
 from Products.CPSCourrier.tests.layer import CPSCourrierLayer
 
 # import things to test
-from Products.CPSCourrier.workflows.scripts import reply_to_incoming
+from Products.CPSCourrier.workflows.scripts import (
+    reply_to_incoming, flag_incoming_answered)
 from Products.CPSCourrier.config import RELATION_GRAPH_ID
 
 
@@ -78,6 +79,13 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
         self.portal.mailboxes.manage_delObjects([self.MBG_ID])
         self.logout()
 
+    # make tests less verbose by using custom accessor for WF state
+    def _get_state(self, ob):
+        return ob.workflow_history.values()[0][-1]['review_state']
+
+    def _set_state(self, ob, state):
+        ob.workflow_history.values()[0][-1]['review_state'] = state
+
     def test_reply_to_incoming(self):
         rtool = getToolByName(self.portal, 'portal_relations')
 
@@ -108,6 +116,94 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
                                 'is_reply_to')
         expected = (int(self.in_mail2.getDocid()),)
         self.assertEquals(expected, res)
+
+    def test_flag_incoming_answered_1(self):
+        # the replying scenario with only one reply to in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        in_mail1 = self.in_mail1
+        out_mail1 = reply_to_incoming(in_mail1)
+
+        # initial states after creation
+        self.assertEquals(self._get_state(in_mail1), 'received')
+        self.assertEquals(self._get_state(out_mail1), 'work')
+
+        # if incoming mail and outgoing mail are not is states 'answering' and
+        # 'sent' respectively, this should not change anything
+        flag_incoming_answered(out_mail1)
+        self.assertEquals(self._get_state(in_mail1), 'received')
+        self.assertEquals(self._get_state(out_mail1), 'work')
+
+        # only incoming mail is in state 'answering' -> nothing either
+        self._set_state(in_mail1, 'answering')
+        flag_incoming_answered(out_mail1)
+        self.assertEquals(self._get_state(in_mail1), 'answering')
+        self.assertEquals(self._get_state(out_mail1), 'work')
+
+        # only outgoing mail is in state 'sent' -> nothing either
+        self._set_state(in_mail1, 'received')
+        self._set_state(out_mail1, 'sent')
+        flag_incoming_answered(out_mail1)
+        self.assertEquals(self._get_state(in_mail1), 'received')
+        self.assertEquals(self._get_state(out_mail1), 'sent')
+
+        # if both incoming and outgoing are on the right state, the transition
+        # is triggered
+        self._set_state(in_mail1, 'answering')
+        flag_incoming_answered(out_mail1)
+        self.assertEquals(self._get_state(in_mail1), 'answered')
+        self.assertEquals(self._get_state(out_mail1), 'sent')
+
+    def test_flag_incoming_answered_2(self):
+        # the replying scenario with several (2) replies to an incoming mail
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        in_mail1 = self.in_mail1
+        out_mail1 = reply_to_incoming(in_mail1)
+        out_mail2 = reply_to_incoming(in_mail1)
+
+        # initial states after creation
+        self.assertEquals(self._get_state(in_mail1), 'received')
+        self.assertEquals(self._get_state(out_mail1), 'work')
+        self.assertEquals(self._get_state(out_mail2), 'work')
+
+        # if incoming mail and outgoing mails are not is states 'answering' and
+        # 'sent' respectively, this should not change anything
+        flag_incoming_answered(out_mail1)
+        self.assertEquals(self._get_state(in_mail1), 'received')
+        self.assertEquals(self._get_state(out_mail1), 'work')
+        self.assertEquals(self._get_state(out_mail2), 'work')
+
+        # only incoming mail is in state 'answering' -> nothing either
+        self._set_state(in_mail1, 'answering')
+        flag_incoming_answered(out_mail1)
+        self.assertEquals(self._get_state(in_mail1), 'answering')
+        self.assertEquals(self._get_state(out_mail1), 'work')
+        self.assertEquals(self._get_state(out_mail2), 'work')
+
+        # only outgoing mails are in state 'sent' -> nothing either
+        self._set_state(in_mail1, 'received')
+        self._set_state(out_mail1, 'sent')
+        self._set_state(out_mail2, 'sent')
+        flag_incoming_answered(out_mail1)
+        self.assertEquals(self._get_state(in_mail1), 'received')
+        self.assertEquals(self._get_state(out_mail1), 'sent')
+        self.assertEquals(self._get_state(out_mail2), 'sent')
+
+        # if only one of the replies is 'sent' -> nothing either
+        self._set_state(in_mail1, 'answering')
+        self._set_state(out_mail1, 'sent')
+        self._set_state(out_mail2, 'work')
+        flag_incoming_answered(out_mail1)
+        self.assertEquals(self._get_state(in_mail1), 'answering')
+        self.assertEquals(self._get_state(out_mail1), 'sent')
+        self.assertEquals(self._get_state(out_mail2), 'work')
+
+        # if both incoming and outgoing are on the right state, the transition
+        # is triggered
+        self._set_state(out_mail2, 'sent')
+        flag_incoming_answered(out_mail1)
+        self.assertEquals(self._get_state(in_mail1), 'answered')
+        self.assertEquals(self._get_state(out_mail1), 'sent')
+        self.assertEquals(self._get_state(out_mail2), 'sent')
 
 
 def test_suite():
