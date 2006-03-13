@@ -277,8 +277,12 @@ class TabularWidget(CPSPortletWidget):
         if proxy is None:
             proxy = datastructure.getDataModel().getProxy()
 
+        if proxy is None:
+            return []
+
         cat = self.actions_category or 'object'
-        actions = atool.listFilteredActionsFor(proxy)[self.actions_category]
+        all_actions = atool.listFilteredActionsFor(proxy)
+        actions = all_actions.get(self.actions_category, ())
         return [{'title': action['name'],
                 'url': action['url'],
                  'id' : action['id'],}

@@ -103,7 +103,7 @@ class IntegrationTestTabularPortlet(IntegrationTestCase):
     def afterAfterSetUp(self):
         # a portlet widget with custom rendering methods
         self.widget = TestingTabularWidgetCustomMethods(
-            'the_id_custom')
+            'the_id_custom').__of__(self.portal)
         self.widget.manage_changeProperties(row_layout='test_row')
 
     def test_widget_registration(self):
@@ -164,6 +164,11 @@ class IntegrationTestTabularPortlet(IntegrationTestCase):
             'Title 1|<div class="ddefault">Pending</div>',
             'Title 2|<div class="ddefault">Rejected</div>',
             ])
+
+    def test_getActions(self):
+        # don't fail if no action from the right category
+        self.widget.actions_category = "won't exist, ever"
+        self.assertEquals(self.widget.getActions(self.ds), [])
 
 #
 # Sub classes
