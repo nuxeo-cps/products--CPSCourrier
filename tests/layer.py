@@ -38,6 +38,7 @@ from Products.CPSCourrier.tests import widgets, stackelements
 
 # register profiles
 ZopeTestCase.installProduct('CPSCourrier')
+ZopeTestCase.installProduct('CPSRelation')
 
 # CPSCourrier:tests : add more layouts to test the widgets
 profile_registry.registerProfile(
