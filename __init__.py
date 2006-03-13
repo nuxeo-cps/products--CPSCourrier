@@ -28,6 +28,9 @@ import widgets, workflows
 # Module security for workflow scripts
 ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
     'reply_to_incoming')
+ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
+    'flag_incoming_answered')
+
 
 registerDirectory('skins', globals())
 
