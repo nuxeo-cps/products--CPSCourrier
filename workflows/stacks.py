@@ -349,7 +349,7 @@ class HierarchicalStackWithData(HierarchicalStack):
                 # protect delegatee self-deletion by adding a 'deletable'
                 # info in edit mode
                 if mode == 'edit' and level == current_level:
-                    elt_infos['deletable'] = elt.holdsCurrentMember(context)
+                    elt_infos['deletable'] = not elt.holdsCurrentMember(context)
                 level_items.append(elt_infos)
             infos[level] = {
                 'level_str': str(level),
