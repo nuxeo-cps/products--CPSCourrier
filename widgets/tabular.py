@@ -368,7 +368,7 @@ class TabularWidget(CPSPortletWidget):
         else:
             here_url = None
 
-        # in search mode, proxy is actually the context, so 
+        # in search mode, proxy is actually the context, so
         # here_url must take the view name into account
         # PUBLISHED would be the view class instance or the skin zpt or py
         if mode == 'search':
