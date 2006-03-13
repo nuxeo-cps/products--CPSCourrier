@@ -67,7 +67,8 @@ class StackElementWithData(StackElement, PersistentMapping):
     def __init__(self, id, **kw):
         self._setId(id)
         PersistentMapping.__init__(self, **kw)
-        ## Already import default_writes ?
+        if not kw:
+            self.update({})
 
     def applyDefault(self, key, how):
         return callable(how) and how() or getattr(aq_base(self), how)()

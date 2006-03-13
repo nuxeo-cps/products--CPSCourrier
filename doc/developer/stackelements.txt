@@ -19,13 +19,13 @@ This is a stack element (see Products/CPSWorkflows) that implements
 the dict API, and provides moreover some facilities to deal with default
 values::
 
-    >>> from Products.CPSCourrier.workflows.stackelements import \
-    ...                  StackElementWithData
-    >>> from Products.CPSWorkflow.interfaces import IStackElement
-    >>> elt = StackElementWithData('prefix:el', why='because')
+    >>> from Products.CPSCourrier.tests.stackelements import \
+    ...                  ExampleStackElement
+    >>> from Products.CPSCourrier.interfaces import IStackElementWithData
+    >>> elt = ExampleStackElement('example:el', why='because')
     >>> elt
-    <StackElementWithData at prefix:el>
-    >>> IStackElement.providedBy(elt)
+    <ExampleStackElement at example:el>
+    >>> IStackElementWithData.providedBy(elt)
     True
     >>> elt['why']
     'because'
@@ -37,13 +37,13 @@ make a blank stack element with prepared defaults::
 
     >>> def aCall():
     ...     return 'A callable'
-    >>> elt = StackElementWithData('prefix:el')
+    >>> elt = ExampleStackElement('example:el')
     >>> elt._default_reads = {'acall': aCall, 'anattr': 'getId'}
     >>> elt._default_writes = {'wrote_call': aCall, 'wrote_attr': 'getId'}
     >>> aCall()
     'A callable'
     >>> elt.getId()
-    'prefix:el'
+    'example:el'
 
 The default read is used (only) in case a value hasn't been already set::
 
@@ -53,14 +53,13 @@ The default read is used (only) in case a value hasn't been already set::
     >>> elt['acall']
     'set'
     >>> elt['anattr']
-    'prefix:el'
+    'example:el'
 
-Default reads appear in the result dict of calling the element (delegation_date
-is the default _default_write that was called upon object creation)::
+Default reads appear in the result dict of calling the element::
 
     >>> pretty_print(elt())
     {'acall': 'set',
-     'anattr': 'prefix:el'}
+     'anattr': 'example:el'}
 
 Similarly, the default write is applied in case a value
 isn't supplied and has not been set already. It is therefore suitable for
@@ -76,16 +75,16 @@ creation dates, for instance::
     >>> elt['wrote_call']
     'no miss'
 
-Note also that default writes are not applied upon creation if no data is
-passed. This was actually used above, since the default writes
-dict is non empty at class level::
+Note also that default writes are applied at creation time even if no data is
+passed. To see this we'll use the base class, since it has a default write::
 
+    >>> from Products.CPSCourrier.workflows.stackelements import (
+    ...                                                    StackElementWithData)
     >>> StackElementWithData._default_writes.keys()
     ['delegation_date']
     >>> elt = StackElementWithData('')
-    >>> elt._default_reads = {}
     >>> 'delegation_date' in elt
-    False
+    True
 
 .. Emacs
 .. Local Variables:
