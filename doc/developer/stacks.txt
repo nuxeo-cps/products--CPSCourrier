@@ -35,6 +35,9 @@ element with data not tied to users/groups::
     >>> IStackElementWithData.implementedBy(ExampleStackElement)
     True
 
+Pushing elements
+~~~~~~~~~~~~~~~~
+
 Let's demonstrate how pushing elements work. Let's try with a single element::
 
     >>> from DateTime import DateTime
@@ -68,8 +71,26 @@ Now several elements at once::
     >>> pretty_print(eltB())
     {'d2': 'B2', 'd1': 'B1'}
 
+Rendering helpers
+~~~~~~~~~~~~~~~~~
 
+    This stacks also provides preformatting methods, to be used by
+    the render method. Let's see what the render helper for stack
+    elements does::
 
+    >>> elt = ExampleStackElement('example:el', adate=DateTime('2006/03/10'))
+    >>> pretty_print(stack.getStackElementForRender(elt, 0, 'view'))
+    {'adate': DateTime('2006/03/10'),
+    'adate_str': '2006/03/10',
+    'input_id': '0,example:el',
+    'label_id': 'label_0,example:el'}
+
+    In particular, the DateTime instance has been converted to a
+    string. One can further specify the format::
+    >>> infos = stack.getStackElementForRender(elt, 0, 'view',
+    ...                          date_format='[%d.%m.%y]')
+    >>> infos['adate_str']
+    '[10.03.06]'
 
 .. Emacs
 .. Local Variables:

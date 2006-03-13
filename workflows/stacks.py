@@ -339,6 +339,7 @@ class HierarchicalStackWithData(HierarchicalStack):
 
         all_levels = self.getAllLevels()
 
+        import pdb; pdb.set_trace()
         for level in all_levels:
             level_content = stack_content[level]
             level_items = []
@@ -409,15 +410,11 @@ class HierarchicalStackWithData(HierarchicalStack):
 
         # dates
 
-        # decode because there might be more than pure formatting in fmt
-        date_fmt = kw.get('date_format')
-        for key in infos:
-            if isinstance(infos[key], DateTime):
-                if date is None:
-                    date_str = ""
-                else:
-                    date_str = date.strftime(date_fmt)
-                infos[date_id +  '_str'] = date_str
+        date_fmt = kw.get('date_format', '%Y/%m/%d')
+        for key, value in infos.items():
+            if isinstance(value, DateTime):
+                date_str = value.strftime(date_fmt)
+                infos[key +  '_str'] = date_str
 
         elt_id = elt.getId()
 
@@ -427,23 +424,26 @@ class HierarchicalStackWithData(HierarchicalStack):
             'label_id': 'label_' + str(level) + ',' + elt_id,
             })
 
-        # user info
-        user = 1
-        if elt_id.startswith('msg_group:'):
-            user = 0
-        if user:
-            dir = kw.get('members')
-        else:
-            dir = kw.get('groups')
+        # user/group info
+        cpsdir = None
+        if elt_id.startswith('user'):
+            user = True
+            cpsdir = kw.get('members')
+        elif elt_id.startswith('group'):
+            group = True
+            cpsdir = kw.get('group')
+        if not cpsdir: # happens, e.g, in unit tests
+            return infos
+
         id_wo_prefix = elt.getIdWithoutPrefix()
         entry = None
         if id_wo_prefix:
-            entry = dir.getEntry(id_wo_prefix, default=None)
+            entry = cpsdir.getEntry(id_wo_prefix, default=None)
         if entry is None:
             # not found
             infos['identite'] = id_wo_prefix
         else:
-            title = entry.get(dir.title_field, '')
+            title = entry.get(cpsdir.title_field, '')
             if not title:
                 title = id_wo_prefix
             if not user:
@@ -451,6 +451,7 @@ class HierarchicalStackWithData(HierarchicalStack):
                 cpsmcat = kw.get('cpsmcat')
                 title = cpsmcat(title, default=title)
             infos['identite'] = title
+
         return infos
 
     def getInsertLevels(self, all_levels):
