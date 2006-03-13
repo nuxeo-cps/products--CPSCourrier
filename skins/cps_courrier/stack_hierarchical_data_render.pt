@@ -12,25 +12,22 @@
   portal_url python:portal.absolute_url()+'/';
   ">
 
-<tal:block condition="python:mode=='view'">
+<tal:block condition="python:mode in ['view', 'edit']">
   <table summary="stack content"
-    class="Docs" border="0"
+    class="listing" border="0"
     cellspacing="0" cellpadding="0">
     <tr>
+      <th>
+        &nbsp;
+      </th>
       <th>
         &nbsp;
       </th>
       <th i18n:translate="label_identite">
         Identite
       </th>
-      <th i18n:translate="label_action_state">
-        State
-      </th>
-      <th i18n:translate="label_acknowledge_date">
-        Acknowledge Date
-      </th>
-      <th i18n:translate="label_transmission_date">
-        Transmision Date
+      <th i18n:translate="label_delegation_date">
+	Delegation Date
       </th>
       <th i18n:translate="label_directive">
         Directive
@@ -47,16 +44,21 @@
                          level_items python:level_infos['items'];
                         ">
         <tr tal:repeat="content level_items"
-            tal:define="even python:repeat['level'].even() and 1 or 0"
-            tal:attributes="class python:even and 'Paire' or nothing">
-          <td tal:condition="level_infos/current_level">
-            <tal:block replace="structure python:here.getImgTag(
-                                'arrow_pagination_right_off.gif',
-                                base_url=portal_url,
-                                alt='Niveau courant')" />
-          </td>
-          <td tal:condition="not:level_infos/current_level">
-            &nbsp;
+	    tal:attributes="class python:test(repeat['level'].odd(),
+			    'odd', 'even')">
+	  <td> 
+            <input type="checkbox" name="pop_ids:list"
+              tal:condition="not:content/not_deletable|nothing"
+              tal:attributes="value content/input_id;
+                              id content/label_id;
+                             " />
+	  </td>
+          <td>
+            <tal:block  condition="level_infos/current_level"
+	      replace="structure python:here.getImgTag(
+	                             'stack_current_level.png',
+				     base_url=portal_url,
+				     alt='Niveau courant')" />
           </td>
           <td>
             <tal:block content="content/identite">
@@ -64,70 +66,46 @@
             </tal:block>
             &nbsp;
           </td>
-          <td class="ActionState">
-            <div tal:content="content/action_str|string:"
-              tal:attributes="class python:test(content['action'] == 2, 'ActionState', nothing)">
-              Action state
-            </div>
-            &nbsp;
-          </td>
-          <td class="Date">
-            <tal:block content="content/acknowledge_date_str">
-              Acknowledge date
-            </tal:block>
-            &nbsp;
-          </td>
-          <td class="Date">
-            <tal:block content="content/transmission_date_str">
-              Transmission date
+          <td>
+            <tal:block content="content/delegation_date_str|string:">
+              Delegation date
             </tal:block>
             &nbsp;
           </td>
           <td>
-            <tal:block define="voc_key content/directive"
+            <tal:block define="voc_key content/directive|string:"
               content="python:vocabulary.get(voc_key, voc_key) or ' '">
               Directive
             </tal:block>
             &nbsp;
+            <div class="field"
+              tal:define="directive content/directive|string:">
+              <select name="directives:list"
+		      tal:define="list python:[(voc[1].strip(), voc) for voc in vocabulary.items()];
+				  sort_list python:list.sort();
+				  vocabulary_list python:[item[1] for item in list];
+				  ">
+                <tal:block repeat="item vocabulary_list">
+                  <option
+                    tal:define="k python:item[0];
+                                w python:item[1];"
+                    tal:content="w"
+                    tal:attributes="value k;
+                                    selected python:directive == k;" />
+                </tal:block>
+                <option
+                  tal:condition="python:directive not in vocabulary.keys()"
+                  tal:content="directive"
+                  tal:attributes="value directive"
+                  selected="selected" />
+              </select>
+            </div>
           </td>
           <td>
-            <tal:block content="content/comment">
+            <tal:block content="content/comment|string:">
               Comment
             </tal:block>
             &nbsp;
-          </td>
-          <td tal:define="dates_info_input_id string:${content/input_id}dates_info">
-            <button type="button" class="tooltipControl"
-              tal:condition="content/dates_info"
-              tal:attributes="
-                onclick string:toggleElementVisibility('${dates_info_input_id}');
-                class python:even and 'tooltipControlEven' or 'tooltipControlOdd';
-               ">
-              <tal:block replace="structure python:here.getImgTag(
-                                  'arrow_pagination_right_on.gif',
-                                  base_url=portal_url,
-                                  alt='Dates supplémentaires')" />
-            </button>
-            <div class="tooltipArea"
-              style="visibility: hidden; display: none;"
-              tal:attributes="
-                id dates_info_input_id;
-                onclick string:showElement(false, '${dates_info_input_id}');
-               ">
-              <tal:block condition="content/expiry_date_str">
-                <tal:block i18n:translate="label_expiry_date_short">
-                  Expiry
-                </tal:block> :
-                <tal:block content="content/expiry_date_str"/>
-                <br />
-              </tal:block>
-              <tal:block condition="content/relance_date_str">
-                <tal:block i18n:translate="label_relance_date_short">
-                  Relance
-                </tal:block> :
-                <tal:block content="content/relance_date_str"/>
-              </tal:block>
-            </div>
           </td>
         </tr>
       </tal:block>
@@ -149,26 +127,14 @@
       <th i18n:translate="label_identite">
         Identite
       </th>
-      <th i18n:translate="label_action_state">
-        State
-      </th>
-      <th i18n:translate="label_acknowledge_date">
-        Acknowledge Date
-      </th>
-      <th i18n:translate="label_transmission_date">
-        Transmision Date
+      <th i18n:translate="label_delegation_date">
+        Delegation Date
       </th>
       <th i18n:translate="label_directive">
         Directive
       </th>
       <th i18n:translate="label_directive_comment">
         Comment
-      </th>
-      <th i18n:translate="label_expiry_date">
-        Expiry Date
-      </th>
-      <th i18n:translate="label_relance_date">
-        Relance Date
       </th>
     </tr>
     <tal:block define="
@@ -207,28 +173,9 @@
             </label>
             &nbsp;
           </td>
-          <td class="ActionState">
-            <div tal:content="content/action_str"
-              tal:attributes="class python:test(content['action'] == 2, 'ActionState', nothing)">
-              Action state
-            </div>
-            &nbsp;
-          </td>
-          <td class="Date">
-            <tal:block content="content/acknowledge_date_str">
-              Acknowledge date
-            </tal:block>
-            &nbsp;
-          </td>
-          <td class="Date">
-            <tal:block content="content/transmission_date_str">
-              Transmission date
-            </tal:block>
-            &nbsp;
-          </td>
           <td>
             <div class="field"
-              tal:define="directive content/directive">
+              tal:define="directive content/directive|string:">
               <select name="directives:list">
                 <tal:block repeat="item vocabulary_list">
                   <option
@@ -248,51 +195,9 @@
           </td>
           <td>
             <div class="field"
-              tal:define="comment content/comment">
+              tal:define="comment content/comment|string:">
               <input name="comments:list" type="text"
                 tal:attributes="value comment" size="30" />
-            </div>
-          </td>
-          <td>
-            <div class="field"
-              tal:define="name content/input_id">
-              <input type="text" size="11" maxlength="22"
-                name="expiry_dates:list"
-                tal:attributes="value content/expiry_date_str;
-                                id string:${name}_date">
-              <button tal:attributes="id string:trigger_${name}_date">...</button>
-              <tal:block replace="structure string:<script type='text/javascript'>
-                Calendar.setup(
-                  {
-                    inputField  : '${name}_date',
-                    ifFormat    : 'd/m/y',
-                    button      : 'trigger_${name}_date',
-                    mondayFirst : true,
-                    range       : [1970, 2037]
-                  }
-                );
-              </script>" />
-            </div>
-          </td>
-          <td>
-            <div class="field"
-              tal:define="name content/input_id">
-              <input type="text" size="11" maxlength="22"
-                name="relance_dates:list"
-                tal:attributes="value content/relance_date_str;
-                                id string:${name}_date">
-              <button tal:attributes="id string:trigger_${name}_date">...</button>
-              <tal:block replace="structure string:<script type='text/javascript'>
-                Calendar.setup(
-                  {
-                    inputField  : '${name}_date',
-                    ifFormat    : 'd/m/y',
-                    button      : 'trigger_${name}_date',
-                    mondayFirst : true,
-                    range       : [1970, 2037]
-                  }
-                );
-              </script>" />
             </div>
           </td>
         </tr>
@@ -323,8 +228,8 @@
       <th i18n:translate="label_acknowledge_date">
         Acknowledge Date
       </th>
-      <th i18n:translate="label_transmission_date">
-        Transmision Date
+      <th i18n:translate="label_delegation_date">
+        Delegatiom Date
       </th>
       <th i18n:translate="label_directive">
         Directive
@@ -375,40 +280,6 @@
             <label tal:content="content/identite"
                    tal:attributes="for level_infos/label_level">
               Delegatee
-            </label>
-            &nbsp;
-          </td>
-          <td class="ActionState">
-            <div tal:content="content/action_str"
-              tal:attributes="class python:test(content['action'] == 2, 'ActionState', nothing)">
-              Action state
-            </div>
-            &nbsp;
-          </td>
-          <td class="Date">
-            <tal:block content="content/acknowledge_date_str">
-              Acknowledge date
-            </tal:block>
-            &nbsp;
-          </td>
-          <td class="Date">
-            <tal:block content="content/transmission_date_str">
-              Transmission date
-            </tal:block>
-            &nbsp;
-          </td>
-          <td>
-            <label tal:define="voc_key content/directive"
-                   tal:content="python:vocabulary.get(voc_key, voc_key)"
-                   tal:attributes="for level_infos/label_level">
-              Directive
-            </label>
-            &nbsp;
-          </td>
-          <td>
-            <label tal:content="content/comment"
-                   tal:attributes="for level_infos/label_level">
-              Comment
             </label>
             &nbsp;
           </td>

@@ -10,12 +10,21 @@
   </metal:block>
 
   <metal:main fill-slot="main"
-	    tal:define="mode request/form/stack_mode|string:view">
-    <div tal:define="cluster options/cluster|nothing"
-         tal:replace="structure python:here.portal_workflow.getInfoFor(here,
-		             'Pilots').render(context=here, mode=mode)" >
-      RENDERED_STACK
-    </div>
-  </metal:main>
+	    tal:define="mode request/form/stack_mode|string:view;
+			wf_var_id string:Pilots">
+    <form action="cpscourrier_stack_modify" method="POST"
+	  enctype="multipart/form-data">
+      <tal:block replace="structure python:here.portal_workflow.getInfoFor(here,
+			  wf_var_id).render(context=here, mode=mode)" />
 
+      <input type="hidden" name="workflow_action_form"
+	     value="cpscourrier_roadmap_view" />
+      <input type="hidden" name="current_var_id" value=""
+	     tal:attributes="value wf_var_id" />
+      <input type="submit" class="context" name="submit_delete"
+	     value="button_delete" />
+      <input type="submit" class="context" name="submit_edit"
+	     value="button_modify" />
+    </form>
+  </metal:main>
 </metal:html>
