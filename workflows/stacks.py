@@ -339,7 +339,6 @@ class HierarchicalStackWithData(HierarchicalStack):
 
         all_levels = self.getAllLevels()
 
-        import pdb; pdb.set_trace()
         for level in all_levels:
             level_content = stack_content[level]
             level_items = []
