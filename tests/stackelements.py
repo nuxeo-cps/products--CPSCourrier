@@ -27,8 +27,6 @@ class ExampleStackElement(StackElementWithData):
      prefix = 'example'
      _default_reads = {}
      _default_writes = {}
-     
+
 
 WorkflowStackElementRegistry.register(ExampleStackElement)
-
-
