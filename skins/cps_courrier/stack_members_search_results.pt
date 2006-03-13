@@ -27,7 +27,7 @@ Macro needs:
       <tal:block define="entry python:member[1]">
         <td width="16">
           <input type="checkbox" name="push_ids:list" value=""
-                 tal:attributes="value string:user:${entry/id};
+                 tal:attributes="value string:user_wdata:${entry/id};
                                  id string:user_${entry/id};
                                 " />
         </td>
