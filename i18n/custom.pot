@@ -292,6 +292,21 @@ msgstr ""
 msgid "validate"
 msgstr ""
 
+msgid "heading_workflow_invalidate_of ${item_id}"
+msgstr ""
+
+msgid "help_workflow_invalidate"
+msgstr ""
+
+msgid "button_invalidate"
+msgstr ""
+
+msgid "action_invalidate"
+msgstr ""
+
+msgid "invalidate"
+msgstr ""
+
 msgid "heading_workflow_send_of ${item_id}"
 msgstr ""
 

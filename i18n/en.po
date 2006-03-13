@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-13 11:22default\n"
+"POT-Creation-Date: 2006-03-13 20:19default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "button_push_delegatees"
 msgstr "Add"
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filter"
@@ -497,6 +497,25 @@ msgstr "Validate"
 
 msgid "validate"
 msgstr "Validation"
+
+#
+# Workflows
+#
+msgid "heading_workflow_invalidate_of ${item_id}"
+msgstr "Invalidate ${item_id}"
+
+msgid "help_workflow_invalidate"
+msgstr ""
+"You are about to invalidate the current outgoing mail document."
+
+msgid "button_invalidate"
+msgstr "Invalidate"
+
+msgid "action_invalidate"
+msgstr "Invalidate"
+
+msgid "invalidate"
+msgstr "Invalidation"
 
 #
 # Workflows

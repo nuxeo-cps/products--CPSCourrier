@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-03-13 11:22default\n"
+"POT-Creation-Date: 2006-03-13 20:19default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -37,7 +37,7 @@ msgstr ""
 msgid "button_push_delegatees"
 msgstr ""
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filtro"
@@ -464,6 +464,21 @@ msgid "action_validate"
 msgstr ""
 
 msgid "validate"
+msgstr ""
+
+msgid "heading_workflow_invalidate_of ${item_id}"
+msgstr ""
+
+msgid "help_workflow_invalidate"
+msgstr ""
+
+msgid "button_invalidate"
+msgstr ""
+
+msgid "action_invalidate"
+msgstr ""
+
+msgid "invalidate"
 msgstr ""
 
 msgid "heading_workflow_send_of ${item_id}"
