@@ -73,6 +73,7 @@ def flag_incoming_answered(outgoing_proxy):
 
     If no incoming mail is found: do nothing (after logging it)
     """
+    logger.debug('start flag_incoming_answered')
     rtool = getToolByName(outgoing_proxy, 'portal_relations')
     ptool = getToolByName(outgoing_proxy, 'portal_proxies')
     wtool = getToolByName(outgoing_proxy, 'portal_workflow')
@@ -80,33 +81,42 @@ def flag_incoming_answered(outgoing_proxy):
     incoming_docids = rtool.getRelationsFor(RELATION_GRAPH_ID,
                                             int(outgoing_proxy.getDocid()),
                                             'is_reply_to')
+    logger.debug('incoming docids: %r' % (incoming_docids,))
     if not incoming_docids:
         # the related incoming mail has been deleted
         logger.warning('%r has no related incoming mail: do nothing')
         return
     # a is_reply_to is a "many to one" relation
     (incoming_docid,) = incoming_docids
+    logger.debug('incoming docid: %r' % (incoming_docid,))
 
     # check that all replies to the incoming mail are already sent
     outgoing_docids = rtool.getRelationsFor(RELATION_GRAPH_ID,
                                             int(incoming_docid),
                                             'has_reply')
+    logger.debug('outgoing docids: %r' % (outgoing_docids,))
     for docid in outgoing_docids:
         proxy_infos = ptool.getProxyInfosFromDocid(
             str(docid), workflow_vars=('review_state',))
         for info in proxy_infos:
-            if info['review_state'] is not 'sent':
+            if info['review_state'] != 'sent':
                 # this reply is still not sent: do nothing
+                logger.debug('reply with info: %r not sent: do nothing' %
+                             info)
                 return
+    logger.debug('all replies sent')
 
     # all replies are sent: switch the incoming review state to answered
     for info in ptool.getProxyInfosFromDocid(
         str(incoming_docid), workflow_vars=('review_state',)):
-        if info['review_state'] is not 'answering':
+        if info['review_state'] != 'answering':
             # incoming mail can already have changed state for several reasons,
             # in that case, just ignore it
+            logger.debug('ingnoring proxy with info %r' % info)
             continue
+        logger.debug('trigger flag_answered transition for %r' % info)
         wtool.doActionFor(info['object'], 'flag_answered')
+
 
 
 
