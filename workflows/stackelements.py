@@ -38,6 +38,8 @@ from Globals import InitializeClass
 from Acquisition import aq_base
 from ZODB.PersistentMapping import PersistentMapping
 
+from Products.CMFCore.utils import getToolByName
+
 from Products.CPSWorkflow.stackregistries import WorkflowStackElementRegistry
 from Products.CPSWorkflow.stackelement import StackElement
 
@@ -113,6 +115,16 @@ class UserStackElementWithData(StackElementWithData, ):
 
     def getIdForRoleSettings(self):
         return self.getIdWithoutPrefix()
+
+    def holdsCurrentMember(self, context, **kw):
+        """tell if current member is the one this element is about.
+
+        we don't use kw, but we have not to fail if some more keyword args
+        are passed"""
+
+        pmtool = getToolByName(context, 'portal_membership')
+        member = pmtool.getAuthenticatedMember()
+        return member.getId() == self.getIdWithoutPrefix()
 
 InitializeClass(UserStackElementWithData)
 

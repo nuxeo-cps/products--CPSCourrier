@@ -21,8 +21,39 @@
 import unittest
 from zope.testing import doctest
 
+from Products.CPSDefault.tests.CPSTestCase import CPSTestCase
+from layer import CPSCourrierLayer
+
+from Products.CMFCore.utils import getToolByName
+from Products.CPSSchemas.DataModel import DataModel
+from Products.CPSCourrier.workflows.stackelements import (
+    UserStackElementWithData,
+    )
+
+class UserStackElementWithDataIntegrationTestCase(CPSTestCase):
+
+    layer = CPSCourrierLayer
+
+    def afterSetUp(self):
+        dtool = getToolByName(self.portal, 'portal_directories')
+        mdir = dtool.members
+
+        mdir._createEntry({'id': 'testuser',
+                           'roles' : ['Member',]})
+
+        self.elt = UserStackElementWithData('user_wdata:testuser')
+
+    def test_holdsCurrentMember(self):
+        self.login('testuser')
+        self.assert_(self.elt.holdsCurrentMember(self.portal))
+
+        self.login('manager')
+        self.failIf(self.elt.holdsCurrentMember(self.portal))
+
+
 def test_suite():
     return unittest.TestSuite((
+        unittest.makeSuite(UserStackElementWithDataIntegrationTestCase),
         doctest.DocFileTest('doc/developer/stackelements.txt',
                             package='Products.CPSCourrier',
                             optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS),
