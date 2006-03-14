@@ -61,6 +61,7 @@
  </state>
  <state state_id="work" title="Work">
   <exit-transition transition_id="checkout_draft"/>
+  <exit-transition transition_id="delete"/>
   <exit-transition transition_id="manage_delegatees"/>
   <exit-transition transition_id="move_down_delegatees"/>
   <exit-transition transition_id="validate"/>
@@ -177,6 +178,20 @@
    <guard-role>WorkspaceMember</guard-role>
   </guard>
   <transition-behavior behavior_id="initial-create"/>
+ </transition>
+ <transition transition_id="delete"
+             title="Delete" new_state=""
+             trigger="USER"
+             before_script="flag_incoming_handled"
+             after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=delete"
+          category="workflow">action_delete</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>Owner</guard-role>
+  </guard>
+  <transition-behavior behavior_id="delete"/>
  </transition>
  <transition transition_id="invalidate"
              title="Undo validation" new_state="work"
@@ -327,10 +342,13 @@
   <guard>
   </guard>
  </variable>
- <script script_id="unlock_locked_before_abandon"
-         type="Script (Python)"
-         filename="workflows/outgoing_mail_wf/scripts/unlock_locked_before_abandon.py"/>
  <script script_id="flag_incoming_answered"
          type="Script (Python)"
          filename="workflows/outgoing_mail_wf/scripts/flag_incoming_answered.py"/>
+ <script script_id="flag_incoming_handled"
+         type="Script (Python)"
+         filename="workflows/outgoing_mail_wf/scripts/flag_incoming_handled.py"/>
+ <script script_id="unlock_locked_before_abandon"
+         type="Script (Python)"
+         filename="workflows/outgoing_mail_wf/scripts/unlock_locked_before_abandon.py"/>
 </cps-workflow>

@@ -13,4 +13,5 @@ New internal features:
 - simple config.py module to hosts non ZODB config parameters
 - new default IOBTree graph to store relations between mail documents
 - outgoing mails are related to incoming mails on reply transition
-- implemented 'after send' logics
+- implemented 'after send' logics for outgoing_mail_wf
+- implemented 'before delete' logics for outgoing_mail_wf

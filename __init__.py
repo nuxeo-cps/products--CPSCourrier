@@ -30,6 +30,9 @@ ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
     'reply_to_incoming')
 ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
     'flag_incoming_answered')
+ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
+    'flag_incoming_handled')
+
 
 
 registerDirectory('skins', globals())
