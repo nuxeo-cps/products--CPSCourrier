@@ -8,7 +8,7 @@
   <exit-transition transition_id="close"/>
  </state>
  <state state_id="answering" title="">
-  <exit-transition transition_id="back_to_handled"/>
+  <exit-transition transition_id="flag_handled"/>
   <exit-transition transition_id="flag_answered"/>
  </state>
  <state state_id="closed" title="">
@@ -37,7 +37,7 @@
   <guard>
   </guard>
  </transition>
- <transition transition_id="back_to_handled" title=""
+ <transition transition_id="flag_handled" title=""
              new_state="handled" trigger="USER"
              before_script="" after_script="">
 
