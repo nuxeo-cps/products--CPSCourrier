@@ -26,7 +26,7 @@ from Acquisition import aq_parent, aq_inner
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.config import RELATION_GRAPH_ID
 
-logger = logging.getLogger('CPSCourrier')
+logger = logging.getLogger('CPSCourrier.workflows.scripts')
 
 def reply_to_incoming(incoming_proxy):
     """Create an outgoing mail document and update the relation tool
