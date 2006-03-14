@@ -12,6 +12,11 @@
   <metal:main fill-slot="main"
 	      tal:define="mode request/form/stack_mode|string:view;
 			  wf_var_id string:Pilots">
+
+    <h1 i18:translate="cpscourrier_roadmap_heading">
+      Mail Handling Roadmap
+    </h1>
+
     <form action="cpscourrier_stack_modify" method="POST"
 	  enctype="multipart/form-data">
       <tal:block replace="structure python:here.portal_workflow.getInfoFor(here,
