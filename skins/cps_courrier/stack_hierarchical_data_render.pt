@@ -62,6 +62,10 @@
 		 tal:attributes="value content/input_id;
 				 id content/label_id;"
 		 />
+	  <input type="hidden" name="edit_ids:list"
+		 tal:attributes="value content/input_id;
+				 id content/label_id;"
+		 />
 	</div>
       </td>
       <td>
@@ -88,7 +92,7 @@
 	      Directive
 	    </tal:content>
 	    <tal:content condition="not:insert_mode">
-	      <select name="directives:list"
+	      <select name="directive:list"
 		      tal:define="list python:[(voc[1].strip(), voc) for voc in vocabulary.items()];
 				  sort_list python:list.sort();
 				  vocabulary_list python:[item[1] for item in list];

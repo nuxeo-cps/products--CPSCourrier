@@ -66,7 +66,8 @@ from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 
 workflow_actions = {'pop': 'manage_delegatees',
-                    'push': 'manage_delegatees'}
+                    'push': 'manage_delegatees',
+                    }
 
 if REQUEST is not None:
     kw.update(REQUEST.form)
@@ -80,7 +81,7 @@ elif 'submit_edit' in kw:
 else:
     raise ValueError("Unkown submission type")
 
-workflow_action = workflow_actions[action_type]
+workflow_action = workflow_actions.get(action_type)
 
 #
 # helper method
@@ -137,50 +138,45 @@ if action_type == 'push':
         kw['comments'] = len(push_ids)*[kw.get('comment', '')]
         res = wftool.doActionFor(context, workflow_action, **kw)
         psm = 'psm_local_roles_changed'
-elif action_type == 'pop':
-    # delete and edit in the same action
-    # check what button has been submitted
-    if kw.get('edit_delegatees') is not None:
-        # edit
-        # XXX AT: no wf transition used here so add this check
-        if wftool.canManageStack(context, current_var_id):
-            edit_ids = kw.get('edit_ids', ())
-            LOG("cpscourrier_delegation_modify", DEBUG, "edit_ids=%s"%(edit_ids,))
-            directives = kw.get('directives', ())
-            comments = kw.get('comments', ())
-            expiry_dates = kw.get('expiry_dates', ())
-            relance_dates = kw.get('relance_dates', ())
-            # make them real dates
-            err_date = 0
-            invalid_date = ''
-            try:
-                expiry_dates = [makeDate(x) for x in expiry_dates]
-                relance_dates = [makeDate(x) for x in relance_dates]
-            except ValueError, err:
-                err_date = 1
-                invalid_date = err
-            if not err_date:
-                stack = wftool.getStackFor(context, current_var_id)
-                stack.setEditableAttributes(edit_ids, directives, comments,
-                                            expiry_dates, relance_dates)
-                err = 0
-                psm = 'psm_directives_edited'
-            else:
-                err = 1
-                # XXX AT: cannot pass %s to translation
-                psm = "Modifications non effectuées : la date '%s' est invalide"%(invalid_date,)
+
+elif action_type == 'edit':
+    # XXX AT: no wf transition used here so add this check
+    if wftool.canManageStack(context, current_var_id):
+        # what we want
+        dates = ()
+        string_data = ('directive',)
+
+        # elements ids
+        edit_ids = kw.get('edit_ids', ())
+        LOG("cpscourrier_delegation_modify", DEBUG, "edit_ids=%s"%(edit_ids,))
+
+        # data extraction
+        try:
+            date_lists = dict(
+                (key, [makeDate(dstr) for dstr in kw.get(key)]) for key in dates)
+        except ValueError, err:
+            # XXX AT: cannot pass %s to translation
+            psm = "Invalid date: ${date (%s)}" % err
         else:
-            err = 1
-            psm = 'psm_cannot_manage_stack'
+            data_lists = dict((key, kw.get(key)) for key in string_data)
+            data_lists.update(date_lists)
+            stack = wftool.getStackFor(context, current_var_id)
+            stack.setEditableAttributes(edit_ids, data_lists)
+            err = 0
+            psm = 'psm_directives_edited'
     else:
-        pop_ids = kw.get('pop_ids', ())
-        LOG("cpscourrier_delegation_modify", DEBUG, "pop_ids=%s"%(pop_ids,))
-        if not pop_ids:
-            psm = 'psm_select_at_least_one_item'
-            err = 1
-        else:
-            res = wftool.doActionFor(context, workflow_actions['pop'], **kw)
-            psm = 'psm_local_roles_changed'
+        err = 1
+        psm = 'psm_cannot_manage_stack'
+
+elif action_type == 'pop':
+    pop_ids = kw.get('pop_ids', ())
+    LOG("cpscourrier_delegation_modify", DEBUG, "pop_ids=%s"%(pop_ids,))
+    if not pop_ids:
+        psm = 'psm_select_at_least_one_item'
+        err = 1
+    else:
+        res = wftool.doActionFor(context, workflow_actions['pop'], **kw)
+        psm = 'psm_local_roles_changed'
 
 
 if REQUEST is not None:
