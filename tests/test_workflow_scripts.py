@@ -119,7 +119,6 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
 
     def test_flag_incoming_answered_1(self):
         # the replying scenario with only one reply to in_mail1
-        wtool = getToolByName(self.portal, 'portal_workflow')
         in_mail1 = self.in_mail1
         out_mail1 = reply_to_incoming(in_mail1)
 
@@ -155,7 +154,6 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
 
     def test_flag_incoming_answered_2(self):
         # the replying scenario with several (2) replies to an incoming mail
-        wtool = getToolByName(self.portal, 'portal_workflow')
         in_mail1 = self.in_mail1
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail2 = reply_to_incoming(in_mail1)
