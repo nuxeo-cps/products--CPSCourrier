@@ -31,7 +31,7 @@ from Products.CPSCourrier.tests.layer import CPSCourrierLayer
 
 # import things to test
 from Products.CPSCourrier.workflows.scripts import (
-    reply_to_incoming, flag_incoming_answered)
+    reply_to_incoming, flag_incoming_answered, flag_incoming_handled)
 from Products.CPSCourrier.config import RELATION_GRAPH_ID
 
 
@@ -202,6 +202,41 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
         self.assertEquals(self._get_state(in_mail1), 'answered')
         self.assertEquals(self._get_state(out_mail1), 'sent')
         self.assertEquals(self._get_state(out_mail2), 'sent')
+
+    def test_flag_incoming_handled(self):
+        in_mail1 = self.in_mail1
+        out_mail1 = reply_to_incoming(in_mail1)
+        out_mail2 = reply_to_incoming(in_mail1)
+        out_mail3 = reply_to_incoming(in_mail1)
+        self._set_state(in_mail1, 'answering')
+
+        # flag_incoming_answered must change the in_mail1 state only if there is
+        # only one reply remaining
+        flag_incoming_answered(out_mail1)
+        self.assertEquals(self._get_state(in_mail1), 'answering')
+
+        # unlink outmail2, and retry
+        rtool = getToolByName(in_mail1, 'portal_relations')
+        rtool.deleteRelationFor(RELATION_GRAPH_ID,
+                                int(out_mail2.getDocid()),
+                                'is_reply_to',
+                                int(in_mail1.getDocid()))
+        flag_incoming_answered(out_mail1)
+        self.assertEquals(self._get_state(in_mail1), 'answering')
+
+        # unlink outmail3, and retry
+        rtool = getToolByName(in_mail1, 'portal_relations')
+        rtool.deleteRelationFor(RELATION_GRAPH_ID,
+                                int(out_mail3.getDocid()),
+                                'is_reply_to',
+                                int(in_mail1.getDocid()))
+        flag_incoming_answered(out_mail1)
+        self.assertEquals(self._get_state(in_mail1), 'handled')
+
+
+
+
+
 
 
 def test_suite():
