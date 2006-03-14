@@ -215,7 +215,7 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
         flag_incoming_answered(out_mail1)
         self.assertEquals(self._get_state(in_mail1), 'answering')
 
-        # unlink outmail2, and retry
+        # unlink out_mail2, and retry
         rtool = getToolByName(in_mail1, 'portal_relations')
         rtool.deleteRelationFor(RELATION_GRAPH_ID,
                                 int(out_mail2.getDocid()),
@@ -224,7 +224,7 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
         flag_incoming_answered(out_mail1)
         self.assertEquals(self._get_state(in_mail1), 'answering')
 
-        # unlink outmail3, and retry
+        # unlink out_mail3, and retry
         rtool = getToolByName(in_mail1, 'portal_relations')
         rtool.deleteRelationFor(RELATION_GRAPH_ID,
                                 int(out_mail3.getDocid()),
@@ -238,8 +238,102 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
         flag_incoming_handled(out_mail1)
         self.assertEquals(self._get_state(in_mail1), 'handled')
 
+    #
+    # the following tests are for workflow scripts but general events.
+    # As the setup is similar we reuse them directly
+    #
 
+    def test_event_delete_1(self):
+        # remove a proxy that is not linked to anything in the rtool (smoke
+        # test)
+        in_mail1 = self.in_mail1
+        rtool = getToolByName(in_mail1, 'portal_relations')
+        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                int(in_mail1.getDocid()),
+                                'has_reply')
+        self.assertEquals(linked_replies, ())
+        self.mb.manage_delObjects([in_mail1.getId()])
 
+        # the deletion of other proxies such as the mailbox should produce
+        # anything weird either
+        self.mbg.manage_delObjects([self.mb.getId()])
+
+    def test_event_delete_2(self):
+        in_mail1 = self.in_mail1
+        in_mail1_docid = int(in_mail1.getDocid())
+        out_mail1 = reply_to_incoming(in_mail1)
+        out_mail1_docid = int(out_mail1.getDocid())
+        rtool = getToolByName(in_mail1, 'portal_relations')
+
+        # out_mail1 is linked has a reply to in_mail1
+        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                in_mail1_docid, 'has_reply')
+
+        self.assertEquals(linked_replies, (out_mail1_docid,))
+
+        # trigger the deletion event
+        self.mb.manage_delObjects([out_mail1.getId()])
+
+        # after deletion in_mail1 is no longer linked to anything
+        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                in_mail1_docid, 'has_reply')
+        self.assertEquals(linked_replies, ())
+
+    def test_event_delete_3(self):
+        in_mail1 = self.in_mail1
+        in_mail1_docid = int(in_mail1.getDocid())
+        out_mail1 = reply_to_incoming(in_mail1)
+        out_mail1_docid = int(out_mail1.getDocid())
+        out_mail2 = reply_to_incoming(in_mail1)
+        out_mail2_docid = int(out_mail2.getDocid())
+        rtool = getToolByName(in_mail1, 'portal_relations')
+
+        # out_mail1 and 2 are linked has a reply to in_mail1
+        linked_replies = sorted(rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                in_mail1_docid, 'has_reply'))
+        expected = sorted((out_mail1_docid, out_mail2_docid))
+        self.assertEquals(linked_replies, expected)
+
+        # trigger the deletion event
+        self.mb.manage_delObjects([out_mail1.getId()])
+
+        # after deletion in_mail1 is no longer linked to out_mail2
+        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                in_mail1_docid, 'has_reply')
+        self.assertEquals(linked_replies, (out_mail2_docid,))
+
+        # deleting the container should delete children and clean the relation
+        # graph
+        self.mbg.manage_delObjects([self.mb.getId()])
+        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                in_mail1_docid, 'has_reply')
+        self.assertEquals(linked_replies, ())
+
+    def test_integration_delete_and_flag_handled(self):
+        # test the integration of WF delete events and scripts
+        in_mail1 = self.in_mail1
+        out_mail1 = reply_to_incoming(in_mail1)
+        out_mail2 = reply_to_incoming(in_mail1)
+        out_mail3 = reply_to_incoming(in_mail1)
+        self._set_state(in_mail1, 'answering')
+
+        # flag_incoming_answered must change the in_mail1 state only if there is
+        # only one reply remaining
+        flag_incoming_answered(out_mail1)
+        self.assertEquals(self._get_state(in_mail1), 'answering')
+
+        # unlink out_mail1, and retry
+        wtool = getToolByName(in_mail1, 'portal_workflow')
+        wtool.doActionFor(out_mail1, 'delete')
+        self.assertEquals(self._get_state(in_mail1), 'answering')
+
+        # unlink out_mail2, and retry
+        wtool.doActionFor(out_mail2, 'delete')
+        self.assertEquals(self._get_state(in_mail1), 'answering')
+
+        # unlink out_mail3, flag_handled is automatically triggered
+        wtool.doActionFor(out_mail3, 'delete')
+        self.assertEquals(self._get_state(in_mail1), 'handled')
 
 
 
