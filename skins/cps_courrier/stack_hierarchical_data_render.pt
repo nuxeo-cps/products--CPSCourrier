@@ -40,7 +40,7 @@
   <tr tal:repeat="level levels"
       tal:attributes="class python:test(repeat['level'].odd(),
 		      'odd', 'even')">
-    
+
     <tal:block define="level_infos python:infos[level];
 		       level_items python:level_infos['items'];
 		       ">
@@ -57,7 +57,7 @@
       </td>
       <td tal:condition="not:insert_mode">
 	<div tal:repeat="content level_items">
-	  <input type="checkbox" name="push_ids:list"
+	  <input type="checkbox" name="pop_ids:list"
 		 tal:condition="python: not content.get('not_deletable', False)"
 		 tal:attributes="value content/input_id;
 				 id content/label_id;"
