@@ -189,8 +189,6 @@
  <transition transition_id="manage_delegatees" title=""
              new_state="" trigger="USER" before_script=""
              after_script="">
-  <action url="%(content_url)s/content_manage_delegatees_form"
-          category="workflow">action_manage_delegatees</action>
   <guard>
    <guard-role>Pilot</guard-role>
    <guard-role>Manager</guard-role>
