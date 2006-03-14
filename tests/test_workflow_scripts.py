@@ -230,7 +230,12 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
                                 int(out_mail3.getDocid()),
                                 'is_reply_to',
                                 int(in_mail1.getDocid()))
-        flag_incoming_answered(out_mail1)
+        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                int(in_mail1.getDocid()),
+                                'has_reply')
+        # out_mail1 is the last reply: the transition on in_mail1 is triggered
+        self.assertEquals(linked_replies, (int(out_mail1.getDocid()),))
+        flag_incoming_handled(out_mail1)
         self.assertEquals(self._get_state(in_mail1), 'handled')
 
 
