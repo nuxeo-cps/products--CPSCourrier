@@ -33,7 +33,7 @@
 			  wf_var_id).render(context=here, mode=mode)" />
 
       <input type="hidden" name="workflow_action_form"
-	     value="cpscourrier_roadmap_view" />
+	     value="cpscourrier_roadmap" />
       <input type="hidden" name="current_var_id" value=""
 	     tal:attributes="value wf_var_id" />
       <tal:buttons condition="not:searching">
@@ -59,9 +59,9 @@
       </h3>
 
       <div class="user_roles">
-	<form method="post" action="cpscourrier_roadmap_view"
+	<form method="post" action="cpscourrier_roadmap"
 	      tal:condition="not:searching"
-	      tal:attributes="action string:${here_url}/cpscourrier_roadmap_view">
+	      tal:attributes="action string:${here_url}/cpscourrier_roadmap">
 
 	  <input type="hidden" name="stack_mode" value="insert" />
 	  <table summary="search layout">
