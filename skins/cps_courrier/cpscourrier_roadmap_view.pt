@@ -22,6 +22,11 @@
       Mail Handling Roadmap
     </h1>
 
+    <p tal:condition="python:mode=='insert'"
+       i18n:translate="cpscourrier_choose_insertion_level">
+      Please select a level to insert the new delegatee
+    </p>
+
     <form action="cpscourrier_stack_modify" method="POST"
 	  enctype="multipart/form-data">
       <tal:block replace="structure python:here.portal_workflow.getInfoFor(here,
@@ -111,13 +116,13 @@
 	  </p>
 	</div>
 	<div tal:condition="python:found and not search_limit_exceeded" class="user_roles">
-	  <p i18n:translate="legend_local_roles_select_members_and_role"
+	  <p i18n:translate="cpscourrier_select_delegatees"
 	     tal:condition="search_members">
-	    Select member(s) and a role to assign:
+	    Please select the member to insert in the roadmap
 	  </p>
 	  <p i18n:translate="legend_local_roles_select_groups_and_role"
 	     tal:condition="search_groups">
-	    Select groups(s) and a role to assign:
+	    Please select a group to insert in the roadmap
 	  </p>
 	  <tal:block condition="search_members">
 	    <metal:block use-macro="here/cpscourrier_stack_members_search_results/macros/search_results" />
@@ -138,6 +143,6 @@
 
     </tal:search-results>
     <tal:endform condition="searching" replace="structure string:</form>" />
-    
+
   </metal:main>
 </metal:html>
