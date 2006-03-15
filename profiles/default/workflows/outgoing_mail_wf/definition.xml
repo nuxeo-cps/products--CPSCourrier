@@ -217,8 +217,8 @@
  <transition transition_id="move_down_delegatees" title=""
              new_state="" trigger="USER" before_script=""
              after_script="">
-  <action url="%(content_url)s/content_move_down_delegatees_form"
-          category="workflow">action_move_down_delegatees</action>
+  <action url="%(content_url)s/workflow_transition_form?transition=move_down_delegatees"
+     category="workflow">action_move_down_delegatees</action>
   <guard>
    <guard-role>Pilot</guard-role>
   </guard>
