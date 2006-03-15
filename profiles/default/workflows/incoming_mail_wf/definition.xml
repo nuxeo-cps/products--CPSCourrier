@@ -15,11 +15,64 @@
   <exit-transition transition_id="reopen"/>
  </state>
  <state state_id="handled" title="">
+  <state-behavior behavior_id="push-delegatees"/>
+  <state-behavior behavior_id="pop-delegatees"/>
+  <state-behavior behavior_id="workflow-down"/>
+  <state-behavior behavior_id="workflow-reset"/>
+  <push-on-workflow-variable variable_id="Pilots"/>
+  <pop-on-workflow-variable variable_id="Pilots"/>
+  <workflow-down-on-workflow-variable variable_id="Pilots"/>
+  <workflow-reset-on-workflow-variable variable_id="Pilots"/>
   <exit-transition transition_id="answer"/>
   <exit-transition transition_id="discard"/>
   <exit-transition transition_id="forward"/>
   <exit-transition transition_id="forward_email"/>
   <exit-transition transition_id="forward_move"/>
+  <exit-transition transition_id="manage_delegatees"/>
+  <exit-transition transition_id="move_down_delegatees"/>
+  <stack-definition stackdef_id="Pilots"
+                    variable_id="Pilots"
+                    meta_type="Hierarchical Stack Definition"
+                    stack_type="Hierarchical Stack With Data">
+   <managed-roles>
+    <managed-role name="Pilot"
+                  expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
+   </managed-roles>
+   <empty-stack-manage-guard>
+    <guard-role>Owner</guard-role>
+    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>Manager</guard-role>
+    <guard-role></guard-role>
+   </empty-stack-manage-guard>
+   <edit-stack-element-guard>
+   </edit-stack-element-guard>
+   <view-stack-element-guard>
+   </view-stack-element-guard>
+  </stack-definition>
+  <permission-map name="Modify portal content"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+  </permission-map>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceReader</permission-role>
+  </permission-map>
+  <permission-map name="WebDAV Lock items" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+  </permission-map>
+  <permission-map name="WebDAV Unlock items"
+                  acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+  </permission-map>
  </state>
  <state state_id="received" title="">
   <exit-transition transition_id="handle"/>
@@ -27,6 +80,31 @@
  <state state_id="trash" title="">
   <exit-transition transition_id="delete"/>
  </state>
+ <transition transition_id="manage_delegatees" title=""
+             new_state="" trigger="USER" before_script=""
+             after_script="">
+  <guard>
+   <guard-role>Pilot</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+  </guard>
+  <transition-behavior behavior_id="push-delegatees"/>
+  <transition-behavior behavior_id="pop-delegatees"/>
+  <push-on-workflow-variable variable_id="Pilots"/>
+  <pop-on-workflow-variable variable_id="Pilots"/>
+ </transition>
+ <transition transition_id="move_down_delegatees" title=""
+             new_state="" trigger="USER" before_script=""
+             after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=move_down_delegatees"
+     category="workflow">action_move_down_delegatees</action>
+  <guard>
+   <guard-role>Pilot</guard-role>
+   <guard-role>Manager</guard-role>
+  </guard>
+  <transition-behavior behavior_id="workflow-down"/>
+  <workflow-down-on-workflow-variable variable_id="Pilots"/>
+ </transition>
  <transition transition_id="answer" title=""
              new_state="answering" trigger="USER"
              before_script=""
@@ -35,6 +113,7 @@
     url="%(content_url)s/workflow_transition_form?transition=answer;do_redirect:int=0"
           category="workflow">action_answer</action>
   <guard>
+   <guard-role>Pilot</guard-role>
   </guard>
  </transition>
  <transition transition_id="flag_handled" title=""
@@ -50,6 +129,8 @@
   <action url="%(content_url)s/workflow_transition_form?transition=close"
           category="workflow">action_close</action>
   <guard>
+   <guard-role>Pilot</guard-role>
+   <guard-role>Manager</guard-role>
   </guard>
  </transition>
  <transition transition_id="create" title=""
