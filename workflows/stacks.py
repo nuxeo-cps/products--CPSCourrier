@@ -367,26 +367,36 @@ class HierarchicalStackWithData(HierarchicalStack):
             all_levels = self.getAllLevels()
             all_insert_levels = self.getInsertLevels(all_levels)
 
+            levels = []
             for level in all_insert_levels:
-                # all insert levels are insertable
+                # only levels below current level are insertable
                 insertable = 1
+                if isinstance(level, int):
+                    level_int = level
+                else:
+                    level_int = int(level[level.find('_')+1:])
+                if level_int > current_level:
+                    insertable = 0
+
                 # set preselection
                 preselected = False
                 if level not in all_levels:
-                    # info for empty levels
-                    infos[level] = {
-                        'level_str': str(level),
-                        'label_level': 'level' + str(level),
-                        'current_level': False,
-                        'items': [],
-                        'insertable': insertable,
-                        'preselected': preselected,
-                        }
+                    if insertable:
+                        # info for empty levels
+                        infos[level] = {
+                            'level_str': str(level),
+                            'label_level': 'level' + str(level),
+                            'current_level': False,
+                            'items': [],
+                            'insertable': insertable,
+                            'preselected': preselected,
+                            }
+                        levels.append(level)
                 else:
                     # infos[level] is already set above
                     infos[level]['insertable'] = insertable
                     infos[level]['preselected'] = preselected
-            levels = all_insert_levels
+                    levels.append(level) # GR TODO: refactor this mess
         else:
             levels = infos.keys()
             levels.sort()

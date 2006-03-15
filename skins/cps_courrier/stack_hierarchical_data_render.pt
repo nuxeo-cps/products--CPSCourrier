@@ -58,6 +58,7 @@
 	  <td tal:condition="python:insert_mode and repeat['content'].start"
 	      tal:attributes = "rowspan repeat/content/length">
 	    <input type="radio" name="level" value="level"
+		   tal:condition="level_infos/insertable"
 		   tal:attributes="value level_infos/level_str" />
 	  </td>
 	  <td tal:condition="edit_mode">
@@ -66,12 +67,11 @@
 		   tal:attributes="value content/input_id;
 				   id content/label_id"
 		   />
+	    <input type="hidden" name="edit_ids:list"
+		   tal:attributes="value content/input_id;
+				   id content/label_id;"
+		   />
 	  </td>
-      <input type="hidden" name="edit_ids:list"
-	     tal:condition="content"
-	     tal:attributes="value content/input_id;
-			     id content/label_id;"
-	     />
       <td>
 	  <tal:block content="content/identite|string:">
 	    Delegatee
