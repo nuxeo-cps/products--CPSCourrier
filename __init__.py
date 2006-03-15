@@ -22,6 +22,9 @@ from Products.GenericSetup import EXTENSION
 from Products.CMFCore.DirectoryView import registerDirectory
 from Products.CPSCore.interfaces import ICPSSite
 
+# temporary fix for a bug in CPSCore events
+import PatchCPSCoreCPSTypes
+
 # various registrations are done therein
 import widgets, workflows
 
