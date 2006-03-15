@@ -347,10 +347,12 @@ class HierarchicalStackWithData(HierarchicalStack):
                                                           mode, **kwargs)
                 # control delegatee deletion
                 if mode == 'edit':
+                    current_user = elt.holdsCurrentMember(context)
                     elt_infos['deletable'] = level < current_level or (
                         level == current_level
-                        and not elt.holdsCurrentMember(context))
-                    elt_infos['editable'] = elt_infos['deletable']
+                        and not current_user)
+                    elt_infos['editable'] = level <= current_level
+                    elt_infos['current_user'] = current_user
                 level_items.append(elt_infos)
             infos[level] = {
                 'level_str': str(level),

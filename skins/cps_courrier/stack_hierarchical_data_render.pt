@@ -84,13 +84,18 @@
       </td>
       <td>
 	<tal:block define="voc_key content/directive|string:;
-			   editable python:edit_mode and content['editable']">
+			   editable python:edit_mode and content['editable'];
+			   current_user content/current_user|nothing">
 	  <tal:render condition="not:editable"
 		      content="python:vocabulary.get(voc_key, voc_key) or ' '">
 	    Directive
-	    </tal:render>
+	  </tal:render>
 	    <tal:render condition="editable">
+	      <input type="hidden" name="directive:list" value=""
+		   tal:condition="current_user"
+		   tal:attributes="value voc_key"/>
 	      <select name="directive:list"
+		      tal:condition="not:current_user"
 		      tal:define="list python:[(voc[1].strip(), voc) for voc in vocabulary.items()];
 				  sort_list python:list.sort();
 				  vocabulary_list python:[item[1] for item in list];
