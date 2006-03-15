@@ -345,10 +345,12 @@ class HierarchicalStackWithData(HierarchicalStack):
             for index, elt in enumerate(level_content):
                 elt_infos = self.getStackElementForRender(elt, level,
                                                           mode, **kwargs)
-                # protect delegatee self-deletion by adding a 'deletable'
-                # info in edit mode
-                if mode == 'edit' and level == current_level:
-                    elt_infos['deletable'] = not elt.holdsCurrentMember(context)
+                # control delegatee deletion
+                if mode == 'edit':
+                    elt_infos['deletable'] = level < current_level or (
+                        level == current_level
+                        and not elt.holdsCurrentMember(context))
+                    elt_infos['editable'] = elt_infos['deletable']
                 level_items.append(elt_infos)
             infos[level] = {
                 'level_str': str(level),

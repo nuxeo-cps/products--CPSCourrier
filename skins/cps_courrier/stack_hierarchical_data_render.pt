@@ -6,6 +6,7 @@
 		   stack options/stack;
 		   mode options/mode;
 		   insert_mode python:mode == 'insert';
+		   edit_mode python:mode == 'edit';
 		   stack_infos python:stack.getStackContentForRender(context, mode);
 		   levels python:stack_infos[0];
 		   infos python:stack_infos[1];
@@ -55,10 +56,10 @@
 	<input type="radio" name="level" value="level"
 	       tal:attributes="value level_infos/level_str" />
       </td>
-      <td tal:condition="not:insert_mode">
+      <td tal:condition="edit_mode">
 	<div tal:repeat="content level_items">
 	  <input type="checkbox" name="pop_ids:list"
-		 tal:condition="python: not content.get('not_deletable', False)"
+		 tal:condition="content/deletable"
 		 tal:attributes="value content/input_id;
 				 id content/label_id;"
 		 />
@@ -86,12 +87,13 @@
       </td>
       <td>
 	<div tal:repeat="content level_items">
-	  <tal:block define="voc_key content/directive|string:">
-	    <tal:content condition="insert_mode"
-			 content="python:vocabulary.get(voc_key, voc_key) or ' '">
+	  <tal:block define="voc_key content/directive|string:;
+			     editable python:edit_mode and content['editable']">
+	    <tal:render condition="not:editable"
+			content="python:vocabulary.get(voc_key, voc_key) or ' '">
 	      Directive
-	    </tal:content>
-	    <tal:content condition="not:insert_mode">
+	    </tal:render>
+	    <tal:render condition="editable">
 	      <select name="directive:list"
 		      tal:define="list python:[(voc[1].strip(), voc) for voc in vocabulary.items()];
 				  sort_list python:list.sort();
@@ -111,7 +113,7 @@
 		    tal:attributes="value voc_key"
 		    selected="selected" />
 	      </select>
-	    </tal:content>
+	    </tal:render>
 	  </tal:block>
 	</div>
       </td>

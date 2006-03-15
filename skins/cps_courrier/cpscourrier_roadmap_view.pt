@@ -10,7 +10,7 @@
   </metal:block>
 
   <metal:main fill-slot="main"
-	      tal:define="mode request/form/stack_mode|string:view;
+	      tal:define="mode request/form/stack_mode|string:edit;
 			  wf_var_id string:Pilots;
 			  search_param python:request.get('search_param', '');
 			  search_term python:request.get('search_term', '');
