@@ -144,7 +144,7 @@ elif action_type == 'edit':
     if wftool.canManageStack(context, current_var_id):
         # what we want
         dates = ()
-        string_data = ('directive',)
+        string_data = ('directive', 'comment')
 
         # elements ids
         edit_ids = kw.get('edit_ids', ())

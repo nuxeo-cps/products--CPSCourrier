@@ -45,7 +45,10 @@
 		                               'odd', 'even')">
 
       <tal:block repeat="content level_items">
-	<tr tal:attributes="class level_class">
+	<tr tal:define="editable python:edit_mode and content['editable'];
+			current_user content/current_user|nothing"
+	    tal:attributes="class level_class">
+
 	  <td tal:attributes="rowspan repeat/content/length"
 	      tal:condition="repeat/content/start">
 
@@ -83,9 +86,7 @@
 	Delegation date
       </td>
       <td>
-	<tal:block define="voc_key content/directive|string:;
-			   editable python:edit_mode and content['editable'];
-			   current_user content/current_user|nothing">
+	<tal:block define="voc_key content/directive|string:;">
 	  <tal:render condition="not:editable"
 		      content="python:vocabulary.get(voc_key, voc_key) or ' '">
 	    Directive
@@ -117,10 +118,17 @@
 	    </tal:render>
 	  </tal:block>
       </td>
-      <td>
-	  <tal:block content="content/comment|string:">
-	    Comment
-	  </tal:block>
+      <td tal:define="editable_widget python:editable and current_user;
+		      comment content/comment|string:">
+	<input type="string" name="comment:list"
+	       tal:condition="editable_widget"
+	       tal:attributes="value comment"/>
+	<tal:notuser condition="not:editable_widget">
+	  <input type="hidden" name="comment:list" value=""
+		 tal:condition="editable"
+		 tal:attributes="value comment"/>
+	  <tal:block content="comment"/>
+	</tal:notuser>
 	  &nbsp;
       </td>
      </tr>
