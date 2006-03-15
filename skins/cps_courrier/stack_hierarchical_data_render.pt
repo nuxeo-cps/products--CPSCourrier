@@ -19,7 +19,7 @@
     <th>
       &nbsp;
     </th>
-    <th>
+    <th tal:condition="python:mode != 'view'">
       &nbsp;
     </th>
     <th i18n:translate="label_identite">
@@ -38,60 +38,55 @@
       &nbsp;
     </th>
   </tr>
-  <tr tal:repeat="level levels"
-      tal:attributes="class python:test(repeat['level'].odd(),
-		      'odd', 'even')">
-
+  <tal:levels repeat="level levels">
     <tal:block define="level_infos python:infos[level];
-		       level_items python:level_infos['items'];
-		       ">
+		       level_items python:level_infos['items'] or insert_mode and [{}];
+		       level_class python:test(repeat['level'].odd(),
+		                               'odd', 'even')">
+
+      <tal:block repeat="content level_items">
+	<tr tal:attributes="class level_class">
+	  <td tal:attributes="rowspan repeat/content/length"
+	      tal:condition="repeat/content/start">
+
+	    <tal:block condition="level_infos/current_level"
+		       replace="structure python:here.getImgTag(
+				'stack_current_level.png',
+				base_url=portal_url,
+				alt='Niveau courant')" />
+	  </td>
+	  <td tal:condition="python:insert_mode and repeat['content'].start"
+	      tal:attributes = "rowspan repeat/content/length">
+	    <input type="radio" name="level" value="level"
+		   tal:attributes="value level_infos/level_str" />
+	  </td>
+	  <td tal:condition="edit_mode">
+	    <input type="checkbox" name="pop_ids:list"
+		   tal:condition="content/deletable"
+		   tal:attributes="value content/input_id;
+				   id content/label_id"
+		   />
+	  </td>
+      <input type="hidden" name="edit_ids:list"
+	     tal:condition="content"
+	     tal:attributes="value content/input_id;
+			     id content/label_id;"
+	     />
       <td>
-	<tal:block  condition="level_infos/current_level"
-		    replace="structure python:here.getImgTag(
-			     'stack_current_level.png',
-			     base_url=portal_url,
-			     alt='Niveau courant')" />
-      </td>
-      <td tal:condition="insert_mode">
-	<input type="radio" name="level" value="level"
-	       tal:attributes="value level_infos/level_str" />
-      </td>
-      <td tal:condition="edit_mode">
-	<div tal:repeat="content level_items">
-	  <input type="checkbox" name="pop_ids:list"
-		 tal:condition="content/deletable"
-		 tal:attributes="value content/input_id;
-				 id content/label_id;"
-		 />
-	  <input type="hidden" name="edit_ids:list"
-		 tal:attributes="value content/input_id;
-				 id content/label_id;"
-		 />
-	</div>
-      </td>
-      <td>
-	<div tal:repeat="content level_items">
-	  <tal:block content="content/identite">
+	  <tal:block content="content/identite|string:">
 	    Delegatee
 	  </tal:block>
 	  &nbsp;
-	</div>
+      </td>
+      <td tal:content="content/delegation_date_str|string:">
+	Delegation date
       </td>
       <td>
-	<div tal:repeat="content level_items">
-	  <tal:block content="content/delegation_date_str|string:">
-	    Delegation date
-	  </tal:block>
-	  &nbsp;
-	</div>
-      </td>
-      <td>
-	<div tal:repeat="content level_items">
-	  <tal:block define="voc_key content/directive|string:;
-			     editable python:edit_mode and content['editable']">
-	    <tal:render condition="not:editable"
-			content="python:vocabulary.get(voc_key, voc_key) or ' '">
-	      Directive
+	<tal:block define="voc_key content/directive|string:;
+			   editable python:edit_mode and content['editable']">
+	  <tal:render condition="not:editable"
+		      content="python:vocabulary.get(voc_key, voc_key) or ' '">
+	    Directive
 	    </tal:render>
 	    <tal:render condition="editable">
 	      <select name="directive:list"
@@ -115,17 +110,16 @@
 	      </select>
 	    </tal:render>
 	  </tal:block>
-	</div>
       </td>
       <td>
-	<div tal:repeat="content level_items">
 	  <tal:block content="content/comment|string:">
 	    Comment
 	  </tal:block>
 	  &nbsp;
-	</div>
       </td>
+     </tr>
     </tal:block>
-  </tr>
+    </tal:block>
+  </tal:levels>
 </table>
 
