@@ -21,6 +21,7 @@
 # testing module and harness
 
 import unittest
+import transaction
 from zope.testing import doctest
 
 
@@ -39,6 +40,7 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
     layer = CPSCourrierLayer
     MBG_ID = 'test_mailbox_group'
     MB_ID = 'test_mailbox'
+    MB2_ID = 'test_mailbox2'
 
     def afterSetUp(self):
         self.login('manager')
@@ -53,6 +55,10 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
         wftool.invokeFactoryFor(self.mbg, 'Mailbox', self.MB_ID,
                                 **{'from': 'test_mailbox@cpscourrier.com'})
         self.mb = self.mbg[self.MB_ID]
+
+        wftool.invokeFactoryFor(self.mbg, 'Mailbox', self.MB2_ID,
+                                **{'from': 'test_mailbox2@cpscourrier.com'})
+        self.mb2 = self.mbg[self.MB2_ID]
 
         # add some incoming mails
         incoming_mail_data = {
@@ -74,9 +80,20 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
                                     datamodel=dm, **mail_data)
             setattr(self, mail_id, self.mb[mail_id])
 
-    def afterTearDown(self):
+        # this is required for cut/paste integration tests
+        transaction.commit()
+
+    def beforeTearDown(self):
+        # ensure the catalog is clean
+        self.portal.portal_catalog.refreshCatalog(clear=1)
+        # ensure the graph is clean
+        self.portal.portal_relations.removeAllRelationsFor(
+            RELATION_GRAPH_ID, int(self.in_mail1.getDocid()))
+        self.portal.portal_relations.removeAllRelationsFor(
+            RELATION_GRAPH_ID, int(self.in_mail2.getDocid()))
         # delete the test areas
         self.portal.mailboxes.manage_delObjects([self.MBG_ID])
+        transaction.commit()
         self.logout()
 
     # make tests less verbose by using custom accessor for WF state
@@ -308,6 +325,46 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
         linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
                                 in_mail1_docid, 'has_reply')
         self.assertEquals(linked_replies, ())
+
+    def test_event_delete_move(self):
+        # smoke test: on proxy move, the relation graph should not change
+        in_mail1 = self.in_mail1
+        in_mail1_docid = int(in_mail1.getDocid())
+        out_mail1 = reply_to_incoming(in_mail1)
+        out_mail1_docid = int(out_mail1.getDocid())
+        rtool = getToolByName(in_mail1, 'portal_relations')
+
+        # out_mail1 is linked has a reply to in_mail1
+        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                in_mail1_docid, 'has_reply')
+        self.assertEquals(linked_replies, (out_mail1_docid,))
+
+        # target mailboxes for moving proxies around
+        mb1 = self.mb
+        mb2 = self.mb2
+
+        # cut an paste objects at CPS level
+        cut = mb1.manage_CPScutObjects([in_mail1.getId()])
+        transaction.commit()
+        mb2.manage_CPSpasteObjects(cut)
+        transaction.commit()
+
+        # relations should not have changed
+        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                in_mail1_docid, 'has_reply')
+        self.assertEquals(linked_replies, (out_mail1_docid,))
+
+        # cut an paste objects at Zope level (ZMI for instance)
+        cut = mb1.manage_cutObjects([out_mail1.getId()])
+        transaction.commit()
+        mb2.manage_pasteObjects(cut)
+        transaction.commit()
+
+        # relations should not have changed either
+        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                in_mail1_docid, 'has_reply')
+        self.assertEquals(linked_replies, (out_mail1_docid,))
+
 
     #
     # integration between wf scripts and events
