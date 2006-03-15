@@ -309,6 +309,10 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
                                 in_mail1_docid, 'has_reply')
         self.assertEquals(linked_replies, ())
 
+    #
+    # integration between wf scripts and events
+    #
+
     def test_integration_delete_and_flag_handled(self):
         # test the integration of WF delete events and scripts
         in_mail1 = self.in_mail1
@@ -334,8 +338,6 @@ class WorkflowScriptsIntegrationTestCase(CPSTestCase):
         # unlink out_mail3, flag_handled is automatically triggered
         wtool.doActionFor(out_mail3, 'delete')
         self.assertEquals(self._get_state(in_mail1), 'handled')
-
-
 
 
 def test_suite():
