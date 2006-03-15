@@ -70,6 +70,7 @@
 	    <input type="hidden" name="edit_ids:list"
 		   tal:attributes="value content/input_id;
 				   id content/label_id;"
+		   tal:condition="content/editable"
 		   />
 	  </td>
       <td>
