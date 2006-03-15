@@ -31,7 +31,7 @@
  <!-- Specific CPSCourrier actions -->
  <action title="action_roadmap"	action_id="roadmap" category="object"
 	 condition_expr="" visible="True"
-	 url_expr="string:${object_url}/cpscourrier_roadmap_view">
+	 url_expr="string:${object_url}/cpscourrier_roadmap">
    <permission value="View" />
  </action>
 
