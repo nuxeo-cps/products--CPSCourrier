@@ -1,4 +1,27 @@
 *******************************************
+** CPSCourrier V0.7.0 [R1 build 2006/03/15-18:35 by gracinet]
+** SVN URL: http://svn/pub/CPSCourrier/trunk Revision: 34465
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Added Spanish translation.
+- specific mail handling workflows with stacks
+Bug fixes:
+~~~~~~~~~~
+-
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- internal backbone for mail WFs (states + transitions)
+- simple config.py module to hosts non ZODB config parameters
+- new default IOBTree graph to store relations between mail documents
+- outgoing mails are related to incoming mails on reply transition
+- implemented 'after send' logics for outgoing_mail_wf
+- implemented 'before delete' logics for outgoing_mail_wf
+- implemented Relation graph cleaning uppon proxy removal thanks to Zope3 events
+
+*******************************************
 ** CPSCourrier V0.6.0 [R1 build 2006/03/07-19:14 by gracinet]
 ** SVN URL: http://svn/pub/CPSCourrier/trunk Revision: 34150
 Requires:
