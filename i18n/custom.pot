@@ -352,6 +352,18 @@ msgstr ""
 msgid "reset"
 msgstr ""
 
+msgid "action_move_down_delegatees"
+msgstr ""
+
+msgid "heading_workflow_move_down_delegatees_of ${item_id}"
+msgstr ""
+
+msgid "button move_down_delegatees"
+msgstr ""
+
+msgid "help_workflow_move_down_delegatees"
+msgstr ""
+
 #
 # Workflow states
 #
