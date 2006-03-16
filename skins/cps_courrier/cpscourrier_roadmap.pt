@@ -10,8 +10,13 @@
   </metal:block>
 
   <metal:main fill-slot="main"
-	      tal:define="mode request/form/stack_mode|string:edit;
-			  wf_var_id string:Pilots;
+	      tal:define="wf_var_id string:Pilots;
+			  wftool here/portal_workflow;
+			  stack python:wftool.getInfoFor(here, wf_var_id);
+			  can_manage python:wftool.canManageStack(here,
+			                                          wf_var_id);
+			  requested_mode request/form/stack_mode|string:edit;
+			  mode python:can_manage and requested_mode or 'view';
 			  search_param python:request.get('search_param', '');
 			  search_term python:request.get('search_term', '');
 			  search_limit python:int(request.get('search_limit', 100));
@@ -22,26 +27,28 @@
       Mail Handling Roadmap
     </h1>
 
-    <p tal:condition="python:mode=='insert'"
+    <h2 tal:condition="python:mode=='insert'"
        i18n:translate="cpscourrier_choose_insertion_level">
       Please select a level to insert the new delegatee
-    </p>
+    </h2>
 
     <form action="cpscourrier_stack_modify" method="POST"
 	  enctype="multipart/form-data">
-      <tal:block replace="structure python:here.portal_workflow.getInfoFor(here,
-			  wf_var_id).render(context=here, mode=mode)" />
-
+      <tal:block
+	  replace="structure python:stack.render(context=here, mode=mode)" />
       <input type="hidden" name="workflow_action_form"
 	     value="cpscourrier_roadmap" />
       <input type="hidden" name="current_var_id" value=""
 	     tal:attributes="value wf_var_id" />
-      <tal:buttons condition="not:searching">
+      <tal:buttons condition="python:not searching and mode == 'edit'">
 	<input type="submit" class="context" name="submit_delete"
 	       value="button_delete"
 	       i18n:attributes="value"/>
 	<input type="submit" class="context" name="submit_edit"
 	       value="button_update_stackelts"
+	       i18n:attributes="value"/>
+	<input type="submit" class="context" name="submit_move_down"
+	       value="button_move_down_delegatees"
 	       i18n:attributes="value"/>
       </tal:buttons>
       <tal:endform condition="not:searching" replace="structure string:</form>" />
@@ -51,17 +58,21 @@
 	play with the insertion process while there aren't so many entry fields.
       </tal:comment>
 
-      <h2 i18n:translate="search_for_delegatees"
-	  tal:condition="not:searching">
-	Add new delegatees to the roadmap
-      </h2>
-      <h2 i18n:translate="delegatees_search_results"
-	  tal:condition="searching">
-	Add delegatees: search results
-      </h2>
-
       <div>
-	<h3 i18n:translate="cpscourrier_search_users">Search users</h3>
+
+	<h2 i18n:translate="search_for_delegatees"
+	    tal:condition="not:searching">
+	  Add new delegatees to the roadmap
+	</h2>
+	<h2 i18n:translate="delegatees_search_results"
+	    tal:condition="searching">
+	  Add delegatees: search results
+	</h2>
+
+	<h3 i18n:translate="cpscourrier_search_users"
+	    tal:condition="not:searching">
+	  Search users
+	</h3>
 	<form method="post" action="cpscourrier_roadmap"
 	      tal:condition="not:searching"
 	      tal:attributes="action string:${here_url}/cpscourrier_roadmap">
