@@ -67,6 +67,7 @@ from Products.CMFCore.utils import getToolByName
 
 workflow_actions = {'pop': 'manage_delegatees',
                     'push': 'manage_delegatees',
+                    'move_down' : 'move_down_delegatees',
                     }
 
 if REQUEST is not None:
@@ -78,6 +79,8 @@ elif 'submit_add' in kw:
     action_type ='push'
 elif 'submit_edit' in kw:
     action_type ='edit'
+elif 'submit_move_down' in kw:
+    action_type = 'move_down'
 else:
     raise ValueError("Unkown submission type")
 
@@ -167,6 +170,12 @@ elif action_type == 'edit':
     else:
         err = 1
         psm = 'psm_cannot_manage_stack'
+
+elif action_type == 'move_down':
+    wftool.doActionFor(context,
+                       workflow_actions['move_down'],
+                       **kw)
+    psm = 'psm_status_changed'
 
 elif action_type == 'pop':
     pop_ids = kw.get('pop_ids', ())
