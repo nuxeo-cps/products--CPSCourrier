@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-16 13:09default\n"
+"POT-Creation-Date: 2006-03-16 13:18default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -46,6 +46,13 @@ msgstr "Sélectionner le niveau d'insertion"
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filtrer"
+
+#.   <h1>
+#.         Mail Handling Roadmap
+#.       </h1>
+#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "cpscourrier_roadmap_heading"
+msgstr "Feuille de route"
 
 #
 # Layout labels
@@ -522,4 +529,3 @@ msgstr "Vous n'avez pas la permission de modifier la feuille de route"
 
 msgid "psm_select_at_least_one_item"
 msgstr "Sélectionnez au moins un élément"
-

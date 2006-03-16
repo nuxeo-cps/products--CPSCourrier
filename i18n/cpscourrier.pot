@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-16 13:09default\n"
+"POT-Creation-Date: 2006-03-16 13:18default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -45,6 +45,13 @@ msgstr ""
 #.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
+msgstr ""
+
+#.   <h1>
+#.         Mail Handling Roadmap
+#.       </h1>
+#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "cpscourrier_roadmap_heading"
 msgstr ""
 
 #.   <h3>Search users</h3>
