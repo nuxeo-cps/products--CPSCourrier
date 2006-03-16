@@ -137,7 +137,7 @@ if action_type == 'push':
         kw['directives'] = len(push_ids)*[kw.get('directive', '')]
         kw['comments'] = len(push_ids)*[kw.get('comment', '')]
         res = wftool.doActionFor(context, workflow_action, **kw)
-        psm = 'psm_local_roles_changed'
+        psm = 'psm_roadmap_changed'
 
 elif action_type == 'edit':
     # XXX AT: no wf transition used here so add this check
@@ -163,7 +163,7 @@ elif action_type == 'edit':
             stack = wftool.getStackFor(context, current_var_id)
             stack.setEditableAttributes(edit_ids, data_lists)
             err = 0
-            psm = 'psm_directives_edited'
+            psm = 'psm_stack_elements_edited'
     else:
         err = 1
         psm = 'psm_cannot_manage_stack'
@@ -176,7 +176,7 @@ elif action_type == 'pop':
         err = 1
     else:
         res = wftool.doActionFor(context, workflow_actions['pop'], **kw)
-        psm = 'psm_local_roles_changed'
+        psm = 'psm_roadmap_changed'
 
 
 if REQUEST is not None:

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-16 12:25default\n"
+"POT-Creation-Date: 2006-03-16 13:09default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -47,7 +47,7 @@ msgstr ""
 msgid "cpscourrier_filter_button"
 msgstr ""
 
-#.   <p>Search users</p>
+#.   <h3>Search users</h3>
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_search_users"
 msgstr ""
@@ -498,4 +498,22 @@ msgid "validated"
 msgstr ""
 
 msgid "sent"
+msgstr ""
+
+#
+# Workflow status messages
+#
+msgid "psm_select_a_level"
+msgstr ""
+
+msgid "psm_roadmap_changed"
+msgstr ""
+
+msgid "psm_stack_elements_edited"
+msgstr ""
+
+msgid "psm_cannot_manage_stack"
+msgstr ""
+
+msgid "psm_select_at_least_one_item"
 msgstr ""

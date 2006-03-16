@@ -381,3 +381,22 @@ msgid "sent"
 msgstr ""
 
 
+#
+# Workflow status messages
+#
+
+msgid "psm_select_a_level"
+msgstr ""
+
+msgid "psm_roadmap_changed"
+msgstr ""
+
+msgid "psm_stack_elements_edited"
+msgstr ""
+
+msgid "psm_cannot_manage_stack"
+msgstr ""
+
+msgid "psm_select_at_least_one_item"
+msgstr ""
+

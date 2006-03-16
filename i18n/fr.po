@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-16 12:25default\n"
+"POT-Creation-Date: 2006-03-16 13:09default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -50,7 +50,7 @@ msgstr "Filtrer"
 #
 # Layout labels
 #
-#.   <p>Search users</p>
+#.   <h3>Search users</h3>
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_search_users"
 msgstr "Rechercher des utilisateurs"
@@ -104,9 +104,8 @@ msgstr ""
 #.         Delegation Date
 #.       </th>
 #: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
-#, fuzzy
 msgid "label_delegation_date"
-msgstr "Réactiver"
+msgstr "Date d'ajout"
 
 #.   <th>
 #.         Directive
@@ -147,7 +146,6 @@ msgstr ""
 #.   	Add new delegatees to the roadmap
 #.         </h2>
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
-#, fuzzy
 msgid "search_for_delegatees"
 msgstr "Ajouter des éléments à la feuille de route"
 
@@ -507,5 +505,21 @@ msgstr "validé"
 msgid "sent"
 msgstr "envoyé"
 
-#~ msgid "button_push_delegatees"
-#~ msgstr "Ajouter"
+#
+# Workflow status messages
+#
+msgid "psm_select_a_level"
+msgstr "Sélectionnez un niveau"
+
+msgid "psm_roadmap_changed"
+msgstr "Feuille de route modifiée"
+
+msgid "psm_stack_elements_edited"
+msgstr "Éléments de feuille de route modifiés"
+
+msgid "psm_cannot_manage_stack"
+msgstr "Vous n'avez pas la permission de modifier la feuille de route"
+
+msgid "psm_select_at_least_one_item"
+msgstr "Sélectionnez au moins un élément"
+
