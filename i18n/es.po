@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-03-13 20:19default\n"
+"POT-Creation-Date: 2006-03-16 12:25default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -25,49 +25,51 @@ msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
 
-#.   <h2 content="current_var_id">
-#.       Stack content
-#.     </h2>
-#: from ../skins/cps_courrier/delegatees_lib.pt
-msgid "Stack content"
+#.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
+#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "button_update_stackelts"
 msgstr ""
 
-#.   <input type="submit" value="button_push_delegatees" />
-#: from ../skins/cps_courrier/delegatees_lib.pt
-msgid "button_push_delegatees"
+#.   <input name="submit_add" type="submit" class="context" value="button_validate" />
+#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "button_validate"
 msgstr ""
 
-#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
+#.   <p condition="python:mode=='insert'">
+#.         Please select a level to insert the new delegatee
+#.       </p>
+#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+#, fuzzy
+msgid "cpscourrier_choose_insertion_level"
+msgstr "Size (kB):"
+
+#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filtro"
 
-#.   <h2 condition="not:searching">
-#.     Assign to the workflow: search members
-#.   </h2>
-#: from ../skins/cps_courrier/delegatees_lib.pt
-msgid "heading_content_assign_search_members"
-msgstr ""
+#
+# Layout labels
+#
+#.   <p>Search users</p>
+#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+#, fuzzy
+msgid "cpscourrier_search_users"
+msgstr "Searched boxes"
+
+#.   <p condition="search_members">
+#.   	    Please select the member to insert in the roadmap
+#.   	  </p>
+#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+#, fuzzy
+msgid "cpscourrier_select_delegatees"
+msgstr "Subject"
 
 #.   <h2 condition="searching">
-#.     Assign to the workflow: search results
-#.   </h2>
-#: from ../skins/cps_courrier/delegatees_lib.pt
-msgid "heading_content_assign_search_results"
-msgstr ""
-
-#.   <th>
-#.           Acknowledge Date
-#.         </th>
-#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
-msgid "label_acknowledge_date"
-msgstr ""
-
-#.   <th>
-#.           State
-#.         </th>
-#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
-msgid "label_action_state"
+#.   	Add delegatees: search results
+#.         </h2>
+#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "delegatees_search_results"
 msgstr ""
 
 #.   <p>
@@ -86,13 +88,6 @@ msgstr ""
 msgid "label_delegatees_current_level_delegatees_highlighted"
 msgstr ""
 
-#.   <h2>
-#.         Select members:
-#.       </h2>
-#: from ../skins/cps_courrier/delegatees_lib.pt
-msgid "label_delegatees_select_members"
-msgstr ""
-
 #.   <strong>
 #.         There are no delegatees within this workflow stack yet
 #.       </strong>
@@ -109,67 +104,31 @@ msgid "label_delegatees_user_in_charge"
 msgstr ""
 
 #.   <th>
-#.           Directive
-#.         </th>
+#.         Delegation Date
+#.       </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_delegation_date"
+msgstr ""
+
+#.   <th>
+#.         Directive
+#.       </th>
 #: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
 msgid "label_directive"
 msgstr ""
 
 #.   <th>
-#.           Comment
-#.         </th>
+#.         Comment
+#.       </th>
 #: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
 msgid "label_directive_comment"
 msgstr ""
 
 #.   <th>
-#.           Expiry Date
-#.         </th>
-#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
-msgid "label_expiry_date"
-msgstr ""
-
-#.   <block>
-#.                     Expiry
-#.                   </block>
-#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
-msgid "label_expiry_date_short"
-msgstr ""
-
-#.   <option attributes="selected python:search_param=='fullname'" value="fullname">Full name</option>
-#: from ../skins/cps_courrier/delegatees_lib.pt
-msgid "label_full_name"
-msgstr ""
-
-#.   <th>
-#.           Identite
-#.         </th>
+#.         Identite
+#.       </th>
 #: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
 msgid "label_identite"
-msgstr ""
-
-#.   <th>Search by</th>
-#: from ../skins/cps_courrier/delegatees_lib.pt
-msgid "label_local_roles_search_by"
-msgstr ""
-
-#.   <th>Search Term</th>
-#: from ../skins/cps_courrier/delegatees_lib.pt
-msgid "label_local_roles_search_term"
-msgstr ""
-
-#.   <th>
-#.           Relance Date
-#.         </th>
-#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
-msgid "label_relance_date"
-msgstr ""
-
-#.   <block>
-#.                     Relance
-#.                   </block>
-#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
-msgid "label_relance_date_short"
 msgstr ""
 
 #.   <h2>
@@ -179,18 +138,18 @@ msgstr ""
 msgid "label_reviewers"
 msgstr ""
 
-#.   <th>
-#.           Transmision Date
-#.         </th>
-#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
-msgid "label_transmission_date"
-msgstr ""
-
 #.   <p>
 #.       Sorry, no members matched your search.
 #.    </p>
 #: from ../skins/cps_courrier/stack_members_search_results.pt
 msgid "legend_local_roles_no_results_members"
+msgstr ""
+
+#.   <h2 condition="not:searching">
+#.   	Add new delegatees to the roadmap
+#.         </h2>
+#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "search_for_delegatees"
 msgstr ""
 
 #
@@ -457,9 +416,6 @@ msgstr ""
 msgid "help_workflow_validate"
 msgstr ""
 
-msgid "button_validate"
-msgstr ""
-
 msgid "action_validate"
 msgstr ""
 
@@ -552,3 +508,7 @@ msgstr ""
 
 msgid "sent"
 msgstr ""
+
+#, fuzzy
+msgid "button_push_delegatees"
+msgstr "Add"

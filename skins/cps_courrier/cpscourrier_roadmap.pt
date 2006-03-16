@@ -38,9 +38,11 @@
 	     tal:attributes="value wf_var_id" />
       <tal:buttons condition="not:searching">
 	<input type="submit" class="context" name="submit_delete"
-	       value="button_delete" />
+	       value="button_delete"
+	       i18n:attributes="value"/>
 	<input type="submit" class="context" name="submit_edit"
-	       value="button_modify" />
+	       value="button_update_stackelts"
+	       i18n:attributes="value"/>
       </tal:buttons>
       <tal:endform condition="not:searching" replace="structure string:</form>" />
 
@@ -49,16 +51,17 @@
 	play with the insertion process while there aren't so many entry fields.
       </tal:comment>
 
-      <h3 i18n:translate="search_for_delegatees"
+      <h2 i18n:translate="search_for_delegatees"
 	  tal:condition="not:searching">
 	Add new delegatees to the roadmap
-      </h3>
-      <h3 i18n:translate="delegatees_search_results"
+      </h2>
+      <h2 i18n:translate="delegatees_search_results"
 	  tal:condition="searching">
 	Add delegatees: search results
-      </h3>
+      </h2>
 
-      <div class="user_roles">
+      <div>
+	<h3 i18n:translate="cpscourrier_search_users">Search users</h3>
 	<form method="post" action="cpscourrier_roadmap"
 	      tal:condition="not:searching"
 	      tal:attributes="action string:${here_url}/cpscourrier_roadmap">
