@@ -18,7 +18,7 @@
 			  searching search_param;
 			  found python:searching and here.folder_localrole_search(search_param, search_term);">
 
-    <h1 i18:translate="cpscourrier_roadmap_heading">
+    <h1 i18n:translate="cpscourrier_roadmap_heading">
       Mail Handling Roadmap
     </h1>
 
