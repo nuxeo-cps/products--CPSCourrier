@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-16 14:01default\n"
+"POT-Creation-Date: 2006-03-16 14:36default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -25,17 +25,17 @@ msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
 
-#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
+#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
 msgstr "Descendre"
 
-#.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
+#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_update_stackelts"
 msgstr "Enregistrer les modifications"
 
-#.   <input name="submit_add" type="submit" class="context" value="button_validate" />
+#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
 msgstr "Valider"
@@ -47,7 +47,7 @@ msgstr "Valider"
 msgid "cpscourrier_choose_insertion_level"
 msgstr "Sélectionner le niveau d'insertion"
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filtrer"
@@ -495,6 +495,12 @@ msgstr "Réinitialiser"
 msgid "reset"
 msgstr "Réinitialisation"
 
+msgid "flag_handled"
+msgstr "Réponse(s) supprimée(s)"
+
+msgid "flag_answered"
+msgstr "Réponse(s) envoyée(s)"
+
 msgid "action_move_down_delegatees"
 msgstr "Descendre"
 
@@ -505,10 +511,11 @@ msgid "button move_down_delegatees"
 msgstr "Descendre"
 
 msgid "help_workflow_move_down_delegatees"
-msgstr "Vous vous apprêtez à passer la main sur ce courrier aux utilisateurs "
-"référencés au niveau suivant de la feuille de route. <br/>"
-"Si vous n'en faites pas partie, ou n'avez pas de droits supérieurs, vous ne "
-"pourrez plus intervenir."
+msgstr ""
+"Vous vous apprêtez à passer la main sur ce courrier aux utilisateurs "
+"référencés au niveau suivant de la feuille de route. <br/>Si vous n'en "
+"faites pas partie, ou n'avez pas de droits supérieurs, vous ne pourrez plus "
+"intervenir."
 
 msgid "received"
 msgstr "reçu"

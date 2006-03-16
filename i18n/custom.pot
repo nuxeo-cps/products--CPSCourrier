@@ -352,6 +352,12 @@ msgstr ""
 msgid "reset"
 msgstr ""
 
+msgid "flag_handled"
+msgstr ""
+
+msgid "flag_answered"
+msgstr ""
+
 msgid "action_move_down_delegatees"
 msgstr ""
 

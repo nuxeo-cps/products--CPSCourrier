@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-16 14:01default\n"
+"POT-Creation-Date: 2006-03-16 14:36default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -25,19 +25,19 @@ msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
 
-#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
+#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 #, fuzzy
 msgid "button_move_down_delegatees"
 msgstr "Add"
 
-#.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
+#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 #, fuzzy
 msgid "button_update_stackelts"
 msgstr "Reset"
 
-#.   <input name="submit_add" type="submit" class="context" value="button_validate" />
+#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
 msgstr "Validate"
@@ -50,7 +50,7 @@ msgstr "Validate"
 msgid "cpscourrier_choose_insertion_level"
 msgstr "Size (kB):"
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filter"
@@ -546,6 +546,12 @@ msgstr "Reset"
 
 msgid "reset"
 msgstr "reset"
+
+msgid "flag_handled"
+msgstr "Back to handled (all replies deleted)"
+
+msgid "flag_answered"
+msgstr "Set answered (all replies sent)"
 
 #, fuzzy
 msgid "action_move_down_delegatees"
