@@ -17,6 +17,8 @@
 			                                          wf_var_id);
 			  requested_mode request/form/stack_mode|string:edit;
 			  mode python:can_manage and requested_mode or 'view';
+			  edit_mode python:mode == 'edit';
+			  insert_mode python:mode == 'insert';
 			  search_param python:request.get('search_param', '');
 			  search_term python:request.get('search_term', '');
 			  search_limit python:int(request.get('search_limit', 100));
@@ -32,26 +34,26 @@
       Please select a level to insert the new delegatee
     </h2>
 
-    <form action="cpscourrier_stack_modify" method="POST"
-	  enctype="multipart/form-data">
-      <tal:block
-	  replace="structure python:stack.render(context=here, mode=mode)" />
-      <input type="hidden" name="workflow_action_form"
-	     value="cpscourrier_roadmap" />
-      <input type="hidden" name="current_var_id" value=""
-	     tal:attributes="value wf_var_id" />
-      <tal:buttons condition="python:not searching and mode == 'edit'">
-	<input type="submit" class="context" name="submit_delete"
-	       value="button_delete"
-	       i18n:attributes="value"/>
-	<input type="submit" class="context" name="submit_edit"
-	       value="button_update_stackelts"
-	       i18n:attributes="value"/>
-	<input type="submit" class="context" name="submit_move_down"
-	       value="button_move_down_delegatees"
-	       i18n:attributes="value"/>
-      </tal:buttons>
-      <tal:endform condition="not:searching" replace="structure string:</form>" />
+    <tal:startform condition="python:mode != 'view'"
+		   replace="structure string:<form action='cpscourrier_stack_modify' method='post' enctype='multipart/form-data'>" />
+    <tal:block
+	replace="structure python:stack.render(context=here, mode=mode)" />
+    <input type="hidden" name="workflow_action_form"
+	   value="cpscourrier_roadmap" />
+    <input type="hidden" name="current_var_id" value=""
+	   tal:attributes="value wf_var_id" />
+    <tal:buttons condition="edit_mode">
+      <input type="submit" class="context" name="submit_delete"
+	     value="button_delete"
+	     i18n:attributes="value"/>
+      <input type="submit" class="context" name="submit_edit"
+	     value="button_update_stackelts"
+	     i18n:attributes="value"/>
+      <input type="submit" class="context" name="submit_move_down"
+	     value="button_move_down_delegatees"
+	     i18n:attributes="value"/>
+    </tal:buttons>
+    <tal:endform condition="edit_mode" replace="structure string:</form>" />
 
       <tal:comment condition="nothing">
 	Search part is directly taken from folder_localrole_form. This is good enough to
@@ -61,20 +63,20 @@
       <div>
 
 	<h2 i18n:translate="search_for_delegatees"
-	    tal:condition="not:searching">
+	    tal:condition="edit_mode">
 	  Add new delegatees to the roadmap
 	</h2>
 	<h2 i18n:translate="delegatees_search_results"
-	    tal:condition="searching">
+	    tal:condition="insert_mode">
 	  Add delegatees: search results
 	</h2>
 
 	<h3 i18n:translate="cpscourrier_search_users"
-	    tal:condition="not:searching">
+	    tal:condition="edit_mode">
 	  Search users
 	</h3>
 	<form method="post" action="cpscourrier_roadmap"
-	      tal:condition="not:searching"
+	      tal:condition="edit_mode"
 	      tal:attributes="action string:${here_url}/cpscourrier_roadmap">
 
 	  <input type="hidden" name="stack_mode" value="insert" />
@@ -110,7 +112,7 @@
 	</form>
       </div>
 
-    <tal:search-results condition="python:searching">
+    <tal:search-results condition="insert_mode">
       <tal:block
 	  define="search_members python:search_param and search_param in ('id', 'givenName', 'sn', 'email');
 		  search_groups python:search_param and search_param == 'groupname';
@@ -156,7 +158,7 @@
       </tal:block>
 
     </tal:search-results>
-    <tal:endform condition="searching" replace="structure string:</form>" />
+    <tal:endform condition="insert_mode" replace="structure string:</form>" />
 
   </metal:main>
 </metal:html>
