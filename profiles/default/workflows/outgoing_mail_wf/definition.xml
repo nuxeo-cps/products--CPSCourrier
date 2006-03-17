@@ -56,6 +56,7 @@
   <exit-transition transition_id="reactivate"/>
  </state>
  <state state_id="validated" title="">
+  <exit-transition transition_id="roadmap_view"/>
   <exit-transition transition_id="invalidate"/>
   <exit-transition transition_id="send"/>
   <exit-transition transition_id="manage_delegatees"/>
@@ -96,6 +97,7 @@
   <workflow-reset-on-workflow-variable variable_id="Pilots"/>
  </state>
  <state state_id="work" title="Work">
+  <exit-transition transition_id="roadmap_view"/>
   <exit-transition transition_id="checkout_draft"/>
   <exit-transition transition_id="delete"/>
   <exit-transition transition_id="manage_delegatees"/>
@@ -153,6 +155,25 @@
   <workflow-down-on-workflow-variable variable_id="Pilots"/>
   <workflow-reset-on-workflow-variable variable_id="Pilots"/>
  </state>
+ <transition transition_id="roadmap_view"
+	     title="View Roadmap" new_state=""
+             trigger="USER"
+             before_script="unlock_locked_before_abandon"
+             after_script="">
+   <!-- This transition does nothing. It is here to provide an action
+      that depends on the wf state. It is not even called -->
+
+  <action url="%(content_url)s/cpscourrier_roadmap"
+          category="object">action_roadmap</action>
+  <guard>
+    <guard-role>Manager</guard-role>
+    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>Owner</guard-role>
+    <guard-role>WorkspaceMember</guard-role>
+    <guard-role>WorkspaceReader</guard-role>
+    <guard-role>Pilot</guard-role>
+  </guard>
+ </transition>
  <transition transition_id="abandon_draft"
              title="Abandon draft" new_state=""
              trigger="USER"
@@ -175,8 +196,8 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>WorkspaceManager</guard-role>
-   <guard-role>Owner</guard-role>
-  </guard>
+   <guard-role>Pilot</guard-role>
+   </guard>
   <transition-behavior behavior_id="checkin"/>
   <checkin-allowed-transition transition_id="unlock"/>
  </transition>
