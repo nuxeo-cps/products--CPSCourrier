@@ -14,7 +14,8 @@
 		   vocabulary python:getattr(vtool, 'mail_directives', {});
 		   utool nocall:here/portal_url;
 		   portal portal|here/portal_url/getPortalObject;
-		   portal_url python:portal.absolute_url()+'/';">
+		   portal_url python:portal.absolute_url()+'/';
+		   cpsmcat nocall:portal/translation_service;">
   <tr>
     <th>
       &nbsp;
@@ -86,10 +87,13 @@
 	Delegation date
       </td>
       <td>
-	<tal:block define="voc_key content/directive|string:;">
-	  <tal:render condition="not:editable"
-		      content="python:vocabulary.get(voc_key, voc_key) or ' '">
-	    Directive
+	<tal:block define="voc_key content/directive|string:;
+			   voc_msg python:vocabulary.get(voc_key, '');
+			   voc_msgid python:vocabulary.getMsgid(voc_key, '');
+			   ">
+	  <tal:render condition="python:not editable or current_user"
+		      content="python:cpsmcat(voc_msgid)">
+
 	  </tal:render>
 	    <tal:render condition="editable">
 	      <input type="hidden" name="directive:list" value=""
@@ -97,17 +101,15 @@
 		   tal:attributes="value voc_key"/>
 	      <select name="directive:list"
 		      tal:condition="not:current_user"
-		      tal:define="list python:[(voc[1].strip(), voc) for voc in vocabulary.items()];
-				  sort_list python:list.sort();
-				  vocabulary_list python:[item[1] for item in list];
+		      tal:define="voc_keys vocabulary/keys;
 				  ">
-		<tal:block repeat="item vocabulary_list">
+		<tal:block repeat="key voc_keys">
 		  <option
-		      tal:define="k python:item[0];
-				  w python:item[1];"
-		      tal:content="w"
-		      tal:attributes="value k;
-				      selected python:voc_key == k;" />
+		      tal:define="msgid python:vocabulary.getMsgid(key, '')"
+		      tal:content="python:cpsmcat(msgid)"
+		      tal:attributes="value key;
+				      selected python:voc_key == key;"
+		      />
 		</tal:block>
 		<option
 		    tal:condition="python:voc_key not in vocabulary.keys()"

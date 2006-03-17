@@ -165,6 +165,15 @@ msgstr ""
 msgid "cpscourrier_all_subjects"
 msgstr ""
 
+msgid "cpscourrier_initiate_handling"
+msgstr ""
+
+msgid "cpscourrier_for_reply"
+msgstr ""
+
+msgid "cpscourrier_for_advice"
+msgstr ""
+
 #
 # Workflows
 #
