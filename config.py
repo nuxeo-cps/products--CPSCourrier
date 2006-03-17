@@ -26,3 +26,11 @@ properties.
 # Id of the relation graph that will host CPSCourrier relations between mails
 # and their responses
 RELATION_GRAPH_ID = "cpscourrier"
+
+# Outgoing Mail -> Incoming Mail relation id (one to one)
+IS_REPLY_TO = 'is_reply_to'
+
+# Incoming Mail -> Outgoing Mail relation id (one to many)
+HAS_REPLY = 'has_reply'
+
+
