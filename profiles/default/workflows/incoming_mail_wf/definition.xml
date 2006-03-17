@@ -4,6 +4,7 @@
               state_variable="review_state"
               meta_type="CPS Workflow">
  <state state_id="answered" title="">
+  <exit-transition transition_id="roadmap_view"/>
   <exit-transition transition_id="answer"/>
   <exit-transition transition_id="close"/>
   <exit-transition transition_id="manage_delegatees"/>
@@ -38,6 +39,7 @@
   <workflow-reset-on-workflow-variable variable_id="Pilots"/>
  </state>
  <state state_id="answering" title="">
+  <exit-transition transition_id="roadmap_view"/>
   <exit-transition transition_id="flag_answered"/>
   <exit-transition transition_id="flag_handled"/>
   <exit-transition transition_id="manage_delegatees"/>
@@ -75,6 +77,7 @@
   <exit-transition transition_id="reopen"/>
  </state>
  <state state_id="handled" title="">
+  <exit-transition transition_id="roadmap_view"/>
   <exit-transition transition_id="answer"/>
   <exit-transition transition_id="discard"/>
   <exit-transition transition_id="forward"/>
@@ -263,6 +266,25 @@
   <action url="%(content_url)s/workflow_transition_form?transition=reopen"
           category="workflow">action_reopen</action>
   <guard>
+  </guard>
+ </transition>
+ <transition transition_id="roadmap_view"
+	     title="View Roadmap" new_state=""
+             trigger="USER"
+             before_script="unlock_locked_before_abandon"
+             after_script="">
+   <!-- This transition does nothing. It is here to provide an action
+      that depends on the wf state. It is not even called -->
+
+  <action url="%(content_url)s/cpscourrier_roadmap"
+          category="object">action_roadmap</action>
+  <guard>
+    <guard-role>Manager</guard-role>
+    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>Owner</guard-role>
+    <guard-role>WorkspaceMember</guard-role>
+    <guard-role>WorkspaceReader</guard-role>
+    <guard-role>Pilot</guard-role>
   </guard>
  </transition>
  <transition transition_id="reset" title=""
