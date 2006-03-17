@@ -49,7 +49,7 @@ def _accumulate_proxy_info(graph, start_from, ptool,
     # compute current level
     infos = ptool.getProxyInfosFromDocid(str(start_from),
                                          workflow_vars=('review_state',))
-    infos = [(depth, info) for info in infos]
+    infos = [(depth, info) for info in infos if info['visible']]
 
     # adding depth first children info
     depth += 1

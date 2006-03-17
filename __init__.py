@@ -38,7 +38,13 @@ ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
 ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
     'init_stack_with_user')
 
+# Stack API
+ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
+    'init_stack_with_user')
 
+# Relations API
+ModuleSecurityInfo('Products.CPSCourrier.relations').declarePublic(
+    'get_thread_for')
 
 registerDirectory('skins', globals())
 
