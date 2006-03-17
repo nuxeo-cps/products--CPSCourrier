@@ -335,7 +335,12 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         # putting in a state where the stack exists
         self._set_state(in_mail, 'handled')
 
-        init_stack_with_user(in_mail, 'Pilots', prefix='user_wdata',
+        class FakeStateChange:
+            pass
+        sci = FakeStateChange()
+        sci.object = in_mail
+        sci.workflow = wftool.getWorkflowsFor(in_mail)[0]
+        init_stack_with_user(sci, 'Pilots', prefix='user_wdata',
                              directive='the_dir')
 
         stack = wftool.getStackFor(in_mail, 'Pilots')
