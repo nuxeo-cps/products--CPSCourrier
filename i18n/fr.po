@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-17 15:41default\n"
+"POT-Creation-Date: 2006-03-17 19:49default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -141,6 +141,13 @@ msgstr ""
 #: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
 msgid "label_identite"
 msgstr ""
+
+#.   <label for="push_directive">
+#.      	  Directive to give these users
+#.   	</label>
+#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "label_push_directive"
+msgstr "Directive associée à l'affectation"
 
 #.   <h2>
 #.         Reviewers

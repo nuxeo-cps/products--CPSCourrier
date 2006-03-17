@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-03-17 15:41default\n"
+"POT-Creation-Date: 2006-03-17 19:49default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -145,6 +145,13 @@ msgstr ""
 #.       </th>
 #: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
 msgid "label_identite"
+msgstr ""
+
+#.   <label for="push_directive">
+#.      	  Directive to give these users
+#.   	</label>
+#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "label_push_directive"
 msgstr ""
 
 #.   <h2>

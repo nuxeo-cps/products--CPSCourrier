@@ -137,8 +137,8 @@ if action_type == 'push':
         err = 1
     else:
         kw['levels'] = len(push_ids)*[level]
-        kw['directives'] = len(push_ids)*[kw.get('directive', '')]
-        kw['comments'] = len(push_ids)*[kw.get('comment', '')]
+        kw['directive'] = len(push_ids)*[kw.get('directive', '')]
+        kw['data_lists'] = ('directive',)
         res = wftool.doActionFor(context, workflow_action, **kw)
         psm = 'psm_roadmap_changed'
 

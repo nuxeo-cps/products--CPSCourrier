@@ -158,7 +158,30 @@
       </tal:block>
 
     </tal:search-results>
-    <tal:endform condition="insert_mode" replace="structure string:</form>" />
 
+    <div tal:condition="insert_mode">
+      <div class="label">
+	<label for="push_directive"
+	       i18n:translate="label_push_directive">
+   	  Directive to give these users
+	</label>
+      </div>
+      <select name="directive"
+	      id="push_directive"
+	      tal:define="vtool here/portal_vocabularies;
+			  vocabulary vtool/mail_directives;
+			  voc_keys vocabulary/keys;
+			  ">
+	<tal:block repeat="key voc_keys">
+	  <option
+	      tal:condition="python:key != 'handle'"
+	      tal:define="msgid python:vocabulary.getMsgid(key, '')"
+	      tal:content="python:cpsmcat(msgid)"
+	      tal:attributes="value key;"
+	      />
+	</tal:block>
+      </select>
+    </div>
+      <tal:endform condition="insert_mode" replace="structure string:</form>" />
   </metal:main>
 </metal:html>
