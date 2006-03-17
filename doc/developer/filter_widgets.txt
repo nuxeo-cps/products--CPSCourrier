@@ -49,12 +49,16 @@ CPSSelectFilterWidget
   This is a widget that subclasses CPSSelectWidget and parses request
   and cookies.
 
-  It also has an additional property, 'defines-scope' (a boolean). If
+  It also has an additional property, 'defines_scope' (a boolean). If
   this is set to true, it puts the full vocabulary list of adds
   another (key, item) pair in the
   datastructure in case the normal value is empty. This tells the
   query mechanism the full scope of the search, which might be more
   restrictive than no search.
+  Also, the additional reject_from_scope property (tokens) specifies
+  keys to exclude from the scope. Typical use-case: you want to filter
+  based on workflow states, but one of them corresponds to closed files.
+
 
 CPSToggableCriterionWidget
 --------------------------
