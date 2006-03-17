@@ -1,17 +1,12 @@
 Requires:
 ~~~~~~~~~
-- CPSWorkflow = 3.4.0
+-
 New features:
 ~~~~~~~~~~~~~
-- new custom portlet to display threads
-- stack is initialized when user does 'handle' transition.
-- dashboard filtering on wf state excludes 'sent', 'trash' and 'closed'
+-
 Bug fixes:
 ~~~~~~~~~~
-- 'directive' stack elt data is always rendered and translated
-- better user feedback with french translations
-- roadmap displayed actions and buttons correspond to what's allowed
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
-- added API to get thread infos from proxy
-- One can explicitely exlude tokens from Select Filter Widget scopes.
+-
