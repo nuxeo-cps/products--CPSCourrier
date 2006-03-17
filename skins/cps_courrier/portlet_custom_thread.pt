@@ -1,9 +1,10 @@
 <tal:block define="context_obj nocall:options/context_obj;
-                   relations python:modules['Products.CPSCourrier.relations'];
-                   infos python:relations.get_thread_for(context_obj);
-                   base_url cpsskins_base_url|here/portal_url/getBaseUrl"
-           condition="python:context_obj.portal_type in ['Outgoing Mail', 'Incoming Mail']">
-  <table class="listing">
+                   ptype context_obj/portal_type|nothing;"
+           condition="python:ptype in ['Outgoing Mail', 'Incoming Mail']">
+  <table class="listing"
+         tal:define="relations python:modules['Products.CPSCourrier.relations'];
+                     infos python:relations.get_thread_for(context_obj);
+                     base_url cpsskins_base_url|here/portal_url/getBaseUrl">
     <thead>
       <th i18n:translate="">cpscourrier_object_label</th>
       <th i18n:translate="">cpscourrier_from_label</th>
@@ -22,7 +23,7 @@
                         class python:repeat['info'].odd() and 'odd' or 'even'"
             tal:attributes="style style; class class">
           <td>
-            <tal:indent replace="structure python:'&nbsp'*depth"/>
+            <tal:indent replace="structure python:'&nbsp'*depth*2"/>
             <a tal:attributes="href url"
                tal:content='title'>Title of the mail</a>
           </td>
