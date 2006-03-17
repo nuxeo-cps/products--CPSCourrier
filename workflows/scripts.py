@@ -176,19 +176,14 @@ def init_stack_with_user(proxy, wf_var_id, prefix='user_wdata', **kw):
     other kwargs are passed as element metadata."""
 
     wftool = getToolByName(proxy, 'portal_workflow')
-#    stack = wftool.getStackDefinitionFor(proxy, wf_var_id)
 
     data = dict((key,(value,)) for key, value in kw.items())
     user_id = getSecurityManager().getUser().getId()
 
+    # Does all security checks
     wftool.doActionFor(proxy, 'manage_delegatees',
                        current_wf_var_id=wf_var_id,
                        levels=(0,),
                        push_ids=('%s:%s' % (prefix, user_id),),
                        data_lists=data.keys(),
                        **data)
-    # Does all security checks
-#    stackdef._push(wf_var_id, push_ids=('%s:%s' % (prefix, user_id),),
-#               data_lists=data.keys(),
-#               **data)
-
