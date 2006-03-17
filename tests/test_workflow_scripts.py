@@ -27,7 +27,10 @@ from Products.CPSCourrier.tests.layer import IntegrationTestCase
 
 # import things to test
 from Products.CPSCourrier.workflows.scripts import (
-    reply_to_incoming, flag_incoming_answered, flag_incoming_handled)
+    reply_to_incoming,
+    flag_incoming_answered,
+    flag_incoming_handled,
+    init_stack_with_user)
 from Products.CPSCourrier.config import RELATION_GRAPH_ID
 
 class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
@@ -325,6 +328,33 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         wtool.doActionFor(out_mail3, 'delete')
         self.assertEquals(self._get_state(in_mail1), 'handled')
 
+    def test_init_stack_with_user(self):
+        in_mail = self.in_mail1
+        self.login('manager')
+        wftool = getToolByName(self.portal, 'portal_workflow')
+        # putting in a state where the stack exists
+        self._set_state(in_mail, 'handled')
+
+        init_stack_with_user(in_mail, 'Pilots', prefix='user_wdata',
+                             directive='the_dir')
+
+        stack = wftool.getStackFor(in_mail, 'Pilots')
+        self.assertEquals(stack.getAllLevels(), [0])
+        elt = stack._getLevelContentValues()[0]
+        self.assertEquals(elt['directive'], 'the_dir')
+
+    def test_handle_transition(self):
+        in_mail = self.in_mail1
+        self.login('manager')
+        wftool = getToolByName(self.portal, 'portal_workflow')
+
+        wftool.doActionFor(in_mail, 'handle')
+
+        stack = wftool.getStackFor(in_mail, 'Pilots')
+        self.assertEquals(stack.getAllLevels(), [0])
+        elt = stack._getLevelContentValues()[0]
+        self.assertEquals(elt['directive'], 'handle')
+        self.logout()
 
 def test_suite():
     return unittest.makeSuite(WorkflowScriptsIntegrationTestCase)
