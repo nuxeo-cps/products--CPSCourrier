@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="portlet_custom_thread" meta_type="CPS Portlet"
+   portal_type="Custom Portlet">
+ <f id="Title" v="Thread"/>
+ <f id="custom_cache_params">
+  <e v="no-cache"/>
+ </f>
+ <f id="order" v="100"/>
+ <f id="render_method" v="portlet_custom_thread"/>
+ <f id="slot" v="content_header"/>
+</object>
