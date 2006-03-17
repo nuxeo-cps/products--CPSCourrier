@@ -232,6 +232,10 @@
   <action url="%(content_url)s/workflow_transition_form?transition=handle"
           category="workflow">action_handle</action>
   <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>Owner</guard-role>
   </guard>
  </transition>
  <transition transition_id="manage_delegatees" title=""
