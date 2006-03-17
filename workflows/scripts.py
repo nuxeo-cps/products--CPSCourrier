@@ -22,6 +22,7 @@ These functions are usually called by workflow scripts.
 """
 import logging
 from Acquisition import aq_parent, aq_inner
+from AccessControl import getSecurityManager
 
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.config import RELATION_GRAPH_ID
@@ -168,4 +169,26 @@ def flag_incoming_handled(outgoing_proxy):
     _trigger_transition_for(incoming_docid, 'flag_handled', 'answering',
                             outgoing_proxy)
 
+
+def init_stack_with_user(proxy, wf_var_id, prefix='user_wdata', **kw):
+    """Initialize the stack with an element representing current user.
+
+    other kwargs are passed as element metadata."""
+
+    wftool = getToolByName(proxy, 'portal_workflow')
+#    stack = wftool.getStackDefinitionFor(proxy, wf_var_id)
+
+    data = dict((key,(value,)) for key, value in kw.items())
+    user_id = getSecurityManager().getUser().getId()
+
+    wftool.doActionFor(proxy, 'manage_delegatees',
+                       current_wf_var_id=wf_var_id,
+                       levels=(0,),
+                       push_ids=('%s:%s' % (prefix, user_id),),
+                       data_lists=data.keys(),
+                       **data)
+    # Does all security checks
+#    stackdef._push(wf_var_id, push_ids=('%s:%s' % (prefix, user_id),),
+#               data_lists=data.keys(),
+#               **data)
 
