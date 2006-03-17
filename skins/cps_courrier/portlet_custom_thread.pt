@@ -1,0 +1,39 @@
+<tal:block define="context_obj nocall:options/context_obj;
+                   relations python:modules['Products.CPSCourrier.relations'];
+                   infos python:relations.get_thread_for(context_obj);
+                   base_url cpsskins_base_url|here/portal_url/getBaseUrl"
+           condition="python:context_obj.portal_type in ['Outgoing Mail', 'Incoming Mail']">
+  <table class="listing">
+    <thead>
+      <th i18n:translate="">cpscourrier_object_label</th>
+      <th i18n:translate="">cpscourrier_from_label</th>
+      <th i18n:translate="">cpscourrier_review_state_label</th>
+    </thead>
+    <tbody>
+      <tal:block repeat="info infos">
+        <tr tal:define="depth python:info[0];
+                        proxy python:info[1]['object'];
+                        style python:proxy.aq_inner is context_obj.aq_inner and 'text-weight:bold' or None;
+                        title proxy/title_or_id;
+                        doc   proxy/getContent;
+                        from  doc/from;
+                        url   python:base_url+info[1]['rpath'];
+                        state python:info[1]['review_state'];
+                        class python:repeat['info'].odd() and 'odd' or 'even'"
+            tal:attributes="style style; class class">
+          <td>
+            <tal:indent replace="structure python:'&nbsp'*depth"/>
+            <a tal:attributes="href url"
+               tal:content='title'>Title of the mail</a>
+          </td>
+          <td tal:content="from">Somebody</td>
+          <td>
+            <span tal:content="state"
+              tal:attributes="class state"
+              i18n:translate="">State</span>
+          </td>
+      </tr>
+    </tal:block>
+    </tbody>
+  </table>
+</tal:block>
