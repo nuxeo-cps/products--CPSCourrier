@@ -180,6 +180,8 @@
   <action url="%(content_url)s/workflow_transition_form?transition=delete"
           category="workflow">action_delete</action>
   <guard>
+    <guard-role>Manager</guard-role>
+    <guard-role>WorkspaceManager</guard-role>
   </guard>
   <transition-behavior behavior_id="delete"/>
  </transition>
@@ -299,6 +301,7 @@
   <guard>
    <guard-role>Pilot</guard-role>
    <guard-role>WorkspaceManager</guard-role>
+   <guard-role>Manager</guard-role>
   </guard>
   <transition-behavior behavior_id="workflow-reset"/>
   <workflow-reset-on-workflow-variable variable_id="Pilots"/>
