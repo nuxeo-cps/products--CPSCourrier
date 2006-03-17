@@ -25,7 +25,11 @@ from Acquisition import aq_parent, aq_inner
 from AccessControl import getSecurityManager
 
 from Products.CMFCore.utils import getToolByName
-from Products.CPSCourrier.config import RELATION_GRAPH_ID
+from Products.CPSCourrier.config import (
+    RELATION_GRAPH_ID,
+    IS_REPLY_TO,
+    HAS_REPLY,
+)
 
 logger = logging.getLogger('CPSCourrier.workflows.scripts')
 
