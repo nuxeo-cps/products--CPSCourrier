@@ -170,20 +170,29 @@ def flag_incoming_handled(outgoing_proxy):
                             outgoing_proxy)
 
 
-def init_stack_with_user(proxy, wf_var_id, prefix='user_wdata', **kw):
+def init_stack_with_user(sci, wf_var_id, prefix='user_wdata', **kw):
     """Initialize the stack with an element representing current user.
 
     other kwargs are passed as element metadata."""
 
+    proxy = sci.object
+    workflow = sci.workflow
     wftool = getToolByName(proxy, 'portal_workflow')
 
     data = dict((key,(value,)) for key, value in kw.items())
     user_id = getSecurityManager().getUser().getId()
 
-    # Does all security checks
-    wftool.doActionFor(proxy, 'manage_delegatees',
-                       current_wf_var_id=wf_var_id,
-                       levels=(0,),
-                       push_ids=('%s:%s' % (prefix, user_id),),
-                       data_lists=data.keys(),
-                       **data)
+    # Can't use doActionFor because the security checks are inappropriate
+    # (cannot give the user's role a permanent access to the stack)
+    # canManageStack will be checked under the hood, with the special condition
+    # for empty stakcs.
+    tdef = workflow.transitions.get('manage_delegatees')
+    kwargs = {'current_wf_var_id': wf_var_id,
+              'levels': (0,),
+              'push_ids':('%s:%s' % (prefix, user_id),),
+              'data_lists':data.keys()}
+    kwargs.update(data)
+
+
+    workflow._executeTransition(proxy, tdef, kwargs)
+

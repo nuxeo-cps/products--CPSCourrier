@@ -8,5 +8,6 @@
 ##title=
 ##
 from Products.CPSCourrier.workflows.scripts import init_stack_with_user
-init_stack_with_user(state_change.object, 'Pilots', prefix='user_wdata',
+init_stack_with_user(state_change,
+                     'Pilots', prefix='user_wdata',
                      directive='handle')
