@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-17 19:49default\n"
+"POT-Creation-Date: 2006-03-20 15:38default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -25,17 +25,22 @@ msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
 
-#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
+#.   <span content="state" attributes="class state">State</span>
+#: from ../skins/cps_courrier/portlet_custom_thread.pt
+msgid "State"
+msgstr ""
+
+#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
 msgstr ""
 
-#.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
+#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_update_stackelts"
 msgstr ""
 
-#.   <input name="submit_add" type="submit" class="context" value="button_validate" />
+#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
 msgstr ""
@@ -47,9 +52,24 @@ msgstr ""
 msgid "cpscourrier_choose_insertion_level"
 msgstr ""
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
+msgstr ""
+
+#.   <th>cpscourrier_from_label</th>
+#: from ../skins/cps_courrier/portlet_custom_thread.pt
+msgid "cpscourrier_from_label"
+msgstr ""
+
+#.   <th>cpscourrier_object_label</th>
+#: from ../skins/cps_courrier/portlet_custom_thread.pt
+msgid "cpscourrier_object_label"
+msgstr ""
+
+#.   <th>cpscourrier_review_state_label</th>
+#: from ../skins/cps_courrier/portlet_custom_thread.pt
+msgid "cpscourrier_review_state_label"
 msgstr ""
 
 #.   <h1>
@@ -165,403 +185,4 @@ msgstr ""
 #.   	</h2>
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "search_for_delegatees"
-msgstr ""
-
-#
-# Document types labels
-#
-msgid "portal_type_MailboxGroup_title"
-msgstr ""
-
-msgid "portal_type_MailboxGroup_description"
-msgstr ""
-
-msgid "portal_type_Mailbox_title"
-msgstr ""
-
-msgid "portal_type_Mailbox_description"
-msgstr ""
-
-msgid "portal_type_IncomingMail_title"
-msgstr ""
-
-msgid "portal_type_IncomingMail_description"
-msgstr ""
-
-msgid "portal_type_OutgoingMail_title"
-msgstr ""
-
-msgid "portal_type_OutgoingMail_description"
-msgstr ""
-
-msgid "portal_type_Dashboard_title"
-msgstr ""
-
-msgid "portal_type_Dashboard_description"
-msgstr ""
-
-#
-# Root of mailboxes area
-#
-msgid "mailboxes_root_title"
-msgstr ""
-
-#
-# Layout labels
-#
-msgid "cpscourrier_object_label"
-msgstr ""
-
-msgid "cpscourrier_from_label"
-msgstr ""
-
-msgid "cpscourrier_to_label"
-msgstr ""
-
-msgid "cpscourrier_creation_date_label"
-msgstr ""
-
-msgid "cpscourrier_form_of_address_label"
-msgstr ""
-
-msgid "cpscourrier_signature_label"
-msgstr ""
-
-msgid "cpscourrier_size_label"
-msgstr ""
-
-msgid "cpscourrier_deadline_label"
-msgstr ""
-
-msgid "cpscourrier_priority_label"
-msgstr ""
-
-msgid "cpscourrier_smtp_headers_label"
-msgstr ""
-
-msgid "cpscourrier_mailbox_addresses_label"
-msgstr ""
-
-msgid "cpscourrier_search_path_label"
-msgstr ""
-
-#
-# Tabular widgets labels
-#
-msgid "cpscourrier_type_label"
-msgstr ""
-
-msgid "cpscourrier_review_state_label"
-msgstr ""
-
-msgid "cpscourrier_empty_box_msg"
-msgstr ""
-
-msgid "cpscourrier_empty_boxgroup_msg"
-msgstr ""
-
-msgid "cpscourrier_no_result_msg"
-msgstr ""
-
-msgid "cpscourrier_timeleft_label"
-msgstr ""
-
-msgid "cpscourrier_has_attachment_label"
-msgstr ""
-
-msgid "cpscourrier_fulltext_search"
-msgstr ""
-
-msgid "cpscourrier_mailbox_priority_label"
-msgstr ""
-
-msgid "cpscourrier_mailbox_from_label"
-msgstr ""
-
-msgid "cpscourrier_allowed_reply_time"
-msgstr ""
-
-#
-# Vocabularies
-#
-msgid "cpscourrier_foa_voc_regards"
-msgstr ""
-
-msgid "cpscourrier_foa_voc_sincerely"
-msgstr ""
-
-msgid "cpscourrier_mp_voc_low"
-msgstr ""
-
-msgid "cpscourrier_mp_voc_normal"
-msgstr ""
-
-msgid "cpscourrier_mp_voc_high"
-msgstr ""
-
-msgid "cpscourrier_mp_voc_very_high"
-msgstr ""
-
-msgid "cpscourrier_all_boxes"
-msgstr "Toutes"
-
-msgid "cpscourrier_subject_label"
-msgstr ""
-
-msgid "cpscourrier_all_subjects"
-msgstr ""
-
-msgid "cpscourrier_initiate_handling"
-msgstr ""
-
-msgid "cpscourrier_for_reply"
-msgstr ""
-
-msgid "cpscourrier_for_advice"
-msgstr ""
-
-#
-# Workflows
-#
-msgid "action_roadmap"
-msgstr ""
-
-msgid "heading_workflow_handle_of ${item_id}"
-msgstr ""
-
-msgid "help_workflow_handle"
-msgstr ""
-
-msgid "button_handle"
-msgstr ""
-
-msgid "action_handle"
-msgstr ""
-
-msgid "handle"
-msgstr ""
-
-msgid "heading_workflow_forward_of ${item_id}"
-msgstr ""
-
-msgid "help_workflow_forward"
-msgstr ""
-
-msgid "button_forward"
-msgstr ""
-
-msgid "action_forward"
-msgstr ""
-
-msgid "forward"
-msgstr ""
-
-msgid "heading_workflow_discard_of ${item_id}"
-msgstr ""
-
-msgid "help_workflow_discard"
-msgstr ""
-
-msgid "button_discard"
-msgstr ""
-
-msgid "action_discard"
-msgstr ""
-
-msgid "discard"
-msgstr ""
-
-msgid "heading_workflow_delete_of ${item_id}"
-msgstr ""
-
-msgid "help_workflow_delete"
-msgstr ""
-
-msgid "button_delete"
-msgstr ""
-
-msgid "action_delete"
-msgstr ""
-
-msgid "delete"
-msgstr ""
-
-msgid "heading_workflow_answer_of ${item_id}"
-msgstr ""
-
-msgid "help_workflow_answer"
-msgstr ""
-
-msgid "button_answer"
-msgstr ""
-
-msgid "action_answer"
-msgstr ""
-
-msgid "answer"
-msgstr ""
-
-msgid "heading_workflow_close_of ${item_id}"
-msgstr ""
-
-msgid "help_workflow_close"
-msgstr ""
-
-msgid "button_close"
-msgstr ""
-
-msgid "action_close"
-msgstr ""
-
-msgid "close"
-msgstr ""
-
-msgid "heading_workflow_reopen_of ${item_id}"
-msgstr ""
-
-msgid "help_workflow_reopen"
-msgstr ""
-
-msgid "button_reopen"
-msgstr ""
-
-msgid "action_reopen"
-msgstr ""
-
-msgid "reopen"
-msgstr ""
-
-msgid "heading_workflow_validate_of ${item_id}"
-msgstr ""
-
-msgid "help_workflow_validate"
-msgstr ""
-
-msgid "action_validate"
-msgstr ""
-
-msgid "validate"
-msgstr ""
-
-msgid "heading_workflow_invalidate_of ${item_id}"
-msgstr ""
-
-msgid "help_workflow_invalidate"
-msgstr ""
-
-msgid "button_invalidate"
-msgstr ""
-
-msgid "action_invalidate"
-msgstr ""
-
-msgid "invalidate"
-msgstr ""
-
-msgid "heading_workflow_send_of ${item_id}"
-msgstr ""
-
-msgid "help_workflow_send"
-msgstr ""
-
-msgid "button_send"
-msgstr ""
-
-msgid "action_send"
-msgstr ""
-
-msgid "send"
-msgstr ""
-
-msgid "heading_workflow_reactivate_of ${item_id}"
-msgstr ""
-
-msgid "help_workflow_reactivate"
-msgstr ""
-
-msgid "button_reactivate"
-msgstr ""
-
-msgid "action_reactivate"
-msgstr ""
-
-msgid "reactivate"
-msgstr ""
-
-msgid "heading_workflow_reset_of ${item_id}"
-msgstr ""
-
-msgid "help_workflow_reset"
-msgstr ""
-
-msgid "button_reset"
-msgstr ""
-
-msgid "action_reset"
-msgstr ""
-
-msgid "reset"
-msgstr ""
-
-msgid "flag_handled"
-msgstr ""
-
-msgid "flag_answered"
-msgstr ""
-
-msgid "action_move_down_delegatees"
-msgstr ""
-
-msgid "heading_workflow_move_down_delegatees_of ${item_id}"
-msgstr ""
-
-msgid "button move_down_delegatees"
-msgstr ""
-
-msgid "help_workflow_move_down_delegatees"
-msgstr ""
-
-#
-# Workflow states
-#
-msgid "received"
-msgstr ""
-
-msgid "handled"
-msgstr ""
-
-msgid "trash"
-msgstr ""
-
-msgid "answering"
-msgstr ""
-
-msgid "answered"
-msgstr ""
-
-msgid "closed"
-msgstr ""
-
-msgid "validated"
-msgstr ""
-
-msgid "sent"
-msgstr ""
-
-#
-# Workflow status messages
-#
-msgid "psm_select_a_level"
-msgstr ""
-
-msgid "psm_roadmap_changed"
-msgstr ""
-
-msgid "psm_stack_elements_edited"
-msgstr ""
-
-msgid "psm_cannot_manage_stack"
-msgstr ""
-
-msgid "psm_select_at_least_one_item"
 msgstr ""

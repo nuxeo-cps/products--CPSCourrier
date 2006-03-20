@@ -53,6 +53,8 @@
   <property name="fields">
    <element value="deadline"/>
   </property>
+  <property name="label">cpscourrier_timeleft_label</property>
+  <property name="is_i18n">True</property>
   <property name="hidden_layout_modes">
     <element value="create"/>
     <element value="edit"/>

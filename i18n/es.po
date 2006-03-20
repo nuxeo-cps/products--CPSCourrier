@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-03-17 19:49default\n"
+"POT-Creation-Date: 2006-03-20 15:36default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -25,18 +25,23 @@ msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
 
-#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
+#.   <span content="state" attributes="class state">State</span>
+#: from ../skins/cps_courrier/portlet_custom_thread.pt
+msgid "State"
+msgstr ""
+
+#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 #, fuzzy
 msgid "button_move_down_delegatees"
 msgstr "Add"
 
-#.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
+#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_update_stackelts"
 msgstr ""
 
-#.   <input name="submit_add" type="submit" class="context" value="button_validate" />
+#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
 msgstr ""
@@ -49,10 +54,28 @@ msgstr ""
 msgid "cpscourrier_choose_insertion_level"
 msgstr "Size (kB):"
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filtro"
+
+#.   <th>cpscourrier_from_label</th>
+#: from ../skins/cps_courrier/portlet_custom_thread.pt
+msgid "cpscourrier_from_label"
+msgstr "De: "
+
+#
+# Layout labels
+#
+#.   <th>cpscourrier_object_label</th>
+#: from ../skins/cps_courrier/portlet_custom_thread.pt
+msgid "cpscourrier_object_label"
+msgstr "Objeto:"
+
+#.   <th>cpscourrier_review_state_label</th>
+#: from ../skins/cps_courrier/portlet_custom_thread.pt
+msgid "cpscourrier_review_state_label"
+msgstr "Estado"
 
 #.   <h1>
 #.         Mail Handling Roadmap
@@ -214,15 +237,6 @@ msgstr "Documento con los resultados de las búsquedas"
 msgid "mailboxes_root_title"
 msgstr "Buzones"
 
-#
-# Layout labels
-#
-msgid "cpscourrier_object_label"
-msgstr "Objeto:"
-
-msgid "cpscourrier_from_label"
-msgstr "De: "
-
 msgid "cpscourrier_to_label"
 msgstr "Para: "
 
@@ -258,9 +272,6 @@ msgstr "Cajas referidas"
 
 msgid "cpscourrier_type_label"
 msgstr "Tipo"
-
-msgid "cpscourrier_review_state_label"
-msgstr "Estado"
 
 msgid "cpscourrier_empty_box_msg"
 msgstr "No hay ningún correo que responda a los criterios de búsqueda"
