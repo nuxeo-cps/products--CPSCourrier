@@ -4,7 +4,9 @@
   <table class="listing"
          tal:define="relations python:modules['Products.CPSCourrier.relations'];
                      infos python:relations.get_thread_for(context_obj);
-                     base_url cpsskins_base_url|here/portal_url/getBaseUrl">
+                     utool nocall:here/portal_url;
+                     here_rpath python:utool.getRpath(context_obj);
+                     base_url cpsskins_base_url|utool/getBaseUrl">
     <thead>
       <th i18n:translate="">cpscourrier_object_label</th>
       <th i18n:translate="">cpscourrier_from_label</th>
@@ -14,11 +16,12 @@
       <tal:block repeat="info infos">
         <tr tal:define="depth python:info[0];
                         proxy python:info[1]['object'];
-                        style python:proxy.aq_inner is context_obj.aq_inner and 'text-weight:bold' or None;
                         title proxy/title_or_id;
                         doc   proxy/getContent;
                         from  doc/from;
-                        url   python:base_url+info[1]['rpath'];
+                        rpath python:info[1]['rpath'];
+                        style python:here_rpath == rpath and 'font-weight:bold' or None;
+                        url   python:base_url+rpath;
                         state python:info[1]['review_state'];
                         class python:repeat['info'].odd() and 'odd' or 'even'"
             tal:attributes="style style; class class">
