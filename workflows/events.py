@@ -39,7 +39,7 @@ def removedProxy(ob, event):
 
     # check if there remain living proxies refering to that docid
     proxies = ptool.listProxies(docid=docid)
-    if len(proxies) > 1:
+    if len(proxies):
         logger.debug('remaining several proxies %r: do nothing' %
                      (proxies,))
         return

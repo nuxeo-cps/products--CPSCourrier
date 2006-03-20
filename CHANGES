@@ -6,7 +6,7 @@ New features:
 - Can give a user a directive when adding to roadmap
 Bug fixes:
 ~~~~~~~~~~
--
+- relation graph is no longer deleted when checkin a draft back in
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

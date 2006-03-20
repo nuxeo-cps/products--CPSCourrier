@@ -31,7 +31,8 @@ from Products.CPSCourrier.workflows.scripts import (
     flag_incoming_answered,
     flag_incoming_handled,
     init_stack_with_user)
-from Products.CPSCourrier.config import RELATION_GRAPH_ID
+from Products.CPSCourrier.config import (
+    RELATION_GRAPH_ID, IS_REPLY_TO, HAS_REPLY)
 
 class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
@@ -48,7 +49,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         # check that they are related
         res = rtool.getRelationsFor(RELATION_GRAPH_ID,
                                 int(out_mail1.getDocid()),
-                                'is_reply_to')
+                                IS_REPLY_TO)
         expected = (int(self.in_mail1.getDocid()),)
         self.assertEquals(expected, res)
 
@@ -62,7 +63,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         # check that they are related
         res = rtool.getRelationsFor(RELATION_GRAPH_ID,
                                 int(out_mail2.getDocid()),
-                                'is_reply_to')
+                                IS_REPLY_TO)
         expected = (int(self.in_mail2.getDocid()),)
         self.assertEquals(expected, res)
 
@@ -168,7 +169,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         rtool = getToolByName(in_mail1, 'portal_relations')
         rtool.deleteRelationFor(RELATION_GRAPH_ID,
                                 int(out_mail2.getDocid()),
-                                'is_reply_to',
+                                IS_REPLY_TO,
                                 int(in_mail1.getDocid()))
         flag_incoming_answered(out_mail1)
         self.assertEquals(self._get_state(in_mail1), 'answering')
@@ -177,11 +178,11 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         rtool = getToolByName(in_mail1, 'portal_relations')
         rtool.deleteRelationFor(RELATION_GRAPH_ID,
                                 int(out_mail3.getDocid()),
-                                'is_reply_to',
+                                IS_REPLY_TO,
                                 int(in_mail1.getDocid()))
         linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
                                 int(in_mail1.getDocid()),
-                                'has_reply')
+                                HAS_REPLY)
         # out_mail1 is the last reply: the transition on in_mail1 is triggered
         self.assertEquals(linked_replies, (int(out_mail1.getDocid()),))
         flag_incoming_handled(out_mail1)
@@ -199,7 +200,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         rtool = getToolByName(in_mail1, 'portal_relations')
         linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
                                 int(in_mail1.getDocid()),
-                                'has_reply')
+                                HAS_REPLY)
         self.assertEquals(linked_replies, ())
         self.mb.manage_delObjects([in_mail1.getId()])
 
@@ -216,7 +217,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
         # out_mail1 is linked has a reply to in_mail1
         linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, 'has_reply')
+                                in_mail1_docid, HAS_REPLY)
 
         self.assertEquals(linked_replies, (out_mail1_docid,))
 
@@ -225,7 +226,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
         # after deletion in_mail1 is no longer linked to anything
         linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, 'has_reply')
+                                in_mail1_docid, HAS_REPLY)
         self.assertEquals(linked_replies, ())
 
     def test_event_delete_3(self):
@@ -239,7 +240,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
         # out_mail1 and 2 are linked has a reply to in_mail1
         linked_replies = sorted(rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, 'has_reply'))
+                                in_mail1_docid, HAS_REPLY))
         expected = sorted((out_mail1_docid, out_mail2_docid))
         self.assertEquals(linked_replies, expected)
 
@@ -248,14 +249,14 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
         # after deletion in_mail1 is no longer linked to out_mail2
         linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, 'has_reply')
+                                in_mail1_docid, HAS_REPLY)
         self.assertEquals(linked_replies, (out_mail2_docid,))
 
         # deleting the container should delete children and clean the relation
         # graph
         self.mbg.manage_delObjects([self.mb.getId()])
         linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, 'has_reply')
+                                in_mail1_docid, HAS_REPLY)
         self.assertEquals(linked_replies, ())
 
     def test_event_delete_move(self):
@@ -268,7 +269,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
         # out_mail1 is linked has a reply to in_mail1
         linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, 'has_reply')
+                                in_mail1_docid, HAS_REPLY)
         self.assertEquals(linked_replies, (out_mail1_docid,))
 
         # target mailboxes for moving proxies around
@@ -283,7 +284,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
         # relations should not have changed
         linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, 'has_reply')
+                                in_mail1_docid, HAS_REPLY)
         self.assertEquals(linked_replies, (out_mail1_docid,))
 
         # cut an paste objects at Zope level (ZMI for instance)
@@ -294,9 +295,45 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
         # relations should not have changed either
         linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, 'has_reply')
+                                in_mail1_docid, HAS_REPLY)
         self.assertEquals(linked_replies, (out_mail1_docid,))
 
+    def test_event_delete_checkout(self):
+        # smoke test: on checkout draft move, the relation graph should not
+        # change
+        in_mail1 = self.in_mail1
+        in_mail1_docid = int(in_mail1.getDocid())
+        out_mail1 = reply_to_incoming(in_mail1)
+        out_mail1_docid = int(out_mail1.getDocid())
+        rtool = getToolByName(self.portal, 'portal_relations')
+        wtool = getToolByName(self.portal, 'portal_workflow')
+
+        # out_mail1 is linked has a reply to in_mail1
+        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                in_mail1_docid, HAS_REPLY)
+        self.assertEquals(linked_replies, (out_mail1_docid,))
+
+        # create a draft
+        wtool.doActionFor(out_mail1, 'checkout_draft',
+                          dest_container=self.mb,
+                          initial_transition='checkout_draft_in')
+
+        # out_mail1 should still be linked has a reply to in_mail1
+        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                in_mail1_docid, HAS_REPLY)
+        self.assertEquals(linked_replies, (out_mail1_docid,))
+
+        # check draft back in
+        draft = self.mb[out_mail1.getId()+'_1']
+        wtool.doActionFor(draft, 'checkin_draft',
+                          dest_container=self.mb,
+                          dest_objects=[out_mail1],
+                          checkin_transition="unlock")
+
+        # out_mail1 should still be linked has a reply to in_mail1
+        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                in_mail1_docid, HAS_REPLY)
+        self.assertEquals(linked_replies, (out_mail1_docid,))
 
     #
     # integration between wf scripts and events

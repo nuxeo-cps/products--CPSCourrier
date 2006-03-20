@@ -68,7 +68,7 @@ def reply_to_incoming(incoming_proxy):
     rtool = getToolByName(incoming_proxy, 'portal_relations')
     rtool.addRelationFor(RELATION_GRAPH_ID,
                          int(outgoing_proxy.getDocid()),
-                         'is_reply_to',
+                         IS_REPLY_TO,
                          int(incoming_proxy.getDocid()))
     return outgoing_proxy
 
@@ -82,7 +82,7 @@ def _get_incoming_docid_for(outgoing_proxy):
     # get the related incoming mail
     incoming_docids = rtool.getRelationsFor(RELATION_GRAPH_ID,
                                             int(outgoing_proxy.getDocid()),
-                                            'is_reply_to')
+                                            IS_REPLY_TO)
     logger.debug('incoming docids: %r' % (incoming_docids,))
     if not incoming_docids:
         # the related incoming mail has been deleted
@@ -127,7 +127,7 @@ def flag_incoming_answered(outgoing_proxy):
     # check that all replies to the incoming mail are already sent
     outgoing_docids = rtool.getRelationsFor(RELATION_GRAPH_ID,
                                             int(incoming_docid),
-                                            'has_reply')
+                                            HAS_REPLY)
     logger.debug('outgoing docids: %r' % (outgoing_docids,))
     for docid in outgoing_docids:
         proxy_infos = ptool.getProxyInfosFromDocid(
@@ -163,7 +163,7 @@ def flag_incoming_handled(outgoing_proxy):
     # check that outgoing_proxy is the last reply to be deleted
     outgoing_docids = rtool.getRelationsFor(RELATION_GRAPH_ID,
                                             int(incoming_docid),
-                                            'has_reply')
+                                            HAS_REPLY)
     if len(outgoing_docids) > 1:
         logger.debug('several remaining docids %r: do nothing' %
                      (outgoing_docids,))
