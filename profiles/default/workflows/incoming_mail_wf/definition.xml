@@ -279,7 +279,7 @@
   </guard>
  </transition>
  <transition transition_id="roadmap_view"
-	     title="View Roadmap" new_state=""
+             title="View Roadmap" new_state=""
              trigger="USER"
              before_script="unlock_locked_before_abandon"
              after_script="">
