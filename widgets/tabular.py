@@ -29,6 +29,7 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
+from Products.CPSSchemas.Widget import widgetname
 from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSDocument.FlexibleTypeInformation import FlexibleTypeInformation
 from Products.CPSPortlets.CPSPortletWidget import CPSPortletWidget
@@ -38,8 +39,6 @@ from Products.CPSSkins.cpsskins_utils import (serializeForCookie,
                                               unserializeFromCookie)
 
 from Products.CPSDocument.interfaces import ICPSDocument
-
-WIDGET_PREFIX = 'widget__' #XXX this should be importable from CPSSchemas
 
 FILTER_PREFIX = 'Query ' #TODO Make this a property of tabular widgets
 FILTER_PREFIX_LEN = len('Query ')
@@ -243,10 +242,10 @@ class TabularWidget(CPSPortletWidget):
 
         # prepare the get request
         wid = widget.getWidgetId()
-        prefixed = WIDGET_PREFIX + sort_wid
-        get_req = '?%s-on=%s&%s-col=%s' % (prefixed,
+        sort_name = widgetname(sort_wid)
+        get_req = '?%s-on=%s&%s-col=%s' % (sort_name,
                                            quote(sortable),
-                                           prefixed,
+                                           sort_name,
                                            wid,
                                            )
         filt_butt = getattr(self, 'filter_button', '')
