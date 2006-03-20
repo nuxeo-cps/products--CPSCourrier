@@ -45,6 +45,7 @@
   <exit-transition transition_id="manage_delegatees"/>
   <exit-transition transition_id="move_down_delegatees"/>
   <exit-transition transition_id="reset"/>
+  <exit-transition transition_id="close"/>
   <stack-definition stackdef_id="Pilots"
                     variable_id="Pilots"
                     meta_type="Hierarchical Stack Definition"
@@ -86,6 +87,7 @@
   <exit-transition transition_id="manage_delegatees"/>
   <exit-transition transition_id="move_down_delegatees"/>
   <exit-transition transition_id="reset"/>
+  <exit-transition transition_id="close"/>
   <permission-map name="Modify portal content"
                   acquired="False">
    <permission-role>Manager</permission-role>
@@ -140,12 +142,14 @@
  </state>
  <state state_id="received" title="">
   <exit-transition transition_id="handle"/>
+  <exit-transition transition_id="close"/>
   <state-behavior behavior_id="workflow-reset"/>
   <workflow-reset-on-workflow-variable variable_id="Pilots"/>
  </state>
  <state state_id="trash" title="">
   <exit-transition transition_id="delete"/>
   <exit-transition transition_id="reset"/>
+  <exit-transition transition_id="close"/>
  </state>
  <transition transition_id="answer" title=""
              new_state="answering" trigger="USER"
