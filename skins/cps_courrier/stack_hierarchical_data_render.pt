@@ -63,7 +63,9 @@
 	      tal:attributes = "rowspan repeat/content/length">
 	    <input type="radio" name="level" value="level"
 		   tal:condition="level_infos/insertable"
-		   tal:attributes="value level_infos/level_str" />
+                   tal:attributes="value level_infos/level_str;
+                                   checked  python:repeat['level'].end and
+                                                   'checked' or nothing" />
 	  </td>
 	  <td tal:condition="edit_mode">
 	    <input type="checkbox" name="pop_ids:list"
