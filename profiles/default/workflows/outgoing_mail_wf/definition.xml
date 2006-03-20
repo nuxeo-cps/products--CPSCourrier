@@ -54,6 +54,7 @@
  </state>
  <state state_id="sent" title="">
   <exit-transition transition_id="reactivate"/>
+  <exit-transition transition_id="reset"/>
  </state>
  <state state_id="validated" title="">
   <exit-transition transition_id="roadmap_view"/>
@@ -61,6 +62,7 @@
   <exit-transition transition_id="send"/>
   <exit-transition transition_id="manage_delegatees"/>
   <exit-transition transition_id="move_down_delegatees"/>
+  <exit-transition transition_id="reset"/>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
@@ -156,7 +158,7 @@
   <workflow-reset-on-workflow-variable variable_id="Pilots"/>
  </state>
  <transition transition_id="roadmap_view"
-	     title="View Roadmap" new_state=""
+             title="View Roadmap" new_state=""
              trigger="USER"
              before_script="unlock_locked_before_abandon"
              after_script="">
@@ -274,8 +276,6 @@
  <transition transition_id="move_down_delegatees" title=""
              new_state="" trigger="USER" before_script=""
              after_script="">
-  <action url="%(content_url)s/workflow_transition_form?transition=move_down_delegatees"
-     category="workflow">action_move_down_delegatees</action>
   <guard>
    <guard-role>Pilot</guard-role>
   </guard>
@@ -297,6 +297,19 @@
           category="workflow">action_send</action>
   <guard>
   </guard>
+ </transition>
+ <transition transition_id="reset" title=""
+             new_state="work" trigger="USER"
+             before_script="" after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=reset"
+          category="workflow">action_reset</action>
+  <guard>
+   <guard-role>Pilot</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>Manager</guard-role>
+  </guard>
+  <transition-behavior behavior_id="workflow-reset"/>
+  <workflow-reset-on-workflow-variable variable_id="Pilots"/>
  </transition>
  <transition transition_id="unlock"
              title="Unlock content after a draft is done"
