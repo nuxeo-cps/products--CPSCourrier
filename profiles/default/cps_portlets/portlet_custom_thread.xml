@@ -7,5 +7,5 @@
  </f>
  <f id="order" v="100"/>
  <f id="render_method" v="portlet_custom_thread"/>
- <f id="slot" v="content_header"/>
+ <f id="slot" v="content_well"/>
 </object>
