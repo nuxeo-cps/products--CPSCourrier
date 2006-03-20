@@ -8,6 +8,7 @@ Bug fixes:
 ~~~~~~~~~~
 - relation graph is no longer deleted when checkin a draft back in
 - added missing delete and reset transitions in incoming wf
+- added missing reset transition in outgoing wf
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
