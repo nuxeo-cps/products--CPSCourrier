@@ -21,6 +21,7 @@
 These functions are usually called by workflow scripts.
 """
 import logging
+import socket
 from Acquisition import aq_parent, aq_inner
 from AccessControl import getSecurityManager
 
@@ -247,11 +248,16 @@ def send_reply(reply_proxy, encoding='iso-8859-15'):
 
     # send the mail
     mailhost = getToolByName(reply_proxy, 'MailHost')
-    return mailhost.send(body,
-                         mto=reply_doc['to'],
-                         mfrom=reply_doc['from'],
-                         subject=reply_doc['Title'](),
-                         encode=encoding)
+    kw = {'mto': reply_doc['to'],
+          'mfrom': reply_doc['from'],
+          'subject': reply_doc['Title']()}
+    try:
+        return mailhost.send(body, **kw)
+    except socket.error, e:
+        # log error for the admin and raise IOError that can get catched by the
+        # skins script to display a friendly error message
+        logger.error("error sending email (%s, %r): %s" % (body, kw, e))
+        raise IOError(e)
 
 
 

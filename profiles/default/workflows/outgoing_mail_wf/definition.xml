@@ -291,9 +291,9 @@
   </guard>
  </transition>
  <transition transition_id="send" title="" new_state="sent"
-             trigger="USER" before_script=""
+             trigger="USER" before_script="send_reply"
              after_script="flag_incoming_answered">
-  <action url="%(content_url)s/workflow_transition_form?transition=send"
+  <action url="%(content_url)s/cpscourrier_send_reply_form"
           category="workflow">action_send</action>
   <guard>
   </guard>
@@ -415,6 +415,9 @@
  <script script_id="flag_incoming_answered"
          type="Script (Python)"
          filename="workflows/outgoing_mail_wf/scripts/flag_incoming_answered.py"/>
+ <script script_id="send_reply"
+         type="Script (Python)"
+         filename="workflows/outgoing_mail_wf/scripts/send_reply.py"/>
  <script script_id="flag_incoming_handled"
          type="Script (Python)"
          filename="workflows/outgoing_mail_wf/scripts/flag_incoming_handled.py"/>
