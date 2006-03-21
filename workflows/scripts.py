@@ -201,15 +201,11 @@ def init_stack_with_user(sci, wf_var_id, prefix='user_wdata', **kw):
     workflow._executeTransition(proxy, tdef, kwargs)
 
 
-def send_reply(reply_proxy, encoding='iso-8859-15'):
-    """Send a reply
+def compute_reply_body(reply_proxy, encoding='iso-8859-15'):
+    """Compute the body of a sent outgoing mail
 
     The content of the reply is build from the proxy quoting the original mail
     thanks to the relation graph.
-
-    This function does not do any error handling if the Mailhost fails to send
-    it properly. This will be handled by the skins script along with the
-    redirect if needed.
     """
     mcat = getToolByName(reply_proxy, 'translation_service')
     reply_doc = reply_proxy.getContent()
@@ -236,6 +232,18 @@ def send_reply(reply_proxy, encoding='iso-8859-15'):
                 body += '\n\n%s\n' % quote_header
                 lines =  incoming_doc['content'].split('\n')
                 body += '\n'.join('> %s' % line for line in lines)
+    return body
+
+def send_reply(reply_proxy, encoding='iso-8859-15'):
+    """Send a reply
+
+
+    This function does not do any error handling if the Mailhost fails to send
+    it properly. This will be handled by the skins script along with the
+    redirect if needed.
+    """
+    reply_doc = reply_proxy.getContent()
+    body = compute_reply_body(reply_proxy, encoding)
 
     # send the mail
     mailhost = getToolByName(reply_proxy, 'MailHost')
