@@ -20,7 +20,6 @@
 
 These functions are usually called by workflow scripts.
 """
-import datetime
 import logging
 from Acquisition import aq_parent, aq_inner
 from AccessControl import getSecurityManager
@@ -227,11 +226,11 @@ def send_reply(reply_proxy, encoding='iso-8859-15'):
             if info['visible']:
                 incoming_doc = info['object'].getContent()
                 orig_date_str = incoming_doc['CreationDate']()
-                date_tuple = orig_date_str.split()[0].split('-')
-                date_obj= datetime.datetime(*(int(i) for i in date_tuple))
-                date_str = date_obj.strftime('%Y-%m-%d')
-                quote_header = mcat('On ${date}, ${name} wrote:',
-                                    {'date': date_str,
+                year, month, day = orig_date_str.split()[0].split('-')
+                quote_header = mcat('On ${y}-${m}-${d}, ${name} wrote:',
+                                    {'y': year,
+                                     'm': month,
+                                     'd': day,
                                      'name': incoming_doc['from']}
                                    ).encode(encoding)
                 body += '\n\n%s\n' % quote_header
