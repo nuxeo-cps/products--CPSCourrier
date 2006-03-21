@@ -20,6 +20,7 @@
 
 These functions are usually called by workflow scripts.
 """
+import datetime
 import logging
 from Acquisition import aq_parent, aq_inner
 from AccessControl import getSecurityManager
@@ -199,4 +200,52 @@ def init_stack_with_user(sci, wf_var_id, prefix='user_wdata', **kw):
 
 
     workflow._executeTransition(proxy, tdef, kwargs)
+
+
+def send_reply(reply_proxy, encoding='iso-8859-15'):
+    """Send a reply
+
+    The content of the reply is build from the proxy quoting the original mail
+    thanks to the relation graph.
+
+    This function does not do any error handling if the Mailhost fails to send
+    it properly. This will be handled by the skins script along with the
+    redirect if needed.
+    """
+    mcat = getToolByName(reply_proxy, 'translation_service')
+    reply_doc = reply_proxy.getContent()
+    body = reply_doc['content']
+
+    # get the original content for quoting
+    incoming_docid = _get_incoming_docid_for(reply_proxy)
+    if incoming_docid is None:
+        logger.warning('%r has no related incoming mail: do not include'
+                       'original mail in reply' % reply_proxy)
+    else:
+        ptool = getToolByName(reply_proxy, 'portal_proxies')
+        for info in ptool.getProxyInfosFromDocid(str(incoming_docid)):
+            if info['visible']:
+                incoming_doc = info['object'].getContent()
+                orig_date_str = incoming_doc['CreationDate']()
+                date_tuple = orig_date_str.split()[0].split('-')
+                date_obj= datetime.datetime(*(int(i) for i in date_tuple))
+                date_str = date_obj.strftime('%Y-%m-%d')
+                quote_header = mcat('On ${date}, ${name} wrote:',
+                                    {'date': date_str,
+                                     'name': incoming_doc['from']}
+                                   ).encode(encoding)
+                body += '\n\n%s\n' % quote_header
+                lines =  incoming_doc['content'].split('\n')
+                body += '\n'.join('> %s' % line for line in lines)
+
+    # send the mail
+    mailhost = getToolByName(reply_proxy, 'MailHost')
+    return mailhost.send(body,
+                         mto=reply_doc['to'],
+                         mfrom=reply_doc['from'],
+                         subject=reply_doc['Title'](),
+                         encode=encoding)
+
+
+
 

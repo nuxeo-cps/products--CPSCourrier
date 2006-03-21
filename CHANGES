@@ -12,3 +12,4 @@ Bug fixes:
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - the thread portlet is now in slot content_well
+- added logics for the send_reply step

@@ -20,6 +20,7 @@
 
 # testing module and harness
 
+import datetime
 import unittest
 import transaction
 from Products.CMFCore.utils import getToolByName
@@ -30,6 +31,7 @@ from Products.CPSCourrier.workflows.scripts import (
     reply_to_incoming,
     flag_incoming_answered,
     flag_incoming_handled,
+    send_reply,
     init_stack_with_user)
 from Products.CPSCourrier.config import (
     RELATION_GRAPH_ID, IS_REPLY_TO, HAS_REPLY)
@@ -187,6 +189,44 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         self.assertEquals(linked_replies, (int(out_mail1.getDocid()),))
         flag_incoming_handled(out_mail1)
         self.assertEquals(self._get_state(in_mail1), 'handled')
+
+    def test_send_reply(self):
+        # faking the MailHost
+        class FakeMailHost:
+            def send(self, *args, **kw):
+                return args, kw
+
+        in_mail1 = self.in_mail1
+        in_mail1_doc_edit = in_mail1.getEditableContent()
+        in_mail1_doc_edit.edit({
+            'content': "Hi!\nPlease go to http://www.paipal.com and confirm"
+                       " your password!\n  Regards,\n  The Paipal team"},
+            proxy=in_mail1,
+        )
+        out_mail1 = reply_to_incoming(in_mail1)
+        out_mail1.MailHost = FakeMailHost()
+        out_mail1_doc_edit = in_mail1.getEditableContent()
+        out_mail1_doc_edit.edit({'content': "Please stop trying to fish us!"},
+                                proxy=out_mail1)
+
+        result = send_reply(out_mail1)
+        expected = (("""\
+Please stop trying to fish us!
+
+On %s, bar@foo.com wrote:
+> Hi!
+> Please go to http://www.paipal.com and confirm your password!
+>   Regards,
+>   The Paipal team""" % datetime.datetime.now().strftime('%Y-%m-%d'),),
+                    {'encode': 'iso-8859-15',
+                     'mfrom': 'bar@foo.com',
+                     'mto': ['foo@foo.com'],
+                     'subject': 'Test mail 1'})
+
+        self.assertEquals(result, expected)
+        # for some reason there is a ZODB commit in beforeTearDown thus we need
+        # get rid of the unpickleable fake MailHost
+        del out_mail1.MailHost
 
     #
     # the following tests are for workflow scripts but general events.

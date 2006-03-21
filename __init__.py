@@ -37,6 +37,9 @@ ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
     'flag_incoming_handled')
 ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
     'init_stack_with_user')
+ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
+    'send_reply')
+
 
 # Stack API
 ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
