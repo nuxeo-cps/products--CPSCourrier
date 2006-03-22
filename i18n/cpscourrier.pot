@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-22 12:04default\n"
+"POT-Creation-Date: 2006-03-22 12:09default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -591,4 +591,10 @@ msgid "psm_cannot_manage_stack"
 msgstr ""
 
 msgid "psm_select_at_least_one_item"
+msgstr ""
+
+msgid "psm_cpscourrier_reply_could_not_be_sent"
+msgstr ""
+
+msgid "psm_cpscourrier_reply_sent"
 msgstr ""

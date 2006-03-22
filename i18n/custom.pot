@@ -435,3 +435,9 @@ msgstr ""
 msgid "psm_select_at_least_one_item"
 msgstr ""
 
+msgid "psm_cpscourrier_reply_could_not_be_sent"
+msgstr ""
+
+msgid "psm_cpscourrier_reply_sent"
+msgstr ""
+

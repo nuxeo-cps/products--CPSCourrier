@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-22 12:04default\n"
+"POT-Creation-Date: 2006-03-22 12:09default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -650,3 +650,11 @@ msgstr "You are not allowed to manage the roadmap"
 
 msgid "psm_select_at_least_one_item"
 msgstr "Please select at least one item"
+
+msgid "psm_cpscourrier_reply_could_not_be_sent"
+msgstr ""
+"Due to a configuration problem, the reply could not be sent. Please contact "
+"the site manager to fix the problem."
+
+msgid "psm_cpscourrier_reply_sent"
+msgstr "Reply sent"

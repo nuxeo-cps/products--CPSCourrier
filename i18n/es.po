@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-03-22 12:04default\n"
+"POT-Creation-Date: 2006-03-22 12:09default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -547,7 +547,7 @@ msgstr ""
 
 #, fuzzy
 msgid "move_down_delegatees"
-msgstr "Move down"
+msgstr "Move to next level"
 
 #, fuzzy
 msgid "action_move_down_delegatees"
@@ -599,7 +599,7 @@ msgstr ""
 
 #, fuzzy
 msgid "manage_delegatees"
-msgstr "Move down"
+msgstr "Roadmap update"
 
 #
 # Workflow status messages
@@ -618,3 +618,11 @@ msgstr ""
 
 msgid "psm_select_at_least_one_item"
 msgstr ""
+
+#, fuzzy
+msgid "psm_cpscourrier_reply_could_not_be_sent"
+msgstr "All"
+
+#, fuzzy
+msgid "psm_cpscourrier_reply_sent"
+msgstr "For reply"

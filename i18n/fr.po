@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-22 12:04default\n"
+"POT-Creation-Date: 2006-03-22 12:09default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -601,3 +601,13 @@ msgstr "Vous n'avez pas la permission de modifier la feuille de route"
 
 msgid "psm_select_at_least_one_item"
 msgstr "Sélectionnez au moins un élément"
+
+msgid "psm_cpscourrier_reply_could_not_be_sent"
+msgstr ""
+"La réponse n'a pas pu être envoyée à cause d'un problème de configuration. "
+"Veuillez s'il vous plaît contacter l'administrateur du portail pour qu'il "
+"règle le problème."
+
+
+msgid "psm_cpscourrier_reply_sent"
+msgstr "Réponse envoyée"
