@@ -447,3 +447,5 @@ msgstr ""
 msgid "psm_cpscourrier_reply_sent"
 msgstr ""
 
+msgid "On ${y}-${m}-${d}, ${name} wrote:"
+msgstr ""

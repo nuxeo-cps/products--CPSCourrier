@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-22 12:46default\n"
+"POT-Creation-Date: 2006-03-22 13:01default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -603,4 +603,7 @@ msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_sender_address"
 msgstr ""
 
 msgid "psm_cpscourrier_reply_sent"
+msgstr ""
+
+msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr ""

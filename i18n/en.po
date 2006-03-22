@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-22 12:46default\n"
+"POT-Creation-Date: 2006-03-22 13:01default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -657,12 +657,13 @@ msgstr ""
 "the site manager to fix the problem."
 
 msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_recipients_address"
-msgstr ""
-"Invalid recipients addresses: the reply could not be sent"
+msgstr "Invalid recipients addresses: the reply could not be sent"
 
 msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_sender_address"
-msgstr ""
-"Invalid sender address: the reply could not be sent"
+msgstr "Invalid sender address: the reply could not be sent"
 
 msgid "psm_cpscourrier_reply_sent"
 msgstr "Reply sent"
+
+msgid "On ${y}-${m}-${d}, ${name} wrote:"
+msgstr "On ${y}-${m}-${d}, ${name} wrote"

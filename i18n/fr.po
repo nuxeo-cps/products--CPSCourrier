@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-22 12:46default\n"
+"POT-Creation-Date: 2006-03-22 13:01default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -620,3 +620,6 @@ msgstr ""
 
 msgid "psm_cpscourrier_reply_sent"
 msgstr "Réponse envoyée"
+
+msgid "On ${y}-${m}-${d}, ${name} wrote:"
+msgstr "Le ${d}/${m}/${y}, ${name} a écrit : "
