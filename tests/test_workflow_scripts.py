@@ -218,8 +218,7 @@ On %s, bar@foo.com wrote:
 > Please go to http://www.paipal.com and confirm your password!
 >   Regards,
 >   The Paipal team""" % datetime.datetime.now().strftime('%Y-%m-%d'),),
-                    {'encode': 'iso-8859-15',
-                     'mfrom': 'bar@foo.com',
+                    {'mfrom': 'bar@foo.com',
                      'mto': ['foo@foo.com'],
                      'subject': 'Test mail 1'})
 
