@@ -680,4 +680,4 @@ msgid "psm_cpscourrier_reply_sent"
 msgstr "Reply sent"
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
-msgstr "On ${y}-${m}-${d}, ${name} wrote"
+msgstr "On ${y}-${m}-${d}, ${name} wrote:"
