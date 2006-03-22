@@ -1,0 +1,3 @@
+# $Id$
+# CPS 3.4.x
+CPSSchemas >= 0.50.1
