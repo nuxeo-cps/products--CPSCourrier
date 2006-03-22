@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-22 13:01default\n"
+"POT-Creation-Date: 2006-03-22 17:11default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -20,7 +20,8 @@ msgstr ""
 #.           <span replace="string:heading_workflow_${transition}_of" />
 #.           ${item_id (tal replace="here/title_or_id")}
 #.         </title>
-#: from ../skins/cps_courrier/workflow_transition_form.pt
+#: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+#: ../skins/cps_courrier/workflow_transition_form.pt
 msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
@@ -56,6 +57,16 @@ msgstr "Choose insertion level"
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filter"
+
+#.   <label for="target_emailaddress">cpscourrier_forward_to_emailaddress</label>
+#: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+msgid "cpscourrier_forward_to_emailaddress"
+msgstr "Forward to email address"
+
+#.   <label for="target_mailbox">cpscourrier_forward_to_mailbox</label>
+#: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+msgid "cpscourrier_forward_to_mailbox"
+msgstr "Forward to a mailbox"
 
 #.   <th>cpscourrier_from_label</th>
 #: from ../skins/cps_courrier/portlet_custom_thread.pt
@@ -378,9 +389,9 @@ msgstr "Forward ${item_id}"
 
 msgid "help_workflow_forward"
 msgstr ""
-"You are about to forward (move) the mail to another Mailbox or to an "
-"external email address. Forwarding the mail document to an external email "
-"address will close the local copy of the document."
+"You are about to forward (move) the mail to another Mailbox <strong>or</"
+"strong> to an external email address. Forwarding the mail document to an "
+"external email address will close the local copy of the document."
 
 msgid "button_forward"
 msgstr "Forward"
@@ -390,6 +401,9 @@ msgstr "Forward"
 
 msgid "forward"
 msgstr "Forwarding"
+
+msgid "cpscourrier_no_mailbox"
+msgstr "(Please select a mailbox)"
 
 #
 # Workflows

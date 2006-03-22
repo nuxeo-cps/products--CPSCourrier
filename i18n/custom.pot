@@ -211,6 +211,9 @@ msgstr ""
 msgid "forward"
 msgstr ""
 
+msgid "cpscourrier_no_mailbox"
+msgstr ""
+
 msgid "heading_workflow_discard_of ${item_id}"
 msgstr ""
 

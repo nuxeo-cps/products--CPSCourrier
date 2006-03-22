@@ -232,7 +232,7 @@
  </transition>
  <transition transition_id="forward" title="" new_state=""
              trigger="USER" before_script="" after_script="">
-  <action url="%(content_url)s/content_forward"
+  <action url="%(content_url)s/cpscourrier_forward_form"
           category="workflow">action_forward</action>
   <guard>
   </guard>

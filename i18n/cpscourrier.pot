@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-22 13:01default\n"
+"POT-Creation-Date: 2006-03-22 17:11default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -20,7 +20,8 @@ msgstr ""
 #.           <span replace="string:heading_workflow_${transition}_of" />
 #.           ${item_id (tal replace="here/title_or_id")}
 #.         </title>
-#: from ../skins/cps_courrier/workflow_transition_form.pt
+#: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+#: ../skins/cps_courrier/workflow_transition_form.pt
 msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
@@ -55,6 +56,16 @@ msgstr ""
 #.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
+msgstr ""
+
+#.   <label for="target_emailaddress">cpscourrier_forward_to_emailaddress</label>
+#: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+msgid "cpscourrier_forward_to_emailaddress"
+msgstr ""
+
+#.   <label for="target_mailbox">cpscourrier_forward_to_mailbox</label>
+#: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+msgid "cpscourrier_forward_to_mailbox"
 msgstr ""
 
 #.   <th>cpscourrier_from_label</th>
@@ -375,6 +386,9 @@ msgid "action_forward"
 msgstr ""
 
 msgid "forward"
+msgstr ""
+
+msgid "cpscourrier_no_mailbox"
 msgstr ""
 
 msgid "heading_workflow_discard_of ${item_id}"

@@ -1,0 +1,62 @@
+<metal:html use-macro="here/content_lib_master/macros/master">
+  <metal:header fill-slot="header"/>
+  <metal:main fill-slot="main"
+    tal:define='transition string:forward'>
+    <metal:std_main use-macro="here/content_lib_std_main/macros/std_main">
+
+      <metal:title fill-slot="title" i18n:translate="">
+        <span tal:replace="string:heading_workflow_${transition}_of" />
+        <span tal:replace="here/title_or_id" i18n:name="item_id">Item</span>
+      </metal:title>
+
+      <metal:help fill-slot="help">
+        <span i18n:translate=""
+          tal:content="string:help_workflow_${transition}"></span>
+      </metal:help>
+
+      <metal:main fill-slot="main"
+        tal:define="global info
+        python:proxy.getContentInfo(proxy, doc=doc, level=3);
+        workflow_action_script string:cpscourrier_forward;">
+
+        <p>
+          <metal:block use-macro="here/content_lib_status/macros/status" />
+        </p>
+
+        <metal:block
+          use-macro="here/content_lib_transition_form/macros/transition_form">
+
+          <metal:block fill-slot="fields">
+            <dl>
+              <dt><label for="target_mailbox" i18n:translate=""
+                  >cpscourrier_forward_to_mailbox</label></dt>
+              <dd><select name="target_mailbox" id="target_mailbox">
+                  <option tal:repeat="mb here/getAllMailboxesList"
+                    tal:attributes="value python:mb[0];
+                    selected python:repeat['mb'].start and 'selected' or None"
+                    tal:content="python:mb[1]"></option>
+              </select></dd>
+              <dt><label for="target_emailaddress" i18n:translate=""
+                  >cpscourrier_forward_to_emailaddress</label></dt>
+              <dd><input name="target_emailaddress" id="target_emailaddress" 
+                  type="text"/></dd>
+            </dl>
+
+          </metal:block>
+          <metal:block fill-slot="button">
+            <input type="submit" class="standalone"
+              tal:attributes="value string:button_${transition}"
+              i18n:attributes="value" />
+            <input type="button" class="context" onClick="history.back()"
+              value="button_cancel" i18n:attributes="value" />
+          </metal:block>
+        </metal:block>
+
+        <metal:block use-macro="here/content_lib_states/macros/states" /><br />
+        <metal:block use-macro="here/content_lib_history/macros/history" />
+
+      </metal:main>
+
+    </metal:std_main>
+  </metal:main>
+</metal:html>
