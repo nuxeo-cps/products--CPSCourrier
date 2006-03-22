@@ -236,6 +236,7 @@ def compute_reply_body(reply_proxy, encoding='iso-8859-15'):
                 body += '\n'.join('> %s' % line for line in lines)
     return body
 
+
 def send_reply(reply_proxy, encoding='iso-8859-15'):
     """Send a reply
 
