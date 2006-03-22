@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-03-22 11:20default\n"
+"POT-Creation-Date: 2006-03-22 12:04default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -34,7 +34,7 @@ msgstr ""
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 #, fuzzy
 msgid "button_move_down_delegatees"
-msgstr "Add"
+msgstr "Move down"
 
 #.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
@@ -52,7 +52,7 @@ msgstr ""
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 #, fuzzy
 msgid "cpscourrier_choose_insertion_level"
-msgstr "Size (kB):"
+msgstr "Choose insertion level"
 
 #.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
@@ -76,7 +76,7 @@ msgstr "Objeto:"
 #: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
 #, fuzzy
 msgid "cpscourrier_response_preview_heading"
-msgstr "High"
+msgstr "Reply preview"
 
 #.   <th>cpscourrier_review_state_label</th>
 #: from ../skins/cps_courrier/portlet_custom_thread.pt
@@ -89,7 +89,7 @@ msgstr "Estado"
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 #, fuzzy
 msgid "cpscourrier_roadmap_heading"
-msgstr "High"
+msgstr "Mail roadmap"
 
 #
 # Layout labels
@@ -100,7 +100,7 @@ msgstr "High"
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 #, fuzzy
 msgid "cpscourrier_search_users"
-msgstr "Searched boxes"
+msgstr "Search users or groups to add to the roadmap"
 
 #.   <p condition="search_members">
 #.   	    Please select the member to insert in the roadmap
@@ -108,7 +108,7 @@ msgstr "Searched boxes"
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 #, fuzzy
 msgid "cpscourrier_select_delegatees"
-msgstr "Subject"
+msgstr "Please select the user(s) to add to the roadmap"
 
 #.   <h2 condition="insert_mode">
 #.   	  Add delegatees: search results
@@ -349,15 +349,15 @@ msgstr "Todos"
 
 #, fuzzy
 msgid "cpscourrier_initiate_handling"
-msgstr "High"
+msgstr "Handling"
 
 #, fuzzy
 msgid "cpscourrier_for_reply"
-msgstr "From"
+msgstr "For reply"
 
 #, fuzzy
 msgid "cpscourrier_for_advice"
-msgstr "From"
+msgstr "For advice"
 
 msgid "action_roadmap"
 msgstr ""
@@ -546,22 +546,29 @@ msgid "flag_answered"
 msgstr ""
 
 #, fuzzy
+msgid "move_down_delegatees"
+msgstr "Move down"
+
+#, fuzzy
 msgid "action_move_down_delegatees"
-msgstr "Delete"
+msgstr "Move down"
 
 msgid "heading_workflow_move_down_delegatees_of ${item_id}"
 msgstr ""
 
 #, fuzzy
 msgid "button move_down_delegatees"
-msgstr "Add"
+msgstr "Move down"
 
 #
 # Workflows
 #
 #, fuzzy
 msgid "help_workflow_move_down_delegatees"
-msgstr "Delete ${item_id}"
+msgstr ""
+"You are about to let the users of the next level handle the mail document.If "
+"you are not part of them and if you are not a local manager you will "
+"nolonguer be able to act on that document."
 
 #
 # Workflow states
@@ -589,6 +596,10 @@ msgstr ""
 
 msgid "sent"
 msgstr ""
+
+#, fuzzy
+msgid "manage_delegatees"
+msgstr "Move down"
 
 #
 # Workflow status messages

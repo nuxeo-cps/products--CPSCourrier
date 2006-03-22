@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-22 11:20default\n"
+"POT-Creation-Date: 2006-03-22 12:04default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -538,6 +538,9 @@ msgstr "Réponse(s) supprimée(s)"
 msgid "flag_answered"
 msgstr "Réponse(s) envoyée(s)"
 
+msgid "move_down_delegatees"
+msgstr "Passage au niveau suivant"
+
 msgid "action_move_down_delegatees"
 msgstr "Descendre"
 
@@ -577,6 +580,9 @@ msgstr "validé"
 
 msgid "sent"
 msgstr "envoyé"
+
+msgid "manage_delegatees"
+msgstr "Mise à jour de la feuille de route"
 
 #
 # Workflow status messages

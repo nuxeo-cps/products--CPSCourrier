@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-22 11:20default\n"
+"POT-Creation-Date: 2006-03-22 12:04default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -582,6 +582,9 @@ msgstr "Back to handled (all replies deleted)"
 msgid "flag_answered"
 msgstr "Set answered (all replies sent)"
 
+msgid "move_down_delegatees"
+msgstr "Move to next level"
+
 msgid "action_move_down_delegatees"
 msgstr "Move down"
 
@@ -599,9 +602,9 @@ msgstr "Move down"
 #
 msgid "help_workflow_move_down_delegatees"
 msgstr ""
-"You are about to let the users of the next level handle the mail document."
-"If you are not part of them and if you are not a local manager you will no"
-"longuer be able to act on that document."
+"You are about to let the users of the next level handle the mail document.If "
+"you are not part of them and if you are not a local manager you will "
+"nolonguer be able to act on that document."
 
 msgid "received"
 msgstr "received"
@@ -626,6 +629,9 @@ msgstr "validated"
 
 msgid "sent"
 msgstr "sent"
+
+msgid "manage_delegatees"
+msgstr "Roadmap update"
 
 #
 # Workflow status messages

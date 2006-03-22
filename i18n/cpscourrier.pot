@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-22 11:20default\n"
+"POT-Creation-Date: 2006-03-22 12:04default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -527,6 +527,9 @@ msgstr ""
 msgid "flag_answered"
 msgstr ""
 
+msgid "move_down_delegatees"
+msgstr ""
+
 msgid "action_move_down_delegatees"
 msgstr ""
 
@@ -564,6 +567,12 @@ msgid "validated"
 msgstr ""
 
 msgid "sent"
+msgstr ""
+
+#
+# Stack transitions
+#
+msgid "manage_delegatees"
 msgstr ""
 
 #

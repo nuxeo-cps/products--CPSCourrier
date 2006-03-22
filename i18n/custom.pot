@@ -367,6 +367,9 @@ msgstr ""
 msgid "flag_answered"
 msgstr ""
 
+msgid "move_down_delegatees"
+msgstr ""
+
 msgid "action_move_down_delegatees"
 msgstr ""
 
@@ -407,6 +410,11 @@ msgstr ""
 msgid "sent"
 msgstr ""
 
+#
+# Stack transitions
+#
+msgid "manage_delegatees"
+msgstr ""
 
 #
 # Workflow status messages
