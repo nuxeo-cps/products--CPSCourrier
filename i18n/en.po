@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-20 15:36default\n"
+"POT-Creation-Date: 2006-03-22 11:20default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -32,15 +32,13 @@ msgstr ""
 
 #.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
-#, fuzzy
 msgid "button_move_down_delegatees"
-msgstr "Add"
+msgstr "Move down"
 
 #.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
-#, fuzzy
 msgid "button_update_stackelts"
-msgstr "Reset"
+msgstr "Apply changes"
 
 #.   <input type="submit" class="context" value="button_validate" name="submit_add" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
@@ -51,9 +49,8 @@ msgstr "Validate"
 #.         Please select a level to insert the new delegatee
 #.       </h2>
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
-#, fuzzy
 msgid "cpscourrier_choose_insertion_level"
-msgstr "Size (kB):"
+msgstr "Choose insertion level"
 
 #.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
@@ -73,6 +70,11 @@ msgstr "From"
 msgid "cpscourrier_object_label"
 msgstr "Object"
 
+#.   <h3>cpscourrier_response_preview_heading</h3>
+#: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
+msgid "cpscourrier_response_preview_heading"
+msgstr "Reply preview"
+
 #.   <th>cpscourrier_review_state_label</th>
 #: from ../skins/cps_courrier/portlet_custom_thread.pt
 msgid "cpscourrier_review_state_label"
@@ -82,9 +84,8 @@ msgstr "State"
 #.         Mail Handling Roadmap
 #.       </h1>
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
-#, fuzzy
 msgid "cpscourrier_roadmap_heading"
-msgstr "High"
+msgstr "Mail roadmap"
 
 #
 # Layout labels
@@ -93,24 +94,33 @@ msgstr "High"
 #.   	  Search users
 #.   	</h3>
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
-#, fuzzy
 msgid "cpscourrier_search_users"
-msgstr "Searched boxes"
+msgstr "Search users or groups to add to the roadmap"
 
 #.   <p condition="search_members">
 #.   	    Please select the member to insert in the roadmap
 #.   	  </p>
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
-#, fuzzy
 msgid "cpscourrier_select_delegatees"
-msgstr "Subject"
+msgstr "Please select the user(s) to add to the roadmap"
 
 #.   <h2 condition="insert_mode">
 #.   	  Add delegatees: search results
 #.   	</h2>
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "delegatees_search_results"
-msgstr ""
+msgstr "Add delegatees: search results"
+
+#
+# Workflows
+#
+#.   <title fill-slot="title">
+#.           heading_workflow_send_of
+#.           ${item_id (tal replace="here/title_or_id")}
+#.         </title>
+#: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
+msgid "heading_workflow_send_of ${item_id}"
+msgstr "Send ${item_id}"
 
 #.   <p>
 #.         Below, stands the members / groups which have been already added to this
@@ -134,7 +144,7 @@ msgstr ""
 #: from ../skins/cps_courrier/stack_hierarchical_method.pt
 #: ../skins/cps_courrier/stack_simple_method.pt
 msgid "label_delegatees_stack_empty"
-msgstr ""
+msgstr "There are no delegatees within this workflow stack yet"
 
 #.   <block>
 #.                     User in charge
@@ -147,59 +157,57 @@ msgstr ""
 #.         Delegation Date
 #.       </th>
 #: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
-#, fuzzy
 msgid "label_delegation_date"
-msgstr "Reactivate"
+msgstr "Delegation Date"
 
 #.   <th>
 #.         Directive
 #.       </th>
 #: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
 msgid "label_directive"
-msgstr ""
+msgstr "Directive"
 
 #.   <th>
 #.         Comment
 #.       </th>
 #: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
 msgid "label_directive_comment"
-msgstr ""
+msgstr "Comment"
 
 #.   <th>
 #.         Identite
 #.       </th>
 #: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
 msgid "label_identite"
-msgstr ""
+msgstr "Identity"
 
 #.   <label for="push_directive">
 #.      	  Directive to give these users
 #.   	</label>
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "label_push_directive"
-msgstr ""
+msgstr "Directive to give these user"
 
 #.   <h2>
 #.         Reviewers
 #.       </h2>
 #: from ../skins/cps_courrier/layout_schedule_view.pt
 msgid "label_reviewers"
-msgstr ""
+msgstr "Reviewers"
 
 #.   <p>
 #.       Sorry, no members matched your search.
 #.    </p>
 #: from ../skins/cps_courrier/stack_members_search_results.pt
 msgid "legend_local_roles_no_results_members"
-msgstr ""
+msgstr "Sorry, no members matched your search."
 
 #.   <h2 condition="edit_mode">
 #.   	  Add new delegatees to the roadmap
 #.   	</h2>
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
-#, fuzzy
 msgid "search_for_delegatees"
-msgstr "Add"
+msgstr "Add new delegatees to the roadmap"
 
 #
 # Document types labels
@@ -330,17 +338,14 @@ msgstr "Subject"
 msgid "cpscourrier_all_subjects"
 msgstr "All"
 
-#, fuzzy
 msgid "cpscourrier_initiate_handling"
-msgstr "High"
+msgstr "Handling"
 
-#, fuzzy
 msgid "cpscourrier_for_reply"
-msgstr "From"
+msgstr "For reply"
 
-#, fuzzy
 msgid "cpscourrier_for_advice"
-msgstr "From"
+msgstr "For advice"
 
 msgid "action_roadmap"
 msgstr "Roadmap"
@@ -519,12 +524,6 @@ msgstr "Invalidate"
 msgid "invalidate"
 msgstr "Invalidation"
 
-#
-# Workflows
-#
-msgid "heading_workflow_send_of ${item_id}"
-msgstr "Send ${item_id}"
-
 msgid "help_workflow_send"
 msgstr "You are about to send the document to the orginal user."
 
@@ -583,27 +582,26 @@ msgstr "Back to handled (all replies deleted)"
 msgid "flag_answered"
 msgstr "Set answered (all replies sent)"
 
-#, fuzzy
 msgid "action_move_down_delegatees"
-msgstr "Delete"
+msgstr "Move down"
 
 #
 # Workflows
 #
-#, fuzzy
 msgid "heading_workflow_move_down_delegatees_of ${item_id}"
-msgstr "Delete ${item_id}"
+msgstr "Move down ${item_id}"
 
-#, fuzzy
 msgid "button move_down_delegatees"
-msgstr "Add"
+msgstr "Move down"
 
 #
 # Workflows
 #
-#, fuzzy
 msgid "help_workflow_move_down_delegatees"
-msgstr "Delete ${item_id}"
+msgstr ""
+"You are about to let the users of the next level handle the mail document."
+"If you are not part of them and if you are not a local manager you will no"
+"longuer be able to act on that document."
 
 msgid "received"
 msgstr "received"
@@ -633,16 +631,16 @@ msgstr "sent"
 # Workflow status messages
 #
 msgid "psm_select_a_level"
-msgstr ""
+msgstr "Please choose a level"
 
 msgid "psm_roadmap_changed"
-msgstr ""
+msgstr "Roadmap changed"
 
 msgid "psm_stack_elements_edited"
-msgstr ""
+msgstr "Roadmap elements changed"
 
 msgid "psm_cannot_manage_stack"
-msgstr ""
+msgstr "You are not allowed to manage the roadmap"
 
 msgid "psm_select_at_least_one_item"
-msgstr ""
+msgstr "Please select at least one item"
