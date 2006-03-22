@@ -21,6 +21,7 @@
 These functions are usually called by workflow scripts.
 """
 import logging
+import smtplib
 import socket
 from Acquisition import aq_parent, aq_inner
 from AccessControl import getSecurityManager
@@ -253,11 +254,20 @@ def send_reply(reply_proxy, encoding='iso-8859-15'):
           'subject': reply_doc['Title']()}
     try:
         return mailhost.send(body, **kw)
-    except socket.error, e:
-        # log error for the admin and raise IOError that can get catched by the
-        # skins script to display a friendly error message
+    # if anything went wrong: log the error for the admin and raise an execption
+    # of type IOError or ValueError that will be cactched by the skins script in
+    # order to build a friendly user message
+    except (socket.error, smtplib.SMTPServerDisconnected), e:
         logger.error("error sending email (%s, %r): %s" % (body, kw, e))
         raise IOError(e)
+    except smtplib.SMTPRecipientsRefused, e:
+        logger.error("error sending email (%s, %r): %s" % (body, kw, e))
+        raise ValueError('invalid_recipients_address')
+    except smtplib.SMTPSencerRefused, e:
+        logger.error("error sending email (%s, %r): %s" % (body, kw, e))
+        raise ValueError('invalid_sender_address')
+
+
 
 
 

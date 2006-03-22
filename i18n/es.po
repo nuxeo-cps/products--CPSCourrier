@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-03-22 12:09default\n"
+"POT-Creation-Date: 2006-03-22 12:46default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -621,8 +621,22 @@ msgstr ""
 
 #, fuzzy
 msgid "psm_cpscourrier_reply_could_not_be_sent"
-msgstr "All"
+msgstr ""
+"Due to a configuration problem, the reply could not be sent. Please contact "
+"the site manager to fix the problem."
+
+#, fuzzy
+msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_recipients_address"
+msgstr ""
+"Due to a configuration problem, the reply could not be sent. Please contact "
+"the site manager to fix the problem."
+
+#, fuzzy
+msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_sender_address"
+msgstr ""
+"Due to a configuration problem, the reply could not be sent. Please contact "
+"the site manager to fix the problem."
 
 #, fuzzy
 msgid "psm_cpscourrier_reply_sent"
-msgstr "For reply"
+msgstr "Reply sent"

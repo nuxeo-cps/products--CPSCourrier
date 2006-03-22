@@ -438,6 +438,12 @@ msgstr ""
 msgid "psm_cpscourrier_reply_could_not_be_sent"
 msgstr ""
 
+msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_recipients_address"
+msgstr ""
+
+msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_sender_address"
+msgstr ""
+
 msgid "psm_cpscourrier_reply_sent"
 msgstr ""
 

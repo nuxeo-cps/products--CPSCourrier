@@ -8,6 +8,8 @@ try:
     psm = "psm_cpscourrier_reply_sent"
 except IOError:
     psm = "psm_cpscourrier_reply_could_not_be_sent"
+except ValueError, e:
+    psm = "psm_cpscourrier_reply_could_not_be_sent_%s" % e
 
 if REQUEST is not None:
     url = "%s?portal_status_message=%s" % (context.absolute_url(), psm)
