@@ -4,6 +4,9 @@ Requires:
 New features:
 ~~~~~~~~~~~~~
 - Can give a user a directive when adding to roadmap
+- mailboxes now follow the mailbox_folder_wf that is similar to
+  workspace_folder_wf except that is allows subpublishing (for moving mails
+  accross mailboxes)
 Bug fixes:
 ~~~~~~~~~~
 - relation graph is no longer deleted when checkin a draft back in

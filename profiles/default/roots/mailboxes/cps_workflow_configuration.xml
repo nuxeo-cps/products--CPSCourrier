@@ -13,7 +13,7 @@
       Mailbox Groups only host mailboxes that cannot get created at the root
       of mailboxes
     -->
-    <type name="Mailbox" wf="workspace_folder_wf"/>
+    <type name="Mailbox" wf="mailbox_folder_wf"/>
 
     <!--
       Put here workflow associations for mailbox contents.
