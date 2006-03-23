@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-22 17:11default\n"
+"POT-Creation-Date: 2006-03-23 14:20default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -386,6 +386,12 @@ msgid "action_forward"
 msgstr ""
 
 msgid "forward"
+msgstr ""
+
+msgid "forward_move"
+msgstr ""
+
+msgid "forward_email"
 msgstr ""
 
 msgid "cpscourrier_no_mailbox"

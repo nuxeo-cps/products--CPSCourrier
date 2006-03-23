@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-03-22 17:11default\n"
+"POT-Creation-Date: 2006-03-23 14:20default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -406,6 +406,12 @@ msgid "action_forward"
 msgstr ""
 
 msgid "forward"
+msgstr ""
+
+msgid "forward_move"
+msgstr ""
+
+msgid "forward_email"
 msgstr ""
 
 #, fuzzy

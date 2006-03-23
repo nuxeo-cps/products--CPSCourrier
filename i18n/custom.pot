@@ -211,6 +211,12 @@ msgstr ""
 msgid "forward"
 msgstr ""
 
+msgid "forward_move"
+msgstr ""
+
+msgid "forward_email"
+msgstr ""
+
 msgid "cpscourrier_no_mailbox"
 msgstr ""
 
