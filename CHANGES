@@ -7,6 +7,7 @@ New features:
 - mailboxes now follow the mailbox_folder_wf that is similar to
   workspace_folder_wf except that is allows subpublishing (for moving mails
   accross mailboxes)
+- added internal forwarding WF and UI
 Bug fixes:
 ~~~~~~~~~~
 - relation graph is no longer deleted when checkin a draft back in
