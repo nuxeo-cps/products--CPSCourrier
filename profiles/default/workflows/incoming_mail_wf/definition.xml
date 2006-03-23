@@ -197,14 +197,17 @@
   <guard>
   </guard>
   <transition-behavior behavior_id="initial-create"/>
+  <transition-behavior behavior_id="initial-clone"/>
+  <transition-behavior behavior_id="workflow-reset"/>
+  <workflow-reset-on-workflow-variable variable_id="Pilots"/>
  </transition>
  <transition transition_id="delete" title="" new_state=""
              trigger="USER" before_script="" after_script="">
   <action url="%(content_url)s/workflow_transition_form?transition=delete"
           category="workflow">action_delete</action>
   <guard>
-    <guard-role>Manager</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
   </guard>
   <transition-behavior behavior_id="delete"/>
  </transition>
@@ -250,10 +253,14 @@
 
   <guard>
   </guard>
+  <transition-behavior behavior_id="delete"/>
+  <transition-behavior behavior_id="clone"/>
+  <clone-allowed-transition transition_id="create"/>
  </transition>
  <transition transition_id="handle" title=""
              new_state="handled" trigger="USER"
-             before_script="" after_script="init_stack_with_user">
+             before_script=""
+             after_script="init_stack_with_user">
   <action url="%(content_url)s/workflow_transition_form?transition=handle"
           category="workflow">action_handle</action>
   <guard>
@@ -297,25 +304,6 @@
   <guard>
   </guard>
  </transition>
- <transition transition_id="roadmap_view"
-             title="View Roadmap" new_state=""
-             trigger="USER"
-             before_script="unlock_locked_before_abandon"
-             after_script="">
-   <!-- This transition does nothing. It is here to provide an action
-      that depends on the wf state. It is not even called -->
-
-  <action url="%(content_url)s/cpscourrier_roadmap"
-          category="object">action_roadmap</action>
-  <guard>
-    <guard-role>Manager</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
-    <guard-role>Owner</guard-role>
-    <guard-role>WorkspaceMember</guard-role>
-    <guard-role>WorkspaceReader</guard-role>
-    <guard-role>Pilot</guard-role>
-  </guard>
- </transition>
  <transition transition_id="reset" title=""
              new_state="received" trigger="USER"
              before_script="" after_script="">
@@ -328,6 +316,22 @@
   </guard>
   <transition-behavior behavior_id="workflow-reset"/>
   <workflow-reset-on-workflow-variable variable_id="Pilots"/>
+ </transition>
+ <transition transition_id="roadmap_view"
+             title="View Roadmap" new_state=""
+             trigger="USER"
+             before_script="unlock_locked_before_abandon"
+             after_script="">
+  <action url="%(content_url)s/cpscourrier_roadmap"
+          category="object">action_roadmap</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>Owner</guard-role>
+   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>WorkspaceReader</guard-role>
+   <guard-role>Pilot</guard-role>
+  </guard>
  </transition>
  <variable variable_id="Pilots" for_catalog="False"
            for_status="True" update_always="False">
@@ -413,10 +417,10 @@
   <guard>
   </guard>
  </variable>
- <script script_id="reply_to_incoming"
-         type="Script (Python)"
-         filename="workflows/incoming_mail_wf/scripts/reply_to_incoming.py"/>
  <script script_id="init_stack_with_user"
          type="Script (Python)"
          filename="workflows/incoming_mail_wf/scripts/init_stack_with_user.py"/>
+ <script script_id="reply_to_incoming"
+         type="Script (Python)"
+         filename="workflows/incoming_mail_wf/scripts/reply_to_incoming.py"/>
 </cps-workflow>
