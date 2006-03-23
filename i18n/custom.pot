@@ -444,6 +444,15 @@ msgstr ""
 msgid "psm_select_at_least_one_item"
 msgstr ""
 
+msgid "psm_cpscourrier_choose_at_least_mailbox_or_emailaddress"
+msgstr ""
+
+msgid "psm_cpscourrier_choose_either_mailbox_or_emailaddress"
+msgstr ""
+
+msgid "psm_cpscourrier_mail_forwarded"
+msgstr ""
+
 msgid "psm_cpscourrier_reply_could_not_be_sent"
 msgstr ""
 

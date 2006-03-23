@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-23 14:20default\n"
+"POT-Creation-Date: 2006-03-23 19:30default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -622,6 +622,15 @@ msgstr "Vous n'avez pas la permission de modifier la feuille de route"
 
 msgid "psm_select_at_least_one_item"
 msgstr "Sélectionnez au moins un élément"
+
+msgid "psm_cpscourrier_choose_at_least_mailbox_or_emailaddress"
+msgstr "Veuillez au moins choisir une boîte ou entrez une adresse email"
+
+msgid "psm_cpscourrier_choose_either_mailbox_or_emailaddress"
+msgstr "Choisissez soit une boîte, soit une adresse email"
+
+msgid "psm_cpscourrier_mail_forwarded"
+msgstr "Courrier transféré avec succès"
 
 msgid "psm_cpscourrier_reply_could_not_be_sent"
 msgstr ""

@@ -10,13 +10,13 @@ if target_mailbox and target_emailaddress:
     redirect_to_template = 'cpscourrier_forward_form'
 
 elif target_mailbox:
-    psm = 'psm_status_changed'
+    psm = 'psm_cpscourrier_mail_forwarded'
     workflow_action = 'forward_move'
     kw['dest_container'] = target_mailbox
     kw['initial_transition'] = 'create'
 
 elif target_emailaddress:
-    psm = 'psm_status_changed'
+    psm = 'psm_cpscourrier_mail_forwarded'
     workflow_action = 'forward_email'
     kw['target_emailaddress'] = target_emailaddress
 
