@@ -12,7 +12,8 @@ if target_mailbox and target_emailaddress:
 elif target_mailbox:
     psm = 'psm_status_changed'
     workflow_action = 'forward_move'
-    kw['target_mailbox'] = target_mailbox
+    kw['dest_container'] = target_mailbox
+    kw['initial_transition'] = 'create'
 
 elif target_emailaddress:
     psm = 'psm_status_changed'
