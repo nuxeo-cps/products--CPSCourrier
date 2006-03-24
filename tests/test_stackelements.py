@@ -27,10 +27,10 @@ from layer import CPSCourrierLayer
 from Products.CMFCore.utils import getToolByName
 from Products.CPSSchemas.DataModel import DataModel
 from Products.CPSCourrier.workflows.stackelements import (
-    UserStackElementWithData,
+    CourrierUserStackElement,
     )
 
-class UserStackElementWithDataIntegrationTestCase(CPSTestCase):
+class CourrierUserStackElementIntegrationTestCase(CPSTestCase):
 
     layer = CPSCourrierLayer
 
@@ -40,21 +40,15 @@ class UserStackElementWithDataIntegrationTestCase(CPSTestCase):
 
         mdir._createEntry({'id': 'testuser',
                            'roles' : ['Member',]})
+        self.aclu = self.portal.acl_users
 
-        self.elt = UserStackElementWithData('user_wdata:testuser')
+        self.elt = CourrierUserStackElement('courrier_user:testuser')
 
     def test_holdsCurrentMember(self):
         self.login('testuser')
-        self.assert_(self.elt.holdsCurrentMember(self.portal))
-
-        self.login('manager')
-        self.failIf(self.elt.holdsCurrentMember(self.portal))
-
+        self.assert_(self.elt.holdsUser('testuser', aclu=self.aclu))
 
 def test_suite():
     return unittest.TestSuite((
-        unittest.makeSuite(UserStackElementWithDataIntegrationTestCase),
-        doctest.DocFileTest('doc/developer/stackelements.txt',
-                            package='Products.CPSCourrier',
-                            optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS),
+        unittest.makeSuite(CourrierUserStackElementIntegrationTestCase),
         ))
