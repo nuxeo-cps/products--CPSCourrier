@@ -123,12 +123,12 @@
 	  </tal:block>
       </td>
       <td tal:define="editable_widget python:editable and current_user;
-		      comment content/comment|string:">
-	<input type="string" name="comment:list"
+		      comment content/user_comment|string:">
+	<input type="string" name="user_comment:list"
 	       tal:condition="editable_widget"
 	       tal:attributes="value comment"/>
 	<tal:notuser condition="not:editable_widget">
-	  <input type="hidden" name="comment:list" value=""
+	  <input type="hidden" name="user_comment:list" value=""
 		 tal:condition="editable"
 		 tal:attributes="value comment"/>
 	  <tal:block content="comment"/>

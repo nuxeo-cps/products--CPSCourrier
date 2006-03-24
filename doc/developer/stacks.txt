@@ -1,6 +1,6 @@
-==================
-CPSCourrier Stacks
-==================
+=================
+CPSCourrier Stack
+=================
 
 :Revision: $Id$
 
@@ -12,19 +12,19 @@ It will be convenient for examples to have a pretty printer::
     >>> from pprint import PrettyPrinter
     >>> pretty_print=PrettyPrinter(width=50).pprint
 
-Hierarchical Stack With Data
-------------------------------------
+Instantiation
+-------------
 
 This is a workflow stack that can hold Stack Element With Data
 elements and provides a few further utilities
 
     >>> from Products.CPSCourrier.workflows.stacks import \
-    ...                  HierarchicalStackWithData
+    ...                  CourrierStack
 
-    >>> from Products.CPSCourrier.interfaces import (IHierarchicalStackWithData,
-    ...                                              IStackElementWithData,)
-    >>> stack = HierarchicalStackWithData()
-    >>> IHierarchicalStackWithData.providedBy(stack)
+    >>> from Products.CPSWorkflow.interfaces import (IHierarchicalWorkflowStack,
+    ...                                              IStackElement,)
+    >>> stack = CourrierStack()
+    >>> IHierarchicalWorkflowStack.providedBy(stack)
     True
 
 We'll also use an example stack element that's basically a stack
@@ -32,11 +32,11 @@ element with data not tied to users/groups::
 
     >>> from Products.CPSCourrier.tests.stackelements import \
     ...	                     ExampleStackElement
-    >>> IStackElementWithData.implementedBy(ExampleStackElement)
+    >>> IStackElement.implementedBy(ExampleStackElement)
     True
 
 Pushing elements
-~~~~~~~~~~~~~~~~
+----------------
 
 Let's demonstrate how pushing elements work. Let's try with a single element::
 
@@ -67,21 +67,22 @@ Now several elements at once::
     >>> eltA = stack._getLevelContentValues()[1]
     >>> eltB = stack._getLevelContentValues(level=1)[0]
     >>> pretty_print(eltA())
-    {'d2': 'A2', 'd1': 'A1'}
+    {'d2': 'A2', 'id': 'example:A', 'd1': 'A1'}
     >>> pretty_print(eltB())
-    {'d2': 'B2', 'd1': 'B1'}
+    {'d2': 'B2', 'id': 'example:B', 'd1': 'B1'}
 
 Rendering helpers
-~~~~~~~~~~~~~~~~~
+-----------------
 
     This stacks also provides preformatting methods, to be used by
     the render method. Let's see what the render helper for stack
     elements does::
 
-    >>> elt = ExampleStackElement('example:el', adate=DateTime('2006/03/10'))
+    >>> elt = ExampleStackElement('example:el', data={'date':
+    ...	   					      DateTime('2006/03/10')})
     >>> pretty_print(stack.getStackElementForRender(elt, 0, 'view'))
-    {'adate': DateTime('2006/03/10'),
-    'adate_str': '2006/03/10',
+    {'date': DateTime('2006/03/10'),
+    'date_str': '2006/03/10',
     'input_id': '0,example:el',
     'label_id': 'label_0,example:el'}
 
@@ -89,7 +90,7 @@ Rendering helpers
     string. One can further specify the format::
     >>> infos = stack.getStackElementForRender(elt, 0, 'view',
     ...                          date_format='[%d.%m.%y]')
-    >>> infos['adate_str']
+    >>> infos['date_str']
     '[10.03.06]'
 
 .. Emacs

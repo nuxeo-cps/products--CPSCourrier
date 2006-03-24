@@ -29,7 +29,7 @@ class IStackElementWithData(IStackElement):
     write values.
     """
 
-class IHierarchicalStackWithData(IHierarchicalWorkflowStack):
+class ICourrierStack(IHierarchicalWorkflowStack):
     """ A hierarchical stack that can hold IStackElementWithData instances."""
 
 

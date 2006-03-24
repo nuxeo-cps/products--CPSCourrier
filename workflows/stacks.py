@@ -24,10 +24,10 @@
 """
 
 from zLOG import LOG, DEBUG
-from zope.interface import implements
 
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
+from AccessControl import getSecurityManager
 from DateTime import DateTime
 
 from Products.CMFCore.utils import getToolByName
@@ -35,24 +35,17 @@ from Products.CMFCore.utils import getToolByName
 from Products.CPSWorkflow.basicstacks import HierarchicalStack
 from Products.CPSWorkflow.stackregistries import WorkflowStackRegistry
 
-from Products.CPSCourrier.interfaces import IStackElementWithData
-from Products.CPSCourrier.interfaces import IHierarchicalStackWithData
-
-
 ###########################################################
 ###########################################################
 
-class HierarchicalStackWithData(HierarchicalStack):
-    """A hierarchical stack whose elements implement StackElementWithData
-
+class CourrierStack(HierarchicalStack):
+    """CPS Courrier specific hierarchical stack.
     """
 
-    meta_type = 'Hierarchical Stack With Data'
+    meta_type = 'Courrier Stack'
 
     security = ClassSecurityInfo()
     security.declareObjectPublic()
-
-    implements(IHierarchicalStackWithData)
 
     render_method = 'stack_hierarchical_data_render'
 
@@ -105,12 +98,12 @@ class HierarchicalStackWithData(HierarchicalStack):
                         elt_info['high_level'] = int(split[1])
                     except (IndexError, ValueError):
                         # Wrong user input
-                        LOG("HierarchicalStackWithData.push", DEBUG,
+                        LOG("CourrierStack.push", DEBUG,
                             "wrong user input, level split=%s"%(level,))
                         continue
             else:
                 # wrong user input
-                LOG("HierarchicalStackWithData.push", DEBUG,
+                LOG("CourrierStack.push", DEBUG,
                     "wrong user input, level=%s"%(level,))
                 #print "wrong user input, level=%s"%(level,)
                 continue
@@ -122,7 +115,7 @@ class HierarchicalStackWithData(HierarchicalStack):
                 except IndexError:
                     pass
 
-            self._push(push_id, level=level, **elt_info)
+            self._push(push_id, level=level, data=elt_info)
 
 
     # XXX TODO (finalization):
@@ -288,9 +281,8 @@ class HierarchicalStackWithData(HierarchicalStack):
             index = self._getStackElementIndex(the_id, level)
             if index != -1:
                 elt = self._elements_container[level][index]
-                if IStackElementWithData.providedBy(elt):
-                    for key, data_list in data_lists.items():
-                        elt[key] = data_list[i]
+                for key, data_list in data_lists.items():
+                    elt[key] = data_list[i]
                 # used to be a try: except IndexError around all this.
 
     #
@@ -298,10 +290,10 @@ class HierarchicalStackWithData(HierarchicalStack):
     #
 
     def getStackContentForRender(self, context, mode='view', **kw):
-        """Return levels and dictionnary used in templates that display the
+        """Return levels and dictionary used in templates that display the
         stack with levels as keys
 
-        Assume stack is a HierarchicalStackWithData storing
+        Assume stack is a CourrierStack storing
 
         context is passed to be able to get portal tools.
         mode can either be 'view', 'edit' or insert'.
@@ -347,7 +339,8 @@ class HierarchicalStackWithData(HierarchicalStack):
                                                           mode, **kwargs)
                 # control delegatee deletion
                 if mode == 'edit':
-                    current_user = elt.holdsCurrentMember(context)
+                    user_id = getSecurityManager().getUser().getId()
+                    current_user = elt.holdsUser(user_id, aclu=aclu)
                     elt_infos['deletable'] = level < current_level or (
                         level == current_level
                         and not current_user)
@@ -419,6 +412,7 @@ class HierarchicalStackWithData(HierarchicalStack):
 
         # basic kws
         infos = elt()
+        del infos['id']
 
         # dates
 
@@ -514,9 +508,9 @@ class HierarchicalStackWithData(HierarchicalStack):
         return res
 
 
-InitializeClass(HierarchicalStackWithData)
+InitializeClass(CourrierStack)
 
 #####################################################################
 #####################################################################
 
-WorkflowStackRegistry.register(HierarchicalStackWithData)
+WorkflowStackRegistry.register(CourrierStack)

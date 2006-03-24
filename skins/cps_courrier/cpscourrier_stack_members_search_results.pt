@@ -30,7 +30,7 @@ changes: ids of <input> tags -->
                           input_id python:id.replace('@', '_at_')">
          <td width="16">
            <input type="checkbox" name="push_ids:list" value=""
-             class="noborder" tal:attributes="value string:user_wdata:${id};
+             class="noborder" tal:attributes="value string:courrier_user:${id};
                                               id input_id;
 					      checked checked"
 	     />

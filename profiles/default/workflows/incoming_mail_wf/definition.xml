@@ -13,7 +13,7 @@
   <stack-definition stackdef_id="Pilots"
                     variable_id="Pilots"
                     meta_type="Hierarchical Stack Definition"
-                    stack_type="Hierarchical Stack With Data">
+                    stack_type="Courrier Stack">
    <managed-roles>
     <managed-role name="Pilot"
                   expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
@@ -49,7 +49,7 @@
   <stack-definition stackdef_id="Pilots"
                     variable_id="Pilots"
                     meta_type="Hierarchical Stack Definition"
-                    stack_type="Hierarchical Stack With Data">
+                    stack_type="Courrier Stack">
    <managed-roles>
     <managed-role name="Pilot"
                   expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
@@ -115,7 +115,7 @@
   <stack-definition stackdef_id="Pilots"
                     variable_id="Pilots"
                     meta_type="Hierarchical Stack Definition"
-                    stack_type="Hierarchical Stack With Data">
+                    stack_type="Courrier Stack">
    <managed-roles>
     <managed-role name="Pilot"
                   expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
@@ -153,7 +153,7 @@
   <stack-definition stackdef_id="Pilots"
                     variable_id="Pilots"
                     meta_type="Hierarchical Stack Definition"
-                    stack_type="Hierarchical Stack With Data">
+                    stack_type="Courrier Stack">
    <managed-roles>
     <managed-role name="Pilot"
                   expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>

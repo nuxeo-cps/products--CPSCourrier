@@ -176,7 +176,7 @@ def flag_incoming_handled(outgoing_proxy):
                             outgoing_proxy)
 
 
-def init_stack_with_user(sci, wf_var_id, prefix='user_wdata', **kw):
+def init_stack_with_user(sci, wf_var_id, prefix='courrier_user', **kw):
     """Initialize the stack with an element representing current user.
 
     other kwargs are passed as element metadata."""

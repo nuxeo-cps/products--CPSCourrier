@@ -3,3 +3,4 @@
 # CPS 3.4.x
 CPSSchemas >= 0.50.1
 CPSDocument >= 0.42.0
+CPSWorkflow > 0.7.0
