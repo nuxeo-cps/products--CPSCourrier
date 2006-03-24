@@ -18,15 +18,15 @@
 
 # $Id$
 
+from Globals import InitializeClass
+
 from Products.CPSWorkflow.stackregistries import WorkflowStackElementRegistry
-from Products.CPSCourrier.workflows.stackelements import StackElementWithData
+from Products.CPSWorkflow.stackelement import StackElement
 
-class ExampleStackElement(StackElementWithData):
+class ExampleStackElement(StackElement):
      meta_type = 'Example Stack Element'
-     hidden_meta_type = 'Hidden User Stack Element'
+     hidden_meta_type = 'Hidden Example Stack Element'
      prefix = 'example'
-     _default_reads = {}
-     _default_writes = {}
-
+     _allowed_attributes = ('date', 'comment','d1', 'd2')
 
 WorkflowStackElementRegistry.register(ExampleStackElement)
