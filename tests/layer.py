@@ -62,17 +62,13 @@ CPSCourrierLayer = CPSCourrierLayerClass(
     'CPSCourrierLayer'
     )
 
-class IntegrationTestCase(CPSTestCase):
-    layer = CPSCourrierLayer
-    MBG_ID = 'test-mailbox-group'
-    MB_ID = 'test-mailbox'
-    MB2_ID = 'test-mailbox2'
+class CommonIntegrationFixture:
+    """ Things like site structure and such."""
 
-    def afterSetUp(self):
-        self.login('manager')
+    def fixtureSetUp(self):
         # create test sandboxes in the mailboxes space
-        wftool = getToolByName(self.portal, 'portal_workflow')
-        ttool = getToolByName(self.portal, 'portal_types')
+        self.wftool = wftool = getToolByName(self.portal, 'portal_workflow')
+        self.ttool = ttool = getToolByName(self.portal, 'portal_types')
         mailboxes = self.portal.mailboxes
 
         wftool.invokeFactoryFor(mailboxes, 'Mailbox Group', self.MBG_ID)
@@ -86,6 +82,69 @@ class IntegrationTestCase(CPSTestCase):
                                 **{'from': 'test_mailbox2@cpscourrier.com'})
         self.mb2 = self.mbg[self.MB2_ID]
 
+class CPSCourrierFunctionalLayerClass(CommonIntegrationFixture,
+                                      CPSCourrierLayerClass):
+
+    """Functional testing layer.
+
+    The contract of testcases living in this layer is that they must
+    create their mail documents and clean up their mess. """
+
+    #can't use __bases__ here, since method names change
+
+    MBG_ID = 'ftest-mailbox-group'
+    MB_ID = 'ftest-mailbox'
+    MB2_ID = 'ftest-mailbox2'
+
+    def setUp(self):
+        CPSCourrierLayerClass.setUp(self)
+        self.login()
+        CommonIntegrationFixture.fixtureSetUp(self)
+        # create some users
+        mtool = getToolByName(self.portal, 'portal_membership')
+        dtool = getToolByName(self.portal, 'portal_directories')
+        mdir = dtool['members']
+
+        roles = {'reader': 'WorkspaceReader',
+                 'member1': 'WorkspaceMember',
+                 'member2': 'WorkspaceMember',
+                 'member3': 'WorkspaceMember',
+                 'manager': 'WorkspaceManager',}
+        for prefix, role in roles.items():
+            for id, folder in ((self.MBG_ID, self.mbg,),
+                               (self.MB_ID, self.mb,),
+                               (self.MB2_ID, self.mb2,)):
+                user_id = '%s_%s' % (prefix, id)
+                mdir._createEntry({'id': user_id, 'roles':('Member',)})
+                mtool.setLocalRoles(folder, [user_id], role)
+        transaction.commit()
+        self.logout()
+
+    def tearDown(self):
+        pass
+
+
+CPSCourrierFunctionalLayer = CPSCourrierFunctionalLayerClass(
+    __name__,
+    'CPSCourrierFunctionalLayer'
+    )
+
+
+class IntegrationTestCase(CommonIntegrationFixture, CPSTestCase):
+    """For tests that need to avoid side-effects.
+
+    provides the same kind of environment as CPSCourrierFunctionalLayer.
+    doesn't share anything but profiles."""
+
+    layer = CPSCourrierLayer
+
+    MBG_ID = 'test-mailbox-group'
+    MB_ID = 'test-mailbox'
+    MB2_ID = 'test-mailbox2'
+
+    def afterSetUp(self):
+        self.login('manager')
+        CommonIntegrationFixture.fixtureSetUp(self)
         # add some incoming mails
         incoming_mail_data = {
             'in_mail1': {
@@ -99,13 +158,12 @@ class IntegrationTestCase(CPSTestCase):
                 'from': 'foo@foo.com',
             },
         }
-        mail_fti = ttool['Incoming Mail']
+        mail_fti = self.ttool['Incoming Mail']
         for mail_id, mail_data in incoming_mail_data.items():
             dm = mail_fti.getDataModel(None)
-            wftool.invokeFactoryFor(self.mb, 'Incoming Mail', mail_id,
+            self.wftool.invokeFactoryFor(self.mb, 'Incoming Mail', mail_id,
                                     datamodel=dm, **mail_data)
             setattr(self, mail_id, self.mb[mail_id])
-
         # this is required for cut/paste integration tests
         transaction.commit()
 
@@ -130,3 +188,59 @@ class IntegrationTestCase(CPSTestCase):
         ob.workflow_history.values()[0][-1]['review_state'] = state
 
 
+class CourrierFunctionalTestCase(CPSTestCase):
+
+    layer = CPSCourrierFunctionalLayer
+
+    def afterSetUp(self):
+        self.mbg = getattr(self.portal.mailboxes, self.layer.MBG_ID)
+        self.mb = getattr(self.mbg, self.layer.MB_ID)
+        self.wftool = getToolByName(self.portal, 'portal_workflow')
+        self.ttool = getToolByName(self.portal, 'portal_types')
+
+    def flogin(self, prefix, object):
+        """ Login as prefixed user on object.
+
+        Typical use case: self.flogin('member1', self.mb) logs in as
+        one of the users that were created in layer to be WorkspaceMember in
+        self.mb.
+        """
+        self.login('%s_%s' % (prefix, object.getId()))
+
+
+    def createIncoming(self, container=None, mail_id='incoming'):
+        """Create incoming mail and set it as an attr on self.
+
+        Default container is self.mb,
+        """
+        self.createMail(container=container,
+                        mail_id=mail_id,
+                        portal_type="Incoming Mail")
+
+    def createOutgoing(self, container=None, mail_id='outgoing'):
+        """Create outgoing mail and set it as an attr on self.
+
+        Default container is self.mb,
+        """
+        self.createMail(container=container,
+                        mail_id=mail_id,
+                        portal_type="Outgoing Mail")
+
+    def createMail(self, container=None, mail_id=None, portal_type=None):
+        """Create mail and set it as an attr on self using given id
+
+        Default container is self.mb
+        """
+        if container is None:
+            container = self.mb
+
+        mail_fti = self.ttool[portal_type]
+        dm = mail_fti.getDataModel(None)
+        mail_id = self.wftool.invokeFactoryFor(self.mb,
+                                               portal_type,
+                                               mail_id,
+                                               datamodel=dm)
+
+        mail = container[mail_id]
+        setattr(self, mail_id, mail)
+        setattr(self, '%s_id' % mail_id, mail.getId())

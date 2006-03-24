@@ -416,7 +416,7 @@ On %s, bar@foo.com wrote:
         sci = FakeStateChange()
         sci.object = in_mail
         sci.workflow = wftool.getWorkflowsFor(in_mail)[0]
-        init_stack_with_user(sci, 'Pilots', prefix='user_wdata',
+        init_stack_with_user(sci, 'Pilots', prefix='courrier_user',
                              directive='the_dir')
 
         stack = wftool.getStackFor(in_mail, 'Pilots')

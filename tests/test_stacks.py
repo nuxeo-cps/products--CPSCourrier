@@ -20,37 +20,23 @@
 
 import unittest
 from zope.testing import doctest
-from Products.CPSDefault.tests.CPSTestCase import CPSTestCase
-from layer import CPSCourrierLayer
+from layer import CourrierFunctionalTestCase
 
 from Products.CMFCore.utils import getToolByName
-from Products.CPSSchemas.DataModel import DataModel
-from Products.CPSCourrier.workflows.stacks import HierarchicalStackWithData
+from Products.CPSCourrier.workflows.stacks import CourrierStack
 
-class HierarchicalStackWithDataIntegrationTestCase(CPSTestCase):
-
-    layer = CPSCourrierLayer
+class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
+    """ Quasifunctional tests for outgoing mails."""
 
     def afterSetUp(self):
+        CourrierFunctionalTestCase.afterSetUp(self)
+        self.stack = CourrierStack()
         self.login('manager')
-        self.stack = HierarchicalStackWithData()
+        self.createOutgoing()
 
-        # Some content, necessary for wf checks
-        self.mailboxes = self.portal.mailboxes
-        wftool = getToolByName(self.portal, 'portal_workflow')
-
-        mboxgrp_id = wftool.invokeFactoryFor(self.mailboxes, 'Mailbox Group',
-                                             'mbox_group')
-        self.mbox_group = self.mailboxes[mboxgrp_id]
-
-        mbox_id = wftool.invokeFactoryFor(self.mbox_group, 'Mailbox Group',
-                                          'mbox')
-        self.mbox = self.mbox_group[mbox_id]
-
-        dm = DataModel(None)
-        outgoing_id = wftool.invokeFactoryFor(self.mbox, 'Outgoing Mail',
-                                          'outgoing_mail', datamodel=dm)
-        self.outgoing_mail = self.mbox[outgoing_id]
+    def beforeTearDown(self):
+        self.mb.manage_delObjects([self.outgoing_id])
+        self.logout()
 
     def test_getStackContentForRender(self):
         self.stack.push(push_ids=('example:A', 'example:B'),
@@ -59,15 +45,35 @@ class HierarchicalStackWithDataIntegrationTestCase(CPSTestCase):
                         d1=('A1', 'B1',),
                         d2=('A2', 'B2',))
 
-        extr = self.stack.getStackContentForRender(self.outgoing_mail,
+        extr = self.stack.getStackContentForRender(self.outgoing,
                                                    mode='view')
         # TODO: assertions
 
 
+class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
+
+    def afterSetUp(self):
+        CourrierFunctionalTestCase.afterSetUp(self)
+        self.login('manager')
+        self.createIncoming()
+
+    def beforeTearDown(self):
+        self.mb.manage_delObjects([self.incoming_id])
+        self.logout()
+
+    def test_handle(self):
+        self.flogin('member1', self.mb)
+        self.wftool.doActionFor(self.incoming, 'handle')
+
+        stack = self.wftool.getStackFor(self.incoming, 'Pilots')
+        self.assertEquals(stack.getAllLevels(), [0])
+        elt = stack._getLevelContentValues()[0]
+        self.assertEquals(elt['directive'], 'handle')
 
 def test_suite():
     return unittest.TestSuite((
-        unittest.makeSuite(HierarchicalStackWithDataIntegrationTestCase),
+        unittest.makeSuite(CourrierOutgoingStackFunctionalTestCase),
+        unittest.makeSuite(CourrierIncomingStackFunctionalTestCase),
         doctest.DocFileTest('doc/developer/stacks.txt',
                             package='Products.CPSCourrier',
                             optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS),
