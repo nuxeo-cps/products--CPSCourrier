@@ -47,7 +47,8 @@ def removedProxy(ob, event):
     # this was the last proxy for that docid, clean the remaining relations
     logger.debug('cleaning all relations for proxy %r with docid %s' %
                  (ob, docid))
-    rtool = getToolByName(ob, 'portal_relations')
-    rtool.removeAllRelationsFor(RELATION_GRAPH_ID, int(docid))
+    rtool = getToolByName(ob, 'portal_relations', None)
+    if rtool is not None:
+        rtool.removeAllRelationsFor(RELATION_GRAPH_ID, int(docid))
 
 
