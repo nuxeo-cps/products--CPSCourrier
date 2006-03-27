@@ -90,17 +90,17 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
                'level': '-1',
                'workflow_action_form': 'cpscourrier_roadmap',
                'submit_add': 'Valider',
-               'push_ids': ['courrier_user:member2']}
+               'push_ids': ['courrier_user:member2_ftest-mailbox']}
         stack_mod(**kws)
         self.assertEquals(stack.getAllLevels(), [-1, 0])
 
-        # member1 adds member2 between member1 and member2
+        # member1 adds member3 (upper) between member1 and member2
         kws = {'current_var_id': 'Pilots',
                'directive': 'response',
                'level': '-1_0',
                'workflow_action_form': 'cpscourrier_roadmap',
                'submit_add': 'Valider',
-               'push_ids': ['courrier_user:member2']}
+               'push_ids': ['courrier_user:member3_ftest-mailbox-group']}
         stack_mod(**kws)
         stack = self.wftool.getStackFor(self.incoming, 'Pilots') # necessary
         self.assertEquals(stack.getAllLevels(), [-2, -1, 0])
@@ -109,6 +109,16 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         for_render = stack.getStackContentForRender(self.incoming)
         self.assertEquals(for_render[1][0]['items'][0]['identite'],
                           'member1_ftest-mailbox')
+
+        # member1 delegates member3
+        self.wftool.doActionFor(self.incoming, 'move_down_delegatees',
+                                current_wf_var_id='Pilots')
+        self.failIf(wf.isActionSupported(self.incoming, 'answer'))
+        self.flogin('member2', self.mb)
+        self.failIf(wf.isActionSupported(self.incoming, 'answer'))
+        self.flogin('member3', self.mbg)
+        self.assert_(wf.isActionSupported(self.incoming, 'answer'))
+
 
 def test_suite():
     return unittest.TestSuite((
