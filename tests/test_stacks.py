@@ -100,6 +100,10 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         stack = self.wftool.getStackFor(self.incoming, 'Pilots') # necessary
         self.assertEquals(stack.getAllLevels(), [-2, -1, 0])
 
+        # check what will be displayed
+        for_render = stack.getStackContentForRender(self.incoming)
+        self.assertEquals(for_render[1][0]['items'][0]['identite'],
+                          'member1_ftest-mailbox')
 
 def test_suite():
     return unittest.TestSuite((

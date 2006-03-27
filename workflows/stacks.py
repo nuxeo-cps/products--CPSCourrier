@@ -23,8 +23,6 @@
 """CPSCourrier Stacks
 """
 
-from zLOG import LOG, DEBUG
-
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 from AccessControl import getSecurityManager
@@ -411,7 +409,7 @@ class CourrierStack(HierarchicalStack):
 
         # basic kws
         infos = elt()
-        del infos['id']
+        elt_id = infos.pop('id')
 
         # dates
 
@@ -431,10 +429,10 @@ class CourrierStack(HierarchicalStack):
 
         # user/group info
         cpsdir = None
-        if elt_id.startswith('user'):
+        if elt_id.startswith('courrier_user'):
             user = True
             cpsdir = kw.get('members')
-        elif elt_id.startswith('group'):
+        elif elt_id.startswith('courrier_group'):
             group = True
             cpsdir = kw.get('group')
         if not cpsdir: # happens, e.g, in unit tests
