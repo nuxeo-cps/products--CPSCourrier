@@ -20,8 +20,10 @@
 		   make_form python: options['mode'] != 'search'
 		   ">
   <tal:block condition="make_form">
+    <!-- we use "structure string:html_soup" in order to make the ZPT file valid
+         xml even if we don't close the form tag -->
     <tal:block
-	content="structure string:<form action='cpscourrier_batch_perform'
+	content="structure string:<form action='cpscourrier_batch_perform_form'
 					method='post'
 					enctype='multipart/form-data'> "/>
   </tal:block>

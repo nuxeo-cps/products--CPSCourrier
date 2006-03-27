@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-03-23 19:30default\n"
+"POT-Creation-Date: 2006-03-27 18:21default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -15,6 +15,13 @@ msgstr ""
 "Language-Name: Spanish\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-Country: SPAIN\n"
+
+#.   <title fill-slot="title">
+#.           <span replace="string:heading_batch_workflow_${transition}" />
+#.         </title>
+#: from ../skins/cps_courrier/cpscourrier_batch_perform_form.pt
+msgid "<span replace=\"string:heading_batch_workflow_${transition}\" />"
+msgstr ""
 
 #.   <title fill-slot="title">
 #.           <span replace="string:heading_workflow_${transition}_of" />
@@ -593,6 +600,27 @@ msgstr ""
 "you are not part of them and if you are not a local manager you will "
 "nolonguer be able to act on that document."
 
+msgid "heading_batch_workflow_handle"
+msgstr ""
+
+#, fuzzy
+msgid "help_batch_workflow_handle"
+msgstr ""
+"By choose to handle the incoming mail document you will be in charge of the "
+"future processing of the mail (answering, delegating, deleting, ... )."
+
+msgid "heading_batch_workflow_discard"
+msgstr ""
+
+msgid "help_batch_workflow_discard"
+msgstr ""
+
+msgid "heading_batch_workflow_answer"
+msgstr ""
+
+msgid "help_batch_workflow_answer"
+msgstr ""
+
 #
 # Workflow states
 #
@@ -644,15 +672,15 @@ msgstr ""
 
 #, fuzzy
 msgid "psm_cpscourrier_choose_at_least_mailbox_or_emailaddress"
-msgstr "Forward to email address"
+msgstr "Choose at least a mailbox or enter an email address"
 
 #, fuzzy
 msgid "psm_cpscourrier_choose_either_mailbox_or_emailaddress"
-msgstr "Forward to email address"
+msgstr "Choose either a mailbox or an email address"
 
 #, fuzzy
 msgid "psm_cpscourrier_mail_forwarded"
-msgstr "Default sender adress"
+msgstr "Mail forwarded"
 
 #, fuzzy
 msgid "psm_cpscourrier_reply_could_not_be_sent"
@@ -671,6 +699,10 @@ msgstr "Invalid sender address: the reply could not be sent"
 #, fuzzy
 msgid "psm_cpscourrier_reply_sent"
 msgstr "Reply sent"
+
+#, fuzzy
+msgid "psm_cpscourrier_no_action_performed_for"
+msgstr "Mail forwarded"
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr ""

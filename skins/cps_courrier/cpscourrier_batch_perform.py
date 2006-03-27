@@ -1,23 +1,30 @@
-##parameters=REQUEST=None
+##parameters=workflow_action, rpaths, comments='', REQUEST=None
+"""Perform transition triggering in batch mode
+"""
 
-# this script is here as a test of buttons. Transform to a view on ICPSProxy
-# or IObjectManager
+from Products.CMFCore.WorkflowCore import WorkflowException
+from urllib import quote
 
-form = REQUEST.form
-list_ids = ('ids', 'rpaths',)
-refs = ()
-for l_id in list_ids:
-    vals = form.pop(l_id, ())
-    if not refs:
-        refs = vals
-        name = l_id
+wtool = context.portal_workflow
+mcat = context.translation_service
+failed = []
 
-PREFIX = "cpscourrier_batch_"
-trans = [key for key in form if key.startswith(PREFIX)]
-if len(trans) > 1:
-    raise ValueError("Got more than one transition")
+for rpath in rpaths:
+    proxy = context.restrictedTraverse(rpath)
+    try:
+        wtool.doActionFor(proxy, workflow_action, comment=comments)
+    except WorkflowException:
+        failed.append(proxy.Title())
 
-transition = trans[0][len(PREFIX):]
-return "You asked to perform transition '%s'\n%s: %s" % (transition,
-                                                       name,
-                                                       ', '.join(refs))
+psm = "psm_status_changed"
+if failed:
+    # translating first cause no interpolation can be done at display time for
+    # psms
+    psm = mcat("psm_cpscourrier_no_action_performed_for").encode('iso-8859-15')
+    psm += ', '.join(failed)
+    psm = quote(psm)
+
+if REQUEST is not None:
+    url = "%s?portal_status_message=%s" % (context.absolute_url(), psm)
+    REQUEST.RESPONSE.redirect(url)
+

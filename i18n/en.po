@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-23 19:30default\n"
+"POT-Creation-Date: 2006-03-27 18:21default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -15,6 +15,13 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-encodings: latin9 utf-8\n"
 "Domain: default\n"
+
+#.   <title fill-slot="title">
+#.           <span replace="string:heading_batch_workflow_${transition}" />
+#.         </title>
+#: from ../skins/cps_courrier/cpscourrier_batch_perform_form.pt
+msgid "<span replace=\"string:heading_batch_workflow_${transition}\" />"
+msgstr ""
 
 #.   <title fill-slot="title">
 #.           <span replace="string:heading_workflow_${transition}_of" />
@@ -369,7 +376,7 @@ msgstr "Handle ${item_id}"
 
 msgid "help_workflow_handle"
 msgstr ""
-"By choose to handle the incoming mail document you will be in charge of the "
+"By choosing to handle the incoming mail document you will be in charge of the "
 "future processing of the mail (answering, delegating, deleting, ... )."
 
 msgid "button_handle"
@@ -622,9 +629,31 @@ msgstr "Move down"
 #
 msgid "help_workflow_move_down_delegatees"
 msgstr ""
-"You are about to let the users of the next level handle the mail document.If "
+"You are about to let the users of the next level handle the mail document. If "
 "you are not part of them and if you are not a local manager you will "
-"nolonguer be able to act on that document."
+"no longuer be able to act on that document."
+
+msgid "heading_batch_workflow_handle"
+msgstr "Handle a set of incoming mail documents"
+
+msgid "help_batch_workflow_handle"
+msgstr ""
+"By choosing to handle the selected mail documents you will be in charge of the"
+" future processing of the mails (answering, delegating, deleting, ... )."
+
+msgid "heading_batch_workflow_discard"
+msgstr "Discard a set of incoming mail documents"
+
+msgid "help_batch_workflow_discard"
+msgstr "You are about to to put the selected mail documents to trash."
+
+msgid "heading_batch_workflow_answer"
+msgstr "Reply to a set of incoming mail documents"
+
+msgid "help_batch_workflow_answer"
+msgstr ""
+"By answering the mail documents, you will create a new linked outgoing mail "
+"for each selected incoming mail document."
 
 msgid "received"
 msgstr "received"
@@ -693,6 +722,9 @@ msgstr "Invalid sender address: the reply could not be sent"
 
 msgid "psm_cpscourrier_reply_sent"
 msgstr "Reply sent"
+
+msgid "psm_cpscourrier_no_action_performed_for"
+msgstr "The following mail documents were left unchanged: "
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr "On ${y}-${m}-${d}, ${name} wrote:"

@@ -391,6 +391,24 @@ msgstr ""
 msgid "help_workflow_move_down_delegatees"
 msgstr ""
 
+msgid "heading_batch_workflow_handle"
+msgstr ""
+
+msgid "help_batch_workflow_handle"
+msgstr ""
+
+msgid "heading_batch_workflow_discard"
+msgstr ""
+
+msgid "help_batch_workflow_discard"
+msgstr ""
+
+msgid "heading_batch_workflow_answer"
+msgstr ""
+
+msgid "help_batch_workflow_answer"
+msgstr ""
+
 #
 # Workflow states
 #
@@ -463,6 +481,9 @@ msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_sender_address"
 msgstr ""
 
 msgid "psm_cpscourrier_reply_sent"
+msgstr ""
+
+msgid "psm_cpscourrier_no_action_performed_for"
 msgstr ""
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"

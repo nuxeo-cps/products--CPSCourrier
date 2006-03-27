@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-23 19:30default\n"
+"POT-Creation-Date: 2006-03-27 18:21default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -15,6 +15,13 @@ msgstr ""
 "Language-Name: French\n"
 "Preferred-encodings: latin9 utf-8\n"
 "Domain: default\n"
+
+#.   <title fill-slot="title">
+#.           <span replace="string:heading_batch_workflow_${transition}" />
+#.         </title>
+#: from ../skins/cps_courrier/cpscourrier_batch_perform_form.pt
+msgid "<span replace=\"string:heading_batch_workflow_${transition}\" />"
+msgstr ""
 
 #.   <title fill-slot="title">
 #.           <span replace="string:heading_workflow_${transition}_of" />
@@ -578,6 +585,27 @@ msgstr ""
 "faites pas partie, ou n'avez pas de droits supérieurs, vous ne pourrez plus "
 "intervenir."
 
+msgid "heading_batch_workflow_handle"
+msgstr "Prendre en charge par lôt"
+
+msgid "help_batch_workflow_handle"
+msgstr ""
+"Vous vous apprêtez à prendre en charge un lot de courriers entrants&nbsp;; "
+"vous deviendrez de fait l'agent en charge de son traitement&nbsp;: répondre, "
+"déléguer, mettre au rebut"
+
+msgid "heading_batch_workflow_discard"
+msgstr "Mettre au rebut par lôt"
+
+msgid "help_batch_workflow_discard"
+msgstr "Vous vous apprêtez à mettre ce lôt de courriers entrants au rebut"
+
+msgid "heading_batch_workflow_answer"
+msgstr "Répondre par lôt"
+
+msgid "help_batch_workflow_answer"
+msgstr "Vous vous apprêtez à créer une réponse pour ce lôt de courriers"
+
 msgid "received"
 msgstr "reçu"
 
@@ -650,6 +678,9 @@ msgstr ""
 
 msgid "psm_cpscourrier_reply_sent"
 msgstr "Réponse envoyée"
+
+msgid "psm_cpscourrier_no_action_performed_for"
+msgstr "Les courriers suivants n'ont pas été affectés par l'opération&nbsp;: "
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr "Le ${d}/${m}/${y}, ${name} a écrit : "

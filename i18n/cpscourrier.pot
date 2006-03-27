@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-23 19:30default\n"
+"POT-Creation-Date: 2006-03-27 18:21default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -15,6 +15,13 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-encodings: latin9 utf-8\n"
 "Domain: default\n"
+
+#.   <title fill-slot="title">
+#.           <span replace="string:heading_batch_workflow_${transition}" />
+#.         </title>
+#: from ../skins/cps_courrier/cpscourrier_batch_perform_form.pt
+msgid "<span replace=\"string:heading_batch_workflow_${transition}\" />"
+msgstr ""
 
 #.   <title fill-slot="title">
 #.           <span replace="string:heading_workflow_${transition}_of" />
@@ -562,6 +569,24 @@ msgstr ""
 msgid "help_workflow_move_down_delegatees"
 msgstr ""
 
+msgid "heading_batch_workflow_handle"
+msgstr ""
+
+msgid "help_batch_workflow_handle"
+msgstr ""
+
+msgid "heading_batch_workflow_discard"
+msgstr ""
+
+msgid "help_batch_workflow_discard"
+msgstr ""
+
+msgid "heading_batch_workflow_answer"
+msgstr ""
+
+msgid "help_batch_workflow_answer"
+msgstr ""
+
 #
 # Workflow states
 #
@@ -632,6 +657,9 @@ msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_sender_address"
 msgstr ""
 
 msgid "psm_cpscourrier_reply_sent"
+msgstr ""
+
+msgid "psm_cpscourrier_no_action_performed_for"
 msgstr ""
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
