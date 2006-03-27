@@ -109,7 +109,7 @@ class CPSCourrierFunctionalLayerClass(CommonIntegrationFixture,
                  'member1': 'WorkspaceMember',
                  'member2': 'WorkspaceMember',
                  'member3': 'WorkspaceMember',
-                 'manager': 'WorkspaceManager',}
+                 'wsmanager': 'WorkspaceManager',}
         for prefix, role in roles.items():
             for id, folder in ((self.MBG_ID, self.mbg,),
                                (self.MB_ID, self.mb,),
