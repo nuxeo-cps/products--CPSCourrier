@@ -21,6 +21,7 @@
 import transaction
 import unittest
 from zope.testing import doctest
+from AccessControl import getSecurityManager
 from Testing import ZopeTestCase
 from Products.GenericSetup import profile_registry
 from Products.GenericSetup import EXTENSION
@@ -244,3 +245,12 @@ class CourrierFunctionalTestCase(CPSTestCase):
         mail = container[mail_id]
         setattr(self, mail_id, mail)
         setattr(self, '%s_id' % mail_id, mail.getId())
+
+    def getRolesFor(self, object):
+        """ Return roles for current user, and for everybody.
+        """
+
+        pm = getToolByName(self.portal, 'portal_membership')
+        roles = pm.getMergedLocalRoles(object)
+        user_id = getSecurityManager().getUser().getId()
+        return roles, roles.get('user:%s' %user_id)
