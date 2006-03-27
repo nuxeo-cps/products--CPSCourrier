@@ -61,7 +61,10 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.mb.manage_delObjects([self.incoming_id])
         self.logout()
 
-    def test_handle(self):
+    def test_handle_stack_manage(self):
+        stack_mod = self.incoming.cpscourrier_stack_modify
+
+        # member1 handles the mail
         self.flogin('member1', self.mb)
         self.wftool.doActionFor(self.incoming, 'handle')
 
@@ -69,6 +72,34 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.assertEquals(stack.getAllLevels(), [0])
         elt = stack._getLevelContentValues()[0]
         self.assertEquals(elt['directive'], 'handle')
+
+        # manager still can manage the stack (see later)
+        self.login('manager')
+        wf = self.wftool['incoming_mail_wf']
+        #self.assert_(wf.isActionSupported(self.incoming, 'manage_delegatees'))
+        self.flogin('member1', self.mb)
+
+        # member1 adds member2 below himself
+        kws = {'current_var_id': 'Pilots',
+               'directive': 'response',
+               'level': '-1',
+               'workflow_action_form': 'cpscourrier_roadmap',
+               'submit_add': 'Valider',
+               'push_ids': ['courrier_user:member2']}
+        stack_mod(**kws)
+        self.assertEquals(stack.getAllLevels(), [-1, 0])
+
+        # member1 adds member2 between member1 and member2
+        kws = {'current_var_id': 'Pilots',
+               'directive': 'response',
+               'level': '-1_0',
+               'workflow_action_form': 'cpscourrier_roadmap',
+               'submit_add': 'Valider',
+               'push_ids': ['courrier_user:member2']}
+        stack_mod(**kws)
+        stack = self.wftool.getStackFor(self.incoming, 'Pilots') # necessary
+        self.assertEquals(stack.getAllLevels(), [-2, -1, 0])
+
 
 def test_suite():
     return unittest.TestSuite((

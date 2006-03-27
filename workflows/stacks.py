@@ -81,33 +81,6 @@ class CourrierStack(HierarchicalStack):
         for i, push_id in enumerate(push_ids):
             elt_info = {}
 
-            # check level
-            level = levels[i]
-            if isinstance(level, int):
-                # ok
-                pass
-            elif isinstance(level, str):
-                try:
-                    level = int(level)
-                except ValueError:
-                    # convention to insert the level itself
-                    # see HierarchicalStack._push
-                    split = level.split('_')
-                    try:
-                        elt_info['low_level'] = int(split[0])
-                        elt_info['high_level'] = int(split[1])
-                    except (IndexError, ValueError):
-                        # Wrong user input
-                        LOG("CourrierStack.push", DEBUG,
-                            "wrong user input, level split=%s"%(level,))
-                        continue
-            else:
-                # wrong user input
-                LOG("CourrierStack.push", DEBUG,
-                    "wrong user input, level=%s"%(level,))
-                #print "wrong user input, level=%s"%(level,)
-                continue
-
             # optional data
             for key, item in data_lists.items():
                 try:
@@ -115,8 +88,34 @@ class CourrierStack(HierarchicalStack):
                 except IndexError:
                     pass
 
-            self._push(push_id, level=level, data=elt_info)
+            # check level
+            level = levels[i]
+            if not isinstance(level, int) and not isinstance(level, str):
+                # wrong user input
+                LOG("CourrierStack.push", DEBUG,
+                    "wrong user input, level=%s"%(level,))
+                continue
 
+            try:
+                level = int(level)
+            except ValueError:
+                # convention to insert between two levels
+                # see HierarchicalStack._push
+                split = level.split('_')
+                try:
+                    low_level = int(split[0])
+                    high_level = int(split[1])
+                except (IndexError, ValueError):
+                    # Wrong user input
+                    LOG("CourrierStack.push", DEBUG,
+                        "wrong user input, level split=%s"%(level,))
+                else:
+                    self._push(push_id,
+                               low_level=low_level,
+                               high_level=high_level,
+                               data=elt_info)
+            else: # level is ok
+                self._push(push_id, level=level, data=elt_info)
 
     # XXX TODO (finalization):
     # check that all overloads below are still necessary
