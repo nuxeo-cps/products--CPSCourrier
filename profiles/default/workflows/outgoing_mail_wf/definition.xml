@@ -91,6 +91,7 @@
   </stack-definition>
   <state-behavior behavior_id="push-delegatees"/>
   <state-behavior behavior_id="pop-delegatees"/>
+  <state-behavior behavior_id="edit-delegatees"/>
   <state-behavior behavior_id="workflow-down"/>
   <state-behavior behavior_id="workflow-reset"/>
   <push-on-workflow-variable variable_id="Pilots"/>
@@ -150,6 +151,7 @@
   </stack-definition>
   <state-behavior behavior_id="push-delegatees"/>
   <state-behavior behavior_id="pop-delegatees"/>
+  <state-behavior behavior_id="edit-delegatees"/>
   <state-behavior behavior_id="workflow-down"/>
   <state-behavior behavior_id="workflow-reset"/>
   <push-on-workflow-variable variable_id="Pilots"/>
@@ -270,8 +272,10 @@
   </guard>
   <transition-behavior behavior_id="push-delegatees"/>
   <transition-behavior behavior_id="pop-delegatees"/>
+  <transition-behavior behavior_id="edit-delegatees"/>
   <push-on-workflow-variable variable_id="Pilots"/>
   <pop-on-workflow-variable variable_id="Pilots"/>
+  <edit-on-workflow-variable variable_id="Pilots"/>
  </transition>
  <transition transition_id="move_down_delegatees" title=""
              new_state="" trigger="USER" before_script=""

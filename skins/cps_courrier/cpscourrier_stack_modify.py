@@ -67,6 +67,7 @@ from Products.CMFCore.utils import getToolByName
 
 workflow_actions = {'pop': 'manage_delegatees',
                     'push': 'manage_delegatees',
+                    'edit': 'manage_delegatees',
                     'move_down' : 'move_down_delegatees',
                     }
 
@@ -85,7 +86,6 @@ else:
     raise ValueError("Unkown submission type")
 
 workflow_action = workflow_actions.get(action_type)
-
 #
 # helper method
 #
@@ -124,6 +124,7 @@ LOG("cpscourrier_delegation_modify", DEBUG, "kws = %s"%(kw))
 
 kw['current_wf_var_id'] = current_var_id
 
+# XXX GR TODO. now that everything is a transition, factorise !
 if action_type == 'push':
     push_ids = kw.get('push_ids', ())
     level = kw.get('level', None)
@@ -143,33 +144,31 @@ if action_type == 'push':
         psm = 'psm_roadmap_changed'
 
 elif action_type == 'edit':
-    # XXX AT: no wf transition used here so add this check
-    if wftool.canManageStack(context, current_var_id):
-        # what we want
-        dates = ()
-        string_data = ('directive', 'user_comment')
+    LOG('cpscourrier_stack_modify', DEBUG, action_type)
+    # what we want
+    dates = ()
+    string_data = ('directive', 'user_comment')
 
-        # elements ids
-        edit_ids = kw.get('edit_ids', ())
-        LOG("cpscourrier_delegation_modify", DEBUG, "edit_ids=%s"%(edit_ids,))
+    # elements ids
+    edit_ids = kw.get('edit_ids', ())
+    LOG("cpscourrier_delegation_modify", DEBUG, "edit_ids=%s"%(edit_ids,))
 
-        # data extraction
-        try:
-            date_lists = dict(
-                (key, [makeDate(dstr) for dstr in kw.get(key)]) for key in dates)
-        except ValueError, err:
-            # XXX AT: cannot pass %s to translation
-            psm = "Invalid date: ${date (%s)}" % err
-        else:
-            data_lists = dict((key, kw.get(key)) for key in string_data)
-            data_lists.update(date_lists)
-            stack = wftool.getStackFor(context, current_var_id)
-            stack.setEditableAttributes(edit_ids, data_lists)
-            err = 0
-            psm = 'psm_stack_elements_edited'
-    else:
+    # data extraction
+    try:
+        date_lists = dict(
+            (key, [makeDate(dstr) for dstr in kw['key']])
+             for key in dates
+             if key in kw)
+    except ValueError, err:
+        # XXX AT: cannot pass %s to translation
+        psm = "Invalid date: ${date (%s)}" % err
         err = 1
-        psm = 'psm_cannot_manage_stack'
+    else:
+        kw.update(date_lists)
+
+        kw['data_list'] = dates + string_data
+        # GR: catch exceptions for user feedback ? Should not happen anyway
+        wftool.doActionFor(context, workflow_action, **kw)
 
 elif action_type == 'move_down':
     wftool.doActionFor(context,
