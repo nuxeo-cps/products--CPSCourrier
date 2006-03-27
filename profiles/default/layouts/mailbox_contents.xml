@@ -101,7 +101,6 @@ Layout that present mailbox contents
      <cell name="Query portal_type" />
    </row>
    <row>
-     <cell name="Query path"/>
      <cell name="Query review_state" />
      <cell name="Query priority" />
    </row>
