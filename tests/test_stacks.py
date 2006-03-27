@@ -73,10 +73,15 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         elt = stack._getLevelContentValues()[0]
         self.assertEquals(elt['directive'], 'handle')
 
-        # manager still can manage the stack (see later)
-        self.login('manager')
+        # Checking perms for other roles
         wf = self.wftool['incoming_mail_wf']
-        #self.assert_(wf.isActionSupported(self.incoming, 'manage_delegatees'))
+
+        self.login('manager')
+        self.assert_(wf.isActionSupported(self.incoming, 'manage_delegatees'))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(wf.isActionSupported(self.incoming, 'manage_delegatees'))
+        self.flogin('member2', self.mb)
+        self.failIf(wf.isActionSupported(self.incoming, 'manage_delegatees'))
         self.flogin('member1', self.mb)
 
         # member1 adds member2 below himself

@@ -14,6 +14,9 @@
                     variable_id="Pilots"
                     meta_type="Hierarchical Stack Definition"
                     stack_type="Courrier Stack">
+    <manager-stack-role name="Pilot"/>
+    <manager-stack-role name="WorkspaceManager"/>
+    <manager-stack-role name="Manager"/>
    <managed-roles>
     <managed-role name="Pilot"
                   expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
@@ -52,6 +55,9 @@
                     variable_id="Pilots"
                     meta_type="Hierarchical Stack Definition"
                     stack_type="Courrier Stack">
+    <manager-stack-role name="Pilot"/>
+    <manager-stack-role name="WorkspaceManager"/>
+    <manager-stack-role name="Manager"/>
    <managed-roles>
     <managed-role name="Pilot"
                   expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
@@ -120,10 +126,13 @@
                     variable_id="Pilots"
                     meta_type="Hierarchical Stack Definition"
                     stack_type="Courrier Stack">
-   <managed-roles>
-    <managed-role name="Pilot"
-                  expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
-   </managed-roles>
+    <manager-stack-role name="Pilot"/>
+    <manager-stack-role name="WorkspaceManager"/>
+    <manager-stack-role name="Manager"/>
+    <managed-roles>
+      <managed-role name="Pilot"
+		    expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
+    </managed-roles>
    <empty-stack-manage-guard>
     <guard-role>Owner</guard-role>
     <guard-role>WorkspaceManager</guard-role>
@@ -160,6 +169,9 @@
                     variable_id="Pilots"
                     meta_type="Hierarchical Stack Definition"
                     stack_type="Courrier Stack">
+    <manager-stack-role name="Pilot"/>
+    <manager-stack-role name="WorkspaceManager"/>
+    <manager-stack-role name="Manager"/>
    <managed-roles>
     <managed-role name="Pilot"
                   expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
