@@ -20,9 +20,9 @@
 
 """ Portlet Widgets. """
 
+import logging
 from urllib import quote
 
-from zLOG import LOG, DEBUG
 from Globals import InitializeClass
 
 from Products.CMFCore.utils import getToolByName
@@ -39,6 +39,8 @@ from Products.CPSSkins.cpsskins_utils import (serializeForCookie,
                                               unserializeFromCookie)
 
 from Products.CPSDocument.interfaces import ICPSDocument
+
+logger = logging.getLogger('CPSCourrier.tabular')
 
 FILTER_PREFIX = 'Query ' #TODO Make this a property of tabular widgets
 FILTER_PREFIX_LEN = len('Query ')
@@ -213,7 +215,7 @@ class TabularWidget(CPSPortletWidget):
             if scope is not None:
                 filters[key[FILTER_PREFIX_LEN:]] = scope
 
-        LOG('Tabular Widget; filters:', DEBUG, filters)
+        logger.debug(' filters: %s' %filters)
         return filters
 
     def columnFromWidget(self, widget, datastructure,
