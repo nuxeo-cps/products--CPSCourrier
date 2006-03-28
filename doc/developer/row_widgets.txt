@@ -108,6 +108,42 @@ This latter behaviour is meant for a folder contents type tabular widgets.
 
 The goal is to post a bunch of object identifiers or references as a list.
 
+Let's instanciate one, with its id::
+
+    >>> from Products.CPSCourrier.widgets.row_widgets \
+    ... import CPSListCheckboxWidget
+    >>> widget = CPSListCheckboxWidget('the_check')
+    >>> widget.getId()
+    'the_check'
+
+Let's make datamodel and datastructure::
+
+    >>> dm = FakeDataModel()
+    >>> ds = DataStructure(datamodel=dm)
+    >>> dm['token'] = '54FF54'
+
+Now let's tell the widget on which field it works and prepare the
+datastructure::
+
+    >>> widget.fields = ('token',)
+    >>> widget.prepare(ds)
+    >>> ds
+    {'the_check': '54FF54'}
+
+
+The rendering is being controlled by the list_name and format_string
+properties. We'll try first without the latter::
+
+    >>> widget.list_name="toks"
+    >>> widget.render('view', ds)
+    '<input type="checkbox" name="toks:list" value="54FF54" />'
+
+Now the format string is a python format string::
+
+    >>> widget.format_string = 'tok-%s-formatted'
+    >>> widget.render('view', ds)
+    '<input type="checkbox" name="toks:list" value="tok-54FF54-formatted" />'
+
 
 .. Emacs
 .. Local Variables:

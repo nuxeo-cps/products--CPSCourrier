@@ -196,9 +196,12 @@ class CPSListCheckboxWidget(CPSWidget):
     _properties = CPSWidget._properties + (
         {'id': 'list_name', 'type' : 'string', 'mode' : 'w',
          'label': 'Name of the posted list', 'is_required': 1},
+        {'id': 'format_string', 'type' : 'string', 'mode' : 'w',
+         'label': 'A python format string to apply to the field'},
         )
 
     list_name = ''
+    format_string = ''
 
     def prepare(self, datastructure, **kw):
         """Prepare datastructure. """
@@ -223,6 +226,8 @@ class CPSListCheckboxWidget(CPSWidget):
 
         name = '%s:list' % self.list_name
         value = datastructure[self.getWidgetId()]
+        if self.format_string:
+            value = self.format_string % value
         # XXX: content_lib_info_detail_tab uses  item.getContextUrl(utool=utool)
         # investigate ?
         return renderHtmlTag('input', type='checkbox',
