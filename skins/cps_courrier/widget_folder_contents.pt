@@ -17,7 +17,7 @@
 </script>
 
 <tal:block define="actions options/actions;
-		   make_form python: options['mode'] != 'search'
+		   make_form python: actions and options['mode'] != 'search'
 		   ">
   <tal:block condition="make_form">
     <tal:comment condition="nothing">
@@ -41,6 +41,7 @@
 			   toggle_get python:col[3];
 			   here_url options/here_url;
 			   ">
+
 	  <input type="checkbox" name="select_all"
 		 onclick="toggleSelectAll(this);"
 		 tal:condition="python:widget.meta_type == 'List Checkbox Widget'" />
