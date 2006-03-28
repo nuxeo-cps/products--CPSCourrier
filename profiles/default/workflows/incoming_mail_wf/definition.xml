@@ -235,6 +235,9 @@
   <action url="%(content_url)s/workflow_transition_form?transition=discard"
           category="workflow">action_discard</action>
   <guard>
+    <guard-role>Manager</guard-role>
+    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>Pilot</guard-role>
   </guard>
  </transition>
  <transition transition_id="flag_answered" title=""
@@ -256,6 +259,9 @@
   <action url="%(content_url)s/cpscourrier_forward_form"
           category="workflow">action_forward</action>
   <guard>
+    <guard-role>Manager</guard-role>
+    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>Pilot</guard-role>
   </guard>
  </transition>
  <transition transition_id="forward_email" title=""
@@ -263,6 +269,9 @@
              before_script="" after_script="">
 
   <guard>
+    <guard-role>Manager</guard-role>
+    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>Pilot</guard-role>
   </guard>
  </transition>
  <transition transition_id="forward_move" title=""
@@ -270,6 +279,9 @@
              before_script="" after_script="">
 
   <guard>
+    <guard-role>Manager</guard-role>
+    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>Pilot</guard-role>
   </guard>
   <transition-behavior behavior_id="delete"/>
   <transition-behavior behavior_id="clone"/>
@@ -311,6 +323,7 @@
           category="workflow">action_move_down_delegatees</action>
   <guard>
    <guard-role>Pilot</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <transition-behavior behavior_id="workflow-down"/>
