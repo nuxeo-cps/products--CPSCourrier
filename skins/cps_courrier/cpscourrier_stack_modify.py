@@ -137,9 +137,11 @@ if action_type == 'push':
         psm = 'psm_select_a_level'
         err = 1
     else:
-        kw['levels'] = len(push_ids)*[level]
-        kw['directive'] = len(push_ids)*[kw.get('directive', '')]
-        kw['data_lists'] = ('directive',)
+        nb_push = len(push_ids)
+        kw['levels'] = nb_push*[level]
+        kw['directive'] = nb_push*[kw.get('directive', '')]
+        kw['delegation_date'] = nb_push*[DateTime()]
+        kw['data_lists'] = ('directive', 'delegation_date',)
         res = wftool.doActionFor(context, workflow_action, **kw)
         psm = 'psm_roadmap_changed'
 
