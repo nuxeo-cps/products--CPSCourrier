@@ -42,8 +42,6 @@ from Products.CPSDocument.interfaces import ICPSDocument
 
 logger = logging.getLogger('CPSCourrier.tabular')
 
-FILTER_PREFIX = 'Query ' #TODO Make this a property of tabular widgets
-FILTER_PREFIX_LEN = len('Query ')
 SCOPE_SUFFIX = '_scope' # see explanations in filter_widgets
 
 _missed = object()
@@ -90,15 +88,6 @@ class FakeRequestWithCookies:
         return info['value']
 
 
-def removeFilterPrefix(wid):
-    """Remove a filter prefix in a widget id. """
-
-    if wid.startswith(FILTER_PREFIX):
-        return wid[FILTER_PREFIX_LEN:]
-    else:
-        return wid
-
-
 class TabularWidget(CPSPortletWidget):
     """ A generic portlet widget to display tabular contents.
 
@@ -133,6 +122,8 @@ class TabularWidget(CPSPortletWidget):
          'label': 'Name of cookie for filter params (no cookie if empty)', },
         {'id': 'filter_button', 'type': 'string', 'mode': 'w',
          'label': 'Name of the button used to trigger filtering', },
+        {'id': 'filter_prefix', 'type': 'string', 'mode': 'w',
+         'label': 'Prefix of filtering widgets', },
         )
 
     row_layout = ''
@@ -143,6 +134,7 @@ class TabularWidget(CPSPortletWidget):
     actions = ()
     cookie_id = ''
     filter_button = ''
+    filter_prefix = 'q_'
 
     def prepareRowDataStructure(self, layout, datastructure):
         """Have layout prepare row datastructure and return it."""
@@ -186,16 +178,17 @@ class TabularWidget(CPSPortletWidget):
 
         Cookies not implemented.
         Assumptions: the post is made with widgets whose ids start all with
-        'Query '
+        self.filter_prefix
         and correspond to other widget ids present in items.
 
         XXX TODO this is a cc from folder_contents. Factorize to base class
         """
 
         # extract filters from datastructure
+        prefix = self.filter_prefix
         prefilt = dict( (key, item)
                        for key, item in datastructure.items()
-                       if key.startswith(FILTER_PREFIX) )
+                       if key.startswith(prefix) )
 
         # if filtering uses a post, set cookie
         request = self.REQUEST
@@ -207,19 +200,20 @@ class TabularWidget(CPSPortletWidget):
         # replace some empty filters by the corresponding total scope
         # and remove the others
         filters = {}
+        pref_len = len(prefix)
         for key, item in prefilt.items():
             if item and not key.endswith(SCOPE_SUFFIX):
-                filters[key[FILTER_PREFIX_LEN:]] = item
+                filters[key[pref_len:]] = item
                 continue
             scope = datastructure.get(key + SCOPE_SUFFIX)
             if scope is not None:
-                filters[key[FILTER_PREFIX_LEN:]] = scope
+                filters[key[pref_len:]] = scope
 
         logger.debug(' filters: %s' %filters)
         return filters
 
     def columnFromWidget(self, widget, datastructure,
-                         sort_wid='Query sort'):
+                         sort_wid='q_sort'):
         """ make column info from a widget object.
 
         Return (widget, boolean, token, get_req) where:

@@ -17,7 +17,7 @@ Layout that presents catalog search results
   <property name="filter_button">filter</property>
  </widget>
 
- <widget name="Query review_state" meta_type="Select Filter Widget">
+ <widget name="q_review_state" meta_type="Select Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">label_search_status</property>
    <property name="label_edit">label_search_status</property>
@@ -32,7 +32,7 @@ Layout that presents catalog search results
    </property>
  </widget>
 
- <widget name="Query priority" meta_type="Select Filter Widget">
+ <widget name="q_priority" meta_type="Select Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_priority_label</property>
    <property name="label_edit">cpscourrier_priority_label</property>
@@ -45,7 +45,7 @@ Layout that presents catalog search results
    </property>
  </widget>
 
- <widget name="Query Subject" meta_type="Select Filter Widget">
+ <widget name="q_Subject" meta_type="Select Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_subject_label</property>
    <property name="label_edit">cpscourrier_subject_label</property>
@@ -58,7 +58,7 @@ Layout that presents catalog search results
    </property>
  </widget>
 
- <widget name="Query portal_type" meta_type="Select Filter Widget">
+ <widget name="q_portal_type" meta_type="Select Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_type_label</property>
    <property name="label_edit">cpscourrier_type_label</property>
@@ -72,7 +72,7 @@ Layout that presents catalog search results
    <property name="defines_scope">True</property>
  </widget>
 
- <widget name="Query sort" meta_type="Toggable Criterion Widget">
+ <widget name="q_sort" meta_type="Toggable Criterion Widget">
    <property name="hidden_layout_modes">create edit</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_type_label</property>
@@ -105,7 +105,7 @@ Layout that presents catalog search results
     <property name="cookie_id">cpscourrier</property>
 </widget>
 
- <widget name="Query path" meta_type="Select Filter Widget">
+ <widget name="q_path" meta_type="Select Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_search_path_label</property>
    <property name="label_edit">cpscourrier_search_path_label</property>
@@ -120,7 +120,7 @@ Layout that presents catalog search results
    <property name="defines_scope">True</property>
  </widget>
 
-<widget name="Query ZCText_or" meta_type="String Widget">
+<widget name="q_ZCText_or" meta_type="String Widget">
    <property name="label_edit">cpscourrier_fulltext_search</property>
    <property name="is_i18n">True</property>
 
@@ -132,16 +132,16 @@ Layout that presents catalog search results
 
  <table>
    <row>
-     <cell name="Query ZCText_or"/>
+     <cell name="q_ZCText_or"/>
    </row>
    <row>
-     <cell name="Query Subject"/>
-     <cell name="Query portal_type" />
+     <cell name="q_Subject"/>
+     <cell name="q_portal_type" />
    </row>
    <row>
-     <cell name="Query path"/>
-     <cell name="Query review_state" />
-     <cell name="Query priority" />
+     <cell name="q_path"/>
+     <cell name="q_review_state" />
+     <cell name="q_priority" />
    </row>
    <row>
      <cell name="default_sort"/>

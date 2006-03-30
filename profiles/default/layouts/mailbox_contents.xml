@@ -17,7 +17,7 @@ Layout that present mailbox contents
   <property name="filter_button">filter</property>
  </widget>
 
- <widget name="Query review_state" meta_type="Select Filter Widget">
+ <widget name="q_review_state" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">label_search_status</property>
@@ -33,7 +33,7 @@ Layout that present mailbox contents
    </property>
  </widget>
 
- <widget name="Query priority" meta_type="Select Filter Widget">
+ <widget name="q_priority" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_priority_label</property>
@@ -47,7 +47,7 @@ Layout that present mailbox contents
    </property>
  </widget>
 
- <widget name="Query Subject" meta_type="Select Filter Widget">
+ <widget name="q_Subject" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_subject_label</property>
@@ -62,7 +62,7 @@ Layout that present mailbox contents
  </widget>
 
 
- <widget name="Query portal_type" meta_type="Select Filter Widget">
+ <widget name="q_portal_type" meta_type="Select Filter Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_type_label</property>
@@ -78,7 +78,7 @@ Layout that present mailbox contents
  </widget>
 
 <!-- Not yet implemented for folder contents
- <widget name="Query sort" meta_type="Toggable Criterion Widget">
+ <widget name="q_sort" meta_type="Toggable Criterion Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="cookie_id">cpscourrier</property>
    <property name="toggle_tokens">
@@ -97,12 +97,12 @@ Layout that present mailbox contents
 
 <table>
    <row>
-     <cell name="Query Subject"/>
-     <cell name="Query portal_type" />
+     <cell name="q_Subject"/>
+     <cell name="q_portal_type" />
    </row>
    <row>
-     <cell name="Query review_state" />
-     <cell name="Query priority" />
+     <cell name="q_review_state" />
+     <cell name="q_priority" />
    </row>
    <row>
      <cell name="Table"/>

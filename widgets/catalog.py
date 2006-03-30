@@ -40,8 +40,9 @@ from Products.CPSCourrier.widgets.tabular import TabularWidget
 class CatalogTabularWidget(TabularWidget):
     """ A tabular portlet widget that performs a catalog query.
 
-    Key, values from datastructure starting from FILTER_PREFIX are forwarded
-    to the catalog, after stripping the prefix.
+    Uses the inherited reading of filter params from datastructure and
+    does further work to build the query out of them in the filterToQuery
+    method.
 
     >>> CatalogTabularWidget('the id')
     <CatalogTabularWidget at the_id>

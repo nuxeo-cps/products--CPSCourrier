@@ -36,17 +36,7 @@ from Products.CPSSkins.cpsskins_utils import serializeForCookie
 
 from Products.CPSCourrier.widgets.tabular import TabularWidget
 
-FILTER_PREFIX = 'Filter '
-FILTER_PREFIX_LEN = len('Filter ')
 _missed = object()
-
-def removeFilterPrefix(wid):
-    """Remove a filter prefix in a widget id. """
-
-    if wid.startswith(FILTER_PREFIX):
-        return wid[FILTER_PREFIX_LEN:]
-    else:
-        return wid
 
 class FolderContentsWidget(TabularWidget):
     """ A tabular portlet widget that performs a simple folder listing.
@@ -77,7 +67,9 @@ class FolderContentsWidget(TabularWidget):
     cookie_id = ''
 
     filter_button = ''
-    
+
+    filter_prefix = 'f_'
+
     render_method = 'widget_folder_contents'
 
     def layout_row_view(self, layout=None, **kw):
@@ -123,31 +115,6 @@ class FolderContentsWidget(TabularWidget):
                 return False
         else:
             return True
-
-    def buildFilters(self, datastructure):
-        """Build filters according to datastructure, query and cookies.
-
-        Cookies not implemented.
-        Assumptions: the post is made with widgets whose ids start all with 'Filter '
-        and correspond to other widget ids present in items.
-        """
-
-        # extract filters from datastructure
-        filters = dict( (key, item)
-                        for key, item in datastructure.items()
-                        if key.startswith(FILTER_PREFIX) )
-
-        # if filtering uses a post, set cookie
-        request = self.REQUEST
-        if self.cookie_id and request.form.get(self.filter_button):
-            cookie = serializeForCookie(filters)
-            request.RESPONSE.setCookie(self.cookie_id, cookie)
-
-        # empty filter value means not to filter
-        filters = dict( (key[FILTER_PREFIX_LEN:], item)
-                        for key, item in filters.items() if item)
-
-        return filters
 
     def listRowDataStructures(self, datastructure, layout, **kw):
         """Return an iterator for folder contents datastructures

@@ -37,29 +37,42 @@ queries upon these parameters.
 Fetching parameters
 ~~~~~~~~~~~~~~~~~~~
 
-The datastructure extraction is based on a prefix::
+The datastructure extraction is based on a prefix whose default value
+is 'q_'::
 
     >>> datastructure1 = DataStructure(data = {
-    ...              'Query one': 'value',
+    ...              'q_one': 'value',
     ...              'other' : 'to_discard'})
     >>> tab.buildFilters(datastructure1)
     {'one': 'value'}
 
 Empty values get removed by default::
 
-    >>> datastructure2 = DataStructure(data = {'Query one': '',
-    ...                                       'Query eggs': 'spam'})
+    >>> datastructure2 = DataStructure(data = {'q_one': '',
+    ...                                       'q_eggs': 'spam'})
     >>> tab.buildFilters(datastructure2)
     {'eggs': 'spam'}
 
-Empty values are replaced by a default value (postfixed '_scope' in
-datastructure)::
+Empty values can be replaced by a default value if present (postfixed
+'_scope' in datastructure)::
 
-    >>> datastructure3 = DataStructure(data = {'Query one': '',
-    ...                                       'Query one_scope': [1,2]})
+    >>> datastructure3 = DataStructure(data = {'q_one': '',
+    ...                                       'q_one_scope': [1,2]})
 
     >>> tab.buildFilters(datastructure3)
     {'one': [1, 2]}
+
+The prefix used is actually a property of the widget::
+
+    >>> tab.manage_changeProperties(filter_prefix='the_prefix_')
+    >>> datastructure4 = DataStructure(data = {
+    ...              'the_prefix_one': 'value',
+    ...              'q_wrong_prefix' : 'to_discard'})
+    >>> tab.buildFilters(datastructure4)
+    {'one': 'value'}
+
+Let's get back to the default value
+    >>> tab.manage_changeProperties(filter_prefix='q_')
 
 Cookie setting
 ~~~~~~~~~~~~~~
@@ -93,15 +106,15 @@ values & scopes::
     >>> res = tab.buildFilters(datastructure1)
     >>> cookie = tab.REQUEST.RESPONSE.cookies['test_cook']['value']
     >>> unserializeFromCookie(cookie)
-    {u'Query one': u'value'}
+    {u'q_one': u'value'}
     >>> res = tab.buildFilters(datastructure2)
     >>> cookie = tab.REQUEST.RESPONSE.cookies['test_cook']['value']
     >>> pretty_print(unserializeFromCookie(cookie))
-    {u'Query eggs': u'spam', u'Query one': u''}
+    {u'q_eggs': u'spam', u'q_one': u''}
     >>> res = tab.buildFilters(datastructure3)
     >>> cookie = tab.REQUEST.RESPONSE.cookies['test_cook']['value']
     >>> pretty_print(unserializeFromCookie(cookie))
-    {u'Query one': u'', u'Query one_scope': [1, 2]}
+    {u'q_one_scope': [1, 2], u'q_one': u''}
 
 Finally we revert to the default value for filter_button::
 
@@ -151,10 +164,10 @@ This is based on info from the datastructure, so it means that some
 widget has to take care of this in its prepare method::
 
     >>> ds = DataStructure()
-    >>> ds['Query sort-col'] = 'mycol'
+    >>> ds['q_sort-col'] = 'mycol'
     >>> tab.columnFromWidget(col_wi, ds)[1]
     True
-    >>> ds['Query sort-col'] = 'another'
+    >>> ds['q_sort-col'] = 'another'
     >>> tab.columnFromWidget(col_wi, ds)[1]
     False
 
@@ -165,16 +178,16 @@ This is any information about the sorting that the triggering widget
 may have put in the datastructure for the column renderer::
 
     >>> ds = DataStructure()
-    >>> ds['Query sort-col'] = 'mycol'
-    >>> ds['Query sort-order'] = 'spiced-lexico'
+    >>> ds['q_sort-col'] = 'mycol'
+    >>> ds['q_sort-order'] = 'spiced-lexico'
     >>> tab.columnFromWidget(col_wi, ds)[1:3]
     (True, 'spiced-lexico')
 
 This shouldn't matter, but by default this is the empty string::
 
     >>> ds = DataStructure()
-    >>> ds['Query sort-col'] = 'other'
-    >>> ds['Query sort-order'] = 'spiced-lexico'
+    >>> ds['q_sort-col'] = 'other'
+    >>> ds['q_sort-order'] = 'spiced-lexico'
     >>> tab.columnFromWidget(col_wi, ds)[1:3]
     (False, '')
 
@@ -185,7 +198,7 @@ The method now can provide info to build a link that triggers/toggles
 sorting on the column::
 
     >>> tab.columnFromWidget(col_wi, ds)[3]
-    '?widget__Query sort-on=myindex&widget__Query sort-col=mycol'
+    '?widget__q_sort-on=myindex&widget__q_sort-col=mycol'
 
 Obviously, this link has then to point to a document that parses that
 kind of request. This is what Toggable Criterion Widgets are meant
@@ -193,14 +206,14 @@ for. Let's build one and simulate the above request to check this::
 
     >>> from Products.CPSCourrier.widgets.filter_widgets import\
     ...               CPSToggableCriterionWidget, FakeRequest
-    >>> sort_wid = CPSToggableCriterionWidget('Query sort')
-    >>> sort_wid.REQUEST = FakeRequest(**{'widget__Query sort-on':'myindex',
-    ...                                   'widget__Query sort-col':'mycol'})
+    >>> sort_wid = CPSToggableCriterionWidget('q_sort')
+    >>> sort_wid.REQUEST = FakeRequest(**{'widget__q_sort-on':'myindex',
+    ...                                   'widget__q_sort-col':'mycol'})
 
 We need a DataStructure instance and cheat a bit with it (sorry)::
 
     >>> other_ds = DataStructure()
-    >>> for x in ['Query sort-on', 'Query sort-col', 'Query sort-col']:
+    >>> for x in ['q_sort-on', 'q_sort-col', 'q_sort-col']:
     ...     other_ds[x] = None
 
 This is how the Toggable Criterion widget interprets the request and writes to
@@ -208,7 +221,7 @@ the datastructure::
 
     >>> sort_wid.prepare(other_ds)
     >>> pretty_print(other_ds)
-    {'Query sort-order': '', 'Query sort-col': 'mycol', 'Query sort-on': 'myindex'}
+    {'q_sort-col': 'mycol', 'q_sort-order': '', 'q_sort-on': 'myindex'}
 
 Options
 ~~~~~~~
@@ -224,7 +237,7 @@ in the built GET request (see the section on buildFilter)
 
     >>> tab.filter_button = 'filter'
     >>> tab.columnFromWidget(col_wi, ds)[3]
-    '?widget__Query sort-on=myindex&widget__Query sort-col=mycol&filter=go'
+    '?widget__q_sort-on=myindex&widget__q_sort-col=mycol&filter=go'
 
 
 .. Emacs
