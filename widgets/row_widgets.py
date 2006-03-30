@@ -245,6 +245,12 @@ class CPSTimeLeftWidget(CPSIntWidget):
     thing has all schemas features, like read_process_expr
     """
 
+    _properties = CPSIntWidget._properties + (
+    {'id': 'is_display_i18n', 'type': 'boolean', 'mode': 'w',
+     'label': 'Should the display of the value be translated?'},)
+
+    is_display_i18n = False
+
     meta_type = 'Time Left Widget'
 
     def prepare(self, datastructure, **kw):
@@ -258,13 +264,21 @@ class CPSTimeLeftWidget(CPSIntWidget):
             return base_rendered
 
         value = int(datastructure[self.getWidgetId()])
+        plus_sign = ''
         if value >= 0:
             css_class = 'late'
+            plus_sign = '+'
         elif value in [-1, -2]:
             css_class = 'shortly'
         else:
             css_class = 'inTime'
 
+        if self.is_display_i18n:
+            cpsmcat = getToolByName(self, 'translation_service')
+            xlated = cpsmcat('cpscourrier_timeleft:${plus_sign}${d}',
+                                    {'d': base_rendered,
+                                    'plus_sign': plus_sign})
+            base_rendered = xlated.encode('iso-8859-15')
         return '<span class=%s>%s</span>' % (css_class, base_rendered)
 
 

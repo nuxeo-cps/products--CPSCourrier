@@ -486,5 +486,12 @@ msgstr ""
 msgid "psm_cpscourrier_no_action_performed_for"
 msgstr ""
 
+#
+# Misc
+#
+
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
+msgstr ""
+
+msgid "cpscourrier_timeleft:${plus_sign}${d}"
 msgstr ""

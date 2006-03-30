@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-27 18:21default\n"
+"POT-Creation-Date: 2006-03-30 19:08default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -38,17 +38,17 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
+#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
 msgstr "Move down"
 
-#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
+#.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_update_stackelts"
 msgstr "Apply changes"
 
-#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
+#.   <input name="submit_add" type="submit" class="context" value="button_validate" />
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
 msgstr "Validate"
@@ -60,7 +60,7 @@ msgstr "Validate"
 msgid "cpscourrier_choose_insertion_level"
 msgstr "Choose insertion level"
 
-#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
+#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filter"
@@ -376,8 +376,8 @@ msgstr "Handle ${item_id}"
 
 msgid "help_workflow_handle"
 msgstr ""
-"By choosing to handle the incoming mail document you will be in charge of the "
-"future processing of the mail (answering, delegating, deleting, ... )."
+"By choosing to handle the incoming mail document you will be in charge of "
+"the future processing of the mail (answering, delegating, deleting, ... )."
 
 msgid "button_handle"
 msgstr "Handle"
@@ -629,17 +629,17 @@ msgstr "Move down"
 #
 msgid "help_workflow_move_down_delegatees"
 msgstr ""
-"You are about to let the users of the next level handle the mail document. If "
-"you are not part of them and if you are not a local manager you will "
-"no longuer be able to act on that document."
+"You are about to let the users of the next level handle the mail document. "
+"If you are not part of them and if you are not a local manager you will no "
+"longuer be able to act on that document."
 
 msgid "heading_batch_workflow_handle"
 msgstr "Handle a set of incoming mail documents"
 
 msgid "help_batch_workflow_handle"
 msgstr ""
-"By choosing to handle the selected mail documents you will be in charge of the"
-" future processing of the mails (answering, delegating, deleting, ... )."
+"By choosing to handle the selected mail documents you will be in charge of "
+"the future processing of the mails (answering, delegating, deleting, ... )."
 
 msgid "heading_batch_workflow_discard"
 msgstr "Discard a set of incoming mail documents"
@@ -728,3 +728,6 @@ msgstr "The following mail documents were left unchanged: "
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr "On ${y}-${m}-${d}, ${name} wrote:"
+
+msgid "cpscourrier_timeleft:${plus_sign}${d}"
+msgstr "D${plus_sign}${d}"
