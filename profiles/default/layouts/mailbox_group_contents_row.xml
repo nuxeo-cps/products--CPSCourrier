@@ -20,6 +20,14 @@ Layouts for rows in the content view of mailboxes
   <property name="label">cpsdoc_title_label_edit</property>
  </widget>
 
+ <widget name="Addresses" meta_type="Lines Widget">
+  <property name="label">cpscourrier_mailbox_addresses_label</property>
+  <property name="fields">
+   <element value="mailbox_addresses"/>
+  </property>
+  <property name="view_mode_separator">, </property>
+</widget>
+
  <widget name="Date" meta_type="Date Widget">
   <property name="label">cpscourrier_creation_date_label</property>
   <property name="fields">
@@ -34,6 +42,9 @@ Layouts for rows in the content view of mailboxes
   </row>
   <row>
    <cell name="Title"/>
+  </row>
+  <row>
+   <cell name="Addresses"/>
   </row>
   <row>
    <cell name="Date"/>
