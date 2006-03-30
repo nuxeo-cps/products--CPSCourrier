@@ -27,6 +27,7 @@ Layouts for rows in the content view of mailboxes
   <property name="label">cpscourrier_type_label</property>
   <property name="label_edit">cpscourrier_type_label</property>
   <property name="is_i18n">True</property>
+  <property name="sortable" type="string">portal_type</property>
  </widget>
 
 
@@ -82,6 +83,7 @@ Layouts for rows in the content view of mailboxes
   <property name="fields">
    <element value="review_state"/>
   </property>
+  <property name="sortable" type="string">review_state</property>
  </widget>
 
  <widget name="priority" meta_type="Select Widget">
