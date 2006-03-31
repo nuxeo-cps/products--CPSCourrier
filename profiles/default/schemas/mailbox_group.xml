@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- specific fields for mailbox groups -->
+<object name="mailbox_group" meta_type="CPS Schema">
+  <!-- no addresses of their own but they are displayed along with mailboxes -->
+  <field name="mailbox_addresses" meta_type="CPS String List Field">
+    <property name="default_expr">string:</property>
+    <property name="read_ignore_storage">True</property>
+    <property name="write_ignore_storage">True</property>
+  </field>
+</object>
+
