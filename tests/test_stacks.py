@@ -24,6 +24,12 @@ from layer import CourrierFunctionalTestCase
 
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.workflows.stacks import CourrierStack
+from Products.CPSCourrier.config import (
+    RELATION_GRAPH_ID,
+    IS_REPLY_TO,
+    HAS_REPLY,
+    STACK_ID,
+    )
 
 class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
     """ Quasifunctional tests for outgoing mails."""
@@ -119,11 +125,50 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member3', self.mbg)
         self.assert_(wf.isActionSupported(self.incoming, 'answer'))
 
+    def test_answer(self):
+        stack_mod = self.incoming.cpscourrier_stack_modify
+
+        # member1 handles the mail
+        self.flogin('member1', self.mb)
+        self.wftool.doActionFor(self.incoming, 'handle')
+
+        # member1 adds member2 below himself
+        kws = {'current_var_id': 'Pilots',
+               'directive': 'response',
+               'level': '-1',
+               'workflow_action_form': 'cpscourrier_roadmap',
+               'submit_add': 'Valider',
+               'push_ids': ['courrier_user:member2_ftest-mailbox']}
+        stack_mod(**kws)
+
+        # member1 creates the answer
+        self.wftool.doActionFor(self.incoming, 'answer')
+
+        # retrieve the answer
+        rtool = getToolByName(self.portal, 'portal_relations')
+        outgoing_docids= rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                               int(self.incoming.getDocid()),
+                                               HAS_REPLY)
+        self.assertEquals(len(outgoing_docids), 1)
+        docid = str(outgoing_docids[0])
+        pxtool = getToolByName(self.portal, 'portal_proxies')
+        proxies = pxtool.listProxies(docid=docid)
+        self.assertEquals(len(proxies), 1)
+        outgoing = self.portal.unrestrictedTraverse(proxies[0][0])
+
+        # stack has been copied and reversed
+        stack = self.wftool.getStackFor(outgoing, 'Pilots')
+        self.assertEquals(stack.getAllLevels(), [0, 1])
+        for_render = stack.getStackContentForRender(outgoing)
+        # was previously at level -1
+        self.assertEquals(for_render[1][1]['items'][0]['identite'],
+                          'member2_ftest-mailbox')
 
 def test_suite():
     return unittest.TestSuite((
         unittest.makeSuite(CourrierOutgoingStackFunctionalTestCase),
         unittest.makeSuite(CourrierIncomingStackFunctionalTestCase),
+        doctest.DocTestSuite('Products.CPSCourrier.workflows.stacks'),
         doctest.DocFileTest('doc/developer/stacks.txt',
                             package='Products.CPSCourrier',
                             optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS),

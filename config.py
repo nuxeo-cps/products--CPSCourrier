@@ -33,4 +33,7 @@ IS_REPLY_TO = 'is_reply_to'
 # Incoming Mail -> Outgoing Mail relation id (one to many)
 HAS_REPLY = 'has_reply'
 
+# Id of the workflow stack
+STACK_ID = 'Pilots'
+
 

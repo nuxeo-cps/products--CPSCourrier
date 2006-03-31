@@ -102,6 +102,7 @@
  <state state_id="work" title="Work">
   <exit-transition transition_id="roadmap_view"/>
   <exit-transition transition_id="checkout_draft"/>
+  <exit-transition transition_id="init_stack"/>
   <exit-transition transition_id="delete"/>
   <exit-transition transition_id="manage_delegatees"/>
   <exit-transition transition_id="move_down_delegatees"/>
@@ -312,6 +313,18 @@
    <guard-role>WorkspaceManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
+ </transition>
+
+ <!-- called at answer creation time -->
+ <transition transition_id="init_stack" title=""
+             new_state="" trigger="USER"
+             before_script="" after_script="">
+  <guard>
+   <guard-role>Owner</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>Manager</guard-role>
+  </guard>
+
   <transition-behavior behavior_id="workflow-reset"/>
   <workflow-reset-on-workflow-variable variable_id="Pilots"/>
  </transition>

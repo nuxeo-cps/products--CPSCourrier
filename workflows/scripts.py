@@ -31,6 +31,7 @@ from Products.CPSCourrier.config import (
     RELATION_GRAPH_ID,
     IS_REPLY_TO,
     HAS_REPLY,
+    STACK_ID,
 )
 
 logger = logging.getLogger('CPSCourrier.workflows.scripts')
@@ -72,6 +73,16 @@ def reply_to_incoming(incoming_proxy):
                          int(outgoing_proxy.getDocid()),
                          IS_REPLY_TO,
                          int(incoming_proxy.getDocid()))
+
+    # init outgoing's workflow stack
+    orig_stack = wftool.getStackFor(incoming_proxy, STACK_ID)
+    new_stack = orig_stack.getCopy()
+    new_level = new_stack.reverse()
+    wftool.doActionFor(outgoing_proxy, 'init_stack',
+                       new_stack=new_stack,
+                       current_wf_var_id=STACK_ID,
+                       current_level=new_level)
+
     return outgoing_proxy
 
 

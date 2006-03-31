@@ -193,6 +193,60 @@ class CourrierStack(HierarchicalStack):
 
         return self
 
+    def reverse(self):
+        """reverse the stack.
+
+        returns new level
+        I want to do it in-place so that we don't have to duplicate the all
+        bothering that stack.__deepcopy__ has to do.
+
+        This should work with any container implementing the dict API, so let's
+        make a stack class with such a container.
+        >>> class FakeStack(CourrierStack):
+        ...       def _getElementsContainer(self):
+        ...          return self.d
+
+        >>> st = FakeStack()
+        >>> st.d = {1:'a', -2:'b'}
+        >>> l = st.reverse()
+        >>> st.d == {-1:'a', 2:'b'}
+        True
+        >>> l
+        0
+
+        >>> st.d = {1:'a', -1:'b', 2: 'c'}
+        >>> l = st.setCurrentLevel(-1)
+        >>> l = st.reverse()
+        >>> st.d == {-1:'a', 1:'b', -2: 'c'}
+        True
+        >>> l
+        1
+
+        >>> st.d = {1:'a', -1:'b', 0: 'c'}
+        >>> l = st.reverse()
+        >>> st.d == {-1:'a', 1:'b', 0: 'c'}
+        True
+        """
+
+        container = self._getElementsContainer()
+
+        keys = container.keys()
+        done = set()
+        for level in keys:
+            if -level in keys:
+                if -level in done:
+                    continue
+                tmp = container[level]
+                container[level] = container[-level]
+                container[-level] = tmp
+                done.add(level)
+            else:
+                value = container.pop(level)
+                container[-level] = value
+
+        self._level = - self._level
+        return self._level
+
     def setCurrentLevel(self, level):
         """Set current level
 
