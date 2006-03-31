@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-30 19:08default\n"
+"POT-Creation-Date: 2006-03-31 11:28default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -328,6 +328,9 @@ msgstr "Default sender adress"
 
 msgid "cpscourrier_allowed_reply_time"
 msgstr "Default allowed reply time"
+
+msgid "cpscourrier_mailbox_addresses_row_label"
+msgstr "Addresses"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Best regards, "

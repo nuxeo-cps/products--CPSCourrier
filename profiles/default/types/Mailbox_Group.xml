@@ -22,6 +22,7 @@
   <element value="metadata"/>
   <element value="common"/>
   <element value="folder"/>
+  <element value="mailbox_group"/>
  </property>
  <!-- The layouts as clustered use to play well with document portlets -->
  <property name="layouts">

@@ -12,6 +12,10 @@
  <index name="deadline" meta_type="FieldIndex">
   <indexed_attr value="deadline"/>
  </index>
+ <index name="mailbox_addresses" meta_type="FieldIndex">
+  <indexed_attr value="mailbox_addresses"/>
+ </index>
+ <column value="mailbox_addresses"/>
  <column value="has_attachment"/>
  <column value="priority"/>
  <column value="from"/>

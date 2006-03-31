@@ -134,6 +134,9 @@ msgstr ""
 msgid "cpscourrier_allowed_reply_time"
 msgstr ""
 
+msgid "cpscourrier_mailbox_addresses_row_label"
+msgstr ""
+ 
 #
 # Vocabularies
 #
@@ -495,3 +498,4 @@ msgstr ""
 
 msgid "cpscourrier_timeleft:${plus_sign}${d}"
 msgstr ""
+

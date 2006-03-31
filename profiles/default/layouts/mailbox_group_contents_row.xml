@@ -21,7 +21,8 @@ Layouts for rows in the content view of mailboxes
  </widget>
 
  <widget name="Addresses" meta_type="Lines Widget">
-  <property name="label">cpscourrier_mailbox_addresses_label</property>
+  <property name="label">cpscourrier_mailbox_addresses_row_label</property>
+  <property name="is_i18n">True</property>
   <property name="fields">
    <element value="mailbox_addresses"/>
   </property>
