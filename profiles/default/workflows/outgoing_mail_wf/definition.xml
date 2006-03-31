@@ -102,6 +102,7 @@
  <state state_id="work" title="Work">
   <exit-transition transition_id="roadmap_view"/>
   <exit-transition transition_id="checkout_draft"/>
+  <exit-transition transition_id="reset"/>
   <exit-transition transition_id="init_stack"/>
   <exit-transition transition_id="delete"/>
   <exit-transition transition_id="manage_delegatees"/>
