@@ -23,6 +23,8 @@
 """CPSCourrier Stacks
 """
 
+import logging
+
 from Globals import InitializeClass
 from AccessControl import ClassSecurityInfo
 from AccessControl import getSecurityManager
@@ -32,6 +34,8 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.CPSWorkflow.basicstacks import HierarchicalStack
 from Products.CPSWorkflow.stackregistries import WorkflowStackRegistry
+
+logger = logging.getLogger('CPSCourrier.workflows.stacks')
 
 ###########################################################
 ###########################################################
@@ -90,8 +94,7 @@ class CourrierStack(HierarchicalStack):
             level = levels[i]
             if not isinstance(level, int) and not isinstance(level, str):
                 # wrong user input
-                LOG("CourrierStack.push", DEBUG,
-                    "wrong user input, level=%s"%(level,))
+                logger.debug("push:wrong user input, level=%s" % (level,))
                 continue
 
             try:
@@ -105,8 +108,8 @@ class CourrierStack(HierarchicalStack):
                     high_level = int(split[1])
                 except (IndexError, ValueError):
                     # Wrong user input
-                    LOG("CourrierStack.push", DEBUG,
-                        "wrong user input, level split=%s"%(level,))
+                    logger.debug("push: wrong user input, level split=%s" % (
+                        level,))
                 else:
                     self._push(push_id,
                                low_level=low_level,
@@ -373,7 +376,6 @@ class CourrierStack(HierarchicalStack):
         current_level = self.getCurrentLevel()
         # stack content is a dictionnary with levels as keys and lists of
         # delegatees as values
-        #LOG("getStackContentForRender", DEBUG, "items=%s"%(stack_content,))
 
         # XXX GR used to be call to a specific tool in edit mode to know
         # which element refers to the member currently managing the stack,
@@ -447,13 +449,13 @@ class CourrierStack(HierarchicalStack):
             levels = infos.keys()
             levels.sort()
 
-        #LOG("getStackContentForRender", DEBUG,
-        #    "res for mode %s=%s"%(mode, levels))
-
         levels.reverse()
 
-        #LOG("getStackContentForRender", DEBUG,
-        #    "res for mode %s=(%s, %s, %s)"%(mode, levels, infos.keys(), infos))
+        #logging.debug(
+        #       "getStackContentForRender: res for mode %s=(%s, %s, %s)" % (
+        #                   mode, levels, infos.keys(), infos()))
+
+
 
         return (levels, infos)
 
@@ -535,9 +537,8 @@ class CourrierStack(HierarchicalStack):
                 res.append(current)
                 index += 1
                 next = all_levels[index]
-                #LOG("getIntermediateLevels", DEBUG,
-                #    "current=%s, next=%s"%(current, next))
-                #print "current=%s, next=%s"%(current, next)
+                logger.debug("getInsertLevels: current=%s, next=%s" % (
+                    current, next))
                 if (current + 1 == next):
                     # add intermediate level
                     res.append(str(current) + '_' + str(next))
@@ -553,8 +554,8 @@ class CourrierStack(HierarchicalStack):
 
         #print "results"
         #print "all_levels=%s, res=%s"%(all_levels, res)
-        #LOG("getIntermediateLevels", DEBUG,
-        #    "all_levels=%s, res=%s"%(all_levels, res))
+        logger.debug("getInsertLevels: all_levels=%s, res=%s" % (
+            all_levels, res))
 
         return res
 
