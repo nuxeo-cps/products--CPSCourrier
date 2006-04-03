@@ -18,7 +18,7 @@
       <metal:main fill-slot="main"
         tal:define="global info
         python:proxy.getContentInfo(proxy, doc=doc, level=3);
-        workflow_action_script string:content_status_modify;">
+        workflow_action_script string:cpscourrier_status_modify;">
 
         <p>
           <metal:block use-macro="here/content_lib_status/macros/status" />
