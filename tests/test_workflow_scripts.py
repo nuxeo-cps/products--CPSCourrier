@@ -495,7 +495,9 @@ On %s, bar@foo.com wrote:
         self._set_state(in_mail, 'handled')
 
         class FakeStateChange:
-            pass
+            def __init__(self):
+                self.kwargs = {}
+
         sci = FakeStateChange()
         sci.object = in_mail
         sci.workflow = wftool.getWorkflowsFor(in_mail)[0]
