@@ -377,10 +377,6 @@ class CourrierStack(HierarchicalStack):
         # stack content is a dictionnary with levels as keys and lists of
         # delegatees as values
 
-        # XXX GR used to be call to a specific tool in edit mode to know
-        # which element refers to the member currently managing the stack,
-        # to forbid deletion. This will be done at the element level instead
-
         all_levels = self.getAllLevels()
 
         for level in all_levels:
@@ -537,7 +533,7 @@ class CourrierStack(HierarchicalStack):
                 res.append(current)
                 index += 1
                 next = all_levels[index]
-                logger.debug("getInsertLevels: current=%s, next=%s" % (
+                #logger.debug("getInsertLevels: current=%s, next=%s" % (
                     current, next))
                 if (current + 1 == next):
                     # add intermediate level
@@ -554,7 +550,7 @@ class CourrierStack(HierarchicalStack):
 
         #print "results"
         #print "all_levels=%s, res=%s"%(all_levels, res)
-        logger.debug("getInsertLevels: all_levels=%s, res=%s" % (
+        #logger.debug("getInsertLevels: all_levels=%s, res=%s" % (
             all_levels, res))
 
         return res
