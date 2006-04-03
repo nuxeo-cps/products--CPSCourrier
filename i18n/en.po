@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-03-31 11:28default\n"
+"POT-Creation-Date: 2006-04-03 14:04default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -370,6 +370,9 @@ msgstr "For advice"
 
 msgid "action_roadmap"
 msgstr "Roadmap"
+
+msgid "action_default_roadmap"
+msgstr "Default roadmap"
 
 #
 # Workflows

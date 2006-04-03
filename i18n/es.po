@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-03-31 11:28default\n"
+"POT-Creation-Date: 2006-04-03 14:04default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -342,7 +342,7 @@ msgstr "Default allowed reply time"
 
 #, fuzzy
 msgid "cpscourrier_mailbox_addresses_row_label"
-msgstr "Mailbox addresses"
+msgstr "Addresses"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Mis mejores deseos, "
@@ -384,6 +384,9 @@ msgid "cpscourrier_for_advice"
 msgstr "For advice"
 
 msgid "action_roadmap"
+msgstr ""
+
+msgid "action_default_roadmap"
 msgstr ""
 
 #
