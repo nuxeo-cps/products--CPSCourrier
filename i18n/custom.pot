@@ -187,6 +187,9 @@ msgstr ""
 msgid "action_default_roadmap"
 msgstr ""
 
+msgid "use_default_roadmap"
+msgstr ""
+
 msgid "heading_workflow_handle_of ${item_id}"
 msgstr ""
 

@@ -125,6 +125,45 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member3', self.mbg)
         self.assert_(wf.isActionSupported(self.incoming, 'answer'))
 
+    def test_default_roadmap(self):
+        stack_mod = self.mb.cpscourrier_stack_modify
+
+        # wsmanager of mb logs in and builds the default roadmap:
+        # -1:member1, 0:member3
+        self.flogin('wsmanager', self.mb)
+        kws = {'current_var_id': 'Pilots',
+               'directive': 'response',
+               'level': '0',
+               'workflow_action_form': 'cpscourrier_roadmap',
+               'submit_add': 'Valider',
+               'push_ids': ['courrier_user:member3_ftest-mailbox-group']}
+        stack_mod(**kws)
+        kws = {'current_var_id': 'Pilots',
+               'directive': 'response',
+               'level': '-1',
+               'workflow_action_form': 'cpscourrier_roadmap',
+               'submit_add': 'Valider',
+               'push_ids': ['courrier_user:member1_ftest-mailbox']}
+        stack_mod(**kws)
+
+        # member2 logs in and handles the incoming mail
+        self.flogin('member2', self.mb)
+        self.wftool.doActionFor(self.incoming, 'handle',
+                                use_parent_roadmap=True)
+
+        # assertions
+        stack = self.wftool.getStackFor(self.incoming, 'Pilots')
+
+        # stack has: -1:member1, 0:member3, 1:member2
+        self.assertEquals(stack.getAllLevels(), [-1,0,1])
+        for_render = stack.getStackContentForRender(self.incoming)
+        self.assertEquals(for_render[1][0]['items'][0]['identite'],
+                          'member3_ftest-mailbox-group')
+        self.assertEquals(for_render[1][1]['items'][0]['identite'],
+                          'member2_ftest-mailbox')
+        self.assertEquals(for_render[1][-1]['items'][0]['identite'],
+                          'member1_ftest-mailbox')
+
     def test_answer(self):
         stack_mod = self.incoming.cpscourrier_stack_modify
 

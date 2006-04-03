@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-04-03 14:04default\n"
+"POT-Creation-Date: 2006-04-03 15:39default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -28,6 +28,7 @@ msgstr ""
 #.           ${item_id (tal replace="here/title_or_id")}
 #.         </title>
 #: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+#: ../skins/cps_courrier/cpscourrier_handle_form.pt
 #: ../skins/cps_courrier/workflow_transition_form.pt
 msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
@@ -129,6 +130,13 @@ msgstr "Search users or groups to add to the roadmap"
 #, fuzzy
 msgid "cpscourrier_select_delegatees"
 msgstr "Please select the user(s) to add to the roadmap"
+
+#.   <span>Use default
+#.   	    roadmap</span>
+#: from ../skins/cps_courrier/cpscourrier_handle_form.pt
+#, fuzzy
+msgid "cpscourrier_use_default_roadmap"
+msgstr "Default roadmap"
 
 #.   <h2 condition="insert_mode">
 #.   	  Add delegatees: search results
@@ -387,6 +395,9 @@ msgid "action_roadmap"
 msgstr ""
 
 msgid "action_default_roadmap"
+msgstr ""
+
+msgid "use_default_roadmap"
 msgstr ""
 
 #

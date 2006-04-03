@@ -211,7 +211,9 @@ def flag_incoming_handled(outgoing_proxy):
 def init_stack_with_user(sci, wf_var_id, prefix='courrier_user', **kw):
     """Initialize the stack with an element representing current user.
 
-    other kwargs are passed as element metadata."""
+    other kwargs are passed as element metadata.
+    use_parent_roadmap is read from the transition kwargs.
+    """
 
     proxy = sci.object
     workflow = sci.workflow
@@ -219,20 +221,38 @@ def init_stack_with_user(sci, wf_var_id, prefix='courrier_user', **kw):
 
     data = dict((key,(value,)) for key, value in kw.items())
     user_id = getSecurityManager().getUser().getId()
+    push_args = {'push_ids':('%s:%s' % (prefix, user_id),),
+                'data_lists':data.keys()}
+    push_args.update(data)
+    transition_args = {'current_wf_var_id': wf_var_id}
 
-    # Can't use doActionFor because the security checks are inappropriate
-    # (cannot give the user's role a permanent access to the stack)
-    # canManageStack will be checked under the hood, with the special condition
-    # for empty stakcs.
-    tdef = workflow.transitions.get('manage_delegatees')
-    kwargs = {'current_wf_var_id': wf_var_id,
-              'levels': (0,),
-              'push_ids':('%s:%s' % (prefix, user_id),),
-              'data_lists':data.keys()}
-    kwargs.update(data)
+    # Can't use doActionFor with manage_delegatees or init_stack
+    # because the guard cannot be appropriate: we would have to give the
+    # handler permanent access to stack management.
+    # The stack guard will be checked anyway, so that it isn't a hole
+    # to call _executeTransition.
 
-
-    workflow._executeTransition(proxy, tdef, kwargs)
+    use_default = sci.kwargs.get('use_parent_roadmap', False)
+    if use_default:
+         # get copy of the default roadmap
+        mailbox = proxy.aq_inner.aq_parent
+        stack = wftool.getStackFor(mailbox, STACK_ID)
+        new_stack = stack.getCopy()
+        # push current user at upper level
+        all_levels = stack.getAllLevels()
+        user_level = all_levels[-1] + 1
+        new_stack.push(levels=(user_level,), **push_args)
+        # init with our copy
+        tdef = workflow.transitions.get('init_stack')
+        transition_args.update({'new_stack': new_stack,
+                                'current_level': user_level})
+        workflow._executeTransition(proxy, tdef, transition_args)
+    else:
+        # simply use manage_delegatees transition with kwargs for push
+        push_args['levels'] = (0,)
+        transition_args.update(push_args)
+        tdef = workflow.transitions.get('manage_delegatees')
+        workflow._executeTransition(proxy, tdef, transition_args)
 
 
 def compute_reply_body(reply_proxy, encoding='iso-8859-15'):

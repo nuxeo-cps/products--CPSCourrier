@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-04-03 14:04default\n"
+"POT-Creation-Date: 2006-04-03 15:39default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -28,6 +28,7 @@ msgstr ""
 #.           ${item_id (tal replace="here/title_or_id")}
 #.         </title>
 #: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+#: ../skins/cps_courrier/cpscourrier_handle_form.pt
 #: ../skins/cps_courrier/workflow_transition_form.pt
 msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
@@ -114,6 +115,12 @@ msgstr ""
 #.   	  </p>
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_select_delegatees"
+msgstr ""
+
+#.   <span>Use default
+#.   	    roadmap</span>
+#: from ../skins/cps_courrier/cpscourrier_handle_form.pt
+msgid "cpscourrier_use_default_roadmap"
 msgstr ""
 
 #.   <h2 condition="insert_mode">
@@ -369,6 +376,9 @@ msgid "action_roadmap"
 msgstr ""
 
 msgid "action_default_roadmap"
+msgstr ""
+
+msgid "use_default_roadmap"
 msgstr ""
 
 msgid "heading_workflow_handle_of ${item_id}"
