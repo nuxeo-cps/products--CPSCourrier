@@ -33,6 +33,9 @@ IS_REPLY_TO = 'is_reply_to'
 # Incoming Mail -> Outgoing Mail relation id (one to many)
 HAS_REPLY = 'has_reply'
 
+# Minimum probability to flag a mail with a subject
+BAYES_MIN_PROB = 0.7
+
 # Id of the workflow stack
 STACK_ID = 'Pilots'
 

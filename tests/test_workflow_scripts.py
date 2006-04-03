@@ -28,6 +28,8 @@ from Products.CPSCourrier.tests.layer import IntegrationTestCase
 
 # import things to test
 from Products.CPSCourrier.workflows.scripts import (
+    bayes_learn_subject,
+    bayes_guess_subject,
     reply_to_incoming,
     flag_incoming_answered,
     flag_incoming_handled,
@@ -38,10 +40,72 @@ from Products.CPSCourrier.config import (
 
 class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
+    def test_bayes_learn_and_guess(self):
+        doc1 = self.in_mail1.getEditableContent()
+        doc2 = self.in_mail2.getEditableContent()
+
+        doc1.edit(proxy=self.in_mail1, **{
+            'Subject': ['CPSCourrier', 'CPSBayes', 'mail', 'subject4'],
+            'Title': 'This is mail1',
+            'content': 'This is a mail talking about the CPSBayes features'
+                       'used in CPSCourrier',
+            'Language': 'en',
+        })
+        bayes_learn_subject(self.in_mail1)
+
+        doc2.edit(proxy=self.in_mail2, **{
+            'Title': 'This is mail2',
+            'content': 'This is a mail talking about things that are very '
+                       'very similar to mail1 such as the features of CPSBayes'
+                       ' that are leveraged by CPSCourrier',
+            'Language': 'en',
+        })
+        bayes_guess_subject(self.in_mail2)
+        subject2 = sorted(self.in_mail2.getContent()['Subject']())
+        expected = sorted(['CPSCourrier', 'CPSBayes', 'mail'])
+        self.assertEquals(subject2, expected)
+
+        # trying again in french instead of english
+        doc1.edit(proxy=self.in_mail1, **{
+            'Subject': ['jonquille', 'printemps'],
+            'Title': 'Ceci est un courrier en francais',
+            'content': 'Oui, c\'est le printemps !',
+            'Language': 'fr',
+        })
+        bayes_learn_subject(self.in_mail1)
+
+        doc2.edit(proxy=self.in_mail2, **{
+            'Subject': [],
+            'Title': 'Ceci est mail2',
+            'content': 'Ce message parle ce concepts proches de ceux de mail1 '
+                       'comme par exemple les fonctionnalités de CPSBayes '
+                       'qui sont mises à profit dans CPSCourrier',
+            'Language': 'fr',
+        })
+        bayes_guess_subject(self.in_mail2)
+        subject2 = self.in_mail2.getContent()['Subject']()
+        self.assertEquals(subject2, (),
+                          'english mail should not affect french classifier')
+
+# This is currently broken is probably due to a bug in BayesCore
+#
+#        # once again about the printemps this time
+#        doc2.edit(proxy=self.in_mail2, **{
+#            'Title': 'Ceci est un courrier en francais',
+#            'content': 'Oui, c\'est le printemps !',
+#            'Language': 'fr',
+#        })
+#        bayes_guess_subject(self.in_mail2)
+#        subject2 = sorted(self.in_mail2.getContent()['Subject']())
+#        expected = sorted(['jonquille', 'printemps'])
+#        self.assertEquals(subject2, expected)
+
     def test_reply_to_incoming(self):
         rtool = getToolByName(self.portal, 'portal_relations')
+        wtool = getToolByName(self.portal, 'portal_workflow')
 
         # add 'Re:' to the incoming mail title
+        wtool.doActionFor(self.in_mail1, 'handle')
         out_mail1 = reply_to_incoming(self.in_mail1)
         self.assertEquals(out_mail1.Title(), 'Re: Test mail 1')
         doc1 = out_mail1.getContent()
@@ -56,6 +120,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         self.assertEquals(expected, res)
 
         # do not add the 'Re:' prefix twice
+        wtool.doActionFor(self.in_mail2, 'handle')
         out_mail2 = reply_to_incoming(self.in_mail2)
         doc2 = out_mail2.getContent()
         self.assertEquals(out_mail2.Title(), 'Re: Test mail 1')
@@ -70,18 +135,20 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         self.assertEquals(expected, res)
 
     def test_flag_incoming_answered_1(self):
+        wtool = getToolByName(self.portal, 'portal_workflow')
         # the replying scenario with only one reply to in_mail1
         in_mail1 = self.in_mail1
+        wtool.doActionFor(in_mail1, 'handle')
         out_mail1 = reply_to_incoming(in_mail1)
 
         # initial states after creation
-        self.assertEquals(self._get_state(in_mail1), 'received')
+        self.assertEquals(self._get_state(in_mail1), 'handled')
         self.assertEquals(self._get_state(out_mail1), 'work')
 
         # if incoming mail and outgoing mail are not is states 'answering' and
         # 'sent' respectively, this should not change anything
         flag_incoming_answered(out_mail1)
-        self.assertEquals(self._get_state(in_mail1), 'received')
+        self.assertEquals(self._get_state(in_mail1), 'handled')
         self.assertEquals(self._get_state(out_mail1), 'work')
 
         # only incoming mail is in state 'answering' -> nothing either
@@ -107,18 +174,20 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
     def test_flag_incoming_answered_2(self):
         # the replying scenario with several (2) replies to an incoming mail
         in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail2 = reply_to_incoming(in_mail1)
 
         # initial states after creation
-        self.assertEquals(self._get_state(in_mail1), 'received')
+        self.assertEquals(self._get_state(in_mail1), 'handled')
         self.assertEquals(self._get_state(out_mail1), 'work')
         self.assertEquals(self._get_state(out_mail2), 'work')
 
         # if incoming mail and outgoing mails are not is states 'answering' and
         # 'sent' respectively, this should not change anything
         flag_incoming_answered(out_mail1)
-        self.assertEquals(self._get_state(in_mail1), 'received')
+        self.assertEquals(self._get_state(in_mail1), 'handled')
         self.assertEquals(self._get_state(out_mail1), 'work')
         self.assertEquals(self._get_state(out_mail2), 'work')
 
@@ -157,6 +226,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
     def test_flag_incoming_handled(self):
         in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail2 = reply_to_incoming(in_mail1)
         out_mail3 = reply_to_incoming(in_mail1)
@@ -197,6 +268,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
                 return args, kw
 
         in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
         in_mail1_doc_edit = in_mail1.getEditableContent()
         in_mail1_doc_edit.edit({
             'content': "Hi!\nPlease go to http://www.paipal.com and confirm"
@@ -249,6 +322,8 @@ On %s, bar@foo.com wrote:
 
     def test_event_delete_2(self):
         in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
         in_mail1_docid = int(in_mail1.getDocid())
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail1_docid = int(out_mail1.getDocid())
@@ -270,6 +345,8 @@ On %s, bar@foo.com wrote:
 
     def test_event_delete_3(self):
         in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
         in_mail1_docid = int(in_mail1.getDocid())
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail1_docid = int(out_mail1.getDocid())
@@ -301,6 +378,8 @@ On %s, bar@foo.com wrote:
     def test_event_delete_move(self):
         # smoke test: on proxy move, the relation graph should not change
         in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
         in_mail1_docid = int(in_mail1.getDocid())
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail1_docid = int(out_mail1.getDocid())
@@ -341,6 +420,8 @@ On %s, bar@foo.com wrote:
         # smoke test: on checkout draft move, the relation graph should not
         # change
         in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
         in_mail1_docid = int(in_mail1.getDocid())
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail1_docid = int(out_mail1.getDocid())
@@ -381,6 +462,8 @@ On %s, bar@foo.com wrote:
     def test_integration_delete_and_flag_handled(self):
         # test the integration of WF delete events and scripts
         in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail2 = reply_to_incoming(in_mail1)
         out_mail3 = reply_to_incoming(in_mail1)

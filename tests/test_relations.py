@@ -39,6 +39,9 @@ class RelationsIntegrationTestCase(IntegrationTestCase):
     def _build_some_thread(self):
         in_mail1 = self.in_mail1
         in_mail2 = self.in_mail2
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
+        wtool.doActionFor(in_mail2, 'handle')
         self.out_mail11 = reply_to_incoming(in_mail1)
         self.out_mail12 = reply_to_incoming(in_mail1)
         # manually add in_mail2 as reply of out_mail11 (this is the job of the

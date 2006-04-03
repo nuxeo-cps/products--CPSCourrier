@@ -33,6 +33,10 @@ ModuleSecurityInfo('urllib').declarePublic('quote')
 
 # Module security for workflow scripts
 ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
+    'bayes_learn_subject')
+ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
+    'bayes_guess_subject')
+ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
     'reply_to_incoming')
 ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
     'flag_incoming_answered')

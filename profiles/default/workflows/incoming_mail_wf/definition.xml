@@ -131,7 +131,7 @@
     <manager-stack-role name="Manager"/>
     <managed-roles>
       <managed-role name="Pilot"
-		    expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
+                    expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
     </managed-roles>
    <empty-stack-manage-guard>
     <guard-role>Owner</guard-role>
@@ -190,7 +190,7 @@
  </state>
  <transition transition_id="answer" title=""
              new_state="answering" trigger="USER"
-             before_script=""
+             before_script="bayes_learn_subject"
              after_script="reply_to_incoming">
   <action url="%(content_url)s/workflow_transition_form?transition=answer;do_redirect:int=0"
           category="workflow">action_answer</action>
@@ -210,7 +210,7 @@
  </transition>
  <transition transition_id="create" title=""
              new_state="received" trigger="USER"
-             before_script="" after_script="">
+             before_script="" after_script="bayes_guess_subject">
 
   <guard>
   </guard>
@@ -453,6 +453,12 @@
  <script script_id="init_stack_with_user"
          type="Script (Python)"
          filename="workflows/incoming_mail_wf/scripts/init_stack_with_user.py"/>
+ <script script_id="bayes_learn_subject"
+         type="Script (Python)"
+         filename="workflows/incoming_mail_wf/scripts/bayes_learn_subject.py"/>
+ <script script_id="bayes_guess_subject"
+         type="Script (Python)"
+         filename="workflows/incoming_mail_wf/scripts/bayes_guess_subject.py"/>
  <script script_id="reply_to_incoming"
          type="Script (Python)"
          filename="workflows/incoming_mail_wf/scripts/reply_to_incoming.py"/>

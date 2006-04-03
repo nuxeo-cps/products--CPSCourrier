@@ -6,4 +6,10 @@
   <dependency step="toolset"/>
   Import relation tool and relation graphs.
  </import-step>
+ <import-step id="bayes" version="20060302-01"
+              handler="Products.CPSBayes.exportimport.importCPSBayes"
+              title="CPSBayes">
+  <dependency step="toolset"/>
+  Import CPSBayes.
+ </import-step>
 </import-steps>

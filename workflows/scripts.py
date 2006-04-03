@@ -31,10 +31,31 @@ from Products.CPSCourrier.config import (
     RELATION_GRAPH_ID,
     IS_REPLY_TO,
     HAS_REPLY,
+    BAYES_MIN_PROB,
     STACK_ID,
 )
 
 logger = logging.getLogger('CPSCourrier.workflows.scripts')
+
+def bayes_guess_subject(proxy):
+    """Update the Subject field with the CPSBayesTool predictions """
+    btool = getToolByName(proxy, 'portal_bayes')
+    doc = proxy.getEditableContent()
+    data = "%s %s" % (doc['Title'](), doc['content'])
+    guessed = btool.guess(data, language=doc['Language']())
+    categories = [category for category, probability in guessed
+                           if probability >= BAYES_MIN_PROB]
+    doc.edit(proxy=proxy, Subject=categories)
+
+
+def bayes_learn_subject(proxy):
+    """Update the bayesian model according to the Subject field value"""
+    btool = getToolByName(proxy, 'portal_bayes')
+    doc = proxy.getContent()
+    data = "%s %s" % (doc['Title'](), doc['content'])
+    for cat in doc['Subject']():
+        btool.learn(data, cat, language=doc['Language']())
+
 
 def reply_to_incoming(incoming_proxy):
     """Create an outgoing mail document and update the relation tool

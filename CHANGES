@@ -9,6 +9,7 @@ New features:
   accross mailboxes)
 - added internal forwarding WF and UI
 - added batch transitions for handle and discard
+- started CPSBayes integration
 Bug fixes:
 ~~~~~~~~~~
 - relation graph is no longer deleted when checkin a draft back in

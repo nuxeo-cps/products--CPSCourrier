@@ -5,4 +5,9 @@
               title="Relation Tool">
   Export relation tool and relation graphs.
  </export-step>
+ <export-step id="bayes"
+              handler="Products.CPSBayes.exportimport.exportCPSBayes"
+              title="CPSBayes">
+  Export CPSBayes.
+ </export-step>
 </export-steps>
