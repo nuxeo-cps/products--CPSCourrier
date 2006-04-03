@@ -349,11 +349,9 @@ class CourrierStack(HierarchicalStack):
 
         Assume stack is a CourrierStack storing
 
-        context is passed to be able to get portal tools.
+        context is passed to be able to get portal tools. Insertion above
+        current level also depends on context's portal_type.
         mode can either be 'view', 'edit' or insert'.
-        wftype can be passed in kw is either 'incoming', 'outgoing' or None. If
-        not None, information about preselected level is added to the stack
-        rendering.
         """
 
         # help to define stack content to display
@@ -404,6 +402,9 @@ class CourrierStack(HierarchicalStack):
                 }
 
         # special levels for insert mode (e.g empty or intermediate levels)
+        # non mail content are typically mailboxes: slightly different behaviour
+        mail_content = context.portal_type in ['Incoming Mail', 'Outgoing Mail']
+        below_only = mail_content
         if mode == 'insert':
             # get new levels, e.g empty levels between non empty levels, and
             # intermediate levels, e.g intermediate levels between non empty
@@ -413,14 +414,15 @@ class CourrierStack(HierarchicalStack):
 
             levels = []
             for level in all_insert_levels:
-                # only levels below current level are insertable
                 insertable = 1
-                if isinstance(level, int):
-                    level_int = level
-                else:
-                    level_int = int(level[level.find('_')+1:])
-                if level_int > current_level:
-                    insertable = 0
+                if below_only:
+                    # only levels below current level are insertable
+                    if isinstance(level, int):
+                        level_int = level
+                    else:
+                        level_int = int(level[level.find('_')+1:])
+                    if level_int > current_level:
+                        insertable = 0
 
                 # set preselection
                 preselected = False
@@ -453,7 +455,7 @@ class CourrierStack(HierarchicalStack):
 
 
 
-        return (levels, infos)
+        return (levels, infos, mail_content)
 
 
     def getStackElementForRender(self, elt, level, mode, **kw):
@@ -534,7 +536,7 @@ class CourrierStack(HierarchicalStack):
                 index += 1
                 next = all_levels[index]
                 #logger.debug("getInsertLevels: current=%s, next=%s" % (
-                    current, next))
+                #    current, next))
                 if (current + 1 == next):
                     # add intermediate level
                     res.append(str(current) + '_' + str(next))
@@ -551,7 +553,7 @@ class CourrierStack(HierarchicalStack):
         #print "results"
         #print "all_levels=%s, res=%s"%(all_levels, res)
         #logger.debug("getInsertLevels: all_levels=%s, res=%s" % (
-            all_levels, res))
+        #    all_levels, res))
 
         return res
 

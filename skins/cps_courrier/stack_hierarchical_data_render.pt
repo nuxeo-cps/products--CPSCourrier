@@ -10,6 +10,7 @@
 		   stack_infos python:stack.getStackContentForRender(context, mode);
 		   levels python:stack_infos[0];
 		   infos python:stack_infos[1];
+		   mail_content python:stack_infos[2];
 		   vtool stack_context/portal_vocabularies;
 		   vocabulary python:getattr(vtool, 'mail_directives', {});
 		   utool nocall:here/portal_url;
@@ -17,7 +18,7 @@
 		   portal_url python:portal.absolute_url()+'/';
 		   cpsmcat nocall:portal/translation_service;">
   <tr>
-    <th>
+    <th tal:condition="mail_content">
       &nbsp;
     </th>
     <th tal:condition="python:mode != 'view'">
@@ -50,15 +51,16 @@
 			current_user content/current_user|nothing"
 	    tal:attributes="class level_class">
 
-	  <td tal:attributes="rowspan repeat/content/length"
-	      tal:condition="repeat/content/start">
-
-	    <tal:block condition="level_infos/current_level"
-		       replace="structure python:here.getImgTag(
-				'stack_current_level.png',
-				base_url=portal_url,
-				alt='Niveau courant')" />
-	  </td>
+	  <tal:cursor condition="mail_content">
+	    <td tal:condition="repeat/content/start"
+		tal:attributes="rowspan repeat/content/length">
+	      <tal:block condition="level_infos/current_level"
+			 replace="structure python:here.getImgTag(
+				  'stack_current_level.png',
+				  base_url=portal_url,
+				  alt='Niveau courant')" />
+	    </td>
+	  </tal:cursor>
 	  <td tal:condition="python:insert_mode and repeat['content'].start"
 	      tal:attributes = "rowspan repeat/content/length">
 	    <input type="radio" name="level" value="level"

@@ -146,15 +146,21 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
                'push_ids': ['courrier_user:member1_ftest-mailbox']}
         stack_mod(**kws)
 
+        # we can insert above current level (should go in unit tests)
+        stack = self.wftool.getStackFor(self.mb, 'Pilots')
+        insert_render = stack.getStackContentForRender(self.mb,
+                                                       mode='insert')
+        self.assertEquals(insert_render[0], [1, 0, '-1_0', -1, -2])
+
         # member2 logs in and handles the incoming mail
         self.flogin('member2', self.mb)
         self.wftool.doActionFor(self.incoming, 'handle',
                                 use_parent_roadmap=True)
 
-        # assertions
+        # assertions on mail's stack
         stack = self.wftool.getStackFor(self.incoming, 'Pilots')
 
-        # stack has: -1:member1, 0:member3, 1:member2
+        # stack holds: -1:member1, 0:member3, 1:member2
         self.assertEquals(stack.getAllLevels(), [-1,0,1])
         for_render = stack.getStackContentForRender(self.incoming)
         self.assertEquals(for_render[1][0]['items'][0]['identite'],
