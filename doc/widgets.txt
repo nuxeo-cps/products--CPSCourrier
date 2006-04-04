@@ -30,8 +30,10 @@ For technical reasons, the row layout must be actually organized as a
 column: one cell per line. It will be nevertheless rendered as a row.
 
 The row layout can be flexible, in which
-case it will attached to the portlet or document object on which
-the tabular widget depends.
+case it will be associated to the portlet or document object on which
+the tabular widget depends. Reminder: flexible layouts/schemas are
+associated to the CPSDocument instance (and actually stored within it
+in the current implementation).
 
 Actions
 -------
@@ -44,13 +46,13 @@ Empty listings
 --------------
 
 If there is no element to list, the widget will render as the string
-provided by propery 'empty_message'
+provided by property 'empty_message'
 
 
 The rendering method
 --------------------
 
-Like many widgets, the final rendering is delegated to a rendering method,
+Like with many widgets, the final rendering is delegated to a rendering method,
 most likely a page template. This method is passed the following
 arguments:
 
@@ -80,6 +82,8 @@ the rendered rows are sequentially dumped.
 
 Workflow Stack Widget
 =====================
+
+Not used anymore in CPSCourrier implementation.
 
 This is a simple widget to call stack renders from within a layout.
 The workflow variable holding the stack is declared in the property
