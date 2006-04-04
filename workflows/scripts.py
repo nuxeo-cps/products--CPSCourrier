@@ -57,7 +57,7 @@ def bayes_learn_subject(proxy):
         btool.learn(data, cat, language=doc['Language']())
 
 
-def reply_to_incoming(incoming_proxy):
+def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
     """Create an outgoing mail document and update the relation tool
 
     This function returns the outgoing proxy to be able to redirect to it if
@@ -65,6 +65,8 @@ def reply_to_incoming(incoming_proxy):
     """
     # create the reply
     wftool = getToolByName(incoming_proxy, 'portal_workflow')
+    utool = getToolByName(incoming_proxy, 'portal_url')
+    portal = utool.getPortalObject()
     incoming_doc = incoming_proxy.getContent()
     container = aq_parent(aq_inner(incoming_proxy))
     container_doc = container.getContent()
@@ -79,7 +81,21 @@ def reply_to_incoming(incoming_proxy):
         'Title': Title,
         'to': [incoming_doc['from']],
         'from': container_doc['from'],
+        'Subject': incoming_doc['Subject'](),
     }
+
+    if base_reply_rpath:
+        # initialise it's content with a template or a previously sent reply
+        template_proxy = portal.unrestrictedTraverse(base_reply_rpath)
+        template_doc = template_proxy.getEditableContent()
+        data.update({
+            'content': template_doc['content'],
+            'Subject': template_doc['Subject'](),
+        })
+
+        # increment the counter of the template reply
+        template_usage = template_doc['template_usage'] + 1
+        template_doc.edit(template_usage=template_usage, proxy=template_proxy)
 
     ptype = 'Outgoing Mail'
     fti = getToolByName(incoming_proxy, 'portal_types')[ptype]
@@ -104,6 +120,7 @@ def reply_to_incoming(incoming_proxy):
                        current_wf_var_id=STACK_ID,
                        current_level=new_level)
 
+    # return the outgoing_proxyt proxy to be able to redirect the user to it
     return outgoing_proxy
 
 

@@ -8,6 +8,6 @@
 ##title=
 ##
 from Products.CPSCourrier.workflows.scripts import reply_to_incoming
-outgoing_proxy = reply_to_incoming(state_change.object)
+outgoing_proxy = reply_to_incoming(state_change.object, **state_change.kwargs)
 url = "%s/cpsdocument_edit_form" % outgoing_proxy.absolute_url()
 context.REQUEST.RESPONSE.redirect(url)

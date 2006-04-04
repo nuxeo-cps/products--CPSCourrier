@@ -20,3 +20,4 @@ New internal features:
 - the thread portlet is now in slot content_well
 - added logics for the send_reply step
 - use standard stackelements, since they can hold data, now
+- the answer transition now supports using an existing reply as template

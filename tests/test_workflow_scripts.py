@@ -134,6 +134,49 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         expected = (int(self.in_mail2.getDocid()),)
         self.assertEquals(expected, res)
 
+    def test_reply_to_incoming_with_template(self):
+        rtool = getToolByName(self.portal, 'portal_relations')
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        utool = getToolByName(self.portal, 'portal_url')
+
+        # create a first reply and use it a template for a second reply
+        wtool.doActionFor(self.in_mail1, 'handle')
+        template = reply_to_incoming(self.in_mail1)
+        self.assertEquals(template.Title(), 'Re: Test mail 1')
+        doc1 = template.getEditableContent()
+        self.assertEquals(doc1['from'], 'test_mailbox@cpscourrier.com')
+        self.assertEquals(doc1['to'], ['bar@foo.com'])
+
+        # check that they are related
+        res = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                int(template.getDocid()),
+                                IS_REPLY_TO)
+        expected = (int(self.in_mail1.getDocid()),)
+        self.assertEquals(expected, res)
+
+        # edit the template reply
+        doc1.edit(content="This content is part of the template",
+                  Subject=("subject1", "subject2",), proxy=template)
+
+        # create a second reply using the first reply as template
+        template_rpath = utool.getRpath(template)
+        second_reply = reply_to_incoming(self.in_mail1,
+                                         base_reply_rpath=template_rpath)
+        self.assertEquals(second_reply.Title(), 'Re: Test mail 1')
+        doc2 = template.getContent()
+        self.assertEquals(doc2['from'], 'test_mailbox@cpscourrier.com')
+        self.assertEquals(doc2['to'], ['bar@foo.com'])
+        self.assertEquals(sorted(doc2['Subject']()),
+                          sorted(("subject1", "subject2",)))
+        self.assertEquals(doc2['content'], doc1['content'])
+
+        # check that they are related
+        res = rtool.getRelationsFor(RELATION_GRAPH_ID,
+                                int(second_reply.getDocid()),
+                                IS_REPLY_TO)
+        expected = (int(self.in_mail1.getDocid()),)
+        self.assertEquals(expected, res)
+
     def test_flag_incoming_answered_1(self):
         wtool = getToolByName(self.portal, 'portal_workflow')
         # the replying scenario with only one reply to in_mail1
