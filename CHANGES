@@ -10,6 +10,7 @@ New features:
 - added internal forwarding WF and UI
 - added batch transitions for handle and discard
 - started CPSBayes integration
+- better look for the thread portlet
 Bug fixes:
 ~~~~~~~~~~
 - relation graph is no longer deleted when checkin a draft back in

@@ -7,11 +7,7 @@
                      utool nocall:here/portal_url;
                      here_rpath python:utool.getRpath(context_obj);
                      base_url cpsskins_base_url|utool/getBaseUrl">
-    <thead>
-      <th i18n:translate="">cpscourrier_object_label</th>
-      <th i18n:translate="">cpscourrier_from_label</th>
-      <th i18n:translate="">cpscourrier_review_state_label</th>
-    </thead>
+    <caption i18n:translate="cpscourrier_thread_caption">Thread</caption>
     <tbody>
       <tal:block repeat="info infos">
         <tr tal:define="depth python:info[0];
@@ -31,7 +27,7 @@
                tal:content='title'>Title of the mail</a>
           </td>
           <td tal:content="from">Somebody</td>
-          <td>
+          <td style="width:8em">
             <span tal:content="state"
               tal:attributes="class state"
               i18n:translate="">State</span>
