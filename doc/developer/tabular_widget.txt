@@ -38,7 +38,7 @@ Fetching parameters
 ~~~~~~~~~~~~~~~~~~~
 
 The datastructure extraction is based on a prefix whose default value
-is 'q_'::
+is ``q_``::
 
     >>> datastructure1 = DataStructure(data = {
     ...              'q_one': 'value',
