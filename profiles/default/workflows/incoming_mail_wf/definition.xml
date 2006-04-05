@@ -267,7 +267,7 @@
  </transition>
  <transition transition_id="forward_email" title=""
              new_state="closed" trigger="USER"
-             before_script="" after_script="">
+             before_script="forward_mail" after_script="">
 
   <guard>
     <guard-role>Manager</guard-role>
@@ -472,6 +472,9 @@
  <script script_id="bayes_guess_subject"
          type="Script (Python)"
          filename="workflows/incoming_mail_wf/scripts/bayes_guess_subject.py"/>
+ <script script_id="forward_mail"
+         type="Script (Python)"
+         filename="workflows/incoming_mail_wf/scripts/forward_mail.py"/>
  <script script_id="reply_to_incoming"
          type="Script (Python)"
          filename="workflows/incoming_mail_wf/scripts/reply_to_incoming.py"/>
