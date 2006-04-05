@@ -299,9 +299,9 @@ def forward_mail(proxy, mto, comments=''):
 
     mailbox_doc = aq_parent(aq_inner(proxy)).getContent()
     mail_headers = {
-        'mto': mto,
+        'mto': [mto],
         'mfrom': mailbox_doc['from'],
-        'subject': proxy.Title(),
+        'subject': "Fwd: " + proxy.Title(),
     }
     return send_mail(proxy, body, mail_headers)
 

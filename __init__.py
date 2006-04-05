@@ -45,6 +45,8 @@ ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
 ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
     'init_stack_with_user')
 ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
+    'forward_mail')
+ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
     'send_reply')
 ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
     'compute_reply_body')

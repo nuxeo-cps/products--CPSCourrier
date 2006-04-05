@@ -33,6 +33,7 @@ from Products.CPSCourrier.workflows.scripts import (
     reply_to_incoming,
     flag_incoming_answered,
     flag_incoming_handled,
+    forward_mail,
     send_reply,
     init_stack_with_user)
 from Products.CPSCourrier.config import (
@@ -78,8 +79,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
             'Subject': [],
             'Title': 'Ceci est mail2',
             'content': 'Ce message parle ce concepts proches de ceux de mail1 '
-                       'comme par exemple les fonctionnalités de CPSBayes '
-                       'qui sont mises à profit dans CPSCourrier',
+                       'comme par exemple les fonctionnalit\xe9s de CPSBayes '
+                       'qui sont mises \xe0 profit dans CPSCourrier',
             'Language': 'fr',
         })
         bayes_guess_subject(self.in_mail2)
@@ -303,6 +304,45 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         self.assertEquals(linked_replies, (int(out_mail1.getDocid()),))
         flag_incoming_handled(out_mail1)
         self.assertEquals(self._get_state(in_mail1), 'handled')
+
+    def test_forward_mail(self):
+        # faking the MailHost
+        class FakeMailHost:
+            def send(self, *args, **kw):
+                return args, kw
+
+        # preparing in_mail1 to get forwarded
+        in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
+        in_mail1_doc_edit = in_mail1.getEditableContent()
+        in_mail1_doc_edit.edit(
+            {'content': "content line 1\ncontent line 2\n"}, proxy=in_mail1,)
+        in_mail1.MailHost = FakeMailHost()
+
+        # ensure the current mailbox has the required 'from' address
+        mb_doc = self.mb.getEditableContent()
+        mb_doc.edit({'from': 'mailbox@example.com'}, proxy=self.mb)
+
+        # forwaring in_mail1
+        result = forward_mail(in_mail1, 'toto@example.com',
+                              comments='Please handle that request')
+        expected = (("""\
+Please handle that request
+
+On %s, bar@foo.com wrote:
+> content line 1
+> content line 2
+> \
+""" % datetime.datetime.now().strftime('%Y-%m-%d'),),
+                    {'mfrom': 'mailbox@example.com',
+                     'mto': ['toto@example.com'],
+                     'subject': 'Fwd: Test mail 1'})
+
+        self.assertEquals(result, expected)
+        # for some reason there is a ZODB commit in beforeTearDown thus we need
+        # get rid of the unpickleable fake MailHost
+        del in_mail1.MailHost
 
     def test_send_reply(self):
         # faking the MailHost
