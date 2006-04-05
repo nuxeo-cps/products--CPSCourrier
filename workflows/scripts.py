@@ -307,23 +307,25 @@ def compute_reply_body(reply_proxy, encoding='iso-8859-15'):
 
 
 def send_reply(reply_proxy, encoding='iso-8859-15'):
-    """Send a reply
+    """Send a reply"""
+    reply_doc = reply_proxy.getContent()
+    body = compute_reply_body(reply_proxy, encoding)
+    mail_data = {
+        'mto': reply_doc['to'],
+        'mfrom': reply_doc['from'],
+        'subject': reply_doc['Title']()}
+    return send_mail(reply_doc, body, mail_data)
 
+def send_mail(context, body, mail_data):
+    """Send a mail
 
     This function does not do any error handling if the Mailhost fails to send
     it properly. This will be handled by the skins script along with the
     redirect if needed.
     """
-    reply_doc = reply_proxy.getContent()
-    body = compute_reply_body(reply_proxy, encoding)
-
-    # send the mail
-    mailhost = getToolByName(reply_proxy, 'MailHost')
-    kw = {'mto': reply_doc['to'],
-          'mfrom': reply_doc['from'],
-          'subject': reply_doc['Title']()}
+    mailhost = getToolByName(context, 'MailHost')
     try:
-        return mailhost.send(body, **kw)
+        return mailhost.send(body, **mail_data)
     # if anything went wrong: log the error for the admin and raise an exception
     # of type IOError or ValueError that will be catched by the skins script in
     # order to build a friendly user message
