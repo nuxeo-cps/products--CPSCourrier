@@ -282,6 +282,8 @@ Helpers
   and returns the corresponding triple (page, start, length), where start is
   in machine format::
 
+     >>> tab.manage_changeProperties(items_per_page=15,
+     ...                             batching_filter='b_page')
      >>> query = {'b_page': '2', 'q_title': 'stuff'}
      >>> tab.filtersToBatchParams(query)
      (2, 15, 15)
