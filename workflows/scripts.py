@@ -292,18 +292,14 @@ def _quote_mail(proxy, encoding='iso-8859-15'):
     body += '\n'.join('> %s' % line for line in lines)
     return body
 
-def forward_mail(proxy, mto, comments=''):
+def forward_mail(proxy, mto, comment=''):
     """Forward an incoming mail to another external mailbox"""
-    body = comments
-    body += _quote_mail(proxy)
-
     mailbox_doc = aq_parent(aq_inner(proxy)).getContent()
-    mail_headers = {
-        'mto': [mto],
-        'mfrom': mailbox_doc['from'],
-        'subject': "Fwd: " + proxy.Title(),
-    }
-    return send_mail(proxy, body, mail_headers)
+    mfrom = mailbox_doc['from']
+    subject = "Fwd: " + proxy.Title()
+    body = comment
+    body += _quote_mail(proxy)
+    return send_mail(proxy, mto, mfrom, subject, body)
 
 def compute_reply_body(reply_proxy):
     """Compute the body of a sent outgoing mail
@@ -329,15 +325,13 @@ def compute_reply_body(reply_proxy):
 def send_reply(reply_proxy):
     """Send a reply by SMTP"""
     reply_doc = reply_proxy.getContent()
+    mto = reply_doc['to']
+    mfrom = reply_doc['from']
+    subject = reply_doc['Title']()
     body = compute_reply_body(reply_proxy)
-    mail_headers = {
-        'mto': reply_doc['to'],
-        'mfrom': reply_doc['from'],
-        'subject': reply_doc['Title'](),
-    }
-    return send_mail(reply_doc, body, mail_headers)
+    return send_mail(reply_doc, mto, mfrom, subject, body)
 
-def send_mail(context, body, mail_headers):
+def send_mail(context, mto, mfrom, subject, body):
     """Send a mail
 
     This function does not do any error handling if the Mailhost fails to send
@@ -345,22 +339,24 @@ def send_mail(context, body, mail_headers):
     redirect if needed.
     """
     mailhost = getToolByName(context, 'MailHost')
+    if not isinstance(mto, str):
+        mto = ', '.join(mto)
+    mail_data = (mto, mfrom, subject, body)
+    log_str = 'to: %r, from: %r, subject: %r, body: %r' % mail_data
     try:
-        return mailhost.send(body, **mail_headers)
+        logger.debug("sending email %s" % log_str)
+        return mailhost.simple_send(mto, mfrom, subject, body)
     # if anything went wrong: log the error for the admin and raise an exception
     # of type IOError or ValueError that will be catched by the skins script in
     # order to build a friendly user message
     except (socket.error, smtplib.SMTPServerDisconnected), e:
-        logger.error("error sending email (%s, %r): %s" % (
-            body, mail_headers, e))
+        logger.error("error sending email %s" % log_str)
         raise IOError(e)
     except smtplib.SMTPRecipientsRefused, e:
-        logger.error("error sending email (%s, %r): %s" % (
-            body, mail_headers, e))
+        logger.error("error sending email %s" % log_str)
         raise ValueError('invalid_recipients_address')
     except smtplib.SMTPSenderRefused, e:
-        logger.error("error sending email (%s, %r): %s" % (
-            body, mail_headers, e))
+        logger.error("error sending email %s" % log_str)
         raise ValueError('invalid_sender_address')
 
 

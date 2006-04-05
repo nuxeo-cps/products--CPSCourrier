@@ -308,8 +308,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
     def test_forward_mail(self):
         # faking the MailHost
         class FakeMailHost:
-            def send(self, *args, **kw):
-                return args, kw
+            def simple_send(self, *args):
+                return args
 
         # preparing in_mail1 to get forwarded
         in_mail1 = self.in_mail1
@@ -324,20 +324,18 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         mb_doc = self.mb.getEditableContent()
         mb_doc.edit({'from': 'mailbox@example.com'}, proxy=self.mb)
 
-        # forwaring in_mail1
+        # forwdaring in_mail1
         result = forward_mail(in_mail1, 'toto@example.com',
-                              comments='Please handle that request')
-        expected = (("""\
+                              comment='Please handle that request')
+        expected = ('toto@example.com', 'mailbox@example.com',
+                    'Fwd: Test mail 1', """\
 Please handle that request
 
 On %s, bar@foo.com wrote:
 > content line 1
 > content line 2
 > \
-""" % datetime.datetime.now().strftime('%Y-%m-%d'),),
-                    {'mfrom': 'mailbox@example.com',
-                     'mto': ['toto@example.com'],
-                     'subject': 'Fwd: Test mail 1'})
+""" % datetime.datetime.now().strftime('%Y-%m-%d'))
 
         self.assertEquals(result, expected)
         # for some reason there is a ZODB commit in beforeTearDown thus we need
@@ -347,8 +345,8 @@ On %s, bar@foo.com wrote:
     def test_send_reply(self):
         # faking the MailHost
         class FakeMailHost:
-            def send(self, *args, **kw):
-                return args, kw
+            def simple_send(self, *args):
+                return args
 
         in_mail1 = self.in_mail1
         wtool = getToolByName(self.portal, 'portal_workflow')
@@ -366,17 +364,14 @@ On %s, bar@foo.com wrote:
                                 proxy=out_mail1)
 
         result = send_reply(out_mail1)
-        expected = (("""\
+        expected = ('foo@foo.com', 'bar@foo.com','Test mail 1', """\
 Please stop trying to fish us!
 
 On %s, bar@foo.com wrote:
 > Hi!
 > Please go to http://www.paipal.com and confirm your password!
 >   Regards,
->   The Paipal team""" % datetime.datetime.now().strftime('%Y-%m-%d'),),
-                    {'mfrom': 'bar@foo.com',
-                     'mto': ['foo@foo.com'],
-                     'subject': 'Test mail 1'})
+>   The Paipal team""" % datetime.datetime.now().strftime('%Y-%m-%d'))
 
         self.assertEquals(result, expected)
         # for some reason there is a ZODB commit in beforeTearDown thus we need
