@@ -49,6 +49,12 @@ class TestingTabularWidget(TabularWidget):
                              'content': 'content %d' % i,
                              'Description': ''}) for i in range(31)]
 
+    def updateFilters(self, datastructure, **filts):
+        """write filters to datastructure."""
+        prefix = self.filter_prefix
+        datastructure.update(dict((prefix + key, value)
+                                  for key, value in filts.items()))
+
     def listRowDataStructures(self, datastructure, row_layout, **kw):
         if datastructure.get('longbrains'):
             b_page, b_start, b_size = self.filtersToBatchParams(datastructure)

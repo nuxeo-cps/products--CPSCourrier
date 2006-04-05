@@ -29,6 +29,7 @@ from Products.CPSCourrier.tests.layer import CPSCourrierLayer
 from Products.CPSSchemas.tests.testWidgets import FakeDataStructure
 
 # things to be tested
+from Products.CMFCore.utils import getToolByName
 from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSSchemas.DataModel import DataModel
 from Products.CPSSchemas.Widget import widgetRegistry
@@ -36,6 +37,7 @@ from Products.CPSDocument.FlexibleTypeInformation import FlexibleTypeInformation
 
 from Products.CPSCourrier.tests.widgets import TestingTabularWidget
 from Products.CPSCourrier.widgets.folder_contents import FolderContentsWidget
+from Products.CPSCourrier.widgets.dirsearch import DirectoryTabularWidget
 
 
 class CustomMethods:
@@ -236,12 +238,52 @@ class IntegrationTestFolderContentsPortlet(IntegrationTestCase):
             'Title 2|<div class="ddefault">content 2</div>',
             ])
 
+#
+# Sub classes
+#
+
+class TestingDirectoryTabularWidget(CustomMethods,
+                                    DirectoryTabularWidget,
+                                    TestingTabularWidget):
+    pass
+
+
+class IntegrationTestDirectoryTabularWidget(IntegrationTestCase):
+
+    def afterAfterSetUp(self):
+        self.widget = TestingDirectoryTabularWidget('the widget').__of__(self.portal)
+        self.widget.manage_changeProperties(row_layout='test_dir_row',
+                                            render_method='',
+                                            directory='members')
+        dtool = getToolByName(self.portal, 'portal_directories')
+        self.dir = dtool.members
+        for i in range(3):
+            self.dir._createEntry({'id': 'test_dirtab%d' % i, 'sn': 'dirtab'})
+
+    def beforeTearDown(self):
+        for i in range(3):
+            self.dir._deleteEntry('test_dirtab%d' % i)
+        IntegrationTestCase.beforeTearDown(self)
+
+    def test_widget_registration(self):
+        self.assert_(
+            'Directory Tabular Widget' in widgetRegistry.listWidgetMetaTypes())
+
+    def test_dirsearch(self):
+        self.widget.updateFilters(self.ds, id='test_dirtab')
+        rendered = self.widget.render('view', self.ds)
+        self.assertEquals(rendered.split('\n'), [
+            'test_dirtab0|dirtab',
+            'test_dirtab1|dirtab',
+            'test_dirtab2|dirtab',
+            ])
 
 
 def test_suite():
     return unittest.TestSuite((
         unittest.makeSuite(IntegrationTestTabularPortlet),
         unittest.makeSuite(IntegrationTestFolderContentsPortlet),
+        unittest.makeSuite(IntegrationTestDirectoryTabularWidget),
         doctest.DocTestSuite('Products.CPSCourrier.widgets.tabular'),
         doctest.DocFileTest('doc/developer/tabular_widget.txt',
                             package='Products.CPSCourrier'),
