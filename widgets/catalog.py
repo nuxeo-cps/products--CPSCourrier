@@ -20,7 +20,8 @@
 
 """ Catalog Tabular Widgets. """
 
-from zLOG import LOG, DEBUG
+import logging
+
 from Globals import InitializeClass
 from AccessControl import Unauthorized
 
@@ -36,6 +37,8 @@ from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSCourrier.braindatamodel import BrainDataModel
 from Products.CPSCourrier.widgets.tabular import TabularWidget
 
+
+logger = logging.getLogger('CPSCourrier.widgets.catalog')
 
 class CatalogTabularWidget(TabularWidget):
     """ A tabular portlet widget that performs a catalog query.
@@ -100,21 +103,61 @@ class CatalogTabularWidget(TabularWidget):
 
         filters[self.fulltext_key] = query_or
 
+    def _doBatchedQuery(self, catalog, b_start, b_size, query):
+        """ Return batched results, total number of results.
+
+        query will be changed to what was actually sent to the catalog."""
+
+        brains = catalog(**query)
+        return brains[b_start:b_start+b_size], len(brains)
+
     def listRowDataStructures(self, datastructure, layout, **kw):
-        """Return datastructures filled with search results meta-data
+        """Return datastructures holding search results meta-data & batch info.
         """
 
         catalog = getToolByName(self, 'portal_catalog')
 
         query = self.buildFilters(datastructure)
         self.filtersToQuery(query)
+        (b_page, b_start, b_size) = self.filtersToBatchParams(query)
 
-        brains = catalog(**query)
+        brains, nb_results = self._doBatchedQuery(catalog,
+                                                  b_start, b_size, query)
+
+        nb_pages = self.getNbPages(nb_results)
+        logger.debug("CatalogTabularWidget: "
+                     "%d results, %d pages (current %d)" % (nb_results,
+                                                            nb_pages,
+                                                            b_page))
+
         dms = (BrainDataModel(brain) for brain in brains)
         datastructures = (DataStructure(datamodel=dm) for dm in dms)
-        return [self.prepareRowDataStructure(layout, ds)
-                for ds in datastructures]
+        return ([self.prepareRowDataStructure(layout, ds)
+                 for ds in datastructures], b_page, nb_pages)
 
 InitializeClass(CatalogTabularWidget)
 
 widgetRegistry.register(CatalogTabularWidget)
+
+
+class LuceneTabularWidget(CatalogTabularWidget):
+
+    meta_type = 'Lucene Tabular Widget'
+
+    def _doBatchedQuery(self, catalog, b_start, b_size, query):
+        """ Return batched results, total number of results.
+
+        query will be changed to what wbas actually sent to the catalog."""
+
+        query['b_start'] = b_start
+        query['b_size'] = b_start
+
+        brains = catalog(**query)
+        if brains:
+            return brains, brains[0].out_of
+        else:
+            return [], 0
+
+InitializeClass(LuceneTabularWidget)
+
+widgetRegistry.register(LuceneTabularWidget)

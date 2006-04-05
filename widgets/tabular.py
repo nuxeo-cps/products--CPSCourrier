@@ -124,6 +124,12 @@ class TabularWidget(CPSPortletWidget):
          'label': 'Name of the button used to trigger filtering', },
         {'id': 'filter_prefix', 'type': 'string', 'mode': 'w',
          'label': 'Prefix of filtering widgets', },
+        {'id': 'items_per_page', 'type': 'int', 'mode': 'w',
+         'label': 'Maximum number of results per page', },
+        {'id': 'batching_filter', 'type': 'string', 'mode': 'w',
+         'label': 'Filter used for batching', },
+        {'id': 'batching_gadget_pages', 'type': 'int', 'mode': 'w',
+         'label': 'Number of context pages displayed in batching gadget'},
         )
 
     row_layout = ''
@@ -135,6 +141,9 @@ class TabularWidget(CPSPortletWidget):
     cookie_id = ''
     filter_button = ''
     filter_prefix = 'q_'
+    items_per_page = 10
+    batching_filter = 'b_page'
+    batching_gadget_pages = 3
 
     def prepareRowDataStructure(self, layout, datastructure):
         """Have layout prepare row datastructure and return it."""
@@ -211,6 +220,25 @@ class TabularWidget(CPSPortletWidget):
 
         logger.debug(' filters: %s' %filters)
         return filters
+
+    def filtersToBatchParams(self, filts):
+        """Extract batching parameters from given dict."""
+
+        b_page = filts.pop(self.batching_filter, None)
+        if b_page is None:
+            b_page = 1
+        else:
+            b_page = int(b_page)
+        b_start = (b_page-1)*self.items_per_page
+        return (b_page, b_start, self.items_per_page)
+
+    def getNbPages(self, nb_items):
+        """Return number of pages that nb_items items make."""
+
+        if nb_items:
+            return (nb_items-1)/self.items_per_page+1
+        else:
+            return 0
 
     def columnFromWidget(self, widget, datastructure,
                          sort_wid='q_sort'):
@@ -297,18 +325,19 @@ class TabularWidget(CPSPortletWidget):
         Rows layout structures are computed once and for all, on the first
         object to display.
         """
+
+        # global preparations
         calling_obj = self.getCallingObject(datastructure)
         if calling_obj is None: # happens on creation
             return ''
 
-        # GR tired of this duplication. refactor after tests are written
+        # GR tired of this duplication. refactor
         proxy = datastructure.get('context_obj') # if from portlet
         if proxy is None:
             proxy = datastructure.getDataModel().getProxy()
 
         # lookup of row layout
         lid = self.row_layout
-
         ## LayoutsTool.renderLayout sets proxy=context, but context might be
         #  anything, e.g, if we are rendering global search results
         if ICPSDocument.providedBy(calling_obj):
@@ -320,13 +349,25 @@ class TabularWidget(CPSPortletWidget):
             row_layout = getattr(ltool, lid)
             fti = FlexibleTypeInformation('transient')
 
+        # fetch prepared row datastructures
+        row_dss, current_page, nb_pages = self.listRowDataStructures(
+            datastructure, row_layout, **kw)
+
+        # early return for empty results
+        if not nb_pages:
+            msg = self.empty_message
+            cpsmcat = getToolByName(self, 'translation_service')
+            if self.is_empty_message_i18n:
+                msg = cpsmcat(msg)
+            if isinstance(msg, unicode):
+                msg = msg.encode('iso-8859-15')
+            return msg
         layout_structures = None
 
-        meth_context = self.getMethodContext(datastructure)
-
+        # rows rendering
         rendered_rows = []
-        for row_ds in self.listRowDataStructures(datastructure,
-                                                 row_layout, **kw):
+        meth_context = self.getMethodContext(datastructure)
+        for row_ds in row_dss:
             # compute layout_structures if needed
             if layout_structures is None:
                 row_dm = row_ds.getDataModel()
@@ -349,15 +390,6 @@ class TabularWidget(CPSPortletWidget):
             raise RuntimeError("Unknown Render Method %s for widget type %s"
                                % (self.render_method, self.getId()))
 
-        if layout_structures is None: # listing is empty
-            msg = self.empty_message
-            cpsmcat = getToolByName(self, 'translation_service')
-            if self.is_empty_message_i18n:
-                msg = cpsmcat(msg)
-            if isinstance(msg, unicode):
-                msg = msg.encode('iso-8859-15')
-            return msg
-
         layout_structure = layout_structures[0] # only one layout
         columns = self.extractColumns(datastructure, layout_structure)
         actions = self.getActions(datastructure)
@@ -376,9 +408,20 @@ class TabularWidget(CPSPortletWidget):
                 view_name = self.REQUEST['URLPATH0'].split('/')[-1]
                 here_url += '/' + view_name
 
+        if nb_pages == 1:
+            batching_info = None
+        else:
+            first_page = max(current_page - self.batching_gadget_pages, 1)
+            last_page = min(current_page + self.batching_gadget_pages + 1,
+                            nb_pages)
+            batching_wid = self.filter_prefix+self.batching_filter
+            batching_info = {'current_page': current_page,
+                             'nb_pages': nb_pages,
+                             'linked_pages' : range(first_page, last_page),
+                             'form_key' : widgetname(batching_wid),}
         return meth(mode=mode, columns=columns,
                     rows=rendered_rows, actions=actions,
-                    here_url=here_url)
+                    here_url=here_url, batching_info=batching_info)
 
 
 widgetRegistry.register(TabularWidget)

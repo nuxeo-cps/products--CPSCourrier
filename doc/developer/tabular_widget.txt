@@ -125,9 +125,14 @@ Global column information
 -------------------------
 
 At the end of the rendering process, the tabular passes column
-information to the rendering method. It is extracted from the widgets that
-are present in the row layout and the datastructure. So let's make a
-basic widget::
+information to the rendering method. This information is global in the
+sense that it doesn't depend on the displayed items.
+It is extracted from the widgets that appear in the row layout and the
+datastructure the tabular works on. What the rendering method gets is
+the result of application of the ``columnFromWidget`` method to the
+list of row widgets.
+
+So let's make a basic widget::
 
     >>> from Products.CPSSchemas.Widget import CPSWidget
     >>> col_wi = CPSWidget('mycol')
@@ -238,6 +243,108 @@ in the built GET request (see the section on buildFilter)
     >>> tab.filter_button = 'filter'
     >>> tab.columnFromWidget(col_wi, ds)[3]
     '?widget__q_sort-on=myindex&widget__q_sort-col=mycol&filter=go'
+
+Batching
+--------
+
+  Although most of the batching has to be implemented by concrete
+  subclasses, some properties and helpers are defined at the baseclass
+  level, to enforce easy switch between concrete implementations.
+
+Properties
+~~~~~~~~~~
+
+  :items_per_page: the max number of items to be displayed on a single page.
+  :batching_filter_widget: the filter widget used to grab the
+  requested page number from query/cookie/datastructure::
+
+  >>> tab.manage_changeProperties(items_per_page=15,
+  ...                             batching_filter='b_page')
+  >>> tab.items_per_page
+  15
+  >>> tab.batching_filter
+  'b_page'
+
+  The convention is that this number is human-formatteed
+
+  Like the sort info, this has to be put in datastructure by a Filter
+  Widget, along with other filter/query params. Hence, the widget must follow
+  the same prefix conventions, and we will have the same cookie persistence
+  as other params.
+
+Subclasses
+~~~~~~~~~~
+
+  The ``listRowDataStructures`` method, implemented by subclasses,
+  must return a tuple.
+
+       #. The list or iterator of prepared datastructure for rows
+       #. The current page number
+       #. The total number of pages
+
+Helpers
+~~~~~~~
+
+  The ``filtersToBatchParams`` takes a dict, as produced by ``buildFilters()``
+  and returns the corresponding triple (page, start, length), where start is
+  in machine format::
+
+  >>> query = {'b_page': '2', 'q_title': 'stuff'}
+  >>> tab.filtersToBatchParams(query)
+  (2, 15, 15)
+
+  The batching param has been removed from query::
+
+  >>> query
+  {'q_title': 'stuff'}
+  >>> query = {'b_page': 1}
+  >>> tab.filtersToBatchParams(query)
+  (1, 0, 15)
+
+  If the batching param is missing, we treat it as first page::
+
+  >>> query = {'other-stuff': 'abc'}
+  >>> tab.filtersToBatchParams(query)
+  (1, 0, 15)
+
+  Now let's see the effect of changing properties::
+
+  >>> tab.manage_changeProperties(batching_filter='the_b')
+  >>> query = {'the_b': '5', 'q_title': 'stuff'}
+  >>> tab.filtersToBatchParams(query)
+  (5, 60, 15)
+  >>> tab.manage_changeProperties(items_per_page=17)
+  >>> query = {'the_b': '3', 'q_title': 'stuff'}
+  >>> tab.filtersToBatchParams(query)
+  (3, 34, 17)
+
+  ``getNbPages()`` is meant to factorize the computation of the number
+  of pages::
+
+  >>> tab.manage_changeProperties(items_per_page=20)
+  >>> tab.getNbPages(20)
+  1
+  >>> tab.getNbPages(13)
+  1
+  >>> tab.getNbPages(21)
+  2
+  >>> tab.getNbPages(1)
+  1
+  >>> tab.getNbPages(200)
+  10
+  >>> tab.getNbPages(0)
+  0
+
+Batching gadget
+~~~~~~~~~~~~~~~
+  As in the case of column information, predigested info is passed to
+  the final render method, to be used to render the batching gadget.
+
+  :last_page:
+  :current_page:
+  :linked_pages:
+
+
 
 
 .. Emacs

@@ -105,6 +105,10 @@ Layout that presents catalog search results
     <property name="cookie_id">cpscourrier</property>
 </widget>
 
+<widget name="q_b_page" meta_type="Int Filter Widget">
+   <property name="hidden_layout_modes">view search_results</property>
+</widget>
+
  <widget name="q_path" meta_type="Select Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_search_path_label</property>

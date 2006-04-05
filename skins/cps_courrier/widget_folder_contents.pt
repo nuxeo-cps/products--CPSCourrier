@@ -17,6 +17,8 @@
 </script>
 
 <tal:block define="actions options/actions;
+		   batching_info options/batching_info|nothing;
+		   here_url options/here_url;
 		   make_form python: actions and options['mode'] != 'search'
 		   ">
   <tal:block condition="make_form">
@@ -39,7 +41,6 @@
 			   is_sort python:col[1];
 			   sort_token python:col[2];
 			   toggle_get python:col[3];
-			   here_url options/here_url;
 			   ">
 
 	  <input type="checkbox" name="select_all"
@@ -75,5 +76,18 @@
   <tal:block condition="make_form">
     <tal:block content="structure string:</form>"/>
   </tal:block>
+
+  <tal:batching_gadget condition="batching_info">
+    <tal:block define="form_key batching_info/form_key;
+		       pages batching_info/linked_pages;
+		       current_page batching_info/current_page;
+		       ">
+      Current page: <span tal:content="current_page"/><br/>
+      <a href="" tal:repeat="page pages"
+	 tal:attributes="href string:${here_url}?${form_key}=${page};
+			 style python:page == current_page and 'strong' or 'small'"
+	 tal:content="page"/>
+    </tal:block>
+  </tal:batching_gadget>
 
 </tal:block>

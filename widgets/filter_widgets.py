@@ -28,7 +28,8 @@ from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSSchemas.BasicWidgets import (CPSSelectWidget,
-                                              CPSMultiSelectWidget)
+                                              CPSMultiSelectWidget,
+                                              CPSIntWidget)
 from Products.CPSSkins.cpsskins_utils import unserializeFromCookie
 
 from Products.CPSSchemas.tests.testWidgets import (FakePortal,
@@ -326,3 +327,20 @@ class CPSPathWidget(CPSWidget):
 InitializeClass(CPSPathWidget)
 
 widgetRegistry.register(CPSPathWidget)
+
+
+class CPSIntFilterWidget(RequestCookiesMixin, CPSIntWidget):
+    """ Puts its argument in datastructure. """
+
+    meta_type = 'Int Filter Widget'
+    _properties = CPSIntWidget._properties + RequestCookiesMixin._properties
+
+    def prepare(self, datastructure, **kw):
+        if self.fields: # Use-case for no fields: batching
+            CPSIntWidget.prepare(self, datastructure, **kw)
+        RequestCookiesMixin.prepare(self, datastructure, **kw)
+
+InitializeClass(CPSIntFilterWidget)
+
+widgetRegistry.register(CPSIntFilterWidget)
+

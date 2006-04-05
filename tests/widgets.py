@@ -33,7 +33,10 @@ from Products.CPSCourrier.widgets.tabular import TabularWidget
 
 
 class TestingTabularWidget(TabularWidget):
-    """ A subclass to implement listRowDataStructures. """
+    """ A subclass to implement listRowDataStructures.
+
+    tests have to put parameters directly in datastructure.
+    """
 
     meta_type = 'Testing Tabular Widget'
 
@@ -42,10 +45,25 @@ class TestingTabularWidget(TabularWidget):
         {'Title' : 'Title 2', 'content' : 'Rejected', 'Description' : '',},
         ]]
 
+    longbrains = [FakeBrain({'Title': 'Title %d' % i,
+                             'content': 'content %d' % i,
+                             'Description': ''}) for i in range(31)]
+
     def listRowDataStructures(self, datastructure, row_layout, **kw):
+        if datastructure.get('longbrains'):
+            b_page, b_start, b_size = self.filtersToBatchParams(datastructure)
+            nb_results = len(self.longbrains)
+            brains = self.longbrains[b_start:b_start+b_size]
+        else: # we don't test batching
+            b_page = b_start = 1
+            b_size = 10000
+            nb_results = len(self.brains)
+            brains = self.brains
+
         gendss = (DataStructure(datamodel=BrainDataModel(brain))
-                              for brain in self.brains)
-        return (self.prepareRowDataStructure(row_layout, ds) for ds in gendss)
+                              for brain in brains)
+        return ((self.prepareRowDataStructure(row_layout, ds) for ds in gendss),
+                b_page, self.getNbPages(nb_results))
 
 InitializeClass(TestingTabularWidget)
 widgetRegistry.register(TestingTabularWidget)

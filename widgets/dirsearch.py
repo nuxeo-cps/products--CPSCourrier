@@ -83,11 +83,15 @@ class DirectoryTabularWidget(TabularWidget):
         cpsdir = dtool[self.directory]
 
         entries = cpsdir.searchEntries(**query) # checks security
+        nb_pages = self.getNbPages(len(entries))
+        (b_page, b_start, b_size) = self.filtersToBatchParams(query)
+        entries = entries[b_start:bstart+b_size]
 
         dms = (cpsdir._getDataModel(id) for id in entries)
-        return (self.prepareRowDataStructure(layout,
-                                             DataStructure(datamodel=dm))
-                for dm in dms)
+        return ((self.prepareRowDataStructure(layout,
+                                              DataStructure(datamodel=dm))
+                 for dm in dms),
+                b_page, nb_pages)
 
 InitializeClass(DirectoryTabularWidget)
 

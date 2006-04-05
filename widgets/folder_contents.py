@@ -130,7 +130,14 @@ class FolderContentsWidget(TabularWidget):
             raise Unauthorized("You are not allowed to list this folder")
         meta_types = datastructure.get('meta_types') or self.listed_meta_types
 
-        iterprox = (folder[p_id] for p_id in folder.objectIds(meta_types))
+        filters = self.buildFilters(datastructure)
+        (b_page, b_start, b_size) = self.filtersToBatchParams(filters)
+
+        o_ids = folder.objectIds(meta_types)
+        nb_pages = self.getNbPages(len(o_ids))
+
+        batched_ids = o_ids[b_start:b_start+b_size]
+        iterprox = (folder[p_id] for p_id in batched_ids)
         iterprox = (proxy for proxy in iterprox
                     if _checkPermission(View, proxy))
         iterdocs = ( (proxy.getContent(), proxy) for proxy in iterprox)
@@ -140,8 +147,8 @@ class FolderContentsWidget(TabularWidget):
         iterds = (self.prepareRowDataStructure(layout,
                                                DataStructure(datamodel=dm))
                   for dm in iterdms)
-        filters = self.buildFilters(datastructure)
-        return (ds for ds in iterds if self.passFilters(ds, filters))
+        return ((ds for ds in iterds if self.passFilters(ds, filters)),
+                b_page, nb_pages)
 
 InitializeClass(FolderContentsWidget)
 
