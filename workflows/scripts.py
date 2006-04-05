@@ -325,7 +325,7 @@ def send_reply(reply_proxy, encoding='iso-8859-15'):
     try:
         return mailhost.send(body, **kw)
     # if anything went wrong: log the error for the admin and raise an exception
-    # of type IOError or ValueError that will be cactched by the skins script in
+    # of type IOError or ValueError that will be catched by the skins script in
     # order to build a friendly user message
     except (socket.error, smtplib.SMTPServerDisconnected), e:
         logger.error("error sending email (%s, %r): %s" % (body, kw, e))
