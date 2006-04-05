@@ -28,7 +28,6 @@ from Globals import InitializeClass
 from Products.CMFCore.utils import getToolByName
 
 from Products.CPSSchemas.Widget import CPSWidget
-from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.Widget import widgetname
 from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSDocument.FlexibleTypeInformation import FlexibleTypeInformation
@@ -422,6 +421,3 @@ class TabularWidget(CPSPortletWidget):
         return meth(mode=mode, columns=columns,
                     rows=rendered_rows, actions=actions,
                     here_url=here_url, batching_info=batching_info)
-
-
-widgetRegistry.register(TabularWidget)
