@@ -338,14 +338,38 @@ Helpers
 Batching gadget
 ~~~~~~~~~~~~~~~
   As in the case of column information, predigested info is passed to
-  the final render method, to be used to render the batching gadget.
+  the final render method, to be used to render the batching
+  gadget. This takes the form of a dict, named 'batching_info'. In
+  case there's only one page of results, this dict is set to ``None``.
 
-  :last_page:
-  :current_page:
-  :linked_pages:
+  :nb_pages: total number of pages (int)
+  :current_page: requested page (int)
+  :linked_pages: pages to propose a link to (int list)
+  :form_key: the key to use in a linke to request a specific page
 
+  The ``linked_pages`` list is deduced from current_page and the
+  property ``batching_gadget_pages``. The batching info is computed by
+  ``getBatchingInfo()``::
 
+  >>> tab.manage_changeProperties(batching_filter='b_page',
+  ...                             batching_gadget_pages=3)
+  >>> nb_pages = 12
+  >>> current_page = 7
+  >>> pretty_print(tab.getBatchingInfo(current_page, nb_pages))
+  {'current_page': 7,
+   'form_key': 'widget__q_b_page',
+   'linked_pages': [4, 5, 6, 7, 8, 9, 10],
+   'nb_pages': 12}
 
+  Here's the behaviour with respect to boundaries::
+
+  >>> nb_pages = 8
+  >>> current_page = 7
+  >>> tab.getBatchingInfo(current_page, nb_pages)['linked_pages']
+  [4, 5, 6, 7, 8]
+  >>> current_page = 2
+  >>> tab.getBatchingInfo(current_page, nb_pages)['linked_pages']
+  [1, 2, 3, 4, 5]
 
 .. Emacs
 .. Local Variables:

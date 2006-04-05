@@ -318,6 +318,19 @@ class TabularWidget(CPSPortletWidget):
         else:
             return CPSWidget.getModeFromLayoutMode(self, layout_mode, datamodel)
 
+    def getBatchingInfo(self, current_page, nb_pages):
+        """ Return a dict to be used by render_method."""
+
+        first_page = max(current_page - self.batching_gadget_pages, 1)
+        last_page = min(current_page + self.batching_gadget_pages,
+                        nb_pages)
+        batching_wid = self.filter_prefix+self.batching_filter
+        return {'current_page': current_page,
+                'nb_pages': nb_pages,
+                'linked_pages' : range(first_page, last_page+1),
+                'form_key' : widgetname(batching_wid),}
+
+
     def render(self, mode, datastructure, **kw):
         """ Render datastructure according to mode.
 
@@ -410,14 +423,7 @@ class TabularWidget(CPSPortletWidget):
         if nb_pages == 1:
             batching_info = None
         else:
-            first_page = max(current_page - self.batching_gadget_pages, 1)
-            last_page = min(current_page + self.batching_gadget_pages + 1,
-                            nb_pages)
-            batching_wid = self.filter_prefix+self.batching_filter
-            batching_info = {'current_page': current_page,
-                             'nb_pages': nb_pages,
-                             'linked_pages' : range(first_page, last_page),
-                             'form_key' : widgetname(batching_wid),}
+            batching_info = self.getBatchingInfo(current_page, nb_pages)
         return meth(mode=mode, columns=columns,
                     rows=rendered_rows, actions=actions,
                     here_url=here_url, batching_info=batching_info)
