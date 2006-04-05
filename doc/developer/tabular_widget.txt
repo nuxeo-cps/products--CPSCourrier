@@ -254,18 +254,11 @@ Batching
 Properties
 ~~~~~~~~~~
 
-  :items_per_page: the max number of items to be displayed on a single page.
-  :batching_filter_widget: the filter widget used to grab the
-  requested page number from query/cookie/datastructure::
+  :items_per_page:         max number of items to be displayed on a single page
+  :batching_filter_widget: filter widget used to grab the page number
+                           from query/cookie/datamodel
 
-  >>> tab.manage_changeProperties(items_per_page=15,
-  ...                             batching_filter='b_page')
-  >>> tab.items_per_page
-  15
-  >>> tab.batching_filter
-  'b_page'
-
-  The convention is that this number is human-formatteed
+  The page number is formatted for humans: 1 means the first page.
 
   Like the sort info, this has to be put in datastructure by a Filter
   Widget, along with other filter/query params. Hence, the widget must follow
@@ -289,51 +282,51 @@ Helpers
   and returns the corresponding triple (page, start, length), where start is
   in machine format::
 
-  >>> query = {'b_page': '2', 'q_title': 'stuff'}
-  >>> tab.filtersToBatchParams(query)
-  (2, 15, 15)
+     >>> query = {'b_page': '2', 'q_title': 'stuff'}
+     >>> tab.filtersToBatchParams(query)
+     (2, 15, 15)
 
   The batching param has been removed from query::
 
-  >>> query
-  {'q_title': 'stuff'}
-  >>> query = {'b_page': 1}
-  >>> tab.filtersToBatchParams(query)
-  (1, 0, 15)
+     >>> query
+     {'q_title': 'stuff'}
+     >>> query = {'b_page': 1}
+     >>> tab.filtersToBatchParams(query)
+     (1, 0, 15)
 
   If the batching param is missing, we treat it as first page::
 
-  >>> query = {'other-stuff': 'abc'}
-  >>> tab.filtersToBatchParams(query)
-  (1, 0, 15)
+     >>> query = {'other-stuff': 'abc'}
+     >>> tab.filtersToBatchParams(query)
+     (1, 0, 15)
 
   Now let's see the effect of changing properties::
 
-  >>> tab.manage_changeProperties(batching_filter='the_b')
-  >>> query = {'the_b': '5', 'q_title': 'stuff'}
-  >>> tab.filtersToBatchParams(query)
-  (5, 60, 15)
-  >>> tab.manage_changeProperties(items_per_page=17)
-  >>> query = {'the_b': '3', 'q_title': 'stuff'}
-  >>> tab.filtersToBatchParams(query)
-  (3, 34, 17)
+      >>> tab.manage_changeProperties(batching_filter='the_b')
+      >>> query = {'the_b': '5', 'q_title': 'stuff'}
+      >>> tab.filtersToBatchParams(query)
+      (5, 60, 15)
+      >>> tab.manage_changeProperties(items_per_page=17)
+      >>> query = {'the_b': '3', 'q_title': 'stuff'}
+      >>> tab.filtersToBatchParams(query)
+      (3, 34, 17)
 
   ``getNbPages()`` is meant to factorize the computation of the number
   of pages::
 
-  >>> tab.manage_changeProperties(items_per_page=20)
-  >>> tab.getNbPages(20)
-  1
-  >>> tab.getNbPages(13)
-  1
-  >>> tab.getNbPages(21)
-  2
-  >>> tab.getNbPages(1)
-  1
-  >>> tab.getNbPages(200)
-  10
-  >>> tab.getNbPages(0)
-  0
+     >>> tab.manage_changeProperties(items_per_page=20)
+     >>> tab.getNbPages(20)
+     1
+     >>> tab.getNbPages(13)
+     1
+     >>> tab.getNbPages(21)
+     2
+     >>> tab.getNbPages(1)
+     1
+     >>> tab.getNbPages(200)
+     10
+     >>> tab.getNbPages(0)
+     0
 
 Batching gadget
 ~~~~~~~~~~~~~~~
@@ -345,31 +338,31 @@ Batching gadget
   :nb_pages: total number of pages (int)
   :current_page: requested page (int)
   :linked_pages: pages to propose a link to (int list)
-  :form_key: the key to use in a linke to request a specific page
+  :form_key: the key to use in a link to request a specific page
 
   The ``linked_pages`` list is deduced from current_page and the
   property ``batching_gadget_pages``. The batching info is computed by
   ``getBatchingInfo()``::
 
-  >>> tab.manage_changeProperties(batching_filter='b_page',
-  ...                             batching_gadget_pages=3)
-  >>> nb_pages = 12
-  >>> current_page = 7
-  >>> pretty_print(tab.getBatchingInfo(current_page, nb_pages))
-  {'current_page': 7,
-   'form_key': 'widget__q_b_page',
-   'linked_pages': [4, 5, 6, 7, 8, 9, 10],
-   'nb_pages': 12}
+     >>> tab.manage_changeProperties(batching_filter='b_page',
+     ...                             batching_gadget_pages=3)
+     >>> nb_pages = 12
+     >>> current_page = 7
+     >>> pretty_print(tab.getBatchingInfo(current_page, nb_pages))
+     {'current_page': 7,
+      'form_key': 'widget__q_b_page',
+      'linked_pages': [4, 5, 6, 7, 8, 9, 10],
+      'nb_pages': 12}
 
   Here's the behaviour with respect to boundaries::
 
-  >>> nb_pages = 8
-  >>> current_page = 7
-  >>> tab.getBatchingInfo(current_page, nb_pages)['linked_pages']
-  [4, 5, 6, 7, 8]
-  >>> current_page = 2
-  >>> tab.getBatchingInfo(current_page, nb_pages)['linked_pages']
-  [1, 2, 3, 4, 5]
+     >>> nb_pages = 8
+     >>> current_page = 7
+     >>> tab.getBatchingInfo(current_page, nb_pages)['linked_pages']
+     [4, 5, 6, 7, 8]
+     >>> current_page = 2
+     >>> tab.getBatchingInfo(current_page, nb_pages)['linked_pages']
+     [1, 2, 3, 4, 5]
 
 .. Emacs
 .. Local Variables:
