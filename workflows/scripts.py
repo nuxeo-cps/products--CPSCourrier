@@ -271,14 +271,46 @@ def init_stack_with_user(sci, wf_var_id, prefix='courrier_user', **kw):
         tdef = workflow.transitions.get('manage_delegatees')
         workflow._executeTransition(proxy, tdef, transition_args)
 
+#
+# Mail sending operation
+#
 
-def compute_reply_body(reply_proxy, encoding='iso-8859-15'):
+def _quote_mail(proxy, encoding='iso-8859-15'):
+    """Helper function to quote a mail in a reply or a forward"""
+    mcat = getToolByName(proxy, 'translation_service')
+    doc = proxy.getContent()
+    orig_date_str = doc['CreationDate']()
+    year, month, day = orig_date_str.split()[0].split('-')
+    quote_header = mcat('On ${y}-${m}-${d}, ${name} wrote:',
+                        {'y': year,
+                         'm': month,
+                         'd': day,
+                         'name': doc['from'],
+                        }).encode(encoding)
+    body = '\n\n%s\n' % quote_header
+    lines =  doc['content'].split('\n')
+    body += '\n'.join('> %s' % line for line in lines)
+    return body
+
+def forward_mail(proxy, mto, comments=''):
+    """Forward an incoming mail to another external mailbox"""
+    body = comments
+    body += _quote_mail(proxy)
+
+    mailbox_doc = aq_parent(aq_inner(proxy)).getContent()
+    mail_headers = {
+        'mto': mto,
+        'mfrom': mailbox_doc['from'],
+        'subject': proxy.Title(),
+    }
+    return send_mail(proxy, body, mail_headers)
+
+def compute_reply_body(reply_proxy):
     """Compute the body of a sent outgoing mail
 
     The content of the reply is build from the proxy quoting the original mail
     thanks to the relation graph.
     """
-    mcat = getToolByName(reply_proxy, 'translation_service')
     reply_doc = reply_proxy.getContent()
     body = reply_doc['content']
 
@@ -291,32 +323,21 @@ def compute_reply_body(reply_proxy, encoding='iso-8859-15'):
         ptool = getToolByName(reply_proxy, 'portal_proxies')
         for info in ptool.getProxyInfosFromDocid(str(incoming_docid)):
             if info['visible']:
-                incoming_doc = info['object'].getContent()
-                orig_date_str = incoming_doc['CreationDate']()
-                year, month, day = orig_date_str.split()[0].split('-')
-                quote_header = mcat('On ${y}-${m}-${d}, ${name} wrote:',
-                                    {'y': year,
-                                     'm': month,
-                                     'd': day,
-                                     'name': incoming_doc['from']}
-                                   ).encode(encoding)
-                body += '\n\n%s\n' % quote_header
-                lines =  incoming_doc['content'].split('\n')
-                body += '\n'.join('> %s' % line for line in lines)
+                body += _quote_mail(info['object'])
     return body
 
-
-def send_reply(reply_proxy, encoding='iso-8859-15'):
-    """Send a reply"""
+def send_reply(reply_proxy):
+    """Send a reply by SMTP"""
     reply_doc = reply_proxy.getContent()
-    body = compute_reply_body(reply_proxy, encoding)
-    mail_data = {
+    body = compute_reply_body(reply_proxy)
+    mail_headers = {
         'mto': reply_doc['to'],
         'mfrom': reply_doc['from'],
-        'subject': reply_doc['Title']()}
-    return send_mail(reply_doc, body, mail_data)
+        'subject': reply_doc['Title'](),
+    }
+    return send_mail(reply_doc, body, mail_headers)
 
-def send_mail(context, body, mail_data):
+def send_mail(context, body, mail_headers):
     """Send a mail
 
     This function does not do any error handling if the Mailhost fails to send
@@ -325,18 +346,21 @@ def send_mail(context, body, mail_data):
     """
     mailhost = getToolByName(context, 'MailHost')
     try:
-        return mailhost.send(body, **mail_data)
+        return mailhost.send(body, **mail_headers)
     # if anything went wrong: log the error for the admin and raise an exception
     # of type IOError or ValueError that will be catched by the skins script in
     # order to build a friendly user message
     except (socket.error, smtplib.SMTPServerDisconnected), e:
-        logger.error("error sending email (%s, %r): %s" % (body, kw, e))
+        logger.error("error sending email (%s, %r): %s" % (
+            body, mail_headers, e))
         raise IOError(e)
     except smtplib.SMTPRecipientsRefused, e:
-        logger.error("error sending email (%s, %r): %s" % (body, kw, e))
+        logger.error("error sending email (%s, %r): %s" % (
+            body, mail_headers, e))
         raise ValueError('invalid_recipients_address')
     except smtplib.SMTPSenderRefused, e:
-        logger.error("error sending email (%s, %r): %s" % (body, kw, e))
+        logger.error("error sending email (%s, %r): %s" % (
+            body, mail_headers, e))
         raise ValueError('invalid_sender_address')
 
 
