@@ -193,7 +193,7 @@ class CPSMultiSelectFilterWidget(RequestCookiesMixin, CPSMultiSelectWidget):
         RequestCookiesMixin.prepare(self, ds, **kw)
 
     def validate(self, ds, **kw):
-        if not CPSSelectWidget.validate(self, ds, **kw):
+        if not CPSMultiSelectWidget.validate(self, ds, **kw):
             return False
 
         self.expireCookie()
