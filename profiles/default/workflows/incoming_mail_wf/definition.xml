@@ -91,6 +91,7 @@
   <exit-transition transition_id="init_stack"/>
   <exit-transition transition_id="roadmap_view"/>
   <exit-transition transition_id="answer"/>
+  <exit-transition transition_id="reuse_answer"/>
   <exit-transition transition_id="discard"/>
   <exit-transition transition_id="forward"/>
   <exit-transition transition_id="forward_email"/>
