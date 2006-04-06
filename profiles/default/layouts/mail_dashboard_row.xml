@@ -6,8 +6,9 @@ Layouts for rows in the content view of mailboxes
 <object name="mailbox_contents_row" meta_type="CPS Layout">
  <property name="layout_view_method">layout_row_view</property>
 
- <widget name="Checkbox" meta_type="List Checkbox Widget">
-  <property name="list_name">rpaths</property>
+ <widget name="Checkbox" meta_type="Row Boolean Widget">
+  <property name="input_name">rpaths</property>
+  <property name="input_type">checkbox</property>
   <property name="fields">
    <element value="rpath"/>
   </property>

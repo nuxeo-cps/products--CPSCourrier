@@ -99,22 +99,36 @@ This now the result of rendering::
 Optionally, one can provide only two fields. The widget will then fetch the
 proxy or object associated to the datamodel and uses its url as target.
 
-List Checkbox Widget
---------------------
+Row Boolean Widget
+------------------
 
-This widget renders a checkbox input element, either from the specified field
-or from the underlying object's id if there's no associated field.
-This latter behaviour is meant for a folder contents type tabular widgets.
+This widget renders a checkbox or radio input element.
 
-The goal is to post a bunch of object identifiers or references as a list.
+The goal is to post a bunch of object identifiers or references as a
+list in the checkbox case, or to post the info
+associated to the selected row in the radio button case.
 
-Let's instanciate one, with its id::
+Properties
+~~~~~~~~~~
+
+    :input_type: 'radio' or 'checkbox'
+    :input_name: name attribute of the input element
+    :fields: will give the value attribute (optional, see below)
+    :format_string: a Python format string to customize the value attribute
+    		    (optional)
+Examples
+~~~~~~~~
+
+Let's instanciate one, with its id, and initiate some properties::
 
     >>> from Products.CPSCourrier.widgets.row_widgets \
-    ... import CPSListCheckboxWidget
-    >>> widget = CPSListCheckboxWidget('the_check')
+    ... import CPSRowBooleanWidget
+    >>> widget = CPSRowBooleanWidget('the_check')
     >>> widget.getId()
     'the_check'
+    >>> widget.manage_changeProperties(input_type='checkbox', fields=('token',),
+    ...                                input_name='toks')
+
 
 Let's make datamodel and datastructure::
 
@@ -122,10 +136,8 @@ Let's make datamodel and datastructure::
     >>> ds = DataStructure(datamodel=dm)
     >>> dm['token'] = '54FF54'
 
-Now let's tell the widget on which field it works and prepare the
-datastructure::
+Preparation is straightforward if a field has been specified::
 
-    >>> widget.fields = ('token',)
     >>> widget.prepare(ds)
     >>> ds
     {'the_check': '54FF54'}
@@ -134,7 +146,6 @@ datastructure::
 The rendering is being controlled by the list_name and format_string
 properties. We'll try first without the latter::
 
-    >>> widget.list_name="toks"
     >>> widget.render('view', ds)
     '<input type="checkbox" name="toks:list" value="54FF54" />'
 
@@ -143,6 +154,34 @@ Now the format string is a python format string::
     >>> widget.format_string = 'tok-%s-formatted'
     >>> widget.render('view', ds)
     '<input type="checkbox" name="toks:list" value="tok-54FF54-formatted" />'
+
+Let's see what the radio input type does::
+
+    >>> widget.input_type = 'radio'
+    >>> widget.render('view', ds)
+    '<input type="radio" name="toks" value="tok-54FF54-formatted" />'
+
+Without field
+~~~~~~~~~~~~~
+
+Finally, if the fields property is empty, the widget tries to use the
+id of the proxy associated to the datamodel. We'll have to make new datamodel
+and datastructure to demonstrate this::
+
+    >>> from Products.CPSSchemas.DataModel import DataModel
+    >>> class FakeProxy:
+    ...      def getId(self):
+    ...          return 'the_id'
+    >>> dm = DataModel(None, proxy=FakeProxy())
+    >>> ds = DataStructure(datamodel=dm)
+
+Now let's go::
+    >>> widget.fields = ()
+    >>> widget.prepare(ds)
+    >>> ds
+    {'the_check': 'the_id'}
+
+
 
 
 .. Emacs

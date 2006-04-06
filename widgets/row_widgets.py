@@ -181,21 +181,26 @@ InitializeClass(CPSQualifiedLinkWidget)
 
 widgetRegistry.register(CPSQualifiedLinkWidget)
 
-class CPSListCheckboxWidget(CPSWidget):
-    """widget making a checkbox, to be posted as a list.
+class CPSRowBooleanWidget(CPSWidget):
+    """widget making a checkbox or radio in a row.
 
+    In case of checkbox, this allows to post a list.
+    In radio, this allows to select from the rows.
+    
     This will probably be extended in the future to take complex visibility
     conditions into account.
 
-    If no field provided, try and find the associated proxy's id for the list
+    If no field provided, try and find the associated proxy's id for the value
     otherwise pick the field value.
     """
 
-    meta_type = 'List Checkbox Widget'
+    meta_type = 'Row Boolean Widget'
 
     _properties = CPSWidget._properties + (
-        {'id': 'list_name', 'type' : 'string', 'mode' : 'w',
+        {'id': 'input_name', 'type' : 'string', 'mode' : 'w',
          'label': 'Name of the posted list', 'is_required': 1},
+        {'id': 'input_type', 'type' : 'string', 'mode' : 'w',
+         'label': 'Type of input element to render', 'is_required': 1},
         {'id': 'format_string', 'type' : 'string', 'mode' : 'w',
          'label': 'A python format string to apply to the field'},
         )
@@ -224,19 +229,24 @@ class CPSListCheckboxWidget(CPSWidget):
     def render(self, mode, datastructure, **kw):
         """Render in mode from datastructure."""
 
-        name = '%s:list' % self.list_name
+        if self.input_type == 'checkbox':
+            name = '%s:list' % self.input_name
+        elif self.input_type == 'radio':
+            name = self.input_name
+        else:
+            raise ValueError("Unknown input type: %s" % self.input_type)
         value = datastructure[self.getWidgetId()]
         if self.format_string:
             value = self.format_string % value
         # XXX: content_lib_info_detail_tab uses  item.getContextUrl(utool=utool)
         # investigate ?
-        return renderHtmlTag('input', type='checkbox',
+        return renderHtmlTag('input', type=self.input_type,
                              name=name, value=value)
 
 
-InitializeClass(CPSListCheckboxWidget)
+InitializeClass(CPSRowBooleanWidget)
 
-widgetRegistry.register(CPSListCheckboxWidget)
+widgetRegistry.register(CPSRowBooleanWidget)
 
 class CPSTimeLeftWidget(CPSIntWidget):
     """ A widget that displays time left.

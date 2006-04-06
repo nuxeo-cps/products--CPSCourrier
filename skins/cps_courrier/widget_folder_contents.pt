@@ -45,7 +45,7 @@
 
 	  <input type="checkbox" name="select_all"
 		 onclick="toggleSelectAll(this);"
-		 tal:condition="python:widget.meta_type == 'List Checkbox Widget'" />
+		 tal:condition="python:widget.meta_type == 'Row Boolean Widget' and widget.input_type == 'checkbox'" />
 
 	  <a href="" tal:omit-tag="not:widget/sortable|nothing"
 	     tal:attributes="href string:${here_url}${toggle_get}">

@@ -25,3 +25,5 @@ New internal features:
 - added logics for the send_reply step
 - use standard stackelements, since they can hold data, now
 - the answer transition now supports using an existing reply as template
+- renamed List Checkbox Widget into Row Boolean Widget, and added radio button
+  capability.
