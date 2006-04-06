@@ -308,7 +308,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
     def test_forward_mail(self):
         # faking the MailHost
         class FakeMailHost:
-            def simple_send(self, *args):
+            def _send(self, *args):
                 return args
 
         # preparing in_mail1 to get forwarded
@@ -327,8 +327,14 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         # forwdaring in_mail1
         result = forward_mail(in_mail1, 'toto@example.com',
                               comment='Please handle that request')
-        expected = ('toto@example.com', 'mailbox@example.com',
-                    'Fwd: Test mail 1', """\
+        expected = ('mailbox@example.com', 'toto@example.com', """\
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Fwd: Test mail 1
+From: mailbox@example.com
+To: toto@example.com
+
 Please handle that request
 
 On %s, bar@foo.com wrote:
@@ -345,7 +351,7 @@ On %s, bar@foo.com wrote:
     def test_send_reply(self):
         # faking the MailHost
         class FakeMailHost:
-            def simple_send(self, *args):
+            def _send(self, *args):
                 return args
 
         in_mail1 = self.in_mail1
@@ -364,7 +370,14 @@ On %s, bar@foo.com wrote:
                                 proxy=out_mail1)
 
         result = send_reply(out_mail1)
-        expected = ('foo@foo.com', 'bar@foo.com','Test mail 1', """\
+        expected = ('bar@foo.com', 'foo@foo.com', """\
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Test mail 1
+From: bar@foo.com
+To: foo@foo.com
+
 Please stop trying to fish us!
 
 On %s, bar@foo.com wrote:
