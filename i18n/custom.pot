@@ -274,6 +274,12 @@ msgstr ""
 msgid "answer"
 msgstr ""
 
+msgid "action_reuse_answer"
+msgstr ""
+
+msgid "reuse_answer"
+msgstr ""
+
 msgid "heading_workflow_close_of ${item_id}"
 msgstr ""
 
