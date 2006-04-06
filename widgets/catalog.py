@@ -24,6 +24,7 @@ import logging
 
 from Globals import InitializeClass
 from AccessControl import Unauthorized
+from ZODB.loglevels import TRACE as TRACE
 
 from Products.CMFCore.utils import _checkPermission, getToolByName
 from Products.CMFCore.permissions import View, ListFolderContents
@@ -121,6 +122,7 @@ class CatalogTabularWidget(TabularWidget):
         self.filtersToQuery(query)
         (b_page, b_start, b_size) = self.filtersToBatchParams(query)
 
+        logger.log(TRACE, query)
         brains, nb_results = self._doBatchedQuery(catalog,
                                                   b_start, b_size, query)
 
