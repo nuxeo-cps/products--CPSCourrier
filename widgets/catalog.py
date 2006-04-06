@@ -152,7 +152,7 @@ class LuceneTabularWidget(CatalogTabularWidget):
         query will be changed to what wbas actually sent to the catalog."""
 
         query['b_start'] = b_start
-        query['b_size'] = b_start
+        query['b_size'] = b_size
 
         brains = catalog(**query)
         if brains:
