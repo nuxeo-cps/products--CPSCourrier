@@ -1,8 +1,10 @@
-##parameters=target_mailbox='', target_emailaddress='', REQUEST=None, **kw
+##parameters=target_mailbox='', target_emailaddress='', comments='', REQUEST=None
 
 url = None
 redirect_to_template = '' # redirect to view by default
 wftool = context.portal_workflow
+
+kw = {'comment': comments}
 
 if target_mailbox and target_emailaddress:
     psm = "psm_cpscourrier_choose_either_mailbox_or_emailaddress"

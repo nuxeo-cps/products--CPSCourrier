@@ -9,5 +9,5 @@
 ##
 from Products.CPSCourrier.workflows.scripts import forward_mail
 mto = state_change.kwargs.get('target_emailaddress')
-comment = state_change.kwargs.get('comments', '')
+comment = state_change.kwargs.get('comment', '')
 forward_mail(state_change.object, mto, comment)
