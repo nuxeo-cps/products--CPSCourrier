@@ -73,3 +73,12 @@ def initialize(registrar):
         'CPSCourrier',
         EXTENSION,
         for_=ICPSSite)
+
+    profile_registry.registerProfile(
+        'lucene',
+        'CPS Courrier Lucene',
+        "Add-on configuration for Lucene",
+        'profiles/lucene',
+        'CPSCourrier',
+        EXTENSION,
+        for_=ICPSSite)
