@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:five="http://namespaces.zope.org/five">
 
     <!--
@@ -11,6 +12,19 @@
       for="Products.CPSCore.interfaces.ICPSProxy
         zope.app.container.interfaces.IObjectRemovedEvent"
       handler="Products.CPSCourrier.workflows.events.removedProxy"
+      />
+
+  <!-- replies from existing/template answers.
+       XXX this permission is supposed to be mapped correctly to the Pilot
+       role
+       -->
+
+  <browser:page
+      for="Products.CPSCore.interfaces.ICPSProxy"
+      name="reuse_answer.html"
+      class=".browser.reuseanswerview.ReuseAnswerView"
+      template="browser/reuseAnswer.zpt"
+      permission="cmf.ModifyPortalContent"
       />
 
 </configure>

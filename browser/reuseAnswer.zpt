@@ -1,0 +1,55 @@
+<tal:block define="submit_result view/dispatchSubmit">
+
+  <tal:block condition="submit_result"
+	     replace="structure submit_result" />
+
+  <tal:block condition="not:submit_result">
+    <metal:block use-macro="here/main_template/macros/master">
+
+	<metal:block fill-slot="header">
+	  <h1 i18n:translate="cpscourrier_answer_from_existing">
+	     Reply from existing reply
+	  </h1>
+	</metal:block>
+
+	<metal:block fill-slot="main"
+		     tal:define="res view/renderLayout;
+				 rendered python:res[0];
+				 ds python:res[1]">
+
+	  <form action="" method="post">
+
+	    <h2 tal:condition="view/is_results"
+		i18n:translate="search_results">
+	      Search results
+	    </h2>
+
+	    <tal:block replace="structure rendered" />
+
+	    <tal:block condition="view/is_results">
+	      <p class="advancedSearchButton">
+		<tal:block replace="structure python:view.forwardInputs(
+				    'Query ZCText_or', )" />
+		<input type="submit" name="answer_submit"
+		       class="standalone" value="button_validate"
+		       i18n:attributes="value" />
+	      </p>
+	    </tal:block>
+
+	    <tal:block condition="not:view/is_results">
+	      <p class="advancedSearchButton">
+		<input type="hidden" name="filter" value="go" />
+		<input type="submit" name="search_submit"
+		       class="standalone" value="button_search"
+		       i18n:attributes="value" />
+		<input type="button" name="cancel_submit"
+		       class="standalone" value="button_cancel"
+		       i18n:attributes="value"
+		       onClick="history.back();"/>
+	      </p>
+	    </tal:block>
+	  </form>
+	</metal:block>
+    </metal:block>
+  </tal:block>
+</tal:block>

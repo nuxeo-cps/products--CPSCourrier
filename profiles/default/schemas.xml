@@ -7,4 +7,5 @@
  <object name="mailbox_group" meta_type="CPS Schema"/>
  <object name="mail_filter_params" meta_type="CPS Schema"/>
  <object name="mail_query_params" meta_type="CPS Schema"/>
+ <object name="mail_search_answers" meta_type="CPS Schema"/>
 </object>

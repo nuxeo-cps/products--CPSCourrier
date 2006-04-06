@@ -20,6 +20,9 @@
  <!-- layout for the Dashboard document type -->
  <object name="mail_dashboard" meta_type="CPS Layout"/>
 
+ <!-- Search layouts -->
+ <object name="mail_search_answers" meta_type="CPS Layout"/>
+
  <!-- layouts for rows of contents views -->
  <object name="mailbox_contents_row" meta_type="CPS Layout"/>
  <object name="mailbox_group_contents_row" meta_type="CPS Layout"/>

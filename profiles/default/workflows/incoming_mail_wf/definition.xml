@@ -199,6 +199,18 @@
    <guard-role>Pilot</guard-role>
   </guard>
  </transition>
+ <!-- this transition is there for the action
+  linked page will perform transtion 'answer' -->
+ <transition transition_id="reuse_answer" title=""
+             new_state="answering" trigger="USER"
+             before_script=""
+             after_script="">
+  <action url="%(content_url)s/reuse_answer.html"
+          category="workflow">action_reuse_answer</action>
+  <guard>
+   <guard-role>Pilot</guard-role>
+  </guard>
+ </transition>
  <transition transition_id="close" title=""
              new_state="closed" trigger="USER"
              before_script="" after_script="">
@@ -209,6 +221,7 @@
    <guard-role>Manager</guard-role>
   </guard>
  </transition>
+
  <transition transition_id="create" title=""
              new_state="received" trigger="USER"
              before_script="" after_script="bayes_guess_subject">
