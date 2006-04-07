@@ -28,11 +28,13 @@
         <metal:block
           use-macro="here/content_lib_transition_form/macros/transition_form">
           <metal:block fill-slot="button">
-	    <input type="hidden" name="workflow_action" value=""
-		   tal:attributes="value transition" />
-	    <input type="checkbox" name="use_parent_roadmap" checked="true"/>
-	    <span i18n:translate="cpscourrier_use_default_roadmap">Use default
-	    roadmap</span>
+            <input type="hidden" name="workflow_action" value=""
+                   tal:attributes="value transition" />
+            <input type="checkbox" id="use_parent_roadmap"
+                   name="use_parent_roadmap" checked="true"/>
+            <label for="use_parent_roadmap"
+                   i18n:translate="cpscourrier_use_default_roadmap">Use default
+              roadmap</label>
             <input type="submit" class="standalone"
               tal:attributes="value string:button_${transition}"
               i18n:attributes="value" />
