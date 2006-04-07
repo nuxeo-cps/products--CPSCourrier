@@ -29,8 +29,6 @@ import PatchCPSCoreCPSTypes
 # various registrations are done therein
 import widgets, workflows
 
-ModuleSecurityInfo('urllib').declarePublic('quote')
-
 # Module security for workflow scripts
 ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
     'bayes_learn_subject')

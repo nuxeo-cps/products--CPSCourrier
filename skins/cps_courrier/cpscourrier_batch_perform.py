@@ -3,7 +3,7 @@
 """
 
 from Products.CMFCore.WorkflowCore import WorkflowException
-from urllib import quote
+from urllib import urlencode
 
 wtool = context.portal_workflow
 mcat = context.translation_service
@@ -22,9 +22,9 @@ if failed:
     # psms
     psm = mcat("psm_cpscourrier_no_action_performed_for").encode('iso-8859-15')
     psm += ', '.join(failed)
-    psm = quote(psm)
 
 if REQUEST is not None:
-    url = "%s?portal_status_message=%s" % (context.absolute_url(), psm)
+    url = "%s?%s" % (
+        context.absolute_url(), urlencode({'portal_status_message': psm}))
     REQUEST.RESPONSE.redirect(url)
 
