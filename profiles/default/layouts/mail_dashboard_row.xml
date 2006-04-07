@@ -22,6 +22,7 @@ Layouts for rows in the content view of mailboxes
   <property name="fields">
    <element value="has_attachment"/>
   </property>
+  <property name="sortable" type="string">has_attachment</property>
  </widget>
 
  <widget name="portal_type" meta_type="Type Icon Widget">
