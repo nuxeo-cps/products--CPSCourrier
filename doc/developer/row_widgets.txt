@@ -181,8 +181,44 @@ Now let's go::
     >>> ds
     {'the_check': 'the_id'}
 
+Time Left Widget
+----------------
 
+The Time Left Widget is a very specific one that displays and
+highlights the (opposite of) number of days left before a deadline::
 
+    >>> from Products.CPSCourrier.widgets.row_widgets \
+    ... import CPSTimeLeftWidget
+    >>> widget = CPSTimeLeftWidget('the_wid')
+    >>> widget.meta_type
+    'Time Left Widget'
+    >>> widget.manage_changeProperties(fields=('deadline',))
+
+Preparation
+-----------
+
+Let's make datamodel and datastructure::
+
+    >>> dm = FakeDataModel()
+    >>> ds = DataStructure(datamodel=dm)
+
+The widget understands strings that Zope's DateTime does (today kwarg
+is a backdoor to make examples reproducible)::
+
+    >>> from DateTime import DateTime
+    >>> dm['deadline'] ='2006/04/07'
+    >>> widget.prepare(ds, today=DateTime('2006/04/10'))
+    >>> ds['the_wid']
+    '3'
+    >>> widget.prepare(ds) # no failure with current time
+
+It does understand datetime.datetime objects too
+    >>> from datetime import datetime
+    >>> dm['deadline'] = datetime(2006, 04, 10)
+    >>> widget.prepare(ds, today=datetime(2006, 04, 07))
+    >>> ds['the_wid']
+    '-3'
+    >>> widget.prepare(ds) # no failure with current time
 
 .. Emacs
 .. Local Variables:

@@ -20,6 +20,7 @@
 """ This module holds simple widget definitions for CPSCourrier row layouts.
 """
 from cgi import escape
+from datetime import datetime
 from Globals import InitializeClass
 from DateTime import DateTime
 
@@ -265,8 +266,16 @@ class CPSTimeLeftWidget(CPSIntWidget):
 
     def prepare(self, datastructure, **kw):
         dm = datastructure.getDataModel()
-        due = DateTime(dm[self.fields[0]])
-        datastructure[self.getWidgetId()] = str(int(DateTime()-due))
+        wid = self.getWidgetId()
+        due = dm[self.fields[0]]
+
+        if isinstance(due, datetime): # Lucene
+            today = kw.get('today', datetime.today())
+            datastructure[wid] = str((today-due).days)
+        else: # ZCat or ZODB
+            due = DateTime(due)
+            today = kw.get('today', DateTime())
+            datastructure[self.getWidgetId()] = str(int(today-due))
 
     def render(self, mode, datastructure, **kw):
         base_rendered = CPSIntWidget.render(self, mode, datastructure)
@@ -309,6 +318,21 @@ class CPSIconBooleanWidget(CPSBooleanWidget):
          'label': 'Icon to display if value is False',}
         )
 
+    def prepare(self, datastructure, **kw):
+        """Prepare datastructure from datamodel.
+
+        Special version that expects either a bool or a str-casted -bool.
+        XXX Remove when there's a Lucene field for booleans.
+        """
+
+        dm = datastructure.getDataModel()
+        value = dm[self.fields[0]]
+        #import pdb; pdb.set_trace()
+        if value == 'None':
+            value = False
+        else:
+            value = bool(value)
+        datastructure[self.getWidgetId()] = value
 
     def render(self, mode, datastructure, **kw):
         """Render in mode from datastructure."""
