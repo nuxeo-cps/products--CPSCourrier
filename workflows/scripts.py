@@ -351,7 +351,7 @@ def forward_mail(proxy, mto, comment=''):
     body = comment
     body += _quote_mail(proxy)
 
-    attachments = _extract_attachments(proxy, encoding)
+    attachments = _extract_attachments(proxy)
 
     return send_mail(proxy, mto, mfrom, subject, body, attachments, encoding)
 
