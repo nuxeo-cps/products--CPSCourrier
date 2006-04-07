@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<object name="portal_catalog" meta_type="CPS Lucene Catalog Tool">
+
+  <!-- Properties -->
+
+  <property name="title"></property>
+  <property name="server_url">localhost</property>
+  <property name="server_port">9180</property>
+
+
+  <!-- Fields -->
+
+
+  <field
+      name="priority"
+      attr="priority"
+      type="Keyword"
+      analyzer="standard"
+      />
+
+    <field
+	name="mail_from"
+	attr="from"
+	type="Keyword"
+	analyzer="Standard"
+      />
+
+    <field
+	name="mail_to"
+	attr="to"
+	type="MultiKeyword"
+	analyzer="Standard"
+      />
+
+    <field
+	name="deadline"
+	attr="deadline"
+	type="Date"
+	analyzer="Standard"
+      />
+
+    <field
+	name="has_attachment"
+	attr="has_attachment"
+	type="Keyword"
+	analyzer="Standard"
+      />
+
+    <field
+	name="Title-sort"
+	attr="Title"
+	type="Keyword"
+	analyzer="Standard"
+	/>
+
+  <!-- Brain's  Metadata -->
+
+  <column value="has_attachment"/>
+  <column value="priority"/>
+  <column value="mail_from"/>
+  <column value="mail_to"/>
+  <column value="deadline"/>
+
+</object>

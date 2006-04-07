@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!-- Lucene version -->
+
+<object name="mail_search_answers">
+ <widget name="Table" meta_type="Lucene Tabular Widget"/>
+
+ <!-- XXX have to do this in CPS -->
+ <table purge="False"/>
+</object>
