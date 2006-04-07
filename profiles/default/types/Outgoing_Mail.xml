@@ -13,6 +13,7 @@
   <element value="common"/>
   <element value="mail_common"/>
   <element value="outgoing_mail" />
+  <element value="file" />
  </property>
  <property name="layouts">
   <element value="mail_header"/>
