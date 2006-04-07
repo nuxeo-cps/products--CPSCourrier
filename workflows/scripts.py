@@ -285,28 +285,28 @@ def init_stack_with_user(sci, wf_var_id, prefix='courrier_user', **kw):
 
 def _quote_mail(proxy, encoding='iso-8859-15'):
     """Helper function to quote a mail in a reply or a forward"""
-    mcat = getToolByName(proxy, 'translation_service')
+    tstool = getToolByName(proxy, 'translation_service')
     doc = proxy.getContent()
     orig_date_str = doc['CreationDate']()
     year, month, day = orig_date_str.split()[0].split('-')
-    quote_header = mcat('On ${y}-${m}-${d}, ${name} wrote:',
-                        {'y': year,
-                         'm': month,
-                         'd': day,
-                         'name': doc['from'],
-                        }).encode(encoding)
+    quote_header = tstool('On ${y}-${m}-${d}, ${name} wrote:',
+                          {'y': year,
+                           'm': month,
+                           'd': day,
+                           'name': doc['from'],
+                          }).encode(encoding)
     body = '\n\n%s\n' % quote_header
     lines =  doc['content'].split('\n')
     body += '\n'.join('> %s' % line for line in lines)
     return body
 
-def _extract_attachements(proxy, filters=None):
+def _extract_attachments(proxy, filters=None):
     """Extract File/Image fields related data from a proxy
 
     Return a generator of tuples (title, ctype, data)
     """
     if filters is None:
-        # default fields type that potentially host attachements
+        # default fields type that potentially host attachments
         filters = set(['CPS File Field',
                        'CPS Disk File Field',
                        'CPS Image Field'])
@@ -332,74 +332,89 @@ def _extract_attachements(proxy, filters=None):
                     to_remove.add(helper_f_id)
 
     # extracting interesting data out of the datamodel
-    attachements = []
+    attachments = []
     for f_id, _ in fields:
         if f_id not in to_remove:
             v= dm[f_id]
-            attachements.append((v.title, v.getContentType(), str(v)))
-    return attachements
+            attachments.append((v.title, v.getContentType(), str(v)))
+    return attachments
 
 def forward_mail(proxy, mto, comment=''):
     """Forward an incoming mail to another external mailbox"""
+    tstool = getToolByName(proxy, 'translation_service')
+    encoding = tstool.default_charset
+
     mailbox_doc = aq_parent(aq_inner(proxy)).getContent()
     mfrom = mailbox_doc['from']
     subject = "Fwd: " + proxy.Title()
+
     body = comment
     body += _quote_mail(proxy)
-    attachements = _extract_attachements(proxy)
-    return send_mail(proxy, mto, mfrom, subject, body, attachements)
 
-def compute_reply_body(reply_proxy):
+    attachments = _extract_attachments(proxy, encoding)
+
+    return send_mail(proxy, mto, mfrom, subject, body, attachments, encoding)
+
+def compute_reply_body(proxy):
     """Compute the body of a sent outgoing mail
 
     The content of the reply is build from the proxy quoting the original mail
     thanks to the relation graph.
     """
-    reply_doc = reply_proxy.getContent()
-    body = reply_doc['content']
+    tstool = getToolByName(proxy, 'translation_service')
+    encoding = tstool.default_charset
+    vtool = getToolByName(proxy, 'portal_vocabularies')
+    mcat = lambda label: tstool(label).encode(encoding)
+    doc = proxy.getContent()
+    body = doc['content']
+    foa = mcat(vtool.form_of_address[doc['form_of_address']])
+    body += '\n\n%s\n\n-- \n%s' % (foa , doc['signature'])
 
     # get the original content for quoting
-    incoming_docid = _get_incoming_docid_for(reply_proxy)
+    incoming_docid = _get_incoming_docid_for(proxy)
     if incoming_docid is None:
         logger.warning('%r has no related incoming mail: do not include'
-                       'original mail in reply' % reply_proxy)
+                       'original mail in reply' % proxy)
     else:
-        ptool = getToolByName(reply_proxy, 'portal_proxies')
+        ptool = getToolByName(proxy, 'portal_proxies')
         for info in ptool.getProxyInfosFromDocid(str(incoming_docid)):
             if info['visible']:
-                body += _quote_mail(info['object'])
+                body += _quote_mail(info['object'], encoding)
     return body
 
-def send_reply(reply_proxy):
+def send_reply(proxy):
     """Send a reply by SMTP"""
-    reply_doc = reply_proxy.getContent()
-    mto = reply_doc['to']
-    mfrom = reply_doc['from']
-    subject = reply_doc['Title']()
-    body = compute_reply_body(reply_proxy)
-    attachements = _extract_attachements(reply_proxy)
-    return send_mail(reply_doc, mto, mfrom, subject, body, attachements)
+    tstool = getToolByName(proxy, 'translation_service')
+    encoding = tstool.default_charset
+    doc = proxy.getContent()
+    mto = doc['to']
+    mfrom = doc['from']
+    subject = doc['Title']()
+    body = compute_reply_body(proxy)
+    attachments = _extract_attachments(proxy)
+    return send_mail(doc, mto, mfrom, subject, body, attachments, encoding)
 
-def send_mail(context, mto, mfrom, subject, body, attachements=()):
+def send_mail(context, mto, mfrom, subject, body, attachments=(),
+              encoding='iso-8859-15'):
     """Send a mail
 
     body should be plain text.
 
-    Optional attachements are (filename, content-type, data) tuples.
+    Optional attachments are (filename, content-type, data) tuples.
 
     This function does not do any error handling if the Mailhost fails to send
     it properly. This will be handled by the skins script along with the
     redirect if needed.
     """
     mailhost = getToolByName(context, 'MailHost')
-    attachements = list(attachements)
+    attachments = list(attachments)
 
     # building the formatted email message
     if not isinstance(mto, str):
         mto = ', '.join(mto)
-    if attachements:
+    if attachments:
         msg = MIMEMultipart()
-        attachements.insert(0, ('content', 'text/plain', body))
+        attachments.insert(0, ('content', 'text/plain', body))
     else:
         msg = MIMEText(body)
 
@@ -410,15 +425,15 @@ def send_mail(context, mto, mfrom, subject, body, attachements=()):
     # Guarantees the message ends in a newline
     msg.epilogue = ''
 
-    # attachement management (if any)
-    for title, ctype, data in attachements:
+    # attachment management (if any)
+    for title, ctype, data in attachments:
         if ctype is None:
             # No guess could be made, or the file is encoded (compressed), so
             # use a generic bag-of-bits type.
             ctype = 'application/octet-stream'
         maintype, subtype = ctype.split('/', 1)
         if maintype == 'text':
-            sub_msg = MIMEText(data, _subtype=subtype)
+            sub_msg = MIMEText(data, _subtype=subtype, _charset=encoding)
         elif maintype == 'image':
             sub_msg = MIMEImage(data, _subtype=subtype)
         elif maintype == 'audio':
@@ -434,8 +449,8 @@ def send_mail(context, mto, mfrom, subject, body, attachements=()):
         msg.attach(sub_msg)
 
     # loggin string
-    attachement_log = list((title, ctype) for title, ctype, _ in attachements)
-    mail_data = (mto, mfrom, subject, body, attachement_log)
+    attachment_log = list((title, ctype) for title, ctype, _ in attachments)
+    mail_data = (mto, mfrom, subject, body, attachment_log)
     log_str = 'to: %r, from: %r, subject: %r, body: %r, att: %r' % mail_data
     logger.debug("sending email %s" % log_str)
 

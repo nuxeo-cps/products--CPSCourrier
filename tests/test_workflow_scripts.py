@@ -365,20 +365,28 @@ On %s, bar@foo.com wrote:
         )
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail1.MailHost = FakeMailHost()
-        out_mail1_doc_edit = in_mail1.getEditableContent()
-        out_mail1_doc_edit.edit({'content': "Please stop trying to fish us!"},
-                                proxy=out_mail1)
+        out_mail1_doc_edit = out_mail1.getEditableContent()
+        out_mail1_doc_edit.edit(
+            content="Please stop trying to fish us!",
+            form_of_address='regards',
+            proxy=out_mail1,
+        )
 
         result = send_reply(out_mail1)
-        expected = ('bar@foo.com', 'foo@foo.com', """\
+        expected = ('test_mailbox@cpscourrier.com', 'bar@foo.com', """\
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
-Subject: Test mail 1
-From: bar@foo.com
-To: foo@foo.com
+Subject: Re: Test mail 1
+From: test_mailbox@cpscourrier.com
+To: bar@foo.com
 
 Please stop trying to fish us!
+
+Best regards,
+
+-- 
+Manager CPS
 
 On %s, bar@foo.com wrote:
 > Hi!
