@@ -265,6 +265,7 @@ class CPSTimeLeftWidget(CPSIntWidget):
     meta_type = 'Time Left Widget'
 
     def prepare(self, datastructure, **kw):
+        import pdb; pdb.set_trace()
         dm = datastructure.getDataModel()
         wid = self.getWidgetId()
         due = dm[self.fields[0]]
@@ -327,7 +328,6 @@ class CPSIconBooleanWidget(CPSBooleanWidget):
 
         dm = datastructure.getDataModel()
         value = dm[self.fields[0]]
-        #import pdb; pdb.set_trace()
         if value == 'None':
             value = False
         else:

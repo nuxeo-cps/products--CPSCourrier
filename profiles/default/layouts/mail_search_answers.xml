@@ -9,7 +9,7 @@ Layout for searching an answer in existing outgoing mails
  <property name="style_prefix">layout_default_</property>
 
  <widget name="Table" meta_type="Catalog Tabular Widget">
-  <property name="row_layout">mail_dashboard_row</property>
+  <property name="row_layout">mail_search_answers_row</property>
   <property name="hidden_layout_modes">edit create</property>
   <property name="empty_message">cpscourrier_no_result_msg</property>
   <property name="is_empty_message_i18n">True</property>

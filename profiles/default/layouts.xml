@@ -27,5 +27,6 @@
  <object name="mailbox_contents_row" meta_type="CPS Layout"/>
  <object name="mailbox_group_contents_row" meta_type="CPS Layout"/>
  <object name="mail_dashboard_row" meta_type="CPS Layout"/>
+ <object name="mail_search_answers_row" meta_type="CPS Layout"/>
 
 </object>

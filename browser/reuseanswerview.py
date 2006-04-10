@@ -83,7 +83,9 @@ class ReuseAnswerView(BrowserView):
     def dispatchSubmit(self):
         """take submissions, calls skins scripts, etc.
 
-        returns rendered html, empty meaning no script called"""
+        returns rendered html, empty meaning no script called.
+
+        XXX this seems to be called twice as expected. Investigate."""
 
         form = self.request.form
 
@@ -91,8 +93,10 @@ class ReuseAnswerView(BrowserView):
 
         if 'answer_submit' in form and 'rpath' in form:
             wftool = getToolByName(self.context, 'portal_workflow')
+            # takes care of redirection as well
             wftool.doActionFor(self.context, 'answer',
                                base_reply_rpath=form['rpath'])
+            return True
         else: # filtering or no submission at all
             return ''
 
