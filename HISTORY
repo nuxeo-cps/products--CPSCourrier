@@ -1,4 +1,38 @@
 *******************************************
+** CPSCourrier V0.9.0 [R1 build 2006/04/10-16:25 by gracinet]
+** SVN URL: http://svn/pub/CPSCourrier/trunk Revision: 35073
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Can give a user a directive when adding to roadmap
+- mailboxes now follow the mailbox_folder_wf that is similar to
+  workspace_folder_wf except that is allows subpublishing (for moving mails
+  accross mailboxes)
+- added internal forwarding WF and UI
+- added external forwarding WF
+- added batch transitions for handle and discard
+- started CPSBayes integration
+- better look for the thread portlet
+- batching in dashboards
+- reply from existing outgoing mail
+- reply and forward now add flexible files as MIME attachments
+Bug fixes:
+~~~~~~~~~~
+- relation graph is no longer deleted when checkin a draft back in
+- added missing delete and reset transitions in incoming wf
+- added missing reset transition in outgoing wf
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- the thread portlet is now in slot content_well
+- added logics for the send_reply step
+- use standard stackelements, since they can hold data, now
+- the answer transition now supports using an existing reply as template
+- renamed List Checkbox Widget into Row Boolean Widget, and added radio button
+  capability.
+
+*******************************************
 ** CPSCourrier V0.8.0 [R1 build 2006/03/17-17:25 by ogrisel]
 ** SVN URL: https://svn.nuxeo.org/pub/CPSCourrier/trunk Revision: 34566
 Requires:
