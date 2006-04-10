@@ -29,31 +29,20 @@ import PatchCPSCoreCPSTypes
 # various registrations are done therein
 import widgets, workflows
 
+wf_scripts_module = 'Products.CPSCourrier.workflows.scripts'
 # Module security for workflow scripts
-ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
-    'bayes_learn_subject')
-ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
-    'bayes_guess_subject')
-ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
-    'reply_to_incoming')
-ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
-    'flag_incoming_answered')
-ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
-    'flag_incoming_handled')
-ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
-    'init_stack_with_user')
-ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
-    'forward_mail')
-ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
-    'send_reply')
-ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
-    'compute_reply_body')
-
-
+ModuleSecurityInfo(wf_scripts_module).declarePublic('bayes_learn_subject')
+ModuleSecurityInfo(wf_scripts_module).declarePublic('bayes_guess_subject')
+ModuleSecurityInfo(wf_scripts_module).declarePublic('reply_to_incoming')
+ModuleSecurityInfo(wf_scripts_module).declarePublic('flag_incoming_answered')
+ModuleSecurityInfo(wf_scripts_module).declarePublic('flag_incoming_handled')
+ModuleSecurityInfo(wf_scripts_module).declarePublic('init_stack_with_user')
+ModuleSecurityInfo(wf_scripts_module).declarePublic('forward_mail')
+ModuleSecurityInfo(wf_scripts_module).declarePublic('send_reply')
+ModuleSecurityInfo(wf_scripts_module).declarePublic('compute_reply_body')
 
 # Stack API
-ModuleSecurityInfo('Products.CPSCourrier.workflows.scripts').declarePublic(
-    'init_stack_with_user')
+ModuleSecurityInfo(wf_scripts_module).declarePublic('init_stack_with_user')
 
 # Relations API
 ModuleSecurityInfo('Products.CPSCourrier.relations').declarePublic(
