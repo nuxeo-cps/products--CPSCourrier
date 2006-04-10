@@ -315,6 +315,8 @@
    <guard-role>WorkspaceManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
+  <transition-behavior behavior_id="workflow-reset"/>
+  <workflow-reset-on-workflow-variable variable_id="Pilots"/>
  </transition>
 
  <!-- called at answer creation time -->
