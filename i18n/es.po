@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-04-06 13:50default\n"
+"POT-Creation-Date: 2006-04-10 12:01default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -63,7 +63,7 @@ msgstr ""
 #: from ../browser/reuseAnswer.zpt
 #, fuzzy
 msgid "cpscourrier_answer_from_existing"
-msgstr "Mail roadmap"
+msgstr "Reply from an existing reply"
 
 #.   <h2 condition="python:mode=='insert'">
 #.         Please select a level to insert the new delegatee
@@ -129,8 +129,8 @@ msgstr "Please select the user(s) to add to the roadmap"
 msgid "cpscourrier_thread_caption"
 msgstr "Mail thread"
 
-#.   <span>Use default
-#.   	    roadmap</span>
+#.   <label for="use_parent_roadmap">Use default
+#.                 roadmap</label>
 #: from ../skins/cps_courrier/cpscourrier_handle_form.pt
 #, fuzzy
 msgid "cpscourrier_use_default_roadmap"
@@ -412,6 +412,9 @@ msgid "action_roadmap"
 msgstr ""
 
 msgid "action_default_roadmap"
+msgstr ""
+
+msgid "init_stack"
 msgstr ""
 
 msgid "use_default_roadmap"

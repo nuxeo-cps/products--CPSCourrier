@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-04-06 13:50default\n"
+"POT-Creation-Date: 2006-04-10 12:01default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -119,8 +119,8 @@ msgstr "Sélectionner les éléments à ajouter dans la feuille de route"
 msgid "cpscourrier_thread_caption"
 msgstr "Fil de discussion"
 
-#.   <span>Use default
-#.   	    roadmap</span>
+#.   <label for="use_parent_roadmap">Use default
+#.                 roadmap</label>
 #: from ../skins/cps_courrier/cpscourrier_handle_form.pt
 msgid "cpscourrier_use_default_roadmap"
 msgstr "Utiliser la feuille de route par défaut"
@@ -392,6 +392,9 @@ msgstr "Feuille de route"
 
 msgid "action_default_roadmap"
 msgstr "Feuille de route par défaut"
+
+msgid "init_stack"
+msgstr "Initialisation feuille de route"
 
 msgid "use_default_roadmap"
 msgstr "Utiliser la feuille de route par défaut"

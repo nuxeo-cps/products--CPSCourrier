@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-04-06 13:50default\n"
+"POT-Creation-Date: 2006-04-10 12:01default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -116,8 +116,8 @@ msgstr ""
 msgid "cpscourrier_thread_caption"
 msgstr ""
 
-#.   <span>Use default
-#.   	    roadmap</span>
+#.   <label for="use_parent_roadmap">Use default
+#.                 roadmap</label>
 #: from ../skins/cps_courrier/cpscourrier_handle_form.pt
 msgid "cpscourrier_use_default_roadmap"
 msgstr ""
@@ -394,6 +394,9 @@ msgid "action_roadmap"
 msgstr ""
 
 msgid "action_default_roadmap"
+msgstr ""
+
+msgid "init_stack"
 msgstr ""
 
 msgid "use_default_roadmap"
