@@ -202,7 +202,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>WorkspaceManager</guard-role>
-   <guard-role>Pilot</guard-role>
+   <guard-role>Owner</guard-role>
    </guard>
   <transition-behavior behavior_id="checkin"/>
   <checkin-allowed-transition transition_id="unlock"/>
