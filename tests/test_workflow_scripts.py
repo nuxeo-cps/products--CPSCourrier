@@ -386,7 +386,7 @@ Please stop trying to fish us!
 Best regards,
 
 -- 
-Manager CPS
+CPS Manager
 
 On %s, bar@foo.com wrote:
 > Hi!
