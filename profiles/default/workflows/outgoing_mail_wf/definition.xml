@@ -156,6 +156,7 @@
   <state-behavior behavior_id="edit-delegatees"/>
   <state-behavior behavior_id="workflow-down"/>
   <state-behavior behavior_id="workflow-reset"/>
+  <edit-on-workflow-variable variable_id="Pilots"/>
   <push-on-workflow-variable variable_id="Pilots"/>
   <pop-on-workflow-variable variable_id="Pilots"/>
   <workflow-down-on-workflow-variable variable_id="Pilots"/>
