@@ -265,7 +265,6 @@ class CPSTimeLeftWidget(CPSIntWidget):
     meta_type = 'Time Left Widget'
 
     def prepare(self, datastructure, **kw):
-        import pdb; pdb.set_trace()
         dm = datastructure.getDataModel()
         wid = self.getWidgetId()
         due = dm[self.fields[0]]
