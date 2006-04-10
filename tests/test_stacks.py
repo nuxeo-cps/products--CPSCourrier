@@ -128,6 +128,17 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
     def test_default_roadmap(self):
         stack_mod = self.mb.cpscourrier_stack_modify
 
+        # Test that we don't fail if we try and handle from default roadmap
+        # and there isn't any
+        self.flogin('member1', self.mb)
+        self.wftool.doActionFor(self.incoming, 'handle',
+                                use_parent_roadmap=True)
+        stack = self.wftool.getStackFor(self.incoming, 'Pilots')
+        for_render = stack.getStackContentForRender(self.incoming)
+        self.assertEquals(for_render[1][0]['items'][0]['identite'],
+                          'member1_ftest-mailbox')
+        self.wftool.doActionFor(self.incoming, 'reset')
+
         # wsmanager of mb logs in and builds the default roadmap:
         # -1:member1, 0:member3
         self.flogin('wsmanager', self.mb)

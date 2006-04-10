@@ -265,7 +265,10 @@ def init_stack_with_user(sci, wf_var_id, prefix='courrier_user', **kw):
         new_stack = stack.getCopy()
         # push current user at upper level
         all_levels = stack.getAllLevels()
-        user_level = all_levels[-1] + 1
+        if all_levels:
+            user_level = all_levels[-1] + 1
+        else:
+            user_level = 0
         new_stack.push(levels=(user_level,), **push_args)
         # init with our copy
         tdef = workflow.transitions.get('init_stack')
