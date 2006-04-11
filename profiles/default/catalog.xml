@@ -12,6 +12,9 @@
  <index name="deadline" meta_type="FieldIndex">
   <indexed_attr value="deadline"/>
  </index>
+ <index name="template_usage" meta_type="FieldIndex">
+  <indexed_attr value="template_usage"/>
+ </index>
  <index name="mailbox_addresses" meta_type="FieldIndex">
   <indexed_attr value="mailbox_addresses"/>
  </index>
@@ -21,4 +24,5 @@
  <column value="from"/>
  <column value="to"/>
  <column value="deadline"/>
+ <column value="template_usage"/>
 </object>

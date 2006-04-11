@@ -341,7 +341,9 @@ class CPSIntFilterWidget(RequestCookiesMixin, CPSIntWidget):
     search_range = ''
 
     def validate(self, datastructure, **kw):
-        """ """
+        """ Update datamodel from datastructure """
+        #XXX GR ugly hack see #1606
+        self.prepare(datastructure)
         value = datastructure.get(self.getWidgetId())
         if isinstance(value, int):
             dm = datastructure.getDataModel()

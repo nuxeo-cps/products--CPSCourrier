@@ -40,7 +40,16 @@ Layout for searching an answer in existing outgoing mails
    </property>
  </widget>
 
-
+ <widget name="q_template_usage" meta_type="Int Filter Widget">
+   <property name="widget_mode_expr">string:edit</property>
+   <property name="label">cpscourrier_template_usage</property>
+   <property name="label">cpscourrier_template_usage</property>
+   <property name="is_i18n">True</property>
+   <property name="fields">
+     <element value="template_usage"/>
+   </property>
+   <property name="search_range">min</property>
+ </widget>
 
  <widget name="q_portal_type" meta_type="Select Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
@@ -93,6 +102,7 @@ Layout for searching an answer in existing outgoing mails
  <table>
    <row>
      <cell name="q_ZCText_or"/>
+     <cell name="q_template_usage"/>
    </row>
    <row>
      <cell name="q_Subject"/>
