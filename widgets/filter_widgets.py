@@ -38,10 +38,6 @@ from Products.CPSSchemas.tests.testWidgets import (FakePortal,
 
 from Products.CPSCourrier.config import RANGE_SUFFIX
 
-# XXX this should be importable from CPSSchemas.Widget
-WIDGET_PREFIX = 'widget__'
-WIDGET_PREFIX_len = len('widget__')
-
 class FakeRequest:
     def __init__(self, **kw):
         self.form = kw
@@ -116,7 +112,7 @@ class RequestCookiesMixin:
             datastructure[wid] = from_cookie
 
         # from request form
-        posted = self.REQUEST.form.get(WIDGET_PREFIX + wid)
+        posted = self.REQUEST.form.get(widgetname(wid))
         if posted is not None:
             datastructure[wid] = posted
 
@@ -264,7 +260,7 @@ class CPSToggableCriterionWidget(RequestCookiesMixin, CPSWidget):
 
 
         # from request form: criterion
-        posted = self.REQUEST.form.get(WIDGET_PREFIX + crit_key)
+        posted = self.REQUEST.form.get(widgetname(crit_key))
 
         # do toggle token
         LOG('ToggleWidget.prepare; posted=', DEBUG, posted)
@@ -278,7 +274,7 @@ class CPSToggableCriterionWidget(RequestCookiesMixin, CPSWidget):
                 ds[token_key] = self.toggle_tokens[(i+1) % order]
 
         # from request: ref
-        posted = self.REQUEST.form.get(WIDGET_PREFIX + ref_key)
+        posted = self.REQUEST.form.get(widgetname(ref_key))
         if posted is not None:
             ds[ref_key] = posted
         LOG('ToggeWidget.prepare, ref:', DEBUG, ds.get(ref_key))
@@ -370,7 +366,7 @@ class CPSIntFilterWidget(RequestCookiesMixin, CPSIntWidget):
             datastructure[wid] = int(from_cookie)
 
         # from request form
-        posted = self.REQUEST.form.get(WIDGET_PREFIX + wid)
+        posted = self.REQUEST.form.get(widgetname(wid))
         if posted is not None:
             datastructure[wid] = int(posted)
 
