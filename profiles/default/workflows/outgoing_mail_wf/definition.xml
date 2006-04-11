@@ -230,7 +230,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>WorkspaceManager</guard-role>
-   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>Pilot</guard-role>
   </guard>
   <transition-behavior behavior_id="checkout"/>
   <checkout-allowed-initial-transition

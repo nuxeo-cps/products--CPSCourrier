@@ -55,6 +55,99 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
                                                    mode='view')
         # TODO: assertions
 
+    def test_outgoing_from_scratch(self):
+        # test the outgoing worklow on a document that is not a reply
+        wf = self.wftool['outgoing_mail_wf']
+        mtool = getToolByName(self.portal, 'portal_membership')
+        checkPerm = mtool.checkPermission
+
+        # member1 creates an outgoing document
+        self.flogin('member1', self.mb)
+        self.createOutgoing(self.mb, mail_id="outgoing_of_member1")
+        proxy = self.mb.outgoing_of_member1
+        stack = self.wftool.getStackFor(proxy, 'Pilots')
+        stack_mod = proxy.cpscourrier_stack_modify
+
+        # initialy, the proxy is in state "work" with an empty stack
+        self.assertEquals(self._get_state(proxy), 'work')
+        self.assertEquals(stack.getAllLevels(), [])
+
+        # the stack is empty: only the manager / wsmanager should be able to
+        # play with the stack and the owner as well
+        self.flogin('reader', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'manage_delegatees'))
+        self.login('manager')
+        self.assert_(wf.isActionSupported(proxy, 'manage_delegatees'))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'manage_delegatees'))
+        self.flogin('member2', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'manage_delegatees'))
+        self.flogin('member1', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'manage_delegatees'))
+
+        # with an empty stack, only the manager and the wsmanager can modify the
+        # document
+        self.flogin('reader', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.login('manager')
+        self.assert_(checkPerm('Modify portal content', proxy))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(checkPerm('Modify portal content', proxy))
+        self.flogin('member2', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.flogin('member1', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+
+        # only the manager / wsmanager can create a draft
+        self.flogin('reader', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.login('manager')
+        self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.flogin('member2', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.flogin('member1', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'checkout_draft'))
+
+        # member1 takes the lead
+        kw = {'current_var_id': 'Pilots',
+              'directive': 'response',
+              'level': '0',
+              'workflow_action_form': 'cpscourrier_roadmap',
+              'submit_add': 'Valider',
+              'push_ids': ['courrier_user:member1_ftest-mailbox']}
+        stack_mod(**kw)
+        self.assertEquals(self._get_state(proxy), 'work')
+        self.assertEquals(stack.getAllLevels(), [0])
+        elt = stack._getLevelContentValues()[0]
+        self.assertEquals(elt.getId(), 'courrier_user:member1_ftest-mailbox')
+
+        # she can now modify the document
+        self.flogin('reader', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.login('manager')
+        self.assert_(checkPerm('Modify portal content', proxy))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(checkPerm('Modify portal content', proxy))
+        self.flogin('member2', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.flogin('member1', self.mb)
+        self.assert_(checkPerm('Modify portal content', proxy))
+
+        # and she can checkout a draft as well
+        self.flogin('reader', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.login('manager')
+        self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.flogin('member2', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.flogin('member1', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
+
+
 
 class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
 
