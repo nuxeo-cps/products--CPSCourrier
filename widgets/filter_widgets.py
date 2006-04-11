@@ -120,6 +120,17 @@ class RequestCookiesMixin:
         if posted is not None:
             datastructure[wid] = posted
 
+    def validate(self, ds, **kw):
+        klass = getattr(self, 'base_widget_class', None)
+        if klass is not None and not klass.validate(self, ds, **kw):
+            return False
+
+        self.expireCookie(**kw)
+        return True
+
+
+
+
 #
 # Widgets
 #
@@ -132,6 +143,8 @@ class CPSSelectFilterWidget(RequestCookiesMixin, CPSSelectWidget):
     """
 
     meta_type = 'Select Filter Widget'
+    base_widget_class = CPSSelectWidget
+
     _properties = (CPSSelectWidget._properties
                    + RequestCookiesMixin._properties
                    + ({'id': 'defines_scope', 'type': 'boolean', 'mode': 'w',
@@ -175,14 +188,6 @@ class CPSSelectFilterWidget(RequestCookiesMixin, CPSSelectWidget):
         if self.defines_scope and not ds[wid]:
             ds[wid+'_scope'] = self.getScope(ds)
 
-    def validate(self, ds, **kw):
-        if not CPSSelectWidget.validate(self, ds, **kw):
-            return False
-
-        self.expireCookie(**kw)
-        return True
-
-
 InitializeClass(CPSSelectFilterWidget)
 
 widgetRegistry.register(CPSSelectFilterWidget)
@@ -194,17 +199,11 @@ class CPSMultiSelectFilterWidget(RequestCookiesMixin, CPSMultiSelectWidget):
     meta_type = 'MultiSelect Filter Widget'
     _properties = CPSMultiSelectWidget._properties + RequestCookiesMixin._properties
 
+    base_widget_class = CPSMultiSelectWidget
+
     def prepare(self, ds, **kw):
         CPSMultiSelectWidget.prepare(self, ds, **kw)
         RequestCookiesMixin.prepare(self, ds, **kw)
-
-    def validate(self, ds, **kw):
-        if not CPSMultiSelectWidget.validate(self, ds, **kw):
-            return False
-
-        self.expireCookie()
-        return True
-
 
 InitializeClass(CPSMultiSelectFilterWidget)
 
