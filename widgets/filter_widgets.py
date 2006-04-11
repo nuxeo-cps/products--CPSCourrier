@@ -29,6 +29,7 @@ from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSSchemas.BasicWidgets import (CPSSelectWidget,
                                               CPSMultiSelectWidget,
+                                              CPSStringWidget,
                                               CPSIntWidget)
 from Products.CPSSkins.cpsskins_utils import unserializeFromCookie
 
@@ -92,7 +93,7 @@ class RequestCookiesMixin:
         if self.cookie_id and kw.get('layout_mode') == 'edit':
             self._expireCookie()
 
-    def prepare(self, datastructure, **kw):
+    def prepare(self, datastructure, call_base=True, **kw):
         """ prepare datastructure from datamodel, request and cookie.
 
         cookie not implemented.
@@ -105,7 +106,10 @@ class RequestCookiesMixin:
 
         wid = self.getWidgetId()
 
-        # from datamodel already done in subclass
+        # from datamodel: call base class if required
+        if call_base:
+            klass = getattr(self, 'widget_base_class')
+            klass.prepare(self, datastructure, **kw)
 
         # from cookie
         from_cookie = self.readCookie(wid)
@@ -180,7 +184,7 @@ class CPSSelectFilterWidget(RequestCookiesMixin, CPSSelectWidget):
     def prepare(self, ds, **kw):
         """Prepare datastructure from datamodel."""
         CPSSelectWidget.prepare(self, ds, **kw)
-        RequestCookiesMixin.prepare(self, ds, **kw)
+        RequestCookiesMixin.prepare(self, ds, call_base=False, **kw)
         wid = self.getWidgetId()
         if self.defines_scope and not ds[wid]:
             ds[wid+'_scope'] = self.getScope(ds)
@@ -195,16 +199,24 @@ class CPSMultiSelectFilterWidget(RequestCookiesMixin, CPSMultiSelectWidget):
 
     meta_type = 'MultiSelect Filter Widget'
     _properties = CPSMultiSelectWidget._properties + RequestCookiesMixin._properties
-
-    base_widget_class = CPSMultiSelectWidget
-
-    def prepare(self, ds, **kw):
-        CPSMultiSelectWidget.prepare(self, ds, **kw)
-        RequestCookiesMixin.prepare(self, ds, **kw)
+    widget_base_class = CPSMultiSelectWidget
 
 InitializeClass(CPSMultiSelectFilterWidget)
 
 widgetRegistry.register(CPSMultiSelectFilterWidget)
+
+
+class CPSStringFilterWidget(RequestCookiesMixin, CPSStringWidget):
+    """A string widget that prepares from request and cookies. """
+
+    meta_type = 'String Filter Widget'
+    _properties = CPSStringWidget._properties + RequestCookiesMixin._properties
+    widget_base_class = CPSStringWidget
+
+InitializeClass(CPSStringFilterWidget)
+
+widgetRegistry.register(CPSStringFilterWidget)
+
 
 TOKEN_SUFFIX = '_token'
 
