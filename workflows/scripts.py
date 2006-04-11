@@ -259,7 +259,7 @@ def init_stack_with_user(sci, wf_var_id, prefix='courrier_user', **kw):
 
     use_default = sci.kwargs.get('use_parent_roadmap', False)
     if use_default:
-         # get copy of the default roadmap
+        # get copy of the default roadmap
         mailbox = proxy.aq_inner.aq_parent
         stack = wftool.getStackFor(mailbox, STACK_ID)
         new_stack = stack.getCopy()
