@@ -25,6 +25,7 @@ Layout for searching an answer in existing outgoing mails
    <property name="vocabulary">mailbox_filter_subject</property>
    <property name="translated">True</property>
    <property name="cookie_id">cpscourrier_answers</property>
+   <property name="size">5</property>
    <property name="fields">
      <element value="filter_Subject"/>
    </property>
