@@ -82,13 +82,18 @@ class RequestCookiesMixin:
 
         return read
 
-    def expireCookie(self):
-        if not self.cookie_id:
-            return
+    def _expireCookie(self):
+        """Expire cookie inconditionnaly."""
 
         request = self.REQUEST
         path = request['URLPATH1']
         request.RESPONSE.expireCookie(self.cookie_id, path=path)
+
+    def expireCookie(self, **kw):
+        """Expire cookie if appropriate."""
+
+        if self.cookie_id and kw.get('layout_mode') == 'edit':
+            self._expireCookie()
 
     def prepare(self, datastructure, **kw):
         """ prepare datastructure from datamodel, request and cookie.
@@ -144,7 +149,7 @@ class CPSSelectFilterWidget(RequestCookiesMixin, CPSSelectWidget):
 
         Use-case for this oddity:
         voc of locally accepted portal_types.
-        '' is used at position 0 to mean 'all',
+        '' Is used at position 0 to mean 'all',
         but the query maker will use the list of all existing portal_types
         and datastructure cannot hold lists, because of type inconsistency.
 
@@ -174,7 +179,7 @@ class CPSSelectFilterWidget(RequestCookiesMixin, CPSSelectWidget):
         if not CPSSelectWidget.validate(self, ds, **kw):
             return False
 
-        self.expireCookie()
+        self.expireCookie(**kw)
         return True
 
 
@@ -359,6 +364,7 @@ class CPSIntFilterWidget(RequestCookiesMixin, CPSIntWidget):
            datastructure[wid] = dm[self.fields[0]]
         if self.search_range:
             datastructure[wid + RANGE_SUFFIX] = self.search_range
+
         # from cookie
         from_cookie = self.readCookie(wid)
         if from_cookie is not None:

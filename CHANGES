@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- Cookie invalidation is smarter (Cf doc/developer/filter_widgets.txt)
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Catalog Tabular Widget can build queries with ranges.

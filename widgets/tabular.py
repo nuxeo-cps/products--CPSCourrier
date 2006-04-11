@@ -54,6 +54,9 @@ class FakeResponse:
         self.cookies[cookie_id] = {
             'value': cookie, 'path': path}
 
+    def expireCookie(self, arg, **kw):
+        print "FakeResponse: called expireCookie with arg=%s" % arg
+
 class FakeRequestWithCookies:
     """To simulate a request with cookies
 

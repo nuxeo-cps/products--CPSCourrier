@@ -32,19 +32,24 @@ one provides::
     >>> from Products.CPSSchemas.tests.testWidgets import FakeDataModel
     >>> from Products.CPSSchemas.DataStructure import DataStructure
 
-RequestCookieMixin
+RequestCookiesMixin
 ------------------
 
   This is a mixin class that provides the preparation of datastructure
   from request and cookie. Widgets that subclass this and a widget
   class can call explicitely the usual prepare methode and the one
-  provided by RequestCookieMixin.
+  provided by RequestCookiesMixin::
+
+    >>> from Products.CPSCourrier.widgets.filter_widgets \
+    ...                         import RequestCookiesMixin
+    >>> mixin = RequestCookiesMixin()
 
   The cookie parsing is optional and depends on the non-emptiness of
-  the 'cookie' property.
+  the 'cookie_id' property.
 
   We'll need some imports to deal with cookies::
 
+    >>> from Products.CPSCourrier.widgets.tabular import FakeRequestWithCookies
     >>> from Products.CPSCourrier.widgets.tabular import serializeForCookie
     >>> from Products.CPSCourrier.widgets.filter_widgets \
     ...                 import unserializeFromCookie
@@ -52,6 +57,60 @@ RequestCookieMixin
   And some general widget stuff::
 
     >>> from Products.CPSSchemas.Widget import widgetname
+
+
+Cookie expiration
+~~~~~~~~~~~~~~~~~
+
+  Suppose the widget is being used for a CPSDocument instance,
+  e.g., a dashboard or a portlet. Then the values stored in ZODB will behave
+  as default values: the filtering criteria ones you get when
+  you use it for the first time. When one changes them, cookies must
+  expire at validation time, otherwise it could look as if nothing happened.
+
+  On the other hand, if the datamodel refers to transient data, as in
+  the advanced search form, the cookie mustn't expire at validation
+  time, because validation will happpen on all search results pages.
+  Expiring the cookie effectively breaks column-sorting capabilities
+  since these are simple HTTP GETs providing the *change* in
+  filtering options only.
+
+  Fortunately, the layout mode is different in these two diametrally
+  opposed use cases, and ``validate()`` receives it in its keyword args.
+
+  The actual expiration is handled by ``_expireCookie()``. Let's
+  replace it by a logger for the purposes of demonstration::
+
+    >>> def _expireCookie():
+    ...     print 'Expired'
+    >>> mixin._expireCookie = _expireCookie
+
+  In edit mode, we are changing ZODB persistent data, but we won't do
+  anything if the ``cookie_id`` property is not set::
+
+    >>> mixin.expireCookie(layout_mode='edit')
+    >>> mixin.cookie_id = 'the_cookie'
+    >>> mixin.expireCookie(layout_mode='edit')
+    Expired
+
+  In view or search_results modes, we are always changing parameters
+  on the fly, we need not to expire::
+
+    >>> mixin.expireCookie(layout_mode='view')
+    >>> mixin.expireCookie(layout_mode='search_results')
+
+  Now let's check that the genuine ``_expireCookie`` does its job,
+  that is forwarding to the response object.
+
+    >>> mixin = RequestCookiesMixin()
+    >>> mixin.cookie_id = 'the_cookie'
+    >>> mixin.REQUEST = FakeRequestWithCookies()
+    >>> resp = mixin.REQUEST.RESPONSE
+    >>> resp.setCookie('the_cookie', 'abcd', path='/')
+    >>> resp.cookies['the_cookie']['value']
+    'abcd'
+    >>> mixin._expireCookie()
+    FakeResponse: called expireCookie with arg=the_cookie
 
 CPSSelectFilterWidget
 ---------------------
