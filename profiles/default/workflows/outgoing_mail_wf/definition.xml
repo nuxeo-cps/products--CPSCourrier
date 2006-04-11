@@ -28,8 +28,7 @@
    <permission-role>WorkspaceManager</permission-role>
    <permission-role>Owner</permission-role>
   </permission-map>
-  <permission-map name="WebDAV Unlock items"
-                  acquired="False">
+  <permission-map name="WebDAV Unlock items" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>WorkspaceManager</permission-role>
    <permission-role>Owner</permission-role>
@@ -55,7 +54,17 @@
  <state state_id="sent" title="">
   <exit-transition transition_id="reactivate"/>
   <exit-transition transition_id="reset"/>
- </state>
+  <permission-map name="View" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>Owner</permission-role>
+   <permission-role>Pilot</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>WorkspaceReader</permission-role>
+  </permission-map>
+  <permission-map name="Modify portal content" acquired="False"/>
+  <permission-map name="WebDAV Lock items" acquired="False"/>
+  <permission-map name="WebDAV Unlock items" acquired="False"/>
+  </state>
  <state state_id="validated" title="">
   <exit-transition transition_id="roadmap_view"/>
   <exit-transition transition_id="invalidate"/>
@@ -70,6 +79,9 @@
    <permission-role>WorkspaceManager</permission-role>
    <permission-role>WorkspaceReader</permission-role>
   </permission-map>
+  <permission-map name="Modify portal content" acquired="False"/>
+  <permission-map name="WebDAV Lock items" acquired="False"/>
+  <permission-map name="WebDAV Unlock items" acquired="False"/>
   <stack-definition stackdef_id="Pilots"
                     variable_id="Pilots"
                     meta_type="Hierarchical Stack Definition"
@@ -96,6 +108,7 @@
   <state-behavior behavior_id="workflow-reset"/>
   <push-on-workflow-variable variable_id="Pilots"/>
   <pop-on-workflow-variable variable_id="Pilots"/>
+  <edit-on-workflow-variable variable_id="Pilots"/>
   <workflow-down-on-workflow-variable variable_id="Pilots"/>
   <workflow-reset-on-workflow-variable variable_id="Pilots"/>
  </state>
@@ -270,6 +283,7 @@
              after_script="">
   <guard>
    <guard-role>Pilot</guard-role>
+   <guard-role>Owner</guard-role>
    <guard-role>Manager</guard-role>
    <guard-role>WorkspaceManager</guard-role>
   </guard>
