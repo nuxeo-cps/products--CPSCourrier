@@ -273,9 +273,14 @@ class CPSTimeLeftWidget(CPSIntWidget):
             today = kw.get('today', datetime.today())
             datastructure[wid] = str((today-due).days)
         else: # ZCat or ZODB
-            due = DateTime(due)
-            today = kw.get('today', DateTime())
-            datastructure[self.getWidgetId()] = str(int(today-due))
+            try:
+                due = DateTime(due)
+            except DateTime.SyntaxError:
+                value = ''
+            else:
+                today = kw.get('today', DateTime())
+                value = str(int(today-due))
+            datastructure[self.getWidgetId()] = value
 
     def render(self, mode, datastructure, **kw):
         base_rendered = CPSIntWidget.render(self, mode, datastructure)

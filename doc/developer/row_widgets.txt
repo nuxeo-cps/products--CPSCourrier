@@ -212,6 +212,15 @@ is a backdoor to make examples reproducible)::
     '3'
     >>> widget.prepare(ds) # no failure with current time
 
+It doesn't fail if the string is badly formatted. Can happen if this
+is a Missing.value coming from some brain::
+
+    >>> dm['deadline'] ='200sjjdfskj'
+    >>> widget.prepare(ds, today=DateTime('2006/04/10'))
+    >>> ds['the_wid']
+    ''
+    >>> widget.prepare(ds) # no failure with current time
+
 It does understand datetime.datetime objects too
     >>> from datetime import datetime
     >>> dm['deadline'] = datetime(2006, 04, 10)
