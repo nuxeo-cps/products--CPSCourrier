@@ -255,3 +255,11 @@ class CourrierFunctionalTestCase(CPSTestCase):
         roles = pm.getMergedLocalRoles(object)
         user_id = getSecurityManager().getUser().getId()
         return roles, roles.get('user:%s' %user_id)
+
+    # make tests less verbose by using custom accessor for WF state
+    def _get_state(self, ob):
+        return ob.workflow_history.values()[0][-1]['review_state']
+
+    def _set_state(self, ob, state):
+        ob.workflow_history.values()[0][-1]['review_state'] = state
+
