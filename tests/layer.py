@@ -83,6 +83,14 @@ class CommonIntegrationFixture:
                                 **{'from': 'test_mailbox2@cpscourrier.com'})
         self.mb2 = self.mbg[self.MB2_ID]
 
+    # make tests less verbose by using custom accessor for WF state
+    def _get_state(self, ob):
+        return ob.workflow_history.values()[0][-1]['review_state']
+
+    def _set_state(self, ob, state):
+        ob.workflow_history.values()[0][-1]['review_state'] = state
+
+
 class CPSCourrierFunctionalLayerClass(CommonIntegrationFixture,
                                       CPSCourrierLayerClass):
 
@@ -180,13 +188,6 @@ class IntegrationTestCase(CommonIntegrationFixture, CPSTestCase):
         self.portal.mailboxes.manage_delObjects([self.MBG_ID])
         transaction.commit()
         self.logout()
-
-    # make tests less verbose by using custom accessor for WF state
-    def _get_state(self, ob):
-        return ob.workflow_history.values()[0][-1]['review_state']
-
-    def _set_state(self, ob, state):
-        ob.workflow_history.values()[0][-1]['review_state'] = state
 
 
 class CourrierFunctionalTestCase(CPSTestCase):
