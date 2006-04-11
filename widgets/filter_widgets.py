@@ -35,6 +35,7 @@ from Products.CPSSkins.cpsskins_utils import unserializeFromCookie
 from Products.CPSSchemas.tests.testWidgets import (FakePortal,
                                                    FakeDataStructure,
                                                    FakeDataModel)
+from Products.CPSSchemas.Widget import widgetname
 
 from Products.CPSCourrier.config import RANGE_SUFFIX
 
