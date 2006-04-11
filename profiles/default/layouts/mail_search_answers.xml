@@ -30,7 +30,7 @@ Layout for searching an answer in existing outgoing mails
    </property>
  </widget>
 
- <widget name="q_from" meta_type="String Widget">
+ <widget name="q_mail_from" meta_type="String Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_from_label</property>
    <property name="label_edit">cpscourrier_from_label</property>
@@ -38,12 +38,14 @@ Layout for searching an answer in existing outgoing mails
    <property name="fields">
      <element value="filter_from"/>
    </property>
+   <property name="cookie_id">cpscourrier_answers</property>
  </widget>
 
  <widget name="q_template_usage" meta_type="Int Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
-   <property name="label">cpscourrier_template_usage</property>
-   <property name="label">cpscourrier_template_usage</property>
+   <property name="label">cpscourrier_min_template_usage</property>
+   <property name="label_edit">cpscourrier_min_template_usage</property>
+   <property name="cookie_id">cpscourrier_answers</property>
    <property name="is_i18n">True</property>
    <property name="fields">
      <element value="template_usage"/>
@@ -51,18 +53,15 @@ Layout for searching an answer in existing outgoing mails
    <property name="search_range">min</property>
  </widget>
 
- <widget name="q_portal_type" meta_type="Select Filter Widget">
+ <widget name="q_portal_type" meta_type="String Widget">
+   <property name="hidden_layout_modes">search_results edit</property>
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_type_label</property>
    <property name="label_edit">cpscourrier_type_label</property>
    <property name="is_i18n">True</property>
-   <property name="vocabulary">mailbox_allowed_ptype</property>
-   <property name="translated">False</property>
-   <property name="cookie_id">cpscourrier_answers</property>
    <property name="fields">
      <element value="filter_type" />
    </property>
-   <property name="defines_scope">True</property>
  </widget>
 
  <widget name="q_sort" meta_type="Toggable Criterion Widget">
@@ -70,7 +69,7 @@ Layout for searching an answer in existing outgoing mails
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_type_label</property>
    <property name="is_i18n">True</property>
-   <property name="cookie_id">cpscourrier</property>
+   <property name="cookie_id">cpscourrier_answers</property>
    <property name="toggle_tokens">
      <element value="" />
      <element value="reverse" />
@@ -90,6 +89,7 @@ Layout for searching an answer in existing outgoing mails
 </widget>
 
 <widget name="q_ZCText_or" meta_type="String Widget">
+   <property name="label">cpscourrier_fulltext_search</property>
    <property name="label_edit">cpscourrier_fulltext_search</property>
    <property name="is_i18n">True</property>
 
@@ -106,7 +106,7 @@ Layout for searching an answer in existing outgoing mails
    </row>
    <row>
      <cell name="q_Subject"/>
-     <cell name="q_portal_type" />
+     <cell name="q_mail_from" />
    </row>
    <row>
      <cell name="Table"/>

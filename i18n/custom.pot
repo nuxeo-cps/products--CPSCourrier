@@ -142,7 +142,10 @@ msgstr ""
 
 msgid "cpscourrier_mailbox_addresses_row_label"
 msgstr ""
- 
+
+msgid "cpscourrier_min_template_usage"
+msgstr ""
+
 #
 # Vocabularies
 #

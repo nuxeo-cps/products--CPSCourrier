@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <object name="mail_search_answers" meta_type="CPS Schema">
   <field name="filter_Subject" meta_type="CPS String List Field" />
-  <field name="filter_type" meta_type="CPS String Field" />
+  <field name="filter_type" meta_type="CPS String Field">
+    <property name="default_expr">string:Outgoing Mail</property>
+  </field>
   <field name="filter_sort_on" meta_type="CPS String Field" />
   <field name="filter_sort_order" meta_type="CPS String Field" />
   <field name="filter_sort_ref" meta_type="CPS String Field" />
   <field name="filter_fulltext" meta_type="CPS String Field" />
   <field name="filter_from" meta_type="CPS String Field" />
   <field name="template_usage" meta_type="CPS Int Field">
-    <property name="default_expr">python:5</property>
   </field>
 </object>
