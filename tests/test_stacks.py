@@ -220,6 +220,9 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.assertEquals(for_render[1][1]['items'][0]['identite'],
                           'member2_ftest-mailbox')
 
+        # cleaning outgoing proxy
+        self.mb.manage_delObjects(['re'])
+
 def test_suite():
     return unittest.TestSuite((
         unittest.makeSuite(CourrierOutgoingStackFunctionalTestCase),
