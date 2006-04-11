@@ -147,7 +147,63 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member1', self.mb)
         self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
 
+        # before going further, member1 adds member2 to the stacks as well at
+        # the same level
+        kw = {'current_var_id': 'Pilots',
+              'directive': 'response',
+              'level': '0',
+              'workflow_action_form': 'cpscourrier_roadmap',
+              'submit_add': 'Valider',
+              'push_ids': ['courrier_user:member2_ftest-mailbox']}
+        stack_mod(**kw)
+        stack = self.wftool.getStackFor(proxy, 'Pilots') # necessary
+        self.assertEquals(self._get_state(proxy), 'work')
+        self.assertEquals(stack.getAllLevels(), [0])
+        elt = stack._getLevelContentValues()[1]
+        self.assertEquals(elt.getId(), 'courrier_user:member2_ftest-mailbox')
 
+        # and she can checkout a draft as well
+        self.flogin('reader', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.login('manager')
+        self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.flogin('member2', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.flogin('member1', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
+
+        # but member1 is faster and does it first
+        self.wftool.doActionFor(proxy, 'checkout_draft', dest_container=self.mb,
+                                initial_transition='checkout_draft_in')
+        draft = self.mb[proxy.getId()+'_1']
+
+        # the original proxy is completely locked:
+        self.assertEquals(self._get_state(proxy), 'locked')
+        self.flogin('reader', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.login('manager')
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.flogin('wsmanager', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.flogin('member2', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.flogin('member1', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+
+        # the draft can only get edited by member1 (and the managers)
+        self.assertEquals(self._get_state(draft), 'draft')
+        self.flogin('reader', self.mb)
+        self.failIf(checkPerm('Modify portal content', draft))
+        self.login('manager')
+        self.assert_(checkPerm('Modify portal content', draft))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(checkPerm('Modify portal content', draft))
+        self.flogin('member2', self.mb)
+        self.failIf(checkPerm('Modify portal content', draft))
+        self.flogin('member1', self.mb)
+        self.assert_(checkPerm('Modify portal content', draft))
 
 class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
 
