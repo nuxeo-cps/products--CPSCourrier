@@ -53,6 +53,13 @@ Empty values get removed by default::
     >>> tab.buildFilters(datastructure2)
     {'eggs': 'spam'}
 
+The types are preserved::
+
+    >>> datastructure4 = DataStructure(data = {'q_one': [1],
+    ...                                       'q_eggs': 3})
+    >>> pretty_print(tab.buildFilters(datastructure4))
+    {'eggs': 3, 'one': [1]}
+
 Empty values can be replaced by a default value if present (postfixed
 '_scope' in datastructure)::
 
