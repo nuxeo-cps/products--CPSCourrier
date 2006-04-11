@@ -36,6 +36,7 @@ from Products.CPSSchemas.tests.testWidgets import (FakePortal,
                                                    FakeDataStructure,
                                                    FakeDataModel)
 
+from Products.CPSCourrier.config import RANGE_SUFFIX
 
 # XXX this should be importable from CPSSchemas.Widget
 WIDGET_PREFIX = 'widget__'
@@ -333,12 +334,39 @@ class CPSIntFilterWidget(RequestCookiesMixin, CPSIntWidget):
     """ Puts its argument in datastructure. """
 
     meta_type = 'Int Filter Widget'
-    _properties = CPSIntWidget._properties + RequestCookiesMixin._properties
+    _properties = CPSIntWidget._properties + RequestCookiesMixin._properties + (
+        {'id': 'search_range', 'type': 'string', 'mode': 'w',
+         'label': 'Range usage in corresponding search'},)
+
+    search_range = ''
+
+    def validate(self, datastructure, **kw):
+        """ """
+        value = datastructure.get(self.getWidgetId())
+        if isinstance(value, int):
+            dm = datastructure.getDataModel()
+            dm[self.fields[0]] = value
+            return 1
+        else:
+           return CPSIntWidget.validate(self, datastructure, **kw)
 
     def prepare(self, datastructure, **kw):
+        wid = self.getWidgetId()
+        dm = datastructure.getDataModel()
         if self.fields: # Use-case for no fields: batching
-            CPSIntWidget.prepare(self, datastructure, **kw)
-        RequestCookiesMixin.prepare(self, datastructure, **kw)
+           datastructure[wid] = dm[self.fields[0]]
+        if self.search_range:
+            datastructure[wid + RANGE_SUFFIX] = self.search_range
+        # from cookie
+        from_cookie = self.readCookie(wid)
+        if from_cookie is not None:
+            datastructure[wid] = int(from_cookie)
+
+        # from request form
+        posted = self.REQUEST.form.get(WIDGET_PREFIX + wid)
+        if posted is not None:
+            datastructure[wid] = int(posted)
+
 
 InitializeClass(CPSIntFilterWidget)
 

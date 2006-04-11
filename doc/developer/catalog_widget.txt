@@ -65,6 +65,13 @@ Of course we don't fail if the keys are missing::
     >>> filters = {}
     >>> cat.filtersToQuery(filters)
 
+Queries with ranges (the filter widget has to push such keys in ds)::
+
+    >>> filters = {'used': 5, 'used_range': 'min'}
+    >>> cat.filtersToQuery(filters)
+    >>> pretty_print(filters)
+    {'used': {'query': 5, 'range': 'min'}}
+
 .. Emacs
 .. Local Variables:
 .. mode: rst

@@ -37,6 +37,7 @@ from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 
 from Products.CPSCourrier.braindatamodel import BrainDataModel
 from Products.CPSCourrier.widgets.tabular import TabularWidget
+from Products.CPSCourrier.config import RANGE_SUFFIX
 
 
 logger = logging.getLogger('CPSCourrier.widgets.catalog')
@@ -88,21 +89,30 @@ class CatalogTabularWidget(TabularWidget):
 
         Takes care of fulltext issues. """
 
-        if not self.fulltext_or or not self.fulltext_key:
-            return
+        if self.fulltext_or and self.fulltext_key:
+            filter_or = filters.pop(self.fulltext_or, '').strip()
+            tokens = [token.strip() for token in filter_or.split()]
+            nb_tok = len(tokens)
 
-        filter_or = filters.pop(self.fulltext_or, '').strip()
-        tokens = [token.strip() for token in filter_or.split()]
-        nb_tok = len(tokens)
+            if nb_tok == 1:
+                query_or = tokens[0]
+            else:
+                query_or = '(%s)' % ' OR '.join(tokens)
 
-        if not(nb_tok):
-            return
-        elif nb_tok == 1:
-            query_or = tokens[0]
-        else:
-            query_or = '(%s)' % ' OR '.join(tokens)
+            if nb_tok:
+                filters[self.fulltext_key] = query_or
 
-        filters[self.fulltext_key] = query_or
+        #Ranges
+        to_del = []
+        for key in filters:
+            key_rg = key + RANGE_SUFFIX
+            range_ = filters.get(key_rg)
+            if range_ is not None:
+                to_del.append(key_rg)
+                filters[key] = {'query': filters[key],
+                                'range' : range_}
+        for key in to_del:
+            del filters[key]
 
     def _doBatchedQuery(self, catalog, b_start, b_size, query):
         """ Return batched results, total number of results.

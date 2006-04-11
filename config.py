@@ -39,4 +39,5 @@ BAYES_MIN_PROB = 0.7
 # Id of the workflow stack
 STACK_ID = 'Pilots'
 
-
+# Suffix for ranges in queries
+RANGE_SUFFIX = '_range'

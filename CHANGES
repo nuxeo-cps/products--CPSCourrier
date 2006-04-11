@@ -9,4 +9,6 @@ Bug fixes:
 -
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- Catalog Tabular Widget can build queries with ranges.
+- Int Filter Widget can set a range.
+
