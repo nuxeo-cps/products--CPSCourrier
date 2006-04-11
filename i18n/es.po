@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-04-10 12:01default\n"
+"POT-Creation-Date: 2006-04-11 15:07default\n"
 "PO-Revision-Date: 2006-03-04 10:43+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -325,6 +325,14 @@ msgstr "Direcciones del buzón: "
 #
 msgid "cpscourrier_search_path_label"
 msgstr "Cajas referidas"
+
+#, fuzzy
+msgid "cpscourrier_template_usage_col"
+msgstr "Uses"
+
+#, fuzzy
+msgid "cpscourrier_modification_date_label"
+msgstr "Date"
 
 msgid "cpscourrier_type_label"
 msgstr "Tipo"

@@ -25,14 +25,6 @@ Row layout for search results in the "reply from existing" view
   <property name="sortable" type="string">has_attachment</property>
  </widget>
 
- <widget name="portal_type" meta_type="Type Icon Widget">
-  <property name="label">cpscourrier_type_label</property>
-  <property name="label_edit">cpscourrier_type_label</property>
-  <property name="is_i18n">True</property>
-  <property name="sortable" type="string">portal_type</property>
- </widget>
-
-
  <widget name="From" meta_type="String Widget">
   <property name="fields">
    <element value="from"/>
@@ -68,9 +60,9 @@ Row layout for search results in the "reply from existing" view
   <property name="sortable" type="string">Title</property>
  </widget>
 
- <widget name="Date" meta_type="String Widget">
-  <property name="label">cpscourrier_creation_date_label</property>
-  <property name="label_edit">cpscourrier_creation_date_label</property>
+ <widget name="Date" meta_type="Date Widget">
+  <property name="label">cpscourrier_modification_date_label</property>
+  <property name="label_edit">cpscourrier_modification_date_label</property>
   <property name="fields">
    <element value="created"/>
   </property>
@@ -88,35 +80,18 @@ Row layout for search results in the "reply from existing" view
   <property name="sortable" type="string">review_state</property>
  </widget>
 
- <widget name="priority" meta_type="Select Widget">
-   <property name="label">cpscourrier_priority_label</property>
-   <property name="label_edit">cpscourrier_priority_label</property>
-   <property name="is_i18n">True</property>
-   <property name="vocabulary">mail_priority</property>
-   <property name="translated">True</property>
-   <property name="fields">
-     <element value="priority" />
-   </property>
-   <property name="sortable" type="string">priority</property>
- </widget>
-
- <widget name="timeleft" meta_type="Time Left Widget">
-   <property name="label">cpscourrier_timeleft_label</property>
-   <property name="label_edit">cpscourrier_timeleft_label</property>
-   <property name="css_class">timeleft</property>
+ <widget name="usages" meta_type="Int Widget">
+   <property name="label">cpscourrier_template_usage_col</property>
    <property name="is_i18n">True</property>
    <property name="fields">
-     <element value="deadline" />
+     <element value="template_usage"/>
    </property>
-  <property name="sortable" type="string">Title</property>
+   <property name="sortable" type="string">template_usage</property>
  </widget>
 
  <table>
   <row>
    <cell name="Radio"/>
-  </row>
-  <row>
-   <cell name="portal_type"/>
   </row>
   <row>
    <cell name="has_attachment"/>
@@ -137,10 +112,7 @@ Row layout for search results in the "reply from existing" view
    <cell name="review_state"/>
   </row>
   <row>
-   <cell name="priority"/>
-  </row>
-  <row>
-   <cell name="timeleft"/>
+   <cell name="usages"/>
   </row>
  </table>
 </object>

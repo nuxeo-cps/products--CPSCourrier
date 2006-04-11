@@ -97,6 +97,12 @@ msgstr ""
 msgid "cpscourrier_search_path_label"
 msgstr ""
 
+msgid "cpscourrier_template_usage_col"
+msgstr ""
+
+msgid "cpscourrier_modification_date_label"
+msgstr ""
+
 #
 # Tabular widgets labels
 #
