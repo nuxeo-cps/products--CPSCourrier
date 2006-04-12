@@ -205,6 +205,42 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member1', self.mb)
         self.assert_(checkPerm('Modify portal content', draft))
 
+        # so he does it by changing the title
+        draft_doc = draft.getEditableContent()
+        draft_doc.edit(Title='A better title', proxy=draft)
+
+        # only member1 (the owner of the draft) and the managers can accept the
+        # modification
+        self.flogin('reader', self.mb)
+        self.failIf(wf.isActionSupported(draft, 'checkin_draft'))
+        self.login('manager')
+        self.assert_(wf.isActionSupported(draft, 'checkin_draft'))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(wf.isActionSupported(draft, 'checkin_draft'))
+        self.flogin('member2', self.mb)
+        self.failIf(wf.isActionSupported(draft, 'checkin_draft'))
+        self.flogin('member1', self.mb)
+        self.assert_(wf.isActionSupported(draft, 'checkin_draft'))
+
+        # and so he does
+        self.wftool.doActionFor(draft, 'checkin_draft',
+                                dest_container=self.mb,
+                                dest_objects=[proxy],
+                                checkin_transition="unlock")
+
+        # the change is the title has been merged
+        self.assertEquals(proxy.Title(), 'A better title')
+
+        # the stack has not been affected by the operation
+        stack = self.wftool.getStackFor(proxy, 'Pilots') # necessary
+        self.assertEquals(self._get_state(proxy), 'work')
+        self.assertEquals(stack.getAllLevels(), [0])
+        elts = stack._getLevelContentValues()
+        self.assertEquals([e.getId() for e in elts],
+                          ['courrier_user:member1_ftest-mailbox',
+                           'courrier_user:member2_ftest-mailbox'])
+
+
 class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
 
     def afterSetUp(self):

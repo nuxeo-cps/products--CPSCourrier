@@ -8,6 +8,7 @@ Bug fixes:
 ~~~~~~~~~~
 - Cookie invalidation is smarter (Cf doc/developer/filter_widgets.txt)
 - Various bugfixes on outgoing_mail_wf access control
+- the stack for outgoing mails is no longer lost on checkout/checkin
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Catalog Tabular Widget can build queries with ranges.
