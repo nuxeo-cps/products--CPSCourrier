@@ -377,7 +377,8 @@ def test_suite():
         unittest.makeSuite(CourrierOutgoingStackFunctionalTestCase),
         unittest.makeSuite(CourrierIncomingStackFunctionalTestCase),
         doctest.DocTestSuite('Products.CPSCourrier.workflows.stacks'),
-        doctest.DocFileTest('doc/developer/stacks.txt',
-                            package='Products.CPSCourrier',
-                            optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS),
+        doctest.DocFileTest(
+            'doc/developer/stacks.txt',
+            package='Products.CPSCourrier',
+            optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS),
         ))
