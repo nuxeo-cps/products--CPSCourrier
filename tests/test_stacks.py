@@ -55,8 +55,9 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
                                                    mode='view')
         # TODO: assertions
 
-    def test_outgoing_from_scratch(self):
-        # test the outgoing worklow on a document that is not a reply
+    def test_outgoing_checkouting_from_scratch(self):
+        # test the outgoing collaborative editing worklow on a document that
+        # is not a reply
         wf = self.wftool['outgoing_mail_wf']
         mtool = getToolByName(self.portal, 'portal_membership')
         checkPerm = mtool.checkPermission
@@ -192,6 +193,18 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member1', self.mb)
         self.failIf(checkPerm('Modify portal content', proxy))
 
+        # its stack is no longer editable by anybody while locked
+        self.flogin('reader', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'manage_delegatees'))
+        self.login('manager')
+        self.failIf(wf.isActionSupported(proxy, 'manage_delegatees'))
+        self.flogin('wsmanager', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'manage_delegatees'))
+        self.flogin('member2', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'manage_delegatees'))
+        self.flogin('member1', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'manage_delegatees'))
+
         # the draft can only get edited by member1 (and the managers)
         self.assertEquals(self._get_state(draft), 'draft')
         self.flogin('reader', self.mb)
@@ -239,6 +252,52 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.assertEquals([e.getId() for e in elts],
                           ['courrier_user:member1_ftest-mailbox',
                            'courrier_user:member2_ftest-mailbox'])
+
+        # cleaning the proxy not to pollute other tests
+        self.mb.manage_delObjects([proxy.getId()])
+
+    def test_outgoing_validating_from_scratch(self):
+        # test the outgoing validation worklow on a document that is not a reply
+        wf = self.wftool['outgoing_mail_wf']
+        mtool = getToolByName(self.portal, 'portal_membership')
+        checkPerm = mtool.checkPermission
+
+        # member1 creates an outgoing document
+        self.flogin('member1', self.mb)
+        self.createOutgoing(self.mb, mail_id="outgoing_of_member1")
+        proxy = self.mb.outgoing_of_member1
+        stack = self.wftool.getStackFor(proxy, 'Pilots')
+        stack_mod = proxy.cpscourrier_stack_modify
+
+        # initialy, the proxy is in state "work" with an empty stack
+        self.assertEquals(self._get_state(proxy), 'work')
+        self.assertEquals(stack.getAllLevels(), [])
+
+        # member1 takes the lead
+        kw = {'current_var_id': 'Pilots',
+              'directive': 'response',
+              'level': '0',
+              'workflow_action_form': 'cpscourrier_roadmap',
+              'submit_add': 'Valider',
+              'push_ids': ['courrier_user:member1_ftest-mailbox']}
+        stack_mod(**kw)
+        self.assertEquals(self._get_state(proxy), 'work')
+        self.assertEquals(stack.getAllLevels(), [0])
+        elt = stack._getLevelContentValues()[0]
+        self.assertEquals(elt.getId(), 'courrier_user:member1_ftest-mailbox')
+
+        # member1 (the Pilot) and the managers can then triggers the validate
+        # transition
+        self.flogin('reader', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'validate'))
+        self.login('manager')
+        self.assert_(wf.isActionSupported(proxy, 'validate'))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'validate'))
+        self.flogin('member2', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'validate'))
+        self.flogin('member1', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'validate'))
 
 
 class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):

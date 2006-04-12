@@ -58,12 +58,8 @@
     <managed-role name="Pilot"
                   expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
    </managed-roles>
-   <empty-stack-manage-guard>
-    <guard-role>Manager</guard-role>
-   </empty-stack-manage-guard>
-   <edit-stack-element-guard>
-    <guard-role>Manager</guard-role>
-   </edit-stack-element-guard>
+   <empty-stack-manage-guard></empty-stack-manage-guard>
+   <edit-stack-element-guard></edit-stack-element-guard>
    <view-stack-element-guard></view-stack-element-guard>
   </stack-definition>
  </state>
@@ -282,7 +278,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>WorkspaceManager</guard-role>
-   <guard-role>Owner</guard-role>
+   <guard-role>Pilot</guard-role>
   </guard>
   <transition-behavior behavior_id="delete"/>
  </transition>
@@ -292,6 +288,9 @@
   <action url="%(content_url)s/workflow_transition_form?transition=invalidate"
           category="workflow">action_invalidate</action>
   <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>Pilot</guard-role>
   </guard>
  </transition>
  <transition transition_id="manage_delegatees" title=""
@@ -333,6 +332,9 @@
   <action url="%(content_url)s/cpscourrier_send_reply_form"
           category="workflow">action_send</action>
   <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>Pilot</guard-role>
   </guard>
  </transition>
  <transition transition_id="reset" title=""
@@ -377,6 +379,9 @@
   <action url="%(content_url)s/workflow_transition_form?transition=validate"
           category="workflow">action_validate</action>
   <guard>
+   <guard-role>Pilot</guard-role>
+   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>Manager</guard-role>
   </guard>
  </transition>
  <variable variable_id="Pilots" for_catalog="False"
