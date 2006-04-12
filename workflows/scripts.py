@@ -106,10 +106,8 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
         template_doc.edit(template_usage=template_usage, proxy=template_proxy)
 
     ptype = 'Outgoing Mail'
-    fti = getToolByName(incoming_proxy, 'portal_types')[ptype]
-    dm = fti.getDataModel(None)
     oid = container.computeId(Title)
-    wftool.invokeFactoryFor(container, ptype, oid, datamodel=dm, **data)
+    wftool.invokeFactoryFor(container, ptype, oid, **data)
     outgoing_proxy = getattr(container, oid)
 
     # update the relation between both docids

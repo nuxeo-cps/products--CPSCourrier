@@ -167,11 +167,9 @@ class IntegrationTestCase(CommonIntegrationFixture, CPSTestCase):
                 'from': 'foo@foo.com',
             },
         }
-        mail_fti = self.ttool['Incoming Mail']
         for mail_id, mail_data in incoming_mail_data.items():
-            dm = mail_fti.getDataModel(None)
             self.wftool.invokeFactoryFor(self.mb, 'Incoming Mail', mail_id,
-                                    datamodel=dm, **mail_data)
+                                    **mail_data)
             setattr(self, mail_id, self.mb[mail_id])
         # this is required for cut/paste integration tests
         transaction.commit()
@@ -236,12 +234,10 @@ class CourrierFunctionalTestCase(CPSTestCase):
         if container is None:
             container = self.mb
 
-        mail_fti = self.ttool[portal_type]
-        dm = mail_fti.getDataModel(None)
         mail_id = self.wftool.invokeFactoryFor(self.mb,
                                                portal_type,
                                                mail_id,
-                                               datamodel=dm)
+                                               )
 
         mail = container[mail_id]
         setattr(self, mail_id, mail)
