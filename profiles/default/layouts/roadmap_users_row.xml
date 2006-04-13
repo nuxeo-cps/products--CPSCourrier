@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<object name="roadmap_users_row" meta_type="CPS Layout">
+ <property name="layout_view_method">layout_row_view</property>
+  <widget name="Checkbox" meta_type="Row Boolean Widget">
+    <property name="input_name">push_ids</property>
+    <property name="input_type">checkbox</property>
+    <property name="fields">
+      <element value="uid"/>
+    </property>
+    <property name="format_string">courrier_user:%s</property>
+  </widget>
+
+   <widget name="uid" meta_type="String Widget">
+    <property name="is_i18n">True</property>
+    <property name="label">label_user_name</property>
+    <property name="fields">
+      <element value="uid"/>
+    </property>
+  </widget>
+
+   <widget name="sn" meta_type="String Widget">
+     <property name="is_i18n">True</property>
+     <property name="label">label_last_name</property>
+     <property name="fields">
+       <element value="sn"/>
+     </property>
+   </widget>
+
+   <widget name="givenName" meta_type="String Widget">
+    <property name="is_i18n">True</property>
+     <property name="label">label_first_name</property>
+    <property name="fields">
+      <element value="givenName"/>
+    </property>
+  </widget>
+
+  <table>
+    <row>
+      <cell name="Checkbox"/>
+    </row>
+    <row>
+      <cell name="sn"/>
+    </row>
+    <row>
+      <cell name="givenName"/>
+    </row>
+    <row>
+      <cell name="uid"/>
+    </row>
+  </table>
+</object>

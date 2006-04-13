@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<object name="roadmap_groups_row" meta_type="CPS Layout">
+ <property name="layout_view_method">layout_row_view</property>
+  <widget name="Checkbox" meta_type="Row Boolean Widget">
+    <property name="input_name">push_ids</property>
+    <property name="input_type">checkbox</property>
+    <property name="fields">
+      <element value="group"/>
+    </property>
+    <property name="format_string">courrier_group:%s</property>
+  </widget>
+
+   <widget name="title" meta_type="String Widget">
+    <property name="is_i18n">True</property>
+    <property name="label">label_name</property>
+    <property name="fields">
+      <element value="group"/>
+    </property>
+  </widget>
+
+   <widget name="description" meta_type="String Widget">
+     <property name="is_i18n">True</property>
+     <property name="label">label_description</property>
+     <property name="fields">
+       <element value="description"/>
+     </property>
+   </widget>
+
+  <table>
+    <row>
+      <cell name="Checkbox"/>
+    </row>    <row>
+      <cell name="title"/>
+    </row>
+    <row>
+      <cell name="description"/>
+    </row>
+  </table>
+</object>

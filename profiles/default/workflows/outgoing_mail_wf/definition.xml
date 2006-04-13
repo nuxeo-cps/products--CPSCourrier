@@ -195,7 +195,7 @@
    <!-- This transition does nothing. It is here to provide an action
       that depends on the wf state. It is not even called -->
 
-  <action url="%(content_url)s/cpscourrier_roadmap"
+  <action url="%(content_url)s/cpscourrier_roadmap.html"
           category="object">action_roadmap</action>
   <guard>
     <guard-role>Manager</guard-role>

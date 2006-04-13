@@ -382,7 +382,7 @@
              trigger="USER"
              before_script="unlock_locked_before_abandon"
              after_script="">
-  <action url="%(content_url)s/cpscourrier_roadmap"
+  <action url="%(content_url)s/cpscourrier_roadmap.html"
           category="object">action_roadmap</action>
   <guard>
    <guard-role>Manager</guard-role>
