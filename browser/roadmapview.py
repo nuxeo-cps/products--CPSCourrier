@@ -31,7 +31,7 @@ class RoadmapView(SearchView):
         self.stack = self.wftool.getStackFor(self.context, self.stack_var_id)
         self.users_results = 'submit_users_search' in self.request.form
         self.groups_results = 'submit_groups_search' in self.request.form
-        self.results = self.users_results or self.groups_results
+        self.is_results = self.users_results or self.groups_results
 
     def canManage(self):
         wfs = self.wftool.getWorkflowsFor(self.context)
