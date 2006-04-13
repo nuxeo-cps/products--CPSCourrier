@@ -30,8 +30,7 @@ class ReuseAnswerView(SearchView):
     layout_id = 'mail_search_answers'
 
     def dispatchSubmit(self):
-        """take submissions, calls skins scripts, etc.
-
+        """take submissions and performs actions.
         returns rendered html, empty meaning no script called.
 
         XXX this seems to be called twice as expected. Investigate."""
@@ -48,7 +47,4 @@ class ReuseAnswerView(SearchView):
             return True
         else: # filtering or no submission at all
             return ''
-
-        meth = getattr(context, method)
-        return meth(REQUEST=self.request)
 
