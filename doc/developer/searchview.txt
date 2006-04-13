@@ -64,49 +64,49 @@ make a fake one::
 If we aren't displaying search results, the layout is rendered in
 edit mode::
 
-   >>> view.renderLayout(name='the_search')
+   >>> res = view.renderLayout(name='the_search')
    {'context': <Folder at app/cps>,
     'layout_id': 'the_search',
     'layout_mode': 'edit',
     'mapping': {},
     'ob': {},
     'schema_id': 'the_search'}
-   ('rendered', 'datastructure')
+   >>> pretty_print(res)
+   {'ds': 'datastructure',
+    'rendered': 'rendered',
+    'status': True}
 
 Search results mode corresponds to layout mode 'search_results'::
 
    >>> view.is_results = True
-   >>> view.renderLayout(name='the_search')
+   >>> res = view.renderLayout(name='the_search')
    {'context': <Folder at app/cps>,
     'layout_id': 'the_search',
     'layout_mode': 'search_results',
     'mapping': {},
     'ob': {},
     'schema_id': 'the_search'}
-   ('rendered', 'datastructure')
 
 If name is missing, the ``layout_id`` attribute is taken::
 
    >>> view.layout_id = 'some_layout'
-   >>> view.renderLayout()
+   >>> res = view.renderLayout()
    {'context': <Folder at app/cps>,
     'layout_id': 'some_layout',
     'layout_mode': 'search_results',
     'mapping': {},
     'ob': {},
     'schema_id': 'some_layout'}
-   ('rendered', 'datastructure')
 
 The schema can be independently specified::
 
-   >>> view.renderLayout(schema_id='the_schema')
+   >>> res = view.renderLayout(schema_id='the_schema')
    {'context': <Folder at app/cps>,
     'layout_id': 'some_layout',
     'layout_mode': 'search_results',
     'mapping': {},
     'ob': {},
     'schema_id': 'the_schema'}
-   ('rendered', 'datastructure')
 
 Values forwarding
 ~~~~~~~~~~~~~~~~~

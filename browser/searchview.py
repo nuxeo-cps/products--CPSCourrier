@@ -58,7 +58,7 @@ class SearchView(BrowserView):
             layout_mode=mode,
             ob={})
         logger.debug('status: %s' % status)
-        return rendered, ds
+        return {'rendered': rendered, 'status': status, 'ds': ds}
 
     def forwardInputs(self, widgets, cookie_id=None):
         """make some hidden <input> tags to forward part request to next
