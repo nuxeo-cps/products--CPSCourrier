@@ -1,0 +1,137 @@
+
+<metal:html use-macro="here/content_lib_master/macros/master">
+  <metal:block fill-slot="header">
+  </metal:block>
+
+  <metal:block fill-slot="style_slot">
+    <link rel="Stylesheet" type="text/css" href=""
+	  tal:attributes="href string:${base_url}document.css" />
+    <link rel="Stylesheet" type="text/css" href=""
+	  tal:attributes="href string:${base_url}forum.css" />
+  </metal:block>
+
+  <metal:main fill-slot="main"
+	      tal:define="can_manage view/canManage;
+			  requested_mode request/form/stack_mode|string:edit;
+			  mode python:can_manage and requested_mode or 'view';
+			  edit_mode python:mode == 'edit';
+			  insert_mode python:mode == 'insert';
+			  searching request/form/search_submit|nothing;
+			  self_url string:cpscourrier_roadmap.html;
+			  ">
+
+    <h1 i18n:translate="cpscourrier_roadmap_heading">
+      Mail Handling Roadmap
+    </h1>
+
+    <h2 tal:condition="python:mode=='insert'"
+       i18n:translate="cpscourrier_choose_insertion_level">
+      Please select a level to insert the new delegatee
+    </h2>
+
+    <tal:startform condition="python:mode != 'view'"
+		   replace="structure string:<form action='cpscourrier_stack_modify' method='post' enctype='multipart/form-data'>" />
+    <tal:block
+	replace="structure python:view.renderStack(mode=mode)" />
+    <input type="hidden" name="workflow_action_form"
+	   value="changed by tal"
+	   tal:attributes="value self_url"/>
+    <input type="hidden" name="current_var_id" value=""
+	   tal:attributes="value view/stack_var_id" />
+    <tal:buttons condition="edit_mode">
+      <input type="submit" class="context" name="submit_delete"
+	     value="button_delete"
+	     i18n:attributes="value"/>
+      <input type="submit" class="context" name="submit_edit"
+	     value="button_update_stackelts"
+	     i18n:attributes="value"/>
+      <input type="submit" class="context" name="submit_move_down"
+	     value="button_move_down_delegatees"
+	     i18n:attributes="value"/>
+    </tal:buttons>
+    <tal:endform condition="edit_mode" replace="structure string:</form>" />
+
+      <div>
+
+	<h2 i18n:translate="search_for_delegatees"
+	    tal:condition="edit_mode">
+	  Add new delegatees to the roadmap
+	</h2>
+	<h2 i18n:translate="delegatees_search_results"
+	    tal:condition="insert_mode">
+	  Add delegatees: search results
+	</h2>
+	 <tal:block condition="view/users_results"
+		    replace="structure python:view.renderLayout(mode='view',
+			                       name='roadmap_users_search')"/>
+	 <tal:block condition="view/groups_results"
+		    replace="structure python:view.renderLayout(mode='view',
+			                       name='roadmap_groups_search')"/>
+
+	<h3 i18n:translate="cpscourrier_search_users"
+	    tal:condition="edit_mode">
+	  Search users
+	</h3>
+	<form method="post" action="changed by tal"
+	      tal:condition="edit_mode"
+	      tal:attributes="action self_url">
+	  <tal:block replace="structure python:view.renderLayout(mode='edit',
+			      name='roadmap_users_search')"/>
+	  <input type="hidden" name="stack_mode" value="insert" />
+	  <input type="submit"
+		 name="submit_users_search"
+		 value="button_search"
+		 i18n:attributes="value"/>
+	</form>
+
+	<h3 i18n:translate="cpscourrier_search_groups"
+	    tal:condition="edit_mode">
+	  Search groups
+	</h3>
+	<form method="post" action="changed by tal"
+	      tal:condition="edit_mode"
+	      tal:attributes="action self_url">
+	  <tal:block replace="structure python:view.renderLayout(mode='edit',
+			      name='roadmap_groups_search')"/>
+	  <input type="hidden" name="stack_mode" value="insert" />
+	  <input type="submit"
+		 name="submit_groups_search"
+		 value="button_search"
+		 i18n:attributes="value"/>
+	</form>
+
+
+    <div tal:condition="insert_mode">
+      <div class="label">
+	<label for="push_directive"
+	       i18n:translate="label_push_directive">
+   	  Directive to give these users
+	</label>
+      </div>
+      <select name="directive"
+	      id="push_directive"
+	      tal:define="vtool here/portal_vocabularies;
+			  vocabulary vtool/mail_directives;
+			  voc_keys vocabulary/keys;
+			  ">
+	<tal:block repeat="key voc_keys">
+	  <option
+	      tal:condition="python:key != 'handle'"
+	      tal:define="msgid python:vocabulary.getMsgid(key, '')"
+	      tal:content="python:cpsmcat(msgid)"
+	      tal:attributes="value key;"
+	      />
+	</tal:block>
+      </select>
+      <input type="submit" class="context"
+	     name="submit_add" value="button_validate"
+	     i18n:attributes="value"/>
+      <input type="button" class="context"
+	     name="cancel" value="button_cancel"
+	     i18n:attributes="value"
+	     onclick="history.back();"/>
+
+    </div>
+    <tal:endform condition="insert_mode" replace="structure string:</form>" />
+  </metal:main>
+</metal:html>

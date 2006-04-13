@@ -19,66 +19,15 @@
 
 import logging
 
-from Products.Five.browser import BrowserView
+from Products.CMFCore.utils import getToolByName
 
-from Products.CMFCore.utils import getToolByName, _checkPermission
-from Products.CMFCore.permissions import AddPortalContent
-
-from Products.CPSSchemas.DataStructure import DataStructure
-from Products.CPSSchemas.Widget import widgetname
-from Products.CPSSchemas.BasicWidgets import renderHtmlTag
-from Products.CPSSkins.cpsskins_utils import unserializeFromCookie
+from searchview import SearchView
 
 logger = logging.getLogger('CPSCourrier.browser.reuseanswerview')
 
-class ReuseAnswerView(BrowserView):
+class ReuseAnswerView(SearchView):
 
-    layout_id = 'mail_dashboard'
-
-    def __init__(self, context, request):
-
-        BrowserView.__init__(self, context, request)
-        form = self.request.form
-        self.is_results = 'search_submit' in form or 'filter' in form
-
-    def renderLayout(self):
-        mode = self.is_results and 'search_results' or 'edit'
-        ltool = getToolByName(self.context, 'portal_layouts')
-        ob = {}
-        rendered, status, ds = ltool.renderLayout(
-            layout_id='mail_search_answers',
-            schema_id='mail_search_answers',
-            context=self.context,
-            mapping=self.request.form,
-            layout_mode=mode,
-            ob={},
-            )
-        logger.debug('status: %s' % status)
-        return rendered, ds
-
-    def forwardInputs(self, *widgets):
-        """make some hidden <input> tags to forward part request to next
-        submission, in particular, parts of query that aren't cookie-persistent
-
-        If we come from a column sort request, we have to pick the value
-        from cookie (!)
-        """
-
-        res = []
-        cookie = self.request.cookies.get('cpscourrier')
-        if cookie is not None:
-            cookie = unserializeFromCookie(cookie)
-        for wid in widgets:
-            name = widgetname(wid)
-            if cookie is not None:
-                value = str(cookie.get(wid))
-            if cookie is None or value is None:
-                value = self.request.get(name)
-            if value is not None:
-                tag = renderHtmlTag('input', type='hidden',
-                                    name=name, value=value)
-                res.append(tag)
-        return '\n'.join(res)
+    layout_id = 'mail_search_answers'
 
     def dispatchSubmit(self):
         """take submissions, calls skins scripts, etc.

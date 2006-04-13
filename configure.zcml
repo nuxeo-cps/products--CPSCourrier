@@ -27,4 +27,12 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <browser:page
+      for="Products.CPSCore.interfaces.ICPSProxy"
+      name="cpscourrier_roadmap.html"
+      class=".browser.roadmapview.RoadmapView"
+      template="browser/roadmap.zpt"
+      permission="cmf.ModifyPortalContent"
+      />
+
 </configure>
