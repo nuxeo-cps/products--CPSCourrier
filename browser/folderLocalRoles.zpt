@@ -33,6 +33,21 @@
     </form>
   </div>
 
+<div class="user_roles">
+    <h3 i18n:translate="cpscourrier_search_groups"
+	tal:condition="not:searching">
+      Search groups
+    </h3>
+    <form method="post" action=""
+	  tal:condition="not:searching">
+      <tal:block replace="structure view/renderGroupsLayout"/>
+      <input type="submit"
+	     name="submit_users_search"
+	     value="button_search"
+	     i18n:attributes="value"/>
+    </form>
+  </div>
+
 <!-- End search -->
 
 <div class="user_roles" tal:condition="python:searching">
