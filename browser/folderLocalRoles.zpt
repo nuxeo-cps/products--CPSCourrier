@@ -68,8 +68,13 @@
   </div>
 
 <!-- End assignment -->
-
-<metal:block use-macro="here/folder_localrole_assigned/macros/assigned" />
+<tal:block define="localrole_form view/getFormName;
+		   localrole_edit_url submit_url;
+		   localrole_block_url submit_url;
+		   localrole_form_url string:${here_url}/${localrole_form}
+		   ">
+  <metal:block use-macro="here/folder_localrole_assigned/macros/assigned" />
+</tal:block>
 
 </metal:main>
 

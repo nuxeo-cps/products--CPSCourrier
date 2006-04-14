@@ -84,6 +84,8 @@ class LocalRolesView(SearchView):
             meth = 'folder_localrole_edit'
         elif 'delete_local_roles' in form:
             meth = 'folder_localrole_edit'
+        elif 'lr_block' or 'lr_unblock' in form:
+            meth = 'folder_localrole_block'
 
         form_name = form.pop('form_name', None)
 
