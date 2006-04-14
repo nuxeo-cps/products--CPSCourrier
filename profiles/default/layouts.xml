@@ -24,6 +24,8 @@
  <object name="mail_search_answers" meta_type="CPS Layout"/>
  <object name="roadmap_groups_search" meta_type="CPS Layout"/>
  <object name="roadmap_users_search" meta_type="CPS Layout"/>
+ <object name="localroles_groups_search" meta_type="CPS Layout"/>
+ <object name="localroles_users_search" meta_type="CPS Layout"/>
 
  <!-- layouts for rows of contents views -->
  <object name="mailbox_contents_row" meta_type="CPS Layout"/>
@@ -32,5 +34,7 @@
  <object name="mail_search_answers_row" meta_type="CPS Layout"/>
  <object name="roadmap_groups_row" meta_type="CPS Layout"/>
  <object name="roadmap_users_row" meta_type="CPS Layout"/>
+ <object name="localroles_groups_row" meta_type="CPS Layout"/>
+ <object name="localroles_users_row" meta_type="CPS Layout"/>
 
 </object>

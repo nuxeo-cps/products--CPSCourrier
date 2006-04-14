@@ -38,6 +38,15 @@ class SearchView(BrowserView):
         form = self.request.form
         self.is_results = 'search_submit' in form or 'filter' in form
 
+    def setAttrs(self, **kw):
+        """Set attributes.
+
+        Useful in zpts where a lot of possibly costly info has already been
+        looked up by a master macro."""
+
+        for key, item in kw.items():
+            setattr(self, key, item)
+
     def renderLayout(self, name='', schema_id=None):
         """Render the requested layout.
 
@@ -86,6 +95,25 @@ class SearchView(BrowserView):
                                     name=name, value=value)
                 res.append(tag)
         return '\n'.join(res)
+
+    def getFormName(self):
+        """Used by ZPT to know its own name in URL."""
+
+        return str(self.__name__)
+
+    def reRedirect(self, form_name=None):
+        """Remakes redirection.
+
+        One of the FS PythonScript did a redirection to folder_localroles_form
+        change this to our form, but keep psms etc.
+        """
+
+        form_name = form_name or self.form_name
+        response = self.request.RESPONSE
+        if response.getStatus() == 302: # Moved temporarily (redirection)
+            url = response.getHeader('location')
+            url = url.replace('folder_localrole_form', form_name)
+            response.redirect(url)
 
     def dispatchSubmit(self):
         """take submissions, calls skins scripts, etc.

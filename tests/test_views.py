@@ -83,7 +83,8 @@ class IntegrationTestReuseAnswerView(IntegrationTestCase):
     def test_dispatchSubmit_nothing(self):
         # The button isn't in the form, one shouldn't do anything
         self.request.form = {'sort-on': 'column', 'rpath': '/some/rpath'}
-        self.assertEquals(self.view.dispatchSubmit, '')
+        self.assertEquals(self.view.dispatchSubmit(), '')
+
 
 def test_suite():
     return unittest.TestSuite((

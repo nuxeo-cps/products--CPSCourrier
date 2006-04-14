@@ -3,7 +3,7 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- The folder localrole form assignment leverages tabular directory widgets
 Bug fixes:
 ~~~~~~~~~~
 - Cookie invalidation is smarter (Cf doc/developer/filter_widgets.txt)
