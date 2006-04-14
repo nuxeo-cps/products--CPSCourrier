@@ -59,7 +59,7 @@
   <permission value="View"/>
  </action>
  <action title="action_local_roles" action_id="localroles" category="object"
-    condition_expr="" url_expr="string:${object_url}/folder_localrole_form"
+    condition_expr="" url_expr="string:${object_url}/folder_localroles.html"
     visible="True">
   <permission value="Change permissions"/>
  </action>
