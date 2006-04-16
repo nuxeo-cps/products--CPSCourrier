@@ -331,7 +331,9 @@ class TabularWidget(CPSPortletWidget):
         return {'current_page': current_page,
                 'nb_pages': nb_pages,
                 'linked_pages' : range(first_page, last_page+1),
-                'form_key' : widgetname(batching_wid),}
+                'form_key' : widgetname(batching_wid),
+                # search views need to know they are displaying results:
+                'filter_button': self.filter_button}
 
 
     def render(self, mode, datastructure, **kw):

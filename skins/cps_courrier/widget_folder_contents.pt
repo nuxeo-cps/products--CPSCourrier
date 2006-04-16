@@ -81,10 +81,11 @@
     <tal:block define="form_key batching_info/form_key;
 		       pages batching_info/linked_pages;
 		       current_page batching_info/current_page;
+		       filter_button batching_info/filter_button;
 		       ">
       Current page: <span tal:content="current_page"/><br/>
       <a href="" tal:repeat="page pages"
-	 tal:attributes="href string:${here_url}?${form_key}=${page};
+	 tal:attributes="href string:${here_url}?${form_key}=${page}&${filter_button}=go;
 			 style python:page == current_page and 'strong' or 'small'"
 	 tal:content="page"/>
     </tal:block>

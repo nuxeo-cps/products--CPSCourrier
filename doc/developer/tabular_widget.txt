@@ -245,7 +245,10 @@ prefix of the target widget::
     '?widget__PREF-on=myindex&widget__PREF-col=mycol'
 
 If the filter_button property is non-empty, we get an additional key
-in the built GET request (see the section on buildFilter)
+in the built GET request (see the section on buildFilter). In case
+the tabular widget is included in a view that has several rendering
+modes according to presence of a key in request (typically a search
+form), this must be used to stay in the same mode::
 
     >>> tab.filter_button = 'filter'
     >>> tab.columnFromWidget(col_wi, ds)[3]
@@ -348,6 +351,8 @@ Batching gadget
   :current_page: requested page (int)
   :linked_pages: pages to propose a link to (int list)
   :form_key: the key to use in a link to request a specific page
+  :filter_button: to be put in GET request for views that deduce mode
+                  from request (same as column info case)
 
   The ``linked_pages`` list is deduced from current_page and the
   property ``batching_gadget_pages``. The batching info is computed by
@@ -359,6 +364,7 @@ Batching gadget
      >>> current_page = 7
      >>> pretty_print(tab.getBatchingInfo(current_page, nb_pages))
      {'current_page': 7,
+      'filter_button': 'filter',
       'form_key': 'widget__q_b_page',
       'linked_pages': [4, 5, 6, 7, 8, 9, 10],
       'nb_pages': 12}
