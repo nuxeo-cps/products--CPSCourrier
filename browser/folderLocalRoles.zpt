@@ -6,6 +6,7 @@
 
 <metal:main fill-slot="main"
 	    tal:define="searching view/is_results;
+			localrole_form view/getFormName;
 			submit_url string:${here_url}/folder_localroles_submit;
 			cps_roles python:here.getCPSCandidateLocalRoles();
 			">
@@ -24,7 +25,8 @@
       Search users
     </h3>
     <form method="post" action=""
-	  tal:condition="not:searching">
+	  tal:condition="not:searching"
+	  tal:attributes="action localrole_form">
       <tal:block replace="structure view/renderUsersLayout"/>
       <input type="submit"
 	     name="submit_users_search"
@@ -39,7 +41,8 @@
       Search groups
     </h3>
     <form method="post" action=""
-	  tal:condition="not:searching">
+	  tal:condition="not:searching"
+	  tal:attributes="action localrole_form">
       <tal:block replace="structure view/renderGroupsLayout"/>
       <input type="submit"
 	     name="submit_users_search"
@@ -83,8 +86,7 @@
   </div>
 
 <!-- End assignment -->
-<tal:block define="localrole_form view/getFormName;
-		   localrole_edit_url submit_url;
+<tal:block define="localrole_edit_url submit_url;
 		   localrole_block_url submit_url;
 		   localrole_form_url string:${here_url}/${localrole_form}
 		   ">

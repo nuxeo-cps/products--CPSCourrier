@@ -75,6 +75,7 @@ class LocalRolesView(SearchView):
         self.checkPerm()
         form = self.request.form
         form.pop('-C', None) # polluting key from publisher
+        form_name = form.pop('form_name', None)
 
         args = []
         if 'member_role' in form:
@@ -87,7 +88,6 @@ class LocalRolesView(SearchView):
         elif 'lr_block' or 'lr_unblock' in form:
             meth = 'folder_localrole_block'
 
-        form_name = form.pop('form_name', None)
 
         meth = getattr(self.context, meth)
         kwargs = form.copy()
