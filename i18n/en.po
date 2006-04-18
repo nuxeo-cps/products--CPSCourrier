@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-04-11 17:51default\n"
+"POT-Creation-Date: 2006-04-18 17:23default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -40,18 +40,18 @@ msgid "State"
 msgstr ""
 
 #.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
-#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
 msgstr "Move down"
 
 #.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
-#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_update_stackelts"
 msgstr "Apply changes"
 
 #.   <input name="answer_submit" type="submit" class="standalone" value="button_validate" />
 #.   <input name="submit_add" type="submit" class="context" value="button_validate" />
-#: from ../browser/reuseAnswer.zpt
+#: from ../browser/reuseAnswer.zpt ../browser/roadmap.zpt
 #: ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
 msgstr "Validate"
@@ -66,7 +66,7 @@ msgstr "Reply from an existing reply"
 #.   <h2 condition="python:mode=='insert'">
 #.         Please select a level to insert the new delegatee
 #.       </h2>
-#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_choose_insertion_level"
 msgstr "Choose insertion level"
 
@@ -93,17 +93,35 @@ msgstr "Reply preview"
 #.   <h1>
 #.         Mail Handling Roadmap
 #.       </h1>
-#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_roadmap_heading"
 msgstr "Mail roadmap"
 
 #
 # Layout labels
 #
+#.   <h3 condition="not:searching">
+#.         Search groups
+#.       </h3>
+#.   <h3 condition="edit_mode">
+#.   	  Search groups
+#.   	</h3>
+#: from ../browser/folderLocalRoles.zpt ../browser/roadmap.zpt
+#, fuzzy
+msgid "cpscourrier_search_groups"
+msgstr "Search users or groups to add to the roadmap"
+
+#
+# Layout labels
+#
+#.   <h3 condition="not:searching">
+#.         Search users
+#.       </h3>
 #.   <h3 condition="edit_mode">
 #.   	  Search users
 #.   	</h3>
-#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+#: from ../browser/folderLocalRoles.zpt ../browser/roadmap.zpt
+#: ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_search_users"
 msgstr "Search users or groups to add to the roadmap"
 
@@ -128,7 +146,7 @@ msgstr "Use default roadmap"
 #.   <h2 condition="insert_mode">
 #.   	  Add delegatees: search results
 #.   	</h2>
-#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "delegatees_search_results"
 msgstr "Add delegatees: search results"
 
@@ -205,7 +223,7 @@ msgstr "Identity"
 #.   <label for="push_directive">
 #.      	  Directive to give these users
 #.   	</label>
-#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "label_push_directive"
 msgstr "Directive to give these user"
 
@@ -226,7 +244,7 @@ msgstr "Sorry, no members matched your search."
 #.   <h2 condition="edit_mode">
 #.   	  Add new delegatees to the roadmap
 #.   	</h2>
-#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "search_for_delegatees"
 msgstr "Add new delegatees to the roadmap"
 
