@@ -12,6 +12,7 @@ Bug fixes:
 - batching system could not fit with search-type views
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
+- Changed 'from' to 'mail_from' and 'to' to 'mail_to' in mail_common schema
 - Catalog Tabular Widget can build queries with ranges.
 - Int Filter Widget can set a range.
 - Factorization of Five views that expose search forms&results
