@@ -20,14 +20,14 @@
 
     <field
 	name="mail_from"
-	attr="from"
+	attr="mail_from"
 	type="Keyword"
 	analyzer="Standard"
       />
 
     <field
 	name="mail_to"
-	attr="to"
+	attr="mail_to"
 	type="MultiKeyword"
 	analyzer="Standard"
       />
