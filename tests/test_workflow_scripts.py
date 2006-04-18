@@ -110,8 +110,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         out_mail1 = reply_to_incoming(self.in_mail1)
         self.assertEquals(out_mail1.Title(), 'Re: Test mail 1')
         doc1 = out_mail1.getContent()
-        self.assertEquals(doc1['from'], 'test_mailbox@cpscourrier.com')
-        self.assertEquals(doc1['to'], ['bar@foo.com'])
+        self.assertEquals(doc1['mail_from'], 'test_mailbox@cpscourrier.com')
+        self.assertEquals(doc1['mail_to'], ['bar@foo.com'])
 
         # check that they are related
         res = rtool.getRelationsFor(RELATION_GRAPH_ID,
@@ -125,8 +125,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         out_mail2 = reply_to_incoming(self.in_mail2)
         doc2 = out_mail2.getContent()
         self.assertEquals(out_mail2.Title(), 'Re: Test mail 1')
-        self.assertEquals(doc2['from'], 'test_mailbox@cpscourrier.com')
-        self.assertEquals(doc2['to'], ['foo@foo.com'])
+        self.assertEquals(doc2['mail_from'], 'test_mailbox@cpscourrier.com')
+        self.assertEquals(doc2['mail_to'], ['foo@foo.com'])
 
         # check that they are related
         res = rtool.getRelationsFor(RELATION_GRAPH_ID,
@@ -145,8 +145,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         template = reply_to_incoming(self.in_mail1)
         self.assertEquals(template.Title(), 'Re: Test mail 1')
         doc1 = template.getEditableContent()
-        self.assertEquals(doc1['from'], 'test_mailbox@cpscourrier.com')
-        self.assertEquals(doc1['to'], ['bar@foo.com'])
+        self.assertEquals(doc1['mail_from'], 'test_mailbox@cpscourrier.com')
+        self.assertEquals(doc1['mail_to'], ['bar@foo.com'])
 
         # check that they are related
         res = rtool.getRelationsFor(RELATION_GRAPH_ID,
@@ -165,8 +165,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
                                          base_reply_rpath=template_rpath)
         self.assertEquals(second_reply.Title(), 'Re: Test mail 1')
         doc2 = template.getContent()
-        self.assertEquals(doc2['from'], 'test_mailbox@cpscourrier.com')
-        self.assertEquals(doc2['to'], ['bar@foo.com'])
+        self.assertEquals(doc2['mail_from'], 'test_mailbox@cpscourrier.com')
+        self.assertEquals(doc2['mail_to'], ['bar@foo.com'])
         self.assertEquals(sorted(doc2['Subject']()),
                           sorted(("subject1", "subject2",)))
         self.assertEquals(doc2['content'], doc1['content'])
@@ -620,6 +620,8 @@ On %s, bar@foo.com wrote:
         elt = stack._getLevelContentValues()[0]
         self.assertEquals(elt['directive'], 'handle')
         self.logout()
+
+    
 
 def test_suite():
     return unittest.makeSuite(WorkflowScriptsIntegrationTestCase)

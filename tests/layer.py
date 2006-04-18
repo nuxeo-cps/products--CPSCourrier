@@ -158,13 +158,13 @@ class IntegrationTestCase(CommonIntegrationFixture, CPSTestCase):
         incoming_mail_data = {
             'in_mail1': {
                 'Title': 'Test mail 1',
-                'to': ['foo@foo.com'],
-                'from': 'bar@foo.com',
+                'mail_to': ['foo@foo.com'],
+                'mail_from': 'bar@foo.com',
             },
             'in_mail2': {
                 'Title': 'Re: Test mail 1',
-                'to': ['bar2@foo.com', 'toto@email.com'],
-                'from': 'foo@foo.com',
+                'mail_to': ['bar2@foo.com', 'toto@email.com'],
+                'mail_from': 'foo@foo.com',
             },
         }
         for mail_id, mail_data in incoming_mail_data.items():

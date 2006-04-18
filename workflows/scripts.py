@@ -350,7 +350,7 @@ def forward_mail(proxy, mto, comment=''):
     encoding = tstool.default_charset
 
     mailbox_doc = aq_parent(aq_inner(proxy)).getContent()
-    mfrom = mailbox_doc['mail_from']
+    mfrom = mailbox_doc['from']
     subject = "Fwd: " + proxy.Title()
 
     body = comment
