@@ -195,6 +195,7 @@ class CourrierFunctionalTestCase(CPSTestCase):
     def afterSetUp(self):
         self.mbg = getattr(self.portal.mailboxes, self.layer.MBG_ID)
         self.mb = getattr(self.mbg, self.layer.MB_ID)
+        self.mb2 = getattr(self.mbg, self.layer.MB2_ID)
         self.wftool = getToolByName(self.portal, 'portal_workflow')
         self.ttool = getToolByName(self.portal, 'portal_types')
 
