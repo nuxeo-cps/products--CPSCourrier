@@ -38,7 +38,7 @@ Row layout for search results in the "reply from existing" view
 
  <widget name="To" meta_type="Lines Widget">
   <property name="fields">
-   <element value="to"/>
+   <element value="mail_to"/>
   </property>
   <property name="label">cpscourrier_to_label</property>
   <property name="label_edit">cpscourrier_to_label</property>
