@@ -14,8 +14,7 @@
 
 	<metal:block fill-slot="main"
 		     tal:define="res view/renderLayout;
-				 rendered python:res[0];
-				 ds python:res[1]">
+				 rendered res/rendered">
 
 	  <form action="" method="post">
 
