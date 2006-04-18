@@ -16,7 +16,7 @@
  </widget>
  <widget name="from" meta_type="String Widget">
   <property name="fields">
-   <element value="from"/>
+   <element value="mail_from"/>
   </property>
   <property name="hidden_layout_modes">
    <element value="view"/>
@@ -29,7 +29,7 @@
  </widget>
  <widget name="to" meta_type="Lines Widget">
   <property name="fields">
-   <element value="to"/>
+   <element value="mail_to"/>
   </property>
   <property name="hidden_layout_modes">
    <element value="view"/>

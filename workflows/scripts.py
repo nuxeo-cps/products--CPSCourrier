@@ -87,8 +87,8 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
 
     data = {
         'Title': Title,
-        'to': [incoming_doc['from']],
-        'from': container_doc['from'],
+        'mail_to': [incoming_doc['mail_from']],
+        'mail_from': container_doc['from'],
         'Subject': incoming_doc['Subject'](),
     }
 
@@ -294,7 +294,7 @@ def _quote_mail(proxy, encoding='iso-8859-15'):
                           {'y': year,
                            'm': month,
                            'd': day,
-                           'name': doc['from'],
+                           'name': doc['mail_from'],
                           }).encode(encoding)
     body = '\n\n%s\n' % quote_header
     lines =  doc['content'].split('\n')
@@ -346,7 +346,7 @@ def forward_mail(proxy, mto, comment=''):
     encoding = tstool.default_charset
 
     mailbox_doc = aq_parent(aq_inner(proxy)).getContent()
-    mfrom = mailbox_doc['from']
+    mfrom = mailbox_doc['mail_from']
     subject = "Fwd: " + proxy.Title()
 
     body = comment
@@ -388,8 +388,8 @@ def send_reply(proxy):
     tstool = getToolByName(proxy, 'translation_service')
     encoding = tstool.default_charset
     doc = proxy.getContent()
-    mto = doc['to']
-    mfrom = doc['from']
+    mto = doc['mail_to']
+    mfrom = doc['mail_from']
     subject = doc['Title']()
     body = compute_reply_body(proxy)
     attachments = _extract_attachments(proxy)

@@ -4,10 +4,10 @@
   <indexed_attr value="priority"/>
  </index>
  <index name="mail_from" meta_type="FieldIndex">
-  <indexed_attr value="from"/>
+  <indexed_attr value="mail_from"/>
  </index>
  <index name="mail_to" meta_type="FieldIndex">
-  <indexed_attr value="to"/>
+  <indexed_attr value="mail_to"/>
  </index>
  <index name="deadline" meta_type="FieldIndex">
   <indexed_attr value="deadline"/>
@@ -21,8 +21,8 @@
  <column value="mailbox_addresses"/>
  <column value="has_attachment"/>
  <column value="priority"/>
- <column value="from"/>
- <column value="to"/>
+ <column value="mail_from"/>
+ <column value="mail_to"/>
  <column value="deadline"/>
  <column value="template_usage"/>
 </object>
