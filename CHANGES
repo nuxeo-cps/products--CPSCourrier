@@ -10,6 +10,7 @@ Bug fixes:
 - Various bugfixes on outgoing_mail_wf access control
 - the stack for outgoing mails is no longer lost on checkout/checkin
 - batching system could not fit with search-type views
+- re-using a reply used to need the user to have write perms on reused reply
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Changed 'from' to 'mail_from' and 'to' to 'mail_to' in mail_common schema

@@ -22,7 +22,8 @@ import unittest
 from zope.testing import doctest
 from layer import CourrierFunctionalTestCase
 
-from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.utils import getToolByName, _checkPermission
+from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CPSCourrier.workflows.stacks import CourrierStack
 from Products.CPSCourrier.config import (
     RELATION_GRAPH_ID,
@@ -493,8 +494,24 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.assertEquals(for_render[1][1]['items'][0]['identite'],
                           'member2_ftest-mailbox')
 
-        # cleaning outgoing proxy
+        # now test that member1 of **mailbox 2** can reuse the answer
+        # XXX this should go in a separate testcase, nothing to do with stacks
+
+        utool = getToolByName(self.portal, 'portal_url')
+        self.flogin('member1', self.mb2)
+        # here's the point of the test
+        self.failIf(_checkPermission(ModifyPortalContent, self.mb))
+
+        self.wftool.invokeFactoryFor(self.mb2, 'Incoming Mail', 'other')
+        self.wftool.doActionFor(self.mb2.other, 'handle')
+        self.wftool.doActionFor(self.mb2.other, 'answer',
+                                base_reply_rpath=utool.getRpath(outgoing))
+        # counter was incremented
+        self.assertEquals(outgoing.getContent().template_usage, 1)
+
+        # cleanings
         self.mb.manage_delObjects(['re'])
+        self.mb2.manage_delObjects(['other'])
 
 def test_suite():
     return unittest.TestSuite((
