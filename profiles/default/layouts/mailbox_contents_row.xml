@@ -28,7 +28,7 @@ Layouts for rows in the content view of mailboxes
 
  <widget name="From" meta_type="String Widget">
   <property name="fields">
-   <element value="from"/>
+   <element value="mail_from"/>
   </property>
   <property name="label">cpscourrier_from_label</property>
   <property name="is_i18n">True</property>
@@ -37,7 +37,7 @@ Layouts for rows in the content view of mailboxes
 
  <widget name="To" meta_type="Lines Widget">
   <property name="fields">
-   <element value="to"/>
+   <element value="mail_to"/>
   </property>
   <property name="label">cpscourrier_to_label</property>
   <property name="is_i18n">True</property>

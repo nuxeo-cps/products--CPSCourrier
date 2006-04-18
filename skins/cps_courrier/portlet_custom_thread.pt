@@ -14,7 +14,7 @@
                         proxy python:info[1]['object'];
                         title proxy/title_or_id;
                         doc   proxy/getContent;
-                        from  doc/from;
+                        from  doc/mail_from;
                         rpath python:info[1]['rpath'];
                         style python:here_rpath == rpath and 'font-weight:bold' or None;
                         url   python:base_url+rpath;
