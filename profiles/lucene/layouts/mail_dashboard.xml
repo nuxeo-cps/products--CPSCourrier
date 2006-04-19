@@ -3,7 +3,4 @@
 
 <object name="mail_dashboard">
  <widget name="Table" meta_type="Lucene Tabular Widget"/>
-
- <!-- XXX have to change this in CPS -->
- <table purge="False"/>
 </object>
