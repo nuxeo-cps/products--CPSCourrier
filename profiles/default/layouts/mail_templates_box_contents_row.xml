@@ -75,6 +75,7 @@ Differences are outlined by (search for 'diff')
   <property name="wf_var_id">review_state</property>
   <property name="label">cpscourrier_review_state_label</property>
   <property name="is_i18n">True</property>
+  <property name="sortable" type="string">review_state</property>
  </widget>
 
  <widget name="usages" meta_type="Int Widget">
@@ -106,7 +107,7 @@ Differences are outlined by (search for 'diff')
    <cell name="Date"/>
   </row>
   <row>
-   <cell name="review_state"/>
+   <cell name="State"/><!--diff-->
   </row>
   <row>
    <cell name="usages"/>
