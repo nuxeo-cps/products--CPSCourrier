@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!-- This is almost like a Mailbox. Differences are outlined -->
+<object name="Mail Templates Box" meta_type="CPS Flexible Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title">portal_type_Mailbox_title</property>
+ <property name="description">portal_type_Mailbox_description</property>
+ <property name="content_icon">mailbox_icon.png</property>
+ <property name="content_meta_type">Folder</property>
+ <property name="product">CPSDefault</property>
+
+ <!-- A Mailbox is a container type similar to a workspace -->
+ <property name="factory">addFolder</property>
+ <property name="immediate_view">view</property>
+
+ <!-- Use a BTree type to scale to potentially large mail collections -->
+ <property name="cps_proxy_type">btreefolder</property>
+
+ <!-- A mailbox is not a regular workspace: it is only used to store mail
+      documents (and potentially sub mailboxes for archiving matters) -->
+ <property name="allowed_content_types">
+  <element value="Incoming Mail"/>
+  <element value="Outgoing Mail"/>
+ </property>
+
+ <!-- One schema on top of those of standard workspaces holds default
+      filtering parameters -->
+ <property name="schemas">
+  <element value="metadata"/>
+  <element value="common"/>
+  <element value="folder"/>
+  <element value="mailbox"/>
+  <element value="mail_filter_params" />
+ </property>
+ <!-- The layouts as clustered to play well with document portlets -->
+ <property name="layouts">
+  <element value="mailbox_common_header"/>
+  <element value="mailbox_header"/>
+  <element value="mailbox_common"/>
+  <element value="folder"/>
+  <!-- content view differs from Mailbox' -->
+  <element value="mail_templates_box_contents"/>
+ </property>
+ <property name="layout_clusters">
+  <element value="header:mailbox_common_header,mailbox_header"/>
+  <element value="metadata:metadata"/>
+ </property>
+ <property name="flexible_layouts"/>
+
+ <!-- use standard document view as content listing is done as a widget in
+      the default layout -->
+ <alias from="(Default)" to="cpsdocument_view"/>
+ <alias from="view" to="cpsdocument_view"/>
+
+ <!-- Almost the same actions as Workspaces -->
+ <action title="action_new_content" action_id="new_content" category="object"
+    condition_expr="" url_expr="string:${object_url}/folder_factories"
+    visible="True">
+  <permission value="Add portal content"/>
+ </action>
+ <action title="action_edit" action_id="edit" category="object"
+    condition_expr="" url_expr="string:${object_url}/cpsdocument_edit_form"
+    visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+ <action title="action_metadata" action_id="metadata" category="object"
+    condition_expr="not:portal/portal_membership/isAnonymousUser"
+    url_expr="string:${object_url}/cpsdocument_metadata" visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="action_local_roles" action_id="localroles" category="object"
+    condition_expr="" url_expr="string:${object_url}/folder_localroles.html"
+    visible="True">
+  <permission value="Change permissions"/>
+ </action>
+</object>
