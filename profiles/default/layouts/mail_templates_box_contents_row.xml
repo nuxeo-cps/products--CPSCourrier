@@ -64,10 +64,10 @@ Differences are outlined by (search for 'diff')
   <property name="label">cpscourrier_modification_date_label</property>
   <property name="label_edit">cpscourrier_modification_date_label</property>
   <property name="fields">
-   <element value="CreationDate"/><!--diff-->
+   <element value="ModificationDate"/><!--diff-->
   </property>
   <property name="is_i18n">True</property>
-  <property name="sortable" type="string">created</property>
+  <property name="sortable" type="string">modified</property>
  </widget>
 
  <!--diff: widget from mailbox_contents_row-->

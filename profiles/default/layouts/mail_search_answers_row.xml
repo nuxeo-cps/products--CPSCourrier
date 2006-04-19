@@ -64,10 +64,10 @@ Row layout for search results in the "reply from existing" view
   <property name="label">cpscourrier_modification_date_label</property>
   <property name="label_edit">cpscourrier_modification_date_label</property>
   <property name="fields">
-   <element value="created"/>
+   <element value="modified"/>
   </property>
   <property name="is_i18n">True</property>
-  <property name="sortable" type="string">created</property>
+  <property name="sortable" type="string">modified</property>
  </widget>
 
  <widget name="review_state" meta_type="Review State String Widget">
