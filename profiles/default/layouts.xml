@@ -17,6 +17,10 @@
  <object name="mailbox_group_common" meta_type="CPS Layout"/>
  <object name="mailbox_group_contents" meta_type="CPS Layout"/>
 
+ <!-- layout for the Mail Templates Box document types -->
+ <object name="mail_templates_box_contents" meta_type="CPS Layout"/>
+ <object name="mail_templates_box_contents_row" meta_type="CPS Layout"/>
+
  <!-- layout for the Dashboard document type -->
  <object name="mail_dashboard" meta_type="CPS Layout"/>
 

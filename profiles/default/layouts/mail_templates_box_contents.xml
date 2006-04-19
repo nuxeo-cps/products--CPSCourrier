@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!--
+Layout that present the contents of the root of mail templates
+-->
+
+<object name="mail_templates_box_contents" meta_type="CPS Layout">
+ <property name="layout_view_method">layout_tabular_view</property>
+ <property name="style_prefix">layout_default_</property>
+
+ <widget name="Table" meta_type="Folder Contents Widget">
+  <property name="row_layout">mail_templates_box_contents_row</property>
+  <property name="hidden_layout_modes">edit create</property>
+  <property name="empty_message">cpscourrier_empty_box_msg</property>
+  <property name="is_empty_message_i18n">True</property>
+  <property name="actions_category">cpscourrier_batch</property>
+  <property name="cookie_id">cpscourrier</property>
+  <property name="filter_button">filter</property>
+ </widget>
+
+ <widget name="q_Subject" meta_type="Select Filter Widget">
+   <property name="hidden_layout_modes">create</property>
+   <property name="widget_mode_expr">string:edit</property>
+   <property name="label">cpscourrier_subject_label</property>
+   <property name="label_edit">cpscourrier_subject_label</property>
+   <property name="is_i18n">True</property>
+   <property name="vocabulary">mailbox_filter_subject</property>
+   <property name="translated">True</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="fields">
+     <element value="filter_Subject"/>
+   </property>
+ </widget>
+
+
+
+<!-- Not yet implemented for folder contents
+ <widget name="q_sort" meta_type="Toggable Criterion Widget">
+   <property name="hidden_layout_modes">create</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="toggle_tokens">
+     <element value="" />
+     <element value="reverse" />
+   </property>
+   <property name="criterion_suffix">-on</property>
+   <property name="token_suffix">-order</property>
+   <property name="ref_suffix">-col</property>
+   <property name="fields">
+     <element value="filter_sort_on" />
+     <element value="filter_sort_order" />
+   </property>
+ </widget>
+-->
+
+<table>
+   <row>
+     <cell name="q_Subject"/>
+   </row>
+   <row>
+     <cell name="Table"/>
+   </row>
+ </table>
+</object>

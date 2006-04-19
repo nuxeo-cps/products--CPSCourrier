@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <roots>
  <object name="mailboxes" portal_type="Mailbox Group"/>
- <object name="mail_templates" portal_type="Mailbox"/>
+ <object name="mail_templates" portal_type="Mail Templates Box"/>
  <object name="members" />
 </roots>
 
