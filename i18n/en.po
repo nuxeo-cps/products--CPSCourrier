@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-04-18 17:23default\n"
+"POT-Creation-Date: 2006-04-19 11:26default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -293,6 +293,9 @@ msgstr "A document presenting search results"
 #
 msgid "mailboxes_root_title"
 msgstr "Mailboxes"
+
+msgid "mail_templates_root_title"
+msgstr "Template Replies"
 
 #
 # Layout labels

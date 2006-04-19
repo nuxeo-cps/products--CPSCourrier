@@ -8,6 +8,9 @@
   <property name="label">cpscourrier_mailbox_addresses_label</property>
   <property name="is_i18n">True</property>
   <property name="css_class">ddescription</property>
+  <!-- Addresses are required on input. Hidden empty has one use-case:
+  root of mail templates-->
+  <property name="hidden_empty">True</property>
   <property name="hidden_layout_modes">
     <element value="create"/>
     <element value="edit"/>

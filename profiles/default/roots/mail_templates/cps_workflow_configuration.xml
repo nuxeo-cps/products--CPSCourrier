@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name=".cps_workflow_configuration"
+        meta_type="CPS Workflow Configuration">
+
+  <!-- The root of mail templates only hosts outgoing mails -->
+  <local-workflows>
+    <type name="Outgoing Mail" wf="mail_template_wf"/>
+  </local-workflows>
+</object>

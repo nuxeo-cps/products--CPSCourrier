@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-04-18 17:23default\n"
+"POT-Creation-Date: 2006-04-19 11:26default\n"
 "PO-Revision-Date: 2006-04-12 15:41+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -290,6 +290,13 @@ msgstr "Documento con los resultados de las búsquedas"
 #
 msgid "mailboxes_root_title"
 msgstr "Buzones"
+
+#
+# Root of mailboxes area
+#
+#, fuzzy
+msgid "mail_templates_root_title"
+msgstr "Mailboxes"
 
 #
 # Layout labels

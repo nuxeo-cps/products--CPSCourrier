@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<object name="mail_templates">
+  <property name="title_msgid">mail_templates_root_title</property>
+  <object name=".cps_workflow_configuration"
+    meta_type="CPS Workflow Configuration"/>
+</object>
