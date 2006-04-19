@@ -217,6 +217,25 @@ InitializeClass(CPSStringFilterWidget)
 
 widgetRegistry.register(CPSStringFilterWidget)
 
+class CPSFixedFilterWidget(CPSStringWidget):
+    """A string widget that puts a fixed value in datastructure.
+
+    Used to transmit search criteria that don't depend on user input.
+    """
+
+    meta_type = 'Fixed Filter Widget'
+    _properties = CPSStringWidget._properties + (
+        {'id': 'value', 'type': 'string', 'mode': 'w', 'label': 'Fixed value'},)
+
+    value = ''
+
+    def prepare(self, ds):
+        ds[self.getWidgetId()] = self.value
+
+InitializeClass(CPSFixedFilterWidget)
+
+widgetRegistry.register(CPSFixedFilterWidget)
+
 
 TOKEN_SUFFIX = '_token'
 

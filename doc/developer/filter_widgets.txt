@@ -126,7 +126,20 @@ CPSSelectFilterWidget
   restrictive than no search.
   Also, the additional reject_from_scope property (tokens) specifies
   keys to exclude from the scope. Typical use-case: you want to filter
-  based on workflow states, but one of them corresponds to closed files.
+  based on workflow states, but one of them corresponds to closed
+  files.
+
+Fixed Filter Widget
+-------------------
+
+  A trivial one that puts its 'value' property in datastructure for
+search criteria that don't depend on user input at all and aren't in
+schema.
+
+String Filter Widget
+--------------------
+
+  Like a String Widget, cookie-request enabled
 
 
 CPSToggableCriterionWidget
