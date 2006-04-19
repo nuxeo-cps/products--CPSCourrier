@@ -11,7 +11,4 @@
  <object name="portlet_navigation_left" meta_type="CPS Portlet"
     portal_type="Navigation Portlet"/>
 
- <!-- portlet responsible for the thread display -->
- <object name="portlet_custom_thread" meta_type="CPS Portlet"
-    portal_type="Custom Portlet"/>
 </object>

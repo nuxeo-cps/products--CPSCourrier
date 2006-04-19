@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<object name=".cps_portlets">
+ <!-- portlet responsible for the thread display -->
+ <object name="portlet_custom_thread" meta_type="CPS Portlet"
+    portal_type="Custom Portlet"/>
+</object>
