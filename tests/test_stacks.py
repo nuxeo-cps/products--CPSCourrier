@@ -103,11 +103,11 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         # stack empty or not, readers and members can view
         self.flogin('reader', self.mb)
         self.assert_(checkPerm('View', proxy))
-        self.flogin('member1', self.mb)
+        self.flogin('member2', self.mb)
         self.assert_(checkPerm('View', proxy))
         self.flogin('wsmanager', self.mb)
         self.assert_(checkPerm('View', proxy))
-        self.flogin('manager', self.mb)
+        self.login('manager')
         self.assert_(checkPerm('View', proxy))
 
         # only the manager / wsmanager can create a draft
@@ -338,6 +338,16 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.failIf(wf.isActionSupported(proxy, 'invalidate'))
         self.flogin('member1', self.mb)
         self.assert_(wf.isActionSupported(proxy, 'invalidate'))
+
+        # the other ones can still view the document
+        self.flogin('reader', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.flogin('member2', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.login('manager')
+        self.assert_(checkPerm('View', proxy))
 
 
 class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
