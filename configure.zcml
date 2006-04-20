@@ -27,12 +27,14 @@
       permission="cmf.ModifyPortalContent"
       />
 
+  <!-- roadmap view manage its mode according to various guards -->
+
   <browser:page
       for="Products.CPSCore.interfaces.ICPSProxy"
       name="cpscourrier_roadmap.html"
       class=".browser.roadmapview.RoadmapView"
       template="browser/roadmap.zpt"
-      permission="cmf.ModifyPortalContent"
+      permission="zope2.View"
       />
 
   <!-- perm is inappropriate but we'll use an explicit
