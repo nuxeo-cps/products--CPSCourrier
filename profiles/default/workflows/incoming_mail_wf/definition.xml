@@ -253,14 +253,12 @@
  <transition transition_id="flag_answered" title=""
              new_state="answered" trigger="USER"
              before_script="" after_script="">
-
   <guard>
   </guard>
  </transition>
  <transition transition_id="flag_handled" title=""
              new_state="handled" trigger="USER"
              before_script="" after_script="">
-
   <guard>
   </guard>
  </transition>
@@ -277,7 +275,6 @@
  <transition transition_id="forward_email" title=""
              new_state="closed" trigger="USER"
              before_script="forward_mail" after_script="">
-
   <guard>
     <guard-role>Manager</guard-role>
     <guard-role>WorkspaceManager</guard-role>
@@ -287,7 +284,6 @@
  <transition transition_id="forward_move" title=""
              new_state="received" trigger="USER"
              before_script="" after_script="">
-
   <guard>
     <guard-role>Manager</guard-role>
     <guard-role>WorkspaceManager</guard-role>
@@ -297,7 +293,6 @@
   <transition-behavior behavior_id="clone"/>
   <clone-allowed-transition transition_id="create"/>
  </transition>
-
  <transition transition_id="handle" title=""
              new_state="handled" trigger="USER"
              before_script=""
@@ -313,7 +308,7 @@
  </transition>
  <!-- called by handle's after_script -->
  <transition transition_id="init_stack" title="" new_state=""
-	     before_script="" after_script="" trigger="USER">
+             before_script="" after_script="" trigger="USER">
   <transition-behavior behavior_id="workflow-reset"/>
   <workflow-reset-on-workflow-variable variable_id="Pilots"/>
   <guard>
@@ -321,11 +316,9 @@
    <guard-role>Manager</guard-role>
   </guard>
  </transition>
-
  <transition transition_id="manage_delegatees" title=""
              new_state="" trigger="USER" before_script=""
              after_script="">
-
   <guard>
    <guard-role>Pilot</guard-role>
    <guard-role>Manager</guard-role>
@@ -392,7 +385,6 @@
            for_status="True" update_always="False">
   <description>Variable holding a stack</description>
   <default>
-
    <expression>python:state_change.getStackFor(var_id='Pilots')</expression>
   </default>
   <guard>
@@ -402,7 +394,6 @@
            for_status="True" update_always="True">
   <description>The last transition</description>
   <default>
-
    <expression>transition/getId|nothing</expression>
   </default>
   <guard>
@@ -412,7 +403,6 @@
            for_status="True" update_always="True">
   <description>The ID of the user who performed</description>
   <default>
-
    <expression>user/getId</expression>
   </default>
   <guard>
@@ -422,7 +412,6 @@
            for_status="True" update_always="True">
   <description>Comments about the last transition</description>
   <default>
-
    <expression>python:state_change.kwargs.get('comment', '')</expression>
   </default>
   <guard>
@@ -432,7 +421,6 @@
            for_status="True" update_always="True">
   <description>Destination container for the last paste/publish</description>
   <default>
-
    <expression>python:state_change.kwargs.get('dest_container', '')</expression>
   </default>
   <guard>
@@ -442,7 +430,6 @@
            for_status="True" update_always="True">
   <description>The language revisions of the proxy</description>
   <default>
-
    <expression>state_change/getLanguageRevisions</expression>
   </default>
   <guard>
@@ -452,7 +439,6 @@
            for_status="False" update_always="False">
   <description>Provides access to workflow history</description>
   <default>
-
    <expression>state_change/getHistory</expression>
   </default>
   <guard>
@@ -466,7 +452,6 @@
            for_status="True" update_always="True">
   <description>Time of the last transition</description>
   <default>
-
    <expression>state_change/getDateTime</expression>
   </default>
   <guard>
