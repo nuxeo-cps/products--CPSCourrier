@@ -12,21 +12,23 @@
   <exit-transition transition_id="reject"/>
   <permission-map name="Modify portal content"
                   acquired="False">
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>SectionManager</permission-role>
+   <permission-role>SectionReviewer</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>SectionManager</permission-role>
+   <permission-role>SectionReviewer</permission-role>
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
   </permission-map>
   <permission-map name="WebDAV Lock items" acquired="False">
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>SectionManager</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="WebDAV Unlock items"
                   acquired="False">
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>SectionManager</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
  </state>
@@ -39,8 +41,9 @@
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
-   <permission-role>WorkspaceReader</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>SectionReader</permission-role>
+   <permission-role>SectionReviewer</permission-role>
+   <permission-role>SectionManager</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <permission-map name="WebDAV Lock items" acquired="False">
@@ -60,21 +63,10 @@
           category="workflow">action_accept</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>SectionManager</guard-role>
+   <guard-role>SectionReviewer</guard-role>
   </guard>
   <transition-behavior behavior_id="merge"/>
- </transition>
- <transition transition_id="cut_copy_paste"
-             title="Cut/Copy/Paste" new_state=""
-             trigger="USER" before_script="" after_script="">
-
-  <guard>
-   <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
-  </guard>
-  <transition-behavior behavior_id="allow-sub-move"/>
-  <transition-behavior behavior_id="allow-sub-delete"/>
-  <transition-behavior behavior_id="allow-sub-copy"/>
  </transition>
  <!-- privileged users can create directly -->
  <transition transition_id="create" title="Initial creation"
@@ -83,11 +75,14 @@
 
    <guard>
      <guard-role>Manager</guard-role>
-     <guard-role>WorkspaceManager</guard-role>
+     <guard-role>SectionManager</guard-role>
+     <guard-role>SectionReviewer</guard-role>
    </guard>
    <transition-behavior behavior_id="initial-create"/>
  </transition>
- <!-- and publish directly -->
+ <!-- and publish directly
+      Note that this is not used in current implementation
+   -->
  <transition transition_id="publish"
              title="Member publishes directly"
              new_state="published" trigger="USER"
@@ -96,7 +91,8 @@
 
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>SectionManager</guard-role>
+   <guard-role>SectionReviewer</guard-role>
   </guard>
   <transition-behavior behavior_id="initial-clone"/>
   <transition-behavior behavior_id="freeze"/>
@@ -110,7 +106,7 @@
           category="workflow">action_reject</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>SectionManager</guard-role>
   </guard>
   <transition-behavior behavior_id="delete"/>
  </transition>
@@ -121,8 +117,9 @@
 
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
-   <guard-role>WorkspaceReader</guard-role>
+   <guard-role>SectionManager</guard-role>
+   <guard-role>SectionReviewer</guard-role>
+   <guard-role>SectionReader</guard-role>
   </guard>
   <transition-behavior behavior_id="allow-sub-publishing"/>
  </transition>
@@ -134,6 +131,7 @@
 
   <guard>
    <guard-role>Manager</guard-role>
+   <guard-role>SectionReviewer</guard-role>
    <guard-role>Member</guard-role>
   </guard>
   <transition-behavior behavior_id="initial-clone"/>
@@ -147,7 +145,8 @@
           category="workflow">action_un_publish</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>SectionReviewer</guard-role>
+   <guard-role>SectionManager</guard-role>
    </guard>
   <transition-behavior behavior_id="delete"/>
  </transition>
@@ -210,7 +209,7 @@
   </default>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>SectionManager</guard-role>
   </guard>
  </variable>
  <variable variable_id="time" for_catalog="True"
