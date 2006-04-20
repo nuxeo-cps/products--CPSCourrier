@@ -37,6 +37,10 @@
               i18n:attributes="value" />
             <input type="button" class="context" onClick="history.back()"
               value="button_cancel" i18n:attributes="value" />
+	    <input type="checkbox" name="submit_template"/>
+	    <span i18n:translate="cpscourrier_submit_template">
+	      Submit as template
+	    </span>
           </metal:block>
         </metal:block>
 

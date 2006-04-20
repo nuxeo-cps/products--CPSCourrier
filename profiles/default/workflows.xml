@@ -11,7 +11,7 @@
    </type>
    <!-- Default workflow chain for the root of mail templates -->
    <type type_id="Mail Templates Box">
-     <bound-workflow workflow_id="workspace_folder_wf"/>
+     <bound-workflow workflow_id="section_folder_wf"/>
    </type>
  </bindings>
 </object>
