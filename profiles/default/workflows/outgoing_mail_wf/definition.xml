@@ -90,6 +90,7 @@
    <permission-role>Pilot</permission-role>
    <permission-role>WorkspaceManager</permission-role>
    <permission-role>WorkspaceReader</permission-role>
+   <permission-role>WorkspaceMember</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False"/>
   <permission-map name="WebDAV Lock items" acquired="False"/>

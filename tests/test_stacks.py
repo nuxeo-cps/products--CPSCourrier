@@ -100,6 +100,16 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member1', self.mb)
         self.failIf(checkPerm('Modify portal content', proxy))
 
+        # stack empty or not, readers and members can view
+        self.flogin('reader', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.flogin('member1', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.flogin('manager', self.mb)
+        self.assert_(checkPerm('View', proxy))
+
         # only the manager / wsmanager can create a draft
         self.flogin('reader', self.mb)
         self.failIf(wf.isActionSupported(proxy, 'checkout_draft'))
