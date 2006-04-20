@@ -13,6 +13,8 @@
   <exit-transition transition_id="reset"/>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>Pilot</permission-role>
   </permission-map>
   <stack-definition stackdef_id="Pilots"
                     variable_id="Pilots"
@@ -57,6 +59,8 @@
   <exit-transition transition_id="close"/>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>Pilot</permission-role>
   </permission-map>
   <stack-definition stackdef_id="Pilots"
                     variable_id="Pilots"
@@ -111,6 +115,8 @@
   <exit-transition transition_id="reset"/>
   <exit-transition transition_id="close"/>
   <permission-map name="Modify portal content" acquired="False">
+   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>Pilot</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
   <stack-definition stackdef_id="Pilots"
