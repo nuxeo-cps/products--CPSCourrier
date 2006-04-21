@@ -13,6 +13,7 @@ Bug fixes:
 - batching system could not fit with search-type views
 - re-using a reply used to need the user to have write perms on reused reply
 - incoming mails cannot get created nor modified except by Managers
+- localrole form fixes
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Changed 'from' to 'mail_from' and 'to' to 'mail_to' in mail_common schema

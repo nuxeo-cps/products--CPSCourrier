@@ -45,7 +45,7 @@
 	  tal:attributes="action localrole_form">
       <tal:block replace="structure view/renderGroupsLayout"/>
       <input type="submit"
-	     name="submit_users_search"
+	     name="submit_groups_search"
 	     value="button_search"
 	     i18n:attributes="value"/>
     </form>

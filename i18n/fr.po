@@ -107,9 +107,8 @@ msgstr "Feuille de route"
 #.   	  Search groups
 #.   	</h3>
 #: from ../browser/folderLocalRoles.zpt ../browser/roadmap.zpt
-#, fuzzy
 msgid "cpscourrier_search_groups"
-msgstr "Rechercher des utilisateurs"
+msgstr "Rechercher des groupes"
 
 #
 # Layout labels

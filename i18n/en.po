@@ -107,9 +107,8 @@ msgstr "Mail roadmap"
 #.   	  Search groups
 #.   	</h3>
 #: from ../browser/folderLocalRoles.zpt ../browser/roadmap.zpt
-#, fuzzy
 msgid "cpscourrier_search_groups"
-msgstr "Search users or groups to add to the roadmap"
+msgstr "Search groups"
 
 #
 # Layout labels
@@ -123,7 +122,7 @@ msgstr "Search users or groups to add to the roadmap"
 #: from ../browser/folderLocalRoles.zpt ../browser/roadmap.zpt
 #: ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_search_users"
-msgstr "Search users or groups to add to the roadmap"
+msgstr "Search users"
 
 #.   <p condition="search_members">
 #.   	    Please select the member to insert in the roadmap
