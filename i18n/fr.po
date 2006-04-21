@@ -686,13 +686,13 @@ msgid "heading_batch_workflow_discard"
 msgstr "Mettre au rebut par lot"
 
 msgid "help_batch_workflow_discard"
-msgstr "Vous vous apprêtez à mettre ce lôt de courriers entrants au rebut"
+msgstr "Vous vous apprêtez à mettre ce lot de courriers entrants au rebut"
 
 msgid "heading_batch_workflow_answer"
 msgstr "Répondre par lot"
 
 msgid "help_batch_workflow_answer"
-msgstr "Vous vous apprêtez à créer une réponse pour ce lôt de courriers"
+msgstr "Vous vous apprêtez à créer une réponse pour ce lot de courriers"
 
 msgid "received"
 msgstr "reçu"
