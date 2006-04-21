@@ -679,7 +679,7 @@ msgstr "Prendre en charge par lot"
 msgid "help_batch_workflow_handle"
 msgstr ""
 "Vous vous apprêtez à prendre en charge un lot de courriers entrants&nbsp;; "
-"vous deviendrez de fait l'agent en charge de son traitement&nbsp;: répondre, "
+"vous deviendrez de fait l'agent en charge de leur traitement&nbsp;: répondre, "
 "déléguer, mettre au rebut"
 
 msgid "heading_batch_workflow_discard"
