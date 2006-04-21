@@ -43,7 +43,7 @@
  <action title="action_edit" action_id="edit" category="object"
     condition_expr="" url_expr="string:${object_url}/cpsdocument_edit_form"
     visible="True">
-  <permission value="Modify portal content"/>
+  <permission value="Manage portal"/>
  </action>
  <action title="action_metadata" action_id="metadata" category="object"
     condition_expr="not:portal/portal_membership/isAnonymousUser"
