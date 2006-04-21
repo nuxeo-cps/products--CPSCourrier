@@ -13,6 +13,7 @@ Bug fixes:
 - batching system could not fit with search-type views
 - re-using a reply used to need the user to have write perms on reused reply
 - incoming mails cannot get created nor modified except by Managers
+- mailboxes contents now use a catalog search
 - localrole form fixes
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~

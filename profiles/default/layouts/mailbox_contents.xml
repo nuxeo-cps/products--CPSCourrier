@@ -1,111 +1,121 @@
 <?xml version="1.0"?>
 <!--
-Layout that present mailbox contents
+Layout that presents mailbox contents
 -->
 
 <object name="mailbox_contents" meta_type="CPS Layout">
+ <property name="layout_create_method"></property>
+ <property name="layout_edit_method"></property>
  <property name="layout_view_method">layout_tabular_view</property>
  <property name="style_prefix">layout_default_</property>
-
- <widget name="Table" meta_type="Folder Contents Widget">
-  <property name="row_layout">mailbox_contents_row</property>
-  <property name="hidden_layout_modes">edit create</property>
+ <property name="flexible_widgets"/>
+ <property name="validate_values_expr"></property>
+ <widget name="Table" meta_type="Catalog Tabular Widget">
+  <property name="hidden_layout_modes">
+   <element value="edit"/>
+   <element value="create"/>
+  </property>
+  <property name="row_layout">mail_dashboard_row</property>
   <property name="empty_message">cpscourrier_empty_box_msg</property>
   <property name="is_empty_message_i18n">True</property>
   <property name="actions_category">cpscourrier_batch</property>
   <property name="cookie_id">cpscourrier</property>
   <property name="filter_button">filter</property>
  </widget>
-
- <widget name="q_review_state" meta_type="Select Filter Widget">
-   <property name="hidden_layout_modes">create</property>
-   <property name="widget_mode_expr">string:edit</property>
-   <property name="label">label_search_status</property>
-   <property name="label_edit">label_search_status</property>
-   <property name="defines_scope">True</property>
-   <property name="reject_from_scope">closed sent trash</property>
-   <property name="is_i18n">True</property>
-   <property name="vocabulary">mail_states</property>
-   <property name="translated">False</property>
-   <property name="cookie_id">cpscourrier</property>
-   <property name="fields">
-     <element value="filter_review_state" />
-   </property>
- </widget>
-
- <widget name="q_priority" meta_type="Select Filter Widget">
-   <property name="hidden_layout_modes">create</property>
-   <property name="widget_mode_expr">string:edit</property>
-   <property name="label">cpscourrier_priority_label</property>
-   <property name="label_edit">cpscourrier_priority_label</property>
-   <property name="is_i18n">True</property>
-   <property name="vocabulary">mailbox_filter_priority</property>
-   <property name="translated">True</property>
-   <property name="cookie_id">cpscourrier</property>
-   <property name="fields">
-     <element value="filter_priority" />
-   </property>
- </widget>
-
  <widget name="q_Subject" meta_type="Select Filter Widget">
-   <property name="hidden_layout_modes">create</property>
-   <property name="widget_mode_expr">string:edit</property>
-   <property name="label">cpscourrier_subject_label</property>
-   <property name="label_edit">cpscourrier_subject_label</property>
-   <property name="is_i18n">True</property>
-   <property name="vocabulary">mailbox_filter_subject</property>
-   <property name="translated">True</property>
-   <property name="cookie_id">cpscourrier</property>
-   <property name="fields">
-     <element value="filter_Subject"/>
-   </property>
+  <property name="fields">
+   <element value="filter_Subject"/>
+  </property>
+  <property name="label">cpscourrier_subject_label</property>
+  <property name="label_edit">cpscourrier_subject_label</property>
+  <property name="is_i18n">True</property>
+  <property name="hidden_layout_modes">
+   <element value="create"/>
+  </property>
+  <property name="widget_mode_expr">string:edit</property>
+  <property name="vocabulary">mailbox_filter_subject</property>
+  <property name="translated">True</property>
+  <property name="cookie_id">cpscourrier</property>
  </widget>
-
-
+ <widget name="q_path" meta_type="Path Widget">
+  <property name="hidden_empty">True</property>
+ </widget>
  <widget name="q_portal_type" meta_type="Select Filter Widget">
-   <property name="hidden_layout_modes">create</property>
-   <property name="widget_mode_expr">string:edit</property>
-   <property name="label">cpscourrier_type_label</property>
-   <property name="label_edit">cpscourrier_type_label</property>
-   <property name="is_i18n">True</property>
-   <property name="vocabulary">mailbox_allowed_ptype</property>
-   <property name="translated">False</property>
-   <property name="cookie_id">cpscourrier</property>
-   <property name="fields">
-     <element value="filter_type" />
-   </property>
-   <property name="defines_scope">True</property>
+  <property name="fields">
+   <element value="filter_type"/>
+  </property>
+  <property name="label">cpscourrier_type_label</property>
+  <property name="label_edit">cpscourrier_type_label</property>
+  <property name="is_i18n">True</property>
+  <property name="hidden_layout_modes">
+   <element value="create"/>
+  </property>
+  <property name="widget_mode_expr">string:edit</property>
+  <property name="vocabulary">mailbox_allowed_ptype</property>
+  <property name="translated">True</property>
+  <property name="cookie_id">cpscourrier</property>
+  <property name="defines_scope">True</property>
  </widget>
-
-<!-- Not yet implemented for folder contents
+ <widget name="q_priority" meta_type="Select Filter Widget">
+  <property name="fields">
+   <element value="filter_priority"/>
+  </property>
+  <property name="label">cpscourrier_priority_label</property>
+  <property name="label_edit">cpscourrier_priority_label</property>
+  <property name="is_i18n">True</property>
+  <property name="hidden_layout_modes">
+   <element value="create"/>
+  </property>
+  <property name="widget_mode_expr">string:edit</property>
+  <property name="vocabulary">mailbox_filter_priority</property>
+  <property name="translated">True</property>
+  <property name="cookie_id">cpscourrier</property>
+ </widget>
+ <widget name="q_review_state" meta_type="Select Filter Widget">
+  <property name="fields">
+   <element value="filter_review_state"/>
+  </property>
+  <property name="label">label_search_status</property>
+  <property name="label_edit">label_search_status</property>
+  <property name="is_i18n">True</property>
+  <property name="hidden_layout_modes">
+   <element value="create"/>
+  </property>
+  <property name="widget_mode_expr">string:edit</property>
+  <property name="vocabulary">mail_states</property>
+  <property name="cookie_id">cpscourrier</property>
+  <property name="defines_scope">True</property>
+  <property name="reject_from_scope">
+   <element value="closed"/>
+   <element value="sent"/>
+   <element value="trash"/>
+  </property>
+ </widget>
  <widget name="q_sort" meta_type="Toggable Criterion Widget">
-   <property name="hidden_layout_modes">create</property>
-   <property name="cookie_id">cpscourrier</property>
-   <property name="toggle_tokens">
-     <element value="" />
-     <element value="reverse" />
-   </property>
-   <property name="criterion_suffix">-on</property>
-   <property name="token_suffix">-order</property>
-   <property name="ref_suffix">-col</property>
-   <property name="fields">
-     <element value="filter_sort_on" />
-     <element value="filter_sort_order" />
-   </property>
+  <property name="fields">
+   <element value="filter_sort_on"/>
+   <element value="filter_sort_order"/>
+  </property>
+  <property name="hidden_layout_modes">
+   <element value="create"/>
+  </property>
+  <property name="cookie_id">cpscourrier</property>
+  <property name="toggle_tokens">
+   <element value=""/>
+   <element value="reverse"/>
+  </property>
  </widget>
--->
-
-<table>
-   <row>
-     <cell name="q_Subject"/>
-     <cell name="q_portal_type" />
-   </row>
-   <row>
-     <cell name="q_review_state" />
-     <cell name="q_priority" />
-   </row>
-   <row>
-     <cell name="Table"/>
-   </row>
+ <table>
+  <row>
+   <cell name="q_Subject"/>
+   <cell name="q_portal_type"/>
+  </row>
+  <row>
+   <cell name="q_review_state"/>
+   <cell name="q_priority"/>
+  </row>
+  <row>
+   <cell name="Table" ncols="2"/>
+  </row>
  </table>
 </object>

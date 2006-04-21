@@ -7,7 +7,7 @@ Layout that present the contents of the root of mail templates
  <property name="layout_view_method">layout_tabular_view</property>
  <property name="style_prefix">layout_default_</property>
 
- <widget name="Table" meta_type="Folder Contents Widget">
+ <widget name="Table" meta_type="Catalog Tabular Widget">
   <property name="row_layout">mail_templates_box_contents_row</property>
   <property name="hidden_layout_modes">edit create</property>
   <property name="empty_message">cpscourrier_empty_box_msg</property>
@@ -31,9 +31,14 @@ Layout that present the contents of the root of mail templates
    </property>
  </widget>
 
+ <widget name="q_path" meta_type="Path Widget">
+   <property name="hidden_empty">True</property>
+ </widget>
 
+ <widget name="q_portal_type" meta_type="Fixed Filter Widget">
+   <property name="value">Outgoing Mail</property>
+ </widget>
 
-<!-- Not yet implemented for folder contents
  <widget name="q_sort" meta_type="Toggable Criterion Widget">
    <property name="hidden_layout_modes">create</property>
    <property name="cookie_id">cpscourrier</property>
@@ -49,7 +54,6 @@ Layout that present the contents of the root of mail templates
      <element value="filter_sort_order" />
    </property>
  </widget>
--->
 
 <table>
    <row>

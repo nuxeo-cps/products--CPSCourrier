@@ -8,23 +8,24 @@ Differences are outlined by (search for 'diff')
 <object name="mail_search_answers_row" meta_type="CPS Layout">
  <property name="layout_view_method">layout_row_view</property>
 
-<!--diff: widget from mailbox_contents_row-->
+<!--diff: widget taken from mail_dashboard_row-->
  <widget name="Checkbox" meta_type="Row Boolean Widget">
-  <property name="input_name">ids</property>
+  <property name="fields">
+   <element value="rpath"/>
+  </property>
+  <property name="input_name">rpath</property>
   <property name="input_type">checkbox</property>
  </widget>
 
- <widget name="has_attachment" meta_type="Icon Boolean Widget">
-  <property name="label">cpscourrier_has_attachment_label</property>
-  <property name="is_i18n">True</property>
-  <property name="icon_true">cpsma_attach_mini.png</property>
-  <property name="icon_false">nothing.png</property>
+ <widget name="Date" meta_type="Date Widget">
   <property name="fields">
-   <element value="has_attachment"/>
+   <element value="modified"/>
   </property>
-  <property name="sortable" type="string">has_attachment</property>
+  <property name="label">cpscourrier_modification_date_label</property>
+  <property name="label_edit">cpscourrier_modification_date_label</property>
+  <property name="is_i18n">True</property>
+  <property name="sortable" type="string">modified</property>
  </widget>
-
  <widget name="From" meta_type="String Widget">
   <property name="fields">
    <element value="mail_from"/>
@@ -35,7 +36,24 @@ Differences are outlined by (search for 'diff')
   <property name="size_max">50</property>
   <property name="sortable" type="string">mail_from</property>
  </widget>
-
+ <widget name="State" meta_type="Review State String Widget">
+  <property name="fields">
+   <element value="review_state"/>
+  </property>
+  <property name="label">cpscourrier_review_state_label</property>
+  <property name="is_i18n">True</property>
+  <property name="sortable" type="string">review_state</property>
+ </widget>
+ <widget name="Title" meta_type="Qualified Link Widget">
+  <property name="fields">
+   <element value="Title"/>
+   <element value="Description"/>
+  </property>
+  <property name="label">cpscourrier_object_label</property>
+  <property name="label_edit">cpscourrier_object_label</property>
+  <property name="is_i18n">True</property>
+  <property name="sortable" type="string">Title</property>
+ </widget>
  <widget name="To" meta_type="Lines Widget">
   <property name="fields">
    <element value="mail_to"/>
@@ -47,46 +65,24 @@ Differences are outlined by (search for 'diff')
   <property name="height">3</property>
   <property name="sortable" type="string">mail_to</property>
  </widget>
-
- <widget name="Title" meta_type="Qualified Link Widget">
+ <widget name="has_attachment" meta_type="Icon Boolean Widget">
   <property name="fields">
-   <element value="Title"/>
-   <element value="Description"/>
-   <!--diff: lack of url-->
+   <element value="has_attachment"/>
   </property>
+  <property name="label">cpscourrier_has_attachment_label</property>
   <property name="is_i18n">True</property>
-  <property name="label">cpscourrier_object_label</property>
-  <property name="label_edit">cpscourrier_object_label</property>
-  <property name="sortable" type="string">Title</property>
+  <property name="icon_true">cpsma_attach_mini.png</property>
+  <property name="icon_false">nothing.png</property>
+  <property name="sortable" type="string">has_attachment</property>
  </widget>
-
- <widget name="Date" meta_type="Date Widget">
-  <property name="label">cpscourrier_modification_date_label</property>
-  <property name="label_edit">cpscourrier_modification_date_label</property>
-  <property name="fields">
-   <element value="ModificationDate"/><!--diff-->
-  </property>
-  <property name="is_i18n">True</property>
-  <property name="sortable" type="string">modified</property>
- </widget>
-
- <!--diff: widget from mailbox_contents_row-->
-  <widget name="State" meta_type="Workflow Variable Widget">
-  <property name="wf_var_id">review_state</property>
-  <property name="label">cpscourrier_review_state_label</property>
-  <property name="is_i18n">True</property>
-  <property name="sortable" type="string">review_state</property>
- </widget>
-
  <widget name="usages" meta_type="Int Widget">
-   <property name="label">cpscourrier_template_usage_col</property>
-   <property name="is_i18n">True</property>
-   <property name="fields">
-     <element value="template_usage"/>
-   </property>
-   <property name="sortable" type="string">template_usage</property>
+  <property name="fields">
+   <element value="template_usage"/>
+  </property>
+  <property name="label">cpscourrier_template_usage_col</property>
+  <property name="is_i18n">True</property>
+  <property name="sortable" type="string">template_usage</property>
  </widget>
-
  <table>
   <row>
    <cell name="Checkbox"/>
@@ -107,11 +103,10 @@ Differences are outlined by (search for 'diff')
    <cell name="Date"/>
   </row>
   <row>
-   <cell name="State"/><!--diff-->
+   <cell name="State"/>
   </row>
   <row>
    <cell name="usages"/>
   </row>
  </table>
 </object>
-
