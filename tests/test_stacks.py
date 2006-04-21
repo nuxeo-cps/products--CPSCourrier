@@ -518,11 +518,13 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         # XXX this should go in a separate testcase, nothing to do with stacks
 
         utool = getToolByName(self.portal, 'portal_url')
-        self.flogin('member1', self.mb2)
-        # here's the point of the test
-        self.failIf(_checkPermission(ModifyPortalContent, self.mb))
-
+        self.login('manager')
         self.wftool.invokeFactoryFor(self.mb2, 'Incoming Mail', 'other')
+        # here's the point of the test: user cannot modify self.outgoing
+        # yet using it as template will increment its usage counter
+        self.flogin('wsmanager', self.mb2)
+        self.failIf(_checkPermission(ModifyPortalContent, outgoing))
+
         self.wftool.doActionFor(self.mb2.other, 'handle')
         self.wftool.doActionFor(self.mb2.other, 'answer',
                                 base_reply_rpath=utool.getRpath(outgoing))
