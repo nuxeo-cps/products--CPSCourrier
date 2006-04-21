@@ -68,7 +68,7 @@ Layouts for rows in the content view of mailboxes
   <property name="sortable" type="string">Title</property>
  </widget>
 
- <widget name="Date" meta_type="String Widget">
+ <widget name="Date" meta_type="Date Widget">
   <property name="label">cpscourrier_creation_date_label</property>
   <property name="label_edit">cpscourrier_creation_date_label</property>
   <property name="fields">
