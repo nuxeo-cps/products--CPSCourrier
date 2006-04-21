@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-04-19 11:26default\n"
+"POT-Creation-Date: 2006-04-21 15:42default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -39,18 +39,18 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
+#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
 msgstr "Descendre"
 
-#.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
+#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_update_stackelts"
 msgstr "Enregistrer les modifications"
 
-#.   <input name="answer_submit" type="submit" class="standalone" value="button_validate" />
-#.   <input name="submit_add" type="submit" class="context" value="button_validate" />
+#.   <input type="submit" name="answer_submit" value="button_validate" class="standalone" />
+#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
 #: from ../browser/reuseAnswer.zpt ../browser/roadmap.zpt
 #: ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
@@ -70,7 +70,7 @@ msgstr "Répondre à partir d'une réponse existante"
 msgid "cpscourrier_choose_insertion_level"
 msgstr "Sélectionner le niveau d'insertion"
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filtrer"
@@ -130,6 +130,14 @@ msgstr "Rechercher des utilisateurs"
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_select_delegatees"
 msgstr "Sélectionner les éléments à ajouter dans la feuille de route"
+
+#.   <span>
+#.   	      Submit as template
+#.   	    </span>
+#: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
+#, fuzzy
+msgid "cpscourrier_submit_template"
+msgstr "Pertinence (nombre minimal d'utilisations)"
 
 #.   <caption>Thread</caption>
 #: from ../skins/cps_courrier/portlet_custom_thread.pt
@@ -292,9 +300,9 @@ msgstr "Boîtes aux lettres"
 
 msgid "mail_templates_root_title"
 msgstr "Réponses-types"
+
 # Forme plurielle basée sur l'exemple safari-photo de
 # http://grammaire.softissimo.com/index_alpha/Fiches/Fiche261.htm
-
 #
 # Layout labels
 #
@@ -381,6 +389,15 @@ msgstr "Adresses"
 
 msgid "cpscourrier_min_template_usage"
 msgstr "Pertinence (nombre minimal d'utilisations)"
+
+#
+# Layout labels
+#
+msgid "cpscourrier_no_user_found"
+msgstr "Aucun membre ne statisfait à vos critères"
+
+msgid "cpscourrier_no_group_found"
+msgstr "Aucun groupe ne satisfait à vos critères"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Cordialement, "

@@ -149,6 +149,12 @@ msgstr ""
 msgid "cpscourrier_min_template_usage"
 msgstr ""
 
+msgid "cpscourrier_no_user_found"
+msgstr ""
+
+msgid "cpscourrier_no_group_found"
+msgstr ""
+
 #
 # Vocabularies
 #
