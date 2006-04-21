@@ -47,6 +47,7 @@
 	     i18n:attributes="value"/>
       <input type="submit" class="context" name="submit_move_down"
 	     value="button_move_down_delegatees"
+	     tal:condition="view/canMoveDown"
 	     i18n:attributes="value"/>
     </tal:buttons>
     <tal:endform condition="edit_mode" replace="structure string:</form>" />

@@ -33,12 +33,21 @@ class RoadmapView(SearchView):
         self.groups_results = 'submit_groups_search' in self.request.form
         self.is_results = self.users_results or self.groups_results
 
-    def canManage(self):
-        wfs = self.wftool.getWorkflowsFor(self.context)
+    def canDoAction(self, transition_id):
+        wfs = getattr(self, 'wfs', None)
+        if wfs is None:
+            wfs = self.wfs = self.wftool.getWorkflowsFor(self.context)
+
         for wf in wfs:
-            if wf.isActionSupported(self.context, 'manage_delegatees'):
+            if wf.isActionSupported(self.context, transition_id):
                 return True
         return False
+
+    def canMoveDown(self):
+        return self.canDoAction('move_down_delegatees')
+
+    def canManage(self):
+        return self.canDoAction('manage_delegatees')
 
     def renderStack(self, mode):
         return self.stack.render(context=self.context, mode=mode)
