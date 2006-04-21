@@ -14,7 +14,7 @@
  </widget>
 
   <widget name="q_group" meta_type="String Widget">
-    <property name="hidden_layout_modes">view</property>
+    <property name="hidden_layout_modes">search_results</property>
     <property name="is_i18n">True</property>
     <property name="label_edit">label_name</property>
     <property name="fields">
@@ -23,7 +23,7 @@
   </widget>
 
   <widget name="q_description" meta_type="String Widget">
-    <property name="hidden_layout_modes">view</property>
+    <property name="hidden_layout_modes">search_results</property>
     <property name="is_i18n">True</property>
     <property name="label_edit">label_description</property>
     <property name="fields">
