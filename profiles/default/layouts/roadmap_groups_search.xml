@@ -5,7 +5,7 @@
   <widget name="Results" meta_type="Directory Tabular Widget">
     <property name="row_layout">roadmap_groups_row</property>
     <property name="hidden_layout_modes">edit</property>
-    <property name="empty_message">dgme_no_user_found</property>
+    <property name="empty_message">cpscourrier_no_group_found</property>
     <property name="is_empty_message_i18n">True</property>
     <property name="filter_button">submit_groups_search</property>
     <property name="directory">groups</property>
