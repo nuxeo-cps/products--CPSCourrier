@@ -1,11 +1,6 @@
 <?xml version="1.0"?>
 <!-- fields in common for both in and out messages types -->
 <object name="mail_common" meta_type="CPS Schema">
-  <field name="content" meta_type="CPS String Field">
-    <property name="is_searchabletext">True</property>
-  </field>
-  <field name="content_position" meta_type="CPS String Field"/>
-  <field name="content_format" meta_type="CPS String Field"/>
   <field name="deadline" meta_type="CPS DateTime Field">
     <property name="default_expr">python:None</property>
     <!-- This is a hack to initialize the value of the deadline from the delay
@@ -17,15 +12,11 @@
     <property name="default_expr">string:1</property>
   </field>
   <field name="size" meta_type="CPS Float Field"/>
-  <field name="mail_from" meta_type="CPS String Field">
-    <property name="is_searchabletext">True</property>
-  </field>
-  <field name="mail_to" meta_type="CPS String List Field">
-    <property name="is_searchabletext">True</property>
-  </field>
   <field name="has_attachment" meta_type="CPS String List Field">
     <property name="write_process_expr">
       python: object.hasFlexibleFields(data=data)
     </property>
   </field>
+  <field name="content_position" meta_type="CPS String Field"/>
+  <field name="content_format" meta_type="CPS String Field"/>
 </object>

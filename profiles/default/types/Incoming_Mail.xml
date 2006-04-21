@@ -9,11 +9,12 @@
 
  <!-- Schemas and layout -->
  <property name="schemas">
+  <element value="metadata_protected_incoming"/>
   <element value="metadata"/>
   <element value="common"/>
   <element value="mail_common" />
   <element value="incoming_mail" />
-  <element value="file"/>
+  <element value="flexible_content"/>
  </property>
  <property name="layouts">
   <element value="mail_header"/>
@@ -25,7 +26,7 @@
   <element value="metadata:incoming_mail_metadata,mail_metadata"/>
  </property>
  <property name="flexible_layouts">
-  <element value="mail_flexible:file"/>
+  <element value="mail_flexible:flexible_content"/>
  </property>
 
  <!-- Specific CPSCourrier actions -->
