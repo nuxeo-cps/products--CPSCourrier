@@ -99,6 +99,7 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
         data.update({
             'content': template_doc['content'],
             'Subject': template_doc['Subject'](),
+            'form_of_address': template_doc['form_of_address'],
         })
 
         # increment the counter of the template reply
