@@ -31,7 +31,8 @@
   <table>
     <row>
       <cell name="Checkbox"/>
-    </row>    <row>
+    </row>
+    <row>
       <cell name="title"/>
     </row>
     <row>
