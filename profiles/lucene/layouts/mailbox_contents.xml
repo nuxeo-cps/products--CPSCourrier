@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!-- Lucene version -->
+
+<object name="mailbox_contents">
+ <widget name="Table" meta_type="Lucene Tabular Widget"/>
+</object>
