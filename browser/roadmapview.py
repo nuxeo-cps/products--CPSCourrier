@@ -29,6 +29,24 @@ class RoadmapView(LocalRolesView):
 
         self.wftool = getToolByName(self.context, 'portal_workflow')
         self.stack = self.wftool.getStackFor(self.context, self.stack_var_id)
+        # stack rendering modes; also needed by what surrounds the stack
+
+    def getStackMode(self):
+        """Wouldn't work at __init__ time because of aq problem"""
+
+        mode = getattr(self, 'stack_mode', None)
+        if mode is not None:
+            return mode
+
+        if self.is_results:
+            mode = 'insert'
+        elif self.canManage():
+            mode = 'edit'
+        else:
+            mode = 'view'
+
+        self.stack_mode = mode
+        return mode
 
     def canDoAction(self, transition_id):
         wfs = getattr(self, 'wfs', None)
@@ -46,8 +64,8 @@ class RoadmapView(LocalRolesView):
     def canManage(self):
         return self.canDoAction('manage_delegatees')
 
-    def renderStack(self, mode):
-        return self.stack.render(context=self.context, mode=mode)
+    def renderStack(self):
+        return self.stack.render(context=self.context, mode=self.stack_mode)
 
     def renderUsersLayout(self):
         return self.renderLayout(name='roadmap_users_search')['rendered']

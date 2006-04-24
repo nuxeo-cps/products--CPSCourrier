@@ -12,11 +12,10 @@
 
   <metal:main fill-slot="main"
 	      tal:define="can_manage view/canManage;
-			  requested_mode request/form/stack_mode|string:edit;
-			  mode python:can_manage and requested_mode or 'view';
-			  edit_mode python:mode == 'edit';
-			  insert_mode python:mode == 'insert';
-			  searching request/form/search_submit|nothing;
+			  stack_mode view/getStackMode;
+			  view_mode python:stack_mode == 'view';
+			  edit_mode python:stack_mode == 'edit';
+			  insert_mode python:stack_mode == 'insert';
 			  self_url string:cpscourrier_roadmap.html;
 			  ">
 
@@ -24,15 +23,14 @@
       Mail Handling Roadmap
     </h1>
 
-    <h2 tal:condition="python:mode=='insert'"
+    <h2 tal:condition="insert_mode"
        i18n:translate="cpscourrier_choose_insertion_level">
       Please select a level to insert the new delegatee
     </h2>
 
-    <tal:startform condition="python:mode != 'view'"
+    <tal:startform condition="not:view_mode"
 		   replace="structure string:<form action='cpscourrier_stack_modify' method='post' enctype='multipart/form-data'>" />
-    <tal:block
-	replace="structure python:view.renderStack(mode=mode)" />
+    <tal:block	replace="structure view/renderStack" />
     <input type="hidden" name="workflow_action_form"
 	   value="changed by tal"
 	   tal:attributes="value self_url"/>
@@ -76,7 +74,6 @@
 			                        name='roadmap_users_search')"
 		     replace="structure res/rendered">
 	  </tal:block>
-	  <input type="hidden" name="stack_mode" value="insert" />
 	  <input type="submit"
 		 name="submit_users_search"
 		 value="button_search"
@@ -93,7 +90,6 @@
 	  <tal:block define="res python:view.renderLayout(
                                      	      name='roadmap_groups_search')"
 		     replace="structure res/rendered"/>
-	  <input type="hidden" name="stack_mode" value="insert" />
 	  <input type="submit"
 		 name="submit_groups_search"
 		 value="button_search"
