@@ -5,6 +5,7 @@ New features:
 ~~~~~~~~~~~~~
 - A new view 'folder_localroles.html' to leverage tabular directory widgets
 - Template replies
+- Made it possible to edit the subject list in view mode
 Bug fixes:
 ~~~~~~~~~~
 - Cookie invalidation is smarter (Cf doc/developer/filter_widgets.txt)

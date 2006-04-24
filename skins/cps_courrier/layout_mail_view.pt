@@ -1,0 +1,45 @@
+<tal:comment replace="nothing">
+  View mode layout rendering with editable widget for subjects list.
+
+  $Id: layout_tabular_view.pt 34098 2006-03-07 09:55:58Z gracinet $
+</tal:comment>
+
+
+<tal:block tal:define="layout options/layout;
+                       rows layout/rows;
+                       editable_cell python:rows[-1][0];
+                       view_rows python:rows[:-1];">
+  <table style="width:100%"><tr><td>
+  <tal:block repeat="row view_rows">
+    <tal:block repeat="cell row">
+      <tal:block define="widget cell/widget">
+      <div tal:attributes="class cell/widget_css_class|nothing;
+                           id python:widget.getHtmlWidgetId()+'_widget';
+                          ">
+        <tal:block condition="widget/label">
+          <span class="dlabel" i18n:translate="" tal:condition="widget/is_i18n"
+            tal:content="widget/label">label</span>
+          <span class="dlabel" tal:condition="not:widget/is_i18n"
+            tal:content="widget/label">label</span>
+        </tal:block>
+        <tal:block replace="structure cell/widget_rendered" />
+      </div>
+      </tal:block>
+    </tal:block>
+  </tal:block>
+  </td><td id="cpscourrierEditablePanel" style="width:10em; text-align:center">
+  <form action="cpsdocument_edit" method="post" id="editForm"
+    enctype="multipart/form-data" class="workflow">
+    <tal:block replace="structure editable_cell/widget_rendered" />
+    <div tal:define="cpsmcat nocall:here/translation_service;
+                     mtool here/portal_membership"
+         tal:condition="python:mtool.checkPermission('Modify portal content',
+                                                     context)">
+       <input type="submit" name="cpsdocument_edit_and_view_button"
+         class="standalone" value="ok" id="cpsdocument_edit_and_view_button"/>
+    </div>
+  </form>
+  </td></tr></table>
+</tal:block>
+
+

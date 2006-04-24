@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <!-- common view for all mail documents -->
 <object name="mail_common" meta_type="CPS Layout">
+ <property name="layout_view_method">layout_mail_view</property>
  <widget name="object" meta_type="String Widget">
   <property name="fields">
    <element value="Title"/>
@@ -67,6 +68,7 @@
   <property name="hidden_empty">True</property>
   <property name="vocabulary">subject_voc</property>
   <property name="size">10</property>
+  <property name="widget_mode_expr">python:portal.portal_membership.checkPermission('Modify portal content', proxy) and 'edit' or 'view'</property>
  </widget>
  <table>
    <row>
