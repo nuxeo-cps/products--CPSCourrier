@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-04-21 15:42default\n"
+"POT-Creation-Date: 2006-04-24 18:58default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -39,6 +39,7 @@ msgstr ""
 msgid "State"
 msgstr ""
 
+#.   <input condition="view/canMoveDown" type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
@@ -424,6 +425,21 @@ msgid "cpscourrier_for_reply"
 msgstr ""
 
 msgid "cpscourrier_for_advice"
+msgstr ""
+
+msgid "cpscourrier_sender_type_label"
+msgstr ""
+
+msgid "cpscourrier_st_voc_individual"
+msgstr ""
+
+msgid "cpscourrier_st_voc_professional"
+msgstr ""
+
+msgid "cpscourrier_st_voc_corporate_body"
+msgstr ""
+
+msgid "cpscourrier_st_voc_administration"
 msgstr ""
 
 #

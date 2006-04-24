@@ -1,6 +1,20 @@
 <?xml version="1.0"?>
 <!-- medata/properties view for all mail documents -->
 <object name="mail_metadata" meta_type="CPS Layout">
+ <widget name="smtp_headers" meta_type="Lines Widget">
+  <property name="fields">
+   <element value="smtp_headers"/>
+  </property>
+  <property name="readonly_layout_modes">
+   <element value="create"/>
+   <element value="edit"/>
+  </property>
+  <property name="label">cpscourrier_smtp_headers_label</property>
+  <property name="label_edit">cpscourrier_smtp_headers_label</property>
+  <property name="is_i18n">True</property>
+  <property name="hidden_empty">True</property>
+  <property name="view_mode_separator">&lt;br/&gt;</property>
+ </widget>
  <widget name="size" meta_type="Float Widget">
   <property name="fields">
    <element value="size"/>
@@ -12,6 +26,15 @@
   <property name="label">cpscourrier_size_label</property>
   <property name="label_edit">cpscourrier_size_label</property>
   <property name="is_i18n">True</property>
+ </widget>
+ <widget name="sender_type" meta_type="Select Widget">
+  <property name="fields">
+   <element value="sender_type"/>
+  </property>
+  <property name="label">cpscourrier_sender_type_label</property>
+  <property name="label_edit">cpscourrier_sender_type_label</property>
+  <property name="is_i18n">True</property>
+  <property name="vocabulary">sender_type</property>
  </widget>
  <widget name="deadline" meta_type="Date Widget">
   <property name="fields">
@@ -33,7 +56,13 @@
  </widget>
  <table>
    <row>
+     <cell name="smtp_headers"/>
+   </row>
+   <row>
      <cell name="size"/>
+   </row>
+   <row>
+     <cell name="sender_type"/>
    </row>
    <row>
      <cell name="deadline"/>

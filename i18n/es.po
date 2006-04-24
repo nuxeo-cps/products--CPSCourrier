@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-04-21 15:42default\n"
+"POT-Creation-Date: 2006-04-24 18:58default\n"
 "PO-Revision-Date: 2006-04-12 15:41+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -39,6 +39,7 @@ msgstr ""
 msgid "State"
 msgstr ""
 
+#.   <input condition="view/canMoveDown" type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
@@ -138,7 +139,7 @@ msgstr "Por favor, seleccione los elementos a adjuntar a la hoja de ruta"
 #: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
 #, fuzzy
 msgid "cpscourrier_submit_template"
-msgstr "Used at least"
+msgstr "Submit a copy as template"
 
 #.   <caption>Thread</caption>
 #: from ../skins/cps_courrier/portlet_custom_thread.pt
@@ -398,11 +399,11 @@ msgstr "Used at least"
 #
 #, fuzzy
 msgid "cpscourrier_no_user_found"
-msgstr "Search groups"
+msgstr "No user matches your search criteria"
 
 #, fuzzy
 msgid "cpscourrier_no_group_found"
-msgstr "No mail matches your search criteria"
+msgstr "No group matches your search criteria"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Mis mejores deseos, "
@@ -439,6 +440,26 @@ msgstr "Para responder"
 
 msgid "cpscourrier_for_advice"
 msgstr "Para avisar"
+
+#, fuzzy
+msgid "cpscourrier_sender_type_label"
+msgstr "Type"
+
+#, fuzzy
+msgid "cpscourrier_st_voc_individual"
+msgstr "Individual"
+
+#, fuzzy
+msgid "cpscourrier_st_voc_professional"
+msgstr "Professional"
+
+#, fuzzy
+msgid "cpscourrier_st_voc_corporate_body"
+msgstr "Corporate body"
+
+#, fuzzy
+msgid "cpscourrier_st_voc_administration"
+msgstr "Administration"
 
 msgid "action_roadmap"
 msgstr "Hoja de ruta"
@@ -791,3 +812,6 @@ msgstr "El ${d}-${m}-${y}, ${name} escribió:"
 #, fuzzy
 msgid "cpscourrier_timeleft:${plus_sign}${d}"
 msgstr "D${plus_sign}${d}"
+
+msgid "label_sender_type_voc"
+msgstr "Sender type"

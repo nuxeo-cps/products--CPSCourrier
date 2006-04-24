@@ -195,6 +195,21 @@ msgstr ""
 msgid "cpscourrier_for_advice"
 msgstr ""
 
+msgid "cpscourrier_sender_type_label"
+msgstr ""
+
+msgid "cpscourrier_st_voc_individual"
+msgstr ""
+
+msgid "cpscourrier_st_voc_professional"
+msgstr ""
+
+msgid "cpscourrier_st_voc_corporate_body"
+msgstr ""
+
+msgid "cpscourrier_st_voc_administration"
+msgstr ""
+
 #
 # Workflows
 #

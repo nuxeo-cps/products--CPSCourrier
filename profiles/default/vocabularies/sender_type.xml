@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="sender_type" meta_type="CPS Vocabulary">
+ <property name="title">cpscourrier_sender_type_label</property>
+ <property name="title_msgid">cpscourrier_sender_type_label</property>
+ <property name="description"></property>
+ <property name="acl_write_roles">Manager</property>
+ <item key="1" msgid="cpscourrier_st_voc_individual">Individual</item>
+ <item key="2" msgid="cpscourrier_st_voc_professional">Professional</item>
+ <item key="3" msgid="cpscourrier_st_voc_corporate_body">Corporate body</item>
+ <item key="4" msgid="cpscourrier_st_voc_administration">Administration</item>
+</object>

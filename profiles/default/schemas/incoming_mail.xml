@@ -1,9 +1,6 @@
 <?xml version="1.0"?>
 <object name="incoming_mail" meta_type="CPS Schema">
 
-  <!-- specific fields for incoming messages -->
-  <field name="smtp_headers" meta_type="CPS String List Field"/>
-
   <!-- write protected fields for incoming mails -->
   <field name="content" meta_type="CPS String Field">
     <property name="is_searchabletext">True</property>

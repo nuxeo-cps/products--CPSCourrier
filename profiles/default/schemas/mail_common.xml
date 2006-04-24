@@ -19,4 +19,8 @@
   </field>
   <field name="content_position" meta_type="CPS String Field"/>
   <field name="content_format" meta_type="CPS String Field"/>
+  <field name="smtp_headers" meta_type="CPS String List Field"/>
+  <field name="sender_type" meta_type="CPS String Field">
+    <property name="default_expr">string:1</property>
+  </field>
 </object>

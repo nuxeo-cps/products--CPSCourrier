@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <object name="portal_vocabularies" meta_type="CPS Vocabularies Tool">
  <object name="form_of_address" meta_type="CPS Vocabulary"/>
+ <object name="sender_type" meta_type="CPS Vocabulary"/>
  <object name="mail_priority" meta_type="CPS Vocabulary"/>
  <object name="mail_states" meta_type="CPS Method Vocabulary"/>
  <object name="mail_directives" meta_type="CPS Vocabulary"/>

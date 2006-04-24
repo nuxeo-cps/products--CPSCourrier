@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-04-21 15:42default\n"
+"POT-Creation-Date: 2006-04-24 18:58default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -39,6 +39,7 @@ msgstr ""
 msgid "State"
 msgstr ""
 
+#.   <input condition="view/canMoveDown" type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
@@ -135,9 +136,8 @@ msgstr "Sélectionner les éléments à ajouter dans la feuille de route"
 #.   	      Submit as template
 #.   	    </span>
 #: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
-#, fuzzy
 msgid "cpscourrier_submit_template"
-msgstr "Pertinence (nombre minimal d'utilisations)"
+msgstr "Proposer comme réponse-type"
 
 #.   <caption>Thread</caption>
 #: from ../skins/cps_courrier/portlet_custom_thread.pt
@@ -435,6 +435,21 @@ msgstr "Pour projet de réponse"
 msgid "cpscourrier_for_advice"
 msgstr "Pour avis"
 
+msgid "cpscourrier_sender_type_label"
+msgstr "Typologie émetteur"
+
+msgid "cpscourrier_st_voc_individual"
+msgstr "Particulier"
+
+msgid "cpscourrier_st_voc_professional"
+msgstr "Professionnel"
+
+msgid "cpscourrier_st_voc_corporate_body"
+msgstr "Personne morale"
+
+msgid "cpscourrier_st_voc_administration"
+msgstr "Administration"
+
 msgid "action_roadmap"
 msgstr "Feuille de route"
 
@@ -679,8 +694,8 @@ msgstr "Prendre en charge par lot"
 msgid "help_batch_workflow_handle"
 msgstr ""
 "Vous vous apprêtez à prendre en charge un lot de courriers entrants&nbsp;; "
-"vous deviendrez de fait l'agent en charge de leur traitement&nbsp;: répondre, "
-"déléguer, mettre au rebut"
+"vous deviendrez de fait l'agent en charge de leur traitement&nbsp;: "
+"répondre, déléguer, mettre au rebut"
 
 msgid "heading_batch_workflow_discard"
 msgstr "Mettre au rebut par lot"
@@ -775,3 +790,4 @@ msgstr "Le ${d}/${m}/${y}, ${name} a écrit : "
 
 msgid "cpscourrier_timeleft:${plus_sign}${d}"
 msgstr "J${plus_sign}${d}"
+
