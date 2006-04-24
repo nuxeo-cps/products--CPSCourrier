@@ -95,3 +95,7 @@ class LocalRolesView(SearchView):
         meth(*args, **kwargs)
 
         self.reRedirect(form_name=form_name)
+
+    def getCPSCandidateLocalRoles(self):
+        mtool = getToolByName(self.context, 'portal_membership')
+        return mtool.getCPSCandidateLocalRoles(self.context)

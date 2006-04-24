@@ -8,7 +8,7 @@
 	    tal:define="searching view/is_results;
 			localrole_form view/getFormName;
 			submit_url string:${here_url}/folder_localroles_submit;
-			cps_roles python:here.getCPSCandidateLocalRoles();
+			cps_roles view/getCPSCandidateLocalRoles;
 			">
   <h1 i18n:translate="heading_local_roles_search_members_and_groups"
       tal:condition="not:searching">
