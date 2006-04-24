@@ -18,6 +18,8 @@ Bug fixes:
 - mailboxes contents now use a catalog search
 - localrole form fixes
 - 'move-down' button was displayed on roadmap if there was no lower level
+- search users batching didn't work for roadmap
+
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Changed 'from' to 'mail_from' and 'to' to 'mail_to' in mail_common schema
