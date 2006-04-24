@@ -62,18 +62,9 @@
 	    tal:condition="insert_mode">
 	  Add delegatees: search results
 	</h2>
-	 <tal:block condition="view/users_results">
-	   <tal:block define="res python:view.renderLayout(
-			                      name='roadmap_users_search')"
-		      replace="structure res/rendered">
-	   </tal:block>
-	 </tal:block>
-	 <tal:block condition="view/groups_results">
-	   <tal:block define="res python:view.renderLayout(
-			                      name='roadmap_groups_search')"
-		      replace="structure res/rendered">
-	   </tal:block>
-	 </tal:block>
+
+	<tal:block replace="structure view/renderResults"/>
+
 	<h3 i18n:translate="cpscourrier_search_users"
 	    tal:condition="edit_mode">
 	  Search users

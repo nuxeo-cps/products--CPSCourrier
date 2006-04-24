@@ -18,20 +18,17 @@
 
 from Products.CMFCore.utils import getToolByName
 
-from searchview import SearchView
+from localrolesview import LocalRolesView
 
-class RoadmapView(SearchView):
+class RoadmapView(LocalRolesView):
 
     stack_var_id = 'Pilots'
 
     def __init__(self, *args):
-        SearchView.__init__(self, *args)
+        LocalRolesView.__init__(self, *args)
 
         self.wftool = getToolByName(self.context, 'portal_workflow')
         self.stack = self.wftool.getStackFor(self.context, self.stack_var_id)
-        self.users_results = 'submit_users_search' in self.request.form
-        self.groups_results = 'submit_groups_search' in self.request.form
-        self.is_results = self.users_results or self.groups_results
 
     def canDoAction(self, transition_id):
         wfs = getattr(self, 'wfs', None)
@@ -52,3 +49,8 @@ class RoadmapView(SearchView):
     def renderStack(self, mode):
         return self.stack.render(context=self.context, mode=mode)
 
+    def renderUsersLayout(self):
+        return self.renderLayout(name='roadmap_users_search')['rendered']
+
+    def renderGroupsLayout(self):
+        return self.renderLayout(name='roadmap_groups_search')['rendered']
