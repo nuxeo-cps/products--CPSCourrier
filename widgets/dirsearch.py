@@ -84,7 +84,7 @@ class DirectoryTabularWidget(TabularWidget):
 
         entries = cpsdir.searchEntries(**query) # checks security
         nb_pages = self.getNbPages(len(entries))
-        (b_page, b_start, b_size) = self.filtersToBatchParams(query)
+        (b_page, b_start, b_size) = self.getBatchParams(datastructure)
         entries = entries[b_start:b_start+b_size]
 
         dms = (cpsdir._getDataModel(id) for id in entries)

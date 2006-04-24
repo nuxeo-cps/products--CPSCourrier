@@ -130,7 +130,7 @@ class CatalogTabularWidget(TabularWidget):
 
         query = self.buildFilters(datastructure)
         self.filtersToQuery(query)
-        (b_page, b_start, b_size) = self.filtersToBatchParams(query)
+        (b_page, b_start, b_size) = self.getBatchParams(datastructure)
 
         logger.log(TRACE, query)
         brains, nb_results = self._doBatchedQuery(catalog,

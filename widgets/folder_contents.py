@@ -131,7 +131,7 @@ class FolderContentsWidget(TabularWidget):
         meta_types = datastructure.get('meta_types') or self.listed_meta_types
 
         filters = self.buildFilters(datastructure)
-        (b_page, b_start, b_size) = self.filtersToBatchParams(filters)
+        (b_page, b_start, b_size) = self.getBatchParams(datastructure)
 
         o_ids = folder.objectIds(meta_types)
         nb_pages = self.getNbPages(len(o_ids))

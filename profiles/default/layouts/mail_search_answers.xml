@@ -85,10 +85,6 @@ Layout for searching an answer in existing outgoing mails
    </property>
  </widget>
 
-<widget name="q_b_page" meta_type="Int Filter Widget">
-   <property name="hidden_layout_modes">view search_results</property>
-</widget>
-
 <widget name="q_ZCText_or" meta_type="String Widget">
    <property name="label">cpscourrier_fulltext_search</property>
    <property name="label_edit">cpscourrier_fulltext_search</property>

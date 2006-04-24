@@ -32,10 +32,12 @@ from Products.CPSSchemas.Widget import widgetname
 from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSDocument.FlexibleTypeInformation import FlexibleTypeInformation
 from Products.CPSPortlets.CPSPortletWidget import CPSPortletWidget
+from Products.CPSCourrier.widgets.filter_widgets import CPSIntFilterWidget
 
 # second import not used here, but imported from tests.
 from Products.CPSSkins.cpsskins_utils import (serializeForCookie,
                                               unserializeFromCookie)
+
 
 from Products.CPSDocument.interfaces import ICPSDocument
 
@@ -90,7 +92,7 @@ class FakeRequestWithCookies:
         return info['value']
 
 
-class TabularWidget(CPSPortletWidget):
+class TabularWidget(CPSIntFilterWidget):
     """ A generic portlet widget to display tabular contents.
 
     Uses a layout to render the rows. This layout is fetched from the portlet.
@@ -109,6 +111,9 @@ class TabularWidget(CPSPortletWidget):
     can override the extractColumns method.
 
     >>> wi = TabularWidget('spam')
+
+    The widget inherits from CPSIntFilterWidget to read batching info from
+    request (and cookies) in the prepare phase.
     """
 
     _properties = _properties = CPSPortletWidget._properties + (
@@ -128,8 +133,6 @@ class TabularWidget(CPSPortletWidget):
          'label': 'Prefix of filtering widgets', },
         {'id': 'items_per_page', 'type': 'int', 'mode': 'w',
          'label': 'Maximum number of results per page', },
-        {'id': 'batching_filter', 'type': 'string', 'mode': 'w',
-         'label': 'Filter used for batching', },
         {'id': 'batching_gadget_pages', 'type': 'int', 'mode': 'w',
          'label': 'Number of context pages displayed in batching gadget'},
         )
@@ -144,7 +147,6 @@ class TabularWidget(CPSPortletWidget):
     filter_button = ''
     filter_prefix = 'q_'
     items_per_page = 10
-    batching_filter = 'b_page'
     batching_gadget_pages = 3
 
     def prepareRowDataStructure(self, layout, datastructure):
@@ -223,10 +225,10 @@ class TabularWidget(CPSPortletWidget):
         logger.debug(' filters: %s' %filters)
         return filters
 
-    def filtersToBatchParams(self, filts):
+    def getBatchParams(self, datastructure):
         """Extract batching parameters from given dict."""
 
-        b_page = filts.pop(self.batching_filter, None)
+        b_page = datastructure.get(self.getWidgetId())
         if b_page is None:
             b_page = 1
         else:
@@ -327,13 +329,13 @@ class TabularWidget(CPSPortletWidget):
         first_page = max(current_page - self.batching_gadget_pages, 1)
         last_page = min(current_page + self.batching_gadget_pages,
                         nb_pages)
-        batching_wid = self.filter_prefix+self.batching_filter
         return {'current_page': current_page,
                 'nb_pages': nb_pages,
                 'linked_pages' : range(first_page, last_page+1),
-                'form_key' : widgetname(batching_wid),
+                'form_key' : self.getHtmlWidgetId(),
                 # search views need to know they are displaying results:
                 'filter_button': self.filter_button}
+
 
 
     def render(self, mode, datastructure, **kw):

@@ -261,19 +261,20 @@ Batching
   subclasses, some properties and helpers are defined at the baseclass
   level, to enforce easy switch between concrete implementations.
 
+  The batching works like the sorting info, except that the tabular widget
+  itself is the one that puts the batching info in datastructure in
+  prepare phase. There is no need to push a new widget in the
+  layouts. The cookie persistence is the same. This is done by
+  subclassing CPSCourrier.widgets.filter_widget.CPSIntFilterWidget
+
 Properties
 ~~~~~~~~~~
 
   :items_per_page:         max number of items to be displayed on a single page
-  :batching_filter_widget: filter widget used to grab the page number
-                           from query/cookie/datamodel
+  :batching_gadget_pages:  number of pages to be linked in batching
+                           gadget around the current one
 
   The page number is formatted for humans: 1 means the first page.
-
-  Like the sort info, this has to be put in datastructure by a Filter
-  Widget, along with other filter/query params. Hence, the widget must follow
-  the same prefix conventions, and we will have the same cookie persistence
-  as other params.
 
 Subclasses
 ~~~~~~~~~~
@@ -288,39 +289,32 @@ Subclasses
 Helpers
 ~~~~~~~
 
-  The ``filtersToBatchParams`` takes a dict, as produced by ``buildFilters()``
-  and returns the corresponding triple (page, start, length), where start is
-  in machine format::
+  The ``getBatchParams`` returns the triple (page, start, length) to
+  be used,  where start is in machine format::
 
-     >>> tab.manage_changeProperties(items_per_page=15,
-     ...                             batching_filter='b_page')
-     >>> query = {'b_page': '2', 'q_title': 'stuff'}
-     >>> tab.filtersToBatchParams(query)
+     >>> tab.manage_changeProperties(items_per_page=15)
+     >>> ds = DataStructure()
+     >>> tab.REQUEST = FakeRequestWithCookies(widget__spam=2)
+     >>> tab.prepare(ds)
+     >>> tab.getWidgetId() # reminder
+     'spam'
+     >>> tab.getBatchParams(ds)
      (2, 15, 15)
-
-  The batching param has been removed from query::
-
-     >>> query
-     {'q_title': 'stuff'}
-     >>> query = {'b_page': 1}
-     >>> tab.filtersToBatchParams(query)
-     (1, 0, 15)
 
   If the batching param is missing, we treat it as first page::
 
-     >>> query = {'other-stuff': 'abc'}
-     >>> tab.filtersToBatchParams(query)
+     >>> ds = DataStructure()
+     >>> tab.REQUEST = FakeRequestWithCookies()
+     >>> tab.prepare(ds)
+     >>> tab.getBatchParams(ds)
      (1, 0, 15)
 
   Now let's see the effect of changing properties::
 
-      >>> tab.manage_changeProperties(batching_filter='the_b')
-      >>> query = {'the_b': '5', 'q_title': 'stuff'}
-      >>> tab.filtersToBatchParams(query)
-      (5, 60, 15)
       >>> tab.manage_changeProperties(items_per_page=17)
-      >>> query = {'the_b': '3', 'q_title': 'stuff'}
-      >>> tab.filtersToBatchParams(query)
+      >>> tab.REQUEST = FakeRequestWithCookies(widget__spam=3)
+      >>> tab.prepare(ds)
+      >>> tab.getBatchParams(ds)
       (3, 34, 17)
 
   ``getNbPages()`` is meant to factorize the computation of the number
@@ -365,7 +359,7 @@ Batching gadget
      >>> pretty_print(tab.getBatchingInfo(current_page, nb_pages))
      {'current_page': 7,
       'filter_button': 'filter',
-      'form_key': 'widget__q_b_page',
+      'form_key': 'widget__spam',
       'linked_pages': [4, 5, 6, 7, 8, 9, 10],
       'nb_pages': 12}
 
