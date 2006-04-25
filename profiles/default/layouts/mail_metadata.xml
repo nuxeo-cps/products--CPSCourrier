@@ -35,6 +35,7 @@
   <property name="label_edit">cpscourrier_sender_type_label</property>
   <property name="is_i18n">True</property>
   <property name="vocabulary">sender_type</property>
+  <property name="translated">True</property>
  </widget>
  <widget name="deadline" meta_type="Date Widget">
   <property name="fields">
