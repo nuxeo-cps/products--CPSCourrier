@@ -245,7 +245,7 @@ class TabularWidget(CPSIntFilterWidget):
             return 0
 
     def columnFromWidget(self, widget, datastructure,
-                         sort_wid='q_sort'):
+                         sort_filter='sort'):
         """ make column info from a widget object.
 
         Return (widget, boolean, token, get_req) where:
@@ -270,6 +270,7 @@ class TabularWidget(CPSIntFilterWidget):
 
         # prepare the get request
         wid = widget.getWidgetId()
+        sort_wid = self.filter_prefix + sort_filter
         sort_name = widgetname(sort_wid)
         get_req = '?%s-on=%s&%s-col=%s' % (sort_name,
                                            quote(sortable),

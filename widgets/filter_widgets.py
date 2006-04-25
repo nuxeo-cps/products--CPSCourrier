@@ -297,7 +297,7 @@ class CPSToggableCriterionWidget(RequestCookiesMixin, CPSWidget):
         # do toggle token
         LOG('ToggleWidget.prepare; posted=', DEBUG, posted)
         if posted is not None:
-            if posted != ds[crit_key]:
+            if posted != ds.get(crit_key):
                 ds[crit_key] = posted
                 ds[token_key] = self.toggle_tokens[0]
             else:

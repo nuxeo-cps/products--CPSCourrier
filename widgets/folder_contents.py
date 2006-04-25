@@ -121,6 +121,8 @@ class FolderContentsWidget(TabularWidget):
 
         We cannot avoid finally fetching all objects, but we try to
         avoid fetching all of them at once.
+
+        Implememtation has become rotten and in need of serious refactoring
         """
         folder = kw.get('context_obj') # typical of portlets
         if folder is None:
@@ -133,9 +135,29 @@ class FolderContentsWidget(TabularWidget):
         filters = self.buildFilters(datastructure)
         (b_page, b_start, b_size) = self.getBatchParams(datastructure)
 
-        o_ids = folder.objectIds(meta_types)
-        nb_pages = self.getNbPages(len(o_ids))
+        sort_key = filters.pop('sort-on', None)
+        sort_order = filters.pop('sort-order', None)
+        sort_col = filters.pop('sort-col', None)
+        ### XXX the filtering algorithm is dead wrong
+        if sort_key is None:
+          o_ids = folder.objectIds(meta_types)
+        else:
+          o_items = folder.objectItems(meta_types)
+          # Check Dublin core case
+          first = o_items and o_items[0][1].getContent()
+          if o_items and callable(getattr(first, sort_key)):
+              weighted_items = [(getattr(item.getContent(), sort_key)(), oid)
+                                for oid, item in o_items]
+          else:
+              weighted_items = [(getattr(item.getContent(), sort_key), oid)
+                                for oid, item in o_items]
 
+          weighted_items.sort()
+          o_ids = [w_item[1] for w_item in weighted_items]
+          if sort_order == 'reverse':
+              o_ids.reverse()
+
+        nb_pages = self.getNbPages(len(o_ids))
         batched_ids = o_ids[b_start:b_start+b_size]
         iterprox = (folder[p_id] for p_id in batched_ids)
         iterprox = (proxy for proxy in iterprox

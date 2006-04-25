@@ -17,8 +17,23 @@ Layout that present mailbox contents
     <element value="CPS Proxy BTree Folder" />
     <element value="CPS Proxy Folder" />
   </property>
-
  </widget>
+
+ <widget name="f_sort" meta_type="Toggable Criterion Widget">
+   <property name="hidden_layout_modes">create edit</property>
+   <property name="widget_mode_expr">string:edit</property>
+   <property name="label">cpscourrier_type_label</property>
+   <property name="is_i18n">True</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="toggle_tokens">
+     <element value="" />
+     <element value="reverse" />
+   </property>
+   <property name="criterion_suffix">-on</property>
+   <property name="token_suffix">-order</property>
+   <property name="ref_suffix">-col</property>
+ </widget>
+
  <table>
   <row>
    <cell name="Table"/>

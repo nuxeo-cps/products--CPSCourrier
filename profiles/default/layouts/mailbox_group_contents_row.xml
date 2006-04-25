@@ -18,6 +18,7 @@ Layouts for rows in the content view of mailboxes
   </property>
   <property name="is_i18n">True</property>
   <property name="label">cpsdoc_title_label_edit</property>
+  <property name="sortable" type="string">Title</property>
  </widget>
 
  <widget name="Addresses" meta_type="Lines Widget">
