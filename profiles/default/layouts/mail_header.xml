@@ -8,6 +8,7 @@
   <property name="is_required">True</property>
   <property name="label">cpscourrier_object_label</property>
   <property name="is_i18n">True</property>
+  <property name="css_class">mailObject</property>
   <property name="hidden_layout_modes">
     <element value="create"/>
     <element value="edit"/>
