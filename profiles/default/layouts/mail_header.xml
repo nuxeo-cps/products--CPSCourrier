@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <object name="mail_header" meta_type="CPS Layout">
  <property name="style_prefix">layout_default_</property>
+
  <widget name="object" meta_type="String Widget">
   <property name="fields">
    <element value="Title"/>
@@ -14,6 +15,7 @@
     <element value="edit"/>
   </property>
  </widget>
+
  <widget name="from" meta_type="String Widget">
   <property name="fields">
    <element value="mail_from"/>
@@ -26,6 +28,7 @@
     <element value="edit"/>
   </property>
  </widget>
+
  <widget name="to" meta_type="Lines Widget">
   <property name="fields">
    <element value="mail_to"/>
@@ -38,6 +41,7 @@
     <element value="edit"/>
   </property>
  </widget>
+
  <widget name="creation_date" meta_type="DateTime Widget">
   <property name="fields">
    <element value="CreationDate"/>
@@ -50,6 +54,7 @@
     <element value="edit"/>
   </property>
  </widget>
+
  <widget name="timeleft" meta_type="Time Left Widget">
   <property name="fields">
    <element value="deadline"/>
@@ -63,6 +68,7 @@
     <element value="edit"/>
   </property>
  </widget>
+
  <widget name="review_state" meta_type="Workflow Variable Widget">
   <property name="label">cpscourrier_review_state_label</property>
   <property name="is_i18n">True</property>
@@ -72,6 +78,7 @@
     <element value="edit"/>
   </property>
  </widget>
+
  <table>
   <row>
    <cell name="object"/>
