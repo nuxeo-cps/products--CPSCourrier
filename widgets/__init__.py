@@ -1,6 +1,6 @@
 # this is a python module
 import stackwidget
-import folder_contents
+import foldercontents
 import catalog
 import dirsearch
 import row_widgets

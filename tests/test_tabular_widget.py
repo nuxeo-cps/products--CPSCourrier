@@ -37,7 +37,7 @@ from Products.CPSDocument.FlexibleTypeInformation import FlexibleTypeInformation
 
 from Products.CPSCourrier.widgets.tabular import FakeRequestWithCookies
 from Products.CPSCourrier.tests.widgets import TestingTabularWidget
-from Products.CPSCourrier.widgets.folder_contents import FolderContentsWidget
+from Products.CPSCourrier.widgets.foldercontents import FolderContentsWidget
 from Products.CPSCourrier.widgets.dirsearch import DirectoryTabularWidget
 
 
@@ -225,7 +225,7 @@ class IntegrationTestFolderContentsPortlet(IntegrationTestCase):
         self.assert_(
             'Folder Contents Widget' in widgetRegistry.listWidgetMetaTypes())
 
-    def test_folder_contents(self):
+    def test_foldercontents(self):
         # creating some content to list
         wftool = self.portal.portal_workflow
         container = self.portal.workspaces

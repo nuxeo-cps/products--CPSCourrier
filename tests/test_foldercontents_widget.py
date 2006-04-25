@@ -23,6 +23,6 @@ from zope.testing import doctest
 
 def test_suite():
     return unittest.TestSuite((
-        doctest.DocTestSuite('Products.CPSCourrier.widgets.folder_contents'),
+        doctest.DocTestSuite('Products.CPSCourrier.widgets.foldercontents'),
         ))
 
