@@ -36,12 +36,20 @@ class IntegrationTestRoadmapView(IntegrationTestCase):
     def afterSetUp(self):
         IntegrationTestCase.afterSetUp(self)
         self.request = FakeRequestWithCookies()
+        dtool = getToolByName(self.portal, 'portal_directories')
+        self.mdir = mdir = dtool.members
+        mdir._createEntry({'id': 'test_roadmap_view', 'roles' : ['Manager',]})
+        self.login('test_roadmap_view')
         self.wftool.doActionFor(self.in_mail1, 'handle')
         self.view = RoadmapView(self.in_mail1, self.request).__of__(
             self.portal)
 
+    def beforeTearDown(self):
+        self.mdir._deleteEntry('test_roadmap_view')
+        IntegrationTestCase.beforeTearDown(self)
+
     def test_canManage(self):
-        # reminder: we're logged in as manager
+        # reminder: we have Manager role
         self.assert_(self.view.canManage())
 
     def test_canMoveDown(self):
@@ -50,8 +58,10 @@ class IntegrationTestRoadmapView(IntegrationTestCase):
 
         # let's build one
         self.wftool.doActionFor(self.in_mail1, 'manage_delegatees',
-                                push_ids=['cpscourrier_user:manager'],
-                                levels=[-1])
+                                push_ids=['courrier_user:test_roadmap_view'],
+                                levels=[-1],
+                                current_wf_var_id='Pilots')
+
         self.assert_(self.view.canMoveDown())
 
     def test_renderStack(self):

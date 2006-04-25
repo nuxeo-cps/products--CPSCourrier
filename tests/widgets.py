@@ -57,7 +57,7 @@ class TestingTabularWidget(TabularWidget):
 
     def listRowDataStructures(self, datastructure, row_layout, **kw):
         if datastructure.get('longbrains'):
-            b_page, b_start, b_size = self.filtersToBatchParams(datastructure)
+            b_page, b_start, b_size = self.getBatchParams(datastructure)
             nb_results = len(self.longbrains)
             brains = self.longbrains[b_start:b_start+b_size]
         else: # we don't test batching
