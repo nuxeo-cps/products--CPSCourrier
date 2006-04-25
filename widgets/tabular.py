@@ -193,8 +193,6 @@ class TabularWidget(CPSIntFilterWidget):
         Assumptions: the post is made with widgets whose ids start all with
         self.filter_prefix
         and correspond to other widget ids present in items.
-
-        XXX TODO this is a cc from folder_contents. Factorize to base class
         """
 
         # extract filters from datastructure
