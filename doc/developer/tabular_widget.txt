@@ -239,10 +239,10 @@ Options
 ~~~~~~~
 
 Let's get back to what the tabular widget does. One can change the
-prefix of the target widget::
+sorting filter::
 
-    >>> tab.columnFromWidget(col_wi, ds, sort_wid='PREF')[3]
-    '?widget__PREF-on=myindex&widget__PREF-col=mycol'
+    >>> tab.columnFromWidget(col_wi, ds, sort_filter='PREF')[3]
+    '?widget__q_PREF-on=myindex&widget__q_PREF-col=mycol'
 
 If the filter_button property is non-empty, we get an additional key
 in the built GET request (see the section on buildFilter). In case
