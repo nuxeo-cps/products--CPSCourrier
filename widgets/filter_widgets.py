@@ -281,14 +281,15 @@ class CPSToggableCriterionWidget(RequestCookiesMixin, CPSWidget):
 
         dm = ds.getDataModel()
 
+        # reading from datamodel if apppropriate
         for key, field in zip(keys, self.fields):
-            # from datamodel
             ds[key] = dm[field]
 
-            # from cookie
+        # from cookie
+        for key in keys:
             from_cookie = self.readCookie(key)
             if from_cookie is not None:
-                ds[key] = from_cookie
+               ds[key] = from_cookie
 
 
         # from request form: criterion

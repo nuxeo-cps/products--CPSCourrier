@@ -208,6 +208,30 @@ A change of criterion doesn't toggle but resets the token to its first value::
     >>> pprint(ds)
     {'Query sort-order': 'usual', 'Query sort-col': 'mycol', 'Query sort-on': 'another'}
 
+This works about the same if there is no associated fields. Let's replay
+some of it::
+
+    >>> sort_wid.fields = ()
+    >>> sort_wid.REQUEST = FakeRequest(**{'widget__Query sort-on':'myindex',
+    ...                                   'widget__Query sort-col':'mycol'})
+    >>> ds = DataStructure(datamodel=FakeDataModel())
+    >>> sort_wid.prepare(ds)
+    >>> from pprint import PrettyPrinter
+    >>> pprint=PrettyPrinter(width=50).pprint
+    >>> pprint(ds)
+    {'Query sort-order': 'usual', 'Query sort-col': 'mycol', 'Query sort-on': 'myindex'}
+
+Now let's check that the toggling works::
+
+    >>> sort_wid.REQUEST = FakeRequestWithCookies(
+    ...                                 **{'widget__Query sort-on':'myindex',
+    ...                                    'widget__Query sort-col':'mycol'})
+    >>> sort_wid.REQUEST.cookies = {'Query sort-order': 'usual'}
+    >>> sort_wid.prepare(ds)
+    >>> pprint(ds)
+    {'Query sort-order': 'alternate', 'Query sort-col': 'mycol', 'Query sort-on': 'myindex'}
+
+
 Int Filter Widget
 -----------------
 The int filter widget passes queries about integer values, together

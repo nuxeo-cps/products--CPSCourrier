@@ -17,6 +17,9 @@ Layout that present mailbox contents
     <element value="CPS Proxy BTree Folder" />
     <element value="CPS Proxy Folder" />
   </property>
+  <property name="cookie_id">cpscourrier</property>
+  <!-- no actual filtering by user but needed to trigger cookie setting-->
+  <property name="filter_button">autofilt</property>
  </widget>
 
  <widget name="f_sort" meta_type="Toggable Criterion Widget">
