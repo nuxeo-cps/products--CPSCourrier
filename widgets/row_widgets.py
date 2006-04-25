@@ -288,11 +288,12 @@ class CPSTimeLeftWidget(CPSIntWidget):
             return base_rendered
 
         value = int(datastructure[self.getWidgetId()])
-        plus_sign = ''
-        if value >= 0:
+        plus_sign = value > 0 and '+' or ''
+
+        #XXX use a property of the widget instead of hardcoded values
+        if value  >= -5:
             css_class = 'late'
-            plus_sign = '+'
-        elif value in [-1, -2]:
+        elif value in range(-10, -5): # -5 excluded
             css_class = 'shortly'
         else:
             css_class = 'inTime'

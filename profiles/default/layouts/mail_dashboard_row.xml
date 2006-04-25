@@ -105,6 +105,7 @@ Layouts for rows in the content view of mailboxes
    <property name="label_edit">cpscourrier_timeleft_label</property>
    <property name="css_class">timeleft</property>
    <property name="is_i18n">True</property>
+   <property name="is_display_i18n">True</property>
    <property name="fields">
      <element value="deadline" />
    </property>

@@ -55,6 +55,17 @@
   </property>
   <property name="label">cpscourrier_timeleft_label</property>
   <property name="is_i18n">True</property>
+  <property name="is_display_i18n">True</property>
+  <property name="css_class">timeleft</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
+ </widget>
+ <widget name="review_state" meta_type="Workflow Variable Widget">
+  <property name="label">cpscourrier_review_state_label</property>
+  <property name="is_i18n">True</property>
+  <property name="wf_var_id">review_state</property>
   <property name="hidden_layout_modes">
     <element value="create"/>
     <element value="edit"/>
@@ -75,6 +86,9 @@
   </row>
   <row>
    <cell name="timeleft"/>
+  </row>
+  <row>
+   <cell name="review_state"/>
   </row>
  </table>
 </object>
