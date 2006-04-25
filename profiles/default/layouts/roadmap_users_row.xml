@@ -34,6 +34,14 @@
     </property>
   </widget>
 
+   <widget name="email" meta_type="String Widget">
+    <property name="is_i18n">True</property>
+     <property name="label">label_email</property>
+    <property name="fields">
+      <element value="email"/>
+    </property>
+  </widget>
+
   <table>
     <row>
       <cell name="Checkbox"/>
@@ -43,6 +51,9 @@
     </row>
     <row>
       <cell name="givenName"/>
+    </row>
+    <row>
+      <cell name="email"/>
     </row>
     <row>
       <cell name="uid"/>
