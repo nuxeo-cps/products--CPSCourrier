@@ -155,6 +155,10 @@ elif action_type == 'edit':
     edit_ids = kw.get('edit_ids', ())
     LOG("cpscourrier_delegation_modify", DEBUG, "edit_ids=%s"%(edit_ids,))
 
+    # ensure that we won't destroy elts that might have been otherwise
+    # checked...
+    kw.pop('pop_ids', ())
+
     # data extraction
     try:
         date_lists = dict(
