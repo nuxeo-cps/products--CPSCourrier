@@ -35,6 +35,7 @@ from Products.CPSSchemas.DataModel import DataModel
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSDocument.FlexibleTypeInformation import FlexibleTypeInformation
 
+from Products.CPSCourrier.widgets.tabular import FakeRequestWithCookies
 from Products.CPSCourrier.tests.widgets import TestingTabularWidget
 from Products.CPSCourrier.widgets.folder_contents import FolderContentsWidget
 from Products.CPSCourrier.widgets.dirsearch import DirectoryTabularWidget
@@ -44,7 +45,7 @@ class CustomMethods:
     """ A mixin that provides custom render method with logging.
 
     XXX Tests have to set the 'render_method' attribute of widget to
-    'widget_render_method'
+    'widget_render_logging'
     """
 
     # attributes for introspection after method calls
@@ -64,7 +65,7 @@ class CustomMethods:
         return '|'.join([row[0]['widget_rendered']
                           for row in layout['rows']]
                          )
-    def widget_render_method(self, columns=None,
+    def widget_render_logging(self, columns=None,
                              rows=None,
                              batching_info=None, **kw):
         # deepcopy would not work
@@ -145,7 +146,7 @@ class IntegrationTestTabularPortlet(IntegrationTestCase):
 
     def test_vidget_render_method(self):
         # call the widget with our testing render_method
-        self.widget.render_method = 'widget_render_method'
+        self.widget.render_method = 'widget_render_logging'
         rendered = self.widget.render('view', self.ds)
 
         # retrieved what was passed to the render method
@@ -181,23 +182,27 @@ class IntegrationTestTabularPortlet(IntegrationTestCase):
 
     def test_render_batching_info(self):
         self.widget.manage_changeProperties(items_per_page=5,
-                                            batching_filter='page',
                                             batching_gadget_pages=2)
 
-        # spectific parameters for testing widget
+        # batching info is fetched by the tabular's prepare() method
+        widget_in_form = self.widget.getHtmlWidgetId()
+        self.widget.REQUEST = FakeRequestWithCookies(**{widget_in_form:4})
+        self.widget.prepare(self.ds)
+
+        # enable batching (specific to testing widget)
         self.ds['longbrains'] = True
-        self.ds['page'] = 4
 
         # enable logging of passed params
-        self.widget.render_method = 'widget_render_method'
+        self.widget.render_method = 'widget_render_logging'
 
         rendered = self.widget.render('view', self.ds)
+
+        # extraction and assertions
         b_info = self.widget.passed_batching_info
         self.failIf(b_info is None) # should happen when there's one page only
         self.assertEquals(b_info['current_page'], 4)
         self.assertEquals(b_info['nb_pages'], 7) #  31 results
-        # will break if widgets html prefixes change, but good enough for now
-        self.assertEquals(b_info['form_key'], 'widget__q_page')
+        self.assertEquals(b_info['form_key'], widget_in_form)
         self.assertEquals(b_info['linked_pages'], [2, 3, 4, 5, 6])
 
 #
