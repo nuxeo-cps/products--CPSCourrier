@@ -45,7 +45,7 @@ class DirectoryTabularWidget(TabularWidget):
 
     meta_type = 'Directory Tabular Widget'
 
-    render_method = 'widget_folder_contents'
+    render_method = 'widget_tabular_render'
 
     _properties=TabularWidget._properties + (
         {'id': 'directory', 'type': 'string', 'mode': 'w',

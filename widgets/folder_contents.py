@@ -70,7 +70,7 @@ class FolderContentsWidget(TabularWidget):
 
     filter_prefix = 'f_'
 
-    render_method = 'widget_folder_contents'
+    render_method = 'widget_tabular_render'
 
     def layout_row_view(self, layout=None, **kw):
         """Render method for rows layouts in 'view' mode.
