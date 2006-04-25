@@ -3,11 +3,12 @@
  <object name="incoming_mail_wf" meta_type="CPS Workflow"/>
  <object name="outgoing_mail_wf" meta_type="CPS Workflow"/>
  <object name="mailbox_folder_wf" meta_type="CPS Workflow"/>
+ <object name="mailboxgroup_folder_wf" meta_type="CPS Workflow"/>
  <object name="mail_template_wf" meta_type="CPS Workflow"/>
  <bindings>
    <!-- Default workflow chain for the root of mailbox groups -->
    <type type_id="Mailbox Group">
-     <bound-workflow workflow_id="workspace_folder_wf"/>
+     <bound-workflow workflow_id="mailboxgroup_folder_wf"/>
    </type>
    <!-- Default workflow chain for the root of mail templates -->
    <type type_id="Mail Templates Box">

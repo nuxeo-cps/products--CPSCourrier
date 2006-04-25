@@ -4,7 +4,7 @@
 
   <local-workflows>
     <!-- The root of mailboxes only hosts Mailbox Groups folders -->
-    <type name="Mailbox Group" wf="workspace_folder_wf"/>
+    <type name="Mailbox Group" wf="mailboxgroup_folder_wf"/>
 
   </local-workflows>
 
