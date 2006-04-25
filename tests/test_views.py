@@ -41,10 +41,21 @@ class IntegrationTestRoadmapView(IntegrationTestCase):
             self.portal)
 
     def test_canManage(self):
-        self.assertEquals(self.view.canManage(), True)
+        # reminder: we're logged in as manager
+        self.assert_(self.view.canManage())
+
+    def test_canMoveDown(self):
+        # there's no level below
+        self.failIf(self.view.canMoveDown())
+
+        # let's build one
+        self.wftool.doActionFor(self.in_mail1, 'manage_delegatees',
+                                push_ids=['cpscourrier_user:manager'],
+                                levels=[-1])
+        self.assert_(self.view.canMoveDown())
 
     def test_renderStack(self):
-        self.assert_(self.view.renderStack('view'))
+        self.assert_(self.view.renderStack(mode='view'))
 
 class IntegrationTestReuseAnswerView(IntegrationTestCase):
 

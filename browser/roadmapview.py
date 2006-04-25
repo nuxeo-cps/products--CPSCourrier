@@ -64,8 +64,10 @@ class RoadmapView(LocalRolesView):
     def canManage(self):
         return self.canDoAction('manage_delegatees')
 
-    def renderStack(self):
-        return self.stack.render(context=self.context, mode=self.stack_mode)
+    def renderStack(self, mode=None):
+        if mode is None:
+            mode = self.stack_mode
+        return self.stack.render(context=self.context, mode=mode)
 
     def renderUsersLayout(self):
         return self.renderLayout(name='roadmap_users_search')['rendered']
