@@ -9,6 +9,7 @@ Layouts for rows in the content view of mailboxes
  <widget name="Type" meta_type="Type Icon Widget">
   <property name="label">cpscourrier_type_label</property>
   <property name="is_i18n">True</property>
+  <property name="sortable" type="string">portal_type</property>
  </widget>
 
  <widget name="Title" meta_type="Qualified Link Widget">
@@ -28,6 +29,7 @@ Layouts for rows in the content view of mailboxes
    <element value="mailbox_addresses"/>
   </property>
   <property name="view_mode_separator">, </property>
+  <property name="sortable" type="string">mailbox_addresses</property>
 </widget>
 
  <widget name="Date" meta_type="Date Widget">
@@ -36,6 +38,7 @@ Layouts for rows in the content view of mailboxes
    <element value="CreationDate"/>
   </property>
   <property name="is_i18n">True</property>
+  <property name="sortable" type="string">CreationDate</property>
  </widget>
 
  <table>
