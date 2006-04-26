@@ -313,10 +313,10 @@ msgid "cpscourrier_object_label"
 msgstr "Objet"
 
 msgid "cpscourrier_from_label"
-msgstr "De"
+msgstr "Émetteur"
 
 msgid "cpscourrier_to_label"
-msgstr "Pour"
+msgstr "Destinataire"
 
 msgid "cpscourrier_creation_date_label"
 msgstr "Date"
