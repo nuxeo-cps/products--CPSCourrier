@@ -9,6 +9,7 @@
   <field name="filter_sort_ref" meta_type="CPS String Field" />
   <field name="filter_fulltext" meta_type="CPS String Field" />
   <field name="filter_from" meta_type="CPS String Field" />
+  <field name="filter_rtype" meta_type="CPS String Field" />
   <field name="template_usage" meta_type="CPS Int Field">
   </field>
 </object>

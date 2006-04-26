@@ -106,6 +106,15 @@ msgstr ""
 msgid "cpscourrier_modification_date_label"
 msgstr ""
 
+msgid "cpscourrier_reply_type_label"
+msgstr ""
+
+msgid "cpscourrier_simple_reply"
+msgstr ""
+
+msgid "cpscourrier_mail_template"
+msgstr ""
+
 #
 # Tabular widgets labels
 #

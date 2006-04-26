@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!-- Types of reply (true one or template) come from the root the're
+ located in -->
+<object name="mail_reply_types" meta_type="CPS Method Vocabulary">
+ <property name="title"></property>
+ <property name="title_msgid"></property>
+ <property name="description"></property>
+ <property name="get_vocabulary_method">getVocabularyReplyTypes</property>
+ <property name="add_empty_key">False</property>
+</object>

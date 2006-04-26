@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-04-24 18:58default\n"
+"POT-Creation-Date: 2006-04-26 16:28default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -39,31 +39,34 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#.   <input condition="view/canMoveDown" type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
-#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
+#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" condition="view/canMoveDown" />
+#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
 msgstr ""
 
-#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
+#.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_update_stackelts"
 msgstr ""
 
-#.   <input type="submit" name="answer_submit" value="button_validate" class="standalone" />
-#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
+#.   <input name="answer_submit" type="submit" class="standalone" value="button_validate" />
+#.   <input name="submit_add" type="submit" class="context" value="button_validate" />
 #: from ../browser/reuseAnswer.zpt ../browser/roadmap.zpt
 #: ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
 msgstr ""
 
 #.   <h1>
-#.   	     Reply from existing reply
-#.   	  </h1>
+#.                Reply from existing reply
+#.             </h1>
 #: from ../browser/reuseAnswer.zpt
 msgid "cpscourrier_answer_from_existing"
 msgstr ""
 
+#.   <h2 condition="insert_mode">
+#.         Please select a level to insert the new delegatee
+#.       </h2>
 #.   <h2 condition="python:mode=='insert'">
 #.         Please select a level to insert the new delegatee
 #.       </h2>
@@ -71,7 +74,7 @@ msgstr ""
 msgid "cpscourrier_choose_insertion_level"
 msgstr ""
 
-#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
+#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr ""
@@ -247,8 +250,8 @@ msgid "search_for_delegatees"
 msgstr ""
 
 #.   <h2 condition="view/is_results">
-#.   	      Search results
-#.   	    </h2>
+#.                 Search results
+#.               </h2>
 #: from ../browser/reuseAnswer.zpt
 msgid "search_results"
 msgstr ""
@@ -338,6 +341,15 @@ msgid "cpscourrier_template_usage_col"
 msgstr ""
 
 msgid "cpscourrier_modification_date_label"
+msgstr ""
+
+msgid "cpscourrier_reply_type_label"
+msgstr ""
+
+msgid "cpscourrier_simple_reply"
+msgstr ""
+
+msgid "cpscourrier_mail_template"
 msgstr ""
 
 #
