@@ -40,6 +40,8 @@ class BatchPerformView(ReuseAnswerView):
         trans = [key for key in form if key.startswith(self.PREFIX)]
         if len(trans) > 1:
             raise ValueError("Got more than one transition to perform")
+        elif not trans:
+            return
         return trans[0][len(self.PREFIX):]
 
     def getMailInfo(self):
