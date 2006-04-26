@@ -41,6 +41,19 @@ Layouts for rows in the content view of mailboxes
   <property name="sortable" type="string">CreationDate</property>
  </widget>
 
+ <widget name="managers" meta_type="Users With Roles Widget">
+  <property name="fields"/>
+  <property name="label">cpscourrier_label_managers</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_readonly_layout_modes"/>
+  <property name="roles">
+   <element value="WorkspaceManager"/>
+  </property>
+  <property name="merge_roles">True</property>
+ </widget>
+
  <table>
   <row>
    <cell name="Type"/>
@@ -50,6 +63,9 @@ Layouts for rows in the content view of mailboxes
   </row>
   <row>
    <cell name="Addresses"/>
+  </row>
+  <row>
+   <cell name="managers"/>
   </row>
   <row>
    <cell name="Date"/>
