@@ -113,6 +113,7 @@ class SearchView(BrowserView):
         if response.getStatus() == 302: # Moved temporarily (redirection)
             url = response.getHeader('location')
             url = url.replace('folder_localrole_form', form_name)
+            #XXX: remove hardcoded form name
             response.redirect(url)
 
     def dispatchSubmit(self):

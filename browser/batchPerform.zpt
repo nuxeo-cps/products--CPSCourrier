@@ -1,0 +1,105 @@
+<tal:block define="submit_result view/dispatchSubmit;
+  transition view/getTransitionId">
+
+  <metal:master use-macro="here/main_template/macros/master">
+    <metal:header fill-slot="header"/>
+    <metal:main fill-slot="main">
+      <metal:std_main use-macro="here/content_lib_std_main/macros/std_main">
+
+        <metal:title fill-slot="title" i18n:translate="">
+          <span tal:replace="string:heading_batch_workflow_${transition}" />
+        </metal:title>
+
+        <metal:help fill-slot="help">
+          <tal:help i18n:translate=""
+            content="string:help_batch_workflow_${transition}"></tal:help>
+          <ul>
+            <li tal:repeat="mail_info view/getMailInfo">
+              <a tal:attributes="href mail_info/mailbox_url"
+                tal:content="mail_info/mailbox_title"></a> -
+              <a tal:attributes="href mail_info/mail_url"
+                tal:content="mail_info/mail_title"></a>
+            </li>
+          </ul>
+        </metal:help>
+
+        <metal:main fill-slot="main">
+
+          <tal:search_form condition="python:transition=='answer'">
+            <!--
+            search form for answer transition
+            -->
+
+            <form action="" method="post"
+              tal:define="res view/renderLayout; rendered res/rendered">
+
+              <!-- forward the rpaths for later reuse -->
+              <input type="hidden" name="rpaths:list"
+                tal:repeat="rpath view/rpaths" tal:attributes="value rpath"/>
+                  tal:attributes="value transition" />
+
+              <!-- forward the transition id as well -->
+              <input type="hidden" value=""
+                tal:attributes="name string:cpscourrier_batch_${transition}" />
+
+              <h2 tal:condition="view/is_results"
+                i18n:translate="search_results">
+                Search results
+              </h2>
+
+              <tal:block replace="structure rendered" />
+
+              <tal:block condition="view/is_results">
+                <p class="advancedSearchButton">
+                  <tal:block replace="structure python:view.forwardInputs(
+                    'Query ZCText_or', )" />
+                  <input type="submit" name="answer_submit"
+                    class="standalone" value="button_validate"
+                    i18n:attributes="value" />
+                </p>
+              </tal:block>
+
+              <tal:block condition="not:view/is_results">
+                <p class="advancedSearchButton">
+                  <input type="hidden" name="filter" value="go" />
+                  <input type="submit" name="search_submit"
+                    class="standalone" value="button_search"
+                    i18n:attributes="value" />
+                  <input type="button" name="cancel_submit"
+                    class="standalone" value="button_cancel"
+                    i18n:attributes="value"
+                    onClick="history.back();"/>
+                </p>
+              </tal:block>
+            </form>
+          </tal:search_form>
+
+          <tal:confirm_form tal:condition="python:transition!='answer'"
+            tal:define="workflow_action_script string:batch_perform.html;
+                        proxy nocall:here">
+            <!--
+            simple confirmation form for any other transition
+            -->
+            <metal:transition_form
+              use-macro="here/content_lib_transition_form/macros/transition_form">
+              <metal:block fill-slot="button">
+                <!-- forward the rapths for later reuse -->
+                <input type="hidden" name="rpaths:list"
+                  tal:repeat="rpath view/rpaths" tal:attributes="value rpath"/>
+                <input type="hidden" name="trigger_transition"
+                  tal:attributes="value transition" />
+                <input type="submit" class="standalone"
+                  tal:attributes="name string:cpscourrier_batch_${transition};
+                                  value string:button_${transition}"
+                  i18n:attributes="value" />
+                <input type="button" class="context" onClick="history.back()"
+                  value="button_cancel" i18n:attributes="value" />
+              </metal:block>
+            </metal:transition_form>
+          </tal:confirm_form>
+
+        </metal:main>
+      </metal:std_main>
+    </metal:main>
+  </metal:master>
+</tal:block>

@@ -27,7 +27,7 @@
          xml even if we don't close the form tag now
     </tal:comment>
     <tal:block
-	content="structure string:<form action='cpscourrier_batch_perform_form'
+	content="structure string:<form action='batch_perform.html'
 					method='post'
 					enctype='multipart/form-data'> "/>
   </tal:block>
