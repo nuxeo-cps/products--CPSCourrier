@@ -11,5 +11,7 @@
   <field name="filter_from" meta_type="CPS String Field" />
   <field name="filter_rtype" meta_type="CPS String Field" />
   <field name="template_usage" meta_type="CPS Int Field">
+    <property name="default_expr">python:5</property>
   </field>
 </object>
+
