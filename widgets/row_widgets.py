@@ -388,18 +388,27 @@ class CPSUsersWithRolesWidget(CPSLinesWidget):
         """Analyses the contets."""
         return False
 
-    def _extractMembers(self, prefix, mdir, members):
+    def _extractMembers(self, prefix, mdir, members, l10n=None):
         """Convert member id as returned by Membership Tool.
         """
 
         pref_len = len(prefix)
-        mems = [mid[pref_len:] for mid in members
-                if mid.startswith(prefix)]
-        if not mems:
-            return []
-
         title_field = mdir.title_field
-        return [mdir._getEntry(mid)[title_field] for mid in mems]
+
+        res = []
+        for mid in members:
+            if not mid.startswith(prefix):
+                continue
+            mid = mid[pref_len:]
+            if mid.startswith('role:'):
+                if l10n is not None:
+                    title = l10n(mid).encode('iso-8859-15')
+                else:
+                    title = mid
+            else:
+                title = mdir._getEntry(mid)[title_field]
+            res.append(title)
+        return res
 
     def prepare(self, datastructure, **kw):
         proxy = datastructure.getDataModel().getProxy()
@@ -427,10 +436,13 @@ class CPSUsersWithRolesWidget(CPSLinesWidget):
             gdir_id = 'groups'
         udir = dtool[udir_id]
         gdir = dtool[gdir_id]
-        users = self._extractMembers('user:', udir, members)
-        groups = self._extractMembers('group:', gdir, members)
+        l10n = getToolByName(self, 'translation_service')
+        users = self._extractMembers('user:', udir, members, l10n=l10n)
+        groups = self._extractMembers('group:', gdir, members, l10n=l10n)
 
-        datastructure[self.getWidgetId()] = users + groups
+        lines = users + groups
+        logger.debug(lines)
+        datastructure[self.getWidgetId()] = lines
 
 
 InitializeClass(CPSUsersWithRolesWidget)

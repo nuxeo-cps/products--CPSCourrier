@@ -7,6 +7,7 @@ New features:
 - Template replies
 - Made it possible to edit the subject list in view mode
 - Added the "sender_type" and "smtp_headers" in mail metadata screen
+- Managers column in display of mailbox groups contents
 Bug fixes:
 ~~~~~~~~~~
 - Cookie invalidation is smarter (Cf doc/developer/filter_widgets.txt)

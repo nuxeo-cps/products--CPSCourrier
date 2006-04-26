@@ -260,6 +260,11 @@ for users and groups::
     >>> widget._extractMembers('spr|', FakeDirectory(), ['spr|me', 'spr|it'])
     ['A B', 'thing']
 
+It forwards directly pseudo-role groups::
+
+    >>> widget._extractMembers('spr|', FakeDirectory(), ['spr|role:Glob',])
+    ['role:Glob']
+
 .. Emacs
 .. Local Variables:
 .. mode: rst
