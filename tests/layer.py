@@ -114,11 +114,11 @@ class CPSCourrierFunctionalLayerClass(CommonIntegrationFixture,
         dtool = getToolByName(self.portal, 'portal_directories')
         mdir = dtool['members']
 
-        roles = {'reader': 'WorkspaceReader',
-                 'member1': 'WorkspaceMember',
-                 'member2': 'WorkspaceMember',
-                 'member3': 'WorkspaceMember',
-                 'wsmanager': 'WorkspaceManager',}
+        roles = {'reader': 'Reader',
+                 'member1': 'Contributor',
+                 'member2': 'Contributor',
+                 'member3': 'Contributor',
+                 'wsmanager': 'LocalManager',}
         for prefix, role in roles.items():
             for id, folder in ((self.MBG_ID, self.mbg,),
                                (self.MB_ID, self.mb,),
@@ -203,7 +203,7 @@ class CourrierFunctionalTestCase(CPSTestCase):
         """ Login as prefixed user on object.
 
         Typical use case: self.flogin('member1', self.mb) logs in as
-        one of the users that were created in layer to be WorkspaceMember in
+        one of the users that were created in layer to be Contributor in
         self.mb.
         """
         self.login('%s_%s' % (prefix, object.getId()))

@@ -14,23 +14,23 @@
   <permission-map name="Modify portal content"
                   acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>LocalManager</permission-role>
    <permission-role>Owner</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
-   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>LocalManager</permission-role>
+   <permission-role>Contributor</permission-role>
    <permission-role>Owner</permission-role>
   </permission-map>
   <permission-map name="WebDAV Lock items" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>LocalManager</permission-role>
    <permission-role>Owner</permission-role>
   </permission-map>
   <permission-map name="WebDAV Unlock items" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>LocalManager</permission-role>
    <permission-role>Owner</permission-role>
   </permission-map>
  </state>
@@ -41,9 +41,9 @@
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
-   <permission-role>WorkspaceMember</permission-role>
-   <permission-role>WorkspaceReader</permission-role>
+   <permission-role>LocalManager</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Reader</permission-role>
   </permission-map>
   <permission-map name="WebDAV Lock items" acquired="False">
   </permission-map>
@@ -70,9 +70,9 @@
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
    <permission-role>Pilot</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
-   <permission-role>WorkspaceMember</permission-role>
-   <permission-role>WorkspaceReader</permission-role>
+   <permission-role>LocalManager</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Reader</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False"/>
   <permission-map name="WebDAV Lock items" acquired="False"/>
@@ -90,9 +90,9 @@
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
    <permission-role>Pilot</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
-   <permission-role>WorkspaceMember</permission-role>
-   <permission-role>WorkspaceReader</permission-role>
+   <permission-role>LocalManager</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Reader</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False"/>
   <permission-map name="WebDAV Lock items" acquired="False"/>
@@ -107,7 +107,7 @@
    </managed-roles>
    <empty-stack-manage-guard>
     <guard-role>Owner</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>LocalManager</guard-role>
     <guard-role>Manager</guard-role>
     <guard-role></guard-role>
    </empty-stack-manage-guard>
@@ -140,26 +140,26 @@
                   acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Pilot</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>LocalManager</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Owner</permission-role>
    <permission-role>Pilot</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
-   <permission-role>WorkspaceReader</permission-role>
-   <permission-role>WorkspaceMember</permission-role>
+   <permission-role>LocalManager</permission-role>
+   <permission-role>Reader</permission-role>
+   <permission-role>Contributor</permission-role>
   </permission-map>
   <permission-map name="WebDAV Lock items" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Pilot</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>LocalManager</permission-role>
   </permission-map>
   <permission-map name="WebDAV Unlock items"
                   acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Pilot</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>LocalManager</permission-role>
   </permission-map>
   <stack-definition stackdef_id="Pilots"
                     variable_id="Pilots"
@@ -171,7 +171,7 @@
    </managed-roles>
    <empty-stack-manage-guard>
     <guard-role>Owner</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>LocalManager</guard-role>
     <guard-role>Manager</guard-role>
     <guard-role></guard-role>
    </empty-stack-manage-guard>
@@ -203,10 +203,10 @@
           category="object">action_roadmap</action>
   <guard>
     <guard-role>Manager</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>LocalManager</guard-role>
     <guard-role>Owner</guard-role>
-    <guard-role>WorkspaceMember</guard-role>
-    <guard-role>WorkspaceReader</guard-role>
+    <guard-role>Contributor</guard-role>
+    <guard-role>Reader</guard-role>
     <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -219,7 +219,7 @@
           category="workflow">action_abandon_draft</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <guard-role>Owner</guard-role>
   </guard>
   <transition-behavior behavior_id="delete"/>
@@ -231,7 +231,7 @@
           category="workflow">action_checkin_draft</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <guard-role>Owner</guard-role>
    </guard>
   <transition-behavior behavior_id="checkin"/>
@@ -245,7 +245,7 @@
           category="workflow">action_checkout_draft</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <guard-role>Pilot</guard-role>
   </guard>
   <transition-behavior behavior_id="checkout"/>
@@ -267,8 +267,8 @@
 
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
-   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>LocalManager</guard-role>
+   <guard-role>Contributor</guard-role>
   </guard>
   <transition-behavior behavior_id="initial-create"/>
  </transition>
@@ -281,7 +281,7 @@
           category="workflow">action_delete</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <guard-role>Pilot</guard-role>
   </guard>
   <transition-behavior behavior_id="delete"/>
@@ -293,7 +293,7 @@
           category="workflow">action_invalidate</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -304,7 +304,7 @@
    <guard-role>Pilot</guard-role>
    <guard-role>Owner</guard-role>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
   </guard>
   <transition-behavior behavior_id="push-delegatees"/>
   <transition-behavior behavior_id="pop-delegatees"/>
@@ -337,7 +337,7 @@
           category="workflow">action_send</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -348,7 +348,7 @@
           category="workflow">action_reset</action>
   <guard>
    <guard-role>Pilot</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <transition-behavior behavior_id="workflow-reset"/>
@@ -361,7 +361,7 @@
              before_script="" after_script="">
   <guard>
    <guard-role>Owner</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
 
@@ -384,7 +384,7 @@
           category="workflow">action_validate</action>
   <guard>
    <guard-role>Pilot</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
  </transition>
@@ -394,7 +394,7 @@
              after_script="">
   <guard>
    <guard-role>Pilot</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <transition-behavior behavior_id="clone"/>
@@ -470,9 +470,9 @@
   </default>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
-   <guard-role>WorkspaceMember</guard-role>
-   <guard-role>WorkspaceReader</guard-role>
+   <guard-role>LocalManager</guard-role>
+   <guard-role>Contributor</guard-role>
+   <guard-role>Reader</guard-role>
   </guard>
  </variable>
  <variable variable_id="time" for_catalog="True"

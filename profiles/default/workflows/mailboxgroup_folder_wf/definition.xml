@@ -12,9 +12,9 @@
   <exit-transition transition_id="delete_translation"/>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
-   <permission-role>WorkspaceMember</permission-role>
-   <permission-role>WorkspaceReader</permission-role>
+   <permission-role>LocalManager</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Reader</permission-role>
   </permission-map>
  </state>
  <transition transition_id="create" title="Initial creation"
@@ -23,7 +23,7 @@
 
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <!-- members cannot create sub groups -->
   </guard>
   <transition-behavior behavior_id="initial-create"/>
@@ -34,8 +34,8 @@
 
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
-   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>LocalManager</guard-role>
+   <guard-role>Contributor</guard-role>
   </guard>
   <transition-behavior behavior_id="allow-sub-create"/>
   <transition-behavior behavior_id="allow-sub-checkout"/>
@@ -46,8 +46,8 @@
 
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
-   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>LocalManager</guard-role>
+   <guard-role>Contributor</guard-role>
   </guard>
   <transition-behavior behavior_id="allow-sub-move"/>
   <transition-behavior behavior_id="allow-sub-delete"/>
@@ -71,8 +71,8 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>Owner</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
-   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>LocalManager</guard-role>
+   <guard-role>Contributor</guard-role>
   </guard>
  </transition>
  <transition transition_id="translate"

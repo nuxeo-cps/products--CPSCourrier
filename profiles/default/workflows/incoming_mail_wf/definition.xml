@@ -13,7 +13,7 @@
   <exit-transition transition_id="reset"/>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>LocalManager</permission-role>
    <permission-role>Pilot</permission-role>
   </permission-map>
   <stack-definition stackdef_id="Pilots"
@@ -21,7 +21,7 @@
                     meta_type="Hierarchical Stack Definition"
                     stack_type="Courrier Stack">
     <manager-stack-role name="Pilot"/>
-    <manager-stack-role name="WorkspaceManager"/>
+    <manager-stack-role name="LocalManager"/>
     <manager-stack-role name="Manager"/>
    <managed-roles>
     <managed-role name="Pilot"
@@ -29,7 +29,7 @@
    </managed-roles>
    <empty-stack-manage-guard>
     <guard-role>Owner</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>LocalManager</guard-role>
     <guard-role>Manager</guard-role>
     <guard-role></guard-role>
    </empty-stack-manage-guard>
@@ -59,7 +59,7 @@
   <exit-transition transition_id="close"/>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>LocalManager</permission-role>
    <permission-role>Pilot</permission-role>
   </permission-map>
   <stack-definition stackdef_id="Pilots"
@@ -67,7 +67,7 @@
                     meta_type="Hierarchical Stack Definition"
                     stack_type="Courrier Stack">
     <manager-stack-role name="Pilot"/>
-    <manager-stack-role name="WorkspaceManager"/>
+    <manager-stack-role name="LocalManager"/>
     <manager-stack-role name="Manager"/>
    <managed-roles>
     <managed-role name="Pilot"
@@ -75,7 +75,7 @@
    </managed-roles>
    <empty-stack-manage-guard>
     <guard-role>Owner</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>LocalManager</guard-role>
     <guard-role>Manager</guard-role>
     <guard-role></guard-role>
    </empty-stack-manage-guard>
@@ -115,7 +115,7 @@
   <exit-transition transition_id="reset"/>
   <exit-transition transition_id="close"/>
   <permission-map name="Modify portal content" acquired="False">
-   <permission-role>WorkspaceManager</permission-role>
+   <permission-role>LocalManager</permission-role>
    <permission-role>Pilot</permission-role>
    <permission-role>Manager</permission-role>
   </permission-map>
@@ -124,7 +124,7 @@
                     meta_type="Hierarchical Stack Definition"
                     stack_type="Courrier Stack">
     <manager-stack-role name="Pilot"/>
-    <manager-stack-role name="WorkspaceManager"/>
+    <manager-stack-role name="LocalManager"/>
     <manager-stack-role name="Manager"/>
     <managed-roles>
       <managed-role name="Pilot"
@@ -132,7 +132,7 @@
     </managed-roles>
    <empty-stack-manage-guard>
     <guard-role>Owner</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>LocalManager</guard-role>
     <guard-role>Manager</guard-role>
     <guard-role></guard-role>
    </empty-stack-manage-guard>
@@ -173,7 +173,7 @@
                     meta_type="Hierarchical Stack Definition"
                     stack_type="Courrier Stack">
     <manager-stack-role name="Pilot"/>
-    <manager-stack-role name="WorkspaceManager"/>
+    <manager-stack-role name="LocalManager"/>
     <manager-stack-role name="Manager"/>
    <managed-roles>
     <managed-role name="Pilot"
@@ -181,7 +181,7 @@
    </managed-roles>
    <empty-stack-manage-guard>
     <guard-role>Owner</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>LocalManager</guard-role>
     <guard-role>Manager</guard-role>
     <guard-role></guard-role>
    </empty-stack-manage-guard>
@@ -241,7 +241,7 @@
           category="workflow">action_delete</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
   </guard>
   <transition-behavior behavior_id="delete"/>
  </transition>
@@ -252,7 +252,7 @@
           category="workflow">action_discard</action>
   <guard>
     <guard-role>Manager</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>LocalManager</guard-role>
     <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -274,7 +274,7 @@
           category="workflow">action_forward</action>
   <guard>
     <guard-role>Manager</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>LocalManager</guard-role>
     <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -283,7 +283,7 @@
              before_script="forward_mail" after_script="">
   <guard>
     <guard-role>Manager</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>LocalManager</guard-role>
     <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -292,7 +292,7 @@
              before_script="" after_script="">
   <guard>
     <guard-role>Manager</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>LocalManager</guard-role>
     <guard-role>Pilot</guard-role>
   </guard>
   <transition-behavior behavior_id="delete"/>
@@ -307,8 +307,8 @@
           category="workflow">action_handle</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
-   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>LocalManager</guard-role>
+   <guard-role>Contributor</guard-role>
    <guard-role>Owner</guard-role>
   </guard>
  </transition>
@@ -328,7 +328,7 @@
   <guard>
    <guard-role>Pilot</guard-role>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
   </guard>
   <transition-behavior behavior_id="push-delegatees"/>
   <transition-behavior behavior_id="pop-delegatees"/>
@@ -344,7 +344,7 @@
           category="workflow">action_move_down_delegatees</action>
   <guard>
    <guard-role>Pilot</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <transition-behavior behavior_id="workflow-down"/>
@@ -365,7 +365,7 @@
           category="workflow">action_reset</action>
   <guard>
    <guard-role>Pilot</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <transition-behavior behavior_id="workflow-reset"/>
@@ -380,10 +380,10 @@
           category="object">action_roadmap</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
    <guard-role>Owner</guard-role>
-   <guard-role>WorkspaceMember</guard-role>
-   <guard-role>WorkspaceReader</guard-role>
+   <guard-role>Contributor</guard-role>
+   <guard-role>Reader</guard-role>
    <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -449,9 +449,9 @@
   </default>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
-   <guard-role>WorkspaceMember</guard-role>
-   <guard-role>WorkspaceReader</guard-role>
+   <guard-role>LocalManager</guard-role>
+   <guard-role>Contributor</guard-role>
+   <guard-role>Reader</guard-role>
   </guard>
  </variable>
  <variable variable_id="time" for_catalog="True"

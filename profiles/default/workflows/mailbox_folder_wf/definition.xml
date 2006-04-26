@@ -13,9 +13,9 @@
   <exit-transition transition_id="manage_delegatees"/>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
-   <permission-role>WorkspaceManager</permission-role>
-   <permission-role>WorkspaceMember</permission-role>
-   <permission-role>WorkspaceReader</permission-role>
+   <permission-role>LocalManager</permission-role>
+   <permission-role>Contributor</permission-role>
+   <permission-role>Reader</permission-role>
   </permission-map>
  <!-- stack representing default roadmap.
       Doesn't allow any role on the mailbox: made to be copied -->
@@ -23,11 +23,11 @@
 		   variable_id="Pilots"
 		   meta_type="Hierarchical Stack Definition"
 		   stack_type="Courrier Stack">
-   <manager-stack-role name="WorkspaceManager"/>
+   <manager-stack-role name="LocalManager"/>
    <manager-stack-role name="Manager"/>
    <empty-stack-manage-guard>
     <guard-role>Owner</guard-role>
-    <guard-role>WorkspaceManager</guard-role>
+    <guard-role>LocalManager</guard-role>
     <guard-role>Manager</guard-role>
     <guard-role></guard-role>
    </empty-stack-manage-guard>
@@ -51,7 +51,7 @@
              before_script="" after_script="">
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
   </guard>
   <transition-behavior behavior_id="initial-create"/>
  </transition>
@@ -62,8 +62,8 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>Member</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
-   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>LocalManager</guard-role>
+   <guard-role>Contributor</guard-role>
   </guard>
   <transition-behavior behavior_id="allow-sub-create"/>
   <transition-behavior behavior_id="allow-sub-publishing"/>
@@ -75,8 +75,8 @@
 
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
-   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>LocalManager</guard-role>
+   <guard-role>Contributor</guard-role>
   </guard>
   <transition-behavior behavior_id="allow-sub-move"/>
   <transition-behavior behavior_id="allow-sub-delete"/>
@@ -101,8 +101,8 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>Owner</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
-   <guard-role>WorkspaceMember</guard-role>
+   <guard-role>LocalManager</guard-role>
+   <guard-role>Contributor</guard-role>
   </guard>
  </transition>
  <transition transition_id="translate"
@@ -132,10 +132,10 @@
 	   category="object">action_default_roadmap</action>
    <guard>
      <guard-role>Manager</guard-role>
-     <guard-role>WorkspaceManager</guard-role>
+     <guard-role>LocalManager</guard-role>
      <guard-role>Owner</guard-role>
-     <guard-role>WorkspaceMember</guard-role>
-     <guard-role>WorkspaceReader</guard-role>
+     <guard-role>Contributor</guard-role>
+     <guard-role>Reader</guard-role>
      <guard-role>Pilot</guard-role>
    </guard>
  </transition>
@@ -146,7 +146,7 @@
 
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>WorkspaceManager</guard-role>
+   <guard-role>LocalManager</guard-role>
   </guard>
   <transition-behavior behavior_id="push-delegatees"/>
   <transition-behavior behavior_id="pop-delegatees"/>
