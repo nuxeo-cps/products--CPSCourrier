@@ -20,9 +20,51 @@
 
 import unittest
 from zope.testing import doctest
+from Products.CPSDefault.tests.CPSTestCase import CPSTestCase
+
+
+from Products.CMFCore.utils import getToolByName
+from Products.CPSSchemas.DataModel import DataModel
+from Products.CPSSchemas.DataStructure import DataStructure
+
+from Products.CPSCourrier.widgets.row_widgets import CPSUsersWithRolesWidget
+
+class TestUsersWithRolesWidget(CPSTestCase):
+
+    def afterSetUp(self):
+        self.login('manager')
+        self.dtool = getToolByName(self.portal, 'portal_directories')
+        self.mdir = mdir = self.dtool.members
+        mdir._createEntry({'id': 'user_roleswidget',
+                           'sn': 'Roles Tester',
+                           'roles' : ('Member'),
+                           })
+        gdir = self.dtool.groups
+        gdir._createEntry({'group': 'group_roleswidget'})
+        wftool = getToolByName(self.portal, 'portal_workflow')
+        ws = self.portal.workspaces
+        wftool.invokeFactoryFor(ws, 'Workspace',
+                                'test_user_roles_widget')
+        self.folder = ws.test_user_roles_widget
+        self.widget = CPSUsersWithRolesWidget('the_wid').__of__(self.portal)
+
+    def beforeTearDown(self):
+        self.dtool.members._deleteEntry('user_roleswidget')
+        self.dtool.groups._deleteEntry('group_roleswidget')
+
+    def test_prepare_user_role(self):
+        self.widget.merge_roles = True
+        self.folder.manage_setLocalRoles('user_roleswidget', ['TestingRole'])
+        self.widget.roles = ['TestingRole', 'OtherRole']
+        dm = DataModel(None, proxy=self.folder)
+        ds = DataStructure(datamodel=dm)
+        self.widget.prepare(ds)
+        self.assert_('the_wid' in ds)
+        self.assertEquals(ds['the_wid'], ['Roles Tester'])
 
 def test_suite():
     return unittest.TestSuite((
+        unittest.makeSuite(TestUsersWithRolesWidget),
         doctest.DocFileTest('doc/developer/row_widgets.txt',
                             package='Products.CPSCourrier'),
         ))

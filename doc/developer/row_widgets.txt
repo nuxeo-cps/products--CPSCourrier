@@ -229,6 +229,37 @@ It does understand datetime.datetime objects too
     '-3'
     >>> widget.prepare(ds) # no failure with current time
 
+Users With Roles Widget
+-----------------------
+
+The Users With Roles Widget extracts the list of users' titles that
+have one of the given roles in its prepare phase, and otherwise
+subclasses the Lines Widget for rendering::
+
+    >>> from Products.CPSCourrier.widgets.row_widgets \
+    ... import CPSUsersWithRolesWidget
+    >>> widget = CPSUsersWithRolesWidget('the_wid')
+    >>> widget.meta_type
+    'Users With Roles Widget'
+
+Internals
+~~~~~~~~~
+
+    >>> class FakeDirectory:
+    ...     title_field = 'title'
+    ...     entries = {'me' : {'title': 'A B'},
+    ...                'it' : {'title' : 'thing'},
+    ...                }
+    ...     def _getEntry(self, eid):
+    ...         return self.entries[eid]
+
+
+``_extractMembers`` can use any prefix and is therefore suitable
+for users and groups::
+
+    >>> widget._extractMembers('spr|', FakeDirectory(), ['spr|me', 'spr|it'])
+    ['A B', 'thing']
+
 .. Emacs
 .. Local Variables:
 .. mode: rst

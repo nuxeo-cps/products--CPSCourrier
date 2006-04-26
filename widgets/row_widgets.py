@@ -19,6 +19,7 @@
 
 """ This module holds simple widget definitions for CPSCourrier row layouts.
 """
+import logging
 from cgi import escape
 from datetime import datetime
 from Globals import InitializeClass
@@ -29,9 +30,11 @@ from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSSchemas.BasicWidgets import (CPSStringWidget,
+                                              CPSLinesWidget,
                                               CPSIntWidget,
                                               CPSBooleanWidget)
 
+logger = logging.getLogger('CPSCourrier.widgets.row_widgets')
 
 class CPSTypeIconWidget(CPSWidget):
     """widget showing the icon associated to the object's portal_type. """
@@ -187,7 +190,7 @@ class CPSRowBooleanWidget(CPSWidget):
 
     In case of checkbox, this allows to post a list.
     In radio, this allows to select from the rows.
-    
+
     This will probably be extended in the future to take complex visibility
     conditions into account.
 
@@ -361,3 +364,74 @@ class CPSIconBooleanWidget(CPSBooleanWidget):
 
 InitializeClass(CPSIconBooleanWidget)
 widgetRegistry.register(CPSIconBooleanWidget)
+
+class CPSUsersWithRolesWidget(CPSLinesWidget):
+    """A widget that displays the list of users having one of the given roles.
+
+    BaseDirectory's title_field prop is used to represent users
+    Doesn't support groups yet
+    """
+
+    meta_type = 'Users With Roles Widget'
+
+    _properties = CPSWidget._properties + (
+        {'id': 'roles', 'type' : 'tokens', 'mode' : 'w',
+         'label': 'Roles to look for', 'is_required': 1},
+        {'id': 'merge_roles', 'type' : 'boolean', 'mode' : 'w',
+         'label': 'Take roles inherited into account?'},
+        )
+
+    roles = []
+    merge_roles = False
+
+    def _hasRequiredRoles(self, member_info):
+        """Analyses the contets."""
+        return False
+
+    def _extractMembers(self, prefix, mdir, members):
+        """Convert member id as returned by Membership Tool.
+        """
+
+        pref_len = len(prefix)
+        mems = [mid[pref_len:] for mid in members
+                if mid.startswith(prefix)]
+        if not mems:
+            return []
+
+        title_field = mdir.title_field
+        return [mdir._getEntry(mid)[title_field] for mid in mems]
+
+    def prepare(self, datastructure, **kw):
+        proxy = datastructure.getDataModel().getProxy()
+
+        if not self.merge_roles:
+            raise NotImplementedError
+        wanted_roles = set(self.roles)
+        mtool = getToolByName(self, 'portal_membership')
+
+        roles_info = mtool.getMergedLocalRoles(proxy)
+        logger.debug(roles_info)
+        members = [mid for mid, m_roles in roles_info.items()
+                   if wanted_roles.intersection(m_roles)]
+
+        if not members:
+            return ()
+
+        aclu = getToolByName(self, 'acl_users')
+        dtool = getToolByName(self, 'portal_directories')
+        if aclu.meta_type == 'CPS User Folder':
+            udir_id = aclu.users_dir
+            gdir_id = aclu.groups_dir
+        else:
+            udir_id = 'members'
+            gdir_id = 'groups'
+        udir = dtool[udir_id]
+        gdir = dtool[gdir_id]
+        users = self._extractMembers('user:', udir, members)
+        groups = self._extractMembers('group:', gdir, members)
+
+        datastructure[self.getWidgetId()] = users + groups
+
+
+InitializeClass(CPSUsersWithRolesWidget)
+widgetRegistry.register(CPSUsersWithRolesWidget)
