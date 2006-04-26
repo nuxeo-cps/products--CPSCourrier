@@ -115,6 +115,9 @@ msgstr ""
 msgid "cpscourrier_mail_template"
 msgstr ""
 
+msgid "cpscourrier_label_managers"
+msgstr ""
+
 #
 # Tabular widgets labels
 #
