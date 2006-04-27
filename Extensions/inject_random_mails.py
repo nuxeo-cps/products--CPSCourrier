@@ -17,55 +17,58 @@ from Products.CPSUtil.text import toAscii
 from copy import deepcopy
 from itertools import cycle
 from pprint import pformat
+from random import randint, sample, choice
 
 EMAIL_PATTERN = "ogrisel-%s@nuxeo.com"
 IN_MAILS_PER_MAILBOX = 20
 OUT_MAILS_PER_MAILBOX = 20
 COMMENT_PATTER = "Test comment for transition %s"
 
-TREE = {
-    'test-group-1': {
-        'Title': 'Test Group 1',
-        'portal_type': 'Mailbox Group',
-        'subobjects': {
-            'test-mailbox-1-1': {
-                'Title': 'Test Group 1 1',
-                'portal_type': 'Mailbox',
-                'from': 'ogrisel-mb11@nuxeo.com'
-            },
-            'test-mailbox-1-2': {
-                'Title': 'Test Group 1 2',
-                'portal_type': 'Mailbox',
-                'from': 'ogrisel-mb12@nuxeo.com'
-            },
-        },
-    },
-    'test-group-2': {
-        'Title': 'Test Group 2',
-        'portal_type': 'Mailbox Group',
-        'subobjects': {
-            'test-mailbox-2-1': {
-                'Title': 'Test Group 2 1',
-                'portal_type': 'Mailbox',
-                'from': 'ogrisel-mb21@nuxeo.com'
-            },
-            'test-mailbox-2-2': {
-                'Title': 'Test Group 2 2',
-                'portal_type': 'Mailbox',
-                'from': 'ogrisel-mb22@nuxeo.com'
+def _buid_tree():
+    return  {
+        'test-group-1': {
+            'Title': 'Test Group 1',
+            'portal_type': 'Mailbox Group',
+            'subobjects': {
+                'test-mailbox-1-1': {
+                    'Title': 'Test Group 1 1',
+                    'portal_type': 'Mailbox',
+                    'from': 'ogrisel-mb11@nuxeo.com',
+                    'mailbox_addresses': sample(EMAILS, 3),
+                },
+                'test-mailbox-1-2': {
+                    'Title': 'Test Group 1 2',
+                    'portal_type': 'Mailbox',
+                    'from': 'ogrisel-mb12@nuxeo.com',
+                    'mailbox_addresses': sample(EMAILS, 3),
+                },
             },
         },
-    },
-}
-
-def _random_words(n=5):
-    return ' '.join((WORDS.next() for _ in xrange(n)))
+        'test-group-2': {
+            'Title': 'Test Group 2',
+            'portal_type': 'Mailbox Group',
+            'subobjects': {
+                'test-mailbox-2-1': {
+                    'Title': 'Test Group 2 1',
+                    'portal_type': 'Mailbox',
+                    'from': 'ogrisel-mb21@nuxeo.com',
+                    'mailbox_addresses': sample(EMAILS, 3),
+                },
+                'test-mailbox-2-2': {
+                    'Title': 'Test Group 2 2',
+                    'portal_type': 'Mailbox',
+                    'from': 'ogrisel-mb22@nuxeo.com',
+                    'mailbox_addresses': sample(EMAILS, 3),
+                },
+            },
+        },
+    }
 
 def _random_paragrah(n=5):
-    return '. '.join(_random_words().capitalize() for _ in xrange(n))
+    return '. '.join(SENTENCES.next() for _ in xrange(n))
 
 def _random_text(n=3):
-    return '\n'.join(_random_paragrah() for _ in xrange(n))
+    return '\n\n'.join(_random_paragrah(randint(3, 6)) for _ in xrange(n))
 
 def _make_email(name):
     email = EMAIL_PATTERN % '-'.join(toAscii(name).lower().split())
@@ -75,9 +78,9 @@ def _populate(where, wftool):
     for i in range(IN_MAILS_PER_MAILBOX):
         mail_to = where.getContent()['from']
         info = {
-            'Title': _random_words().capitalize(),
-            'content': _random_text(),
-            'mail_from': EMAILS.next(),
+            'Title': ' '.join(SENTENCES.next().split()[:5]),
+            'content': _random_text(randint(1, 3)),
+            'mail_from': choice(EMAILS),
             'mail_to': [mail_to],
         }
         id = where.computeId(info['Title'])
@@ -98,8 +101,9 @@ def _rec_build_tree(where, tree, wftool):
 def inject(self):
     wftool = getToolByName(self, 'portal_workflow')
     portal = getToolByName(self, 'portal_url').getPortalObject()
-    _rec_build_tree(portal.mailboxes, deepcopy(TREE), wftool)
-    return "populated tree:\n%s" % pformat(TREE)
+    tree = _buid_tree()
+    _rec_build_tree(portal.mailboxes, deepcopy(tree), wftool)
+    return "populated tree:\n%s" % pformat(tree)
 
 #
 # Data source to inject content
@@ -121,9 +125,9 @@ USERNAMES = (
     "Paul Doumer",
     "Albert Lebrun",
 )
-EMAILS = cycle(_make_email(name) for name in USERNAMES)
+EMAILS = [_make_email(name) for name in USERNAMES]
 
-WORDS = cycle("""
+TEXT = """\
 Aquariophilie d'eau douce
 
 L'aquariophilie d'eau douce est réputée être la plus simple à gérer. Le bassin avec des poissons rouges en est l'exemple le plus simple et le plus connu.
@@ -135,19 +139,16 @@ Il est essentiel pour la survie des poissons que l'aquariophile maîtrise les par
 Les nitrites sont alors transformés en nitrates par une seconde famille de bactéries. Les nitrates ne sont pas toxiques à faible dose. Ces nitrates seront éliminés de l'aquarium lors des changements d'eau, ou bien consommés par les plantes qui s'y trouvent.
 
 Afin que les populations de bactéries se constituent, il est indispensable d'attendre vingt à trente jours après la constitution de l'aquarium avant d'y mettre les premiers poissons. De même, il est indispensable de préserver ces populations de bactéries lors de l'entretien du bac.
-[modifier]
 
 Aquariophilie d'eau de mer
 
 Celle-ci est réputée être plus difficile, et surtout réclame un matériel plus imposant. L'espèce la plus souvent montrée et reproduite en aquarium d'eau de mer est le poisson clown avec son anémone que l'on peut voir notamment dans le dessin animé de Walt Disney Le Monde de Némo. Les aquariums marins récifaux reproduisent les écosystèmes coralliens, alors que les bacs dits fish only se consacrent exclusivement à l'hébergement des poissons.
-[modifier]
 
 Comment devenir aquariophile ?
 
 L'aquariophilie est un loisir passionnant et enrichissant, et de nombreux bienfaits découlent de cette passion. En plus d'acquérir le sens de responsabilités des enfants comme les adultes, l'aquariophilie apporte des notions pluridisciplinaires (notamment telles la biologie), des études tendent à démontrer que cet hobby contribue à diminuer le stress, ce qui explique que de nombreux centres médicaux ou maisons de repos, possèdent des aquariums.
 
 Avant de commencer cette passion, il y a cependant des précautions à prendre.
-[modifier]
 
 Se renseigner avant de commencer
 
@@ -156,7 +157,6 @@ Sous peine de faire beaucoup d'erreurs en s'y lançant à l'aveuglette... et d'aba
 En effet l'aquariophilie peut être un hobby très coûteux, quand on est débutant. Vous pourrez aussi remarquer qu'aucun vendeur ne répondra la même chose à la même question (ou presque). Certains sont sérieux, mais ils sont bien difficiles à distinguer des autres, au début.
 
 Si vous avez besoin de conseils, reportez vous surtout aux livres, et aux forums de discussion aquariophiles, où les gens vous aideront à bien débuter. Petit à petit vous saurez sur quels matériels il vaut mieux mettre le prix, et sur quels autres vous pouvez faire bien des économies.
-[modifier]
 
 Quels poissons ?
 
@@ -172,7 +172,12 @@ Les poissons d'eau douce vendus dans le commerce sont pour la plupart tropicaux 
 
 Si vous voulez rester en eau froide, il y a toutes sortes de poissons rouges : ils peuvent aussi être très beaux dans un aquarium planté, plutôt que dans une boule.
 
-Il va donc falloir faire le point sur ce que vous pouvez fournir à vos futurs pensionnaires, puis les sélectionner selon ces paramètres. En général on commence par faire l'inverse, et... ça se passe mal !
-""".split())
+Il va donc falloir faire le point sur ce que vous pouvez fournir à vos futurs pensionnaires, puis les sélectionner selon ces paramètres. En général on commence par faire l'inverse, et... ça se passe mal !"""
+
+PARAGRAPHS = TEXT.split('\n\n')
+SENTENCES = []
+for p in PARAGRAPHS:
+    SENTENCES += p.split('. ')
+SENTENCES = cycle(SENTENCES)
 # source: http://fr.wikipedia.org/wiki/Aquariophilie
 
