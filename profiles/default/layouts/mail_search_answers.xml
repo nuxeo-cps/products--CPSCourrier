@@ -96,7 +96,7 @@ Layout for searching an answer in existing outgoing mails
    </property>
 </widget>
 
-<widget name="q_path" meta_type="Select Filter Widget">
+<widget name="q_folder_prefix" meta_type="Select Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_reply_type_label</property>
    <property name="label_edit">cpscourrier_reply_type_label</property>
