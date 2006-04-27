@@ -158,7 +158,7 @@ class CPSSelectFilterWidget(RequestCookiesMixin, CPSSelectWidget):
 
     defines_scope = False
     reject_from_scope = ()
-    scope = ()
+    total_scope = ()
 
     def getScope(self, datastructure):
         """return a total scope that might not be equivalent for query
