@@ -120,7 +120,7 @@ Layout for searching an answer in existing outgoing mails
      <cell name="q_mail_from" />
    </row>
    <row>
-     <cell name="q_path"/>
+     <cell name="q_folder_prefix"/>
    </row>
    <row>
      <cell name="Table"/>
