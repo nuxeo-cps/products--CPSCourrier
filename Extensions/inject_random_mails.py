@@ -18,6 +18,7 @@ from DateTime import DateTime
 from copy import deepcopy
 from itertools import cycle
 from pprint import pformat
+import transaction
 from random import randint, sample, choice
 
 EMAIL_PATTERN = "ogrisel-%s@nuxeo.com"
@@ -91,6 +92,9 @@ def _populate(where, wftool):
         }
         id = where.computeId(info['Title'])
         wftool.invokeFactoryFor(where, 'Incoming Mail', id, **info)
+        if i % 100 == 0:
+            transaction.commit()
+
 
 def _rec_build_tree(where, tree, wftool):
     existing_ids = set(where.objectIds())
