@@ -32,3 +32,4 @@ New internal features:
 - Untied local roles from the ones in workspaces. Followed convention suggested 
   in #1072
 - tabular widgets understand 'folder_prefix' filter
+- dev utility: external method to inject sample content
