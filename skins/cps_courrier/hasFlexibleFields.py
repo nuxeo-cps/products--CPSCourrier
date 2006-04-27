@@ -7,4 +7,4 @@ flexible field"""
 import re
 regexp = '_f[0..9]+$'
 
-return bool([fid for fid in data if re.search(regexp, fid) is not None])
+return int(bool([fid for fid in data if re.search(regexp, fid) is not None]))

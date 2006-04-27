@@ -12,7 +12,9 @@
     <property name="default_expr">string:1</property>
   </field>
   <field name="size" meta_type="CPS Float Field"/>
-  <field name="has_attachment" meta_type="CPS String List Field">
+  <!-- has_attachment is an int in order to be compatible with all indexing
+       solutions-->
+  <field name="has_attachment" meta_type="CPS Int Field">
     <property name="write_process_expr">
       python: object.hasFlexibleFields(data=data)
     </property>
