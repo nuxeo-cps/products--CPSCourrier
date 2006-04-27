@@ -135,7 +135,7 @@
              trigger="USER"
              before_script=""
              after_script="">
-   <action url="%(content_url)s/cpscourrier_roadmap"
+   <action url="%(content_url)s/cpscourrier_roadmap.html"
 	   category="object">action_default_roadmap</action>
    <guard>
      <guard-role>Manager</guard-role>
