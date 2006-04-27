@@ -151,11 +151,14 @@ class CPSSelectFilterWidget(RequestCookiesMixin, CPSSelectWidget):
                    + ({'id': 'defines_scope', 'type': 'boolean', 'mode': 'w',
  'label': "Is the union of all values is more restrictive than no filtering?"},
                       {'id': 'reject_from_scope', 'type': 'tokens', 'mode': 'w',
-                       'label': "Items from voc to exclude from scope"})
+                       'label': "Items from voc to exclude from scope"},
+                      {'id': 'total_scope', 'type': 'tokens', 'mode': 'w',
+                       'label': "Fixed total scope (takes precedence)"})
                    )
 
     defines_scope = False
     reject_from_scope = ()
+    scope = ()
 
     def getScope(self, datastructure):
         """return a total scope that might not be equivalent for query
@@ -169,6 +172,9 @@ class CPSSelectFilterWidget(RequestCookiesMixin, CPSSelectWidget):
 
         #XXX TODO factorize in mixin class
         """
+
+        if self.total_scope:
+            return self.total_scope
 
         items = self._getVocabulary(datastructure).keys()
         if not items[0]: # raise on empty voc (good thing)

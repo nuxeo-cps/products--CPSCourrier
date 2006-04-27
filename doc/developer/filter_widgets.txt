@@ -128,6 +128,9 @@ CPSSelectFilterWidget
   keys to exclude from the scope. Typical use-case: you want to filter
   based on workflow states, but one of them corresponds to closed
   files.
+  Finally, there's the ``total_scope`` property if you want to fix the scope no
+  matter what. Use-case: base rpath.
+
 
 Fixed Filter Widget
 -------------------
