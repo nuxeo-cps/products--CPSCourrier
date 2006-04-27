@@ -35,8 +35,7 @@
 
               <!-- forward the rpaths for later reuse -->
               <input type="hidden" name="rpaths:list"
-                tal:repeat="rpath view/rpaths" tal:attributes="value rpath"/>
-                  tal:attributes="value transition" />
+                tal:repeat="rpath view/rpaths" tal:attributes="value rpath" />
 
               <!-- forward the transition id as well -->
               <input type="hidden" value=""
