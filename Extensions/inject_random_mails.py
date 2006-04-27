@@ -14,6 +14,7 @@ Add this as External Method to populate portal with sample mails:
 
 from Products.CMFCore.utils import getToolByName
 from Products.CPSUtil.text import toAscii
+from DateTime import DateTime
 from copy import deepcopy
 from itertools import cycle
 from pprint import pformat
@@ -31,16 +32,18 @@ def _buid_tree():
             'portal_type': 'Mailbox Group',
             'subobjects': {
                 'test-mailbox-1-1': {
-                    'Title': 'Test Group 1 1',
+                    'Title': 'Test Mailbox 1 1',
                     'portal_type': 'Mailbox',
                     'from': 'ogrisel-mb11@nuxeo.com',
                     'mailbox_addresses': sample(EMAILS, 3),
+                    'allowed_reply_time': randint(1, 15),
                 },
                 'test-mailbox-1-2': {
-                    'Title': 'Test Group 1 2',
+                    'Title': 'Test Mailbox 1 2',
                     'portal_type': 'Mailbox',
                     'from': 'ogrisel-mb12@nuxeo.com',
                     'mailbox_addresses': sample(EMAILS, 3),
+                    'allowed_reply_time': randint(1, 15),
                 },
             },
         },
@@ -49,16 +52,18 @@ def _buid_tree():
             'portal_type': 'Mailbox Group',
             'subobjects': {
                 'test-mailbox-2-1': {
-                    'Title': 'Test Group 2 1',
+                    'Title': 'Test Mailbox 2 1',
                     'portal_type': 'Mailbox',
                     'from': 'ogrisel-mb21@nuxeo.com',
                     'mailbox_addresses': sample(EMAILS, 3),
+                    'allowed_reply_time': randint(1, 15),
                 },
                 'test-mailbox-2-2': {
-                    'Title': 'Test Group 2 2',
+                    'Title': 'Test Mailbox 2 2',
                     'portal_type': 'Mailbox',
                     'from': 'ogrisel-mb22@nuxeo.com',
                     'mailbox_addresses': sample(EMAILS, 3),
+                    'allowed_reply_time': randint(1, 15),
                 },
             },
         },
@@ -82,6 +87,7 @@ def _populate(where, wftool):
             'content': _random_text(randint(1, 3)),
             'mail_from': choice(EMAILS),
             'mail_to': [mail_to],
+            'deadline': DateTime() + randint(-2, 15),
         }
         id = where.computeId(info['Title'])
         wftool.invokeFactoryFor(where, 'Incoming Mail', id, **info)
