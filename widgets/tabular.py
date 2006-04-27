@@ -220,6 +220,18 @@ class TabularWidget(CPSIntFilterWidget):
             if scope is not None:
                 filters[key[pref_len:]] = scope
 
+        # path and rpath. Meant to reproduce what CPSDefault's search.py does
+        rpaths = filters.pop('folder_prefix', None)
+        if not 'path' in filters:
+            if rpaths is not None:
+                utool = getToolByName(self, 'portal_url')
+                base = '/'.join(utool.getPortalObject().getPhysicalPath())
+                if isinstance(rpaths, list):
+                    filters['path'] = ['%s/%s' % (base, rpath)
+                                       for rpath in rpaths]
+                elif isinstance(rpaths, str):
+                    filters['path'] = '%s/%s' % (base, rpaths)
+
         logger.debug(' filters: %s' %filters)
         return filters
 

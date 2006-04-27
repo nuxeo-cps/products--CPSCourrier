@@ -81,6 +81,36 @@ The prefix used is actually a property of the widget::
 Let's get back to the default value
     >>> tab.manage_changeProperties(filter_prefix='q_')
 
+For catalog-based subclass, we automatically make absolute paths from
+``folder_prefix`` values. For the example, let's make a fake portal::
+
+    >>> class FakePortal:
+    ...     def getPhysicalPath(self):
+    ...         return ('', 'portal_id')
+    >>> class FakeUrlTool:
+    ...     def getPortalObject(self):
+    ...         return FakePortal()
+    >>> tab.portal_url = FakeUrlTool() # fool getToolByName
+
+Case of a single folder prefix::
+
+    >>> datastructure5 = DataStructure(data = {'q_folder_prefix': 'sections'})
+    >>> tab.buildFilters(datastructure5)
+    {'path': '/portal_id/sections'}
+
+Case of multiple ones::
+
+    >>> datastructure6 = DataStructure(data = {'q_folder_prefix': ['w', 's']})
+    >>> tab.buildFilters(datastructure6)
+    {'path': ['/portal_id/w', '/portal_id/s']}
+
+Nothing's done if ``path`` is already there::
+
+    >>> datastructure7 = DataStructure(data = {'q_path': '/the/path'})
+    >>> tab.buildFilters(datastructure7)
+    {'path': '/the/path'}
+
+
 Cookie setting
 ~~~~~~~~~~~~~~
 

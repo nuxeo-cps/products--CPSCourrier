@@ -31,3 +31,4 @@ New internal features:
 - No need to put an Int Filter Widget to grab batching page from request anymore
 - Untied local roles from the ones in workspaces. Followed convention suggested 
   in #1072
+- tabular widgets understand 'folder_prefix' filter
