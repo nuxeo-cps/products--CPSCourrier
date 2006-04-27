@@ -20,6 +20,7 @@
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>LocalManager</permission-role>
+   <permission-role>Supervisor</permission-role>
    <permission-role>Contributor</permission-role>
    <permission-role>Owner</permission-role>
   </permission-map>
@@ -42,6 +43,7 @@
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>LocalManager</permission-role>
+   <permission-role>Supervisor</permission-role>
    <permission-role>Contributor</permission-role>
    <permission-role>Reader</permission-role>
   </permission-map>
@@ -71,7 +73,7 @@
    <permission-role>Owner</permission-role>
    <permission-role>Pilot</permission-role>
    <permission-role>LocalManager</permission-role>
-   <permission-role>Contributor</permission-role>
+   <permission-role>Supervisor</permission-role>
    <permission-role>Reader</permission-role>
   </permission-map>
   <permission-map name="Modify portal content" acquired="False"/>
@@ -91,6 +93,7 @@
    <permission-role>Owner</permission-role>
    <permission-role>Pilot</permission-role>
    <permission-role>LocalManager</permission-role>
+   <permission-role>Supervisor</permission-role>
    <permission-role>Contributor</permission-role>
    <permission-role>Reader</permission-role>
   </permission-map>
@@ -108,6 +111,7 @@
    <empty-stack-manage-guard>
     <guard-role>Owner</guard-role>
     <guard-role>LocalManager</guard-role>
+    <guard-role>Supervisor</guard-role>
     <guard-role>Manager</guard-role>
     <guard-role></guard-role>
    </empty-stack-manage-guard>
@@ -140,6 +144,7 @@
                   acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Pilot</permission-role>
+   <permission-role>Supervisor</permission-role>
    <permission-role>LocalManager</permission-role>
   </permission-map>
   <permission-map name="View" acquired="False">
@@ -147,18 +152,21 @@
    <permission-role>Owner</permission-role>
    <permission-role>Pilot</permission-role>
    <permission-role>LocalManager</permission-role>
+   <permission-role>Supervisor</permission-role>
    <permission-role>Reader</permission-role>
    <permission-role>Contributor</permission-role>
   </permission-map>
   <permission-map name="WebDAV Lock items" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Pilot</permission-role>
+   <permission-role>Supervisor</permission-role>
    <permission-role>LocalManager</permission-role>
   </permission-map>
   <permission-map name="WebDAV Unlock items"
                   acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>Pilot</permission-role>
+   <permission-role>Supervisor</permission-role>
    <permission-role>LocalManager</permission-role>
   </permission-map>
   <stack-definition stackdef_id="Pilots"
@@ -172,6 +180,7 @@
    <empty-stack-manage-guard>
     <guard-role>Owner</guard-role>
     <guard-role>LocalManager</guard-role>
+    <guard-role>Supervisor</guard-role>
     <guard-role>Manager</guard-role>
     <guard-role></guard-role>
    </empty-stack-manage-guard>
@@ -204,6 +213,7 @@
   <guard>
     <guard-role>Manager</guard-role>
     <guard-role>LocalManager</guard-role>
+    <guard-role>Supervisor</guard-role>
     <guard-role>Owner</guard-role>
     <guard-role>Contributor</guard-role>
     <guard-role>Reader</guard-role>
@@ -220,6 +230,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>LocalManager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>Owner</guard-role>
   </guard>
   <transition-behavior behavior_id="delete"/>
@@ -232,6 +243,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>LocalManager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>Owner</guard-role>
    </guard>
   <transition-behavior behavior_id="checkin"/>
@@ -268,6 +280,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>LocalManager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>Contributor</guard-role>
   </guard>
   <transition-behavior behavior_id="initial-create"/>
@@ -282,6 +295,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>LocalManager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>Pilot</guard-role>
   </guard>
   <transition-behavior behavior_id="delete"/>
@@ -294,6 +308,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>LocalManager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -304,6 +319,7 @@
    <guard-role>Pilot</guard-role>
    <guard-role>Owner</guard-role>
    <guard-role>Manager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
   </guard>
   <transition-behavior behavior_id="push-delegatees"/>
@@ -318,6 +334,9 @@
              after_script="">
   <guard>
    <guard-role>Pilot</guard-role>
+   <guard-role>Manager</guard-role>
+   <guard-role>Supervisor</guard-role>
+   <guard-role>LocalManager</guard-role>
   </guard>
   <transition-behavior behavior_id="workflow-down"/>
   <workflow-down-on-workflow-variable variable_id="Pilots"/>
@@ -338,6 +357,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>LocalManager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -349,6 +369,7 @@
   <guard>
    <guard-role>Pilot</guard-role>
    <guard-role>LocalManager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <transition-behavior behavior_id="workflow-reset"/>
@@ -362,6 +383,7 @@
   <guard>
    <guard-role>Owner</guard-role>
    <guard-role>LocalManager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
 
@@ -384,6 +406,7 @@
           category="workflow">action_validate</action>
   <guard>
    <guard-role>Pilot</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
@@ -394,6 +417,7 @@
              after_script="">
   <guard>
    <guard-role>Pilot</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
@@ -470,6 +494,7 @@
   </default>
   <guard>
    <guard-role>Manager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
    <guard-role>Contributor</guard-role>
    <guard-role>Reader</guard-role>

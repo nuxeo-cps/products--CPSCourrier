@@ -13,6 +13,7 @@
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>LocalManager</permission-role>
+   <permission-role>Supervisor</permission-role>
    <permission-role>Contributor</permission-role>
    <permission-role>Reader</permission-role>
   </permission-map>
@@ -24,6 +25,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>LocalManager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <!-- members cannot create sub groups -->
   </guard>
   <transition-behavior behavior_id="initial-create"/>
@@ -35,6 +37,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>LocalManager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>Contributor</guard-role>
   </guard>
   <transition-behavior behavior_id="allow-sub-create"/>
@@ -46,6 +49,7 @@
 
   <guard>
    <guard-role>Manager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
    <guard-role>Contributor</guard-role>
   </guard>
@@ -71,6 +75,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>Owner</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
    <guard-role>Contributor</guard-role>
   </guard>

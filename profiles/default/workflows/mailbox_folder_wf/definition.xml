@@ -14,6 +14,7 @@
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>LocalManager</permission-role>
+   <permission-role>Supervisor</permission-role>
    <permission-role>Contributor</permission-role>
    <permission-role>Reader</permission-role>
   </permission-map>
@@ -24,10 +25,12 @@
 		   meta_type="Hierarchical Stack Definition"
 		   stack_type="Courrier Stack">
    <manager-stack-role name="LocalManager"/>
+   <manager-stack-role name="Supervisor"/>
    <manager-stack-role name="Manager"/>
    <empty-stack-manage-guard>
     <guard-role>Owner</guard-role>
     <guard-role>LocalManager</guard-role>
+    <guard-role>Supervisor</guard-role>
     <guard-role>Manager</guard-role>
     <guard-role></guard-role>
    </empty-stack-manage-guard>
@@ -51,6 +54,7 @@
              before_script="" after_script="">
   <guard>
    <guard-role>Manager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
   </guard>
   <transition-behavior behavior_id="initial-create"/>
@@ -62,6 +66,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>Member</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
    <guard-role>Contributor</guard-role>
   </guard>
@@ -75,6 +80,7 @@
 
   <guard>
    <guard-role>Manager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
    <guard-role>Contributor</guard-role>
   </guard>
@@ -101,6 +107,7 @@
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>Owner</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
    <guard-role>Contributor</guard-role>
   </guard>
@@ -132,6 +139,7 @@
 	   category="object">action_default_roadmap</action>
    <guard>
      <guard-role>Manager</guard-role>
+     <guard-role>Supervisor</guard-role>
      <guard-role>LocalManager</guard-role>
      <guard-role>Owner</guard-role>
      <guard-role>Contributor</guard-role>
@@ -146,6 +154,7 @@
 
   <guard>
    <guard-role>Manager</guard-role>
+   <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
   </guard>
   <transition-behavior behavior_id="push-delegatees"/>
