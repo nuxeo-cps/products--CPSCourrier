@@ -10,9 +10,8 @@ base_path = '/'.join(portal.getPhysicalPath())
 types = ['Mailbox', ]
 brains = catalog(portal_type=types,  path=base_path)
 l10n = context.translation_service
-res = [('%s/%s' % (base_path,brain.relative_path), brain.Title)
+res = [(base_path + brain.relative_path, brain.Title)
        for brain in brains]
-
 res.insert(0, (base_path, l10n('cpscourrier_all_boxes').encode('iso-8859-15')))
 
 if key is not None:
