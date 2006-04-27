@@ -59,6 +59,15 @@
 	analyzer="Standard"
 	/>
 
+    <!-- Dedicated fields for sorting -->
+
+    <field
+	name="deadline_sort"
+	attr="deadline"
+	type="Sort"
+	analyzer="Standard"
+      />
+
   <!-- Brain's  Metadata -->
 
   <column value="has_attachment"/>
