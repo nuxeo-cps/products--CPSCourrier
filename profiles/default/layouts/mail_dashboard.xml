@@ -124,15 +124,26 @@ Layout that presents catalog search results
    <property name="label_edit">cpscourrier_fulltext_search</property>
    <property name="is_i18n">True</property>
 
-  <property name="hidden_layout_modes">view</property>
+  <property name="hidden_layout_modes">view search_results</property>
    <property name="fields">
      <element value="filter_fulltext" />
+   </property>
+</widget>
+
+<widget name="q_ZCTitle_or" meta_type="String Widget">
+   <property name="label_edit">cpscourrier_object_label</property>
+   <property name="is_i18n">True</property>
+
+  <property name="hidden_layout_modes">view search_results</property>
+   <property name="fields">
+     <element value="filter_title" />
    </property>
 </widget>
 
  <table>
    <row>
      <cell name="q_ZCText_or"/>
+     <cell name="q_ZCTitle_or"/>
    </row>
    <row>
      <cell name="q_Subject"/>

@@ -58,14 +58,16 @@ class CatalogTabularWidget(TabularWidget):
     render_method = 'widget_tabular_render'
 
     _properties = TabularWidget._properties + (
-        {'id': 'fulltext_key', 'type': 'string', 'mode': 'w',
-         'label': 'Catalog key for fulltext searchs'},
-        {'id': 'fulltext_or', 'type': 'string', 'mode': 'w',
-         'label': 'Input filter used for fulltext OR',},
+        {'id': 'fulltext_keys', 'type': 'tokens', 'mode': 'w',
+         'label': 'Catalog keys for fulltext searchs'},
+        {'id': 'fulltext_ors', 'type': 'tokens', 'mode': 'w',
+         'label': 'Input filters used for fulltext ORs',},
         )
 
-    fulltext_key = 'SearchableText'
-    fulltext_or = 'ZCText_or'
+    # support for more than one full text index.
+    # the two props should be fully synchronized
+    fulltext_keys = ('SearchableText', 'ZCTitle')
+    fulltext_ors = ('ZCText_or', 'ZCTitle_or')
 
     def layout_row_view(self, layout=None, **kw):
         """Render method for rows layouts in 'view' mode.
@@ -89,8 +91,9 @@ class CatalogTabularWidget(TabularWidget):
 
         Takes care of fulltext issues. """
 
-        if self.fulltext_or and self.fulltext_key:
-            filter_or = filters.pop(self.fulltext_or, '').strip()
+        for fulltext_or, fulltext_key in zip(self.fulltext_ors,
+                                             self.fulltext_keys):
+            filter_or = filters.pop(fulltext_or, '').strip()
             tokens = [token.strip() for token in filter_or.split()]
             nb_tok = len(tokens)
 
@@ -100,7 +103,7 @@ class CatalogTabularWidget(TabularWidget):
                 query_or = '(%s)' % ' OR '.join(tokens)
 
             if nb_tok:
-                filters[self.fulltext_key] = query_or
+                filters[fulltext_key] = query_or
 
         #Ranges
         to_del = []

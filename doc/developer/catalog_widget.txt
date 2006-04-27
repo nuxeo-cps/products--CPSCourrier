@@ -27,17 +27,18 @@ We'll need the pretty printer::
 Properties
 ----------
 
-The ``fulltext_key`` property will be used as the key in the Catalog Tool
+The ``fulltext_keys`` property indicates keys used in the Catalog Tool
 query for fulltext searches.
 
-The ``fulltext_or`` property is the incoming key for or searches.
+The ``fulltext_ors`` property are the corresponding incoming key for
+or searches. *They must correspond perfectly*.
 
 Default values are set for a typical CPS setup::
 
-    >>> cat.fulltext_key
-    'SearchableText'
-    >>> cat.fulltext_or
-    'ZCText_or'
+    >>> cat.fulltext_keys
+    ('SearchableText', 'ZCTitle')
+    >>> cat.fulltext_ors
+    ('ZCText_or', 'ZCTitle_or')
 
 Process
 -------
@@ -56,10 +57,10 @@ widget's properties to find them.
 
 Now let's see what happens with several tokens:
 
-    >>> filters = {'ZCText_or': 'foo eggs'}
+    >>> filters = {'ZCTitle_or': 'foo eggs'}
     >>> cat.filtersToQuery(filters)
     >>> filters
-    {'SearchableText': '(foo OR eggs)'}
+    {'ZCTitle': '(foo OR eggs)'}
 
 Of course we don't fail if the keys are missing::
     >>> filters = {}
