@@ -101,9 +101,10 @@ class BatchPerformView(ReuseAnswerView):
         failed = []
         for rpath in self.rpaths:
             proxy = portal.unrestrictedTraverse(rpath)
-            try:
+            wf = wftool.getWorkflowsFor(proxy)[0]
+            if wf.isActionSupported(proxy, transition):
                 wftool.doActionFor(proxy, transition, comment=comments)
-            except WorkflowException:
+            else:
                 failed.append(proxy.Title())
 
         psm = "psm_status_changed"
