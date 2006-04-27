@@ -424,7 +424,8 @@ class CPSUsersWithRolesWidget(CPSLinesWidget):
                    if wanted_roles.intersection(m_roles)]
 
         if not members:
-            return ()
+            datastructure[self.getWidgetId()] = []
+            return
 
         aclu = getToolByName(self, 'acl_users')
         dtool = getToolByName(self, 'portal_directories')

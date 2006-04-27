@@ -52,15 +52,25 @@ class TestUsersWithRolesWidget(CPSTestCase):
         self.dtool.members._deleteEntry('user_roleswidget')
         self.dtool.groups._deleteEntry('group_roleswidget')
 
-    def test_prepare_user_role(self):
+    def test_prepare(self):
         self.widget.merge_roles = True
         self.folder.manage_setLocalRoles('user_roleswidget', ['TestingRole'])
-        self.widget.roles = ['TestingRole', 'OtherRole']
         dm = DataModel(None, proxy=self.folder)
+
+        # Our test user matches
         ds = DataStructure(datamodel=dm)
+        self.widget.roles = ['TestingRole', 'OtherRole']
         self.widget.prepare(ds)
         self.assert_('the_wid' in ds)
         self.assertEquals(ds['the_wid'], ['Roles Tester'])
+
+        # Behavior when no user matches
+        ds = DataStructure(datamodel=dm)
+        self.widget.roles = ['No such Role']
+        self.widget.prepare(ds)
+        self.assert_('the_wid' in ds)
+        self.assertEquals(ds['the_wid'], [])
+
 
 def test_suite():
     return unittest.TestSuite((
