@@ -277,6 +277,34 @@ usual precedence rules::
     >>> ds['the_widget']
     1
 
+Courrier To Do Filter Widget
+----------------------------
+
+This is the filter brother of Multi Boolean Widget. It translates the
+vocabulary key in a boolean query::
+
+    >>> from Products.CPSCourrier.widgets.filter_widgets import\
+    ...               CPSCourrierToDoFilterWidget
+    >>> widget = CPSCourrierToDoFilterWidget('the_widget')
+    >>> widget.manage_changeProperties(fields=('todo',))
+    >>> widget.REQUEST = FakeRequest()
+
+Let's make datamodel and datastructure::
+
+    >>> dm = FakeDataModel()
+    >>> ds = DataStructure(datamodel=dm)
+    >>> dm['todo'] = 'handle'
+
+Now let's go through preparation::
+
+    >>> widget.prepare(ds)
+    >>> ds['the_widget']
+    'handle'
+    >>> ds['the_widget-handle']
+    True
+
+Now some catalog widget can convert it to the needed query.
+
 .. Emacs
 .. Local Variables:
 .. mode: rst

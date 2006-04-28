@@ -414,3 +414,18 @@ InitializeClass(CPSIntFilterWidget)
 
 widgetRegistry.register(CPSIntFilterWidget)
 
+class CPSCourrierToDoFilterWidget(CPSSelectFilterWidget):
+    meta_type = "Courrier To Do Filter Widget"
+
+    def prepare(self, ds, **kw):
+        """Prepare datastructure from datamodel."""
+        CPSSelectWidget.prepare(self, ds, **kw)
+        RequestCookiesMixin.prepare(self, ds, call_base=False, **kw)
+        wid = self.getWidgetId()
+        value = ds[wid]
+        ds['%s-%s' % (wid,value)] = True  # use empty string to mean 'all'
+
+InitializeClass(CPSCourrierToDoFilterWidget)
+
+widgetRegistry.register(CPSCourrierToDoFilterWidget)
+
