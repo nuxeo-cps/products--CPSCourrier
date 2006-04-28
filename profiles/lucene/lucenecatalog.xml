@@ -35,7 +35,7 @@
     <field
 	name="template_usage"
 	attr="template_usage"
-	type="KeyWord"
+	type="Keyword"
 	analyzer="Standard"
       />
 
