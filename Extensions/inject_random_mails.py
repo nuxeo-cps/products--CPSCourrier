@@ -93,12 +93,14 @@ def _populate(where, wftool):
             'mail_from': choice(EMAILS),
             'mail_to': [mail_to],
             'deadline': DateTime() + randint(-2, 15),
+            'initial_transition': 'create',
         }
         id = where.computeId(info['Title'])
         wftool.invokeFactoryFor(where, 'Incoming Mail', id, **info)
         if i % 100 == 0:
             transaction.commit()
-
+    # necessary with zopectl run:
+    transaction.commit()
 
 def _rec_build_tree(where, tree, wftool):
     existing_ids = set(where.objectIds())
