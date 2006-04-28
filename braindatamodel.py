@@ -134,6 +134,9 @@ class BrainDataModel(DataModel):
             else:
                 raise KeyError(key)
 
+        if callable(value):
+            value = value()
+
         # remember value
         self.data[key] = value
         return value
