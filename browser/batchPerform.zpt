@@ -3,7 +3,7 @@
   <metal:main fill-slot="main">
     <tal:dispatch_submit define="submit_result view/dispatchSubmit">
       <tal:no_redirect condition="python: submit_result != 'do_redirect'"
-                       define="transition view/getTransitionId">
+                       define="transition view/transition">
 
         <metal:std_main use-macro="here/content_lib_std_main/macros/std_main">
 
@@ -34,13 +34,9 @@
               <form action="" method="post"
                 tal:define="res view/renderLayout; rendered res/rendered">
 
-                <!-- forward the rpaths for later reuse -->
-                <input type="hidden" name="rpaths:list"
-                  tal:repeat="rpath view/rpaths" tal:attributes="value rpath" />
-
-                <!-- forward the transition id as well -->
+                <!-- forward the transition id -->
                 <input type="hidden" value=""
-                  tal:attributes="name string:cpscourrier_batch_${transition}" />
+                  tal:attributes="name string:cpscourrier_batch_${transition}"/>
 
                 <h2 tal:condition="view/is_results"
                   i18n:translate="search_results">
@@ -85,11 +81,7 @@
                 <metal:block fill-slot="button">
                   <!-- forward the chosen answering template if any -->
                   <input type="hidden" name="base_reply_rpath"
-                    tal:attributes="value rpath|string:"/>
-                  <!-- forward the rapths for later reuse -->
-                  <input type="hidden" name="rpaths:list"
-                    tal:repeat="rpath view/rpaths"
-                    tal:attributes="value rpath"/>
+                    tal:attributes="value request/rpath|string:"/>
                   <input type="hidden" name="trigger_transition"
                     tal:attributes="value transition" />
                   <input type="submit" class="standalone"
