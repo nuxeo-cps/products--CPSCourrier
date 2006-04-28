@@ -485,9 +485,9 @@ class CourrierStack(HierarchicalStack):
         cpsdir = None
         user = False
         if elt_id.startswith('courrier_user'):
-            user = True
             cpsdir = kw.get('members')
         elif elt_id.startswith('courrier_group'):
+            infos['is_group'] = True
             cpsdir = kw.get('groups')
         if not cpsdir: # happens, e.g, in unit tests
             return infos
@@ -503,7 +503,7 @@ class CourrierStack(HierarchicalStack):
             title = entry.get(cpsdir.title_field, '')
             if not title:
                 title = id_wo_prefix
-            if not user:
+            if infos.get('is_group'):
                 # translate group title
                 cpsmcat = kw.get('cpsmcat')
                 title = cpsmcat(title, default=title)

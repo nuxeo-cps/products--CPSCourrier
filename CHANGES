@@ -22,6 +22,7 @@ Bug fixes:
 - search users batching didn't work for roadmap
 - roadmap: clicking 'save modifications' while some checkboxes are on used to
   remove corresponding elt
+- icons representing user/group in roadmap
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Changed 'from' to 'mail_from' and 'to' to 'mail_to' in mail_common schema

@@ -36,9 +36,6 @@
     <th i18n:translate="label_directive_comment">
       Comment
     </th>
-    <th>
-      &nbsp;
-    </th>
   </tr>
   <tal:levels repeat="level levels">
     <tal:block define="level_infos python:infos[level];
@@ -81,7 +78,17 @@
 		   tal:condition="content/editable"
 		   />
 	  </td>
-      <td>
+	  <td>
+	    <tal:block condition="content/is_group|nothing"
+		       replace="structure python:here.getImgTag(
+	      'group.png',
+	       base_url=portal_url,
+	       alt='Groupe')" />
+	    <tal:block condition="not:content/is_group|nothing"
+		       replace="structure python:here.getImgTag(
+				'user.png',
+				base_url=portal_url,
+				alt='Groupe')" />
 	  <tal:block content="content/identite|string:">
 	    Delegatee
 	  </tal:block>
