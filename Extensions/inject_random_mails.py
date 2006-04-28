@@ -10,6 +10,10 @@ Add this as External Method to populate portal with sample mails:
     module: CPSCourrier.inject_random_mails
     function: inject
 
+Alternatively, you can run it like this (from INSTANCE_HOME):
+bin/zopectl run Products/CPSCourrier/Extensions/inject_random_mails.py [portal_rpath]
+
+The default portal_rpath is "cps"
 """
 
 from Products.CMFCore.utils import getToolByName
@@ -191,3 +195,27 @@ for p in PARAGRAPHS:
 SENTENCES = cycle(SENTENCES)
 # source: http://fr.wikipedia.org/wiki/Aquariophilie
 
+if __name__ == '__main__':
+    from sys import argv
+    from AccessControl.User import UnrestrictedUser as BaseUnrestrictedUser
+    from AccessControl.SecurityManagement import newSecurityManager
+    from Testing.makerequest import makerequest
+
+    class UnrestrictedUser(BaseUnrestrictedUser):
+        """Unrestricted user that still has an id."""
+        def getId(self):
+            """Return the ID of the user."""
+            return self.getUserName()
+
+    app = makerequest(app)
+
+    if len(argv) == 1:
+        rpath = 'cps'
+        print "Inject Random Mails, no rpath specified."
+    else:
+        rpath = argv[1]
+    print "Injecting random mails in %s" % rpath
+    portal = app.unrestrictedTraverse(rpath)
+    user = UnrestrictedUser('script', '', ['Manager'], '').__of__(portal)
+    newSecurityManager(None, user)
+    inject(portal)
