@@ -68,7 +68,6 @@ class BatchPerformView(ReuseAnswerView):
            reply wf script with the selected template as model
          - other batch transitions with a classical confirmation form
         """
-
         form = self.request.form
 
         # compute the list of incoming mail rpath and store them as attribute
@@ -85,13 +84,13 @@ class BatchPerformView(ReuseAnswerView):
             url = "%s?portal_status_message=%s" % (self.context.absolute_url(),
                                                    psm)
             self.request.RESPONSE.redirect(url)
-            return
+            return 'do_redirect'
 
         transition = form.get('trigger_transition', None)
         if transition is not None:
             # handle the redirection and the psm
             self.batchTriggerTransition(transition)
-            return
+            return 'do_redirect'
 
     def batchTriggerTransition(self, transition):
         wftool = getToolByName(self.context, 'portal_workflow')
