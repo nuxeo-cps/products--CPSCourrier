@@ -41,6 +41,7 @@ def _buid_tree(gen):
                     'from': 'ogrisel-mb11@nuxeo.com',
                     'mailbox_addresses': gen.randomEmails(3),
                     'allowed_reply_time': randint(1, 15),
+                    'Subject': gen.sampleFromVoc('subject_voc'),
                 },
                 'test-mailbox-1-2': {
                     'Title': 'Test Mailbox 1 2',
@@ -48,6 +49,7 @@ def _buid_tree(gen):
                     'from': 'ogrisel-mb12@nuxeo.com',
                     'mailbox_addresses': gen.randomEmails(3),
                     'allowed_reply_time': randint(1, 15),
+                    'Subject': gen.sampleFromVoc('subject_voc'),
                 },
             },
         },
@@ -61,6 +63,7 @@ def _buid_tree(gen):
                     'from': 'ogrisel-mb21@nuxeo.com',
                     'mailbox_addresses': gen.randomEmails(3),
                     'allowed_reply_time': randint(1, 15),
+                    'Subject': gen.sampleFromVoc('subject_voc'),
                 },
                 'test-mailbox-2-2': {
                     'Title': 'Test Mailbox 2 2',
@@ -68,6 +71,7 @@ def _buid_tree(gen):
                     'from': 'ogrisel-mb22@nuxeo.com',
                     'mailbox_addresses': gen.randomEmails(3),
                     'allowed_reply_time': randint(1, 15),
+                    'Subject': gen.sampleFromVoc('subject_voc'),
                 },
             },
         },
@@ -83,6 +87,8 @@ def _populate(where, generator, wftool):
             'mail_to': [mail_to],
             'deadline': DateTime() + randint(-2, 15),
             'initial_transition': 'create',
+            'Subject': generator.sampleFromVoc('subject_voc'),
+            'priority': generator.choiceFromVoc('mail_priority'),
         }
         id = where.computeId(info['Title'])
         wftool.invokeFactoryFor(where, 'Incoming Mail', id, **info)
@@ -217,6 +223,14 @@ class RandomContentGenerator(object):
     def makeEmail(self, name):
         email = self._email_pattern % '-'.join(toAscii(name).lower().split())
         return "%s <%s>" % (name, email)
+
+    def choiceFromVoc(self, voc_name):
+        voc = self._portal.portal_vocabularies[voc_name]
+        return choice(voc.keys())
+
+    def sampleFromVoc(self, voc_name, n=3):
+        voc = self._portal.portal_vocabularies[voc_name]
+        return sample(voc.keys(), n)
 
 
 if __name__ == '__main__':
