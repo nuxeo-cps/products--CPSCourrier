@@ -454,7 +454,7 @@ class CPSMultiBooleanWidget(CPSWidget):
 
     meta_type = "Multi Boolean Widget"
 
-    _properties = CPSStringWidget._properties + (
+    _properties = CPSWidget._properties + (
         {'id': 'displayed_values', 'type': 'string', 'mode': 'w',
          'label': 'Values corresponding to fields to be displayed '},
         {'id': 'is_display_18n', 'type': 'boolean', 'mode': 'w',
