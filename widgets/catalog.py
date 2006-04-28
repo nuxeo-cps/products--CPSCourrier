@@ -24,6 +24,7 @@ import logging
 
 from Globals import InitializeClass
 from AccessControl import Unauthorized
+from AccessControl import getSecurityManager
 from ZODB.loglevels import TRACE as TRACE
 
 from Products.CMFCore.utils import _checkPermission, getToolByName
@@ -62,12 +63,15 @@ class CatalogTabularWidget(TabularWidget):
          'label': 'Catalog keys for fulltext searchs'},
         {'id': 'fulltext_ors', 'type': 'tokens', 'mode': 'w',
          'label': 'Input filters used for fulltext ORs',},
+        {'id': 'users_groups_filters', 'type': 'tokens', 'mode': 'w',
+         'label': "Input filters to replace by user and user's group",},
         )
 
     # support for more than one full text index.
     # the two props should be fully synchronized
     fulltext_keys = ('SearchableText', 'ZCTitle')
     fulltext_ors = ('ZCText_or', 'ZCTitle_or')
+    users_groups_filters = ()
 
     def layout_row_view(self, layout=None, **kw):
         """Render method for rows layouts in 'view' mode.
@@ -116,6 +120,18 @@ class CatalogTabularWidget(TabularWidget):
                                 'range' : range_}
         for key in to_del:
             del filters[key]
+
+        #Filters to feed with user id and its groups
+        if not self.users_groups_filters:
+            return
+
+        aclu = getToolByName(self, 'acl_users')
+        user = getSecurityManager().getUser()
+        allowed = aclu.getAllowedRolesAndUsersOfUser(user)
+
+        for filt in self.users_groups_filters:
+            if filters.get(filt):
+                filters[filt] = allowed
 
     def _doBatchedQuery(self, catalog, b_start, b_size, query):
         """ Return batched results, total number of results.
