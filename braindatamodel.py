@@ -33,6 +33,7 @@ class FakeBrain:
         return self
 
 _lazy = object()
+_missing = object()
 
 class BrainDataModel(DataModel):
     """ To use brain catalog results as a datamodel.
@@ -46,6 +47,8 @@ class BrainDataModel(DataModel):
     >>> dm._brain == d
     True
     >>> dm['spam']
+    'eggs'
+    >>> dm.get('spam')
     'eggs'
     >>> dm['non']
     Traceback (most recent call last):
@@ -109,7 +112,34 @@ class BrainDataModel(DataModel):
         self._brain_obj = obj
         return obj
 
+    def get(self, key, default=_missing):
+        """Examples with callables:
+
+        >>> dm = BrainDataModel(FakeBrain({}))
+        >>> def smthing():
+        ...    return True
+        >>> dm._brain.smthing = smthing
+        >>> dm.get('smthing')
+        True
+        """
+
+        try:
+            return self[key]
+        except KeyError:
+            if default is _missing:
+                raise
+            return default
+
     def __getitem__(self, key):
+        """We read attributes from brain, even callables
+
+        >>> dm = BrainDataModel(FakeBrain({}))
+        >>> def smthing():
+        ...    return True
+        >>> dm._brain.smthing = smthing
+        >>> dm['smthing']
+        True
+        """
         # If already computed, return value
         value = self.data.get(key)
         if value is not None:
@@ -146,3 +176,6 @@ class BrainDataModel(DataModel):
 
     def checkWriteAccess(self, key):
         return False
+
+    def checkReadAccess(self, key):
+        return True
