@@ -2,6 +2,9 @@
 
 <object name="mail_dashboard_row">
  <widget name="Title">
-  <property name="sortable">Title-sort</property>
+  <property name="sortable">Title_sort</property>
+ </widget>
+ <widget name="timeleft">
+   <property name="sortable">deadline_sort</property>
  </widget>
 </object>

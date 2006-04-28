@@ -1,12 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_catalog" meta_type="CPS Lucene Catalog Tool">
 
-  <!-- Properties -->
-
-  <property name="title"></property>
-  <property name="server_url">http://localhost:9180</property>
-
-
   <!-- Fields -->
 
 
@@ -52,14 +46,14 @@
 	analyzer="Standard"
       />
 
-    <field
-	name="Title-sort"
-	attr="Title"
-	type="Keyword"
-	analyzer="Standard"
-	/>
-
     <!-- Dedicated fields for sorting -->
+
+    <field
+	name="Title_sort"
+	attr="Title"
+	type="Sort"
+	analyzer="Sort"
+	/>
 
     <field
 	name="deadline_sort"
