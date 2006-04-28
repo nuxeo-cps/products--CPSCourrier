@@ -483,11 +483,11 @@ class CourrierStack(HierarchicalStack):
 
         # user/group info
         cpsdir = None
+        user = False
         if elt_id.startswith('courrier_user'):
             user = True
             cpsdir = kw.get('members')
         elif elt_id.startswith('courrier_group'):
-            group = True
             cpsdir = kw.get('groups')
         if not cpsdir: # happens, e.g, in unit tests
             return infos
