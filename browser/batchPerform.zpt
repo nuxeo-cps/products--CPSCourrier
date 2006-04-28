@@ -26,7 +26,7 @@
 
           <metal:main fill-slot="main">
 
-            <tal:search_form condition="python:transition == 'answer'">
+            <tal:search_form condition="view/showSearchAnswerForm">
               <!--
               search form for answer transition
               -->
@@ -74,7 +74,7 @@
               </form>
             </tal:search_form>
 
-            <tal:confirm_form tal:condition="python:transition != 'answer'"
+            <tal:confirm_form tal:condition="view/showConfirmationForm"
               tal:define="workflow_action_script string:batch_perform.html;
               proxy nocall:here">
               <!--
@@ -83,9 +83,13 @@
               <metal:transition_form
                 use-macro="here/content_lib_transition_form/macros/transition_form">
                 <metal:block fill-slot="button">
+                  <!-- forward the chosen answering template if any -->
+                  <input type="hidden" name="base_reply_rpath"
+                    tal:attributes="value rpath|string:"/>
                   <!-- forward the rapths for later reuse -->
                   <input type="hidden" name="rpaths:list"
-                    tal:repeat="rpath view/rpaths" tal:attributes="value rpath"/>
+                    tal:repeat="rpath view/rpaths"
+                    tal:attributes="value rpath"/>
                   <input type="hidden" name="trigger_transition"
                     tal:attributes="value transition" />
                   <input type="submit" class="standalone"

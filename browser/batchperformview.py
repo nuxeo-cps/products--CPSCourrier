@@ -40,9 +40,10 @@ class BatchPerformView(ReuseAnswerView):
         trans = [key for key in form if key.startswith(self.PREFIX)]
         if len(trans) > 1:
             raise ValueError("Got more than one transition to perform")
-        elif not trans:
-            return
-        return trans[0][len(self.PREFIX):]
+        if trans:
+            return trans[0][len(self.PREFIX):]
+        if 'answer_submit' in form:
+            return 'answer'
 
     def getMailInfo(self):
         """Compute data related to the rpath"""
@@ -59,6 +60,26 @@ class BatchPerformView(ReuseAnswerView):
                 'mailbox_url': mailbox_proxy.absolute_url(),
             })
         return infos
+
+    def showSearchAnswerForm(self):
+        """Decide whether we should display the transition confirmation form"""
+        if self.getTransitionId() != 'answer':
+            # No search for non answer transitions
+            return False
+        if 'rpath' in self.request.form:
+            # The template answer as already been chosen
+            return False
+        return True
+
+    def showConfirmationForm(self):
+        """Decide whether we should display the transition confirmation form"""
+        if self.getTransitionId() != 'answer':
+            # Non answer transitions directly need the final confirmation form
+            return True
+        if 'rpath' in self.request.form:
+            # The answering template is chosen, show the confirmation form
+            return True
+        return False
 
     def dispatchSubmit(self):
         """Process the POST request of the mailbox/dashboard listing views
