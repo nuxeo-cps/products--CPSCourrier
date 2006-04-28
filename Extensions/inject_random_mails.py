@@ -20,17 +20,16 @@ from Products.CMFCore.utils import getToolByName
 from Products.CPSUtil.text import toAscii
 from DateTime import DateTime
 from copy import deepcopy
-from itertools import cycle
 from pprint import pformat
 import transaction
 from random import randint, sample, choice
 
-EMAIL_PATTERN = "ogrisel-%s@nuxeo.com"
 IN_MAILS_PER_MAILBOX = 20
 OUT_MAILS_PER_MAILBOX = 20
-COMMENT_PATTER = "Test comment for transition %s"
+EMAIL_PATTERN = "ogrisel-%s@nuxeo.com"
+COMMENT_PATTERN = "Test comment for transition %s"
 
-def _buid_tree():
+def _buid_tree(gen):
     return  {
         'test-group-1': {
             'Title': 'Test Group 1',
@@ -40,14 +39,14 @@ def _buid_tree():
                     'Title': 'Test Mailbox 1 1',
                     'portal_type': 'Mailbox',
                     'from': 'ogrisel-mb11@nuxeo.com',
-                    'mailbox_addresses': sample(EMAILS, 3),
+                    'mailbox_addresses': gen.randomEmails(3),
                     'allowed_reply_time': randint(1, 15),
                 },
                 'test-mailbox-1-2': {
                     'Title': 'Test Mailbox 1 2',
                     'portal_type': 'Mailbox',
                     'from': 'ogrisel-mb12@nuxeo.com',
-                    'mailbox_addresses': sample(EMAILS, 3),
+                    'mailbox_addresses': gen.randomEmails(3),
                     'allowed_reply_time': randint(1, 15),
                 },
             },
@@ -60,37 +59,27 @@ def _buid_tree():
                     'Title': 'Test Mailbox 2 1',
                     'portal_type': 'Mailbox',
                     'from': 'ogrisel-mb21@nuxeo.com',
-                    'mailbox_addresses': sample(EMAILS, 3),
+                    'mailbox_addresses': gen.randomEmails(3),
                     'allowed_reply_time': randint(1, 15),
                 },
                 'test-mailbox-2-2': {
                     'Title': 'Test Mailbox 2 2',
                     'portal_type': 'Mailbox',
                     'from': 'ogrisel-mb22@nuxeo.com',
-                    'mailbox_addresses': sample(EMAILS, 3),
+                    'mailbox_addresses': gen.randomEmails(3),
                     'allowed_reply_time': randint(1, 15),
                 },
             },
         },
     }
 
-def _random_paragrah(n=5):
-    return '. '.join(SENTENCES.next() for _ in xrange(n))
-
-def _random_text(n=3):
-    return '\n\n'.join(_random_paragrah(randint(3, 6)) for _ in xrange(n))
-
-def _make_email(name):
-    email = EMAIL_PATTERN % '-'.join(toAscii(name).lower().split())
-    return "%s <%s>" % (name, email)
-
-def _populate(where, wftool):
+def _populate(where, generator, wftool):
     for i in range(IN_MAILS_PER_MAILBOX):
         mail_to = where.getContent()['from']
         info = {
-            'Title': ' '.join(SENTENCES.next().split()[:5]),
-            'content': _random_text(randint(1, 3)),
-            'mail_from': choice(EMAILS),
+            'Title': generator.randomWords(),
+            'content': generator.randomText(),
+            'mail_from': generator.randomEmail(),
             'mail_to': [mail_to],
             'deadline': DateTime() + randint(-2, 15),
             'initial_transition': 'create',
@@ -102,7 +91,7 @@ def _populate(where, wftool):
     # necessary with zopectl run:
     transaction.commit()
 
-def _rec_build_tree(where, tree, wftool):
+def _rec_build_tree(where, tree, generator, wftool):
     existing_ids = set(where.objectIds())
     for id, info in tree.items():
         portal_type = info.pop('portal_type')
@@ -110,15 +99,16 @@ def _rec_build_tree(where, tree, wftool):
         if id not in existing_ids:
             wftool.invokeFactoryFor(where, portal_type, id, **info)
         if subobjects:
-            _rec_build_tree(where[id], subobjects, wftool)
+            _rec_build_tree(where[id], subobjects, generator, wftool)
         if portal_type == 'Mailbox':
-            _populate(where[id], wftool)
+            _populate(where[id], generator, wftool)
 
 def inject(self):
     wftool = getToolByName(self, 'portal_workflow')
     portal = getToolByName(self, 'portal_url').getPortalObject()
-    tree = _buid_tree()
-    _rec_build_tree(portal.mailboxes, deepcopy(tree), wftool)
+    generator = RandomContentGenerator(portal=portal)
+    tree = _buid_tree(generator)
+    _rec_build_tree(portal.mailboxes, deepcopy(tree), generator, wftool)
     return "populated tree:\n%s" % pformat(tree)
 
 #
@@ -141,7 +131,6 @@ USERNAMES = (
     "Paul Doumer",
     "Albert Lebrun",
 )
-EMAILS = [_make_email(name) for name in USERNAMES]
 
 TEXT = """\
 Aquariophilie d'eau douce
@@ -189,13 +178,46 @@ Les poissons d'eau douce vendus dans le commerce sont pour la plupart tropicaux 
 Si vous voulez rester en eau froide, il y a toutes sortes de poissons rouges : ils peuvent aussi être très beaux dans un aquarium planté, plutôt que dans une boule.
 
 Il va donc falloir faire le point sur ce que vous pouvez fournir à vos futurs pensionnaires, puis les sélectionner selon ces paramètres. En général on commence par faire l'inverse, et... ça se passe mal !"""
+# source: http://fr.wikipedia.org/wiki/Aquariophilie
 
 PARAGRAPHS = TEXT.split('\n\n')
 SENTENCES = []
 for p in PARAGRAPHS:
     SENTENCES += p.split('. ')
-SENTENCES = cycle(SENTENCES)
-# source: http://fr.wikipedia.org/wiki/Aquariophilie
+SENTENCES = tuple(SENTENCES)
+
+class RandomContentGenerator(object):
+
+    def __init__(self, usernames=USERNAMES, sentences=SENTENCES,
+                 email_pattern=EMAIL_PATTERN, portal=None):
+        self._email_pattern = email_pattern
+        self._usernames = usernames
+        self._emails = tuple(self.makeEmail(name) for name in usernames)
+        self._sentences = sentences
+        self._portal = portal
+
+    def randomEmail(self):
+        return choice(self._emails)
+
+    def randomEmails(self, n=3):
+        return sample(self._emails, n)
+
+    def randomSentence(self):
+        return choice(self._sentences)
+
+    def randomWords(self, n=5):
+        return ' '.join(self.randomSentence().split()[:n])
+
+    def randomParagrah(self, n=5):
+        return '. '.join(self.randomSentence() for _ in xrange(n))
+
+    def randomText(self, n=3):
+        return '\n\n'.join(self.randomParagrah(randint(3, 6)) for _ in xrange(n))
+
+    def makeEmail(self, name):
+        email = self._email_pattern % '-'.join(toAscii(name).lower().split())
+        return "%s <%s>" % (name, email)
+
 
 if __name__ == '__main__':
     from sys import argv
