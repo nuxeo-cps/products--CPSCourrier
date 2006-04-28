@@ -352,6 +352,7 @@
  <transition transition_id="send" title="" new_state="sent"
              trigger="USER" before_script="send_reply"
              after_script="flag_incoming_answered">
+  <transition-behavior behavior_id="freeze"/>
   <action url="%(content_url)s/cpscourrier_send_reply_form"
           category="workflow">action_send</action>
   <guard>
