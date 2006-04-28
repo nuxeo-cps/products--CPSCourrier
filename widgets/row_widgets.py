@@ -448,3 +448,41 @@ class CPSUsersWithRolesWidget(CPSLinesWidget):
 
 InitializeClass(CPSUsersWithRolesWidget)
 widgetRegistry.register(CPSUsersWithRolesWidget)
+
+class CPSMultiBooleanWidget(CPSWidget):
+    """Convert several boolean attributes in datamodel to a string."""
+
+    meta_type = "Multi Boolean Widget"
+
+    _properties = CPSStringWidget._properties + (
+        {'id': 'displayed_values', 'type': 'string', 'mode': 'w',
+         'label': 'Values corresponding to fields to be displayed '},
+        {'id': 'is_display_18n', 'type': 'boolean', 'mode': 'w',
+         'label': 'Are displayed values to be translated?'},
+        )
+
+    displayed_values = ()
+    is_display_i18n = False
+
+    def prepare(self, datastructure):
+        dm = datastructure.getDataModel()
+        for c, f_id in enumerate(self.fields):
+            if dm.get(f_id, False):
+                value = self.displayed_values[c]
+                break
+        else:
+            value = self.displayed_values[len(self.fields)]
+        datastructure[self.getWidgetId()] = value
+
+    def render(self, mode, datastructure):
+        if mode not in ['search', 'view']:
+            raise NotImplementedError
+        rendered = datastructure[self.getWidgetId()]
+        if self.is_display_i18n:
+            cpsmcat = getToolByName(self, 'translation_service')
+            rendered = cpsmcat(rendered).encode('iso-8859-15')
+        return rendered
+
+InitializeClass(CPSMultiBooleanWidget)
+widgetRegistry.register(CPSMultiBooleanWidget)
+

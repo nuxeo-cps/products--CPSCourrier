@@ -265,6 +265,69 @@ It forwards directly pseudo-role groups::
     >>> widget._extractMembers('spr|', FakeDirectory(), ['spr|role:Glob',])
     ['role:Glob']
 
+Multi Boolean Widget
+--------------------
+
+This widget takes several boolean valued fields and convert them
+to related strings::
+
+    >>> from Products.CPSCourrier.widgets.row_widgets \
+    ...        import CPSMultiBooleanWidget
+    >>> widget = CPSMultiBooleanWidget('mbool')
+    >>> widget.manage_changeProperties(fields=['master', 'slave'],
+    ...                                displayed_values=['Primary', 'Mirror'])
+
+Preparation
+~~~~~~~~~~~
+
+Let's make datamodel and datastructure::
+
+    >>> dm = FakeDataModel()
+    >>> ds = DataStructure(datamodel=dm)
+
+Booleans are checked in the fields order. First matching wins::
+
+    >>> dm['master'] = True
+    >>> widget.prepare(ds)
+    >>> ds
+    {'mbool': 'Primary'}
+    >>> dm['master'] = False
+    >>> dm['slave'] = True
+    >>> widget.prepare(ds)
+    >>> ds
+    {'mbool': 'Mirror'}
+
+In case none matches, we use one more value from ``displayed_fields``.
+
+    >>> widget.manage_changeProperties(displayed_values=['P', 'M', 'Unknown'])
+
+    >>> dm['slave'] = False
+    >>> widget.prepare(ds)
+    >>> ds
+    {'mbool': 'Unknown'}
+
+Rendering
+~~~~~~~~~
+
+    >>> ds['mbool'] = 'Here!'
+    >>> widget.render('view', ds)
+    'Here!'
+
+Translation is made according to ``is_display_i18n`` property::
+
+    >>> widget.is_display_i18n = True
+    >>> class FakeLocalizer:
+    ...     def __call__(self, key):
+    ...         if key == 'Here!':
+    ...             return u'ici'
+    >>> cpsmcat = FakeLocalizer()
+    >>> cpsmcat('Here!')
+    u'ici'
+    >>> widget.translation_service = FakeLocalizer()
+    >>> widget.render('search', ds)
+    'ici'
+
+
 .. Emacs
 .. Local Variables:
 .. mode: rst
