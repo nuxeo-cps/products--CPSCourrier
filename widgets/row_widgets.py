@@ -464,17 +464,17 @@ class CPSMultiBooleanWidget(CPSWidget):
     displayed_values = ()
     is_display_i18n = False
 
-    def prepare(self, datastructure):
+    def prepare(self, datastructure, **kw):
         dm = datastructure.getDataModel()
         for c, f_id in enumerate(self.fields):
-            if dm.get(f_id, False):
+            if f_id in dm and dm[f_id]: # dm.get() doesn't work with BrainDM
                 value = self.displayed_values[c]
                 break
         else:
             value = self.displayed_values[len(self.fields)]
         datastructure[self.getWidgetId()] = value
 
-    def render(self, mode, datastructure):
+    def render(self, mode, datastructure, **kw):
         if mode not in ['search', 'view']:
             raise NotImplementedError
         rendered = datastructure[self.getWidgetId()]

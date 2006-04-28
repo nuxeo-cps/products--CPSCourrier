@@ -324,7 +324,7 @@ Translation is made according to ``is_display_i18n`` property::
     >>> cpsmcat('Here!')
     u'ici'
     >>> widget.translation_service = FakeLocalizer()
-    >>> widget.render('search', ds)
+    >>> widget.render('search', ds, something='else')
     'ici'
 
 
