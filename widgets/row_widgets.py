@@ -467,7 +467,7 @@ class CPSMultiBooleanWidget(CPSWidget):
     def prepare(self, datastructure, **kw):
         dm = datastructure.getDataModel()
         for c, f_id in enumerate(self.fields):
-            if f_id in dm and dm[f_id]: # dm.get() doesn't work with BrainDM
+            if dm.get(f_id):
                 value = self.displayed_values[c]
                 break
         else:
