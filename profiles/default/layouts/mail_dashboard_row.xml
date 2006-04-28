@@ -88,6 +88,23 @@ Layouts for rows in the content view of mailboxes
   <property name="sortable" type="string">review_state</property>
  </widget>
 
+ <widget name="todo" meta_type="Multi Boolean Widget">
+  <property name="label">cpscourrier_todo_label</property>
+  <property name="is_i18n">True</property>
+  <property name="fields">
+   <element value="todo_pilot"/>
+   <element value="todo_delegatee"/>
+   <element value="todo_handle"/>
+  </property>
+  <property name="displayed_values">
+    <element value="cpscourrier_to_process"/>
+    <element value="cpscourrier_to_watch"/>
+    <element value="cpscourrier_to_handle"/>
+    <element value=""/>
+  </property>
+  <property name="sortable" type="string">review_state</property>
+ </widget>
+
  <widget name="priority" meta_type="Select Widget">
    <property name="label">cpscourrier_priority_label</property>
    <property name="label_edit">cpscourrier_priority_label</property>
@@ -136,6 +153,9 @@ Layouts for rows in the content view of mailboxes
   </row>
   <row>
    <cell name="review_state"/>
+  </row>
+  <row>
+   <cell name="todo"/>
   </row>
   <row>
    <cell name="priority"/>
