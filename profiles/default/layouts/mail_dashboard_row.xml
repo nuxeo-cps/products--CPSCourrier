@@ -102,7 +102,6 @@ Layouts for rows in the content view of mailboxes
     <element value="cpscourrier_to_handle"/>
     <element value=""/>
   </property>
-  <property name="sortable" type="string">review_state</property>
  </widget>
 
  <widget name="priority" meta_type="Select Widget">
