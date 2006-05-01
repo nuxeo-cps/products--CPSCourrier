@@ -91,6 +91,7 @@ Layouts for rows in the content view of mailboxes
  <widget name="todo" meta_type="Multi Boolean Widget">
   <property name="label">cpscourrier_todo_label</property>
   <property name="is_i18n">True</property>
+  <property name="is_display_i18n">True</property>
   <property name="fields">
    <element value="todo_pilot"/>
    <element value="todo_delegatee"/>
