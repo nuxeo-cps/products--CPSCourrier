@@ -27,7 +27,8 @@
       </tal:block>
     </tal:block>
   </tal:block>
-  </td><td id="cpscourrierEditablePanel" style="width:10em; text-align:center">
+  </td><td id="cpscourrierEditablePanel"
+           style="width:10em; text-align:left; border:1px solid black;">
   <form action="cpsdocument_edit" method="post" id="editForm"
     enctype="multipart/form-data" class="workflow">
     <tal:block replace="structure editable_cell/widget_rendered" />

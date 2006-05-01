@@ -22,6 +22,8 @@
 from Globals import InitializeClass
 from Acquisition import aq_parent, aq_inner
 
+from Products.CMFCore.utils import getToolByName
+
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
@@ -55,21 +57,23 @@ class CPSMailTopicsWidget(CPSSelectWidget):
             return []
         if proxy is not None:
             parent = aq_parent(aq_inner(proxy)).getContent()
-            return getattr(parent, self.fields[0], [])
+            p_dm = parent.getTypeInfo().getDataModel(parent)
+            return p_dm.get(self.fields[0], [])
 
     def renderInputDiv(self, topic, voc, checked=False, css_class=None, cpsmcat=None):
         """make a <div> holding a checkbox and label."""
 
         if css_class is not None:
-            start = '<div class=%s>' % css_class
+            start = '<div class="%s">' % css_class
         else:
             start = '<div>'
         end = '</div>'
         name = self.getHtmlWidgetId()
-        checkbox_id = '%s-%s' % (name,topic)
+        checkbox_id = '%s-%s' % (name, topic)
         checkbox = renderHtmlTag('input',
                                  type='checkbox',
                                  name='%s:list' % name,
+                                 value=topic,
                                  checked=checked and 'checked' or None,
                                  id=checkbox_id)
 
@@ -95,14 +99,15 @@ class CPSMailTopicsWidget(CPSSelectWidget):
         input_name = self.getHtmlWidgetId()
         outstanding_topics = [topic for topic in topics if topic not in parent_topics]
         voc = self._getVocabulary(datastructure)
-        rendered_topics = [self.makeInputDiv(topic, voc,
-                                             css_class='outstanding',
-                                             cpsmcat=cpsmcat,
-                                             checked=True)
+        rendered_topics = [self.renderInputDiv(topic, voc,
+                                               css_class='outstanding',
+                                               cpsmcat=cpsmcat,
+                                               checked=True)
                            for topic in outstanding_topics]
         for topic in parent_topics:
-            rendered_topics.append(self.makeInputDiv(topic, voc, cpsmcat=cpsmcat,
-                                                     checked=topic in topics))
+            rendered_topics.append(self.renderInputDiv(topic, voc,
+                                                       cpsmcat=cpsmcat,
+                                                       checked=topic in topics))
         return '\n'.join(rendered_topics)
 
 InitializeClass(CPSMailTopicsWidget)

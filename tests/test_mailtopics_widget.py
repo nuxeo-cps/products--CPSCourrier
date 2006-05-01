@@ -28,5 +28,6 @@ from zope.testing import doctest
 def test_suite():
     return unittest.TestSuite((
         doctest.DocFileTest('doc/developer/mailtopics_widget.txt',
-                            package='Products.CPSCourrier'),
+                            package='Products.CPSCourrier',
+                            optionflags=doctest.NORMALIZE_WHITESPACE|doctest.ELLIPSIS),
         ))

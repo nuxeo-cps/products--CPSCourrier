@@ -57,7 +57,7 @@
   <property name="render_format">text</property>
   <property name="configurable">nothing</property>
  </widget>
- <widget name="subject" meta_type="Subject Widget">
+ <widget name="subject" meta_type="Mail Topics Widget">
   <property name="fields">
    <element value="Subject"/>
   </property>
@@ -65,10 +65,10 @@
   <property
      name="label_edit">cpsdoc_NewsItem_label_related_subjects</property>
   <property name="is_i18n">True</property>
+  <property name="css_class">mailTopics</property>
   <property name="hidden_empty">True</property>
   <property name="vocabulary">subject_voc</property>
   <property name="translated">True</property>
-  <property name="size">10</property>
   <property name="widget_mode_expr">python:portal.portal_membership.checkPermission('Modify portal content', proxy) and 'edit' or 'view'</property>
  </widget>
  <table>

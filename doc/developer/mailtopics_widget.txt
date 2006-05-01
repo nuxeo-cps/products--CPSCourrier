@@ -47,15 +47,24 @@ Validation
     >>> print dm
     {'topics': ['movies']}
 
-Rendering
-~~~~~~~~~~
 
-    We need first to create a pseudo proxy and its parent mailbox, and
-    refer to the former in the datamodel::
+Rendering
+---------
+
+
+Preliminaries
+~~~~~~~~~~~~~
+
+We need first to create a pseudo proxy and its parent mailbox, and
+refer to the former in the datamodel::
 
     >>> from OFS.SimpleItem import SimpleItem
+    >>> class ParentTypeInfo:
+    ...     def getDataModel(self, obj):
+    ...         return {'topics': obj.topics}
     >>> class FakeMailboxContent:
-    ...     topics = (['mbox_topic', 'mbox_topic2'])
+    ...     def getTypeInfo(self):
+    ...         return ParentTypeInfo()
     >>> class FakeMailbox(SimpleItem):
     ...     def getContent(self):
     ...         return FakeMailboxContent()
@@ -65,12 +74,9 @@ Rendering
     >>> ds = FakeDataStructure(dm)
 
 
-Internals
-~~~~~~~~~
-
-Let's prepare a pseudo vocabulary. It's a nicety inherited from Select
+We'll need also a pseudo vocabulary. It's a nicety inherited from Select
 Widget that we can directly set it as an attribute of the widget, that would
-normally be its id in ``portal_vocabularies``::
+normally be the property holding the id in ``portal_vocabularies``::
 
     >>> from UserDict import UserDict
     >>> class FakeVocabulary(UserDict):
@@ -86,8 +92,12 @@ normally be its id in ``portal_vocabularies``::
     >>> voc.get('mbox_topic')
     'mbox_voctop'
 
-Parent topics are accessed through the following method::
+Internals
+~~~~~~~~~
 
+Parent topics are accessed through ``getParentTopics()``::
+
+    >>> FakeMailboxContent.topics = (['mbox_topic', 'mbox_topic2'])
     >>> widget.getParentTopics(ds)
     ['mbox_topic', 'mbox_topic2']
 
@@ -99,30 +109,62 @@ Individual tag rendering is done by ``renderInputDiv``::
     >>> widget.getHtmlWidgetId = getHtmlWidgetId
     >>> print widget.renderInputDiv('arts', voc)
     <div>
-    <input type="checkbox" name="tops:list" id="tops-arts" />
+    <input type="checkbox" name="tops:list" value="arts" id="tops-arts" />
     <label for="tops-arts">voc_arts</label>
     </div>
     >>> print widget.renderInputDiv('arts', voc, css_class='special')
-    <div class=special>
-    <input type="checkbox" name="tops:list" id="tops-arts" />
+    <div class="special">
+    <input type="checkbox" name="tops:list" value="arts" id="tops-arts" />
     <label for="tops-arts">voc_arts</label>
     </div>
     >>> print widget.renderInputDiv('arts', voc, checked=True)
     <div>
-    <input checked="checked" type="checkbox" name="tops:list" id="tops-arts" />
+    <input checked="checked" type="checkbox" name="tops:list" value="arts" id="tops-arts" />
     <label for="tops-arts">voc_arts</label>
     </div>
 
-Finally, let's try one with translations::
+Finally, let's try one with translations and non ascii character::
 
     >>> def cpsmcat(key, *args):
     ...       return key.replace('msgid', '\xe9').decode('iso-8859-15')
     >>> print widget.renderInputDiv('arts', voc, checked=True, cpsmcat=cpsmcat)
     <div>
-    <input checked="checked" type="checkbox" name="tops:list" id="tops-arts" />
+    <input checked="checked" type="checkbox" name="tops:list" value="arts" id="tops-arts" />
     <label for="tops-arts">é:voc_arts</label>
     </div>
 
+Full example
+~~~~~~~~~~~~
+
+The topics that don't belong to the parent's list get displayed
+first, and bear a specific class::
+
+    >>> ds['the_widget'] = ['arts', 'mbox_topic']
+    >>> print widget.render('edit', ds)
+    <div class="outstanding">
+    <input checked="checked" ... value="arts" ... />
+    ...
+    </div>
+    <div>
+    <input checked="checked" ... value="mbox_topic" ... />
+    ...
+    </div>
+    <div>
+    <input type="checkbox" name="tops:list" value="mbox_topic2" id="tops-mbox_topic2" />
+    ...
+    </div>
+
+The vocabulary can be translated::
+
+    >>> widget.manage_changeProperties(translated=True)
+    >>> def cpsmcat(key, *args):
+    ...       return str(key.replace('msgid', 'transl'))
+    >>> widget.translation_service = cpsmcat
+    >>> print widget.render('edit', ds)
+    <div ...>
+    <input ... />
+    <label for="tops-arts">transl:voc_arts</label>
+    </div>...
 
 .. Emacs
 .. Local Variables:
