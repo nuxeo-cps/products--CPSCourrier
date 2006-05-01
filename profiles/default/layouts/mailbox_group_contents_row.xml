@@ -49,7 +49,7 @@ Layouts for rows in the content view of mailboxes
   <property name="hidden_layout_modes"/>
   <property name="hidden_readonly_layout_modes"/>
   <property name="roles">
-   <element value="WorkspaceManager"/>
+   <element value="LocalManager"/>
   </property>
   <property name="merge_roles">True</property>
  </widget>
