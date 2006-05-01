@@ -5,3 +5,4 @@ import catalog
 import dirsearch
 import row_widgets
 import filter_widgets
+import mailtopics

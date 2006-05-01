@@ -1,0 +1,132 @@
+==================
+Mail Topics Widget
+==================
+
+:Revision: $Id$
+
+.. contents:: :depth: 1
+.. sectnum::
+
+This widget is very specific to CPSCourrier. It works like the Generic
+Select Widget in checkbox mode, except that the list of available
+options is deduced from the mailbox, and that the field is allowed to
+hold values that aren't from the list of available options, e.g.,
+coming from an automated guessing mechanism.
+
+This is designed for the subjects (topics) associated to an incoming mail.
+
+Let's instanciate one
+    >>> from Products.CPSCourrier.widgets.mailtopics import CPSMailTopicsWidget
+    >>> widget = CPSMailTopicsWidget('the_widget')
+    >>> widget.getId()
+    'the_widget'
+
+Preparation
+~~~~~~~~~~~
+
+    This is standard::
+
+    >>> from Products.CPSSchemas.tests.testWidgets import FakeDataModel
+    >>> from Products.CPSSchemas.tests.testWidgets import FakeDataStructure
+    >>> widget.fields = ['topics']
+    >>> dm = FakeDataModel(dm={'topics': ['computers', 'arts']})
+    >>> ds = FakeDataStructure(dm)
+    >>> widget.prepare(ds)
+    >>> ds
+    {'the_widget': ['computers', 'arts']}
+
+
+Validation
+~~~~~~~~~~
+
+    All values are valid::
+
+    >>> ds['the_widget'] = ['movies']
+    >>> widget.validate(ds)
+    True
+    >>> print dm
+    {'topics': ['movies']}
+
+Rendering
+~~~~~~~~~~
+
+    We need first to create a pseudo proxy and its parent mailbox, and
+    refer to the former in the datamodel::
+
+    >>> from OFS.SimpleItem import SimpleItem
+    >>> class FakeMailboxContent:
+    ...     topics = (['mbox_topic', 'mbox_topic2'])
+    >>> class FakeMailbox(SimpleItem):
+    ...     def getContent(self):
+    ...         return FakeMailboxContent()
+    >>> class FakeMail(SimpleItem):
+    ...     pass
+    >>> dm.proxy = FakeMail().__of__(FakeMailbox())
+    >>> ds = FakeDataStructure(dm)
+
+
+Internals
+~~~~~~~~~
+
+Let's prepare a pseudo vocabulary. It's a nicety inherited from Select
+Widget that we can directly set it as an attribute of the widget, that would
+normally be its id in ``portal_vocabularies``::
+
+    >>> from UserDict import UserDict
+    >>> class FakeVocabulary(UserDict):
+    ...       meta_type = 'Fake Vocabulary'
+    ...
+    ...       def getMsgid(self, key, default):
+    ...           val = self.get(key, '')
+    ...           return val and 'msgid:' + val or default
+    >>> widget.vocabulary = FakeVocabulary({'mbox_topic': 'mbox_voctop',
+    ...                                     'mbox_topic2': 'mbox_voctop2',
+    ...                                     'arts': 'voc_arts',})
+    >>> voc = widget._getVocabulary(ds)
+    >>> voc.get('mbox_topic')
+    'mbox_voctop'
+
+Parent topics are accessed through the following method::
+
+    >>> widget.getParentTopics(ds)
+    ['mbox_topic', 'mbox_topic2']
+
+Individual tag rendering is done by ``renderInputDiv``::
+
+    >>> def getHtmlWidgetId():
+    ...     "A monkey patch to make output more readable"
+    ...     return 'tops'
+    >>> widget.getHtmlWidgetId = getHtmlWidgetId
+    >>> print widget.renderInputDiv('arts', voc)
+    <div>
+    <input type="checkbox" name="tops:list" id="tops-arts" />
+    <label for="tops-arts">voc_arts</label>
+    </div>
+    >>> print widget.renderInputDiv('arts', voc, css_class='special')
+    <div class=special>
+    <input type="checkbox" name="tops:list" id="tops-arts" />
+    <label for="tops-arts">voc_arts</label>
+    </div>
+    >>> print widget.renderInputDiv('arts', voc, checked=True)
+    <div>
+    <input checked="checked" type="checkbox" name="tops:list" id="tops-arts" />
+    <label for="tops-arts">voc_arts</label>
+    </div>
+
+Finally, let's try one with translations::
+
+    >>> def cpsmcat(key, *args):
+    ...       return key.replace('msgid', '\xe9').decode('iso-8859-15')
+    >>> print widget.renderInputDiv('arts', voc, checked=True, cpsmcat=cpsmcat)
+    <div>
+    <input checked="checked" type="checkbox" name="tops:list" id="tops-arts" />
+    <label for="tops-arts">é:voc_arts</label>
+    </div>
+
+
+.. Emacs
+.. Local Variables:
+.. mode: rst
+.. End:
+.. Vim
+.. vim: set filetype=rst:
