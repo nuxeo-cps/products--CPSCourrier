@@ -167,6 +167,18 @@ msgstr ""
 msgid "cpscourrier_no_group_found"
 msgstr ""
 
+msgid "cpscourrier_todo_label"
+msgstr ""
+
+msgid "cpscourrier_to_process"
+msgstr ""
+
+msgid "cpscourrier_to_handle"
+msgstr ""
+
+msgid "cpscourrier_to_watch"
+msgstr ""
+
 #
 # Vocabularies
 #

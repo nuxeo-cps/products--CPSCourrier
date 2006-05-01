@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-04-27 00:38default\n"
+"POT-Creation-Date: 2006-05-01 12:57default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -17,9 +17,9 @@ msgstr ""
 "Domain: default\n"
 
 #.   <title fill-slot="title">
-#.           <span replace="string:heading_batch_workflow_${transition}" />
-#.         </title>
-#: from ../skins/cps_courrier/cpscourrier_batch_perform_form.pt
+#.               <span replace="string:heading_batch_workflow_${transition}" />
+#.             </title>
+#: from ../browser/batchPerform.zpt
 msgid "<span replace=\"string:heading_batch_workflow_${transition}\" />"
 msgstr ""
 
@@ -52,8 +52,8 @@ msgstr ""
 
 #.   <input name="answer_submit" type="submit" class="standalone" value="button_validate" />
 #.   <input name="submit_add" type="submit" class="context" value="button_validate" />
-#: from ../browser/reuseAnswer.zpt ../browser/roadmap.zpt
-#: ../skins/cps_courrier/cpscourrier_roadmap.pt
+#: from ../browser/batchPerform.zpt ../browser/reuseAnswer.zpt
+#: ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
 msgstr ""
 
@@ -250,9 +250,12 @@ msgid "search_for_delegatees"
 msgstr ""
 
 #.   <h2 condition="view/is_results">
+#.                     Search results
+#.                   </h2>
+#.   <h2 condition="view/is_results">
 #.                 Search results
 #.               </h2>
-#: from ../browser/reuseAnswer.zpt
+#: from ../browser/batchPerform.zpt ../browser/reuseAnswer.zpt
 msgid "search_results"
 msgstr ""
 
@@ -401,6 +404,18 @@ msgid "cpscourrier_no_user_found"
 msgstr ""
 
 msgid "cpscourrier_no_group_found"
+msgstr ""
+
+msgid "cpscourrier_todo_label"
+msgstr ""
+
+msgid "cpscourrier_to_process"
+msgstr ""
+
+msgid "cpscourrier_to_handle"
+msgstr ""
+
+msgid "cpscourrier_to_watch"
 msgstr ""
 
 #
