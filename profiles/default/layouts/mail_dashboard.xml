@@ -16,7 +16,6 @@ Layout that presents catalog search results
   <property name="cookie_id">cpscourrier</property>
   <property name="filter_button">filter</property>
   <property name="users_groups_filters">
-    <element value="todo-handle"/>
     <element value="todo-process"/>
     <element value="todo-watch"/>
   </property>
@@ -37,6 +36,7 @@ Layout that presents catalog search results
    </property>
  </widget>
 
+ <!-- This is currently effective on Lucene only -->
  <widget name="q_todo" meta_type="Courrier To Do Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">label_search_todo</property>
@@ -46,7 +46,13 @@ Layout that presents catalog search results
    <property name="translated">True</property>
    <property name="cookie_id">cpscourrier</property>
    <property name="fields">
-     <element value="filter_review_state" />
+     <element value="filter_todo" />
+   </property>
+   <property name="forward_values">
+     <element value="received" />
+   </property>
+   <property name="forward_indexes">
+     <element value="q_review_state_dup" />
    </property>
  </widget>
 

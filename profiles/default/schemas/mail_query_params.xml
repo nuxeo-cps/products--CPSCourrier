@@ -5,6 +5,7 @@ should probably use only one schema. This will get clearer later
 
 <object name="mail_query_params" meta_type="CPS Schema">
   <field name="filter_review_state" meta_type="CPS String Field"/>
+  <field name="filter_todo" meta_type="CPS String Field"/>
   <field name="filter_priority" meta_type="CPS String Field"/>
   <field name="filter_type" meta_type="CPS String Field"/>
   <field name="filter_sort_on" meta_type="CPS String Field">

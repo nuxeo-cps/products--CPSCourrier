@@ -46,6 +46,15 @@
 	analyzer="Standard"
       />
 
+    <!-- duplicate because two different filter widgets are going to
+	 struggle for it -->
+    <field
+	name="review_state_dup"
+	attr="review_state"
+	type="Keyword"
+	analyzer="Standard"
+      />
+
     <!-- Dedicated fields for sorting -->
 
     <field

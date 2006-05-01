@@ -280,8 +280,9 @@ usual precedence rules::
 Courrier To Do Filter Widget
 ----------------------------
 
-This is the filter brother of Multi Boolean Widget. It translates the
-vocabulary key in a boolean query::
+This is the filter brother of Multi Boolean Widget, that is it is
+designed to choose among mutually exclusive criteria.
+It can translates the vocabulary key in a boolean query::
 
     >>> from Products.CPSCourrier.widgets.filter_widgets import\
     ...               CPSCourrierToDoFilterWidget
@@ -295,7 +296,9 @@ Let's make datamodel and datastructure::
     >>> ds = DataStructure(datamodel=dm)
     >>> dm['todo'] = 'handle'
 
-Now let's go through preparation::
+Now let's go through preparation. Note that the field value is put in
+datastructure like a Select Widget would do, too. This is
+for the rendering part::
 
     >>> widget.prepare(ds)
     >>> ds['the_widget']
@@ -303,7 +306,24 @@ Now let's go through preparation::
     >>> ds['the_widget-handle']
     True
 
-Now some catalog widget can convert it to the needed query.
+In addition, the widget can forward non-boolean queries to several indexes::
+
+    >>> widget.manage_changeProperties(forward_values=['dead', 'flying'],
+    ...                                forward_indexes=['state', 'type'])
+    >>> dm['todo'] = 'dead'
+    >>> widget.prepare(ds)
+    >>> ds['state']
+    'dead'
+    >>> dm['todo'] = 'flying'
+    >>> widget.prepare(ds)
+    >>> ds['type']
+    'flyings'
+
+It's now the job of the catalog widget to convert to the needed query,
+for example replacing the above booleans by the list of groyps the
+user belongs to. Note that you'll have to use the same prefix
+convention in ``forward_values`` as you did for the widget id for this
+to work.
 
 .. Emacs
 .. Local Variables:

@@ -417,13 +417,29 @@ widgetRegistry.register(CPSIntFilterWidget)
 class CPSCourrierToDoFilterWidget(CPSSelectFilterWidget):
     meta_type = "Courrier To Do Filter Widget"
 
+    _properties = CPSSelectFilterWidget._properties + (
+        {'id': 'forward_values', 'type': 'tokens', 'mode': 'w',
+         'label': 'Values to be forwarded to an index'},
+        {'id': 'forward_indexes', 'type': 'tokens', 'mode': 'w',
+         'label': 'Filter widget id to forward values to'},
+        )
+
+    forward_values = ()
+    forward_indexes = ()
+
     def prepare(self, ds, **kw):
         """Prepare datastructure from datamodel."""
         CPSSelectWidget.prepare(self, ds, **kw)
         RequestCookiesMixin.prepare(self, ds, call_base=False, **kw)
         wid = self.getWidgetId()
         value = ds[wid]
-        ds['%s-%s' % (wid,value)] = True  # use empty string to mean 'all'
+        indexes = iter(self.forward_indexes)
+        for val in self.forward_values:
+            index = indexes.next()
+            if val == value:
+                ds[index] = value
+                return
+        ds['%s-%s' % (wid, value)] = True # use empty string to mean 'all'
 
 InitializeClass(CPSCourrierToDoFilterWidget)
 
