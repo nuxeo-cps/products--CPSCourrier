@@ -75,6 +75,7 @@
 		     replace="structure res/rendered">
 	  </tal:block>
 	  <input type="submit"
+		 class="standalone"
 		 name="submit_users_search"
 		 value="button_search"
 		 i18n:attributes="value"/>
@@ -91,6 +92,7 @@
                                      	      name='roadmap_groups_search')"
 		     replace="structure res/rendered"/>
 	  <input type="submit"
+		 class="standalone"
 		 name="submit_groups_search"
 		 value="button_search"
 		 i18n:attributes="value"/>
