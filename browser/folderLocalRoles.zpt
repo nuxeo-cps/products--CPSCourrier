@@ -31,6 +31,7 @@
       <input type="submit"
 	     name="submit_users_search"
 	     value="button_search"
+	     class="standalone"
 	     i18n:attributes="value"/>
     </form>
   </div>
@@ -46,6 +47,7 @@
       <tal:block replace="structure view/renderGroupsLayout"/>
       <input type="submit"
 	     name="submit_groups_search"
+	     class="standalone"
 	     value="button_search"
 	     i18n:attributes="value"/>
     </form>
