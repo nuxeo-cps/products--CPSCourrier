@@ -317,7 +317,7 @@ In addition, the widget can forward non-boolean queries to several indexes::
     >>> dm['todo'] = 'flying'
     >>> widget.prepare(ds)
     >>> ds['type']
-    'flyings'
+    'flying'
 
 It's now the job of the catalog widget to convert to the needed query,
 for example replacing the above booleans by the list of groyps the
