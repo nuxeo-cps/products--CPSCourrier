@@ -118,6 +118,9 @@ msgstr ""
 msgid "cpscourrier_label_managers"
 msgstr ""
 
+msgid "label_search_todo"
+msgstr ""
+
 #
 # Tabular widgets labels
 #

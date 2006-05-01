@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-05-01 12:57default\n"
+"POT-Creation-Date: 2006-05-01 16:34default\n"
 "PO-Revision-Date: 2006-04-12 15:41+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -376,6 +376,9 @@ msgstr "Template reply"
 msgid "cpscourrier_label_managers"
 msgstr "Managers"
 
+msgid "label_search_todo"
+msgstr ""
+
 msgid "cpscourrier_type_label"
 msgstr "Tipo"
 
@@ -429,7 +432,7 @@ msgstr "No group matches your search criteria"
 
 #, fuzzy
 msgid "cpscourrier_todo_label"
-msgstr "To"
+msgstr "To do"
 
 #, fuzzy
 msgid "cpscourrier_to_process"
@@ -850,6 +853,3 @@ msgstr "El ${d}-${m}-${y}, ${name} escribió:"
 #, fuzzy
 msgid "cpscourrier_timeleft:${plus_sign}${d}"
 msgstr "D${plus_sign}${d}"
-
-#~ msgid "label_sender_type_voc"
-#~ msgstr "Sender type"
