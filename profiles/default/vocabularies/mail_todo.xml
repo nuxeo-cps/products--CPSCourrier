@@ -5,7 +5,7 @@
  <property name="description"></property>
  <property name="acl_write_roles">Manager</property>
  <item key="" msgid="label_all">All</item>
- <item key="handle" msgid="cpscourrier_to_handle">To Handle</item>
+ <item key="received" msgid="cpscourrier_to_handle">To Handle</item>
  <item key="process" msgid="cpscourrier_to_process">To Process</item>
  <item key="watch" msgid="cpscourrier_to_watch">To Watch</item>
 </object>
