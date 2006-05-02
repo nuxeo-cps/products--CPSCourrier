@@ -27,9 +27,9 @@ from Products.CMFCore.utils import getToolByName
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
-from Products.CPSSchemas.BasicWidgets import CPSSelectWidget
+from Products.CPSSchemas.BasicWidgets import CPSMultiSelectWidget
 
-class CPSMailTopicsWidget(CPSSelectWidget):
+class CPSMailTopicsWidget(CPSMultiSelectWidget):
     """Aggregate default topics from mailbox together with stored ones.
 
     Parent's field holding topics must have the same id as the current object's
@@ -90,6 +90,9 @@ class CPSMailTopicsWidget(CPSSelectWidget):
         """render in mode from datastructure.
 
         Highlights topics that don't come from the mailbox."""
+        if mode not in ['edit', 'create']:
+            return CPSMultiSelectWidget.render(self, mode, datastructure, **kw)
+
         topics = datastructure[self.getWidgetId()]
         parent_topics = self.getParentTopics(datastructure)
         if self.translated:
