@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-05-01 16:34default\n"
+"POT-Creation-Date: 2006-05-02 14:37default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -309,6 +309,9 @@ msgstr "Mailboxes"
 
 msgid "mail_templates_root_title"
 msgstr "Template Replies"
+
+msgid "cpscourrier_creator_label"
+msgstr "Creator"
 
 #
 # Layout labels

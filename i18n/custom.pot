@@ -64,6 +64,9 @@ msgstr ""
 # Layout labels
 #
 
+msgid "cpscourrier_creator_label"
+msgstr ""
+
 msgid "cpscourrier_object_label"
 msgstr ""
 

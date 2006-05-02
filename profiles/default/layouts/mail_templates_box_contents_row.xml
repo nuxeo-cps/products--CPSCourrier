@@ -83,6 +83,19 @@ Differences are outlined by (search for 'diff')
   <property name="is_i18n">True</property>
   <property name="sortable" type="string">template_usage</property>
  </widget>
+
+<widget name="Creator" meta_type="Directory Entry Widget">
+ <property name="fields">
+  <element value="Creator"/>
+ </property>
+ <property name="label">cpscourrier_creator_label</property>
+ <property name="is_i18n">True</property>
+ <property name="readonly_layout_modes"/>
+ <property name="hidden_layout_modes"/>
+ <property name="hidden_readonly_layout_modes"/>
+ <property name="directory">members</property>
+</widget>
+
  <table>
   <row>
    <cell name="Checkbox"/>
@@ -94,10 +107,7 @@ Differences are outlined by (search for 'diff')
    <cell name="Title"/>
   </row>
   <row>
-   <cell name="From"/>
-  </row>
-  <row>
-   <cell name="To"/>
+    <cell name="Creator"/>
   </row>
   <row>
    <cell name="Date"/>
