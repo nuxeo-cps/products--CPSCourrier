@@ -19,5 +19,13 @@
      visible="True">
    <permission>View</permission>
   </action>
+
+  <action title="action_delete" action_id="delete"
+	  category="cpscourrier_templates_batch"
+	  condition_expr="member"
+	  url_expr="string:delete"
+	  visible="True">
+   <permission>Delete objects</permission>
+  </action>
  </action-provider>
 </object>
