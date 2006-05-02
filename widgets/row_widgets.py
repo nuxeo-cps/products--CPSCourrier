@@ -336,8 +336,8 @@ class CPSIconBooleanWidget(CPSBooleanWidget):
 
         dm = datastructure.getDataModel()
         value = dm[self.fields[0]]
-        if value == 'None':
-            value = False
+        if isinstance(value, str):
+            value = bool(int(value))
         else:
             value = bool(value)
         datastructure[self.getWidgetId()] = value
