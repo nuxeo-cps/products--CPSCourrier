@@ -1,4 +1,44 @@
 *******************************************
+** CPSCourrier V0.10.0 [R1 build 2006/05/02-16:48 by gracinet]
+** SVN URL: http://svn/pub/CPSCourrier/trunk Revision: 45182
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- A new view 'folder_localroles.html' to leverage tabular directory widgets
+- Template replies
+- Made it possible to edit the subject list in view mode
+- Added the "sender_type" and "smtp_headers" in mail metadata screen
+- Managers column in display of mailbox groups contents
+Bug fixes:
+~~~~~~~~~~
+- Cookie invalidation is smarter (Cf doc/developer/filter_widgets.txt)
+- Various bugfixes on outgoing_mail_wf access control
+- the stack for outgoing mails is no longer lost on checkout/checkin
+- batching system could not fit with search-type views
+- re-using a reply used to need the user to have write perms on reused reply
+- incoming mails cannot get created nor modified except by Managers
+- mailboxes contents now use a catalog search
+- localrole form fixes
+- 'move-down' button was displayed on roadmap if there was no lower level
+- search users batching didn't work for roadmap
+- roadmap: clicking 'save modifications' while some checkboxes are on used to
+  remove corresponding elt
+- icons representing user/group in roadmap
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Changed 'from' to 'mail_from' and 'to' to 'mail_to' in mail_common schema
+- Catalog Tabular Widget can build queries with ranges.
+- Int Filter Widget can set a range.
+- Factorization of Five views that expose search forms&results
+- No need to put an Int Filter Widget to grab batching page from request anymore
+- Untied local roles from the ones in workspaces. Followed convention suggested 
+  in #1072
+- tabular widgets understand 'folder_prefix' filter
+- dev utility: external method to inject sample content
+
+*******************************************
 ** CPSCourrier V0.9.1 [R1 build 2006/04/10-18:22 by gracinet]
 ** SVN URL: http://svn/pub/CPSCourrier/trunk Revision: 35080
 Requires:
