@@ -69,3 +69,12 @@ def initialize(registrar):
         'CPSCourrier',
         EXTENSION,
         for_=ICPSSite)
+
+    profile_registry.registerProfile(
+        'subscriptions',
+        'CPS Courrier Subscriptions',
+        "Add-on configuration for CPSSubscriptions",
+        'profiles/subscriptions',
+        'CPSCourrier',
+        EXTENSION,
+        for_=ICPSSite)
