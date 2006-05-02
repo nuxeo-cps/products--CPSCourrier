@@ -11,5 +11,6 @@
     <property name="default_expr">string:reverse</property>
   </field>
   <field name="filter_Subject" meta_type="CPS String Field" />
+  <field name="filter_todo" meta_type="CPS String Field" />
 </object>
 
