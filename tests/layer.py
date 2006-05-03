@@ -238,6 +238,7 @@ class CourrierFunctionalTestCase(CPSTestCase):
         mail_id = self.wftool.invokeFactoryFor(self.mb,
                                                portal_type,
                                                mail_id,
+                                               initial_transition='create'
                                                )
 
         mail = container[mail_id]
