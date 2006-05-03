@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- Non global Manager couldn't modify attached file
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

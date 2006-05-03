@@ -41,6 +41,9 @@ ModuleSecurityInfo(wf_scripts_module).declarePublic('forward_mail')
 ModuleSecurityInfo(wf_scripts_module).declarePublic('send_reply')
 ModuleSecurityInfo(wf_scripts_module).declarePublic('compute_reply_body')
 
+utils_module = 'Products.CPSCourrier.utils'
+ModuleSecurityInfo(utils_module).declarePublic('hasFlexibleFields')
+
 # Stack API
 ModuleSecurityInfo(wf_scripts_module).declarePublic('init_stack_with_user')
 
