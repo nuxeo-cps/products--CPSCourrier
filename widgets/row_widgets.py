@@ -142,6 +142,18 @@ InitializeClass(CPSReviewStateStringWidget)
 
 widgetRegistry.register(CPSReviewStateStringWidget)
 
+## XXX This should be part of CPSDefault std js libraries
+# check status after current js refactorings
+# As is, the script will be defined for each bloody widget calling it !
+JS_OPENER = """function link_popup(url, name) {
+       str_window_features = 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=1,dependent=1,width=%d,height=%d'
+       popup = window.open(url, name, str_window_features);
+       if (!popup.opener) {
+         popup.opener = window;
+       }
+       return false;
+     }
+"""
 
 class CPSQualifiedLinkWidget(CPSWidget):
     """widget that makes a single <a> tag out of three informations.
@@ -158,11 +170,20 @@ class CPSQualifiedLinkWidget(CPSWidget):
     _properties = CPSWidget._properties + (
     {'id': 'target', 'type': 'string', 'mode': 'w',
      'label': 'Target attribute of <a> element'},
+    {'id': 'popup', 'type': 'boolean', 'mode': 'w',
+     'label': 'Should the link open a popup?'},
+    {'id': 'popup_width', 'type': 'int', 'mode': 'w',
+     'label': 'Width of popup window'},
+    {'id': 'popup_height', 'type': 'int', 'mode': 'w',
+     'label': 'Height of popup window'},
     {'id': 'is_display_i18n', 'type': 'boolean', 'mode': 'w',
      'label': 'Should the display of values be translated?'},)
 
     is_display_i18n = False
     target = ''
+    popup = False
+    popup_width = 800
+    popup_height = 600
 
     def prepare(self, datastructure, **kw):
         """Prepare datastructure from datamodel."""
@@ -200,8 +221,19 @@ class CPSQualifiedLinkWidget(CPSWidget):
                 params[key] = xlate(params[key], cpsmcat)
         if self.target:
             params['target'] = self.target
-        return renderHtmlTag('a', **params)
 
+        if self.popup:
+            script = renderHtmlTag('script', type='text/javascript',
+                                     contents=JS_OPENER % (self.popup_width,
+                                                           self.popup_height,))
+            onclick = "return link_popup('%s', 'roles')" % params['href']
+            params['onClick'] = onclick
+
+        a_tag = renderHtmlTag('a', **params)
+
+        if self.popup:
+            return script + a_tag
+        return a_tag
 
 InitializeClass(CPSQualifiedLinkWidget)
 

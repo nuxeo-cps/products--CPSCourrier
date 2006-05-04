@@ -3,7 +3,7 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- Qualified link widgets can make popups
 Bug fixes:
 ~~~~~~~~~~
 - Non global Manager couldn't modify attached file
