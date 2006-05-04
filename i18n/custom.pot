@@ -568,6 +568,16 @@ msgid "psm_cpscourrier_no_action_performed_for"
 msgstr ""
 
 #
+# Subscriptions
+#
+
+msgid "label_workflow_mail_confirm"
+msgstr ""
+
+msgid "label_workflow_discard"
+msgstr ""
+
+#
 # Misc
 #
 
@@ -576,4 +586,5 @@ msgstr ""
 
 msgid "cpscourrier_timeleft:${plus_sign}${d}"
 msgstr ""
+
 

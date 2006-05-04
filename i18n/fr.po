@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-05-02 14:37default\n"
+"POT-Creation-Date: 2006-05-04 22:17default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -820,6 +820,12 @@ msgstr "Réponse envoyée"
 
 msgid "psm_cpscourrier_no_action_performed_for"
 msgstr "Les courriers suivants n'ont pas été affectés par l'opération&nbsp;: "
+
+msgid "label_workflow_mail_confirm"
+msgstr "Réception et confirmation"
+
+msgid  "label_workflow_discard"
+msgstr "Mise au rebut"
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr "Le ${d}/${m}/${y}, ${name} a écrit : "

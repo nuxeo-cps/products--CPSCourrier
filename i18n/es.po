@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-05-02 14:37default\n"
+"POT-Creation-Date: 2006-05-04 22:17default\n"
 "PO-Revision-Date: 2006-04-12 15:41+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -312,7 +312,7 @@ msgstr "Template Replies"
 
 #, fuzzy
 msgid "cpscourrier_creator_label"
-msgstr "To"
+msgstr "Creator"
 
 #
 # Layout labels
@@ -850,6 +850,16 @@ msgstr "Respuesta enviada"
 
 msgid "psm_cpscourrier_no_action_performed_for"
 msgstr "Los siguientes documentos de correo no han sufrido cambios:"
+
+#, fuzzy
+msgid "label_workflow_mail_confirm"
+msgstr ""
+"By answering the mail document, you will create a new outgoing mail linked "
+"to the original incoming mail."
+
+#, fuzzy
+msgid "label_workflow_discard"
+msgstr "You are about to to put the mail to trash."
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr "El ${d}-${m}-${y}, ${name} escribió:"
