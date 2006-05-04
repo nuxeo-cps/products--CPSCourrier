@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<rolemap>
+  <permissions>
+    <permission name="Manage Subscriptions" acquire="True">
+      <role name="Manager"/>
+      <role name="WorkspaceManager"/>
+      <role name="ForumModerator"/>
+    </permission>
+  </permissions>
+</rolemap>

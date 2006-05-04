@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<roots>
+ <object name="mailboxes"/>
+ <object name="mail_templates"/>
+</roots>
