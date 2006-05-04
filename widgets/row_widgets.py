@@ -156,10 +156,13 @@ class CPSQualifiedLinkWidget(CPSWidget):
     field_types = ('CPS String Field', 'CPS String Field', 'CPS String Field')
 
     _properties = CPSWidget._properties + (
+    {'id': 'target', 'type': 'string', 'mode': 'w',
+     'label': 'Target attribute of <a> element'},
     {'id': 'is_display_i18n', 'type': 'boolean', 'mode': 'w',
      'label': 'Should the display of values be translated?'},)
 
     is_display_i18n = False
+    target = ''
 
     def prepare(self, datastructure, **kw):
         """Prepare datastructure from datamodel."""
@@ -195,6 +198,8 @@ class CPSQualifiedLinkWidget(CPSWidget):
             cpsmcat = getToolByName(self, 'translation_service')
             for key in ['title', 'contents']:
                 params[key] = xlate(params[key], cpsmcat)
+        if self.target:
+            params['target'] = self.target
         return renderHtmlTag('a', **params)
 
 
