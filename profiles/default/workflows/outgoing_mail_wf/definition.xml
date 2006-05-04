@@ -140,6 +140,7 @@
   <exit-transition transition_id="manage_delegatees"/>
   <exit-transition transition_id="move_down_delegatees"/>
   <exit-transition transition_id="validate"/>
+  <exit-transition transition_id="send"/>
   <permission-map name="Modify portal content"
                   acquired="False">
    <permission-role>Manager</permission-role>

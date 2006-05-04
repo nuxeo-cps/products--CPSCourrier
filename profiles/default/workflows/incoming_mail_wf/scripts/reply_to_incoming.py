@@ -7,6 +7,11 @@
 ##parameters=state_change
 ##title=
 ##
+if state_change.kwargs.get('no_reply_script', False):
+    # this is useful for the batch transition machinery that calls the wf
+    # script manually
+    return
+
 from Products.CPSCourrier.workflows.scripts import reply_to_incoming
 base_reply_rpath = state_change.kwargs.get('base_reply_rpath', '')
 outgoing_proxy = reply_to_incoming(state_change.object,

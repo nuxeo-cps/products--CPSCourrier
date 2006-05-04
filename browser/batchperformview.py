@@ -23,6 +23,7 @@ from Acquisition import aq_inner, aq_parent
 from Products.CMFCore.utils import getToolByName
 from Products.CPSSkins.cpsskins_utils import (
     serializeForCookie, unserializeFromCookie)
+from Products.CPSCourrier.workflows.scripts import reply_to_incoming
 
 from reuseanswerview import ReuseAnswerView
 
@@ -222,16 +223,33 @@ class BatchPerformView(ReuseAnswerView):
 
         kw = {
            'comment': form.get('comments', ''),
-           'base_reply_rpath': form.get('base_reply_rpath', ''),
         }
-        failed = []
-        for rpath in self.rpaths:
-            proxy = portal.unrestrictedTraverse(rpath)
+
+        if transition == 'answer':
+            # special case transition answer is a 2 steps transitions: first on
+            # the incoming docs, then send the replies. In order to do so, we
+            # will trigger the the reply_to_incoming wf script manually to
+            # collect the replies of successful answers
+            kw['no_reply_script'] = True
+
+        failed = set()
+        proxies = [portal.unrestrictedTraverse(rpath) for rpath in self.rpaths]
+        for proxy in proxies:
             wf = wftool.getWorkflowsFor(proxy)[0]
             if wf.isActionSupported(proxy, transition):
                 wftool.doActionFor(proxy, transition, **kw)
             else:
-                failed.append(proxy.Title())
+                failed.add(proxy)
+
+        if transition == 'answer':
+            # step 2 creating the replies and triggering the send transition on
+            # them
+            replies = []
+            base_rpath = form.get('base_reply_rpath', '')
+            replies = [reply_to_incoming(p, base_rpath) for p in proxies
+                                                        if p not in failed]
+            for reply in replies:
+                wftool.doActionFor(reply, 'send', comment=kw['comment'])
 
         # this is the end of the batch session: clean the cookies
         self._expireCookies()
@@ -244,7 +262,7 @@ class BatchPerformView(ReuseAnswerView):
             # display time for psms
             psm = mcat("psm_cpscourrier_no_action_performed_for")
             psm = psm.encode('iso-8859-15')
-            psm += ', '.join(failed)
+            psm += ', '.join(proxy.Title() for proxy in failed)
 
         url = "%s?%s" % (self.context.absolute_url(),
                          urlencode({'portal_status_message': psm}))
