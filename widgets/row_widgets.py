@@ -36,6 +36,13 @@ from Products.CPSSchemas.BasicWidgets import (CPSStringWidget,
 
 logger = logging.getLogger('CPSCourrier.widgets.row_widgets')
 
+def xlate(s, cpsmcat):
+    """Does a translation."""
+    if not s: # no need to waste time
+        return s
+    return cpsmcat(s).encode('iso-8859-15')
+
+
 class CPSTypeIconWidget(CPSWidget):
     """widget showing the icon associated to the object's portal_type. """
     meta_type = 'Type Icon Widget'
@@ -148,6 +155,12 @@ class CPSQualifiedLinkWidget(CPSWidget):
 
     field_types = ('CPS String Field', 'CPS String Field', 'CPS String Field')
 
+    _properties = CPSWidget._properties + (
+    {'id': 'is_display_i18n', 'type': 'boolean', 'mode': 'w',
+     'label': 'Should the display of values be translated?'},)
+
+    is_display_i18n = False
+
     def prepare(self, datastructure, **kw):
         """Prepare datastructure from datamodel."""
 
@@ -178,6 +191,10 @@ class CPSQualifiedLinkWidget(CPSWidget):
         w_id = self.getWidgetId()
         params = dict((suffix, datastructure['%s_%s' % (w_id, suffix)])
                        for suffix in ('href', 'title', 'contents',))
+        if self.is_display_i18n:
+            cpsmcat = getToolByName(self, 'translation_service')
+            for key in ['title', 'contents']:
+                params[key] = xlate(params[key], cpsmcat)
         return renderHtmlTag('a', **params)
 
 
