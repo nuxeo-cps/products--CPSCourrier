@@ -78,5 +78,9 @@ Supervisor can do what LocalManager can except change perms-->
       <role name="Contributor"/>
       <role name="Owner"/>
     </permission>
+    <permission name="Manage Subscriptions" acquire="True">
+      <role name="Manager"/>
+      <role name="LocalManager"/>
+    </permission>
   </permissions>
 </rolemap>
