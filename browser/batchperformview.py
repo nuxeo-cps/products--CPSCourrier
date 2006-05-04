@@ -240,8 +240,8 @@ class BatchPerformView(ReuseAnswerView):
         psm = "psm_status_changed"
         mcat = getToolByName(self.context, 'translation_service')
         if failed:
-            # translating psm here because no interpolation can be done at display
-            # time for psms
+            # translating psm here because no interpolation can be done at
+            # display time for psms
             psm = mcat("psm_cpscourrier_no_action_performed_for")
             psm = psm.encode('iso-8859-15')
             psm += ', '.join(failed)
