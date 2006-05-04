@@ -15,7 +15,7 @@ elif target_mailbox:
     psm = 'psm_cpscourrier_mail_forwarded'
     workflow_action = 'forward_move'
     kw['dest_container'] = target_mailbox
-    kw['initial_transition'] = 'create'
+    kw['initial_transition'] = 'create_forward'
 
 elif target_emailaddress:
     psm = 'psm_cpscourrier_mail_forwarded'

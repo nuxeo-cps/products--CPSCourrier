@@ -242,9 +242,18 @@
    <guard-role>Manager</guard-role>
   </guard>
   <transition-behavior behavior_id="initial-create"/>
-  <transition-behavior behavior_id="initial-clone"/>
   <transition-behavior behavior_id="workflow-reset"/>
   <workflow-reset-on-workflow-variable variable_id="Pilots"/>
+ </transition>
+ <transition transition_id="create_forward" title=""
+             new_state="received" trigger="USER"
+             before_script="" after_script="">
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>Member</guard-role>
+   <!-- this is required to allow users to forward mails in all mailboxes -->
+  </guard>
+  <transition-behavior behavior_id="initial-clone"/>
  </transition>
  <transition transition_id="delete" title="" new_state=""
              trigger="USER" before_script="" after_script="">
@@ -313,7 +322,7 @@
   </guard>
   <transition-behavior behavior_id="delete"/>
   <transition-behavior behavior_id="clone"/>
-  <clone-allowed-transition transition_id="create"/>
+  <clone-allowed-transition transition_id="create_forward"/>
  </transition>
  <transition transition_id="handle" title=""
              new_state="handled" trigger="USER"

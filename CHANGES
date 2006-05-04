@@ -7,6 +7,8 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - Non global Manager couldn't modify attached file
+- allow internal forward (based on clone wf behavior) to work again by using a
+  dedicated create_forward transition
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
