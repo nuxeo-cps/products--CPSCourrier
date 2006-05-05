@@ -268,4 +268,28 @@ class BatchPerformView(ReuseAnswerView):
                          urlencode({'portal_status_message': psm}))
         self.request.RESPONSE.redirect(url)
 
+    def replyPreview(self):
+        """Render a textual preview of the mail that will be send"""
+        utool = getToolByName(self.context, 'portal_url')
+        portal = utool.getPortalObject()
+        tstool = getToolByName(portal, 'translation_service')
+        vtool = getToolByName(portal, 'portal_vocabularies')
+        mtool = getToolByName(portal, 'portal_membership')
+        encoding = portal.default_charset
+        mcat = lambda label: tstool(label).encode(encoding)
+        proxy = portal.unrestrictedTraverse(self.request.form.get('rpath'))
+        doc = proxy.getContent()
+        body = doc['content']
+        foa = vtool.form_of_address.getMsgid(doc['form_of_address'])
+        if foa:
+            foa = mcat(foa)
+        else:
+            foa = vtool.form_of_address[doc['form_of_address']]
+        user = mtool.getAuthenticatedMember()
+        signature = mtool.getFullnameFromId(str(user))
+        body += '\n\n%s\n\n-- \n%s' % (foa , signature)
+        fake_original_msg = mcat('cpscourrier_fake_original_msg')
+        return "%s\n\n%s" % (body,  fake_original_msg)
+
+
 

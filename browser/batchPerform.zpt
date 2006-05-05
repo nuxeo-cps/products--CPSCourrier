@@ -76,6 +76,9 @@
               <!--
               simple confirmation form for any other transition
               -->
+              <pre tal:condition="request/rpath|nothing"
+                   tal:content="view/replyPreview">
+              </pre>
               <metal:transition_form
                 use-macro="here/content_lib_transition_form/macros/transition_form">
                 <metal:block fill-slot="button">

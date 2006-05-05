@@ -587,4 +587,6 @@ msgstr ""
 msgid "cpscourrier_timeleft:${plus_sign}${d}"
 msgstr ""
 
+msgid "cpscourrier_fake_original_msg"
+msgstr ""
 

@@ -81,8 +81,7 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
 
     Title = incoming_doc.Title()
     title_lower = Title.lower()
-    if not (title_lower.startswith('re:') or
-            title_lower.startswith('ref:')):
+    if not (title_lower.startswith('re:') or title_lower.startswith('ref:')):
         Title = 'Re: %s' % Title
 
     data = {
@@ -375,7 +374,11 @@ def compute_reply_body(proxy):
     mcat = lambda label: tstool(label).encode(encoding)
     doc = proxy.getContent()
     body = doc['content']
-    foa = mcat(vtool.form_of_address[doc['form_of_address']])
+    foa = vtool.form_of_address.getMsgid(doc['form_of_address'])
+    if foa:
+        foa = mcat(foa)
+    else:
+        foa = vtool.form_of_address[doc['form_of_address']]
     body += '\n\n%s\n\n-- \n%s' % (foa , doc['signature'])
 
     # get the original content for quoting

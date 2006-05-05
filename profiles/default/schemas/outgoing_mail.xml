@@ -6,7 +6,9 @@
     <property name="default_expr">
       python:portal.portal_membership.getFullnameFromId(str(user))</property>
   </field>
-  <field name="form_of_address" meta_type="CPS String Field"/>
+  <field name="form_of_address" meta_type="CPS String Field">
+    <property name="default_expr">string:regards</property>
+  </field>
   <field name="issue_date" meta_type="CPS DateTime Field"/>
   <field name="is_template" meta_type="CPS Boolean Field"/>
   <field name="template_usage" meta_type="CPS Int Field"/>

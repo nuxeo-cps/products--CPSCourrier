@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-05-04 22:17default\n"
+"POT-Creation-Date: 2006-05-05 11:15default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -39,19 +39,19 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" condition="view/canMoveDown" />
-#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
+#.   <input condition="view/canMoveDown" type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
+#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
 msgstr ""
 
-#.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
+#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_update_stackelts"
 msgstr ""
 
-#.   <input name="answer_submit" type="submit" class="standalone" value="button_validate" />
-#.   <input name="submit_add" type="submit" class="context" value="button_validate" />
+#.   <input type="submit" name="answer_submit" value="button_validate" class="standalone" />
+#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
 #: from ../browser/batchPerform.zpt ../browser/reuseAnswer.zpt
 #: ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
@@ -74,7 +74,7 @@ msgstr ""
 msgid "cpscourrier_choose_insertion_level"
 msgstr ""
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr ""
@@ -812,4 +812,7 @@ msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr ""
 
 msgid "cpscourrier_timeleft:${plus_sign}${d}"
+msgstr ""
+
+msgid "cpscourrier_fake_original_msg"
 msgstr ""
