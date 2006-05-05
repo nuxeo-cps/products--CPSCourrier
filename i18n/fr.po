@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-05-05 11:15default\n"
+"POT-Creation-Date: 2006-05-05 17:16default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -744,6 +744,13 @@ msgstr "Répondre par lot"
 
 msgid "help_batch_workflow_answer"
 msgstr "Vous vous apprêtez à créer une réponse pour ce lot de courriers"
+
+msgid "heading_batch_workflow_delete"
+msgstr "Supprimer par lot"
+
+msgid "help_batch_workflow_delete"
+msgstr ""
+"Vous vous apprêtez à supprimer les courriers suivants&nbsp;: "
 
 msgid "received"
 msgstr "reçu"

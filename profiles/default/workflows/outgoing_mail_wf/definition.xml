@@ -425,7 +425,6 @@
   </guard>
   <transition-behavior behavior_id="clone"/>
   <clone-allowed-transition transition_id="submit"/>
-  <clone-allowed-transition transition_id="publish"/>
  </transition>
  <variable variable_id="Pilots" for_catalog="False"
            for_status="True" update_always="False">

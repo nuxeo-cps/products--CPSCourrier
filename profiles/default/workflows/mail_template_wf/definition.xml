@@ -9,7 +9,7 @@
  <permission>WebDAV Unlock items</permission>
  <state state_id="pending" title="Waiting for reviewer">
   <exit-transition transition_id="accept"/>
-  <exit-transition transition_id="reject"/>
+  <exit-transition transition_id="delete"/>
   <permission-map name="Modify portal content"
                   acquired="False">
    <permission-role>SectionManager</permission-role>
@@ -34,6 +34,7 @@
  </state>
  <state state_id="published" title="Public">
   <exit-transition transition_id="unpublish"/>
+  <exit-transition transition_id="delete"/>
   <exit-transition transition_id="cut_copy_paste"/>
   <exit-transition transition_id="sub_publishing"/>
   <permission-map name="Modify portal content"
@@ -70,8 +71,8 @@
  </transition>
  <!-- privileged users can create directly -->
  <transition transition_id="create" title="Initial creation"
-	     new_state="published" trigger="USER"
-	     before_script="" after_script="">
+             new_state="pending" trigger="USER"
+             before_script="" after_script="">
 
    <guard>
      <guard-role>Manager</guard-role>
@@ -80,9 +81,6 @@
    </guard>
    <transition-behavior behavior_id="initial-create"/>
  </transition>
- <!-- and publish directly
-      Note that this is not used in current implementation
-   -->
  <transition transition_id="publish"
              title="Member publishes directly"
              new_state="published" trigger="USER"
@@ -94,21 +92,8 @@
    <guard-role>SectionManager</guard-role>
    <guard-role>SectionReviewer</guard-role>
   </guard>
-  <transition-behavior behavior_id="initial-clone"/>
   <transition-behavior behavior_id="freeze"/>
   <transition-behavior behavior_id="merge"/>
- </transition>
- <transition transition_id="reject"
-             title="Reviewer rejects publishing"
-             new_state="" trigger="USER" before_script=""
-             after_script="">
-  <action url="%(content_url)s/content_reject_form"
-          category="workflow">action_reject</action>
-  <guard>
-   <guard-role>Manager</guard-role>
-   <guard-role>SectionManager</guard-role>
-  </guard>
-  <transition-behavior behavior_id="delete"/>
  </transition>
  <transition transition_id="sub_publishing"
              title="Allow publishing of subdocuments"
@@ -139,10 +124,22 @@
  </transition>
  <transition transition_id="unpublish"
              title="Reviewer removes content from publication"
-             new_state="" trigger="USER" before_script=""
+             new_state="pending" trigger="USER" before_script=""
              after_script="">
   <action url="%(content_url)s/content_unpublish_form"
           category="workflow">action_un_publish</action>
+  <guard>
+   <guard-role>Manager</guard-role>
+   <guard-role>SectionReviewer</guard-role>
+   <guard-role>SectionManager</guard-role>
+   </guard>
+ </transition>
+ <transition transition_id="delete"
+             title="Reviewer deletes the proxy"
+             new_state="pending" trigger="USER" before_script=""
+             after_script="">
+  <action url="%(content_url)s/workflow_transition_form?transition=delete"
+          category="workflow">action_delete</action>
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>SectionReviewer</guard-role>

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-05-05 11:15default\n"
+"POT-Creation-Date: 2006-05-05 17:16default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -791,6 +791,12 @@ msgid "help_batch_workflow_answer"
 msgstr ""
 "By answering the mail documents, you will create a new linked outgoing mail "
 "for each selected incoming mail document."
+
+msgid "heading_batch_workflow_delete"
+msgstr "Delete a set of mail documents"
+
+msgid "help_batch_workflow_delete"
+msgstr "You are about to delete the following  mail documents: "
 
 msgid "received"
 msgstr "received"

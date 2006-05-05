@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-05-05 11:15default\n"
+"POT-Creation-Date: 2006-05-05 17:16default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -719,6 +719,12 @@ msgid "heading_batch_workflow_answer"
 msgstr ""
 
 msgid "help_batch_workflow_answer"
+msgstr ""
+
+msgid "heading_batch_workflow_delete"
+msgstr ""
+
+msgid "help_batch_workflow_delete"
 msgstr ""
 
 #

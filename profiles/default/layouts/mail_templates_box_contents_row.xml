@@ -10,10 +10,7 @@ Differences are outlined by (search for 'diff')
 
 <!--diff: widget taken from mail_dashboard_row-->
  <widget name="Checkbox" meta_type="Row Boolean Widget">
-  <property name="fields">
-   <element value="rpath"/>
-  </property>
-  <property name="input_name">rpath</property>
+  <property name="input_name">ids</property>
   <property name="input_type">checkbox</property>
  </widget>
 

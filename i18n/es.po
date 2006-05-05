@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-05-05 11:15default\n"
+"POT-Creation-Date: 2006-05-05 17:16default\n"
 "PO-Revision-Date: 2006-04-12 15:41+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -772,6 +772,16 @@ msgstr ""
 "Al responder a los documentos, creará un nuevo enlace de correo saliente "
 "para cada documento entrante seleccionado. "
 
+#, fuzzy
+msgid "heading_batch_workflow_delete"
+msgstr "Handle a set of incoming mail documents"
+
+#, fuzzy
+msgid "help_batch_workflow_delete"
+msgstr ""
+"By choosing to handle the selected mail documents you will be in charge of "
+"the future processing of the mails (answering, delegating, deleting, ... )."
+
 #
 # Workflow states
 #
@@ -868,4 +878,4 @@ msgstr "D${plus_sign}${d}"
 
 #, fuzzy
 msgid "cpscourrier_fake_original_msg"
-msgstr "Best regards, "
+msgstr "-------- Original message ---------"

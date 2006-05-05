@@ -490,6 +490,12 @@ msgstr ""
 msgid "help_batch_workflow_answer"
 msgstr ""
 
+msgid "heading_batch_workflow_delete"
+msgstr ""
+
+msgid "help_batch_workflow_delete"
+msgstr ""
+
 #
 # Workflow states
 #
