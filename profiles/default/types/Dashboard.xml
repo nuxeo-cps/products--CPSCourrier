@@ -52,4 +52,27 @@
   <permission value="Modify portal content"/>
  </action>
 
+ <!-- batch actions -->
+ <action title="action_handle" action_id="handle"
+   category="folder_cpscourrier_batch"
+    condition_expr="member"
+    url_expr="string:handle"
+    visible="True">
+  <permission>View</permission>
+ </action>
+ <action title="action_discard" action_id="discard"
+   category="folder_cpscourrier_batch"
+    condition_expr="member"
+    url_expr="string:discard"
+    visible="True">
+  <permission>View</permission>
+ </action>
+ <action title="action_answer" action_id="answer"
+   category="folder_cpscourrier_batch"
+    condition_expr="member"
+    url_expr="string:answer"
+    visible="True">
+  <permission>View</permission>
+ </action>
+
 </object>

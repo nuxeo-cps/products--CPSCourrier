@@ -72,4 +72,14 @@
     visible="True">
   <permission value="Change permissions"/>
  </action>
+
+ <!-- batch actions -->
+ <action title="action_delete" action_id="delete"
+         category="folder_cpscourrier_batch"
+         condition_expr="member"
+         url_expr="string:delete"
+         visible="True">
+  <permission>Delete objects</permission>
+ </action>
+
 </object>

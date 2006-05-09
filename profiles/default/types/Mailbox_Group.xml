@@ -63,4 +63,24 @@
     visible="True">
   <permission value="Change permissions"/>
  </action>
+
+ <!-- batch actions -->
+ <action title="button_cut" action_id="cut" category="folder_cpscourrier_batch"
+   url_expr="string:cut" visible="True">
+  <permission>Delete objects</permission>
+ </action>
+ <action title="button_copy" action_id="copy" category="folder_cpscourrier_batch"
+   url_expr="string:copy" visible="False">
+  <permission>Add portal content</permission>
+ </action>
+ <action title="button_paste" action_id="paste"
+   category="folder_cpscourrier_batch"
+   condition_expr="python:object.cb_dataValid()" url_expr="string:paste"
+   visible="True">
+  <permission>Add portal content</permission>
+ </action>
+
+
+
+
 </object>
