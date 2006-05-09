@@ -383,15 +383,6 @@ class TabularWidget(CPSIntFilterWidget):
         row_dss, current_page, nb_pages = self.listRowDataStructures(
             datastructure, row_layout, **kw)
 
-        # early return for empty results
-        if not nb_pages:
-            msg = self.empty_message
-            cpsmcat = getToolByName(self, 'translation_service')
-            if self.is_empty_message_i18n:
-                msg = cpsmcat(msg)
-            if isinstance(msg, unicode):
-                msg = msg.encode('iso-8859-15')
-            return msg
         layout_structures = None
 
         # rows rendering
@@ -420,8 +411,11 @@ class TabularWidget(CPSIntFilterWidget):
             raise RuntimeError("Unknown Render Method %s for widget type %s"
                                % (self.render_method, self.getId()))
 
-        layout_structure = layout_structures[0] # only one layout
-        columns = self.extractColumns(datastructure, layout_structure)
+        if layout_structures:
+            layout_structure = layout_structures[0] # only one layout
+            columns = self.extractColumns(datastructure, layout_structure)
+        else:
+            columns = ()
         actions = self.getActions(datastructure)
 
         if proxy is not None:
@@ -438,10 +432,11 @@ class TabularWidget(CPSIntFilterWidget):
                 view_name = self.REQUEST['URLPATH0'].split('/')[-1]
                 here_url += '/' + view_name
 
-        if nb_pages == 1:
+        if nb_pages <= 1:
             batching_info = None
         else:
             batching_info = self.getBatchingInfo(current_page, nb_pages)
         return meth(mode=mode, columns=columns,
                     rows=rendered_rows, actions=actions,
-                    here_url=here_url, batching_info=batching_info)
+                    here_url=here_url, batching_info=batching_info,
+                    empty_message=self.empty_message)
