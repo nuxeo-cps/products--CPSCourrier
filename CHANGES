@@ -4,6 +4,7 @@ Requires:
 New features:
 ~~~~~~~~~~~~~
 - Qualified link widgets can make popups
+- Support for copy/pasting
 Bug fixes:
 ~~~~~~~~~~
 - Non global Manager couldn't modify attached file
