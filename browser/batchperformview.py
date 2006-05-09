@@ -18,14 +18,19 @@
 # $Id$
 
 from urllib import urlencode
+from logging import getLogger
 
 from Acquisition import aq_inner, aq_parent
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.WorkflowCore import WorkflowException
+from Products.CPSCore.EventServiceTool import getPublicEventService
 from Products.CPSSkins.cpsskins_utils import (
     serializeForCookie, unserializeFromCookie)
 from Products.CPSCourrier.workflows.scripts import reply_to_incoming
 
 from reuseanswerview import ReuseAnswerView
+
+logger = getLogger('batchperformview')
 
 class BatchPerformView(ReuseAnswerView):
 
@@ -56,7 +61,7 @@ class BatchPerformView(ReuseAnswerView):
         if len(transitions) > 1:
             raise ValueError("Got more than one transition to perform")
         if transitions:
-            transition =  transitions[0][len(self.submit_button_prefix):]
+            transition = transitions[0][len(self.submit_button_prefix):]
 
         if 'answer_submit' in form:
             transition =  'answer'
@@ -134,7 +139,17 @@ class BatchPerformView(ReuseAnswerView):
 
         # cookies management
 
-        if rpaths is ():
+        # are we at the first call of the batch form or inside a multi screen
+        # session?
+        init_call = False
+        for key in form:
+            if key.startswith(self.submit_button_prefix):
+                init_call = True
+                break
+
+        if not rpaths and not init_call:
+            # nothing was provided in the request, we are probably in a multi
+            # screens session:
             # try to see if some rpaths where previously stored in cookies
             rpaths = self._readRpathsFromCookies()
         else:
@@ -142,7 +157,54 @@ class BatchPerformView(ReuseAnswerView):
             # cookies for later reuse
             self._storeRpathsInCookies(rpaths)
 
+        logger.debug('rpaths: %s' % (rpaths,))
         return rpaths
+
+    #
+    # Cut copy paste management
+    #
+
+    def _doRedirect(self, psm):
+        url = "%s?%s" % (self.context.absolute_url(),
+                         urlencode({'portal_status_message': psm}))
+        self.request.RESPONSE.redirect(url)
+        # return a flag that tells the template not to render the rest of the
+        # view since we don't need it
+        return 'do_redirect'
+
+    def _doCutCopyPaste(self):
+        """Special handling of cut/copy/paste actions
+
+        This are not actual transitions and require special treatment
+        """
+        if self.transition == 'paste':
+            if self.context.cb_dataValid:
+                cp = self.request['__cp']
+                try:
+                    result = self.context.manage_CPSpasteObjects(cp)
+                    for id in [ob['new_id'] for ob in result]:
+                        ob = getattr(self.context, id)
+                        evtool = getPublicEventService(self.context)
+                        evtool.notifyEvent('workflow_cut_copy_paste', ob, {})
+                    psm = 'psm_item(s)_pasted'
+                except WorkflowException:
+                    psm = 'psm_operation_not_allowed'
+            else:
+                psm = 'psm_copy_or_cut_at_least_one_document'
+        else:
+            # copy or cut
+            ids = [rpath.rsplit('/', 1)[1] for rpath in self.rpaths]
+            if ids:
+                if self.transition == 'cut':
+                    self.context.manage_CPScutObjects(ids, self.request)
+                    psm = 'psm_item(s)_cut'
+                if self.transition == 'copy':
+                    self.context.manage_CPScopyObjects(ids, self.request)
+                    psm = 'psm_item(s)_copied'
+            else:
+                psm = 'psm_select_at_least_one_document'
+
+        return self._doRedirect(psm)
 
     #
     # View API for the template
@@ -160,23 +222,23 @@ class BatchPerformView(ReuseAnswerView):
         # of the view instance
         self.rpaths = self._getMailRpaths()
 
-        if not self.rpaths:
-            psm = 'psm_select_at_least_one_item'
-            url = "%s?portal_status_message=%s" % (self.context.absolute_url(),
-                                                   psm)
-            self.request.RESPONSE.redirect(url)
-            return 'do_redirect'
-
         # guess what is the transition to be performed in the current session
         self.transition = self._getTransitionId()
         if not self.transition:
             raise ValueError('No transition specified')
 
+        if self.transition in ('cut', 'copy', 'paste'):
+            # special actions that are not handled by actual workflow
+            # transitions
+            return self._doCutCopyPaste()
+
+        if not self.rpaths:
+            return self._doRedirect('psm_select_at_least_one_item')
+
         trigger_transition = self.request.form.get('trigger_transition', None)
         if trigger_transition is not None:
             # handle the redirection and the psm
-            self.batchTriggerTransition(trigger_transition)
-            return 'do_redirect'
+            return self.batchTriggerTransition(trigger_transition)
 
     def getMailInfo(self):
         """Compute data related to the rpath"""
@@ -263,10 +325,7 @@ class BatchPerformView(ReuseAnswerView):
             psm = mcat("psm_cpscourrier_no_action_performed_for")
             psm = psm.encode('iso-8859-15')
             psm += ', '.join(proxy.Title() for proxy in failed)
-
-        url = "%s?%s" % (self.context.absolute_url(),
-                         urlencode({'portal_status_message': psm}))
-        self.request.RESPONSE.redirect(url)
+        return self._doRedirect(psm)
 
     def replyPreview(self):
         """Render a textual preview of the mail that will be send"""
