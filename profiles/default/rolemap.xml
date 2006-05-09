@@ -3,6 +3,8 @@
 
   <roles>
     <role name="Pilot"/>
+    <role name="LocalManager"/>
+    <role name="Supervisor"/>
   </roles>
 
 <!-- Generic setup bug: need to duplicate CPSDefault's permissions map -->
