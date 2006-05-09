@@ -21,6 +21,7 @@ from urllib import urlencode
 from logging import getLogger
 
 from Acquisition import aq_inner, aq_parent
+from OFS.CopySupport import CopyError
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CPSCore.EventServiceTool import getPublicEventService
@@ -30,7 +31,7 @@ from Products.CPSCourrier.workflows.scripts import reply_to_incoming
 
 from reuseanswerview import ReuseAnswerView
 
-logger = getLogger('batchperformview')
+logger = getLogger('CPSCourrier.browser.batchperformview')
 
 class BatchPerformView(ReuseAnswerView):
 
@@ -187,6 +188,8 @@ class BatchPerformView(ReuseAnswerView):
                         evtool = getPublicEventService(self.context)
                         evtool.notifyEvent('workflow_cut_copy_paste', ob, {})
                     psm = 'psm_item(s)_pasted'
+                except CopyError:
+                    psm = 'psm_copy_or_cut_at_least_one_document'
                 except WorkflowException:
                     psm = 'psm_operation_not_allowed'
             else:
