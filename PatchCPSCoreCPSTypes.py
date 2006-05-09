@@ -111,5 +111,36 @@ if True:
                 if aq_base(orig_container) is not aq_base(self):
                     notifyContainerModified(self)
 
+        # Do not move this import from here: causes import problems at
+        # initialization time because of weird dependencies
+        from Products.CPSWorkflow import transitions
+
+        # Insert the new pasted object within the workflow if the
+        # workflows are differents in between the orig and the dest.
+        for new_id in [x['new_id'] for x in result]:
+            ob = getattr(self, new_id)
+            if wftool.getInfoFor(ob, 'review_state') is None:
+                type_name = getattr(ob, 'portal_type', '')
+                inserted = False
+                for behavior in (transitions.TRANSITION_INITIAL_CREATE,
+                                 transitions.TRANSITION_INITIAL_PUBLISHING):
+                    if inserted:
+                        break
+                    crtrans = wftool.getInitialTransitions(
+                        self, type_name, behavior)
+                    for initial_transition in crtrans:
+                        initial_behavior = behavior
+                        try:
+                            wftool._insertWorkflowRecursive(
+                                ob, initial_transition, initial_behavior, {})
+                            inserted = True
+                            break
+                        except (WorkflowException, Unauthorized):
+                            # Let's try other transitions
+                            pass
+                if not inserted:
+                    raise WorkflowException(
+                        "You are not allowed to copy / paste here !")
+        return result
 
     TypeContainer.manage_CPSpasteObjects = manage_CPSpasteObjects
