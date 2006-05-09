@@ -6,7 +6,6 @@ Supervisor can do what LocalManager can except change perms-->
     <permission name="Add portal content" acquire="False">
       <role name="Manager"/>
       <role name="LocalManager"/>
-      <role name="Contributor"/>
       <role name="Supervisor"/>
     </permission>
     <permission name="Add portal folders" acquire="False">
@@ -27,7 +26,6 @@ Supervisor can do what LocalManager can except change perms-->
       <role name="Manager"/>
       <role name="LocalManager"/>
       <role name="Supervisor"/>
-      <role name="Contributor"/>
     </permission>
     <permission name="List folder contents" acquire="False">
       <role name="Manager"/>
