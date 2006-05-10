@@ -9,6 +9,7 @@ from zope.app.container.contained import ObjectMovedEvent
 from zope.app.container.contained import notifyContainerModified
 
 from Acquisition import aq_base, aq_inner, aq_parent
+from OFS.event import ObjectWillBeRemovedEvent
 from OFS import Moniker
 from OFS.CopySupport import CopyError, _cb_decode, sanity_check
 from Products.CPSCore.CPSTypes import TypeContainer
@@ -95,6 +96,11 @@ if True:
                 # this is a move operation: do not send IObjectRemovedEvent
                 orig_container = aq_parent(aq_inner(ob))
                 orig_container._delObject(orig_id, suppress_events=True)
+
+                # XXX: the following is necessary because of the wierd semantics
+                # of CPS notifyCompat
+                notify(ObjectWillBeRemovedEvent(ob, orig_container, orig_id))
+
                 ob = aq_base(ob)
                 id = self._get_id(orig_id)
                 result.append({'id':orig_id, 'new_id':id })
