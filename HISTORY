@@ -1,4 +1,23 @@
 *******************************************
+** CPSCourrier V0.11.0 [R1 build 2006/05/10-19:52 by ogrisel]
+** SVN URL: https://svn.nuxeo.org/pub/CPSCourrier/trunk Revision: 45426
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Qualified link widgets can make popups
+- Support for copy/pasting
+Bug fixes:
+~~~~~~~~~~
+- Non global Manager couldn't modify attached file
+- allow internal forward (based on clone wf behavior) to work again by using a
+  dedicated create_forward transition
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCourrier V0.10.0 [R1 build 2006/05/02-16:48 by gracinet]
 ** SVN URL: http://svn/pub/CPSCourrier/trunk Revision: 45182
 Requires:
