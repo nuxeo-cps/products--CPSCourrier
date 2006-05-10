@@ -34,10 +34,6 @@
               <form action="" method="post"
                 tal:define="res view/renderLayout; rendered res/rendered">
 
-                <!-- forward the transition id -->
-                <input type="hidden" value=""
-                  tal:attributes="name string:cpscourrier_batch_${transition}"/>
-
                 <h2 tal:condition="view/is_results"
                   i18n:translate="search_results">
                   Search results
@@ -88,8 +84,7 @@
                   <input type="hidden" name="trigger_transition"
                     tal:attributes="value transition" />
                   <input type="submit" class="standalone"
-                    tal:attributes="name string:cpscourrier_batch_${transition};
-                    value string:button_${transition}"
+                    tal:attributes="value string:button_${transition}"
                     i18n:attributes="value" />
                   <input type="button" class="context" onClick="history.back()"
                     value="button_cancel" i18n:attributes="value" />
