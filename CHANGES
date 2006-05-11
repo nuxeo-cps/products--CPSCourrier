@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- 'Subject' from the parent mailbox or mail doc is preselected in the reuse
+  reply search view
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
