@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <object name="mail_search_answers" meta_type="CPS Schema">
-  <field name="filter_Subject" meta_type="CPS String List Field" />
+  <field name="filter_Subject" meta_type="CPS String List Field">
+    <property name="default_expr">python:portal.REQUEST.PUBLISHED.context.getContent()['Subject']()</property>
+  </field>
   <field name="filter_type" meta_type="CPS String Field">
     <property name="default_expr">string:Outgoing Mail</property>
   </field>
