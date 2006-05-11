@@ -402,12 +402,20 @@ class CPSIntFilterWidget(RequestCookiesMixin, CPSIntWidget):
         # from cookie
         from_cookie = self.readCookie(wid)
         if from_cookie is not None:
-            datastructure[wid] = int(from_cookie)
+            try:
+                datastructure[wid] = int(from_cookie)
+            except ValueError:
+                # XXX OG: Ugly, see #1606
+                pass
 
         # from request form
         posted = self.REQUEST.form.get(widgetname(wid))
         if posted is not None:
-            datastructure[wid] = int(posted)
+            try:
+                datastructure[wid] = int(posted)
+            except ValueError:
+                # XXX OG: Ugly, see #1606
+                pass
 
 
 InitializeClass(CPSIntFilterWidget)
