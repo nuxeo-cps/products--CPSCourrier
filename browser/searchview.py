@@ -21,10 +21,8 @@ import logging
 
 from Products.Five.browser import BrowserView
 
-from Products.CMFCore.utils import getToolByName, _checkPermission
-from Products.CMFCore.permissions import AddPortalContent
+from Products.CMFCore.utils import getToolByName
 
-from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSSchemas.Widget import widgetname
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSSkins.cpsskins_utils import unserializeFromCookie
@@ -57,7 +55,6 @@ class SearchView(BrowserView):
             schema_id = layout_id
         mode = self.is_results and 'search_results' or 'edit'
         ltool = getToolByName(self.context, 'portal_layouts')
-        ob = {}
         # XXX the cookie stuff could be done by passing the right mapping here
         rendered, status, ds = ltool.renderLayout(
             layout_id=layout_id,
