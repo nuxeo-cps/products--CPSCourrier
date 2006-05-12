@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-05-05 17:16default\n"
+"POT-Creation-Date: 2006-05-12 16:26default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -89,6 +89,15 @@ msgstr "Transférer à une adresse email"
 msgid "cpscourrier_forward_to_mailbox"
 msgstr "Transférer à une boîte du portail"
 
+#
+# Layout labels
+#
+#.   <label for="group_selection">
+#.                     Please select a group</label>
+#: from ../skins/cps_courrier/cpscourrier_handle_form.pt
+msgid "cpscourrier_help_handle_select_group"
+msgstr "Prendre en charge au nom d'un groupe"
+
 #.   <h3>cpscourrier_response_preview_heading</h3>
 #: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
 msgid "cpscourrier_response_preview_heading"
@@ -148,7 +157,7 @@ msgid "cpscourrier_thread_caption"
 msgstr "Fil de discussion"
 
 #.   <label for="use_parent_roadmap">Use default
-#.                 roadmap</label>
+#.                   roadmap</label>
 #: from ../skins/cps_courrier/cpscourrier_handle_form.pt
 msgid "cpscourrier_use_default_roadmap"
 msgstr "Utiliser la feuille de route par défaut"
@@ -749,8 +758,7 @@ msgid "heading_batch_workflow_delete"
 msgstr "Supprimer par lot"
 
 msgid "help_batch_workflow_delete"
-msgstr ""
-"Vous vous apprêtez à supprimer les courriers suivants&nbsp;: "
+msgstr "Vous vous apprêtez à supprimer les courriers suivants&nbsp;: "
 
 msgid "received"
 msgstr "reçu"

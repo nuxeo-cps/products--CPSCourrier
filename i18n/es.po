@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-05-05 17:16default\n"
+"POT-Creation-Date: 2006-05-12 16:26default\n"
 "PO-Revision-Date: 2006-04-12 15:41+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -89,6 +89,16 @@ msgstr "Transferir a una cuenta de correo"
 msgid "cpscourrier_forward_to_mailbox"
 msgstr "Transferir a una caja del portal"
 
+#
+# Layout labels
+#
+#.   <label for="group_selection">
+#.                     Please select a group</label>
+#: from ../skins/cps_courrier/cpscourrier_handle_form.pt
+#, fuzzy
+msgid "cpscourrier_help_handle_select_group"
+msgstr "Search groups"
+
 #.   <h3>cpscourrier_response_preview_heading</h3>
 #: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
 msgid "cpscourrier_response_preview_heading"
@@ -150,7 +160,7 @@ msgid "cpscourrier_thread_caption"
 msgstr "Hilo de discusión"
 
 #.   <label for="use_parent_roadmap">Use default
-#.                 roadmap</label>
+#.                   roadmap</label>
 #: from ../skins/cps_courrier/cpscourrier_handle_form.pt
 msgid "cpscourrier_use_default_roadmap"
 msgstr "Utilice la hoja de ruta por defecto"
@@ -774,13 +784,11 @@ msgstr ""
 
 #, fuzzy
 msgid "heading_batch_workflow_delete"
-msgstr "Handle a set of incoming mail documents"
+msgstr "Delete a set of mail documents"
 
 #, fuzzy
 msgid "help_batch_workflow_delete"
-msgstr ""
-"By choosing to handle the selected mail documents you will be in charge of "
-"the future processing of the mails (answering, delegating, deleting, ... )."
+msgstr "You are about to delete the following  mail documents: "
 
 #
 # Workflow states

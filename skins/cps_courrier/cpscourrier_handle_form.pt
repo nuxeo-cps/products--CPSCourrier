@@ -27,15 +27,39 @@
 
         <metal:block
           use-macro="here/content_lib_transition_form/macros/transition_form">
+
+          <metal:block fill-slot="fields">
+            <metal:handle_params define-macro="handle_params">
+            <br/>
+            <dl tal:define="groups here/listMyGroupsIdAndTitle"
+              tal:condition="python:len(groups)>1">
+              <dt><label for="group_selection"
+                  i18n:translate="cpscourrier_help_handle_select_group">
+                  Please select a group</label>
+              </dt>
+              <dd>
+                <select name="group" id="group_selection">
+                  <option tal:repeat="group groups"
+                    tal:attributes="value python:group[0]"
+                    tal:content="python:group[1]">
+                  Group Title</option>
+                </select>
+              </dd>
+            </dl>
+            <p>
+              <input type="checkbox" id="use_parent_roadmap"
+                name="use_parent_roadmap" checked="true"/>
+              <label for="use_parent_roadmap"
+                i18n:translate="cpscourrier_use_default_roadmap">Use default
+                roadmap</label>
+            </p>
+          </metal:handle_params>
+           </metal:block>
+
           <metal:block fill-slot="button">
-            <input type="hidden" name="workflow_action" value=""
+           <input type="hidden" name="workflow_action" value=""
                    tal:attributes="value transition" />
-            <input type="checkbox" id="use_parent_roadmap"
-                   name="use_parent_roadmap" checked="true"/>
-            <label for="use_parent_roadmap"
-                   i18n:translate="cpscourrier_use_default_roadmap">Use default
-              roadmap</label>
-            <input type="submit" class="standalone"
+           <input type="submit" class="standalone"
               tal:attributes="value string:button_${transition}"
               i18n:attributes="value" />
             <input type="button" class="context" onClick="history.back()"

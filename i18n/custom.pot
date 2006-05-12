@@ -596,3 +596,6 @@ msgstr ""
 msgid "cpscourrier_fake_original_msg"
 msgstr ""
 
+msgid "cpscourrier_help_handle_select_group"
+msgstr ""
+

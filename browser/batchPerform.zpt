@@ -77,6 +77,12 @@
               </pre>
               <metal:transition_form
                 use-macro="here/content_lib_transition_form/macros/transition_form">
+                <metal:block fill-slot="fields">
+                  <metal:block tal:condition="python:transition=='handle'"
+                    use-macro="here/cpscourrier_handle_form/macros/handle_params"
+                    />
+                </metal:block>
+
                 <metal:block fill-slot="button">
                   <!-- forward the chosen answering template if any -->
                   <input type="hidden" name="base_reply_rpath"

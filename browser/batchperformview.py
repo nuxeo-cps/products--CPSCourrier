@@ -297,6 +297,10 @@ class BatchPerformView(ReuseAnswerView):
             # collect the replies of successful answers
             kw['no_reply_script'] = True
 
+        if transition == 'handle':
+            kw['group'] = form.get('group', '')
+            kw['use_parent_roadmap'] = form.get('use_parent_roadmap', '')
+
         failed = set()
         proxies = [portal.unrestrictedTraverse(rpath) for rpath in self.rpaths]
         for proxy in proxies:

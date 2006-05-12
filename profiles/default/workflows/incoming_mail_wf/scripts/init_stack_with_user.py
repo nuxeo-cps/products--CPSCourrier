@@ -9,5 +9,5 @@
 ##
 from Products.CPSCourrier.workflows.scripts import init_stack_with_user
 init_stack_with_user(state_change,
-                     'Pilots', prefix='courrier_user',
+                     'Pilots', prefix='courrier_',
                      directive='handle')

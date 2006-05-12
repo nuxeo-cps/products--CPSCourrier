@@ -237,8 +237,10 @@ def flag_incoming_handled(outgoing_proxy):
                             outgoing_proxy)
 
 
-def init_stack_with_user(sci, wf_var_id, prefix='courrier_user', **kw):
+def init_stack_with_user(sci, wf_var_id, prefix='courrier_', **kw):
     """Initialize the stack with an element representing current user.
+
+    if 'group' is provided in sci.kwargs, use it instead of the current user
 
     other kwargs are passed as element metadata.
     use_parent_roadmap is read from the transition kwargs.
@@ -248,9 +250,16 @@ def init_stack_with_user(sci, wf_var_id, prefix='courrier_user', **kw):
     workflow = sci.workflow
     wftool = getToolByName(proxy, 'portal_workflow')
 
+    group = sci.kwargs.get('group', None)
+    if group:
+        push_id = '%sgroup:%s' % (prefix, group)
+    else:
+        # use the current user
+        user_id = getSecurityManager().getUser().getId()
+        push_id = '%suser:%s' % (prefix, user_id)
+
     data = dict((key,(value,)) for key, value in kw.items())
-    user_id = getSecurityManager().getUser().getId()
-    push_args = {'push_ids':('%s:%s' % (prefix, user_id),),
+    push_args = {'push_ids':(push_id,),
                 'data_lists':data.keys()}
     push_args.update(data)
     transition_args = {'current_wf_var_id': wf_var_id}
@@ -261,7 +270,7 @@ def init_stack_with_user(sci, wf_var_id, prefix='courrier_user', **kw):
     # The stack guard will be checked anyway, so that it isn't a hole
     # to call _executeTransition.
 
-    use_default = sci.kwargs.get('use_parent_roadmap', False)
+    use_default = sci.kwargs.get('use_parent_roadmap', True)
     if use_default:
         # get copy of the default roadmap
         mailbox = proxy.aq_inner.aq_parent

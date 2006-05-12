@@ -26,6 +26,7 @@
 
         <metal:block
           use-macro="here/content_lib_transition_form/macros/transition_form">
+
           <metal:block fill-slot="button">
             <input type="hidden" name="current_wf_var_id" value="Pilots"
               tal:condition="python:transition.find('delegatees') != -1"/>
