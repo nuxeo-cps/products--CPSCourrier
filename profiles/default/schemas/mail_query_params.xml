@@ -21,5 +21,7 @@ should probably use only one schema. This will get clearer later
   <field name="filter_Subject" meta_type="CPS String Field" />
   <field name="filter_fulltext" meta_type="CPS String Field" />
   <field name="filter_title" meta_type="CPS String Field" />
+  <field name="filter_mail_to" meta_type="CPS String Field" />
+  <field name="filter_mail_from" meta_type="CPS String Field" />
 </object>
 

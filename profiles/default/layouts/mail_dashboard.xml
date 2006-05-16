@@ -15,6 +15,18 @@ Layout that presents catalog search results
   <property name="actions_category">cpscourrier_batch</property>
   <property name="cookie_id">cpscourrier</property>
   <property name="filter_button">filter</property>
+  <property name="fulltext_keys">
+    <element value="SearchableText"/>
+    <element value="ZCTitle"/>
+    <element value="mail_to"/>
+    <element value="mail_from"/>
+  </property>
+   <property name="fulltext_ors">
+    <element value="ZCText_or"/>
+    <element value="ZCTitle_or"/>
+    <element value="mail_to_or"/>
+    <element value="mail_from_or"/>
+  </property>
   <property name="users_groups_filters">
     <element value="todo-process"/>
     <element value="todo-watch"/>
@@ -164,6 +176,26 @@ Layout that presents catalog search results
    </property>
 </widget>
 
+<widget name="q_mail_from_or" meta_type="String Widget">
+   <property name="label_edit">cpscourrier_from_label</property>
+   <property name="is_i18n">True</property>
+
+  <property name="hidden_layout_modes">view search_results</property>
+   <property name="fields">
+     <element value="filter_mail_from" />
+   </property>
+</widget>
+
+<widget name="q_mail_to_or" meta_type="String Widget">
+   <property name="label_edit">cpscourrier_to_label</property>
+   <property name="is_i18n">True</property>
+
+  <property name="hidden_layout_modes">view search_results</property>
+   <property name="fields">
+     <element value="filter_mail_to" />
+   </property>
+</widget>
+
  <table>
    <row>
      <cell name="q_ZCText_or"/>
@@ -178,6 +210,10 @@ Layout that presents catalog search results
      <cell name="q_path"/>
      <cell name="q_review_state" />
      <cell name="q_priority" />
+   </row>
+   <row>
+     <cell name="q_mail_from_or"/>
+     <cell name="q_mail_to_or"/>
    </row>
    <row>
      <cell name="default_sort"/>
