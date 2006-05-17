@@ -18,10 +18,27 @@
 	analyzer="Standard"
       />
 
+    <!-- fulltext version -->
+    <field
+	name="fulltext_mail_from"
+	attr="mail_from"
+	type="UnStored"
+	analyzer="Standard"
+      />
+
+
     <field
 	name="mail_to"
 	attr="mail_to"
 	type="MultiKeyword"
+	analyzer="Standard"
+      />
+
+    <!-- fulltext version -->
+    <field
+	name="fulltext_mail_to"
+	attr="mail_to"
+	type="UnStored"
 	analyzer="Standard"
       />
 

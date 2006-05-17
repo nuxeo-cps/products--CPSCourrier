@@ -18,14 +18,12 @@ Layout that presents catalog search results
   <property name="fulltext_keys">
     <element value="SearchableText"/>
     <element value="ZCTitle"/>
-    <element value="mail_to"/>
-    <element value="mail_from"/>
+    <element value="fulltext_mail_to"/>
+    <element value="fulltext_mail_from"/>
   </property>
    <property name="fulltext_ors">
     <element value="ZCText_or"/>
     <element value="ZCTitle_or"/>
-    <element value="mail_to_or"/>
-    <element value="mail_from_or"/>
   </property>
   <property name="users_groups_filters">
     <element value="todo-process"/>
@@ -176,7 +174,7 @@ Layout that presents catalog search results
    </property>
 </widget>
 
-<widget name="q_mail_from_or" meta_type="String Widget">
+<widget name="q_fulltext_mail_from" meta_type="String Widget">
    <property name="label_edit">cpscourrier_from_label</property>
    <property name="is_i18n">True</property>
 
@@ -186,7 +184,7 @@ Layout that presents catalog search results
    </property>
 </widget>
 
-<widget name="q_mail_to_or" meta_type="String Widget">
+<widget name="q_fulltext_mail_to" meta_type="String Widget">
    <property name="label_edit">cpscourrier_to_label</property>
    <property name="is_i18n">True</property>
 
@@ -212,8 +210,8 @@ Layout that presents catalog search results
      <cell name="q_priority" />
    </row>
    <row>
-     <cell name="q_mail_from_or"/>
-     <cell name="q_mail_to_or"/>
+     <cell name="q_fulltext_mail_from"/>
+     <cell name="q_fulltext_mail_to"/>
    </row>
    <row>
      <cell name="default_sort"/>
