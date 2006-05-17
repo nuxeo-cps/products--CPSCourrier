@@ -22,6 +22,7 @@
 from cgi import escape
 from zLOG import LOG, DEBUG
 from Globals import InitializeClass
+from DateTime.DateTime import DateTime
 
 from Products.CMFCore.utils import getToolByName
 from Products.CPSSchemas.Widget import CPSWidget
@@ -31,6 +32,7 @@ from Products.CPSSchemas.BasicWidgets import (CPSSelectWidget,
                                               CPSMultiSelectWidget,
                                               CPSStringWidget,
                                               CPSIntWidget)
+from Products.CPSSchemas.ExtendedWidgets import CPSDateTimeWidget
 from Products.CPSSkins.cpsskins_utils import unserializeFromCookie
 
 from Products.CPSSchemas.tests.testWidgets import (FakePortal,
@@ -368,6 +370,61 @@ InitializeClass(CPSPathWidget)
 
 widgetRegistry.register(CPSPathWidget)
 
+class CPSDateTimeFilterWidget(RequestCookiesMixin, CPSDateTimeWidget):
+    """ Puts its argument in datastructure. """
+
+    meta_type = 'DateTime Filter Widget'
+    _properties = (
+        CPSDateTimeWidget._properties
+        + RequestCookiesMixin._properties
+        + ({'id': 'search_range', 'type': 'string', 'mode': 'w',
+            'label': 'Range usage in corresponding search'},)
+    )
+
+    search_range = ''
+
+    def validate(self, datastructure, **kw):
+        """ Update datamodel from datastructure """
+        #XXX OG ugly hack see #1606
+        self.prepare(datastructure)
+        value = datastructure.get(self.getWidgetId())
+        if isinstance(value, DateTime):
+            dm = datastructure.getDataModel()
+            dm[self.fields[0]] = value
+            return 1
+        else:
+           return CPSDateTimeWidget.validate(self, datastructure, **kw)
+
+    def prepare(self, datastructure, **kw):
+        wid = self.getWidgetId()
+        dm = datastructure.getDataModel()
+        if self.fields: # Use-case for no fields: batching
+           datastructure[wid] = dm[self.fields[0]]
+        if self.search_range:
+            datastructure[wid + RANGE_SUFFIX] = self.search_range
+
+        # from cookie
+        from_cookie = self.readCookie(wid)
+        if from_cookie is not None:
+            try:
+                datastructure[wid] = DateTime(from_cookie)
+            except ValueError:
+                # XXX OG: Ugly, see #1606
+                pass
+
+        # from request form
+        posted = self.REQUEST.form.get(widgetname(wid))
+        if posted is not None:
+            try:
+                datastructure[wid] = DateTime(posted)
+            except ValueError:
+                # XXX OG: Ugly, see #1606
+                pass
+
+
+InitializeClass(CPSDateTimeFilterWidget)
+
+widgetRegistry.register(CPSDateTimeFilterWidget)
 
 class CPSIntFilterWidget(RequestCookiesMixin, CPSIntWidget):
     """ Puts its argument in datastructure. """
