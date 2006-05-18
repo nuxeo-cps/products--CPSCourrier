@@ -136,7 +136,7 @@ Layout that presents catalog search results
    <property name="fields">
      <element value="filter_sort_on" />
    </property>
-    <property name="cookie_id">cpscourrier</property>
+   <property name="cookie_id">cpscourrier</property>
 </widget>
 
  <widget name="q_path" meta_type="Select Filter Widget">
@@ -144,7 +144,6 @@ Layout that presents catalog search results
    <property name="label">cpscourrier_search_path_label</property>
    <property name="label_edit">cpscourrier_search_path_label</property>
    <property name="is_i18n">True</property>
-
    <property name="vocabulary">mailboxes_and_groups</property>
    <property name="translated">False</property>
    <property name="cookie_id">cpscourrier</property>
@@ -157,8 +156,8 @@ Layout that presents catalog search results
 <widget name="q_ZCText_or" meta_type="String Filter Widget">
    <property name="label_edit">cpscourrier_fulltext_search</property>
    <property name="is_i18n">True</property>
-
-  <property name="hidden_layout_modes">view search_results</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="hidden_layout_modes">view search_results</property>
    <property name="fields">
      <element value="filter_fulltext" />
    </property>
@@ -167,8 +166,8 @@ Layout that presents catalog search results
 <widget name="q_ZCTitle_or" meta_type="String Filter Widget">
    <property name="label_edit">cpscourrier_object_label</property>
    <property name="is_i18n">True</property>
-
-  <property name="hidden_layout_modes">view search_results</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="hidden_layout_modes">view search_results</property>
    <property name="fields">
      <element value="filter_title" />
    </property>
@@ -177,8 +176,8 @@ Layout that presents catalog search results
   <widget name="q_fulltext_mail_from" meta_type="String Filter Widget">
    <property name="label_edit">cpscourrier_from_label</property>
    <property name="is_i18n">True</property>
-
-  <property name="hidden_layout_modes">view search_results</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="hidden_layout_modes">view search_results</property>
    <property name="fields">
      <element value="filter_mail_from" />
    </property>
@@ -187,8 +186,8 @@ Layout that presents catalog search results
   <widget name="q_fulltext_mail_to" meta_type="String Filter Widget">
    <property name="label_edit">cpscourrier_to_label</property>
    <property name="is_i18n">True</property>
-
-  <property name="hidden_layout_modes">view search_results</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="hidden_layout_modes">view search_results</property>
    <property name="fields">
      <element value="filter_mail_to" />
    </property>
@@ -197,10 +196,10 @@ Layout that presents catalog search results
   <widget name="q_created_min" meta_type="DateTime Filter Widget">
    <property name="label_edit">cpscourrier_created_min_label</property>
    <property name="is_i18n">True</property>
-
-  <property name="hidden_layout_modes">view search_results</property>
-  <property name="search_range">min</property>
-  <property name="view_format">long</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="hidden_layout_modes">view search_results</property>
+   <property name="search_range">min</property>
+   <property name="view_format">long</property>
    <property name="fields">
      <element value="filter_created_min" />
    </property>
@@ -209,10 +208,10 @@ Layout that presents catalog search results
   <widget name="q_created_max" meta_type="DateTime Filter Widget">
    <property name="label_edit">cpscourrier_created_max_label</property>
    <property name="is_i18n">True</property>
-
-  <property name="hidden_layout_modes">view search_results</property>
-  <property name="search_range">max</property>
-  <property name="view_format">long</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="hidden_layout_modes">view search_results</property>
+   <property name="search_range">max</property>
+   <property name="view_format">long</property>
    <property name="fields">
      <element value="filter_created_max" />
    </property>
@@ -221,10 +220,10 @@ Layout that presents catalog search results
   <widget name="q_deadline_min" meta_type="DateTime Filter Widget">
    <property name="label_edit">cpscourrier_deadline_min_label</property>
    <property name="is_i18n">True</property>
-
-  <property name="hidden_layout_modes">view search_results</property>
-  <property name="search_range">min</property>
-  <property name="view_format">long</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="hidden_layout_modes">view search_results</property>
+   <property name="search_range">min</property>
+   <property name="view_format">long</property>
    <property name="fields">
      <element value="filter_deadline_min" />
    </property>
@@ -233,10 +232,10 @@ Layout that presents catalog search results
   <widget name="q_deadline_max" meta_type="DateTime Filter Widget">
    <property name="label_edit">cpscourrier_deadline_max_label</property>
    <property name="is_i18n">True</property>
-
-  <property name="hidden_layout_modes">view search_results</property>
-  <property name="search_range">max</property>
-  <property name="view_format">long</property>
+   <property name="cookie_id">cpscourrier</property>
+   <property name="hidden_layout_modes">view search_results</property>
+   <property name="search_range">max</property>
+   <property name="view_format">long</property>
    <property name="fields">
      <element value="filter_deadline_max" />
    </property>
