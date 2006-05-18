@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-05-12 16:26default\n"
+"POT-Creation-Date: 2006-05-18 19:28default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -443,6 +443,18 @@ msgstr "À prendre en charge"
 
 msgid "cpscourrier_to_watch"
 msgstr "À consulter"
+
+msgid "cpscourrier_created_min_label"
+msgstr "Date de création minimum"
+
+msgid "cpscourrier_created_max_label"
+msgstr "Date de création maximum"
+
+msgid "cpscourrier_deadline_min_label"
+msgstr "Date d'échéance minimum"
+
+msgid "cpscourrier_deadline_max_label"
+msgstr "Date d'échéance maximum"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Cordialement, "

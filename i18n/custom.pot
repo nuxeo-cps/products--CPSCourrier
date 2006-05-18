@@ -185,6 +185,18 @@ msgstr ""
 msgid "cpscourrier_to_watch"
 msgstr ""
 
+msgid "cpscourrier_created_min_label"
+msgstr ""
+
+msgid "cpscourrier_created_max_label"
+msgstr ""
+
+msgid "cpscourrier_deadline_min_label"
+msgstr ""
+
+msgid "cpscourrier_deadline_max_label"
+msgstr ""
+
 #
 # Vocabularies
 #

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-05-12 16:26default\n"
+"POT-Creation-Date: 2006-05-18 19:28default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -444,6 +444,18 @@ msgstr "To handle"
 
 msgid "cpscourrier_to_watch"
 msgstr "To watch"
+
+msgid "cpscourrier_created_min_label"
+msgstr "Creation date (mininum)"
+
+msgid "cpscourrier_created_max_label"
+msgstr "Creation date (maximum)"
+
+msgid "cpscourrier_deadline_min_label"
+msgstr "Dealine (minimum)"
+
+msgid "cpscourrier_deadline_max_label"
+msgstr "Dealine (maximum)"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Best regards, "
