@@ -17,8 +17,8 @@
 #
 # $Id$
 
-""" This module holds simple widget definitions for CPSCourrier row layouts.
-"""
+"""Widget definitions for CPSCourrier query parameters and cookie management"""
+
 from zLOG import LOG, DEBUG
 from Globals import InitializeClass
 from DateTime.DateTime import DateTime
@@ -105,7 +105,7 @@ class RequestCookiesMixin:
 
         # from datamodel: call base class if required
         if call_base:
-            klass = getattr(self, 'widget_base_class')
+            klass = getattr(self, 'base_widget_class')
             klass.prepare(self, datastructure, **kw)
 
         # from cookie
@@ -125,8 +125,6 @@ class RequestCookiesMixin:
 
         self.expireCookie(**kw)
         return True
-
-
 
 
 #
@@ -202,7 +200,7 @@ class CPSMultiSelectFilterWidget(RequestCookiesMixin, CPSMultiSelectWidget):
 
     meta_type = 'MultiSelect Filter Widget'
     _properties = CPSMultiSelectWidget._properties + RequestCookiesMixin._properties
-    widget_base_class = CPSMultiSelectWidget
+    base_widget_class = CPSMultiSelectWidget
 
 InitializeClass(CPSMultiSelectFilterWidget)
 
@@ -214,7 +212,7 @@ class CPSStringFilterWidget(RequestCookiesMixin, CPSStringWidget):
 
     meta_type = 'String Filter Widget'
     _properties = CPSStringWidget._properties + RequestCookiesMixin._properties
-    widget_base_class = CPSStringWidget
+    base_widget_class = CPSStringWidget
 
 InitializeClass(CPSStringFilterWidget)
 
@@ -377,18 +375,7 @@ class CPSDateTimeFilterWidget(RequestCookiesMixin, CPSDateTimeWidget):
     )
 
     search_range = ''
-
-    def validate(self, datastructure, **kw):
-        """ Update datamodel from datastructure """
-        #XXX OG ugly hack see #1606
-        self.prepare(datastructure)
-        value = datastructure.get(self.getWidgetId())
-        if isinstance(value, DateTime):
-            dm = datastructure.getDataModel()
-            dm[self.fields[0]] = value
-            return 1
-        else:
-           return CPSDateTimeWidget.validate(self, datastructure, **kw)
+    base_widget_class = CPSDateTimeWidget
 
     def prepare(self, datastructure, **kw):
         wid = self.getWidgetId()
