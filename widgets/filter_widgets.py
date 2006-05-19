@@ -19,7 +19,6 @@
 
 """ This module holds simple widget definitions for CPSCourrier row layouts.
 """
-from cgi import escape
 from zLOG import LOG, DEBUG
 from Globals import InitializeClass
 from DateTime.DateTime import DateTime
@@ -27,7 +26,6 @@ from DateTime.DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetRegistry
-from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSSchemas.BasicWidgets import (CPSSelectWidget,
                                               CPSMultiSelectWidget,
                                               CPSStringWidget,
@@ -35,9 +33,6 @@ from Products.CPSSchemas.BasicWidgets import (CPSSelectWidget,
 from Products.CPSSchemas.ExtendedWidgets import CPSDateTimeWidget
 from Products.CPSSkins.cpsskins_utils import unserializeFromCookie
 
-from Products.CPSSchemas.tests.testWidgets import (FakePortal,
-                                                   FakeDataStructure,
-                                                   FakeDataModel)
 from Products.CPSSchemas.Widget import widgetname
 
 from Products.CPSCourrier.config import RANGE_SUFFIX
@@ -397,9 +392,8 @@ class CPSDateTimeFilterWidget(RequestCookiesMixin, CPSDateTimeWidget):
 
     def prepare(self, datastructure, **kw):
         wid = self.getWidgetId()
-        dm = datastructure.getDataModel()
-        if self.fields: # Use-case for no fields: batching
-           datastructure[wid] = dm[self.fields[0]]
+        if self.fields:
+            CPSDateTimeWidget.prepare(self, datastructure, **kw)
         if self.search_range:
             datastructure[wid + RANGE_SUFFIX] = self.search_range
 
@@ -407,7 +401,7 @@ class CPSDateTimeFilterWidget(RequestCookiesMixin, CPSDateTimeWidget):
         from_cookie = self.readCookie(wid)
         if from_cookie is not None:
             try:
-                datastructure[wid] = DateTime(from_cookie)
+                self._prepareDateTimeFromValue(from_cookie, datastructure, **kw)
             except ValueError:
                 # XXX OG: Ugly, see #1606
                 pass
@@ -416,10 +410,21 @@ class CPSDateTimeFilterWidget(RequestCookiesMixin, CPSDateTimeWidget):
         posted = self.REQUEST.form.get(widgetname(wid))
         if posted is not None:
             try:
-                datastructure[wid] = DateTime(posted)
+                self._prepareDateTimeFromValue(posted, datastructure, **kw)
             except ValueError:
                 # XXX OG: Ugly, see #1606
                 pass
+
+    def _prepareDateTimeFromValue(self, value, datastructure, **kw):
+        """Same as CPSDateTimeWidget.prepare but use value instead of dm"""
+        # get date time info, mode is not known here
+        v, date, hour, minute = self.getDateTimeInfo(value, mode=None)
+        wid = self.getWidgetId()
+        datastructure[wid] = v
+        datastructure[wid + '_date'] = date
+        datastructure[wid + '_hour'] = hour or self.time_hour_default
+        datastructure[wid + '_minute'] = minute or self.time_minutes_default
+
 
 
 InitializeClass(CPSDateTimeFilterWidget)
