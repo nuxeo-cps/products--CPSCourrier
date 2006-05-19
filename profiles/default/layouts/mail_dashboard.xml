@@ -18,8 +18,6 @@ Layout that presents catalog search results
   <property name="fulltext_keys">
     <element value="SearchableText"/>
     <element value="ZCTitle"/>
-    <element value="fulltext_mail_to"/>
-    <element value="fulltext_mail_from"/>
   </property>
    <property name="fulltext_ors">
     <element value="ZCText_or"/>
