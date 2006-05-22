@@ -26,6 +26,9 @@ from Products.CPSCore.interfaces import ICPSSite
 # temporary fix for a bug in CPSCore events
 import PatchCPSCoreCPSTypes
 
+# Local Managers can change local roles
+import PatchCPSMembershipTool
+
 # various registrations are done therein
 import widgets, workflows
 

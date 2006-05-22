@@ -10,6 +10,7 @@ Bug fixes:
   reply search view
 - search form was broken when putting values that were not integer castable in
   the pertinence form element
+- Local Managers could not set local roles
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
