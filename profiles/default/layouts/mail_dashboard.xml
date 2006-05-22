@@ -196,8 +196,8 @@ Layout that presents catalog search results
    <property name="is_i18n">True</property>
    <property name="cookie_id">cpscourrier</property>
    <property name="hidden_layout_modes">view search_results</property>
-   <property name="search_range">min</property>
    <property name="view_format">long</property>
+   <property name="time_setting">0</property>
    <property name="fields">
      <element value="filter_created_min" />
    </property>
@@ -208,8 +208,8 @@ Layout that presents catalog search results
    <property name="is_i18n">True</property>
    <property name="cookie_id">cpscourrier</property>
    <property name="hidden_layout_modes">view search_results</property>
-   <property name="search_range">max</property>
    <property name="view_format">long</property>
+   <property name="time_setting">0</property>
    <property name="fields">
      <element value="filter_created_max" />
    </property>
@@ -220,8 +220,8 @@ Layout that presents catalog search results
    <property name="is_i18n">True</property>
    <property name="cookie_id">cpscourrier</property>
    <property name="hidden_layout_modes">view search_results</property>
-   <property name="search_range">min</property>
    <property name="view_format">long</property>
+   <property name="time_setting">0</property>
    <property name="fields">
      <element value="filter_deadline_min" />
    </property>
@@ -232,8 +232,8 @@ Layout that presents catalog search results
    <property name="is_i18n">True</property>
    <property name="cookie_id">cpscourrier</property>
    <property name="hidden_layout_modes">view search_results</property>
-   <property name="search_range">max</property>
    <property name="view_format">long</property>
+   <property name="time_setting">0</property>
    <property name="fields">
      <element value="filter_deadline_max" />
    </property>

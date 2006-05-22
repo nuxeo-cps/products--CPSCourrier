@@ -68,10 +68,31 @@ Of course we don't fail if the keys are missing::
 
 Queries with ranges (the filter widget has to push such keys in ds)::
 
-    >>> filters = {'used': 5, 'used_range': 'min'}
+    >>> filters = {'used_min': 5}
     >>> cat.filtersToQuery(filters)
     >>> pretty_print(filters)
     {'used': {'query': 5, 'range': 'min'}}
+
+This also supports 'minmax' ranges on demand, according the range suffixes::
+
+    >>> from DateTime import DateTime
+    >>> filters = {'date_min': DateTime('2006/01/22'),
+    ...            'date_max': DateTime('2006/02/03')}
+    >>> cat.filtersToQuery(filters)
+    >>> pretty_print(filters)
+    {'date': {'query': [DateTime('2006/01/22'),
+                        DateTime('2006/02/03')],
+              'range': 'minmax'}}
+
+Empty values are ignored if any::
+
+    >>> filters = {'date_min': None,
+    ...            'date_max': DateTime('2006/02/03')}
+    >>> cat.filtersToQuery(filters)
+    >>> pretty_print(filters)
+    {'date': {'query': DateTime('2006/02/03'),
+              'range': 'max'}}
+
 
 .. Emacs
 .. Local Variables:

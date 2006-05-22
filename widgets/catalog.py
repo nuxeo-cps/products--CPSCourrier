@@ -38,8 +38,6 @@ from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 
 from Products.CPSCourrier.braindatamodel import BrainDataModel
 from Products.CPSCourrier.widgets.tabular import TabularWidget
-from Products.CPSCourrier.config import RANGE_SUFFIX
-
 
 logger = logging.getLogger('CPSCourrier.widgets.catalog')
 
@@ -65,6 +63,10 @@ class CatalogTabularWidget(TabularWidget):
          'label': 'Input filters used for fulltext ORs',},
         {'id': 'users_groups_filters', 'type': 'tokens', 'mode': 'w',
          'label': "Input filters to replace by user and user's group",},
+        {'id': 'range_min_suffix', 'type': 'string', 'mode': 'w',
+         'label': "Suffix for widget ids that encode a min range bound",},
+        {'id': 'range_max_suffix', 'type': 'string', 'mode': 'w',
+         'label': "Suffix for widget ids that encode a max range bound",},
         )
 
     # support for more than one full text index.
@@ -72,6 +74,8 @@ class CatalogTabularWidget(TabularWidget):
     fulltext_keys = ('SearchableText', 'ZCTitle')
     fulltext_ors = ('ZCText_or', 'ZCTitle_or')
     users_groups_filters = ()
+    range_min_suffix = "_min"
+    range_max_suffix = "_max"
 
     def layout_row_view(self, layout=None, **kw):
         """Render method for rows layouts in 'view' mode.
@@ -93,7 +97,8 @@ class CatalogTabularWidget(TabularWidget):
     def filtersToQuery(self, filters):
         """Updates dict to build a query from filters.
 
-        Takes care of fulltext issues. """
+        Takes care of fulltext issues, range queries and access rights.
+        """
 
         for fulltext_or, fulltext_key in zip(self.fulltext_ors,
                                              self.fulltext_keys):
@@ -110,14 +115,39 @@ class CatalogTabularWidget(TabularWidget):
                 filters[fulltext_key] = query_or
 
         #Ranges
-        to_del = []
-        for key in filters:
-            key_rg = key + RANGE_SUFFIX
-            range_ = filters.get(key_rg)
-            if range_ is not None:
-                to_del.append(key_rg)
-                filters[key] = {'query': filters[key],
-                                'range' : range_}
+        to_del = set()
+        for key in filters.keys():
+            if key in to_del:
+                # in case of minmax, do not build the quesry twice
+                continue
+            if key.endswith(self.range_min_suffix):
+                key_base = key[:-len(self.range_min_suffix)]
+            elif key.endswith(self.range_max_suffix):
+                key_base = key[:-len(self.range_max_suffix)]
+            else:
+                # this is a not a range param: no query to build
+                continue
+            # computing the range (min, max or minmax)
+            key_min = key_base + self.range_min_suffix
+            if filters.has_key(key_min):
+                to_del.add(key_min)
+            value_min = filters.get(key_min)
+            key_max = key_base + self.range_max_suffix
+            if filters.has_key(key_max):
+                to_del.add(key_max)
+            value_max = filters.get(key_max)
+
+            # building the query from the non empty values
+            if value_min is not None and value_max is not None:
+                filters[key_base] = {'query': [value_min, value_max],
+                                            'range' : "minmax"}
+            elif value_min is not None:
+                filters[key_base] = {'query': value_min,
+                                            'range' : "min"}
+            elif value_max is not None:
+                filters[key_base] = {'query': value_max,
+                                            'range' : "max"}
+
         for key in to_del:
             del filters[key]
 

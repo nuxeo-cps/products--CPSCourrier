@@ -42,7 +42,7 @@ Layout for searching an answer in existing outgoing mails
    <property name="cookie_id">cpscourrier_answers</property>
  </widget>
 
- <widget name="q_template_usage" meta_type="Int Filter Widget">
+ <widget name="q_template_usage_min" meta_type="Int Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">cpscourrier_min_template_usage</property>
    <property name="label_edit">cpscourrier_min_template_usage</property>
@@ -51,7 +51,6 @@ Layout for searching an answer in existing outgoing mails
    <property name="fields">
      <element value="template_usage"/>
    </property>
-   <property name="search_range">min</property>
  </widget>
 
  <widget name="q_portal_type" meta_type="String Widget">
@@ -113,7 +112,7 @@ Layout for searching an answer in existing outgoing mails
  <table>
    <row>
      <cell name="q_ZCText_or"/>
-     <cell name="q_template_usage"/>
+     <cell name="q_template_usage_min"/>
    </row>
    <row>
      <cell name="q_Subject"/>

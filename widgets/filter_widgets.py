@@ -21,7 +21,6 @@
 
 from zLOG import LOG, DEBUG
 from Globals import InitializeClass
-from DateTime.DateTime import DateTime
 
 from Products.CMFCore.utils import getToolByName
 from Products.CPSSchemas.Widget import CPSWidget
@@ -34,8 +33,6 @@ from Products.CPSSchemas.ExtendedWidgets import CPSDateTimeWidget
 from Products.CPSSkins.cpsskins_utils import unserializeFromCookie
 
 from Products.CPSSchemas.Widget import widgetname
-
-from Products.CPSCourrier.config import RANGE_SUFFIX
 
 class FakeRequest:
     def __init__(self, **kw):
@@ -367,22 +364,14 @@ class CPSDateTimeFilterWidget(RequestCookiesMixin, CPSDateTimeWidget):
     """ Puts its argument in datastructure. """
 
     meta_type = 'DateTime Filter Widget'
-    _properties = (
-        CPSDateTimeWidget._properties
-        + RequestCookiesMixin._properties
-        + ({'id': 'search_range', 'type': 'string', 'mode': 'w',
-            'label': 'Range usage in corresponding search'},)
-    )
+    _properties = CPSDateTimeWidget._properties + RequestCookiesMixin._properties
 
-    search_range = ''
     base_widget_class = CPSDateTimeWidget
 
     def prepare(self, datastructure, **kw):
         wid = self.getWidgetId()
         if self.fields:
             CPSDateTimeWidget.prepare(self, datastructure, **kw)
-        if self.search_range:
-            datastructure[wid + RANGE_SUFFIX] = self.search_range
 
         # from cookie
         from_cookie = self.readCookie(wid)
@@ -422,11 +411,7 @@ class CPSIntFilterWidget(RequestCookiesMixin, CPSIntWidget):
     """ Puts its argument in datastructure. """
 
     meta_type = 'Int Filter Widget'
-    _properties = CPSIntWidget._properties + RequestCookiesMixin._properties + (
-        {'id': 'search_range', 'type': 'string', 'mode': 'w',
-         'label': 'Range usage in corresponding search'},)
-
-    search_range = ''
+    _properties = CPSIntWidget._properties + RequestCookiesMixin._properties
 
     def validate(self, datastructure, **kw):
         """ Update datamodel from datastructure """
@@ -445,8 +430,6 @@ class CPSIntFilterWidget(RequestCookiesMixin, CPSIntWidget):
         dm = datastructure.getDataModel()
         if self.fields: # Use-case for no fields: batching
            datastructure[wid] = dm[self.fields[0]]
-        if self.search_range:
-            datastructure[wid + RANGE_SUFFIX] = self.search_range
 
         # from cookie
         from_cookie = self.readCookie(wid)

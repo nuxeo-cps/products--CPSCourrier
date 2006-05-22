@@ -238,14 +238,14 @@ Now let's check that the toggling works::
 Int Filter Widget
 -----------------
 The int filter widget passes queries about integer values, together
-with how to use them (typically a range type). This is specified in
-the widget properties, and is written to datastructure with a suffix.
+with how to use them. This is specified in the widget properties,
+and is written to datastructure with a suffix.
 
     >>> from Products.CPSCourrier.widgets.filter_widgets import\
     ...               CPSIntFilterWidget
     >>> widget = CPSIntFilterWidget('the_widget')
     >>> widget.REQUEST = FakeRequest()
-    >>> widget.manage_changeProperties(search_range='min', fields=('int',))
+    >>> widget.manage_changeProperties(fields=('int',))
 
 Let's make datamodel and datastructure::
 
@@ -260,8 +260,6 @@ Int Widget::
     >>> widget.prepare(ds)
     >>> ds['the_widget']
     3
-    >>> ds['the_widget_range']
-    'min'
 
 Same must be true with cookies and request form, and they follow the
 usual precedence rules::
