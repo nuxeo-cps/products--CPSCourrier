@@ -352,7 +352,7 @@ msgid "cpscourrier_size_label"
 msgstr "Size (kB):"
 
 msgid "cpscourrier_deadline_label"
-msgstr "Dealine"
+msgstr "Deadline"
 
 msgid "cpscourrier_priority_label"
 msgstr "Priority"
@@ -457,10 +457,10 @@ msgid "cpscourrier_created_max_label"
 msgstr "Creation date (maximum)"
 
 msgid "cpscourrier_deadline_min_label"
-msgstr "Dealine (minimum)"
+msgstr "Deadline (minimum)"
 
 msgid "cpscourrier_deadline_max_label"
-msgstr "Dealine (maximum)"
+msgstr "Deadline (maximum)"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Best regards, "
