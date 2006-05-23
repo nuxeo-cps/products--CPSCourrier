@@ -83,13 +83,24 @@
     <tal:block define="form_key batching_info/form_key;
 		       pages batching_info/linked_pages;
 		       current_page batching_info/current_page;
+		       nb_pages batching_info/nb_pages;
 		       filter_button batching_info/filter_button;
 		       ">
-      Current page: <span tal:content="current_page"/><br/>
+      <span i18n:translate="">Page <span tal:replace="current_page"
+          i18n:name="current_page"/> of <span tal:replace="nb_pages"
+          i18n:name="nb_pages"/></span>
+      <div tal:condition="python:nb_pages > 1">
+        <a tal:condition="python:1 not in pages"
+          tal:attributes="href string:${here_url}?${form_key}=1&${filter_button}=go">1</a>
+        <tal:dots condition="python:2 not in pages">...</tal:dots>
       <a href="" tal:repeat="page pages"
-	 tal:attributes="href string:${here_url}?${form_key}=${page}&${filter_button}=go;
-			 style python:page == current_page and 'strong' or 'small'"
-	 tal:content="page"/>
+	 tal:attributes="href string:${here_url}?${form_key}=${page}&${filter_button}=go"
+         tal:omit-tag="python:page == current_page" tal:content="page"/>
+        <tal:dots condition="python:(nb_pages-1) not in pages">...</tal:dots>
+        <a tal:condition="python:nb_pages not in pages" tal:content="nb_pages"
+          tal:attributes="href string:${here_url}?${form_key}=${nb_pages}&${filter_button}=go"
+          >last page</a>
+        </div>
     </tal:block>
   </tal:batching_gadget>
 

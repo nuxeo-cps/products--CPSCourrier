@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-05-18 19:28default\n"
+"POT-Creation-Date: 2006-05-23 15:07default\n"
 "PO-Revision-Date: 2006-05-07 09:40+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -32,6 +32,11 @@ msgstr ""
 #: ../skins/cps_courrier/workflow_transition_form.pt
 msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
+msgstr ""
+
+#.   <span>Page ${current_page (tal replace="current_page")} of ${nb_pages (tal replace="nb_pages")}</span>
+#: from ../skins/cps_courrier/widget_tabular_render.pt
+msgid "Page ${current_page} of ${nb_pages}"
 msgstr ""
 
 #.   <span content="state" attributes="class state">State</span>
@@ -445,19 +450,19 @@ msgstr "Por consultar"
 
 #, fuzzy
 msgid "cpscourrier_created_min_label"
-msgstr "Creator"
+msgstr "Creation date (mininum)"
 
 #, fuzzy
 msgid "cpscourrier_created_max_label"
-msgstr "Creator"
+msgstr "Creation date (maximum)"
 
 #, fuzzy
 msgid "cpscourrier_deadline_min_label"
-msgstr "Dealine"
+msgstr "Dealine (minimum)"
 
 #, fuzzy
 msgid "cpscourrier_deadline_max_label"
-msgstr "Dealine"
+msgstr "Dealine (maximum)"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Mis mejores deseos, "
