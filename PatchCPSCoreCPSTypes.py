@@ -89,12 +89,15 @@ if True:
                 if not sanity_check(self, ob):
                     raise CopyError, 'This object cannot be pasted into itself'
 
+                orig_container = aq_parent(aq_inner(ob))
+                if self == orig_container:
+                    raise CopyError, 'Cannot cut/paste in the same place'
+
                 # try to make ownership explicit so that it gets carried
                 # along to the new location if needed.
                 ob.manage_changeOwnershipType(explicit=1)
 
                 # this is a move operation: do not send IObjectRemovedEvent
-                orig_container = aq_parent(aq_inner(ob))
                 orig_container._delObject(orig_id, suppress_events=True)
 
                 # XXX: the following is necessary because of the wierd semantics
