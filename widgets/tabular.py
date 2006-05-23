@@ -439,4 +439,5 @@ class TabularWidget(CPSIntFilterWidget):
         return meth(mode=mode, columns=columns,
                     rows=rendered_rows, actions=actions,
                     here_url=here_url, batching_info=batching_info,
+                    base_url=getToolByName(self, 'portal_url').getBaseUrl(),
                     empty_message=self.empty_message)

@@ -14,6 +14,8 @@ Bug fixes:
   the pertinence form element
 - Local Managers could not set local roles
 - Supervisors could not set local roles
+- Arrows for sorting column materialization were not displayed
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - catalog tabular widget can now perform range request (min:max included)
+- Page Template for tabulars now receives base_url in options
