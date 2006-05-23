@@ -73,7 +73,7 @@ Queries with ranges (the filter widget has to push such keys in ds)::
     >>> pretty_print(filters)
     {'used': {'query': 5, 'range': 'min'}}
 
-This also supports 'minmax' ranges on demand, according the range suffixes::
+This also supports 'min:max' ranges on demand, according the range suffixes::
 
     >>> from DateTime import DateTime
     >>> filters = {'date_min': DateTime('2006/01/22'),
@@ -82,7 +82,7 @@ This also supports 'minmax' ranges on demand, according the range suffixes::
     >>> pretty_print(filters)
     {'date': {'query': [DateTime('2006/01/22'),
                         DateTime('2006/02/03')],
-              'range': 'minmax'}}
+              'range': 'min:max'}}
 
 Empty values are ignored if any::
 

@@ -4,6 +4,7 @@ Requires:
 New features:
 ~~~~~~~~~~~~~
 - handle as a group of users
+- date range search in the dashboard layout
 Bug fixes:
 ~~~~~~~~~~
 - 'Subject' from the parent mailbox or mail doc is preselected in the reuse
@@ -13,4 +14,4 @@ Bug fixes:
 - Local Managers could not set local roles
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- catalog tabular widget can now perform range request (min:max included)

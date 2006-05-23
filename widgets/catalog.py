@@ -118,7 +118,7 @@ class CatalogTabularWidget(TabularWidget):
         to_del = set()
         for key in filters.keys():
             if key in to_del:
-                # in case of minmax, do not build the quesry twice
+                # in case of min:max, do not build the quesry twice
                 continue
             if key.endswith(self.range_min_suffix):
                 key_base = key[:-len(self.range_min_suffix)]
@@ -127,7 +127,7 @@ class CatalogTabularWidget(TabularWidget):
             else:
                 # this is a not a range param: no query to build
                 continue
-            # computing the range (min, max or minmax)
+            # computing the range (min, max or min:max)
             key_min = key_base + self.range_min_suffix
             if filters.has_key(key_min):
                 to_del.add(key_min)
@@ -140,13 +140,13 @@ class CatalogTabularWidget(TabularWidget):
             # building the query from the non empty values
             if value_min is not None and value_max is not None:
                 filters[key_base] = {'query': [value_min, value_max],
-                                            'range' : "minmax"}
+                                     'range' : "min:max"}
             elif value_min is not None:
                 filters[key_base] = {'query': value_min,
-                                            'range' : "min"}
+                                     'range' : "min"}
             elif value_max is not None:
                 filters[key_base] = {'query': value_max,
-                                            'range' : "max"}
+                                     'range' : "max"}
 
         for key in to_del:
             del filters[key]
