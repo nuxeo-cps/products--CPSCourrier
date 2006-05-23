@@ -19,7 +19,8 @@
 
 """Widget definitions for CPSCourrier query parameters and cookie management"""
 
-from zLOG import LOG, DEBUG
+import logging
+
 from Globals import InitializeClass
 
 from Products.CMFCore.utils import getToolByName
@@ -33,6 +34,8 @@ from Products.CPSSchemas.ExtendedWidgets import CPSDateTimeWidget
 from Products.CPSSkins.cpsskins_utils import unserializeFromCookie
 
 from Products.CPSSchemas.Widget import widgetname
+
+logger = logging.getLogger('CPSCourrier.widgets.filter_widgets')
 
 class FakeRequest:
     def __init__(self, **kw):
@@ -56,14 +59,15 @@ class RequestCookiesMixin:
         if not self.cookie_id:
             return
         cookie = self.REQUEST.cookies.get(self.cookie_id)
+
         if cookie is None:
             return
 
         # we have to convert from unicode. There should be only identifiers
         # so we don't catch UnicodeEncodeErrors
         c_filters = unserializeFromCookie(string=cookie)
-        LOG('CPSSelectFilterWidget:cookie', DEBUG, c_filters)
-        LOG('CPSSelectFilterWidget:wid', DEBUG, wid)
+        logger.debug('c_filters:%s' % c_filters)
+        logger.debug('wid:%s' % wid)
         try:
             read = c_filters.get(wid)
         except AttributeError: # not a dict
@@ -294,7 +298,8 @@ class CPSToggableCriterionWidget(RequestCookiesMixin, CPSWidget):
         posted = self.REQUEST.form.get(widgetname(crit_key))
 
         # do toggle token
-        LOG('ToggleWidget.prepare; posted=', DEBUG, posted)
+        logger.debug('Toggle Widget')
+        logger.debug('posted: %s' % posted)
         if posted is not None:
             if posted != ds.get(crit_key):
                 ds[crit_key] = posted
@@ -308,9 +313,9 @@ class CPSToggableCriterionWidget(RequestCookiesMixin, CPSWidget):
         posted = self.REQUEST.form.get(widgetname(ref_key))
         if posted is not None:
             ds[ref_key] = posted
-        LOG('ToggeWidget.prepare, ref:', DEBUG, ds.get(ref_key))
-        LOG('ToggeWidget.prepare, crit:', DEBUG, ds.get(crit_key))
-        LOG('ToggeWidget.prepare, token:', DEBUG, ds.get(token_key))
+        logger.debug('ref: %s' % ds.get(ref_key))
+        logger.debug('crit: %s' % ds.get(crit_key))
+        logger.debug('token: %s' % ds.get(token_key))
 
 
     def render(self, mode, datastructure, **kw):
