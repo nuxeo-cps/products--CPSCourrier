@@ -17,6 +17,7 @@ Bug fixes:
 - Arrows for sorting column materialization were not displayed
 - cookie for advanced search page cannot interfere with dashboards of mailboxes content
   views anymore
+- fixed permission problems for mb and mbg wf
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - catalog tabular widget can now perform range request (min:max included)

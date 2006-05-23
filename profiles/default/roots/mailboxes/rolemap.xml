@@ -42,7 +42,6 @@ Supervisor can do what LocalManager can except change perms-->
       <role name="Manager"/>
       <role name="LocalManager"/>
       <role name="Supervisor"/>
-      <role name="Contributor"/>
       <role name="Owner"/>
     </permission>
     <permission name="View archived revisions" acquire="False">

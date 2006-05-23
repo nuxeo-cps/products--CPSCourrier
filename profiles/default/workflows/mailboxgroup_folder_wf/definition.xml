@@ -4,12 +4,18 @@
               state_variable="review_state"
               meta_type="CPS Workflow">
  <permission>View</permission>
+ <permission>Modify portal content</permission>
  <state state_id="work" title="Work">
   <exit-transition transition_id="create_content"/>
   <exit-transition transition_id="cut_copy_paste"/>
   <exit-transition transition_id="modify"/>
   <exit-transition transition_id="translate"/>
   <exit-transition transition_id="delete_translation"/>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+   <permission-role>LocalManager</permission-role>
+   <permission-role>Supervisor</permission-role>
+  </permission-map>
   <permission-map name="View" acquired="False">
    <permission-role>Manager</permission-role>
    <permission-role>LocalManager</permission-role>
