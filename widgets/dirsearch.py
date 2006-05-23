@@ -70,14 +70,17 @@ class DirectoryTabularWidget(TabularWidget):
     def getMethodContext(self, datastructure):
         return self
 
-    def listRowDataStructures(self, datastructure, layout, **kw):
+    def listRowDataStructures(self, datastructure, layout, filters=None, **kw):
         """Return datastructures filled with search results meta-data
 
         Currently, this will give an iterator on the full entry datamodels.
         It would be much better to have
         """
 
-        query = self.buildFilters(datastructure)
+        if filters is None:
+            raise ValueError('Filters is None')
+
+        query = filters
 
         dtool = getToolByName(self, 'portal_directories')
         cpsdir = dtool[self.directory]

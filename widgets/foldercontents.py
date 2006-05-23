@@ -116,7 +116,7 @@ class FolderContentsWidget(TabularWidget):
         else:
             return True
 
-    def listRowDataStructures(self, datastructure, layout, **kw):
+    def listRowDataStructures(self, datastructure, layout, filters=None, **kw):
         """Return an iterator for folder contents datastructures
 
         We cannot avoid finally fetching all objects, but we try to
@@ -132,7 +132,9 @@ class FolderContentsWidget(TabularWidget):
             raise Unauthorized("You are not allowed to list this folder")
         meta_types = datastructure.get('meta_types') or self.listed_meta_types
 
-        filters = self.buildFilters(datastructure)
+        if filters is None:
+            raise ValueError('Filters is None')
+
         (b_page, b_start, b_size) = self.getBatchParams(datastructure)
 
         sort_key = filters.pop('sort-on', None)

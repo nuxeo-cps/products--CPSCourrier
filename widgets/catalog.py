@@ -171,13 +171,16 @@ class CatalogTabularWidget(TabularWidget):
         brains = catalog(**query)
         return brains[b_start:b_start+b_size], len(brains)
 
-    def listRowDataStructures(self, datastructure, layout, **kw):
+    def listRowDataStructures(self, datastructure, layout, filters=None, **kw):
         """Return datastructures holding search results meta-data & batch info.
         """
 
         catalog = getToolByName(self, 'portal_catalog')
 
-        query = self.buildFilters(datastructure)
+        if filters is None:
+            raise ValueError('Filters is None')
+
+        query = filters
         self.filtersToQuery(query)
         (b_page, b_start, b_size) = self.getBatchParams(datastructure)
 

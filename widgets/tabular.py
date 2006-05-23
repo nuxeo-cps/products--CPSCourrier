@@ -186,13 +186,17 @@ class TabularWidget(CPSIntFilterWidget):
 
         return datastructure.getDataModel().getContext()
 
-    def buildFilters(self, datastructure):
+    def buildFilters(self, datastructure, cookie_path_method=False):
         """Build query according to datastructure, query and cookies.
 
         Cookies not implemented.
         Assumptions: the post is made with widgets whose ids start all with
         self.filter_prefix
         and correspond to other widget ids present in items.
+        cookie_path_method: boolean to tweak the path to set cookie.
+          if true, the full requested path is used
+          The default behavior is usefull to share between different views of
+          the same object (e.g., cpsdocument_edit_form and cpsdocument_view)
         """
 
         # extract filters from datastructure
@@ -204,8 +208,12 @@ class TabularWidget(CPSIntFilterWidget):
         # if filtering uses a post, set cookie
         request = self.REQUEST
         if self.cookie_id and request.form.get(self.filter_button):
-            path = request['URLPATH1'] # need to validate this
+            if cookie_path_method:
+                path = request['URLPATH0']
+            else:
+                path = request['URLPATH1']
             cookie = serializeForCookie(prefilt)
+            logger.debug("Setting cookie, path=%s" % path)
             request.RESPONSE.setCookie(self.cookie_id, cookie, path=path)
 
         # replace some empty filters by the corresponding total scope
@@ -379,9 +387,13 @@ class TabularWidget(CPSIntFilterWidget):
             row_layout = getattr(ltool, lid)
             fti = FlexibleTypeInformation('transient')
 
+        # build filters and maybe set cookie
+        filters = self.buildFilters(datastructure,
+                                    cookie_path_method=mode=='search')
+
         # fetch prepared row datastructures
         row_dss, current_page, nb_pages = self.listRowDataStructures(
-            datastructure, row_layout, **kw)
+            datastructure, row_layout, filters=filters, **kw)
 
         layout_structures = None
 
