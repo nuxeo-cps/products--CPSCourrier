@@ -44,6 +44,8 @@ def hasFlexibleFields(data):
 # based on CPSSkins versions, but can handle non ascii-chars
 # here not to break possible CPSSkins assumptions
 
+# XXX since we eventually patched both, we could settle for utf8, which
+# json.read seems to assume by default
 def serializeForCookie(obj, charset='ascii'):
     """Convert a python data structure into a base64 encoded string suitable
     for storing in a cookie."""
