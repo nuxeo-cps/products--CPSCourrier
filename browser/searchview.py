@@ -25,7 +25,7 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.CPSSchemas.Widget import widgetname
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
-from Products.CPSSkins.cpsskins_utils import unserializeFromCookie
+from Products.CPSCourrier.utils import unserializeFromCookie
 
 logger = logging.getLogger('CPSCourrier.browser.reuseanswerview')
 
@@ -35,6 +35,7 @@ class SearchView(BrowserView):
         BrowserView.__init__(self, context, request)
         form = self.request.form
         self.is_results = 'search_submit' in form or 'filter' in form
+        self.charset = self.context.default_charset
 
     def setAttrs(self, **kw):
         """Set attributes.
@@ -80,7 +81,7 @@ class SearchView(BrowserView):
         else:
             cookie = None
         if cookie is not None:
-            cookie = unserializeFromCookie(cookie)
+            cookie = unserializeFromCookie(cookie, charset=self.charset)
         for wid in widgets:
             name = widgetname(wid)
             if cookie is not None:
