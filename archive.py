@@ -16,11 +16,15 @@
 # 02111-1307, USA.
 #
 # $Id$
-"""XML export of old threads of mail"""
+"""XML export of old threads of mail
+
+This archiver assumes the catalog supports batching (ie is a lucene catalog).
+"""
 
 import logging
 from DateTime import DateTime
 
+from zExceptions import NotFound
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.config import ARCHIVE_MIN_AGE, ARCHIVE_HOME
 from Products.CPSCourrier.relations import get_thread_for
@@ -47,9 +51,9 @@ class Archiver:
 
         Candidate proxies are found thanks to a catalog search.
         """
-        # record the set of rpath of proxies that where already processed to
-        # avoid duplication
-        rpaths_done = set()
+
+        # set of a allowed states to speed up membership tests
+        review_states = set(self.review_states)
 
         # maximum creation date
         created_max = DateTime() - ARCHIVE_MIN_AGE
@@ -62,32 +66,50 @@ class Archiver:
                 'query': created_max,
                 'range': 'max',
             },
+            # process 100 proxies at a time: trade off between number of brains
+            # loaded in memory and number of requests to the catalog
+            'b_size': 100,
+            'b_start': 0,
         }
-        # XXX refactore! use batching to avoid having 100 000 RSS items to parse
-        brains = getToolByName(self._portal, 'portal_catalog')(**query)
+        catalog = getToolByName(self._portal, 'portal_catalog')
+        brains = catalog(**query)
 
-        review_states = set(self.review_states)
+        while brains:
 
-        for brain in brains:
-            if brain['relative_path'] in rpaths_done:
-                # already seen in a thread
-                continue
+            # record the set of rpath of proxies that where already processed to
+            # avoid duplication
+            rpaths_done = set()
 
-            thread_info = get_thread_for(brain.getObject())
-            proxies = []
-            invalid_thread = False
+            for brain in brains:
+                if brain['relative_path'] in rpaths_done:
+                    # already seen in a thread
+                    continue
 
-            for _, proxy_info in thread_info:
-                rpaths_done.add(proxy_info['rpath'])
-                proxy = proxy_info['object']
-                if proxy_info['review_state'] not in review_states:
-                    invalid_thread = True
-                    break
-                if proxy.getContent()['created'] > created_max:
-                    invalid_thread = True
-                    break
-                proxies.append(proxy)
+                try:
+                    thread_seed = brain.getObject()
+                except NotFound:
+                    # the proxy has been deleted since last catalog query
+                    continue
 
-            if not invalid_thread:
-                logger.debug('Next thread to archive: %s' % proxies)
-                yield proxies
+                thread_info = get_thread_for(thread_seed)
+                proxies = []
+                invalid_thread = False
+
+                for _, proxy_info in thread_info:
+                    rpaths_done.add(proxy_info['rpath'])
+                    proxy = proxy_info['object']
+                    if proxy_info['review_state'] not in review_states:
+                        invalid_thread = True
+                        break
+                    if proxy.getContent()['created'] > created_max:
+                        invalid_thread = True
+                        break
+                    proxies.append(proxy)
+
+                if not invalid_thread:
+                    logger.debug('Next thread to archive: %s' % proxies)
+                    yield proxies
+
+            # make the same query again starting with 0 as b_start cause
+            # proxies may have been deleted since the last query
+            brains = catalog(**query)
