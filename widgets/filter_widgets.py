@@ -31,7 +31,7 @@ from Products.CPSSchemas.BasicWidgets import (CPSSelectWidget,
                                               CPSStringWidget,
                                               CPSIntWidget)
 from Products.CPSSchemas.ExtendedWidgets import CPSDateTimeWidget
-from Products.CPSSkins.cpsskins_utils import unserializeFromCookie
+from Products.CPSCourrier.utils import unserializeFromCookie
 
 from Products.CPSSchemas.Widget import widgetname
 
@@ -65,7 +65,8 @@ class RequestCookiesMixin:
 
         # we have to convert from unicode. There should be only identifiers
         # so we don't catch UnicodeEncodeErrors
-        c_filters = unserializeFromCookie(string=cookie)
+        c_filters = unserializeFromCookie(string=cookie,
+                                          charset=self.default_charset)
         logger.debug('c_filters:%s' % c_filters)
         logger.debug('wid:%s' % wid)
         try:

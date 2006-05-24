@@ -18,8 +18,12 @@
 
 #$Id$
 
+import base64
 
 import re
+
+from Products.CPSSkins import minjson as json
+
 
 def hasFlexibleFields(data):
     """True if the passed dict looks like a datamodel with flexible fields.
@@ -35,3 +39,34 @@ def hasFlexibleFields(data):
 
     return int(bool([fid for fid in data
                      if re.search(regexp, fid) and data[fid] is not None]))
+
+
+# based on CPSSkins versions, but can handle non ascii-chars
+# here not to break possible CPSSkins assumptions
+
+def serializeForCookie(obj, charset='ascii'):
+    """Convert a python data structure into a base64 encoded string suitable
+    for storing in a cookie."""
+
+    string = json.write(obj)
+    # base64 will cast to str, producing Unicode errors
+    if isinstance(string, unicode):
+        string = string.encode(charset)
+    v = base64.encodestring(string)
+    return v.replace('\n', '') # cookie values cannot contain newlines
+
+def unserializeFromCookie(string='', default=None, charset='ascii'):
+    """Convert a base64 string into a python object"""
+
+    value = default
+    if not string:
+        return value
+
+    # If not already unicode, myjson will try to decode assuming utf-8
+    v = base64.decodestring(string).decode(charset)
+    try:
+        value = json.read(v)
+    except IndexError:
+        pass
+
+    return value

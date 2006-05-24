@@ -32,12 +32,9 @@ from Products.CPSSchemas.Widget import widgetname
 from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSDocument.FlexibleTypeInformation import FlexibleTypeInformation
 from Products.CPSPortlets.CPSPortletWidget import CPSPortletWidget
+from Products.CPSCourrier.utils import serializeForCookie
+from Products.CPSCourrier.utils import unserializeFromCookie
 from Products.CPSCourrier.widgets.filter_widgets import CPSIntFilterWidget
-
-# second import not used here, but imported from tests.
-from Products.CPSSkins.cpsskins_utils import (serializeForCookie,
-                                              unserializeFromCookie)
-
 
 from Products.CPSDocument.interfaces import ICPSDocument
 
@@ -58,6 +55,8 @@ class FakeResponse:
 
     def expireCookie(self, arg, **kw):
         print "FakeResponse: called expireCookie with arg=%s" % arg
+
+
 
 class FakeRequestWithCookies:
     """To simulate a request with cookies
@@ -186,6 +185,18 @@ class TabularWidget(CPSIntFilterWidget):
 
         return datastructure.getDataModel().getContext()
 
+    def setCookieFromMapping(self, request, mapping, path_method=False):
+        """Set a dict in cookie."""
+
+        if path_method:
+            path = request['URLPATH0']
+        else:
+            path = request['URLPATH1']
+
+        cookie = serializeForCookie(mapping, charset=self.default_charset)
+        logger.debug("Setting cookie, path=%s" % path)
+        request.RESPONSE.setCookie(self.cookie_id, cookie, path=path)
+
     def buildFilters(self, datastructure, cookie_path_method=False):
         """Build query according to datastructure, query and cookies.
 
@@ -208,13 +219,8 @@ class TabularWidget(CPSIntFilterWidget):
         # if filtering uses a post, set cookie
         request = self.REQUEST
         if self.cookie_id and request.form.get(self.filter_button):
-            if cookie_path_method:
-                path = request['URLPATH0']
-            else:
-                path = request['URLPATH1']
-            cookie = serializeForCookie(prefilt)
-            logger.debug("Setting cookie, path=%s" % path)
-            request.RESPONSE.setCookie(self.cookie_id, cookie, path=path)
+            self.setCookieFromMapping(request, prefilt,
+                                      path_method=cookie_path_method)
 
         # replace some empty filters by the corresponding total scope
         # and remove the others

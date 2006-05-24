@@ -50,9 +50,8 @@ RequestCookiesMixin
   We'll need some imports to deal with cookies::
 
     >>> from Products.CPSCourrier.widgets.tabular import FakeRequestWithCookies
-    >>> from Products.CPSCourrier.widgets.tabular import serializeForCookie
-    >>> from Products.CPSCourrier.widgets.filter_widgets \
-    ...                 import unserializeFromCookie
+    >>> from Products.CPSCourrier.utils import serializeForCookie
+    >>> from Products.CPSCourrier.utils import unserializeFromCookie
 
   And some general widget stuff::
 
@@ -245,6 +244,7 @@ and is written to datastructure with a suffix.
     ...               CPSIntFilterWidget
     >>> widget = CPSIntFilterWidget('the_widget')
     >>> widget.REQUEST = FakeRequest()
+    >>> widget.default_charset = 'iso-8859-15' # normally acquired from portal
     >>> widget.manage_changeProperties(fields=('int',))
 
 Let's make datamodel and datastructure::

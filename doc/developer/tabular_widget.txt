@@ -125,7 +125,7 @@ and read the cookie.
 
     >>> from Products.CPSCourrier.widgets.tabular import FakeRequestWithCookies
     >>> tab.REQUEST = FakeRequestWithCookies()
-    >>> from Products.CPSCourrier.widgets.tabular import unserializeFromCookie
+    >>> from Products.CPSCourrier.utils import unserializeFromCookie
 
 Cookie setting will not be done if request lacks the filter_button::
 
@@ -136,6 +136,11 @@ Cookie setting will not be done if request lacks the filter_button::
 Let's add this to the request, then::
 
     >>> tab.REQUEST.form['go'] = 1
+
+The default charset is normally acquired from the portal object. We
+need to set it directly since we have no acquisition::
+
+    >>> tab.default_charset = charset = 'iso-8859-15'
 
 The cookie holds the interesting part of datastructure, including empty
 values & scopes::
@@ -152,6 +157,14 @@ values & scopes::
     >>> cookie = tab.REQUEST.RESPONSE.cookies['test_cook']['value']
     >>> pretty_print(unserializeFromCookie(cookie))
     {u'q_one_scope': [1, 2], u'q_one': u''}
+
+Now let's try with non ascii chars::
+
+    >>> datastructure8 = DataStructure(data = {'q_acc': '\xe9'})
+    >>> res = tab.buildFilters(datastructure8)
+    >>> cookie = tab.REQUEST.RESPONSE.cookies['test_cook']['value']
+    >>> pretty_print(unserializeFromCookie(cookie, charset=charset))
+    {u'q_acc': u'\xe9'}
 
 Finally we revert to the default value for filter_button::
 
