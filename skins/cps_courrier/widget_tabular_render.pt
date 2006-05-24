@@ -52,7 +52,7 @@
 	     tal:attributes="href string:${here_url}${toggle_get}">
 	    <img tal:condition="is_sort" src=""
 		  tal:attributes="src python:base_url + test(sort_token,
-				   '/arrow_down.png', '/arrow_up.png')" />
+				   'arrow_down.png', 'arrow_up.png')" />
 	    <tal:block content="widget/label"
 		       i18n:translate=""
 		       tal:condition="widget/is_i18n" />
