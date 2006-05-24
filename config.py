@@ -38,3 +38,9 @@ BAYES_MIN_PROB = 0.7
 
 # Id of the workflow stack
 STACK_ID = 'Pilots'
+
+# FS directory name in to host the archives
+ARCHIVE_HOME = "$INSTANCE_HOME/var/archive"
+
+# Minimum number of days for mails to get archived
+ARCHIVE_MIN_AGE = 60
