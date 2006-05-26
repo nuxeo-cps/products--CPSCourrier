@@ -263,7 +263,7 @@ class TabularWidget(CPSIntFilterWidget):
 
         items_per_page = self.items_per_page
         if filters is not None and self.filter_items_per_page:
-            items_per_page = int(filters.get(self.filter_items_per_page,
+            items_per_page = int(filters.pop(self.filter_items_per_page,
                                              self.items_per_page))
         else:
             items_per_page = self.items_per_page

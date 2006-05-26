@@ -361,11 +361,14 @@ Helpers
       (3, 34, 17)
 
   Additionnaly, one can use a filter to let the user choose the number
-  of items per page::
+  of items per page. It will get removed from the passed filters dict.::
 
       >>> tab.manage_changeProperties(filter_items_per_page='items')
-      >>> tab.getBatchParams(ds, filters={'items': 19})
+      >>> filters={'items': 19, 'other': 'eggs'}
+      >>> tab.getBatchParams(ds, filters=filters)
       (3, 38, 19)
+      >>> filters
+      {'other': 'eggs'}
 
   The filter value can be a string (useful with Select Widgets)::
 
