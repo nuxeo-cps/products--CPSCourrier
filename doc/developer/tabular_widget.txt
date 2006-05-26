@@ -360,6 +360,23 @@ Helpers
       >>> tab.getBatchParams(ds)
       (3, 34, 17)
 
+  Additionnaly, one can use a filter to let the user choose the number
+  of items per page::
+
+      >>> tab.manage_changeProperties(filter_items_per_page='items')
+      >>> tab.getBatchParams(ds, filters={'items': 19})
+      (3, 38, 19)
+
+  The filter value can be a string (useful with Select Widgets)::
+
+      >>> tab.getBatchParams(ds, filters={'items': '11'})
+      (3, 22, 11)
+
+  We fall back to the property if the filter is missing::
+
+      >>> tab.getBatchParams(ds, filters={})
+      (3, 34, 17)
+
   ``getNbPages()`` is meant to factorize the computation of the number
   of pages::
 

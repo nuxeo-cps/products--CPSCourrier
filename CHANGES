@@ -23,3 +23,4 @@ New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - catalog tabular widget can now perform range request (min:max included)
 - Page Template for tabulars now receives base_url in options
+- tabular widgets can get the number of items per page from a filter

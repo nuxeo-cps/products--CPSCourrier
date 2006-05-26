@@ -132,6 +132,8 @@ class TabularWidget(CPSIntFilterWidget):
          'label': 'Prefix of filtering widgets', },
         {'id': 'items_per_page', 'type': 'int', 'mode': 'w',
          'label': 'Maximum number of results per page', },
+        {'id': 'filter_items_per_page', 'type': 'string', 'mode': 'w',
+         'label': 'Filter used for number of results per page', },
         {'id': 'batching_gadget_pages', 'type': 'int', 'mode': 'w',
          'label': 'Number of context pages displayed in batching gadget'},
         )
@@ -147,6 +149,7 @@ class TabularWidget(CPSIntFilterWidget):
     filter_prefix = 'q_'
     items_per_page = 10
     batching_gadget_pages = 3
+    filter_items_per_page = ''
 
     def prepareRowDataStructure(self, layout, datastructure):
         """Have layout prepare row datastructure and return it."""
@@ -249,7 +252,7 @@ class TabularWidget(CPSIntFilterWidget):
         logger.debug(' filters: %s' %filters)
         return filters
 
-    def getBatchParams(self, datastructure):
+    def getBatchParams(self, datastructure, filters=None):
         """Extract batching parameters from given dict."""
 
         b_page = datastructure.get(self.getWidgetId())
@@ -257,8 +260,16 @@ class TabularWidget(CPSIntFilterWidget):
             b_page = 1
         else:
             b_page = int(b_page)
-        b_start = (b_page-1)*self.items_per_page
-        return (b_page, b_start, self.items_per_page)
+
+        items_per_page = self.items_per_page
+        if filters is not None and self.filter_items_per_page:
+            items_per_page = int(filters.get(self.filter_items_per_page,
+                                             self.items_per_page))
+        else:
+            items_per_page = self.items_per_page
+
+        b_start = (b_page-1)*items_per_page
+        return (b_page, b_start, items_per_page)
 
     def getNbPages(self, nb_items):
         """Return number of pages that nb_items items make."""

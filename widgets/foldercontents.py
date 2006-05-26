@@ -135,7 +135,8 @@ class FolderContentsWidget(TabularWidget):
         if filters is None:
             raise ValueError('Filters is None')
 
-        (b_page, b_start, b_size) = self.getBatchParams(datastructure)
+        (b_page, b_start, b_size) = self.getBatchParams(datastructure,
+                                                        filters=filters)
 
         sort_key = filters.pop('sort-on', None)
         sort_order = filters.pop('sort-order', None)
