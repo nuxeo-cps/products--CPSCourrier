@@ -277,8 +277,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         out_mail3 = reply_to_incoming(in_mail1)
         self._set_state(in_mail1, 'answering')
 
-        # flag_incoming_answered must change the in_mail1 state only if there is
-        # only one reply remaining
+        # flag_incoming_answered must change the in_mail1 state only if there
+        # is only one reply remaining
         flag_incoming_answered(out_mail1)
         self.assertEquals(self._get_state(in_mail1), 'answering')
 
@@ -605,7 +605,7 @@ On %s, bar@foo.com wrote:
         sci = FakeStateChange()
         sci.object = in_mail
         sci.workflow = wftool.getWorkflowsFor(in_mail)[0]
-        init_stack_with_user(sci, 'Pilots', prefix='courrier_user',
+        init_stack_with_user(sci, 'Pilots', prefix='courrier_',
                              directive='the_dir')
 
         stack = wftool.getStackFor(in_mail, 'Pilots')
