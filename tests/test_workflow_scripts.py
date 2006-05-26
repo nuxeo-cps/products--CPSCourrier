@@ -318,16 +318,18 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         in_mail1_doc_edit = in_mail1.getEditableContent()
         in_mail1_doc_edit.edit(
             {'content': "content line 1\ncontent line 2\n"}, proxy=in_mail1,)
-        in_mail1.MailHost = FakeMailHost()
 
-        # ensure the current mailbox has the required 'from' address
-        mb_doc = self.mb.getEditableContent()
-        mb_doc.edit({'from': 'mailbox@example.com'}, proxy=self.mb)
+        try:
+            in_mail1.MailHost = FakeMailHost()
 
-        # forwdaring in_mail1
-        result = forward_mail(in_mail1, 'toto@example.com',
-                              comment='Please handle that request')
-        expected = ('mailbox@example.com', 'toto@example.com', """\
+            # ensure the current mailbox has the required 'from' address
+            mb_doc = self.mb.getEditableContent()
+            mb_doc.edit({'from': 'mailbox@example.com'}, proxy=self.mb)
+
+            # forwdaring in_mail1
+            result = forward_mail(in_mail1, 'toto@example.com',
+                                  comment='Please handle that request')
+            expected = ('mailbox@example.com', 'toto@example.com', """\
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -343,10 +345,11 @@ On %s, bar@foo.com wrote:
 > \
 """ % datetime.datetime.now().strftime('%Y-%m-%d'))
 
-        self.assertEquals(result, expected)
-        # for some reason there is a ZODB commit in beforeTearDown thus we need
-        # get rid of the unpickleable fake MailHost
-        del in_mail1.MailHost
+            self.assertEquals(result, expected)
+        finally:
+            # for some reason there is a ZODB commit in beforeTearDown thus
+            # we need get rid of the unpickleable fake MailHost
+            del in_mail1.MailHost
 
     def test_send_reply(self):
         # faking the MailHost
@@ -364,16 +367,17 @@ On %s, bar@foo.com wrote:
             proxy=in_mail1,
         )
         out_mail1 = reply_to_incoming(in_mail1)
-        out_mail1.MailHost = FakeMailHost()
-        out_mail1_doc_edit = out_mail1.getEditableContent()
-        out_mail1_doc_edit.edit(
-            content="Please stop trying to fish us!",
-            form_of_address='regards',
-            proxy=out_mail1,
-        )
+        try:
+            out_mail1.MailHost = FakeMailHost()
+            out_mail1_doc_edit = out_mail1.getEditableContent()
+            out_mail1_doc_edit.edit(
+                content="Please stop trying to fish us!",
+                form_of_address='regards',
+                proxy=out_mail1,
+            )
 
-        result = send_reply(out_mail1)
-        expected = ('test_mailbox@cpscourrier.com', 'bar@foo.com', """\
+            result = send_reply(out_mail1)
+            expected = ('test_mailbox@cpscourrier.com', 'bar@foo.com', """\
 Content-Type: text/plain; charset="us-ascii"
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
@@ -394,10 +398,11 @@ On %s, bar@foo.com wrote:
 >   Regards,
 >   The Paipal team""" % datetime.datetime.now().strftime('%Y-%m-%d'))
 
-        self.assertEquals(result, expected)
-        # for some reason there is a ZODB commit in beforeTearDown thus we need
-        # get rid of the unpickleable fake MailHost
-        del out_mail1.MailHost
+            self.assertEquals(result, expected)
+        finally:
+            # for some reason there is a ZODB commit in beforeTearDown thus we
+            # need get rid of the unpickleable fake MailHost
+            del out_mail1.MailHost
 
     #
     # the following tests are for workflow scripts but general events.
@@ -621,7 +626,7 @@ On %s, bar@foo.com wrote:
         self.assertEquals(elt['directive'], 'handle')
         self.logout()
 
-    
+
 
 def test_suite():
     return unittest.makeSuite(WorkflowScriptsIntegrationTestCase)
