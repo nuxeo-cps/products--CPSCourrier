@@ -188,7 +188,7 @@ class CatalogTabularWidget(TabularWidget):
         brains, nb_results = self._doBatchedQuery(catalog,
                                                   b_start, b_size, query)
 
-        nb_pages = self.getNbPages(nb_results)
+        nb_pages = self.getNbPages(nb_results, items_per_page=b_size)
         logger.debug("CatalogTabularWidget: "
                      "%d results, %d pages (current %d)" % (nb_results,
                                                             nb_pages,

@@ -397,6 +397,11 @@ Helpers
      >>> tab.getNbPages(0)
      0
 
+It can take the items_per_page keyword arg, too:
+
+    >>> tab.getNbPages(12, items_per_page=10)
+    2
+
 Batching gadget
 ~~~~~~~~~~~~~~~
   As in the case of column information, predigested info is passed to

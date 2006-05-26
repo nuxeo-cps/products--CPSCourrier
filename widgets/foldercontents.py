@@ -160,7 +160,7 @@ class FolderContentsWidget(TabularWidget):
           if sort_order == 'reverse':
               o_ids.reverse()
 
-        nb_pages = self.getNbPages(len(o_ids))
+        nb_pages = self.getNbPages(len(o_ids), b_size)
         batched_ids = o_ids[b_start:b_start+b_size]
         iterprox = (folder[p_id] for p_id in batched_ids)
         iterprox = (proxy for proxy in iterprox

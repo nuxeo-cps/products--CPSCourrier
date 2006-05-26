@@ -271,11 +271,13 @@ class TabularWidget(CPSIntFilterWidget):
         b_start = (b_page-1)*items_per_page
         return (b_page, b_start, items_per_page)
 
-    def getNbPages(self, nb_items):
+    def getNbPages(self, nb_items, items_per_page=None):
         """Return number of pages that nb_items items make."""
 
         if nb_items:
-            return (nb_items-1)/self.items_per_page+1
+            if items_per_page is None:
+                items_per_page = self.items_per_page
+            return (nb_items-1)/items_per_page+1
         else:
             return 0
 
