@@ -12,5 +12,8 @@
   </field>
   <field name="filter_Subject" meta_type="CPS String Field" />
   <field name="filter_todo" meta_type="CPS String Field" />
+  <field name="filter_items_nb" meta_type="CPS Int Field">
+    <property name="default_expr">python:10</property>
+  </field>
 </object>
 

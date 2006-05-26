@@ -127,6 +127,8 @@ msgstr ""
 #
 # Tabular widgets labels
 #
+msgid "cpscourrier_items_nb_label"
+msgstr ""
 
 msgid "cpscourrier_type_label"
 msgstr ""

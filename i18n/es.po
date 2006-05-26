@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-05-23 15:07default\n"
+"POT-Creation-Date: 2006-05-26 20:43default\n"
 "PO-Revision-Date: 2006-05-07 09:40+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -44,19 +44,19 @@ msgstr ""
 msgid "State"
 msgstr ""
 
-#.   <input condition="view/canMoveDown" type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
-#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
+#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" condition="view/canMoveDown" />
+#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
 msgstr "Desplazar hacia abajo"
 
-#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
+#.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_update_stackelts"
 msgstr "Aplicar cambios"
 
-#.   <input type="submit" name="answer_submit" value="button_validate" class="standalone" />
-#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
+#.   <input name="answer_submit" type="submit" class="standalone" value="button_validate" />
+#.   <input name="submit_add" type="submit" class="context" value="button_validate" />
 #: from ../browser/batchPerform.zpt ../browser/reuseAnswer.zpt
 #: ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
@@ -79,7 +79,7 @@ msgstr "Responder a partir de una respuesta existente"
 msgid "cpscourrier_choose_insertion_level"
 msgstr "Seleccionar el nivel de inserción"
 
-#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
+#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filtro"
@@ -388,6 +388,10 @@ msgstr "Responsables"
 msgid "label_search_todo"
 msgstr "Acción"
 
+#, fuzzy
+msgid "cpscourrier_items_nb_label"
+msgstr "Size (kB):"
+
 msgid "cpscourrier_type_label"
 msgstr "Tipo"
 
@@ -458,11 +462,11 @@ msgstr "Creation date (maximum)"
 
 #, fuzzy
 msgid "cpscourrier_deadline_min_label"
-msgstr "Dealine (minimum)"
+msgstr "Deadline (minimum)"
 
 #, fuzzy
 msgid "cpscourrier_deadline_max_label"
-msgstr "Dealine (maximum)"
+msgstr "Deadline (maximum)"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Mis mejores deseos, "
