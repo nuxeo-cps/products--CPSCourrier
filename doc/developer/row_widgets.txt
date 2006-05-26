@@ -59,6 +59,20 @@ This widget is a simple helper that fetches the value of a workflow variable
 , typically 'review_state' for the proxy or object associated to the
 datastructure.
 
+    >>> from Products.CPSCourrier.widgets.row_widgets \
+    ...    import CPSWorkflowVariableWidget
+    >>> widget = CPSWorkflowVariableWidget('wf_var')
+    >>> widget.getId()
+    'wf_var'
+
+The worflow tool answers None in some cases (archived versions). We
+don't fail
+
+    >>> ds = DataStructure()
+    >>> ds['wf_var'] = None
+    >>> widget.render('view', ds)
+    ''
+
 Qualified Link Widget
 ---------------------
 

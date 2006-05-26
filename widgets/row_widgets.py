@@ -115,8 +115,10 @@ class CPSWorkflowVariableWidget(CPSWidget):
     def render(self, mode, datastructure, **kw):
         """Render in mode from datastructure."""
 
-        cpsmcat = getToolByName(self, 'translation_service')
         state = datastructure[self.getWidgetId()]
+        if state is None:
+            return ''
+        cpsmcat = getToolByName(self, 'translation_service')
         return escape(cpsmcat(state).encode('iso-8859-15'))
 
 
