@@ -26,7 +26,7 @@ from random import randint, sample, choice
 
 IN_MAILS_PER_MAILBOX = 20
 OUT_MAILS_PER_MAILBOX = 20
-EMAIL_PATTERN = "ogrisel-%s@nuxeo.com"
+EMAIL_PATTERN = "ogrisel+%s@nuxeo.com"
 COMMENT_PATTERN = "Test comment for transition %s"
 
 def _buid_tree(gen):
@@ -38,7 +38,7 @@ def _buid_tree(gen):
                 'test-mailbox-1-1': {
                     'Title': 'Test Mailbox 1 1',
                     'portal_type': 'Mailbox',
-                    'from': 'ogrisel-mb11@nuxeo.com',
+                    'from': 'ogrisel+mb11@nuxeo.com',
                     'mailbox_addresses': gen.randomEmails(3),
                     'allowed_reply_time': randint(1, 15),
                     'Subject': gen.sampleFromVoc('subject_voc'),
@@ -46,7 +46,7 @@ def _buid_tree(gen):
                 'test-mailbox-1-2': {
                     'Title': 'Test Mailbox 1 2',
                     'portal_type': 'Mailbox',
-                    'from': 'ogrisel-mb12@nuxeo.com',
+                    'from': 'ogrisel+mb12@nuxeo.com',
                     'mailbox_addresses': gen.randomEmails(3),
                     'allowed_reply_time': randint(1, 15),
                     'Subject': gen.sampleFromVoc('subject_voc'),
@@ -60,7 +60,7 @@ def _buid_tree(gen):
                 'test-mailbox-2-1': {
                     'Title': 'Test Mailbox 2 1',
                     'portal_type': 'Mailbox',
-                    'from': 'ogrisel-mb21@nuxeo.com',
+                    'from': 'ogrisel+mb21@nuxeo.com',
                     'mailbox_addresses': gen.randomEmails(3),
                     'allowed_reply_time': randint(1, 15),
                     'Subject': gen.sampleFromVoc('subject_voc'),
@@ -68,7 +68,7 @@ def _buid_tree(gen):
                 'test-mailbox-2-2': {
                     'Title': 'Test Mailbox 2 2',
                     'portal_type': 'Mailbox',
-                    'from': 'ogrisel-mb22@nuxeo.com',
+                    'from': 'ogrisel+mb22@nuxeo.com',
                     'mailbox_addresses': gen.randomEmails(3),
                     'allowed_reply_time': randint(1, 15),
                     'Subject': gen.sampleFromVoc('subject_voc'),
