@@ -67,8 +67,8 @@ class RequestCookiesMixin:
         # so we don't catch UnicodeEncodeErrors
         c_filters = unserializeFromCookie(string=cookie,
                                           charset=self.default_charset)
-        logger.debug('c_filters:%s' % c_filters)
-        logger.debug('wid:%s' % wid)
+        logger.debug('c_filters:%s', c_filters)
+        logger.debug('wid:%s', wid)
         try:
             read = c_filters.get(wid)
         except AttributeError: # not a dict
@@ -299,8 +299,7 @@ class CPSToggableCriterionWidget(RequestCookiesMixin, CPSWidget):
         posted = self.REQUEST.form.get(widgetname(crit_key))
 
         # do toggle token
-        logger.debug('Toggle Widget')
-        logger.debug('posted: %s' % posted)
+        logger.debug('Toggable Widget posted: %s', posted)
         if posted is not None:
             if posted != ds.get(crit_key):
                 ds[crit_key] = posted
@@ -314,9 +313,9 @@ class CPSToggableCriterionWidget(RequestCookiesMixin, CPSWidget):
         posted = self.REQUEST.form.get(widgetname(ref_key))
         if posted is not None:
             ds[ref_key] = posted
-        logger.debug('ref: %s' % ds.get(ref_key))
-        logger.debug('crit: %s' % ds.get(crit_key))
-        logger.debug('token: %s' % ds.get(token_key))
+        logger.debug('ref: %s', ds.get(ref_key))
+        logger.debug('crit: %s', ds.get(crit_key))
+        logger.debug('token: %s', ds.get(token_key))
 
 
     def render(self, mode, datastructure, **kw):
