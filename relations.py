@@ -27,6 +27,14 @@ from Products.CPSCourrier.config import (
 
 logger = logging.getLogger('CPSCourrier.relations')
 
+def make_reply_to(proxy, reference_proxy):
+    """Add relation so that proxy is a reply to reference_proxy"""
+    rtool = getToolByName(proxy, 'portal_relations')
+    rtool.addRelationFor(RELATION_GRAPH_ID,
+                         int(proxy.getDocid()),
+                         IS_REPLY_TO,
+                         int(reference_proxy.getDocid()))
+
 def _find_root(graph, start_from, relation_id=IS_REPLY_TO):
     """Recursively climb the relation_id tree in graph till the root"""
     parents = graph.getRelationsFor(start_from, relation_id)

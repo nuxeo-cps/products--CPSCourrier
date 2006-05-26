@@ -35,6 +35,7 @@ from Acquisition import aq_parent, aq_inner
 from AccessControl import getSecurityManager
 
 from Products.CMFCore.utils import getToolByName
+from Products.CPSCourrier.relations import make_reply_to
 from Products.CPSCourrier.config import (
     RELATION_GRAPH_ID,
     IS_REPLY_TO,
@@ -117,11 +118,7 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
     outgoing_proxy = getattr(container, oid)
 
     # update the relation between both docids
-    rtool = getToolByName(incoming_proxy, 'portal_relations')
-    rtool.addRelationFor(RELATION_GRAPH_ID,
-                         int(outgoing_proxy.getDocid()),
-                         IS_REPLY_TO,
-                         int(incoming_proxy.getDocid()))
+    make_reply_to(outgoing_proxy, incoming_proxy)
 
     # init outgoing's workflow stack
     orig_stack = wftool.getStackFor(incoming_proxy, STACK_ID)
