@@ -24,6 +24,7 @@ Let's make a view , in a pseudo portal::
    >>> app = Folder('app')
    >>> app._setOb('cps', Folder('cps'))
    >>> portal = app.cps
+   >>> portal.default_charset = "iso-8859-15"
    >>> from Products.CPSCourrier.widgets.tabular import FakeRequestWithCookies
    >>> request = FakeRequestWithCookies()
    >>> from Products.CPSCourrier.browser.searchview import SearchView
