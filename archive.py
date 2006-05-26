@@ -40,6 +40,9 @@ class Archiver:
     # portal types of proxies to be archived
     portal_types = ['Incoming Mail', 'Outgoing Mail']
 
+    # date attribute used to discriminate
+    date_field_id = 'ModificationDate'
+
     def __init__(self, portal):
         self._portal = portal
 
@@ -56,14 +59,14 @@ class Archiver:
         review_states = set(self.review_states)
 
         # maximum creation date
-        created_max = DateTime() - ARCHIVE_MIN_AGE
+        date_max = DateTime() - ARCHIVE_MIN_AGE
 
         # find candidate proxies for archiving
         query = {
             'portal_type': self.portal_types,
             'review_state': self.review_states,
-            'created': {
-                'query': created_max,
+            self.date_field_id: {
+                'query': date_max,
                 'range': 'max',
             },
             # process 100 proxies at a time: trade off between number of brains
@@ -101,7 +104,8 @@ class Archiver:
                     if proxy_info['review_state'] not in review_states:
                         invalid_thread = True
                         break
-                    if proxy.getContent()['created'] > created_max:
+                    dm = proxy.getContent().getDataModel()
+                    if dm[self.date_field_id] > date_max:
                         invalid_thread = True
                         break
                     proxies.append(proxy)
@@ -110,6 +114,6 @@ class Archiver:
                     logger.debug('Next thread to archive: %s' % proxies)
                     yield proxies
 
-            # make the same query again starting with 0 as b_start cause
-            # proxies may have been deleted since the last query
+            query['b_start'] = query['b_start'] + query['b_size']
             brains = catalog(**query)
+
