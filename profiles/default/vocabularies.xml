@@ -13,4 +13,5 @@
  <object name="mailbox_filter_subject" meta_type="CPS Method Vocabulary"/>
  <object name="dashboard_sort_criteria" meta_type="CPS Method Vocabulary"/>
  <object name="mail_reply_types" meta_type="CPS Method Vocabulary"/>
+ <object name="items_per_page" meta_type="CPS Vocabulary"/>
 </object>

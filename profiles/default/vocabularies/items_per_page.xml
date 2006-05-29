@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<object name="items_per_page" meta_type="CPS Vocabulary">
+ <property name="title"></property>
+ <property name="title_msgid"></property>
+ <property name="description"></property>
+ <property name="acl_write_roles">Manager</property>
+
+ <!-- The key is what matters for the tabular widgets -->
+ <item key="10" msgid="cpscourrier_few_per_page">10</item>
+ <item key="30" msgid="cpscourrier_many_per_page">30</item>
+ <item key="50" msgid="cpscourrier_alot_per_page">50</item>
+</object>
