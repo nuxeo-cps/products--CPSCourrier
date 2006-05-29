@@ -117,7 +117,20 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
     wftool.invokeFactoryFor(container, ptype, oid, **data)
     outgoing_proxy = getattr(container, oid)
 
+    # update the relation between both docids
+    make_reply_to(outgoing_proxy, incoming_proxy)
+
+    # init outgoing's workflow stack
+    orig_stack = wftool.getStackFor(incoming_proxy, STACK_ID)
+    new_stack = orig_stack.getCopy()
+    new_level = new_stack.reverse()
+    wftool.doActionFor(outgoing_proxy, 'init_stack',
+                       new_stack=new_stack,
+                       current_wf_var_id=STACK_ID,
+                       current_level=new_level)
+
     # copy attached files from template
+    # now that current user has modif perm
     if base_reply_rpath and template_doc.has_attachment:
         outgoing_doc = outgoing_proxy.getEditableContent()
         fti = template_doc.getTypeInfo()
@@ -134,17 +147,6 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
 
         outgoing_doc.edit(**data)
 
-    # update the relation between both docids
-    make_reply_to(outgoing_proxy, incoming_proxy)
-
-    # init outgoing's workflow stack
-    orig_stack = wftool.getStackFor(incoming_proxy, STACK_ID)
-    new_stack = orig_stack.getCopy()
-    new_level = new_stack.reverse()
-    wftool.doActionFor(outgoing_proxy, 'init_stack',
-                       new_stack=new_stack,
-                       current_wf_var_id=STACK_ID,
-                       current_level=new_level)
 
     # return the outgoing_proxyt proxy to be able to redirect the user to it
     return outgoing_proxy
