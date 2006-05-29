@@ -23,6 +23,9 @@
 import datetime
 import unittest
 import transaction
+
+from StringIO import StringIO
+from OFS.Image import File
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.tests.layer import IntegrationTestCase
 
@@ -155,21 +158,40 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         expected = (int(self.in_mail1.getDocid()),)
         self.assertEquals(expected, res)
 
-        # edit the template reply
+        # edit the template reply, and attach two files
         doc1.edit(content="This content is part of the template",
                   Subject=("subject1", "subject2",), proxy=template)
+        ti = doc1.getTypeInfo()
+        ti.flexibleAddWidget(doc1, 'mail_flexible', 'file')
+        ti.flexibleAddWidget(doc1, 'mail_flexible', 'file')
+        dm = ti.getDataModel(doc1, proxy=template)
+        self.assert_('file_f0' in dm) # test the test
+        self.assert_('file_1_f0' in dm)
+        doc1.edit(file_f0=File('file_f0', 'this_is.test',
+                               StringIO('This is a test')),
+                  file_1_f0=File('file_1_f0', 'other_file.txt',
+                                 StringIO('Other foo file'))
+                  )
 
         # create a second reply using the first reply as template
         template_rpath = utool.getRpath(template)
         second_reply = reply_to_incoming(self.in_mail1,
                                          base_reply_rpath=template_rpath)
+
+        # check fields init
         self.assertEquals(second_reply.Title(), 'Re: Test mail 1')
-        doc2 = template.getContent()
+        doc2 = second_reply.getContent()
         self.assertEquals(doc2['mail_from'], 'test_mailbox@cpscourrier.com')
         self.assertEquals(doc2['mail_to'], ['bar@foo.com'])
         self.assertEquals(sorted(doc2['Subject']()),
                           sorted(("subject1", "subject2",)))
         self.assertEquals(doc2['content'], doc1['content'])
+        attached = getattr(doc2, 'file_f0', None)
+        self.failIf(attached is None)
+        self.assertEquals(attached.data, 'This is a test')
+        attached = getattr(doc2, 'file_1_f0', None)
+        self.failIf(attached is None)
+        self.assertEquals(attached.data, 'Other foo file')
 
         # check that they are related
         res = rtool.getRelationsFor(RELATION_GRAPH_ID,

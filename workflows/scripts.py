@@ -117,6 +117,23 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
     wftool.invokeFactoryFor(container, ptype, oid, **data)
     outgoing_proxy = getattr(container, oid)
 
+    # copy attached files from template
+    if base_reply_rpath and template_doc.has_attachment:
+        outgoing_doc = outgoing_proxy.getEditableContent()
+        fti = template_doc.getTypeInfo()
+        tpl_dm = fti.getDataModel(template_doc, proxy=template_proxy)
+        data = {}
+        wid = 'file'
+        n = 0
+        while '%s_f0' % wid in tpl_dm:
+            new_wid = fti.flexibleAddWidget(outgoing_doc,
+                                            'mail_flexible', 'file')
+            data['%s_f0' % new_wid] = tpl_dm['%s_f0' % wid]
+            n += 1
+            wid = 'file_%d' % n
+
+        outgoing_doc.edit(**data)
+
     # update the relation between both docids
     make_reply_to(outgoing_proxy, incoming_proxy)
 

@@ -19,6 +19,7 @@ Bug fixes:
   views anymore
 - cookie setting was broken with non ascii chars
 - fixed permission problems for mb and mbg wf
+- Attached files of mail templates weren't copied
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - catalog tabular widget can now perform range request (min:max included)
