@@ -37,6 +37,13 @@ class SearchView(BrowserView):
         self.is_results = 'search_submit' in form or 'filter' in form
         self.charset = self.context.default_charset
 
+    def getId(self):
+        """Return name as declared in ZCML.
+
+        Use case: this will become the value of 'published'
+        in portlet guards."""
+        return self.__name__
+
     def setAttrs(self, **kw):
         """Set attributes.
 
