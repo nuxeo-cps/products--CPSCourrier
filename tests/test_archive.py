@@ -23,7 +23,6 @@
 import unittest
 from itertools import chain
 from DateTime import DateTime
-from Acquisition import aq_base
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.CatalogTool import CatalogTool
@@ -129,7 +128,6 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         rpath = getToolByName(self.portal, 'portal_url').getRpath
         return sorted(rpath(m) for m in proxies)
 
-
     def test_getThreadsToArchive(self):
         # by default, no mail is in a state that deserves archiving
         results = list(self.archiver.getThreadsToArchive())
@@ -183,11 +181,6 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         expected1 = self._sortedRpaths([self.incoming_mails[3]]
                                        + self.outgoing_mails[6:8])
         self.assertEquals(result1, expected1)
-
-
-
-
-
 
 
 def test_suite():
