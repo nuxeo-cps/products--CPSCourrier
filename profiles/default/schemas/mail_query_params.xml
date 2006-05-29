@@ -27,8 +27,8 @@ should probably use only one schema. This will get clearer later
   <field name="filter_created_max" meta_type="CPS DateTime Field" />
   <field name="filter_deadline_min" meta_type="CPS DateTime Field" />
   <field name="filter_deadline_max" meta_type="CPS DateTime Field" />
-  <field name="filter_items_nb" meta_type="CPS Int Field">
-    <property name="default_expr">python:10</property>
+  <field name="filter_items_nb" meta_type="CPS String Field">
+    <property name="default_expr">string:10</property>
   </field>
 </object>
 
