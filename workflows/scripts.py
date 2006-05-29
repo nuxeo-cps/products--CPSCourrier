@@ -368,7 +368,7 @@ def forward_mail(proxy, mto, comment=''):
 
     return send_mail(proxy, mto, mfrom, subject, body, attachments, encoding)
 
-def compute_reply_body(proxy):
+def compute_reply_body(proxy,text_only=True,additionnal_info=''):
     """Compute the body of a sent outgoing mail
 
     The content of the reply is build from the proxy quoting the original mail
@@ -379,13 +379,21 @@ def compute_reply_body(proxy):
     vtool = getToolByName(proxy, 'portal_vocabularies')
     mcat = lambda label: tstool(label).encode(encoding)
     doc = proxy.getContent()
-    body = doc['content']
+    if text_only:
+        body = doc['content']
+    else:
+        body="<html>%s</html>" % doc['content']
+        
     foa = vtool.form_of_address.getMsgid(doc['form_of_address'])
     if foa:
         foa = mcat(foa)
     else:
         foa = vtool.form_of_address[doc['form_of_address']]
-    body += '\n\n%s\n\n-- \n%s' % (foa , doc['signature'])
+        
+    if text_only:
+        body += '\n\n%s\n\n-- \n%s\n%s' % (foa , doc['signature'],additionnal_info)
+    else:
+        body += '<br/><br/>%s<br/><br/>-- <br/>%s<br/>%s' % (foa , doc['signature'],additionnal_info)
 
     # get the original content for quoting
     incoming_docid = _get_incoming_docid_for(proxy)
@@ -399,7 +407,7 @@ def compute_reply_body(proxy):
                 body += _quote_mail(info['object'], encoding)
     return body
 
-def send_reply(proxy):
+def send_reply(proxy,text_only=True,additionnal_info=''):
     """Send a reply by SMTP"""
     tstool = getToolByName(proxy, 'translation_service')
     encoding = tstool.default_charset
@@ -407,12 +415,12 @@ def send_reply(proxy):
     mto = doc['mail_to']
     mfrom = doc['mail_from']
     subject = doc['Title']()
-    body = compute_reply_body(proxy)
+    body = compute_reply_body(proxy,text_only,additionnal_info)
     attachments = _extract_attachments(proxy)
-    return send_mail(doc, mto, mfrom, subject, body, attachments, encoding)
+    return send_mail(doc, mto, mfrom, subject, body, attachments, encoding,text_only)
 
 def send_mail(context, mto, mfrom, subject, body, attachments=(),
-              encoding='iso-8859-15'):
+              encoding='iso-8859-15',text_only=True):
     """Send a mail
 
     body should be plain text.
@@ -431,9 +439,15 @@ def send_mail(context, mto, mfrom, subject, body, attachments=(),
         mto = ', '.join(mto)
     if attachments:
         msg = MIMEMultipart()
-        attachments.insert(0, ('content', 'text/plain', body))
+        if text_only:
+            attachments.insert(0, ('content', 'text/plain', body))
+        else:
+            attachments.insert(0, ('content', 'text/html', body))
     else:
-        msg = MIMEText(body)
+        if text_only:
+            msg = MIMEText(body)
+        else:
+            msg = MIMEText(body,_subtype='html',_charset=encoding)
 
     msg['Subject'] = subject
     msg['From'] = mfrom
