@@ -23,6 +23,7 @@
 import unittest
 from itertools import chain
 from DateTime import DateTime
+from Acquisition import aq_base
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.CatalogTool import CatalogTool
@@ -100,7 +101,6 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         #          - out3
         make_reply_to(self.incoming_mails[1], self.outgoing_mails[1])
 
-
     def beforeTearDown(self):
         # unpatch the catalog
         CatalogTool.__call__ = CatalogTool._original_call
@@ -123,6 +123,12 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         doc = mail.getEditableContent()
         fid = self.archiver.date_field_id
         doc.edit({fid: doc.getDataModel()[fid] - days}, mail)
+
+    def _sortedRpaths(self, proxies):
+        """Function to help compare list of proxies"""
+        rpath = getToolByName(self.portal, 'portal_url').getRpath
+        return sorted(rpath(m) for m in proxies)
+
 
     def test_getThreadsToArchive(self):
         # by default, no mail is in a state that deserves archiving
@@ -150,10 +156,18 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         # archiving
         self._set_state(self.outgoing_mails[3], 'sent')
         self._putMailInPast(self.outgoing_mails[3], 200) # needed to reindex
-        #import pdb; pdb.set_trace()
+
         threads = list(self.archiver.getThreadsToArchive())
         self.assertEquals(len(threads), 1)
-        self.assertEquals(len(threads[0]), 6)
+
+        result = self._sortedRpaths(threads[0])
+        expected = self._sortedRpaths(self.incoming_mails[:2]
+                                      + self.outgoing_mails[:4])
+        self.assertEquals(result, expected)
+
+        # making another thread available for archiving
+
+
 
 
 
