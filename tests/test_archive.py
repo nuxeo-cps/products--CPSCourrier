@@ -160,12 +160,29 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         threads = list(self.archiver.getThreadsToArchive())
         self.assertEquals(len(threads), 1)
 
-        result = self._sortedRpaths(threads[0])
-        expected = self._sortedRpaths(self.incoming_mails[:2]
-                                      + self.outgoing_mails[:4])
-        self.assertEquals(result, expected)
+        result0 = self._sortedRpaths(threads[0])
+        expected0 = self._sortedRpaths(self.incoming_mails[:2]
+                                       + self.outgoing_mails[:4])
+        self.assertEquals(result0, expected0)
 
         # making another thread available for archiving
+        mail = self.incoming_mails[3]
+        self._set_state(mail, 'trash')
+        self._putMailInPast(mail, 300)
+        for mail in self.outgoing_mails[7:]: # 7 and 8
+            self._set_state(mail, 'sent')
+            self._putMailInPast(mail, 500)
+
+        threads = list(self.archiver.getThreadsToArchive())
+        self.assertEquals(len(threads), 2)
+
+        result0 = self._sortedRpaths(threads[0])
+        self.assertEquals(result0, expected0) # same as previously
+
+        result1 = self._sortedRpaths(threads[1])
+        expected0 = self._sortedRpaths([self.incoming_mails[3]]
+                                       + self.outgoing_mails[7:])
+        self.assertEquals(result1, expected1)
 
 
 
