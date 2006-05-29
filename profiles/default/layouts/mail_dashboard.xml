@@ -15,6 +15,7 @@ Layout that presents catalog search results
   <property name="actions_category">cpscourrier_batch</property>
   <property name="cookie_id">cpscourrier</property>
   <property name="filter_button">filter</property>
+  <property name="filter_items_per_page">items_nb</property>
   <property name="fulltext_keys">
     <element value="SearchableText"/>
     <element value="ZCTitle"/>
@@ -239,6 +240,22 @@ Layout that presents catalog search results
    </property>
   </widget>
 
+ <widget name="q_items_nb" meta_type="Select Filter Widget">
+  <property name="fields">
+   <element value="filter_items_nb"/>
+  </property>
+  <property name="label">cpscourrier_items_nb_label</property>
+  <property name="label_edit">cpscourrier_items_nb_label</property>
+  <property name="is_i18n">True</property>
+  <property name="hidden_layout_modes">
+   <element value="create"/>
+  </property>
+  <property name="widget_mode_expr">string:edit</property>
+  <property name="vocabulary">items_per_page</property>
+  <property name="translated">False</property>
+  <property name="cookie_id">cpscourrier</property>
+ </widget>
+
   <table>
    <row>
      <cell name="q_ZCText_or"/>
@@ -268,6 +285,7 @@ Layout that presents catalog search results
    </row>
    <row>
      <cell name="default_sort"/>
+     <cell name="q_items_nb"/>
    </row>
    <row>
      <cell name="Table"/>

@@ -154,8 +154,10 @@ Layout that presents mailbox contents
   <row>
    <cell name="q_review_state"/>
    <cell name="q_priority"/>
-   <cell name="q_items_nb"/>
   </row>
+  <row>
+    <cell name="q_items_nb"/>
+  </row>>
   <row>
    <cell name="Table" ncols="2"/>
   </row>
