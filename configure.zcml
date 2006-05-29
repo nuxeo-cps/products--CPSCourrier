@@ -4,6 +4,14 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:five="http://namespaces.zope.org/five">
 
+  <!-- I/O support for the archiver -->
+
+  <adapter
+      factory=".archive.CPSProxyXMLAdapter"
+      provides="Products.GenericSetup.interfaces.IBody"
+      for="Products.CPSCore.interfaces.ICPSProxy
+           Products.GenericSetup.interfaces.ISetupEnviron"
+      />
     <!--
       The relations between docids are automatically cleaned at document
       deletion time.

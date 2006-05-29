@@ -20,9 +20,14 @@
 
 # testing module and harness
 
-import unittest
-from itertools import chain
 from DateTime import DateTime
+from itertools import chain
+import os
+import shutil
+import tempfile
+import unittest
+
+import lxml.etree
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.CatalogTool import CatalogTool
@@ -57,7 +62,8 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         CatalogTool.__call__ = _batching_call
 
         # create an archiver instance
-        self.archiver = Archiver(self.portal)
+        self.tmp_archive_dir = tempfile.mkdtemp()
+        self.archiver = Archiver(self.portal, archive_home=self.tmp_archive_dir)
         # use the 'ExpirationDate' field instead of the 'ModificationDate' to
         # simplify the test fixture
         self.archiver.date_field_id = "ExpirationDate"
@@ -104,6 +110,9 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         # unpatch the catalog
         CatalogTool.__call__ = CatalogTool._original_call
         delattr(CatalogTool, '_original_call')
+
+        # clean temp dir
+        shutil.rmtree(self.tmp_archive_dir)
 
         # ensure the catalog is clean
         self.portal.portal_catalog.refreshCatalog(clear=1)
@@ -181,6 +190,29 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         expected1 = self._sortedRpaths([self.incoming_mails[3]]
                                        + self.outgoing_mails[6:8])
         self.assertEquals(result1, expected1)
+
+    def test_exportProxyToXML(self):
+        # archiving an incoming mail
+        self.archiver.exportProxyToXml(self.incoming_mails[0])
+        filename = "mailboxes/test-mailbox-group/test-mailbox/in_mail0.xml"
+        tree = lxml.etree.parse(os.path.join(self.tmp_archive_dir, filename))
+        object = tree.xpath('/object')[0]
+        self.assertEquals(object.get('portal_type'), 'Incoming Mail')
+        title = tree.xpath("//f[@id='Title']")[0]
+        self.assertEquals(title.get('v'), 'Test mail 0')
+
+        #TODO: test docid, wf history, relations
+
+        # archiving an outgoing mail
+#        self.archiver.exportProxyToXml(self.outgoing_mails[0])
+#        filename = "mailboxes/test-mailbox-group/test-mailbox/re-in_mail0.xml"
+#        tree = lxml.etree.parse(os.path.join(self.tmp_archive_dir, filename))
+#        object = tree.xpath('/object')[0]
+#        self.assertEquals(object.get('portal_type'), 'Outgoing Mail')
+#        title = tree.xpath("//f[@id='Title']")[0]
+#        self.assertEquals(title.get('v'), 'Re: Test mail 0')
+
+        #TODO: test docid, wf history, relations
 
 
 def test_suite():

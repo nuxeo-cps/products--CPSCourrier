@@ -41,6 +41,7 @@ STACK_ID = 'Pilots'
 
 # FS directory name in to host the archives
 ARCHIVE_HOME = "$INSTANCE_HOME/var/archive"
+ARCHIVE_HOME = ARCHIVE_HOME.replace("$INSTANCE_HOME", INSTANCE_HOME)
 
 # Minimum number of days for mails to get archived
 ARCHIVE_MIN_AGE = 60

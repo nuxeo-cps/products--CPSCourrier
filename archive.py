@@ -22,14 +22,89 @@ This archiver assumes the catalog supports batching (ie is a lucene catalog).
 """
 
 import logging
+import os
 from DateTime import DateTime
 
+from zope.app import zapi
+from zope.component import adapts
+from zope.interface import implements
+
+from Acquisition import aq_inner, aq_parent
+from ZODB.loglevels import BLATHER as VERBOSE
 from zExceptions import NotFound
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.config import ARCHIVE_MIN_AGE, ARCHIVE_HOME
 from Products.CPSCourrier.relations import get_thread_for
+from Products.GenericSetup.context import DirectoryExportContext
+from Products.GenericSetup.utils import XMLAdapterBase
+from Products.GenericSetup.interfaces import IBody
+from Products.GenericSetup.interfaces import INode
+from Products.GenericSetup.interfaces import ISetupEnviron
+
+from Products.CPSCore.interfaces import ICPSProxy
 
 logger = logging.getLogger('CPSCourrier.archive')
+
+class CPSProxyXMLAdapter(XMLAdapterBase):
+    """XML (import and) exporter for a CPSProxy
+
+    Store the Proxy data (docid, WF history, ...) and the document data in the
+    same XML file (+ subfiles).
+
+    This also export the IS_REPLY_TO information.
+    """
+
+    adapts(ICPSProxy, ISetupEnviron)
+    implements(IBody)
+
+    _LOGGER_ID = 'cpsproxy'
+
+    def _getObjectNode(self, name, i18n=True):
+        node = XMLAdapterBase._getObjectNode(self, name, i18n)
+        node.setAttribute('portal_type', self.context.getPortalTypeName())
+        return node
+
+    def _exportNode(self):
+        """Export the object as a DOM node"""
+        node = self._getObjectNode('object')
+        ob = self.context
+        exporter = zapi.queryMultiAdapter((ob.getContent(), self.environ), IBody)
+        node.appendChild(self._extractDocid())
+        node.appendChild(self._extractWorkflowHistory())
+        node.appendChild(self._extractRelation())
+        node.appendChild(exporter._extractObjects())
+        node.appendChild(exporter._extractDocumentFields())
+        msg = "Proxy %r exported." % self.context.getId()
+        self._logger.log(VERBOSE, msg)
+        return node
+
+    def _extractDocid(self):
+        fragment = self._doc.createDocumentFragment()
+        return fragment
+
+    def _extractWorkflowHistory(self):
+        fragment = self._doc.createDocumentFragment()
+        return fragment
+
+    def _extractRelation(self):
+        fragment = self._doc.createDocumentFragment()
+        return fragment
+
+
+def exportSingleCPSObject(obj, parent_path, context):
+    """Export a single CPS object.
+
+    Recursion only happens for specific CPS subobjects (attachment fields).
+    """
+    exporter = zapi.queryMultiAdapter((obj, context), IBody)
+    if exporter:
+        id = obj.getId().replace(' ', '_')
+        if exporter.name:
+            id = '%s%s' % (id, exporter.name)
+        filename = '%s%s' % (id, exporter.suffix)
+        body = exporter.body
+        if body is not None:
+            context.writeDataFile(filename, body, exporter.mime_type, parent_path)
 
 
 class Archiver:
@@ -43,8 +118,14 @@ class Archiver:
     # date attribute used to discriminate
     date_field_id = 'ModificationDate'
 
-    def __init__(self, portal):
+    def __init__(self, portal, archive_home=ARCHIVE_HOME):
         self._portal = portal
+        setup_tool = getToolByName(portal, "portal_setup")
+        if not os.path.exists(archive_home):
+            os.mkdirs(archive_home)
+        if not os.path.isdir(archive_home):
+            raise IOError("%s is not a directory" % archive_home)
+        self._context = DirectoryExportContext(setup_tool, archive_home)
 
     def getThreadsToArchive(self):
         """Generate lists of proxies that are to be archived
@@ -116,4 +197,25 @@ class Archiver:
 
             query['b_start'] = query['b_start'] + query['b_size']
             brains = catalog(**query)
+
+    def exportProxyToXml(self, proxy):
+        """Export a proxy to the XML profile directory"""
+        utool = getToolByName(self._portal, 'portal_url')
+        path = utool.getRpath(proxy)
+        parent_path, _ = path.rsplit('/', 1)
+        exportSingleCPSObject(proxy, parent_path + '/', self._context)
+
+    def archive(self):
+        """Export and delete thread of old proxies"""
+        evtool = getToolByName(self._portal, 'portal_eventservice')
+        for thread in self.getThreadsToArchive():
+            for proxy in thread:
+                # exporting the whole thread
+                self.exportProxyToXml(proxy)
+            for proxy in thread:
+                # deleting the whole thread
+                mb = aq_parent(aq_inner(proxy))
+                evtool.notifyEvent('workflow_delete', proxy, {})
+                mb.manage_delObjects([proxy.getId()])
+
 
