@@ -64,6 +64,14 @@ Layout for searching an answer in existing outgoing mails
    </property>
  </widget>
 
+ <!-- here for preparation only -->
+ <widget name="q_review_state" meta_type="Lines Widget">
+   <property name="hidden_layout_modes">search_results edit</property>
+   <property name="fields">
+     <element value="filter_review_state" />
+   </property>
+ </widget>
+
  <widget name="q_sort" meta_type="Toggable Criterion Widget">
    <property name="hidden_layout_modes">create edit</property>
    <property name="widget_mode_expr">string:edit</property>

@@ -12,6 +12,10 @@
   <field name="filter_fulltext" meta_type="CPS String Field" />
   <field name="filter_from" meta_type="CPS String Field" />
   <field name="filter_rtype" meta_type="CPS String Field" />
+  <field name="filter_review_state" meta_type="CPS String List Field">
+    <property name="read_ignore_storage">True</property>
+    <property name="read_process_expr">python:['published', 'sent']</property>
+  </field>
   <field name="template_usage" meta_type="CPS Int Field">
     <property name="default_expr">python:5</property>
   </field>
