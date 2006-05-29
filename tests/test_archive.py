@@ -169,7 +169,7 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         mail = self.incoming_mails[3]
         self._set_state(mail, 'trash')
         self._putMailInPast(mail, 300)
-        for mail in self.outgoing_mails[7:]: # 7 and 8
+        for mail in self.outgoing_mails[6:]: # 6 to 9
             self._set_state(mail, 'sent')
             self._putMailInPast(mail, 500)
 
@@ -180,8 +180,8 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         self.assertEquals(result0, expected0) # same as previously
 
         result1 = self._sortedRpaths(threads[1])
-        expected0 = self._sortedRpaths([self.incoming_mails[3]]
-                                       + self.outgoing_mails[7:])
+        expected1 = self._sortedRpaths([self.incoming_mails[3]]
+                                       + self.outgoing_mails[6:8])
         self.assertEquals(result1, expected1)
 
 
