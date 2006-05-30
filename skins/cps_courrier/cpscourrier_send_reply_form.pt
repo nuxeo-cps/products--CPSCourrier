@@ -17,11 +17,18 @@
         tal:define="global info
         python:proxy.getContentInfo(proxy, doc=doc, level=3);
         workflow_action_script string:cpscourrier_send_reply;
-        scripts python:modules['Products.CPSCourrier.workflows.scripts'];">
+        scripts python:modules['Products.CPSCourrier.workflows.scripts'];
+	content_format doc/content_format">
 
         <h3 i18n:translate="">cpscourrier_response_preview_heading</h3>
 
-        <pre tal:content="python:scripts.compute_reply_body(context)">
+
+	<div class="htmlReplyPreview"
+	     tal:condition="python: content_format == 'html'"
+	     tal:content="structure python:scripts.compute_reply_body(context, plain_text=False)"/>
+
+        <pre tal:condition="python: content_format != 'html'"
+	  tal:content="python:scripts.compute_reply_body(context)">
           reply preview
         </pre>
 
