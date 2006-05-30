@@ -191,7 +191,7 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
                                        + self.outgoing_mails[6:8])
         self.assertEquals(result1, expected1)
 
-    def test_exportProxyToXML(self):
+    def test_exportProxyToXml(self):
         # archiving an incoming mail
         self.archiver.exportProxyToXml(self.incoming_mails[0])
         filename = "mailboxes/test-mailbox-group/test-mailbox/in_mail0.xml"
@@ -204,13 +204,14 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         #TODO: test docid, wf history, relations
 
         # archiving an outgoing mail
-#        self.archiver.exportProxyToXml(self.outgoing_mails[0])
-#        filename = "mailboxes/test-mailbox-group/test-mailbox/re-in_mail0.xml"
-#        tree = lxml.etree.parse(os.path.join(self.tmp_archive_dir, filename))
-#        object = tree.xpath('/object')[0]
-#        self.assertEquals(object.get('portal_type'), 'Outgoing Mail')
-#        title = tree.xpath("//f[@id='Title']")[0]
-#        self.assertEquals(title.get('v'), 'Re: Test mail 0')
+        self.archiver.exportProxyToXml(self.outgoing_mails[0])
+        filename = ("mailboxes/test-mailbox-group/test-mailbox/"
+                    "re-test-mail-0.xml")
+        tree = lxml.etree.parse(os.path.join(self.tmp_archive_dir, filename))
+        object = tree.xpath('/object')[0]
+        self.assertEquals(object.get('portal_type'), 'Outgoing Mail')
+        title = tree.xpath("//f[@id='Title']")[0]
+        self.assertEquals(title.get('v'), 'Re: Test mail 0')
 
         #TODO: test docid, wf history, relations
 
