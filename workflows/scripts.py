@@ -331,7 +331,7 @@ def _quote_mail(proxy, encoding='iso-8859-15', plain_text=True):
     lines =  doc['content'].split('\n')
     body += '\n'.join('> %s' % line for line in lines)
     if not plain_text:
-        return '<pre>%s</pre>' % body
+        return '\n<pre>%s</pre>\n' % body
     return body
 
 def _extract_attachments(proxy, filters=None):
@@ -436,7 +436,8 @@ def compute_reply_body(proxy, plain_text=True,additionnal_info=''):
         ptool = getToolByName(proxy, 'portal_proxies')
         for info in ptool.getProxyInfosFromDocid(str(incoming_docid)):
             if info['visible']:
-                body += _quote_mail(info['object'], encoding)
+                body += _quote_mail(info['object'], encoding,
+                                    plain_text=plain_text)
 
     if plain_text:
         return body

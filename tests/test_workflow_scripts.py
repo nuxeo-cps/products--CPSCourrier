@@ -428,6 +428,66 @@ On %s, bar@foo.com wrote:
             # need get rid of the unpickleable fake MailHost
             del out_mail1.MailHost
 
+    def test_send_html_reply(self):
+        # faking the MailHost
+        class FakeMailHost:
+            def _send(self, *args):
+                return args
+
+        in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
+        in_mail1_doc_edit = in_mail1.getEditableContent()
+        in_mail1_doc_edit.edit({
+            'content': "Hi!\nPlease go to http://www.paipal.com and confirm"
+                       " your password!\n  Regards,\n  The Paipal team"},
+            proxy=in_mail1,
+        )
+        out_mail1 = reply_to_incoming(in_mail1)
+        try:
+            out_mail1.MailHost = FakeMailHost()
+            out_mail1_doc_edit = out_mail1.getEditableContent()
+            out_mail1_doc_edit.edit(
+                content="<em>Please</em> stop trying to fish us!",
+                content_format='html',
+                form_of_address='regards',
+                proxy=out_mail1,
+            )
+
+            result = send_reply(out_mail1)
+            expected = ('test_mailbox@cpscourrier.com', 'bar@foo.com', """\
+Content-Type: text/html; charset="iso-8859-15"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: Test mail 1
+From: test_mailbox@cpscourrier.com
+To: bar@foo.com
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content=3D"text/html;charset=3DISO-8859-15" http-equiv=3D"Content-T=
+ype">
+  <title></title>
+</head>
+<body bgcolor=3D"#ffffff" text=3D"#000000"><em>Please</em> stop trying to f=
+ish us!<br/><br/>Best regards, <br/><br/>-- <br/>CPS Manager<br/>
+<pre>
+
+On %s, bar@foo.com wrote:
+> Hi!
+> Please go to http://www.paipal.com and confirm your password!
+>   Regards,
+>   The Paipal team</pre>
+</body>
+</html>""" % datetime.datetime.now().strftime('%Y-%m-%d'))
+
+            self.assertEquals(result, expected)
+        finally:
+            # for some reason there is a ZODB commit in beforeTearDown thus we
+            # need get rid of the unpickleable fake MailHost
+            del out_mail1.MailHost
+
     #
     # the following tests are for workflow scripts but general events.
     # As the setup is similar we reuse them directly
