@@ -38,7 +38,6 @@ from Products.CPSCourrier.relations import get_thread_for
 from Products.GenericSetup.context import DirectoryExportContext
 from Products.GenericSetup.utils import XMLAdapterBase
 from Products.GenericSetup.interfaces import IBody
-from Products.GenericSetup.interfaces import INode
 from Products.GenericSetup.interfaces import ISetupEnviron
 
 from Products.CPSCore.interfaces import ICPSProxy
@@ -208,6 +207,7 @@ class Archiver:
     def archive(self):
         """Export and delete thread of old proxies"""
         evtool = getToolByName(self._portal, 'portal_eventservice')
+        archived_mails = 0
         for thread in self.getThreadsToArchive():
             for proxy in thread:
                 # exporting the whole thread
@@ -217,5 +217,8 @@ class Archiver:
                 mb = aq_parent(aq_inner(proxy))
                 evtool.notifyEvent('workflow_delete', proxy, {})
                 mb.manage_delObjects([proxy.getId()])
+            archived_mails += len(thread)
+        return archived_mails
+
 
 
