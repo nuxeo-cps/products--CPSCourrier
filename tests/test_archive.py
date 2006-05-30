@@ -34,7 +34,9 @@ from Products.CMFCore.CatalogTool import CatalogTool
 from Products.CPSCourrier.tests.layer import IntegrationTestCase
 from Products.CPSCourrier.workflows.scripts import reply_to_incoming
 from Products.CPSCourrier.relations import make_reply_to
-from Products.CPSCourrier.config import RELATION_GRAPH_ID
+from Products.CPSCourrier.config import (
+    RELATION_GRAPH_ID, IS_REPLY_TO, HAS_REPLY)
+
 
 # import things to test
 from Products.CPSCourrier.archive import Archiver
@@ -261,8 +263,14 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         self.assertEquals(remaining_ids, all_ids - archived_ids)
 
         # check that the relation tool no longer have reference to archived
-        # mails: TODO
-
+        # mails:
+        rtool = getToolByName(self.portal, 'portal_relations')
+        g = rtool.getGraph(RELATION_GRAPH_ID)
+        for _, mail in in_mails + out_mails:
+            references = g.getRelationsFor(int(mail.getDocid()), IS_REPLY_TO)
+            self.assertEquals(references, ())
+            replies = g.getRelationsFor(int(mail.getDocid()), HAS_REPLY)
+            self.assertEquals(replies, ())
 
 
 def test_suite():
