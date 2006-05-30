@@ -426,17 +426,24 @@ def compute_reply_body(proxy,text_only=True,additionnal_info=''):
                 body += _quote_mail(info['object'], encoding)
     return body
 
-def send_reply(proxy,text_only=True,additionnal_info=''):
-    """Send a reply by SMTP"""
+def send_reply(proxy, text_only=False, additionnal_info=''):
+    """Send a reply by SMTP
+
+    If text_only is True, any html is stripped to plain text
+    Otherwise, the content type is deduced from the document.
+    """
     tstool = getToolByName(proxy, 'translation_service')
     encoding = tstool.default_charset
     doc = proxy.getContent()
     mto = doc['mail_to']
     mfrom = doc['mail_from']
     subject = doc['Title']()
+
     body = compute_reply_body(proxy,text_only,additionnal_info)
     attachments = _extract_attachments(proxy)
-    return send_mail(doc, mto, mfrom, subject, body, attachments, encoding,text_only)
+    return send_mail(doc, mto, mfrom, subject, body,
+                     attachments=attachments, encoding=encoding,
+                     text_only=text_only)
 
 def send_mail(context, mto, mfrom, subject, body, attachments=(),
               encoding='iso-8859-15',text_only=True):
