@@ -422,9 +422,10 @@ def compute_reply_body(proxy, plain_text=True,additionnal_info=''):
         foa = vtool.form_of_address[doc['form_of_address']]
 
     if plain_text:
-        body += '\n\n%s\n\n-- \n%s\n%s' % (foa , doc['signature'],additionnal_info)
+        sig_wrapper = '\n\n%s\n\n-- \n%s\n%s'
     else:
-        body += '<br/><br/>%s<br/><br/>-- <br/>%s<br/>%s' % (foa , doc['signature'],additionnal_info)
+        sig_wrapper =  '<br/><br/>%s<br/><br/>-- <br/>%s<br/>%s'
+    body += sig_wrapper % (foa , doc['signature'], additionnal_info)
 
     # get the original content for quoting
     incoming_docid = _get_incoming_docid_for(proxy)
