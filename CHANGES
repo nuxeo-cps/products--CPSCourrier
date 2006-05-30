@@ -3,25 +3,10 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
-- handle as a group of users
-- date range search in the dashboard layout
-- better look for the batching gadget
+-
 Bug fixes:
 ~~~~~~~~~~
-- 'Subject' from the parent mailbox or mail doc is preselected in the reuse
-  reply search view
-- search form was broken when putting values that were not integer castable in
-  the pertinence form element
-- Local Managers could not set local roles
-- Supervisors could not set local roles
-- Arrows for sorting column materialization were not displayed
-- cookie for advanced search page cannot interfere with dashboards of mailboxes content
-  views anymore
-- cookie setting was broken with non ascii chars
-- fixed permission problems for mb and mbg wf
-- Attached files of mail templates weren't copied
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
-- catalog tabular widget can now perform range request (min:max included)
-- Page Template for tabulars now receives base_url in options
-- tabular widgets can get the number of items per page from a filter
+-
