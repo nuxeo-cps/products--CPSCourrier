@@ -470,7 +470,7 @@ def send_mail(context, mto, mfrom, subject, body, attachments=(),
               encoding='iso-8859-15', plain_text=True):
     """Send a mail
 
-    body should be plain text.
+    body is plain text or html according to plain_text kwarg
 
     Optional attachments are (filename, content-type, data) tuples.
 
