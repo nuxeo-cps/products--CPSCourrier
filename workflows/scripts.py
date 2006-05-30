@@ -486,15 +486,24 @@ def send_mail(context, mto, mfrom, subject, body, attachments=(),
     # building the formatted email message
     if not isinstance(mto, str):
         mto = ', '.join(mto)
+
+    # prepare main content
+    content_type = plain_text and 'text/plain' or 'text/html'
+    if plain_text:
+        main_msg = MIMEText(body, _subtype='plain', _charset=encoding)
+    else:
+        alt_html = MIMEText(body, _subtype='html', _charset=encoding)
+        alt_plain = MIMEText(
+            'Sorry no text/plain version available. Check html version.'
+            )
+        main_msg = MIMEMultipart(_subtype='alternative',
+                                 _subparts=[alt_plain, alt_html])
+
     if attachments:
         msg = MIMEMultipart()
-        content_type = plain_text and 'text/plain' or 'text/html'
-        attachments.insert(0, ('content', content_type, body))
+        msg.attach(main_msg)
     else:
-        if plain_text:
-            msg = MIMEText(body)
-        else:
-            msg = MIMEText(body,_subtype='html',_charset=encoding)
+        msg = main_msg
 
     msg['Subject'] = subject
     msg['From'] = mfrom
@@ -511,7 +520,7 @@ def send_mail(context, mto, mfrom, subject, body, attachments=(),
             ctype = 'application/octet-stream'
         maintype, subtype = ctype.split('/', 1)
         if maintype == 'text':
-            sub_msg = MIMEText(data, _subtype=subtype, _charset=encoding)
+            sub_msg = MIMEText(data, _subtype=subtype)
         elif maintype == 'image':
             sub_msg = MIMEImage(data, _subtype=subtype)
         elif maintype == 'audio':
