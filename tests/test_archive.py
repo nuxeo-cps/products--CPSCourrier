@@ -215,6 +215,48 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
 
         #TODO: test docid, wf history, relations
 
+    def test_archive(self):
+        # make 2 threads archivable as previously
+        in_mails = [(i, self.incoming_mails[i]) for i in (0, 1, 3)]
+        for _, mail in in_mails:
+            self._set_state(mail, 'closed')
+            self._putMailInPast(mail, 300)
+        out_mails = [(i, self.outgoing_mails[i]) for i in range(4)+range(6, 8)]
+        for _, mail in out_mails:
+            self._set_state(mail, 'sent')
+            self._putMailInPast(mail, 500)
+
+        # archive them
+        self.archiver.archive()
+
+        # check they are archived:
+        path_pattern = "mailboxes/test-mailbox-group/test-mailbox/%s.xml"
+
+        for i, mail in in_mails:
+            filename = path_pattern % mail.getId()
+            filepath = os.path.join(self.tmp_archive_dir, filename)
+            tree = lxml.etree.parse(filepath)
+            object = tree.xpath('/object')[0]
+            self.assertEquals(object.get('portal_type'), 'Incoming Mail')
+            title = tree.xpath("//f[@id='Title']")[0]
+            self.assertEquals(title.get('v'), 'Test mail %d' % i)
+
+        for i, mail in out_mails:
+            filename = path_pattern % mail.getId()
+            filepath = os.path.join(self.tmp_archive_dir, filename)
+            tree = lxml.etree.parse(filepath)
+            object = tree.xpath('/object')[0]
+            self.assertEquals(object.get('portal_type'), 'Outgoing Mail')
+            title = tree.xpath("//f[@id='Title']")[0]
+            self.assertEquals(title.get('v'), 'Re: Test mail %d' % (i / 2))
+
+        # check they are deleted: TODO
+
+        # check that they no longer are related in the relation tool: TODO
+
+        # check that the remaining mails were not archived: TODO
+
+
 
 def test_suite():
     return unittest.makeSuite(ArchiverIntegrationTestCase)
