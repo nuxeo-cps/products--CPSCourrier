@@ -250,11 +250,18 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
             title = tree.xpath("//f[@id='Title']")[0]
             self.assertEquals(title.get('v'), 'Re: Test mail %d' % (i / 2))
 
-        # check they are deleted: TODO
+        # check they are all deleted:
+        archived_ids = set(m.getId() for _, m in in_mails + out_mails)
+        remaining_ids = set(self.mb.objectIds())
+        self.assertEquals(archived_ids & remaining_ids, set())
 
-        # check that they no longer are related in the relation tool: TODO
+        # check that the remaining mails were not archived:
+        all_ids = set(m.getId() for m in self.incoming_mails +
+                                         self.outgoing_mails)
+        self.assertEquals(remaining_ids, all_ids - archived_ids)
 
-        # check that the remaining mails were not archived: TODO
+        # check that the relation tool no longer have reference to archived
+        # mails: TODO
 
 
 
