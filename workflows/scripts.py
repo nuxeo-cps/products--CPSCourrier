@@ -98,6 +98,7 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
         template_doc = template_proxy.getEditableContent()
         data.update({
             'content': template_doc['content'],
+            'content_format': template_doc['content_format'],
             'Subject': template_doc['Subject'](),
             'form_of_address': template_doc['form_of_address'],
         })
