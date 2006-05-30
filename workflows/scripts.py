@@ -441,7 +441,7 @@ def compute_reply_body(proxy, plain_text=True,additionnal_info=''):
     if plain_text:
         return body
     else:
-        return HTML_BODY_WRAPPER % doc['content']
+        return HTML_BODY_WRAPPER % body
 
 
 def send_reply(proxy, text_only=False, additionnal_info=''):
@@ -457,14 +457,14 @@ def send_reply(proxy, text_only=False, additionnal_info=''):
     mfrom = doc['mail_from']
     subject = doc['Title']()
 
-    text_only = text_only or doc.get('content_format') == 'html'
+    plain_text = text_only or getattr(doc, 'content_format', 'text') != 'html'
 
     body = compute_reply_body(proxy, additionnal_info=additionnal_info,
-                              plain_text=text_only)
+                              plain_text=plain_text)
     attachments = _extract_attachments(proxy)
     return send_mail(doc, mto, mfrom, subject, body,
                      attachments=attachments, encoding=encoding,
-                     plain_text=text_only)
+                     plain_text=plain_text)
 
 def send_mail(context, mto, mfrom, subject, body, attachments=(),
               encoding='iso-8859-15', plain_text=True):

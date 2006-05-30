@@ -394,6 +394,7 @@ On %s, bar@foo.com wrote:
             out_mail1_doc_edit = out_mail1.getEditableContent()
             out_mail1_doc_edit.edit(
                 content="Please stop trying to fish us!",
+                content_format='text',
                 form_of_address='regards',
                 proxy=out_mail1,
             )
@@ -413,6 +414,7 @@ Best regards,
 
 -- 
 CPS Manager
+
 
 On %s, bar@foo.com wrote:
 > Hi!
