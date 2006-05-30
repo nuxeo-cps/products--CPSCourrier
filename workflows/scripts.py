@@ -315,7 +315,7 @@ def init_stack_with_user(sci, wf_var_id, prefix='courrier_', **kw):
 # Mail sending operation
 #
 
-def _quote_mail(proxy, encoding='iso-8859-15'):
+def _quote_mail(proxy, encoding='iso-8859-15', plain_text=True):
     """Helper function to quote a mail in a reply or a forward"""
     tstool = getToolByName(proxy, 'translation_service')
     doc = proxy.getContent()
@@ -330,6 +330,8 @@ def _quote_mail(proxy, encoding='iso-8859-15'):
     body = '\n\n%s\n' % quote_header
     lines =  doc['content'].split('\n')
     body += '\n'.join('> %s' % line for line in lines)
+    if not plain_text:
+        return '<pre>%s</pre>' % body
     return body
 
 def _extract_attachments(proxy, filters=None):
@@ -387,7 +389,20 @@ def forward_mail(proxy, mto, comment=''):
 
     return send_mail(proxy, mto, mfrom, subject, body, attachments, encoding)
 
-def compute_reply_body(proxy,text_only=True,additionnal_info=''):
+HTML_BODY_WRAPPER = """\
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html;charset=ISO-8859-15" http-equiv="Content-Type">
+  <title></title>
+</head>
+<body bgcolor="#ffffff" text="#000000">%s</body>
+</html>"""
+
+# make emacs fontifier happy
+dummy = """ " """
+
+def compute_reply_body(proxy, plain_text=True,additionnal_info=''):
     """Compute the body of a sent outgoing mail
 
     The content of the reply is build from the proxy quoting the original mail
@@ -398,18 +413,15 @@ def compute_reply_body(proxy,text_only=True,additionnal_info=''):
     vtool = getToolByName(proxy, 'portal_vocabularies')
     mcat = lambda label: tstool(label).encode(encoding)
     doc = proxy.getContent()
-    if text_only:
-        body = doc['content']
-    else:
-        body="<html>%s</html>" % doc['content']
-        
+    body = doc['content']
+
     foa = vtool.form_of_address.getMsgid(doc['form_of_address'])
     if foa:
         foa = mcat(foa)
     else:
         foa = vtool.form_of_address[doc['form_of_address']]
-        
-    if text_only:
+
+    if plain_text:
         body += '\n\n%s\n\n-- \n%s\n%s' % (foa , doc['signature'],additionnal_info)
     else:
         body += '<br/><br/>%s<br/><br/>-- <br/>%s<br/>%s' % (foa , doc['signature'],additionnal_info)
@@ -424,7 +436,12 @@ def compute_reply_body(proxy,text_only=True,additionnal_info=''):
         for info in ptool.getProxyInfosFromDocid(str(incoming_docid)):
             if info['visible']:
                 body += _quote_mail(info['object'], encoding)
-    return body
+
+    if plain_text:
+        return body
+    else:
+        return HTML_BODY_WRAPPER % doc['content']
+
 
 def send_reply(proxy, text_only=False, additionnal_info=''):
     """Send a reply by SMTP
@@ -439,14 +456,17 @@ def send_reply(proxy, text_only=False, additionnal_info=''):
     mfrom = doc['mail_from']
     subject = doc['Title']()
 
-    body = compute_reply_body(proxy,text_only,additionnal_info)
+    text_only = text_only or doc.get('content_format') == 'html'
+
+    body = compute_reply_body(proxy, additionnal_info=additionnal_info,
+                              plain_text=text_only)
     attachments = _extract_attachments(proxy)
     return send_mail(doc, mto, mfrom, subject, body,
                      attachments=attachments, encoding=encoding,
-                     text_only=text_only)
+                     plain_text=text_only)
 
 def send_mail(context, mto, mfrom, subject, body, attachments=(),
-              encoding='iso-8859-15',text_only=True):
+              encoding='iso-8859-15', plain_text=True):
     """Send a mail
 
     body should be plain text.
@@ -465,12 +485,10 @@ def send_mail(context, mto, mfrom, subject, body, attachments=(),
         mto = ', '.join(mto)
     if attachments:
         msg = MIMEMultipart()
-        if text_only:
-            attachments.insert(0, ('content', 'text/plain', body))
-        else:
-            attachments.insert(0, ('content', 'text/html', body))
+        content_type = plain_text and 'text/plain' or 'text/html'
+        attachments.insert(0, ('content', content_type, body))
     else:
-        if text_only:
+        if plain_text:
             msg = MIMEText(body)
         else:
             msg = MIMEText(body,_subtype='html',_charset=encoding)
