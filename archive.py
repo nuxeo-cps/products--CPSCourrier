@@ -29,12 +29,13 @@ from zope.app import zapi
 from zope.component import adapts
 from zope.interface import implements
 
-from Acquisition import aq_inner, aq_parent
+from Acquisition import aq_base, aq_inner, aq_parent
 from ZODB.loglevels import BLATHER as VERBOSE
 from zExceptions import NotFound
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.config import ARCHIVE_MIN_AGE, ARCHIVE_HOME
 from Products.CPSCourrier.relations import get_thread_for
+from Products.CPSDocument.exportimport import getCPSObjectValues
 from Products.GenericSetup.context import DirectoryExportContext
 from Products.GenericSetup.utils import XMLAdapterBase
 from Products.GenericSetup.interfaces import IBody
@@ -90,20 +91,38 @@ class CPSProxyXMLAdapter(XMLAdapterBase):
         return fragment
 
 
-def exportSingleCPSObject(obj, parent_path, context):
-    """Export a single CPS object.
+def exportCPSObjectsWithDoc(obj, parent_path, context):
+    """Export CPS proxies and related documents subfields.
 
-    Recursion only happens for specific CPS subobjects (attachment fields).
+    Recursion also happens for specific CPS subobjects.
+
+    Also use the 'subdir' kw of context.writeDataFile to play nicely with 
+    DirectoryExportContext.
     """
     exporter = zapi.queryMultiAdapter((obj, context), IBody)
+    id = obj.getId().replace(' ', '_')
     if exporter:
-        id = obj.getId().replace(' ', '_')
         if exporter.name:
             id = '%s%s' % (id, exporter.name)
         filename = '%s%s' % (id, exporter.suffix)
         body = exporter.body
         if body is not None:
-            context.writeDataFile(filename, body, exporter.mime_type, parent_path)
+            context.writeDataFile(filename, body, exporter.mime_type,
+                                  subdir=parent_path)
+
+    sub_path = "%s%s/" % (parent_path, id)
+    # subojects (contained documents or flexible schemas and layouts)
+    if getattr(aq_base(obj), 'objectValues', None) is not None:
+        for sub in getCPSObjectValues(obj):
+            exportCPSObjectsWithDoc(sub, sub_path, context)
+
+    # field subobjects of the related document if any
+    if getattr(aq_base(obj), 'getContent', None) is not None:
+        doc = obj.getContent()
+        for sub in getCPSObjectValues(doc):
+            exportCPSObjectsWithDoc(sub, sub_path, context)
+
+
 
 
 class Archiver:
@@ -209,7 +228,7 @@ class Archiver:
         utool = getToolByName(self._portal, 'portal_url')
         path = utool.getRpath(proxy)
         parent_path, _ = path.rsplit('/', 1)
-        exportSingleCPSObject(proxy, parent_path + '/', self._context)
+        exportCPSObjectsWithDoc(proxy, parent_path + '/', self._context)
 
     def archive(self):
         """Export and delete thread of old proxies"""

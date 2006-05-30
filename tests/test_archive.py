@@ -20,14 +20,16 @@
 
 # testing module and harness
 
+
 from DateTime import DateTime
+from OFS.Image import File
+from cStringIO import StringIO
 from itertools import chain
+import lxml.etree
 import os
 import shutil
 import tempfile
 import unittest
-
-import lxml.etree
 
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.CatalogTool import CatalogTool
@@ -93,11 +95,22 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
             self.incoming_mails.append(in_mail)
             self.wtool.doActionFor(in_mail, 'handle')
             # two outoing replies for each incoming mail
-            now = {self.archiver.date_field_id: DateTime()}
+            doc_def = {self.archiver.date_field_id: DateTime()}
             for _ in range(2):
                 out_mail = reply_to_incoming(in_mail)
                 self.outgoing_mails.append(out_mail)
-                out_mail.getEditableContent().edit(now, out_mail)
+                doc = out_mail.getEditableContent()
+                # attach files to the outgoing mail
+                ti = doc.getTypeInfo()
+                ti.flexibleAddWidget(doc, 'mail_flexible', 'file')
+                ti.flexibleAddWidget(doc, 'mail_flexible', 'file')
+                doc_def.update({
+                    'file_f0': File('file_f0', 'some_file.txt' ,
+                                    StringIO('This is a test')),
+                    'file_1_f0': File('file_1_f0', 'other_file.txt',
+                                      StringIO('Other test content'))
+                })
+                doc.edit(doc_def, out_mail)
 
         # link incoming #1 as a reply of outgoing #1 to get a bigger thread:
         # - in0
@@ -115,6 +128,8 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
 
         # clean temp dir
         shutil.rmtree(self.tmp_archive_dir)
+        #print '#' * 80
+        #print 'archive directory:', self.tmp_archive_dir
 
         # ensure the catalog is clean
         self.portal.portal_catalog.refreshCatalog(clear=1)
