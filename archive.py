@@ -171,6 +171,8 @@ class Archiver:
                 try:
                     thread_seed = brain.getObject()
                 except NotFound:
+                    thread_seed = None
+                if thread_seed is None:
                     # the proxy has been deleted since last catalog query
                     continue
 
@@ -183,10 +185,15 @@ class Archiver:
                     proxy = proxy_info['object']
                     if proxy_info['review_state'] not in review_states:
                         invalid_thread = True
+                        logger.debug('Proxy with info %s has wrong review state',
+                                     proxy_info)
                         break
                     dm = proxy.getContent().getDataModel()
-                    if dm[self.date_field_id] > date_max:
+                    proxy_date = dm[self.date_field_id]
+                    if  proxy_date > date_max:
                         invalid_thread = True
+                        logger.debug('Proxy with info %s is not old enough: '
+                                     '%s > %s', proxy_info, proxy_date, date_max)
                         break
                     proxies.append(proxy)
 
