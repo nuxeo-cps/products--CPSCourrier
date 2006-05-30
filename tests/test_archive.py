@@ -213,24 +213,44 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         self.archiver.exportProxyToXml(self.incoming_mails[0])
         filename = "mailboxes/test-mailbox-group/test-mailbox/in_mail0.xml"
         tree = lxml.etree.parse(os.path.join(self.tmp_archive_dir, filename))
+
+        # check general xml content
         object = tree.xpath('/object')[0]
         self.assertEquals(object.get('portal_type'), 'Incoming Mail')
         title = tree.xpath("//f[@id='Title']")[0]
         self.assertEquals(title.get('v'), 'Test mail 0')
 
-        #TODO: test docid, wf history, relations
+        # check relations
+        replies = tree.xpath("//relation[@name='has_reply']/target")
+        for reply in replies:
+            _, id = reply.get('rpath').rsplit('/', 1)
+            self.assert_(id.startswith("re-test-mail-0"))
+        references = tree.xpath("//relation[@name='is_reply_to']/target")
+        self.assertEquals(references, [])
+
+        #TODO: test wf history
 
         # archiving an outgoing mail
         self.archiver.exportProxyToXml(self.outgoing_mails[0])
         filename = ("mailboxes/test-mailbox-group/test-mailbox/"
                     "re-test-mail-0.xml")
         tree = lxml.etree.parse(os.path.join(self.tmp_archive_dir, filename))
+
+        # check general xml content
         object = tree.xpath('/object')[0]
         self.assertEquals(object.get('portal_type'), 'Outgoing Mail')
         title = tree.xpath("//f[@id='Title']")[0]
         self.assertEquals(title.get('v'), 'Re: Test mail 0')
 
-        #TODO: test docid, wf history, relations
+        # check relations
+        replies = tree.xpath("//relation[@name='has_reply']/target")
+        self.assertEquals(len(replies), 0)
+        references = tree.xpath("//relation[@name='is_reply_to']/target")
+        self.assertEquals(len(references), 1)
+        _, id = references[0].get('rpath').rsplit('/', 1)
+        self.assertEquals(id, "in_mail0")
+
+        #TODO: test wf history
 
     def test_archive(self):
         # make 2 threads archivable as previously

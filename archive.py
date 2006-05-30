@@ -33,7 +33,8 @@ from Acquisition import aq_base, aq_inner, aq_parent
 from ZODB.loglevels import BLATHER as VERBOSE
 from zExceptions import NotFound
 from Products.CMFCore.utils import getToolByName
-from Products.CPSCourrier.config import ARCHIVE_MIN_AGE, ARCHIVE_HOME
+from Products.CPSCourrier.config import (
+    ARCHIVE_MIN_AGE, ARCHIVE_HOME, HAS_REPLY, IS_REPLY_TO, RELATION_GRAPH_ID)
 from Products.CPSCourrier.relations import get_thread_for
 from Products.CPSDocument.exportimport import getCPSObjectValues
 from Products.GenericSetup.context import DirectoryExportContext
@@ -48,10 +49,10 @@ logger = logging.getLogger('CPSCourrier.archive')
 class CPSProxyXMLAdapter(XMLAdapterBase):
     """XML (import and) exporter for a CPSProxy
 
-    Store the Proxy data (docid, WF history, ...) and the document data in the
+    Store the Proxy data such as WF history and the document data in the
     same XML file (+ subfiles).
 
-    This also export the IS_REPLY_TO information.
+    This also export the IS_REPLY_TO and HAS_REPLY relations.
     """
 
     adapts(ICPSProxy, ISetupEnviron)
@@ -69,16 +70,15 @@ class CPSProxyXMLAdapter(XMLAdapterBase):
         node = self._getObjectNode('object')
         ob = self.context
         exporter = zapi.queryMultiAdapter((ob.getContent(), self.environ), IBody)
-        node.appendChild(self._extractDocid())
         node.appendChild(self._extractWorkflowHistory())
-        node.appendChild(self._extractRelation())
+        node.appendChild(self._extractRelation(IS_REPLY_TO))
+        node.appendChild(self._extractRelation(HAS_REPLY))
         node.appendChild(exporter._extractObjects())
         node.appendChild(exporter._extractDocumentFields())
         msg = "Proxy %r exported." % self.context.getId()
         self._logger.log(VERBOSE, msg)
         return node
 
-    def _extractDocid(self):
         fragment = self._doc.createDocumentFragment()
         return fragment
 
@@ -86,8 +86,21 @@ class CPSProxyXMLAdapter(XMLAdapterBase):
         fragment = self._doc.createDocumentFragment()
         return fragment
 
-    def _extractRelation(self):
+    def _extractRelation(self, relation_id):
         fragment = self._doc.createDocumentFragment()
+        node = self._doc.createElement('relation')
+        node.setAttribute('name', relation_id)
+        rtool = getToolByName(self.context, 'portal_relations')
+        ptool = getToolByName(self.context, 'portal_proxies')
+        g = rtool.getGraph(RELATION_GRAPH_ID)
+        docids = g.getRelationsFor(int(self.context.getDocid()), relation_id)
+        for docid in docids:
+            infos = ptool.getProxyInfosFromDocid(str(docid))
+            for info in infos:
+                child = self._doc.createElement('target')
+                child.setAttribute('rpath', info['rpath'])
+            node.appendChild(child)
+        fragment.appendChild(node)
         return fragment
 
 
@@ -121,8 +134,6 @@ def exportCPSObjectsWithDoc(obj, parent_path, context):
         doc = obj.getContent()
         for sub in getCPSObjectValues(doc):
             exportCPSObjectsWithDoc(sub, sub_path, context)
-
-
 
 
 class Archiver:
