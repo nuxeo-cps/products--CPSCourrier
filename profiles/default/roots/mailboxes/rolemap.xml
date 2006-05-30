@@ -15,6 +15,7 @@ Supervisor can do what LocalManager can except change perms-->
     <permission name="Change permissions" acquire="False">
       <role name="Manager"/>
       <role name="LocalManager"/>
+      <role name="Supervisor"/>
     </permission>
     <permission name="Change subobjects order" acquire="False">
       <role name="Manager"/>
