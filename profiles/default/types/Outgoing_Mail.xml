@@ -13,7 +13,7 @@
   <element value="common"/>
   <element value="mail_common"/>
   <element value="outgoing_mail" />
-  <element value="file" />
+  <element value="flexible_content" />
  </property>
  <property name="layouts">
   <element value="mail_header"/>
@@ -23,7 +23,7 @@
  </property>
  <property name="layout_clusters">
   <element value="header:mail_header"/>
-  <element value="metadata:mail_metadata"/>
+  <element value="metadata:flexible_content"/>
  </property>
  <property name="flexible_layouts">
   <element value="mail_flexible:file"/>
