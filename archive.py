@@ -60,6 +60,14 @@ class CPSProxyXMLAdapter(XMLAdapterBase):
 
     _LOGGER_ID = 'cpsproxy'
 
+    _wf_vars_type_map = {
+        str: 'str',
+        int: 'int',
+        float: 'float',
+        bool: 'bool',
+        type(DateTime()): 'date',
+    }
+
     def _getObjectNode(self, name, i18n=True):
         node = XMLAdapterBase._getObjectNode(self, name, i18n)
         node.setAttribute('portal_type', self.context.getPortalTypeName())
@@ -84,6 +92,26 @@ class CPSProxyXMLAdapter(XMLAdapterBase):
 
     def _extractWorkflowHistory(self):
         fragment = self._doc.createDocumentFragment()
+        for wf_id, wf_history in sorted(self.context.workflow_history.items()):
+            node = self._doc.createElement('wf_history')
+            node.setAttribute('name', wf_id)
+            for step in wf_history:
+                step_node = self._doc.createElement('step')
+                for name, value in sorted(step.items()):
+                    type_ = self._wf_vars_type_map.get(type(value))
+                    if type_ is None:
+                        logger.debug('Could not serialize wf var %s: %s'
+                                     'for document %s', name, value, self.context)
+                        continue
+                    if type_ == 'date':
+                        value = value.ISO8601()
+                    var_node = self._doc.createElement('variable')
+                    var_node.setAttribute('name', name)
+                    var_node.setAttribute('type', type_)
+                    var_node.appendChild(self._doc.createTextNode(str(value)))
+                    step_node.appendChild(var_node)
+                node.appendChild(step_node)
+            fragment.appendChild(node)
         return fragment
 
     def _extractRelation(self, relation_id):

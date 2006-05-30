@@ -228,7 +228,24 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         references = tree.xpath("//relation[@name='is_reply_to']/target")
         self.assertEquals(references, [])
 
-        #TODO: test wf history
+        # check wf history export
+        histories = tree.xpath("//wf_history")
+        self.assertEquals(len(histories), 1)
+        history = histories[0]
+        self.assertEquals(history.get('name'), 'incoming_mail_wf')
+        steps = history.getchildren()
+        self.assertEquals(len(steps), 3)
+        for step in steps:
+            expected = [('action', 'str'),
+                        ('actor', 'str'),
+                        ('comments', 'str'),
+                        ('dest_container', 'str'),
+                        ('review_state', 'str'),
+                        ('rpath', 'str'),
+                        ('time', 'date'),
+                        ('workflow_id', 'str')]
+            result = [(v.get('name'), v.get('type')) for v in step.getchildren()]
+            self.assertEquals(result, expected)
 
         # archiving an outgoing mail
         self.archiver.exportProxyToXml(self.outgoing_mails[0])
