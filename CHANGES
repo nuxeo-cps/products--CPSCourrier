@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- enable html editing in mail_common layout
+- removed the file uploader for the mail content
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

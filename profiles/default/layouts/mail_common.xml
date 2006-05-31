@@ -53,9 +53,9 @@
   <property name="css_class">dcontent</property>
   <property name="width">72</property>
   <property name="height">20</property>
-  <property name="file_uploader">True</property>
+  <property name="file_uploader">False</property>
   <property name="render_format">text</property>
-  <property name="configurable">nothing</property>
+  <property name="configurable">format</property>
  </widget>
  <widget name="subject" meta_type="Mail Topics Widget">
   <property name="fields">
