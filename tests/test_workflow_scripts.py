@@ -23,6 +23,7 @@
 import datetime
 import unittest
 import transaction
+import re
 
 from StringIO import StringIO
 from OFS.Image import File
@@ -354,7 +355,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
             expected = ('mailbox@example.com', 'toto@example.com', """\
 Content-Type: text/plain; charset="iso-8859-15"
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 Subject: Fwd: Test mail 1
 From: mailbox@example.com
 To: toto@example.com
@@ -364,7 +365,7 @@ Please handle that request
 On %s, bar@foo.com wrote:
 > content line 1
 > content line 2
-> \
+>=20\
 """ % datetime.datetime.now().strftime('%Y-%m-%d'))
 
             self.assertEquals(result, expected)
@@ -401,18 +402,20 @@ On %s, bar@foo.com wrote:
 
             result = send_reply(out_mail1)
             expected = ('test_mailbox@cpscourrier.com', 'bar@foo.com', """\
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="iso-8859-15"
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 Subject: Re: Test mail 1
 From: test_mailbox@cpscourrier.com
 To: bar@foo.com
 
 Please stop trying to fish us!
 
-Best regards, 
+Best regards, =
 
--- 
+
+-- =
+
 CPS Manager
 
 
@@ -482,7 +485,12 @@ On %s, bar@foo.com wrote:
 </body>
 </html>""" % datetime.datetime.now().strftime('%Y-%m-%d'))
 
-            self.assertEquals(result, expected)
+            dummy = """ " """ # for Emacs editor
+
+            self.assertEquals(result[0], expected[0])
+            self.assertEquals(result[1], expected[1])
+            self.assert_(re.sub(r'====.+==', '====(boundary)==', result[2]),
+                         expected[2])
         finally:
             # for some reason there is a ZODB commit in beforeTearDown thus we
             # need get rid of the unpickleable fake MailHost
