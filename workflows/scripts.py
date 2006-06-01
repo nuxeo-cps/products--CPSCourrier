@@ -35,6 +35,7 @@ from Acquisition import aq_parent, aq_inner
 from AccessControl import getSecurityManager
 
 from Products.CMFCore.utils import getToolByName
+from Products.CPSCourrier.utils import html_to_text
 from Products.CPSCourrier.relations import make_reply_to
 from Products.CPSCourrier.config import (
     RELATION_GRAPH_ID,
@@ -493,9 +494,7 @@ def send_mail(context, mto, mfrom, subject, body, attachments=(),
         main_msg = MIMEText(body, _subtype='plain', _charset=encoding)
     else:
         alt_html = MIMEText(body, _subtype='html', _charset=encoding)
-        alt_plain = MIMEText(
-            'Sorry no text/plain version available. Check html version.'
-            )
+        alt_plain = MIMEText(html_to_text(body), _charset=encoding)
         main_msg = MIMEMultipart(_subtype='alternative',
                                  _subparts=[alt_plain, alt_html])
 

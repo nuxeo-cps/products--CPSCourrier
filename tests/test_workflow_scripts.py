@@ -489,6 +489,7 @@ On %s, bar@foo.com wrote:
 
             self.assertEquals(result[0], expected[0])
             self.assertEquals(result[1], expected[1])
+            ### XXX GR regexp is bogus, will correct later
             self.assert_(re.sub(r'====.+==', '====(boundary)==', result[2]),
                          expected[2])
         finally:
