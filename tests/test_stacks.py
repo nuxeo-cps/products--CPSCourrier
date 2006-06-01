@@ -349,6 +349,71 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.login('manager')
         self.assert_(checkPerm('View', proxy))
 
+    def test_outgoing_sending_from_scratch(self):
+        # this is about the workflow itself not about testing actual
+        # sending of reply. For this there is another test in
+        # test_workflow_scripts module
+
+        wf = self.wftool['outgoing_mail_wf']
+        mtool = getToolByName(self.portal, 'portal_membership')
+        checkPerm = mtool.checkPermission
+
+        # member1 creates an outgoing document
+        self.flogin('member1', self.mb)
+        self.createOutgoing(self.mb, mail_id="outgoing_of_member1")
+        proxy = self.mb.outgoing_of_member1
+        stack = self.wftool.getStackFor(proxy, 'Pilots')
+        stack_mod = proxy.cpscourrier_stack_modify
+
+        # Using a disabled MailHost
+        class FakeMailHost:
+            def _send(self, *args):
+                return args
+        proxy.MailHost = FakeMailHost()
+
+        # initialy, the proxy is in state "work" with an empty stack
+        self.assertEquals(self._get_state(proxy), 'work')
+        self.assertEquals(stack.getAllLevels(), [])
+
+        # member1 takes the lead
+        kw = {'current_var_id': 'Pilots',
+              'directive': 'response',
+              'level': '0',
+              'workflow_action_form': 'cpscourrier_roadmap',
+              'submit_add': 'Valider',
+              'push_ids': ['courrier_user:member1_ftest-mailbox']}
+        stack_mod(**kw)
+
+        # member1 (the Pilot) and the managers can then trigger the send
+        # transition
+        self.flogin('reader', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'send'))
+        self.login('manager')
+        self.assert_(wf.isActionSupported(proxy, 'send'))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'send'))
+        self.flogin('member2', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'send'))
+        self.flogin('member1', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'send'))
+
+        # and member1 does it
+        self.wftool.doActionFor(proxy, 'send')
+        self.assertEquals(self._get_state(proxy), 'sent')
+
+        # the other ones can still view the document
+        self.flogin('reader', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.flogin('member2', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.login('manager')
+        self.assert_(checkPerm('View', proxy))
+
+        # necessary cleaning
+        del proxy.MailHost
+
 
 class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
 

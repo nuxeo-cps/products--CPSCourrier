@@ -8,6 +8,7 @@ Bug fixes:
 ~~~~~~~~~~
 - enable html editing in mail_common layout
 - removed the file uploader for the mail content
+- contributors couldn't see sent mails apart from their own
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

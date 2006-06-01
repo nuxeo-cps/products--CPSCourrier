@@ -73,6 +73,7 @@
    <permission-role>Owner</permission-role>
    <permission-role>Pilot</permission-role>
    <permission-role>LocalManager</permission-role>
+   <permission-role>Contributor</permission-role>
    <permission-role>Supervisor</permission-role>
    <permission-role>Reader</permission-role>
   </permission-map>
