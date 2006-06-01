@@ -101,6 +101,8 @@ class DunNotifier:
             late_docs_brains = self.getLateMailDocuments(mb_brain.relative_path)
             if late_docs_brains:
                 mailbox = mb_brain.getObject()
+                if mailbox is None:
+                    continue
                 mfrom = self._portal.email_from_address
                 mto = self.getNotifieeEmails(mailbox)
                 info = {
