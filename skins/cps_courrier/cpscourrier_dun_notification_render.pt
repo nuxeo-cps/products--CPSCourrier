@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <meta content="text/html;charset=ISO-8859-15" http-equiv="Content-Type" />
+    <title/>
+  </head>
+  <body bgcolor="#ffffff" text="#000000">
+    <h1 i18n:translate="cpscourrier_dun_heading">
+      Late documents
+    </h1>
+    <h2>
+      <span i18n:translate="cpscourrier_dun_intro">
+	Here is the list of late mail documents on application:
+      </span>
+	    <span tal:content="options/portal_title"/>
+    </h2>
+    <ul>
+      <li tal:repeat="brain options/late_brains">
+	<span tal:content="brain/Title"/>
+	<a href="" tal:content="brain/url" tal:attributes="href brain/url"/>
+      </li>
+    </ul>
+  </body>
+</html>

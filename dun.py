@@ -25,7 +25,7 @@ late mails.
 import logging
 from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
-from Products.CPSCourrier.workflow.scripts import send_mail
+from Products.CPSCourrier.workflows.scripts import send_mail
 
 logger = logging.getLogger('CPSCourrier.dun')
 
@@ -47,10 +47,13 @@ class DunNotifier:
     sort_on = 'deadline_sort'
 
     # local roles of members to get notified
-    local_roles = ('LocalManager', 'Supervisor')
+    notified_roles = set(['LocalManager', 'Supervisor'])
 
     # subject string to get localized
     subject = "cpscourrier_subject_${portal_title}_${mb_title}_${late_number}"
+
+    # max number of late emails to report
+    sort_limit = 100
 
     # render method to render the body of the notification mail
     render_method = "cpscourrier_dun_notification_render"
@@ -58,8 +61,15 @@ class DunNotifier:
     def __init__(self, portal):
         self._portal = portal
         self._catalog = getToolByName(portal, 'portal_catalog')
-        mcat = getToolByName(portal, 'translation_service')
-        self._mcat = lambda x: mcat(x).encode(portal.default_charset)
+        self._transl = getToolByName(portal, 'translation_service')
+
+        aclu = getToolByName(portal, 'acl_users')
+        dtool = getToolByName(portal, 'portal_directories')
+        self._mdir = dtool[aclu.users_dir]
+        self._gdir = dtool[aclu.groups_dir]
+
+    def _mcat(self, x, param_dict=None):
+        return self._transl(x, param_dict)
 
     def getLateMailDocuments(self, mailbox_rpath):
         """Generate lists of late documents brains
@@ -71,7 +81,7 @@ class DunNotifier:
         path = base_path + mailbox_rpath
 
         # maximum date
-        date_max = DateTime() - self.tolerance
+        date_max = DateTime() - self.date_tolerance
 
         # find candidate proxies for archiving
         query = {
@@ -83,16 +93,50 @@ class DunNotifier:
                 'range': 'max',
             },
             # limit the number of results to 100
-            'b_size': 100,
-            'b_start': 0,
+            'sort-limit': self.sort_limit,
             # get latest mail documents first
             'sort-on': self.sort_on,
         }
         return self._catalog(**query)
 
+    def appendUserEmail(self, em_list, user_id):
+        entry = self._mdir._getEntry(user_id, default=None)
+        if entry is None:
+            warn="Non-existent user %s has roles on %s. Reindex security?"
+            logger.warn(warn, user_id, mailbox)
+            return
+        email = entry.get('email')
+        if email is None:
+            logger.error(
+                "Directory entry for user %s has no email", user_id)
+            return
+        em_list.append(email)
+
     def getNotifieeEmails(self, mailbox):
         """Get the email address of people to be notified"""
-        # TODO
+
+        notifiees = []
+
+        mtool = getToolByName(self._portal, 'portal_membership')
+        roles_info =  mtool.getMergedLocalRoles(mailbox)
+        members_ids = [mid for mid, m_roles in roles_info.items()
+                       if self.notified_roles.intersection(m_roles)]
+        for mid in members_ids:
+            pref = 'user:'
+            if mid.startswith(pref):
+                user_id = mid[len(pref):]
+                self.appendUserEmail(notifiees, user_id)
+
+            pref = 'group:'
+            if mid.startswith(pref):
+                group_id =  mid[len(pref):]
+                group = self._gdir._getEntry(group_id, default=None)
+                if group is None:
+                    logger.warn("Non-existent group %s has roles on %s.")
+                    continue
+                for user_id in group['members']:
+                    self.appendUserEmail(notifiees, user_id)
+        return notifiees
 
     def notify(self):
         """Send email notifications to the manager of late documents"""
@@ -109,14 +153,16 @@ class DunNotifier:
                     'portal_title': self._portal.Title(),
                     'mb_title': mailbox.Title(),
                     'late_number': str(len(late_docs_brains)),
+                    'sort_limit': self.sort_limit,
                 }
                 subject = self._mcat(self.subject, info)
                 info.update({
                     'late_brains': late_docs_brains,
                     'portal_url': self._portal.absolute_url(),
                 })
-                body = self.portal[self.render_method](info)
-                send_mail(self._portal, mto, mfrom, subject, body)
+                body = self._portal[self.render_method](**info)
+                send_mail(self._portal, mto, mfrom, subject, body,
+                          plain_text=False)
 
 
 
