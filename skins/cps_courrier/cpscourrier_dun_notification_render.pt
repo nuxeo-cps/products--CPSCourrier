@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html tal:define="portal_url options/portal_url">
   <head>
     <meta content="text/html;charset=ISO-8859-15" http-equiv="Content-Type" />
     <title/>
@@ -16,8 +16,10 @@
     </h2>
     <ul>
       <li tal:repeat="brain options/late_brains">
-	<span tal:content="brain/Title"/>
-	<a href="" tal:content="brain/url" tal:attributes="href brain/url"/>
+	<span tal:content="brain/Title"/><br/>
+	<a href=""
+	   tal:define="url string:${portal_url}${brain/relative_path}"
+	   tal:content="url" tal:attributes="href url"/>
       </li>
     </ul>
   </body>
