@@ -36,6 +36,7 @@ from Products.CMFCore.utils import _checkPermission
 from Products.CMFCore.permissions import ManagePortal
 
 from Products.CPSCourrier.dun import DunNotifier
+from Products.CPSCourrier.workflows.scripts import HTML_BODY_WRAPPER
 
 def notify(self):
     portal = getToolByName(self, 'portal_url').getPortalObject()
@@ -45,4 +46,13 @@ def notify(self):
     notifier = DunNotifier(portal)
 
     notifier.date_tolerance = -1
-    notifier.notify()
+    report = notifier.notify()
+    report_str = ["Notified %d person(s) about %s documents in mailbox at %s" % (
+
+        len(info['notifiees']), info['late_number'], info['mb_url'])
+                  for info in report]
+
+    body = "<h1>Notification reminder for late mail documents</h1>"
+    "<h2>Report</h2>"
+    body += '<br/>'.join(report_str)
+    return HTML_BODY_WRAPPER % body

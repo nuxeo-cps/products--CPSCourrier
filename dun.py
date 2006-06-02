@@ -141,6 +141,7 @@ class DunNotifier:
     def notify(self):
         """Send email notifications to the manager of late documents"""
         query = {'portal_type': 'Mailbox'}
+        report = []
         for mb_brain in self._catalog(**query):
             late_docs_brains = self.getLateMailDocuments(mb_brain.relative_path)
             if late_docs_brains:
@@ -155,6 +156,7 @@ class DunNotifier:
                 info = {
                     'portal_title': self._portal.Title(),
                     'mb_title': mailbox.Title(),
+                    'mb_url': mailbox.absolute_url(),
                     'late_number': str(len(late_docs_brains)),
                     'sort_limit': self.sort_limit,
                 }
@@ -166,6 +168,6 @@ class DunNotifier:
                 body = self._portal[self.render_method](**info)
                 send_mail(self._portal, mto, mfrom, subject, body,
                           plain_text=False)
-
-
-
+                info['notifiees'] = mto
+                report.append(info)
+        return report
