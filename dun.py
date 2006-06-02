@@ -149,6 +149,9 @@ class DunNotifier:
                     continue
                 mfrom = self._portal.email_from_address
                 mto = self.getNotifieeEmails(mailbox)
+                if not mto:
+                    continue
+
                 info = {
                     'portal_title': self._portal.Title(),
                     'mb_title': mailbox.Title(),
