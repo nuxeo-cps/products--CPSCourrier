@@ -6,14 +6,23 @@
   </head>
   <body bgcolor="#ffffff" text="#000000">
     <h1 i18n:translate="cpscourrier_dun_heading">
-      Late documents
+      Late documents on <tal:block content="options/portal_title"/>
     </h1>
     <h2>
       <span i18n:translate="cpscourrier_dun_intro">
-	Here is the list of late mail documents on application:
+	You'll find below the list of late mail documents in mailbox
       </span>
-	    <span tal:content="options/portal_title"/>
+       <span tal:content="options/mb_title"/>
     </h2>
+    <p>
+      <span i18n:translate="cpscourrier_dun_total">Total:</span>
+      <span tal:content="options/late_number"/>
+      <span tal:condition="python:options['sort_limit'] == options['late_number']"
+	    i18n:translate="cpscourrier_dun_max_reached">
+	(maximum reached)
+      </span>
+    </p>
+
     <ul>
       <li tal:repeat="brain options/late_brains">
 	<span tal:content="brain/Title"/><br/>
