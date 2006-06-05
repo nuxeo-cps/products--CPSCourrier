@@ -36,27 +36,17 @@ from Products.CPSDefault.tests.CPSTestCase import (
     CPSTestCase,
     ExtensionProfileLayerClass)
 
-from Products.CPSCourrier.tests import widgets, stackelements
+from Products.CPSCourrier.tests import stackelements
 from Products.CPSCourrier.config import RELATION_GRAPH_ID
 
 
 # register profiles
+ZopeTestCase.installProduct('CPSDashboards')
 ZopeTestCase.installProduct('CPSCourrier')
 ZopeTestCase.installProduct('CPSRelation')
 
-# CPSCourrier:tests : add more layouts to test the widgets
-profile_registry.registerProfile(
-    'tests',
-    'CPS Courrier Tests',
-    "Tests of mail tracking and management system for CPS",
-    'tests/profile',
-    'CPSCourrier',
-    EXTENSION,
-    for_=ICPSSite)
-
-
 class CPSCourrierLayerClass(ExtensionProfileLayerClass):
-    extension_ids = ('CPSCourrier:default', 'CPSCourrier:tests',)
+    extension_ids = ('CPSCourrier:default', )
 
 CPSCourrierLayer = CPSCourrierLayerClass(
     __name__,

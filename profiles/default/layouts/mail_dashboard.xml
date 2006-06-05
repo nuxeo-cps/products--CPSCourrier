@@ -46,7 +46,7 @@ Layout that presents catalog search results
  </widget>
 
  <!-- This is currently effective on Lucene only -->
- <widget name="q_todo" meta_type="Courrier To Do Filter Widget">
+ <widget name="q_todo" meta_type="To Do Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
    <property name="label">label_search_todo</property>
    <property name="label_edit">label_search_todo</property>

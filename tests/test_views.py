@@ -24,7 +24,7 @@ import unittest
 from zope.testing import doctest
 
 from Products.CPSCourrier.tests.layer import IntegrationTestCase
-from Products.CPSCourrier.widgets.tabular import FakeRequestWithCookies
+from Products.CPSDashboards.testing import FakeRequestWithCookies
 
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.browser.roadmapview import RoadmapView
@@ -112,7 +112,5 @@ def test_suite():
         unittest.makeSuite(IntegrationTestRoadmapView),
         unittest.makeSuite(IntegrationTestReuseAnswerView),
         doctest.DocFileTest('doc/developer/views.txt',
-                            package='Products.CPSCourrier'),
-        doctest.DocFileTest('doc/developer/searchview.txt',
                             package='Products.CPSCourrier'),
         ))

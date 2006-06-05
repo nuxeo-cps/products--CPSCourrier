@@ -362,6 +362,12 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member1', self.mb)
         self.createOutgoing(self.mb, mail_id="outgoing_of_member1")
         proxy = self.mb.outgoing_of_member1
+        # XXX add invokeFactory kwargs to self.createOutgoing()
+        # send_mail rejects mails with no recipients
+        self.login('manager')
+        proxy.getEditableContent().edit(mail_to="noone@nohost.com",
+                                        proxy=proxy)
+        self.flogin('member1', self.mb)
         stack = self.wftool.getStackFor(proxy, 'Pilots')
         stack_mod = proxy.cpscourrier_stack_modify
 

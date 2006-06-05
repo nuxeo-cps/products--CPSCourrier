@@ -19,17 +19,6 @@ ReuseAnswerView
 This view class inherits from searchview.SearchView for existing
 outgoing mails search/forms and results.
 
-FolderLocalRolesView
---------------------
-
-This view class inherits from searchview.SearchView. It recognizes
-whether we search for users or groups::
-
-    >>> from Products.CPSCourrier.widgets.tabular import FakeRequestWithCookies
-    >>> 
-
-
-
 
 
 .. Emacs
