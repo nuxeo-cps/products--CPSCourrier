@@ -53,25 +53,4 @@
       permission="zope2.View"
       />
 
-  <!-- perm is inappropriate but we'll use an explicit
-       security assertion -->
-  <browser:page
-      for="Products.CPSCore.interfaces.ICPSProxy"
-      name="folder_localroles.html"
-      class=".browser.localrolesview.LocalRolesView"
-      template="browser/folderLocalRoles.zpt"
-      permission="cmf.ModifyPortalContent"
-      />
-
-  <browser:page
-      for="Products.CPSCore.interfaces.ICPSProxy"
-      name="folder_localroles_submit"
-      class=".browser.localrolesview.LocalRolesView"
-      attribute="dispatchSubmit"
-      permission="cmf.ModifyPortalContent"
-      />
-
-
-
-
 </configure>

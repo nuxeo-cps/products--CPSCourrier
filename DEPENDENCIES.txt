@@ -6,3 +6,4 @@ CPSDocument >= 0.42.0
 CPSWorkflow > 0.7.0
 CPSUserFolder > 0.8.3
 CPSDirectory > 1.32.0
+CPSDashboards >= 0.0.0
