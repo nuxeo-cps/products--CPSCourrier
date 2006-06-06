@@ -1,4 +1,22 @@
 *******************************************
+** CPSCourrier V0.13.0 [R1 build 2006/06/06-12:14 by gracinet]
+** SVN URL: http://svn/pub/CPS3/products/CPSCourrier/trunk Revision: 46233
+Requires:
+~~~~~~~~~
+- CPSDashboards 0.0.0
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- enable html editing in mail_common layout
+- removed the file uploader for the mail content
+- contributors couldn't see sent mails apart from their own
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Dashboards externalized to CPSDashboards
+
+*******************************************
 ** CPSCourrier V0.12.0 [R1 build 2006/05/30-21:27 by ogrisel]
 ** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 46038
 Requires:

@@ -1,14 +1,12 @@
 Requires:
 ~~~~~~~~~
-- CPSDashboards 0.0.0
+-
 New features:
 ~~~~~~~~~~~~~
 -
 Bug fixes:
 ~~~~~~~~~~
-- enable html editing in mail_common layout
-- removed the file uploader for the mail content
-- contributors couldn't see sent mails apart from their own
+-
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
-- Dashboards externalized to CPSDashboards
+-
