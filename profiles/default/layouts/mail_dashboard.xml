@@ -37,7 +37,10 @@ Layout that presents catalog search results
    <property name="is_i18n">True</property>
    <property name="vocabulary">mail_states</property>
    <property name="defines_scope">True</property>
-   <property name="reject_from_scope">closed sent trash</property>
+   <property name="reject_from_scope">
+     <element value="closed"/>
+     <element value="trash"/>
+   </property>
    <property name="translated">False</property>
    <property name="cookie_id">cpscourrier</property>
    <property name="fields">

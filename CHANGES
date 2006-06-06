@@ -7,6 +7,7 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - DGME #4528: fixed wrong guard roles on the "close" permission
+- DGME #4525: mails in "sent" state are visible by default
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

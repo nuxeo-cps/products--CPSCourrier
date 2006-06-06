@@ -107,7 +107,6 @@ Layout that presents mailbox contents
   <property name="defines_scope">True</property>
   <property name="reject_from_scope">
    <element value="closed"/>
-   <element value="sent"/>
    <element value="trash"/>
   </property>
  </widget>
