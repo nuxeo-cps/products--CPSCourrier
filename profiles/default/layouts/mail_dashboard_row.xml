@@ -33,7 +33,7 @@ Layouts for rows in the content view of mailboxes
  </widget>
 
 
- <widget name="From" meta_type="String Widget">
+ <widget name="From" meta_type="Email Display Widget">
   <property name="fields">
    <element value="mail_from"/>
   </property>
@@ -44,7 +44,7 @@ Layouts for rows in the content view of mailboxes
   <property name="sortable" type="string">mail_from</property>
  </widget>
 
- <widget name="To" meta_type="Lines Widget">
+ <widget name="To" meta_type="Emails Display Widget">
   <property name="fields">
    <element value="mail_to"/>
   </property>
