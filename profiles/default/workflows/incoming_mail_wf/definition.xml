@@ -232,6 +232,8 @@
   <guard>
    <guard-role>Pilot</guard-role>
    <guard-role>Manager</guard-role>
+   <guard-role>LocalManager</guard-role>
+   <guard-role>Supervisor</guard-role>
   </guard>
  </transition>
 
