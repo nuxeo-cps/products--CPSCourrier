@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- DGME #4528: fixed wrong guard roles on the "close" permission
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
