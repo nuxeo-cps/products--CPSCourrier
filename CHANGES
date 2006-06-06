@@ -8,6 +8,8 @@ Bug fixes:
 ~~~~~~~~~~
 - DGME #4528: fixed wrong guard roles on the "close" permission
 - DGME #4525: mails in "sent" state are visible by default
+- DGME #4532: the Mai templates box now has all portal subjects selected
+  to be able to assign whatever subjects to the templates
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

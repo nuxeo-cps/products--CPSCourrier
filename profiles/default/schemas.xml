@@ -9,6 +9,7 @@
  <object name="mail_filter_params" meta_type="CPS Schema"/>
  <object name="mail_query_params" meta_type="CPS Schema"/>
  <object name="mail_search_answers" meta_type="CPS Schema"/>
+ <object name="metadata_mail_templates_box" meta_type="CPS Schema"/>
  <!-- Roadmap searches -->
  <object name="roadmap_users_search" meta_type="CPS Schema"/>
  <object name="roadmap_groups_search" meta_type="CPS Schema"/>

@@ -13,6 +13,7 @@
  <object name="mailbox_header" meta_type="CPS Layout"/>
  <object name="mailbox_common_header" meta_type="CPS Layout"/>
  <object name="mailbox_common" meta_type="CPS Layout"/>
+ <object name="mail_templates_box_common" meta_type="CPS Layout"/>
  <object name="mailbox_contents" meta_type="CPS Layout"/>
  <object name="mailbox_group_common" meta_type="CPS Layout"/>
  <object name="mailbox_group_contents" meta_type="CPS Layout"/>

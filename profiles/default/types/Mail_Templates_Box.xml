@@ -25,23 +25,23 @@
  <!-- One schema on top of those of standard workspaces holds default
       filtering parameters -->
  <property name="schemas">
-  <element value="metadata"/>
+  <!-- Custom metadata schema for custom Subjects field -->
+  <element value="metadata_mail_templates_box"/>
   <element value="common"/>
   <element value="folder"/>
-  <element value="mailbox"/>
+  <!-- No mailbox schema -->
   <element value="mail_filter_params" />
  </property>
  <!-- The layouts as clustered to play well with document portlets -->
  <property name="layouts">
   <element value="mailbox_common_header"/>
-  <element value="mailbox_header"/>
-  <element value="mailbox_common"/>
+  <element value="mail_templates_box_common"/>
   <element value="folder"/>
   <!-- content view differs from Mailbox' -->
   <element value="mail_templates_box_contents"/>
  </property>
  <property name="layout_clusters">
-  <element value="header:mailbox_common_header,mailbox_header"/>
+  <element value="header:mailbox_common_header"/>
   <element value="metadata:metadata"/>
  </property>
  <property name="flexible_layouts"/>
