@@ -57,13 +57,15 @@ Edit elements: same as add elements except:
   otherwise see Add elements
 """
 
-from zLOG import LOG, DEBUG
+from logging import getLogger
 
 from urllib import urlencode
 from re import match
 from DateTime import DateTime
 
 from Products.CMFCore.utils import getToolByName
+
+logger = getLogger('CPSCourrier.skins.cpscourrier.cpscourrier_stack_modify')
 
 workflow_actions = {'pop': 'manage_delegatees',
                     'push': 'manage_delegatees',
@@ -120,7 +122,7 @@ wftool = getToolByName(context, 'portal_workflow')
 # used for redirection
 old_state = wftool.getInfoFor(context, 'review_state', None)
 
-LOG("cpscourrier_delegation_modify", DEBUG, "kws = %s"%(kw))
+logger.debug("kws = %s", kw)
 
 kw['current_wf_var_id'] = current_var_id
 
@@ -128,7 +130,7 @@ kw['current_wf_var_id'] = current_var_id
 if action_type == 'push':
     push_ids = kw.get('push_ids', ())
     level = kw.get('level', None)
-    LOG("cpscourrier_delegation_modify", DEBUG, "push_ids=%s on level %s"%(push_ids, level))
+    logger.debug("push_ids=%s on level %s", push_ids, level)
     member_ids = kw.get('member_ids', ())
     if not push_ids:
         psm = 'psm_select_at_least_one_item'
@@ -146,14 +148,14 @@ if action_type == 'push':
         psm = 'psm_roadmap_changed'
 
 elif action_type == 'edit':
-    LOG('cpscourrier_stack_modify', DEBUG, action_type)
+    logger.debug(action_type)
     # what we want
     dates = ()
     string_data = ('directive', 'user_comment')
 
     # elements ids
     edit_ids = kw.get('edit_ids', ())
-    LOG("cpscourrier_delegation_modify", DEBUG, "edit_ids=%s"%(edit_ids,))
+    logger.debug("edit_ids=%s", edit_ids)
 
     # ensure that we won't destroy elts that might have been otherwise
     # checked...
@@ -184,7 +186,7 @@ elif action_type == 'move_down':
 
 elif action_type == 'pop':
     pop_ids = kw.get('pop_ids', ())
-    LOG("cpscourrier_delegation_modify", DEBUG, "pop_ids=%s"%(pop_ids,))
+    logger.debug("pop_ids=%s", pop_ids)
     if not pop_ids:
         psm = 'psm_select_at_least_one_item'
         err = 1
