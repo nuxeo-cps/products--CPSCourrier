@@ -70,7 +70,11 @@ class RoadmapView(LocalRolesView):
         return self.stack.render(context=self.context, mode=mode)
 
     def renderUsersLayout(self):
-        return self.renderLayout(name='roadmap_users_search')['rendered']
+        return self.renderLayout(
+            name='roadmap_users_search',
+            schema_id='localroles_users_search')['rendered']
 
     def renderGroupsLayout(self):
-        return self.renderLayout(name='roadmap_groups_search')['rendered']
+        return self.renderLayout(
+            name='roadmap_groups_search',
+            schema_id='localroles_groups_search')['rendered']

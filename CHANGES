@@ -12,4 +12,5 @@ Bug fixes:
   to be able to assign whatever subjects to the templates
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- Roadmap delegation layouts are based on localroles (from CPSDashboards).
+  Was the other way round

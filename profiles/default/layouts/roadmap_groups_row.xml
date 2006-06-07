@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <object name="roadmap_groups_row" meta_type="CPS Layout">
+   <!-- Unique difference with localroles counterpart should be in
+   'Checkbox': props input_name and format_string
+     TODO: find a way to avoid this duplication -->
  <property name="layout_view_method">layout_row_view</property>
   <widget name="Checkbox" meta_type="Row Boolean Widget">
     <property name="input_name">push_ids</property>
@@ -18,22 +21,11 @@
     </property>
   </widget>
 
-   <widget name="description" meta_type="String Widget">
-     <property name="is_i18n">True</property>
-     <property name="label">label_description</property>
-     <property name="fields">
-       <element value="description"/>
-     </property>
-   </widget>
-
   <table>
     <row>
       <cell name="Checkbox"/>
     </row>    <row>
       <cell name="title"/>
     </row>
-    <row>
-      <cell name="description"/>
-    </row>
-  </table>
+   </table>
 </object>

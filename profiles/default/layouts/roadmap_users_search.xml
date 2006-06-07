@@ -2,6 +2,7 @@
 <object name="roadmap_users_search" meta_type="CPS Layout">
  <property name="layout_search_results_method"
 	   type="string">layout_tabular_view</property>
+ <!-- Unique difference with localroles counterpart: row layout -->
   <widget name="Results" meta_type="Directory Tabular Widget">
     <property name="row_layout">roadmap_users_row</property>
     <property name="hidden_layout_modes">edit</property>

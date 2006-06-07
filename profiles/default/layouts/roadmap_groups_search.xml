@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<object name="roadmap_users_search" meta_type="CPS Layout">
+<object name="roadmap_groups_search" meta_type="CPS Layout">
+ <!-- Unique difference with localroles counterpart should be row layout -->
  <property name="layout_search_results_method"
 	   type="string">layout_tabular_view</property>
   <widget name="Results" meta_type="Directory Tabular Widget">
@@ -20,19 +21,10 @@
     </property>
   </widget>
 
-  <widget name="q_description" meta_type="String Widget">
-    <property name="hidden_layout_modes">search_results</property>
-    <property name="is_i18n">True</property>
-    <property name="label_edit">label_description</property>
-    <property name="fields">
-      <element value="description"/>
-    </property>
-  </widget>
 
   <table>
     <row>
       <cell name="q_group"/>
-      <cell name="q_description"/>
     </row>
     <row>
       <cell name="Results"/>

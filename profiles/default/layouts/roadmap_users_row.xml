@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <object name="roadmap_users_row" meta_type="CPS Layout">
  <property name="layout_view_method">layout_row_view</property>
+   <!-- Unique difference with localroles counterpart should be in
+   'Checkbox': props input_name and format_string
+     TODO: find a way to avoid this duplication -->
   <widget name="Checkbox" meta_type="Row Boolean Widget">
     <property name="input_name">push_ids</property>
     <property name="input_type">checkbox</property>
@@ -14,7 +17,7 @@
     <property name="is_i18n">True</property>
     <property name="label">label_user_name</property>
     <property name="fields">
-      <element value="uid"/>
+      <element value="id"/>
     </property>
   </widget>
 
