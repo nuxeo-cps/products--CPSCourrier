@@ -29,7 +29,8 @@
   <element value="metadata_mail_templates_box"/>
   <element value="common"/>
   <element value="folder"/>
-  <!-- No mailbox schema -->
+  <!-- keep mailbox schema with default values not to disturb contained mail documents -->
+  <element value="mailbox"/>
   <element value="mail_filter_params" />
  </property>
  <!-- The layouts as clustered to play well with document portlets -->

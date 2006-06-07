@@ -6,7 +6,7 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- DGME #4536: fixed missing schema fields for the mail templates box
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
