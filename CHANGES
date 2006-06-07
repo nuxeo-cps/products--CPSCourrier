@@ -13,6 +13,7 @@ Bug fixes:
 - various wf / stacks permissions fixes in the outgoing wf
 - DGME #4529: added a target="_blank" attributes to all the links of the
   batchPerform view
+- fixed wrong category name for dashboards' batch actions
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Roadmap delegation layouts are based on localroles (from CPSDashboards).
