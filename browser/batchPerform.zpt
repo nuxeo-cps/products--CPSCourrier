@@ -16,9 +16,9 @@
               content="string:help_batch_workflow_${transition}"></tal:help>
             <ul>
               <li tal:repeat="mail_info view/getMailInfo">
-                <a tal:attributes="href mail_info/mailbox_url"
-                  tal:content="mail_info/mailbox_title"></a> -
-                <a tal:attributes="href mail_info/mail_url"
+                [<a tal:attributes="href mail_info/mailbox_url" target="_blank"
+                  tal:content="mail_info/mailbox_title"></a>] -
+                <a tal:attributes="href mail_info/mail_url" target="_blank"
                   tal:content="mail_info/mail_title"></a>
               </li>
             </ul>
