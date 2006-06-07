@@ -57,7 +57,7 @@ Layout that presents mailbox contents
   </property>
   <property name="widget_mode_expr">string:edit</property>
   <property name="vocabulary">mailbox_allowed_ptype</property>
-  <property name="translated">True</property>
+  <property name="translated">False</property>
   <property name="cookie_id">cpscourrier</property>
   <property name="defines_scope">True</property>
  </widget>
