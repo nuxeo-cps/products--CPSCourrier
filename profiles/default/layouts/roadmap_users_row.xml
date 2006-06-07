@@ -8,7 +8,7 @@
     <property name="input_name">push_ids</property>
     <property name="input_type">checkbox</property>
     <property name="fields">
-      <element value="uid"/>
+      <element value="id"/>
     </property>
     <property name="format_string">courrier_user:%s</property>
   </widget>
