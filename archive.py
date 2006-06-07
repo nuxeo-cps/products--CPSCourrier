@@ -179,7 +179,7 @@ class Archiver:
         self._portal = portal
         setup_tool = getToolByName(portal, "portal_setup")
         if not os.path.exists(archive_home):
-            os.mkdirs(archive_home)
+            os.makedirs(archive_home)
         if not os.path.isdir(archive_home):
             raise IOError("%s is not a directory" % archive_home)
         self._context = DirectoryExportContext(setup_tool, archive_home)
