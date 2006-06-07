@@ -10,6 +10,7 @@ Bug fixes:
 - DGME #4525: mails in "sent" state are visible by default
 - DGME #4532: the Mai templates box now has all portal subjects selected
   to be able to assign whatever subjects to the templates
+- various wf / stacks permissions fixes in the outgoing wf
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Roadmap delegation layouts are based on localroles (from CPSDashboards).
