@@ -25,12 +25,7 @@ from layer import CourrierFunctionalTestCase
 from Products.CMFCore.utils import getToolByName, _checkPermission
 from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CPSCourrier.workflows.stacks import CourrierStack
-from Products.CPSCourrier.config import (
-    RELATION_GRAPH_ID,
-    IS_REPLY_TO,
-    HAS_REPLY,
-    STACK_ID,
-    )
+from Products.CPSCourrier.config import  RELATION_GRAPH_ID, HAS_REPLY, STACK_ID
 
 class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
     """ Quasifunctional tests for outgoing mails."""
@@ -67,75 +62,29 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member1', self.mb)
         self.createOutgoing(self.mb, mail_id="outgoing_of_member1")
         proxy = self.mb.outgoing_of_member1
-        stack = self.wftool.getStackFor(proxy, 'Pilots')
+        stack = self.wftool.getStackFor(proxy, STACK_ID)
         stack_mod = proxy.cpscourrier_stack_modify
 
-        # initialy, the proxy is in state "work" with an empty stack
-        self.assertEquals(self._get_state(proxy), 'work')
-        self.assertEquals(stack.getAllLevels(), [])
-
-        # the stack is empty: only the manager / wsmanager should be able to
-        # play with the stack and the owner as well
-        self.flogin('reader', self.mb)
-        self.failIf(wf.isActionSupported(proxy, 'manage_delegatees'))
-        self.login('manager')
-        self.assert_(wf.isActionSupported(proxy, 'manage_delegatees'))
-        self.flogin('wsmanager', self.mb)
-        self.assert_(wf.isActionSupported(proxy, 'manage_delegatees'))
-        self.flogin('member2', self.mb)
-        self.failIf(wf.isActionSupported(proxy, 'manage_delegatees'))
-        self.flogin('member1', self.mb)
-        self.assert_(wf.isActionSupported(proxy, 'manage_delegatees'))
-
-        # with an empty stack, only the manager and the wsmanager can modify the
-        # document
-        self.flogin('reader', self.mb)
-        self.failIf(checkPerm('Modify portal content', proxy))
-        self.login('manager')
-        self.assert_(checkPerm('Modify portal content', proxy))
-        self.flogin('wsmanager', self.mb)
-        self.assert_(checkPerm('Modify portal content', proxy))
-        self.flogin('member2', self.mb)
-        self.failIf(checkPerm('Modify portal content', proxy))
-        self.flogin('member1', self.mb)
-        self.failIf(checkPerm('Modify portal content', proxy))
-
-        # stack empty or not, readers and members can view
-        self.flogin('reader', self.mb)
-        self.assert_(checkPerm('View', proxy))
-        self.flogin('member2', self.mb)
-        self.assert_(checkPerm('View', proxy))
-        self.flogin('wsmanager', self.mb)
-        self.assert_(checkPerm('View', proxy))
-        self.login('manager')
-        self.assert_(checkPerm('View', proxy))
-
-        # only the manager / wsmanager can create a draft
-        self.flogin('reader', self.mb)
-        self.failIf(wf.isActionSupported(proxy, 'checkout_draft'))
-        self.login('manager')
-        self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
-        self.flogin('wsmanager', self.mb)
-        self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
-        self.flogin('member2', self.mb)
-        self.failIf(wf.isActionSupported(proxy, 'checkout_draft'))
-        self.flogin('member1', self.mb)
-        self.failIf(wf.isActionSupported(proxy, 'checkout_draft'))
-
-        # member1 takes the lead
-        kw = {'current_var_id': 'Pilots',
-              'directive': 'response',
-              'level': '0',
-              'workflow_action_form': 'cpscourrier_roadmap',
-              'submit_add': 'Valider',
-              'push_ids': ['courrier_user:member1_ftest-mailbox']}
-        stack_mod(**kw)
+        # initialy, the proxy is in state "work" and the creator is in the stack
         self.assertEquals(self._get_state(proxy), 'work')
         self.assertEquals(stack.getAllLevels(), [0])
         elt = stack._getLevelContentValues()[0]
         self.assertEquals(elt.getId(), 'courrier_user:member1_ftest-mailbox')
 
-        # she can now modify the document
+        # the manager / wsmanager and the pilot should be able to  play with
+        # the stack and the owner as well
+        self.flogin('reader', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'manage_delegatees'))
+        self.login('manager')
+        self.assert_(wf.isActionSupported(proxy, 'manage_delegatees'))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'manage_delegatees'))
+        self.flogin('member2', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'manage_delegatees'))
+        self.flogin('member1', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'manage_delegatees'))
+
+        # member1 can thus modify the document unlike member2
         self.flogin('reader', self.mb)
         self.failIf(checkPerm('Modify portal content', proxy))
         self.login('manager')
@@ -159,16 +108,26 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member1', self.mb)
         self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
 
+        # stack empty or not, readers and members can view
+        self.flogin('reader', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.flogin('member2', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.login('manager')
+        self.assert_(checkPerm('View', proxy))
+
         # before going further, member1 adds member2 to the stacks as well at
         # the same level
-        kw = {'current_var_id': 'Pilots',
+        kw = {'current_var_id': STACK_ID,
               'directive': 'response',
               'level': '0',
               'workflow_action_form': 'cpscourrier_roadmap',
               'submit_add': 'Valider',
               'push_ids': ['courrier_user:member2_ftest-mailbox']}
         stack_mod(**kw)
-        stack = self.wftool.getStackFor(proxy, 'Pilots') # necessary
+        stack = self.wftool.getStackFor(proxy, STACK_ID) # necessary
         self.assertEquals(self._get_state(proxy), 'work')
         self.assertEquals(stack.getAllLevels(), [0])
         elt = stack._getLevelContentValues()[1]
@@ -256,7 +215,7 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.assertEquals(proxy.Title(), 'A better title')
 
         # the stack has not been affected by the operation
-        stack = self.wftool.getStackFor(proxy, 'Pilots') # necessary
+        stack = self.wftool.getStackFor(proxy, STACK_ID) # necessary
         self.assertEquals(self._get_state(proxy), 'work')
         self.assertEquals(stack.getAllLevels(), [0])
         elts = stack._getLevelContentValues()
@@ -277,21 +236,10 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member1', self.mb)
         self.createOutgoing(self.mb, mail_id="outgoing_of_member1")
         proxy = self.mb.outgoing_of_member1
-        stack = self.wftool.getStackFor(proxy, 'Pilots')
+        stack = self.wftool.getStackFor(proxy, STACK_ID)
         stack_mod = proxy.cpscourrier_stack_modify
 
-        # initialy, the proxy is in state "work" with an empty stack
-        self.assertEquals(self._get_state(proxy), 'work')
-        self.assertEquals(stack.getAllLevels(), [])
-
-        # member1 takes the lead
-        kw = {'current_var_id': 'Pilots',
-              'directive': 'response',
-              'level': '0',
-              'workflow_action_form': 'cpscourrier_roadmap',
-              'submit_add': 'Valider',
-              'push_ids': ['courrier_user:member1_ftest-mailbox']}
-        stack_mod(**kw)
+        # initialy, the proxy is in state "work" with member1 in the stack
         self.assertEquals(self._get_state(proxy), 'work')
         self.assertEquals(stack.getAllLevels(), [0])
         elt = stack._getLevelContentValues()[0]
@@ -368,7 +316,7 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         proxy.getEditableContent().edit(mail_to="noone@nohost.com",
                                         proxy=proxy)
         self.flogin('member1', self.mb)
-        stack = self.wftool.getStackFor(proxy, 'Pilots')
+        stack = self.wftool.getStackFor(proxy, STACK_ID)
         stack_mod = proxy.cpscourrier_stack_modify
 
         # Using a disabled MailHost
@@ -377,21 +325,7 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
                 return args
         proxy.MailHost = FakeMailHost()
 
-        # initialy, the proxy is in state "work" with an empty stack
-        self.assertEquals(self._get_state(proxy), 'work')
-        self.assertEquals(stack.getAllLevels(), [])
-
-        # member1 takes the lead
-        kw = {'current_var_id': 'Pilots',
-              'directive': 'response',
-              'level': '0',
-              'workflow_action_form': 'cpscourrier_roadmap',
-              'submit_add': 'Valider',
-              'push_ids': ['courrier_user:member1_ftest-mailbox']}
-        stack_mod(**kw)
-
-        # member1 (the Pilot) and the managers can then trigger the send
-        # transition
+        # member1 (the Pilot) and the managers can trigger the send transition
         self.flogin('reader', self.mb)
         self.failIf(wf.isActionSupported(proxy, 'send'))
         self.login('manager')
@@ -439,7 +373,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member1', self.mb)
         self.wftool.doActionFor(self.incoming, 'handle')
 
-        stack = self.wftool.getStackFor(self.incoming, 'Pilots')
+        stack = self.wftool.getStackFor(self.incoming, STACK_ID)
         self.assertEquals(stack.getAllLevels(), [0])
         elt = stack._getLevelContentValues()[0]
         self.assertEquals(elt['directive'], 'handle')
@@ -456,7 +390,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member1', self.mb)
 
         # member1 adds member2 below himself
-        kws = {'current_var_id': 'Pilots',
+        kws = {'current_var_id': STACK_ID,
                'directive': 'response',
                'level': '-1',
                'workflow_action_form': 'cpscourrier_roadmap',
@@ -466,14 +400,14 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.assertEquals(stack.getAllLevels(), [-1, 0])
 
         # member1 adds member3 (upper) between member1 and member2
-        kws = {'current_var_id': 'Pilots',
+        kws = {'current_var_id': STACK_ID,
                'directive': 'response',
                'level': '-1_0',
                'workflow_action_form': 'cpscourrier_roadmap',
                'submit_add': 'Valider',
                'push_ids': ['courrier_user:member3_ftest-mailbox-group']}
         stack_mod(**kws)
-        stack = self.wftool.getStackFor(self.incoming, 'Pilots') # necessary
+        stack = self.wftool.getStackFor(self.incoming, STACK_ID) # necessary
         self.assertEquals(stack.getAllLevels(), [-2, -1, 0])
 
         # check what will be displayed
@@ -483,7 +417,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
 
         # member1 delegates member3
         self.wftool.doActionFor(self.incoming, 'move_down_delegatees',
-                                current_wf_var_id='Pilots')
+                                current_wf_var_id=STACK_ID)
         self.failIf(wf.isActionSupported(self.incoming, 'answer'))
         self.flogin('member2', self.mb)
         self.failIf(wf.isActionSupported(self.incoming, 'answer'))
@@ -498,7 +432,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member1', self.mb)
         self.wftool.doActionFor(self.incoming, 'handle',
                                 use_parent_roadmap=True)
-        stack = self.wftool.getStackFor(self.incoming, 'Pilots')
+        stack = self.wftool.getStackFor(self.incoming, STACK_ID)
         for_render = stack.getStackContentForRender(self.incoming)
         self.assertEquals(for_render[1][0]['items'][0]['identite'],
                           'member1_ftest-mailbox')
@@ -507,14 +441,14 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         # wsmanager of mb logs in and builds the default roadmap:
         # -1:member1, 0:member3
         self.flogin('wsmanager', self.mb)
-        kws = {'current_var_id': 'Pilots',
+        kws = {'current_var_id': STACK_ID,
                'directive': 'response',
                'level': '0',
                'workflow_action_form': 'cpscourrier_roadmap',
                'submit_add': 'Valider',
                'push_ids': ['courrier_user:member3_ftest-mailbox-group']}
         stack_mod(**kws)
-        kws = {'current_var_id': 'Pilots',
+        kws = {'current_var_id': STACK_ID,
                'directive': 'response',
                'level': '-1',
                'workflow_action_form': 'cpscourrier_roadmap',
@@ -523,7 +457,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         stack_mod(**kws)
 
         # we can insert above current level (should go in unit tests)
-        stack = self.wftool.getStackFor(self.mb, 'Pilots')
+        stack = self.wftool.getStackFor(self.mb, STACK_ID)
         insert_render = stack.getStackContentForRender(self.mb,
                                                        mode='insert')
         self.assertEquals(insert_render[0], [1, 0, '-1_0', -1, -2])
@@ -534,7 +468,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
                                 use_parent_roadmap=True)
 
         # assertions on mail's stack
-        stack = self.wftool.getStackFor(self.incoming, 'Pilots')
+        stack = self.wftool.getStackFor(self.incoming, STACK_ID)
 
         # stack holds: -1:member1, 0:member3, 1:member2
         self.assertEquals(stack.getAllLevels(), [-1,0,1])
@@ -554,7 +488,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.wftool.doActionFor(self.incoming, 'handle')
 
         # member1 adds member2 below himself
-        kws = {'current_var_id': 'Pilots',
+        kws = {'current_var_id': STACK_ID,
                'directive': 'response',
                'level': '-1',
                'workflow_action_form': 'cpscourrier_roadmap',
@@ -578,7 +512,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         outgoing = self.portal.unrestrictedTraverse(proxies[0][0])
 
         # stack has been copied and reversed
-        stack = self.wftool.getStackFor(outgoing, 'Pilots')
+        stack = self.wftool.getStackFor(outgoing, STACK_ID)
         self.assertEquals(stack.getAllLevels(), [0, 1])
         for_render = stack.getStackContentForRender(outgoing)
         # was previously at level -1

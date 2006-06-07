@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-05-26 20:43default\n"
+"POT-Creation-Date: 2006-06-05 12:38default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -44,19 +44,19 @@ msgstr "Page ${current_page} of ${nb_pages}"
 msgid "State"
 msgstr ""
 
-#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" condition="view/canMoveDown" />
-#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
+#.   <input condition="view/canMoveDown" type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
+#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
 msgstr "Move down"
 
-#.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
+#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_update_stackelts"
 msgstr "Apply changes"
 
-#.   <input name="answer_submit" type="submit" class="standalone" value="button_validate" />
-#.   <input name="submit_add" type="submit" class="context" value="button_validate" />
+#.   <input type="submit" name="answer_submit" value="button_validate" class="standalone" />
+#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
 #: from ../browser/batchPerform.zpt ../browser/reuseAnswer.zpt
 #: ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
@@ -79,7 +79,37 @@ msgstr "Reply from an existing reply"
 msgid "cpscourrier_choose_insertion_level"
 msgstr "Choose insertion level"
 
-#.   <input name="filter" type="submit" class="context" value="cpscourrier_filter_button" condition="param_rows" />
+#.   <h1>
+#.         Late documents on <block content="options/portal_title" />
+#.       </h1>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+#, fuzzy
+msgid "cpscourrier_dun_heading"
+msgstr "Mail roadmap"
+
+#.   <span>
+#.   	You'll find below the list of late mail documents in mailbox
+#.         </span>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+#, fuzzy
+msgid "cpscourrier_dun_intro"
+msgstr "(Please select a mailbox)"
+
+#.   <span condition="python:options['sort_limit'] == options['late_number']">
+#.   	(maximum reached)
+#.         </span>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+#, fuzzy
+msgid "cpscourrier_dun_max_reached"
+msgstr "Deadline (maximum)"
+
+#.   <span>Total:</span>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+#, fuzzy
+msgid "cpscourrier_dun_total"
+msgstr "To"
+
+#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
 #: from ../skins/cps_courrier/layout_tabular_view.pt
 msgid "cpscourrier_filter_button"
 msgstr "Filter"
@@ -912,3 +942,6 @@ msgstr "D${plus_sign}${d}"
 
 msgid "cpscourrier_fake_original_msg"
 msgstr "-------- Original message ---------"
+
+msgid "cpscourrier_subject_${portal_title}_${mb_title}_${late_number}"
+msgstr ""

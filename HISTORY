@@ -1,4 +1,28 @@
 *******************************************
+** CPSCourrier V0.13.1 [R1 build 2006/06/07-17:59 by ogrisel]
+** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 46305
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- DGME #4528: fixed wrong guard roles on the "close" permission
+- DGME #4525: mails in "sent" state are visible by default
+- DGME #4532: the Mai templates box now has all portal subjects selected
+  to be able to assign whatever subjects to the templates
+- various wf / stacks permissions fixes in the outgoing wf
+- DGME #4529: added a target="_blank" attributes to all the links of the
+  batchPerform view
+- fixed wrong category name for dashboards' batch actions
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Roadmap delegation layouts are based on localroles (from CPSDashboards).
+  Was the other way round
+
+*******************************************
 ** CPSCourrier V0.13.0 [R1 build 2006/06/06-12:14 by gracinet]
 ** SVN URL: http://svn/pub/CPS3/products/CPSCourrier/trunk Revision: 46233
 Requires:
