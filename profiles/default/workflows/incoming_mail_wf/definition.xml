@@ -143,7 +143,6 @@
     <guard-role>LocalManager</guard-role>
     <guard-role>Supervisor</guard-role>
     <guard-role>Manager</guard-role>
-    <guard-role></guard-role>
    </empty-stack-manage-guard>
    <edit-stack-element-guard>
    </edit-stack-element-guard>
