@@ -1,4 +1,20 @@
 *******************************************
+** CPSCourrier V0.13.2 [R1 build 2006/06/07-18:42 by ogrisel]
+** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 46321
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- DGME #4536: fixed missing schema fields for the mail templates box
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCourrier V0.13.1 [R1 build 2006/06/07-17:59 by ogrisel]
 ** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 46305
 Requires:
