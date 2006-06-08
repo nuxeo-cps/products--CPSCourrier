@@ -106,6 +106,18 @@
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
   </permission-map>
+  <stack-definition stackdef_id="Pilots"
+                    variable_id="Pilots"
+                    meta_type="Hierarchical Stack Definition"
+                    stack_type="Courrier Stack">
+   <managed-roles>
+    <managed-role name="Pilot"
+                  expression="python:stack.getAllLevels() and level == stack.getCurrentLevel()"/>
+   </managed-roles>
+   <empty-stack-manage-guard></empty-stack-manage-guard>
+   <edit-stack-element-guard></edit-stack-element-guard>
+   <view-stack-element-guard></view-stack-element-guard>
+  </stack-definition>
  </state>
  <state state_id="handled" title="">
   <exit-transition transition_id="init_stack"/>
