@@ -30,9 +30,12 @@ from zope.component import adapts
 from zope.interface import implements
 
 from Acquisition import aq_base, aq_inner, aq_parent
+from AccessControl import Unauthorized
 from ZODB.loglevels import BLATHER as VERBOSE
 from zExceptions import NotFound
+from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.utils import _checkPermission
 from Products.CPSCourrier.config import (
     ARCHIVE_MIN_AGE, ARCHIVE_HOME, HAS_REPLY, IS_REPLY_TO, RELATION_GRAPH_ID)
 from Products.CPSCourrier.relations import get_thread_for
@@ -137,7 +140,7 @@ def exportCPSObjectsWithDoc(obj, parent_path, context):
 
     Recursion also happens for specific CPS subobjects.
 
-    Also use the 'subdir' kw of context.writeDataFile to play nicely with 
+    Also use the 'subdir' kw of context.writeDataFile to play nicely with
     DirectoryExportContext.
     """
     exporter = zapi.queryMultiAdapter((obj, context), IBody)
@@ -165,6 +168,18 @@ def exportCPSObjectsWithDoc(obj, parent_path, context):
 
 
 class Archiver:
+    """Implement CPSCourrier specific archiving logic
+
+    Old mail documents in specified review states are exported to XML and
+    deleted from the ZODB.
+
+    To maximize efficiency, the repository should be purged and the ZODB packed
+    after triggering the archiving machinery (cf cpshousekeeping to automate
+    such tasks).
+
+    Use a special XMLAdapter to export the proxy informations using the
+    GenericSetup machinery.
+    """
 
     # review states of proxies to be archived
     review_states = ['closed', 'trash', 'sent']
@@ -176,6 +191,9 @@ class Archiver:
     date_field_id = 'ModificationDate'
 
     def __init__(self, portal, archive_home=ARCHIVE_HOME):
+        if not _checkPermission(ManagePortal, portal):
+            raise Unauthorized
+
         self._portal = portal
         setup_tool = getToolByName(portal, "portal_setup")
         if not os.path.exists(archive_home):
@@ -284,6 +302,4 @@ class Archiver:
                 mb.manage_delObjects([proxy.getId()])
             archived_mails += len(thread)
         return archived_mails
-
-
 

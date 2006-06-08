@@ -9,6 +9,10 @@ Add this as External Method to the root of the portal:
     module: CPSCourrier.archive
     function: archive
 
+To run it in a cron job each night at 2h12, add something along those lines in
+your cron tab. Be sure to adjust the user/passwd to some Manager account::
+
+  12 2 * * * /usr/bin/wget -http-user=<user> --http-passwd=<pwd> <portal_url>/archive >/dev/null 2>&1 &
 """
 
 from Products.CMFCore.utils import getToolByName

@@ -9,4 +9,4 @@ Bug fixes:
 - DGME #4542: fixed mkdirs/makedirs typo in the archiver
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- explicit security checking at archiver instanciation time
