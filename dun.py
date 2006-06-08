@@ -23,8 +23,11 @@ late mails.
 """
 
 import logging
+from AccessControl import Unauthorized
 from DateTime import DateTime
+from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.utils import _checkPermission
 from Products.CPSCourrier.workflows.scripts import send_mail
 
 logger = logging.getLogger('CPSCourrier.dun')
@@ -59,6 +62,8 @@ class DunNotifier:
     render_method = "cpscourrier_dun_notification_render"
 
     def __init__(self, portal):
+        if not _checkPermission(ManagePortal, portal):
+            raise Unauthorized
         self._portal = portal
         self._catalog = getToolByName(portal, 'portal_catalog')
         self._transl = getToolByName(portal, 'translation_service')
@@ -102,8 +107,8 @@ class DunNotifier:
     def appendUserEmail(self, em_list, user_id):
         entry = self._mdir._getEntry(user_id, default=None)
         if entry is None:
-            warn="Non-existent user %s has roles on %s. Reindex security?"
-            logger.warn(warn, user_id, mailbox)
+            warn="Non-existent user %s has matching roles. Reindex security?"
+            logger.warn(warn, user_id)
             return
         email = entry.get('email')
         if email is None:

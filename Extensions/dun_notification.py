@@ -32,20 +32,16 @@ How to use it:
 """
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFCore.utils import _checkPermission
-from Products.CMFCore.permissions import ManagePortal
 
 from Products.CPSCourrier.dun import DunNotifier
 from Products.CPSCourrier.workflows.scripts import HTML_BODY_WRAPPER
 
 def notify(self):
     portal = getToolByName(self, 'portal_url').getPortalObject()
-    if not _checkPermission(ManagePortal, portal):
-        raise Unauthorized
 
     notifier = DunNotifier(portal)
-
     notifier.date_tolerance = -1
+
     report = notifier.notify()
     report_str = ["Notified %d person(s) about %s documents in mailbox at %s" % (
 
