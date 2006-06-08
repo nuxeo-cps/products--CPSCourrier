@@ -5,30 +5,35 @@
     <title/>
   </head>
   <body bgcolor="#ffffff" text="#000000">
-    <h1 i18n:translate="cpscourrier_dun_heading">
-      Late documents on <tal:block content="options/portal_title"/>
+    <h1 i18n:translate="">
+      Late documents on <span i18n:name="portal_title"
+        tal:content="options/portal_title"/>
     </h1>
-    <h2>
-      <span i18n:translate="cpscourrier_dun_intro">
-	You'll find below the list of late mail documents in mailbox
-      </span>
-       <span tal:content="options/mb_title"/>
-    </h2>
+    <p i18n:translate="">
+      You'll find below the list of late mail documents in mailbox
+      <span i18n:name="mailbox_title" tal:content="options/mb_title"/>
+    </p>
     <p>
-      <span i18n:translate="cpscourrier_dun_total">Total:</span>
-      <span tal:content="options/late_number"/>
-      <span tal:condition="python:options['sort_limit'] == options['late_number']"
-	    i18n:translate="cpscourrier_dun_max_reached">
-	(maximum reached)
+      <span
+        tal:condition="python:options['sort_limit'] != options['late_number']"
+        i18n:translate="">The following <span
+          i18n:name="late_number" tal:content="options/late_number"/>
+      mail documents are late:
+      </span>
+      <span
+        tal:condition="python:options['sort_limit'] == options['late_number']"
+        i18n:translate="">The following mail documents are late (only the first
+        <span i18n:name="late_number" tal:content="options/late_number"/>
+        are displayed):
       </span>
     </p>
 
     <ul>
       <li tal:repeat="brain options/late_brains">
-	<span tal:content="brain/Title"/><br/>
-	<a href=""
-	   tal:define="url string:${portal_url}${brain/relative_path}"
-	   tal:content="url" tal:attributes="href url"/>
+        <span tal:content="brain/Title"/><br/>
+        <a href=""
+          tal:define="url string:${portal_url}${brain/relative_path}"
+          tal:content="url" tal:attributes="href url"/>
       </li>
     </ul>
   </body>

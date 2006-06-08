@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-06-05 12:38default\n"
+"POT-Creation-Date: 2006-06-08 18:56default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -34,14 +34,42 @@ msgid ""
 "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
 
-#.   <span>Page ${current_page (tal replace="current_page")} of ${nb_pages (tal replace="nb_pages")}</span>
-#: from ../skins/cps_courrier/widget_tabular_render.pt
-msgid "Page ${current_page} of ${nb_pages}"
-msgstr "Page ${current_page} of ${nb_pages}"
+#.   <h1>
+#.         Late documents on ${portal_title (tal content="options/portal_title")}
+#.       </h1>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+msgid "Late documents on ${portal_title}"
+msgstr ""
 
 #.   <span content="state" attributes="class state">State</span>
 #: from ../skins/cps_courrier/portlet_custom_thread.pt
 msgid "State"
+msgstr ""
+
+#.   <span condition="python:options['sort_limit'] != options['late_number']">The following ${late_number (tal content="options/late_number")}
+#.         mail documents are late:
+#.         </span>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+msgid "The following ${late_number} mail documents are late:"
+msgstr ""
+
+#.   <span condition="python:options['sort_limit'] == options['late_number']">The following mail documents are late (only the first
+#.           ${late_number (tal content="options/late_number")}
+#.           are displayed):
+#.         </span>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+msgid ""
+"The following mail documents are late (only the first ${late_number} are "
+"displayed):"
+msgstr ""
+
+#.   <p>
+#.         You'll find below the list of late mail documents in mailbox
+#.         ${mailbox_title (tal content="options/mb_title")}
+#.       </p>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+msgid ""
+"You'll find below the list of late mail documents in mailbox ${mailbox_title}"
 msgstr ""
 
 #.   <input condition="view/canMoveDown" type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
@@ -78,41 +106,6 @@ msgstr "Reply from an existing reply"
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_choose_insertion_level"
 msgstr "Choose insertion level"
-
-#.   <h1>
-#.         Late documents on <block content="options/portal_title" />
-#.       </h1>
-#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
-#, fuzzy
-msgid "cpscourrier_dun_heading"
-msgstr "Mail roadmap"
-
-#.   <span>
-#.   	You'll find below the list of late mail documents in mailbox
-#.         </span>
-#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
-#, fuzzy
-msgid "cpscourrier_dun_intro"
-msgstr "(Please select a mailbox)"
-
-#.   <span condition="python:options['sort_limit'] == options['late_number']">
-#.   	(maximum reached)
-#.         </span>
-#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
-#, fuzzy
-msgid "cpscourrier_dun_max_reached"
-msgstr "Deadline (maximum)"
-
-#.   <span>Total:</span>
-#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
-#, fuzzy
-msgid "cpscourrier_dun_total"
-msgstr "To"
-
-#.   <input condition="param_rows" type="submit" name="filter" value="cpscourrier_filter_button" class="context" />
-#: from ../skins/cps_courrier/layout_tabular_view.pt
-msgid "cpscourrier_filter_button"
-msgstr "Filter"
 
 #.   <label for="target_emailaddress">cpscourrier_forward_to_emailaddress</label>
 #: from ../skins/cps_courrier/cpscourrier_forward_form.pt
@@ -945,3 +938,4 @@ msgstr "-------- Original message ---------"
 
 msgid "cpscourrier_subject_${portal_title}_${mb_title}_${late_number}"
 msgstr ""
+"[${portal_title}] ${late_number} late mail documents in \"${mb_title}\""

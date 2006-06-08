@@ -8,6 +8,7 @@ Bug fixes:
 ~~~~~~~~~~
 - DGME #4542: fixed mkdirs/makedirs typo in the archiver
 - DGME #4538: fixed unwanted stack reset on mail closure
+- DGME #4507: fixed i18n for the dun notifier
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - explicit security checking at archiver instanciation time
