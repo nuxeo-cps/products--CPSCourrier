@@ -7,6 +7,7 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - DGME #4542: fixed mkdirs/makedirs typo in the archiver
+- DGME #4146: confirm form for move down on roadmaps
 - DGME #4538: fixed unwanted stack reset on mail closure
 - DGME #4507: fixed i18n for the dun notifier
 New internal features:

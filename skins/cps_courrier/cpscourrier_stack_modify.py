@@ -81,9 +81,15 @@ if 'submit_delete' in kw:
 elif 'submit_add' in kw:
     action_type ='push'
 elif 'submit_edit' in kw:
-    action_type ='edit'
+    action_type = 'edit'
 elif 'submit_move_down' in kw:
     action_type = 'move_down'
+    if REQUEST is not None:
+	url = '%s/workflow_transition_form?transition=%s' % (
+	    context.absolute_url(), 
+	    workflow_actions[action_type])
+	REQUEST.RESPONSE.redirect(url)
+	return
 else:
     raise ValueError("Unkown submission type")
 

@@ -45,7 +45,6 @@
       <input type="submit" class="context" name="submit_move_down"
 	     value="button_move_down_delegatees"
 	     tal:condition="view/canMoveDown"
-	     tal:attributes="onclick python:'return window.confirm(\'%s\')' % (cpsmcat('description_confirm_delete'), )"
 	     i18n:attributes="value"/>
     </tal:buttons>
     <tal:endform condition="edit_mode" replace="structure string:</form>" />
