@@ -61,7 +61,7 @@ def initialize(registrar):
     profile_registry.registerProfile(
         'default',
         'CPS Courrier',
-        "Mail tracking and management system for CPS",
+        "Mail tracking and management system for CPS, base configuration",
         'profiles/default',
         'CPSCourrier',
         EXTENSION,
@@ -72,6 +72,15 @@ def initialize(registrar):
         'CPS Courrier Lucene',
         "Add-on configuration for Lucene",
         'profiles/lucene',
+        'CPSCourrier',
+        EXTENSION,
+        for_=ICPSSite)
+
+    profile_registry.registerProfile(
+        'standalone',
+        'CPS Courrier Standalone',
+        "CPSCourrier skinning for standalone operation",
+        'profiles/standalone',
         'CPSCourrier',
         EXTENSION,
         for_=ICPSSite)
