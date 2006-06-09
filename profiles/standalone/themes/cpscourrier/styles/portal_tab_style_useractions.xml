@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<object name="portal_tab_style_useractions" meta_type="Portal Tab Style">
+ <property name="title">PortalTabStyleuseractions</property>
+ <property name="default">False</property>
+ <property name="HorizontalMargin">5px</property>
+ <property name="VerticalPadding">1px</property>
+ <property name="HorizontalPadding">1px</property>
+ <property name="Tab_width"></property>
+ <property name="Tabs_bg_image"></property>
+ <property name="Tab_bottom_border_color"></property>
+ <property name="TabIn_bottom_border_color"></property>
+ <property name="Tab_left_bg_image"></property>
+ <property name="Tab_right_bg_image"></property>
+ <property name="TabIn_left_bg_image"></property>
+ <property name="TabIn_right_bg_image"></property>
+</object>

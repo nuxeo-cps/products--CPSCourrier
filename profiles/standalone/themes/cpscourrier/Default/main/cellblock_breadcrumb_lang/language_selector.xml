@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<object name="language_selector" meta_type="Language Templet">
+ <property name="title">Lang_selector3</property>
+ <property name="cacheable">False</property>
+ <property name="cache_lifetime">60</property>
+ <property name="hidden_in_text_mode">False</property>
+ <property name="display_title_in_text_mode">False</property>
+ <property name="xpos">1</property>
+ <property name="align">right</property>
+ <property name="padding">10px 15px 0px 20px</property>
+ <property name="margin">0px</property>
+ <property name="templet_height"></property>
+ <property name="fontcolor">defaultfontcolors</property>
+ <property name="fontshape">average</property>
+ <property name="shape"></property>
+ <property name="color"></property>
+ <property name="formstyle"></property>
+ <property name="visibility">always</property>
+ <property name="visibility_paths"/>
+ <property name="languages"/>
+ <property name="esi_fragment">False</property>
+ <property name="style">flags</property>
+ <property name="hide_current_lang">False</property>
+</object>

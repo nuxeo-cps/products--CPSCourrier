@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="box_corners_half_rounded" meta_type="Box Corners">
+ <property name="title">halfRoundedBox</property>
+ <property name="default">False</property>
+ <property name="Area_border_color">#bcbcbc</property>
+ <property name="Area_bg_color">#FFF</property>
+ <property name="TopLeft_bg_image">scorner1.png</property>
+ <property name="TopRight_bg_image">scorner2.png</property>
+ <property name="BottomRight_bg_image">corner3.png</property>
+ <property name="BottomLeft_bg_image">corner4.png</property>
+</object>

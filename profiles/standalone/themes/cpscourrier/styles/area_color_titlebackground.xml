@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="area_color_titlebackground" meta_type="Area Color">
+ <property name="title">titlebackground</property>
+ <property name="default">False</property>
+ <property name="Area_border_color">transparent</property>
+ <property name="Area_bg_color">#1F4485</property>
+ <property name="Area_bg_image">cps_athens.png</property>
+ <property name="Area_bg_position">top left</property>
+ <property name="Area_bg_repeat">no-repeat</property>
+ <property name="Area_font_color">#000000</property>
+</object>

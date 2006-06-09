@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<object name="portal_themes">
+  <property name="method_themes" purge="True"/>
+  <object name="cpscourrier" meta_type="Portal Theme"/>
+</object>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<object name="cellblock_breadcrumb_lang" meta_type="Cell Block">
+ <property name="title">Breadcrumb_lang_cells</property>
+ <property name="xpos">1</property>
+ <property name="height"></property>
+ <property name="maxcols">2</property>
+ <property name="shape"></property>
+ <property name="color">maintopcorner</property>
+ <property name="margin">10px 0px 0px 0px</property>
+ <object name="language_selector" meta_type="Language Templet"/>
+ <object name="portal_box_breadcrumb" meta_type="Portal Box Group Templet"/>
+ <object name="cell_sizer1" meta_type="Cell Sizer"/>
+ <object name="cell_sizer2" meta_type="Cell Sizer"/>
+</object>

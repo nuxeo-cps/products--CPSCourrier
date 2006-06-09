@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<object name="portal_box_breadcrumb" meta_type="Portal Box Group Templet">
+ <property name="title">breadcrumb</property>
+ <property name="cacheable">False</property>
+ <property name="cache_lifetime">60</property>
+ <property name="hidden_in_text_mode">False</property>
+ <property name="display_title_in_text_mode">False</property>
+ <property name="xpos">0</property>
+ <property name="align">left</property>
+ <property name="padding">0px 0px 0px 10px</property>
+ <property name="margin">10px 0px 0px 0px</property>
+ <property name="templet_height"></property>
+ <property name="fontcolor">defaultfontcolors</property>
+ <property name="fontshape">mini</property>
+ <property name="shape"></property>
+ <property name="color"></property>
+ <property name="formstyle"></property>
+ <property name="visibility">always</property>
+ <property name="visibility_paths"/>
+ <property name="languages"/>
+ <property name="esi_fragment">False</property>
+ <property name="boxshape"></property>
+ <property name="boxcolor"></property>
+ <property name="boxcorners"></property>
+ <property name="portaltabstyle"></property>
+ <property name="boxlayout">notitle_noframe</property>
+ <property name="box_group">breadcrumb</property>
+ <property name="macroless">False</property>
+ <property name="box_title_i18n">False</property>
+</object>

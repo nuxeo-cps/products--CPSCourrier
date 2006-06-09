@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<object name="Default" meta_type="Theme Page">
+ <property name="title">Default</property>
+ <property name="default">True</property>
+ <property name="preview"></property>
+ <property name="renderer">default</property>
+ <property name="macroless">False</property>
+ <property name="tableless">False</property>
+ <property name="align">center</property>
+ <property name="shape"></property>
+ <property name="color">background</property>
+ <property name="margin">0px</property>
+ <object name="header" meta_type="Page Block"/>
+ <object name="main" meta_type="Page Block"/>
+ <object name="footer" meta_type="Page Block"/>
+</object>

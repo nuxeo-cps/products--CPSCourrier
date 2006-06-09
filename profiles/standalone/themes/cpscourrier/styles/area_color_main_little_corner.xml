@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="area_color_main_little_corner" meta_type="Area Color">
+ <property name="title">mainlittlecorner</property>
+ <property name="default">False</property>
+ <property name="Area_border_color">transparent</property>
+ <property name="Area_bg_color">#e7e7e7</property>
+ <property name="Area_bg_image">little_main_corner_e7_20px.png</property>
+ <property name="Area_bg_position">top left</property>
+ <property name="Area_bg_repeat">no-repeat</property>
+ <property name="Area_font_color">#666666</property>
+</object>

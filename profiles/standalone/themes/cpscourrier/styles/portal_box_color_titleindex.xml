@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<object name="portal_box_color_titleindex" meta_type="Portal Box Color">
+ <property name="title">titleindex</property>
+ <property name="default">False</property>
+ <property name="BoxTitle_bg_color">#FFF</property>
+ <property name="BoxTitle_border_color">transparent</property>
+ <property name="BoxTitle_bg_position"></property>
+ <property name="BoxTitle_bg_repeat"></property>
+ <property name="BoxBody_bg_color">#fff</property>
+ <property name="BoxBody_bg_position"></property>
+ <property name="BoxBody_bg_repeat"></property>
+ <property name="BoxBody_border_color">#999999</property>
+ <property name="BoxBody_menuout_color">#fff</property>
+ <property name="BoxBody_menuout_border_color">#fff</property>
+ <property name="BoxBody_menuin_color">#e7e7e7</property>
+ <property name="BoxBody_menuin_border_color">transparent</property>
+ <property name="BoxTitle_font_color">#003399</property>
+ <property name="BoxTitle_bg_image"></property>
+ <property name="BoxBody_bg_image"></property>
+ <property name="BoxBody_menuin_icon">blakbullet.png</property>
+ <property name="BoxBody_menuout_icon">blakbullet.png</property>
+</object>

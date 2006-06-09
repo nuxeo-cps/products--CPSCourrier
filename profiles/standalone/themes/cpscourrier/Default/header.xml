@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<object name="header" meta_type="Page Block">
+ <property name="title">Header</property>
+ <property name="closed">False</property>
+ <property name="width">98%</property>
+ <property name="height"></property>
+ <property name="maxcols">1</property>
+ <property name="shape"></property>
+ <property name="color">backgroundtop</property>
+ <object name="cell_header_container" meta_type="Cell Block"/>
+ <object name="cell_sizer4" meta_type="Cell Sizer"/>
+ <object name="cell_sizer3" meta_type="Cell Sizer"/>
+ <object name="cell_sizer1" meta_type="Cell Sizer"/>
+ <object name="cell_sizer5" meta_type="Cell Sizer"/>
+ <object name="cell_sizer2" meta_type="Cell Sizer"/>
+ <object name="1306761273" meta_type="Cell Styler"/>
+</object>

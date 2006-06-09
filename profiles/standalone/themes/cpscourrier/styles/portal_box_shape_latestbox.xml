@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<object name="portal_box_shape_latestbox" meta_type="Portal Box Shape">
+ <property name="title">Latestbox</property>
+ <property name="default">False</property>
+ <property
+    name="BoxTitle_font">bold 175% Arial, Helvetica, Verdana, sans-serif</property>
+ <property name="BoxTitle_border_style">none</property>
+ <property name="BoxTitle_border_width">0px</property>
+ <property name="BoxTitle_padding">0px 5px 0px 10px</property>
+ <property name="BoxTitle_display">inline</property>
+ <property name="BoxBody_border_style">none</property>
+ <property name="BoxBody_border_width">0px</property>
+ <property name="BoxBody_padding">10px 10px 10px 10px</property>
+ <property name="BoxBody_menuin_padding">2px</property>
+ <property name="BoxBody_menuout_padding">2px</property>
+ <property name="BoxBody_menuout_border_style">none</property>
+ <property name="BoxBody_menuout_border_width">1px</property>
+ <property name="BoxBody_menuout_margin">2px</property>
+ <property name="BoxBody_menuin_border_style">none</property>
+ <property name="BoxBody_menuin_border_width">0px</property>
+ <property name="BoxBody_menuin_margin">2px</property>
+</object>

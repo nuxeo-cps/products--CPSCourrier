@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<object name="main" meta_type="Page Block">
+ <property name="title">Main</property>
+ <property name="closed">False</property>
+ <property name="width">98%</property>
+ <property name="height"></property>
+ <property name="maxcols">2</property>
+ <property name="shape">main</property>
+ <property name="color">Headercandybarbackground</property>
+ <object name="cellblock_breadcrumb_lang" meta_type="Cell Block"/>
+ <object name="portal_box_pending" meta_type="Portal Box Group Templet"/>
+ <object name="portal_box_doc_actions" meta_type="Portal Box Group Templet"/>
+ <object name="contentwell" meta_type="Portal Box Group Templet"/>
+ <object name="portal_box_treeview" meta_type="Portal Box Group Templet"/>
+ <object name="portal_box_latest_doc" meta_type="Portal Box Group Templet"/>
+ <object name="cell_sizer5" meta_type="Cell Sizer"/>
+ <object name="cell_sizer3" meta_type="Cell Sizer"/>
+ <object name="cell_sizer1" meta_type="Cell Sizer"/>
+ <object name="cell_sizer2" meta_type="Cell Sizer"/>
+ <object name="cell_sizer4" meta_type="Cell Sizer"/>
+ <object name="cell_styler1" meta_type="Cell Styler"/>
+ <object name="1879553856" meta_type="Cell Styler"/>
+</object>

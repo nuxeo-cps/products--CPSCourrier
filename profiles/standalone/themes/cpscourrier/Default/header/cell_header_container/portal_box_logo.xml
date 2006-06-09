@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<object name="portal_box_logo" meta_type="Image Box Templet">
+ <property name="title">Logo</property>
+ <property name="cacheable">False</property>
+ <property name="cache_lifetime">60</property>
+ <property name="hidden_in_text_mode">False</property>
+ <property name="display_title_in_text_mode">False</property>
+ <property name="xpos">0</property>
+ <property name="align">center</property>
+ <property name="padding">0px</property>
+ <property name="margin">0px</property>
+ <property name="templet_height"></property>
+ <property name="fontcolor"></property>
+ <property name="fontshape"></property>
+ <property name="shape"></property>
+ <property name="color"></property>
+ <property name="formstyle"></property>
+ <property name="visibility">always</property>
+ <property name="visibility_paths"/>
+ <property name="languages"/>
+ <property name="esi_fragment">False</property>
+ <property name="i18n">False</property>
+ <property name="caption"></property>
+ <property name="link"></property>
+ <property name="use_internal_link">True</property>
+ <property name="internal_link">/</property>
+ <object name="image" meta_type="Image" title=""/>
+</object>

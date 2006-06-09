@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<object name="cpscourrier" meta_type="Portal Theme">
+ <property name="title">CPS Courrier Theme</property>
+ <property name="default">True</property>
+ <property name="esi">False</property>
+ <property name="shortcut_icon">cps_favicon_4.png</property>
+ <property name="author">thibaut soulcie for nuxeo</property>
+ <property name="copyright">CPS is copyright by Nuxeo
+  CPSSkins is copyright by Jean-Marc Orliaguet</property>
+ <property name="license"></property>
+ <object name="icons" meta_type="Theme Folder"/>
+ <object name="backgrounds" meta_type="Theme Folder"/>
+ <object name="thumbnails" meta_type="Theme Folder"/>
+ <object name="styles" meta_type="Theme Folder"/>
+ <object name="palettes" meta_type="Theme Folder"/>
+ <object name="Default" meta_type="Theme Page"/>
+</object>

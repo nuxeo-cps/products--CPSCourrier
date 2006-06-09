@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<object name="backgrounds" meta_type="Theme Folder">
+ <property name="title"></property>
+ <object name="header_background.png" meta_type="Image"
+    title="header_background.png"/>
+ <object name="header_side_left.png" meta_type="Image"
+    title="header_side_left.png"/>
+ <object name="header_side_right.png" meta_type="Image"
+    title="header_side_right.png"/>
+ <object name="main_side_left.png" meta_type="Image"
+    title="main_side_left.png"/>
+ <object name="main_side_right.png" meta_type="Image"
+    title="main_side_right.png"/>
+ <object name="tab_white_left.png" meta_type="Image"
+    title="tab_white_left.png"/>
+ <object name="tab_white_right.png" meta_type="Image"
+    title="tab_white_right.png"/>
+ <object name="tab_yellow_left.png" meta_type="Image"
+    title="tab_yellow_left.png"/>
+ <object name="tab_yellow_right.png" meta_type="Image"
+    title="tab_yellow_right.png"/>
+ <object name="footer_gradient.png" meta_type="Image"
+    title="footer_gradient.png"/>
+ <object name="pixel_gray_e7.png" meta_type="Image"
+    title="pixel_gray_e7.png"/>
+ <object name="little_corner_e7.png" meta_type="Image"
+    title="little_corner_e7.png"/>
+ <object name="bc_pixel.png" meta_type="Image" title="bc_pixel.png"/>
+ <object name="little_main_corner_e7_20px.png" meta_type="Image"
+    title="little_main_corner_e7_20px.png"/>
+ <object name="main_top_corner.png" meta_type="Image"
+    title="main_top_corner.png"/>
+ <object name="mainblock_bottom_gradient.png" meta_type="Image"
+    title="mainblock_bottom_gradient.png"/>
+ <object name="corner1.png" meta_type="Image" title="corner1.png"/>
+ <object name="corner2.png" meta_type="Image" title="corner2.png"/>
+ <object name="corner3.png" meta_type="Image" title="corner3.png"/>
+ <object name="corner4.png" meta_type="Image" title="corner4.png"/>
+ <object name="cps_athens.png" meta_type="Image" title="cps_athens.png"/>
+ <object name="scorner1.png" meta_type="Image" title="scorner1.png"/>
+ <object name="scorner2.png" meta_type="Image" title="scorner2.png"/>
+ <object name="bottom_main.png" meta_type="Image" title="bottom_main.png"/>
+ <object name="whitemaintop.png" meta_type="Image" title="whitemaintop.png"/>
+ <object name="background_top.gif" meta_type="Image"
+    title="background_top.gif"/>
+ <object name="background.gif" meta_type="Image" title="background.gif"/>
+</object>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<object name="portal_box_shape_objectactions" meta_type="Portal Box Shape">
+ <property name="title">objectactions</property>
+ <property name="default">False</property>
+ <property
+    name="BoxTitle_font">12px Arial, Helvetica, Verdana, sans-serif</property>
+ <property name="BoxTitle_border_style">none solid none none</property>
+ <property name="BoxTitle_border_width">1px</property>
+ <property name="BoxTitle_padding">0</property>
+ <property name="BoxTitle_display">inline</property>
+ <property name="BoxBody_border_style">none</property>
+ <property name="BoxBody_border_width">1px</property>
+ <property name="BoxBody_padding">0px</property>
+ <property name="BoxBody_menuin_padding">5px</property>
+ <property name="BoxBody_menuout_padding">5px</property>
+ <property name="BoxBody_menuout_border_style">none</property>
+ <property name="BoxBody_menuout_border_width">0px</property>
+ <property name="BoxBody_menuout_margin"></property>
+ <property name="BoxBody_menuin_border_style">none solid none solid</property>
+ <property name="BoxBody_menuin_border_width">1px</property>
+ <property name="BoxBody_menuin_margin"></property>
+</object>

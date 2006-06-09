@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="1270808862" meta_type="Area Color">
+ <property name="title">background</property>
+ <property name="default">False</property>
+ <property name="Area_border_color">#CCC</property>
+ <property name="Area_bg_color">#FFF</property>
+ <property name="Area_bg_image">background.gif</property>
+ <property name="Area_bg_position"></property>
+ <property name="Area_bg_repeat"></property>
+ <property name="Area_font_color">#000000</property>
+</object>

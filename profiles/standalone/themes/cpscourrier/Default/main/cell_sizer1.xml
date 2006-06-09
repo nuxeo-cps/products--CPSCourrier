@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<object name="cell_sizer1" meta_type="Cell Sizer">
+ <property name="xpos">4</property>
+ <property name="cellwidth">10%</property>
+</object>

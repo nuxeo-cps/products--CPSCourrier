@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<object name="font_shape_mini" meta_type="Font Shape">
+ <property name="title">mini</property>
+ <property name="default">False</property>
+ <property
+    name="Default_font">10px Arial, Helvetica, Verdana, sans-serif</property>
+ <property
+    name="H1_font">normal 150% Arial, Helvetica, Verdana, sans-serif</property>
+ <property name="H1_padding">0.8em 0em 0em 0em</property>
+ <property name="H1_margin"></property>
+ <property name="H1_border_width">1px</property>
+ <property name="H1_border_style">none</property>
+ <property
+    name="H2_font">bold 125% Arial, Helvetica, Verdana, sans-serif</property>
+ <property name="H2_padding">0.6em 0em 0em 0em</property>
+ <property name="H2_margin"></property>
+ <property name="H2_border_width">1px</property>
+ <property name="H2_border_style">none</property>
+ <property
+    name="H3_font">bold 120% Arial, Helvetica, Verdana, sans-serif</property>
+ <property name="H3_padding">0.6em 0em 0em 0em</property>
+ <property name="H3_margin"></property>
+ <property name="H3_border_width">1px</property>
+ <property name="H3_border_style">none</property>
+ <property
+    name="H456_font">bold 115% Arial, Helvetica, Verdana, sans-serif</property>
+ <property name="H456_padding">0.4em 0em 0em 0em</property>
+ <property name="H456_margin"></property>
+ <property name="H456_border_width">1px</property>
+ <property name="H456_border_style">none</property>
+ <property name="P_font">100% Arial, Helvetica, Verdana, sans-serif</property>
+ <property name="SMALL_font"></property>
+ <property name="STRONG_font"></property>
+ <property name="P_padding">0em</property>
+ <property name="A_link_decoration">none</property>
+ <property name="A_visited_decoration">none</property>
+ <property name="A_active_decoration">underline overline</property>
+ <property name="A_hover_decoration">underline</property>
+ <property name="A_link_border_width"></property>
+ <property name="A_visited_border_width"></property>
+ <property name="A_active_border_width"></property>
+ <property name="A_hover_border_width"></property>
+ <property name="A_link_border_style"></property>
+ <property name="A_visited_border_style"></property>
+ <property name="A_active_border_style"></property>
+ <property name="A_hover_border_style"></property>
+</object>

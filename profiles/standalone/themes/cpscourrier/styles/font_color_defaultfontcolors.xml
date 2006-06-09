@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<object name="font_color_defaultfontcolors" meta_type="Font Color">
+ <property name="title">defaultfontcolors</property>
+ <property name="default">True</property>
+ <property name="H1_font_color">#4E4E4E</property>
+ <property name="H1_border_color">#666666</property>
+ <property name="H1_bg_color"></property>
+ <property name="H2_font_color">#525252</property>
+ <property name="H2_border_color">#666666</property>
+ <property name="H2_bg_color"></property>
+ <property name="H3_font_color">#666666</property>
+ <property name="H3_border_color">#666666</property>
+ <property name="H3_bg_color"></property>
+ <property name="H456_font_color">Black</property>
+ <property name="H456_border_color">#666666</property>
+ <property name="H456_bg_color"></property>
+ <property name="A_link">#0066cc</property>
+ <property name="A_visited">#003399</property>
+ <property name="A_active">blue</property>
+ <property name="A_hover">#0066cc</property>
+ <property name="A_link_border_color"></property>
+ <property name="A_visited_border_color"></property>
+ <property name="A_active_border_color"></property>
+ <property name="A_hover_border_color"></property>
+ <property name="A_link_bg_color"></property>
+ <property name="A_visited_bg_color"></property>
+ <property name="A_active_bg_color"></property>
+ <property name="A_hover_bg_color"></property>
+</object>

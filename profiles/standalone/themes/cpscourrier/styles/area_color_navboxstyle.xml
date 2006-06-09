@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="area_color_navboxstyle" meta_type="Area Color">
+ <property name="title">Navboxstyle</property>
+ <property name="default">False</property>
+ <property name="Area_border_color">transparent</property>
+ <property name="Area_bg_color">#FFF</property>
+ <property name="Area_bg_image">little_corner_e7.png</property>
+ <property name="Area_bg_position">bottom left</property>
+ <property name="Area_bg_repeat">no-repeat</property>
+ <property name="Area_font_color">#000000</property>
+</object>

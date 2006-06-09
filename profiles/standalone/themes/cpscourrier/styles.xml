@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<object name="styles" meta_type="Theme Folder">
+ <property name="title"></property>
+ <object name="area_color_header_side_left" meta_type="Area Color"/>
+ <object name="area_color_header_side_right" meta_type="Area Color"/>
+ <object name="area_color_main_side_left" meta_type="Area Color"/>
+ <object name="area_color_main_side_right" meta_type="Area Color"/>
+ <object name="area_color_header_background" meta_type="Area Color"/>
+ <object name="portal_tab_style_tabstyle" meta_type="Portal Tab Style"/>
+ <object name="area_color_footergradient" meta_type="Area Color"/>
+ <object name="area_color_graye7" meta_type="Area Color"/>
+ <object name="font_shape_average" meta_type="Font Shape"/>
+ <object name="font_shape_mini" meta_type="Font Shape"/>
+ <object name="area_color_navboxstyle" meta_type="Area Color"/>
+ <object name="portal_box_shape_extraleftboxes" meta_type="Portal Box Shape"/>
+ <object name="portal_box_color_extraleftboxes" meta_type="Portal Box Color"/>
+ <object name="font_color_defaultfontcolors" meta_type="Font Color"/>
+ <object name="area_color_main_top" meta_type="Area Color"/>
+ <object name="area_color_main_little_corner" meta_type="Area Color"/>
+ <object name="area_color_main_left_border" meta_type="Area Color"/>
+ <object name="area_color_main_top_corner" meta_type="Area Color"/>
+ <object name="portal_box_shape_objectactions" meta_type="Portal Box Shape"/>
+ <object name="portal_box_color_objectactions" meta_type="Portal Box Color"/>
+ <object name="portal_box_shape_navbox" meta_type="Portal Box Shape"/>
+ <object name="portal_box_color_navbox" meta_type="Portal Box Color"/>
+ <object name="font_color_mini" meta_type="Font Color"/>
+ <object name="area_color_fontcolorgray" meta_type="Area Color"/>
+ <object name="font_color_defaultnovisitedlinks" meta_type="Font Color"/>
+ <object name="font_shape_actions" meta_type="Font Shape"/>
+ <object name="box_corners_rounded" meta_type="Box Corners"/>
+ <object name="portal_tab_style_useractions" meta_type="Portal Tab Style"/>
+ <object name="area_color_titlebackground" meta_type="Area Color"/>
+ <object name="box_corners_half_rounded" meta_type="Box Corners"/>
+ <object name="font_shape_titleindex" meta_type="Font Shape"/>
+ <object name="font_color_titleindex" meta_type="Font Color"/>
+ <object name="portal_box_shape_latestbox" meta_type="Portal Box Shape"/>
+ <object name="portal_box_color_titleindex" meta_type="Portal Box Color"/>
+ <object name="1270808862" meta_type="Area Color"/>
+ <object name="1700480434" meta_type="Area Color"/>
+ <object name="1170293671" meta_type="Area Shape"/>
+ <object name="412144907" meta_type="Font Color"/>
+ <object name="460823880" meta_type="Area Color"/>
+ <object name="1325969180" meta_type="Area Shape"/>
+</object>

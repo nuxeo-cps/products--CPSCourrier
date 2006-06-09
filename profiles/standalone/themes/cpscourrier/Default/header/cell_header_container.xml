@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<object name="cell_header_container" meta_type="Cell Block">
+ <property name="title">header_container</property>
+ <property name="xpos">0</property>
+ <property name="height"></property>
+ <property name="maxcols">2</property>
+ <property name="shape"></property>
+ <property name="color"></property>
+ <property name="margin">0px</property>
+ <object name="portal_box_search" meta_type="Portal Box Group Templet"/>
+ <object name="portal_box_user_actions" meta_type="Portal Box Group Templet"/>
+ <object name="portal_box_tabs" meta_type="Portal Box Group Templet"/>
+ <object name="portal_box_logo" meta_type="Image Box Templet"/>
+ <object name="215489144" meta_type="Cell Sizer"/>
+</object>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<object name="footer" meta_type="Page Block">
+ <property name="title">Footer</property>
+ <property name="closed">False</property>
+ <property name="width">98%</property>
+ <property name="height">50px</property>
+ <property name="maxcols">1</property>
+ <property name="shape">bottom</property>
+ <property name="color">justwhite</property>
+ <object name="copy_of_portlet_legal" meta_type="Portlet Box Templet"/>
+ <object name="2013458134" meta_type="Portlet Box Templet"/>
+ <object name="cell_sizer4" meta_type="Cell Sizer"/>
+ <object name="cell_sizer2" meta_type="Cell Sizer"/>
+ <object name="cell_sizer1" meta_type="Cell Sizer"/>
+ <object name="cell_sizer5" meta_type="Cell Sizer"/>
+ <object name="1255935322" meta_type="Cell Sizer"/>
+</object>

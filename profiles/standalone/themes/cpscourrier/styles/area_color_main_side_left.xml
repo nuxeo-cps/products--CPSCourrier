@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="area_color_main_side_left" meta_type="Area Color">
+ <property name="title">Mainsideleft</property>
+ <property name="default">False</property>
+ <property name="Area_border_color">transparent</property>
+ <property name="Area_bg_color">gray</property>
+ <property name="Area_bg_image">main_side_left.png</property>
+ <property name="Area_bg_position">top right</property>
+ <property name="Area_bg_repeat">repeat-y</property>
+ <property name="Area_font_color">#000000</property>
+</object>

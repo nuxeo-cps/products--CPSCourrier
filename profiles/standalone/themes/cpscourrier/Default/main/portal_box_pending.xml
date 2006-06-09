@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<object name="portal_box_pending" meta_type="Portal Box Group Templet">
+ <property name="title">pending</property>
+ <property name="cacheable">False</property>
+ <property name="cache_lifetime">60</property>
+ <property name="hidden_in_text_mode">False</property>
+ <property name="display_title_in_text_mode">False</property>
+ <property name="xpos">1</property>
+ <property name="align">left</property>
+ <property name="padding">10px 15px 10px 30px</property>
+ <property name="margin">0px</property>
+ <property name="templet_height"></property>
+ <property name="fontcolor">titleindex</property>
+ <property name="fontshape">Titleindex</property>
+ <property name="shape"></property>
+ <property name="color">mainleftborder</property>
+ <property name="formstyle"></property>
+ <property name="visibility">starting_from</property>
+ <property name="visibility_paths"/>
+ <property name="languages"/>
+ <property name="esi_fragment">False</property>
+ <property name="boxshape">Latestbox</property>
+ <property name="boxcolor">titleindex</property>
+ <property name="boxcorners">RoundedBoxCorners</property>
+ <property name="portaltabstyle"></property>
+ <property name="boxlayout">rounded_box</property>
+ <property name="box_group">Pending</property>
+ <property name="macroless">False</property>
+ <property name="box_title_i18n">False</property>
+</object>

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="area_color_footergradient" meta_type="Area Color">
+ <property name="title">Footergradient</property>
+ <property name="default">False</property>
+ <property name="Area_border_color">transparent</property>
+ <property name="Area_bg_color">#e7e7e7</property>
+ <property name="Area_bg_image">footer_gradient.png</property>
+ <property name="Area_bg_position">bottom left</property>
+ <property name="Area_bg_repeat">repeat-x</property>
+ <property name="Area_font_color">#000000</property>
+</object>
