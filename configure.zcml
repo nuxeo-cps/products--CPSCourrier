@@ -43,7 +43,7 @@
       permission="zope2.View"
       />
 
-  <!-- roadmap view manage its mode according to various guards -->
+  <!-- roadmap view manages its mode according to various guards -->
 
   <browser:page
       for="Products.CPSCore.interfaces.ICPSProxy"
