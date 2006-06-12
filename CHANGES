@@ -11,6 +11,7 @@ Bug fixes:
 - DGME #4146: confirm form for move down on roadmaps
 - DGME #4538: fixed unwanted stack reset on mail closure
 - DGME #4507: fixed i18n for the dun notifier
+- #4523: roadmap specific options were displayed on batch perform pages
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - explicit security checking at archiver instanciation time

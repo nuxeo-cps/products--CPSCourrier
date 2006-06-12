@@ -34,7 +34,7 @@
               <form action="" method="post"
                 tal:define="res view/renderLayout; rendered res/rendered">
 
-                <h2 tal:condition="view/is_results"
+               <h2 tal:condition="view/is_results"
                   i18n:translate="search_results">
                   Search results
                 </h2>
@@ -78,9 +78,11 @@
               <metal:transition_form
                 use-macro="here/content_lib_transition_form/macros/transition_form">
                 <metal:block fill-slot="fields">
-                  <metal:block tal:condition="python:transition=='handle'"
-                    use-macro="here/cpscourrier_handle_form/macros/handle_params"
+		  <tal:block condition="python:transition=='handle'">
+                  <metal:block
+		      use-macro="here/cpscourrier_handle_form/macros/handle_params"
                     />
+		  </tal:block>
                 </metal:block>
 
                 <metal:block fill-slot="button">
