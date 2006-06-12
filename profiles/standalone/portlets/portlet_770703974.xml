@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<object name="portlet_770703974" meta_type="CPS Portlet"
+   portal_type="Image Portlet">
+ <object name="image" meta_type="Image" title="powered_by_nuxeo.png"/>
+ <f id="Contributors">
+  <e v="root"/>
+ </f>
+ <f id="Coverage" v=""/>
+ <f id="CreationDate" v="20060606214308Z"/>
+ <f id="Creator" v="root"/>
+ <f id="Description" v=""/>
+ <f id="EffectiveDate" v=""/>
+ <f id="ExpirationDate" v=""/>
+ <f id="Format" v="text/html"/>
+ <f id="Language" v=""/>
+ <f id="ModificationDate" v="20060606214326Z"/>
+ <f id="Relation" v=""/>
+ <f id="Rights" v=""/>
+ <f id="Source" v=""/>
+ <f id="Subject"/>
+ <f id="Title" v=""/>
+ <f id="allow_discussion" v="False"/>
+ <f id="cache_cleanup_date" v="1149630206.09"/>
+ <f id="cache_params"/>
+ <f id="cache_timeout" v="0"/>
+ <f id="caption" v=""/>
+ <f id="disable_override" v="0"/>
+ <f id="identifier" v="portlet_770703974"/>
+ <f id="image"/>
+ <f id="javascript" v=""/>
+ <f id="link" v="http://www.nuxeo.com"/>
+ <f id="order" v="0"/>
+ <f id="portlet" v=""/>
+ <f id="preview"/>
+ <f id="provider" v=""/>
+ <f id="slot" v=""/>
+ <f id="slot_override" v="0"/>
+ <f id="visibility_range" v="0-0"/>
+</object>

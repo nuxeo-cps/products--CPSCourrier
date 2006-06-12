@@ -1,0 +1,8 @@
+<object name="portal_cpsportlets">
+ <object name="portlet_48347476" meta_type="CPS Portlet"
+    portal_type="Navigation Portlet"/>
+ <object name="portlet_770703973" meta_type="CPS Portlet"
+    portal_type="Image Portlet"/>
+ <object name="portlet_770703974" meta_type="CPS Portlet"
+    portal_type="Image Portlet"/>
+</object>

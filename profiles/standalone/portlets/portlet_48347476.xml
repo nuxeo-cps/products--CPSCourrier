@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<object name="portlet_48347476" meta_type="CPS Portlet"
+   portal_type="Navigation Portlet">
+ <f id="Contributors">
+  <e v="root"/>
+ </f>
+ <f id="Coverage" v=""/>
+ <f id="CreationDate" v="20060607125910Z"/>
+ <f id="Creator" v="root"/>
+ <f id="Description" v=""/>
+ <f id="EffectiveDate" v=""/>
+ <f id="ExpirationDate" v=""/>
+ <f id="Format" v="text/html"/>
+ <f id="Language" v=""/>
+ <f id="ModificationDate" v="20060607125920Z"/>
+ <f id="Relation" v=""/>
+ <f id="Rights" v=""/>
+ <f id="Source" v=""/>
+ <f id="Subject"/>
+ <f id="Title" v=""/>
+ <f id="allow_discussion" v="False"/>
+ <f id="authorized_only" v="True"/>
+ <f id="cache_cleanup_date" v="1149685160.88"/>
+ <f id="cache_params"/>
+ <f id="cache_timeout" v="0"/>
+ <f id="context_is_portlet" v="0"/>
+ <f id="context_rpath" v=""/>
+ <f id="contextual" v="0"/>
+ <f id="disable_override" v="0"/>
+ <f id="display" v="navigation_tree"/>
+ <f id="display_description" v="False"/>
+ <f id="display_hidden_folders" v="False"/>
+ <f id="display_managers" v="0"/>
+ <f id="dummy" v=""/>
+ <f id="end_depth" v="0"/>
+ <f id="folder_prefixes"/>
+ <f id="identifier" v="portlet_48347476"/>
+ <f id="javascript" v="widget_portlet_navigation_js"/>
+ <f id="order" v="0"/>
+ <f id="portlet" v=""/>
+ <f id="preview"/>
+ <f id="provider" v=""/>
+ <f id="rel_depth" v="0"/>
+ <f id="root_uids">
+  <e v="mailboxes"/>
+ </f>
+ <f id="short_syndication_formats" v="0"/>
+ <f id="show_docs" v="0"/>
+ <f id="show_icons" v="True"/>
+ <f id="slot" v=""/>
+ <f id="slot_override" v="0"/>
+ <f id="sort_by" v=""/>
+ <f id="sort_direction" v=""/>
+ <f id="syndication_formats"/>
+ <f id="visibility_range" v="0-0"/>
+</object>

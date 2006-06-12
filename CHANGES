@@ -4,6 +4,7 @@ Requires:
 New features:
 ~~~~~~~~~~~~~
 - Icons for courrier workflow actions
+- Standalone profile and skinning
 Bug fixes:
 ~~~~~~~~~~
 - DGME #4542: fixed mkdirs/makedirs typo in the archiver

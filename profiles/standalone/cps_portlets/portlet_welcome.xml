@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<object name="portlet_welcome" meta_type="CPS Portlet"
+   portal_type="Text Portlet">
+ <f id="Contributors">
+  <e v="root"/>
+ </f>
+ <f id="Coverage" v=""/>
+ <f id="CreationDate" v="20060607130154Z"/>
+ <f id="Creator" v="root"/>
+ <f id="Description" v=""/>
+ <f id="EffectiveDate" v=""/>
+ <f id="ExpirationDate" v=""/>
+ <f id="Format" v="text/html"/>
+ <f id="Language" v=""/>
+ <f id="ModificationDate" v="20060607130307Z"/>
+ <f id="Relation" v=""/>
+ <f id="Rights" v=""/>
+ <f id="Source" v=""/>
+ <f id="Subject"/>
+ <f id="Title" v="bienvenue"/>
+ <f id="allow_discussion" v="False"/>
+ <f id="cache_cleanup_date" v="1149685345.47"/>
+ <f id="cache_params"/>
+ <f id="cache_timeout" v="0"/>
+ <f id="disable_override" v="0"/>
+ <f id="i18n" v="0"/>
+ <f id="identifier" v="portlet_welcome"/>
+ <f id="javascript" v=""/>
+ <f id="order" v="20"/>
+ <f id="portlet" v=""/>
+ <f id="preview"/>
+ <f id="provider" v=""/>
+ <f id="slot" v="content_well"/>
+ <f id="slot_override" v="0"/>
+ <f id="text" v="&lt;h1&gt;Bienvenue dans ...&lt;/h1&gt;"/>
+ <f id="text_format" v="normal"/>
+ <f id="text_position" v="html"/>
+ <f id="visibility_range" v="0-0"/>
+ <guard groups="" permissions=""
+    roles="">python: published == 'index_html'</guard>
+</object>
