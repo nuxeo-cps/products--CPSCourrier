@@ -61,6 +61,7 @@ def _batching_call(self, *args, **kw):
 class ArchiverIntegrationTestCase(IntegrationTestCase):
 
     def afterSetUp(self):
+        self.login('manager')
         # patch the catalog to add fake batching support a la lucene
         CatalogTool._original_call = CatalogTool.__call__
         CatalogTool.__call__ = _batching_call
@@ -72,7 +73,6 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         # simplify the test fixture
         self.archiver.date_field_id = "ExpirationDate"
 
-        self.login('manager')
         IntegrationTestCase.fixtureSetUp(self)
 
         # add some incoming mails and replies to them
