@@ -31,45 +31,45 @@ COMMENT_PATTERN = "Test comment for transition %s"
 
 def _buid_tree(gen):
     return  {
-        'test-group-1': {
-            'Title': 'Test Group 1',
+        'group-1': {
+            'Title': 'Group 1',
             'portal_type': 'Mailbox Group',
             'subobjects': {
-                'test-mailbox-1-1': {
-                    'Title': 'Test Mailbox 1 1',
+                'mailbox-1-1': {
+                    'Title': 'Mailbox 1 1',
                     'portal_type': 'Mailbox',
                     'from': 'ogrisel+mb11@nuxeo.com',
-                    'mailbox_addresses': gen.randomEmails(3),
+                    'mailbox_addresses': gen.randomEmails(simple=True),
                     'allowed_reply_time': randint(1, 15),
                     'Subject': gen.sampleFromVoc('subject_voc'),
                 },
-                'test-mailbox-1-2': {
-                    'Title': 'Test Mailbox 1 2',
+                'mailbox-1-2': {
+                    'Title': 'Mailbox 1 2',
                     'portal_type': 'Mailbox',
                     'from': 'ogrisel+mb12@nuxeo.com',
-                    'mailbox_addresses': gen.randomEmails(3),
+                    'mailbox_addresses': gen.randomEmails(simple=True),
                     'allowed_reply_time': randint(1, 15),
                     'Subject': gen.sampleFromVoc('subject_voc'),
                 },
             },
         },
-        'test-group-2': {
-            'Title': 'Test Group 2',
+        'group-2': {
+            'Title': 'Group 2',
             'portal_type': 'Mailbox Group',
             'subobjects': {
-                'test-mailbox-2-1': {
-                    'Title': 'Test Mailbox 2 1',
+                'mailbox-2-1': {
+                    'Title': 'Mailbox 2 1',
                     'portal_type': 'Mailbox',
                     'from': 'ogrisel+mb21@nuxeo.com',
-                    'mailbox_addresses': gen.randomEmails(3),
+                    'mailbox_addresses': gen.randomEmails(simple=True),
                     'allowed_reply_time': randint(1, 15),
                     'Subject': gen.sampleFromVoc('subject_voc'),
                 },
-                'test-mailbox-2-2': {
-                    'Title': 'Test Mailbox 2 2',
+                'mailbox-2-2': {
+                    'Title': 'Mailbox 2 2',
                     'portal_type': 'Mailbox',
                     'from': 'ogrisel+mb22@nuxeo.com',
-                    'mailbox_addresses': gen.randomEmails(3),
+                    'mailbox_addresses': gen.randomEmails(simple=True),
                     'allowed_reply_time': randint(1, 15),
                     'Subject': gen.sampleFromVoc('subject_voc'),
                 },
@@ -79,7 +79,9 @@ def _buid_tree(gen):
 
 def _populate(where, generator, wftool):
     for i in range(IN_MAILS_PER_MAILBOX):
-        mail_to = where.getContent()['from']
+        dm = where.getContent().getDataModel()
+        subjects = dm['Subject']
+        mail_to = dm['from']
         info = {
             'Title': generator.randomWords(),
             'content': generator.randomText(),
@@ -87,7 +89,7 @@ def _populate(where, generator, wftool):
             'mail_to': [mail_to],
             'deadline': DateTime() + randint(-2, 15),
             'initial_transition': 'create',
-            'Subject': generator.sampleFromVoc('subject_voc'),
+            'Subject': sample(subjects, 2),
             'priority': generator.choiceFromVoc('mail_priority'),
         }
         id = where.computeId(info['Title'])
@@ -199,30 +201,47 @@ class RandomContentGenerator(object):
         self._email_pattern = email_pattern
         self._usernames = usernames
         self._emails = tuple(self.makeEmail(name) for name in usernames)
+        self._simple_emails = tuple(self.makeEmail(name, simple=True)
+                                    for name in usernames)
         self._sentences = sentences
         self._portal = portal
 
-    def randomEmail(self):
-        return choice(self._emails)
+    def randomEmail(self, simple=False):
+        if simple:
+            return choice(self._simple_emails)
+        else:
+            return choice(self._emails)
 
-    def randomEmails(self, n=3):
-        return sample(self._emails, n)
+    def randomEmails(self, n=None, simple=False):
+        if n is None:
+            n = randint(2, 5)
+        if simple:
+            return sample(self._simple_emails, n)
+        else:
+            return sample(self._emails, n)
 
     def randomSentence(self):
         return choice(self._sentences)
 
-    def randomWords(self, n=5):
+    def randomWords(self, n=None):
+        if n is None:
+            n = randint(3, 10)
         return ' '.join(self.randomSentence().split()[:n])
 
-    def randomParagrah(self, n=5):
+    def randomParagrah(self, n=None):
+        if n is None:
+            n = randint(3, 10)
         return '. '.join(self.randomSentence() for _ in xrange(n))
 
     def randomText(self, n=3):
         return '\n\n'.join(self.randomParagrah(randint(3, 6)) for _ in xrange(n))
 
-    def makeEmail(self, name):
+    def makeEmail(self, name, simple=False):
         email = self._email_pattern % '-'.join(toAscii(name).lower().split())
-        return "%s <%s>" % (name, email)
+        if simple:
+            return email
+        else:
+            return "%s <%s>" % (name, email)
 
     def choiceFromVoc(self, voc_name):
         voc = self._portal.portal_vocabularies[voc_name]
