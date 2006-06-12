@@ -12,6 +12,7 @@ Layouts for rows in the content view of mailboxes
   <property name="fields">
    <element value="rpath"/>
   </property>
+  <property name="css_class">smallCell</property>
  </widget>
 
  <widget name="has_attachment" meta_type="Icon Boolean Widget">
@@ -22,6 +23,7 @@ Layouts for rows in the content view of mailboxes
   <property name="fields">
    <element value="has_attachment"/>
   </property>
+  <property name="css_class">smallCell</property>
   <property name="sortable" type="string">has_attachment</property>
  </widget>
 
@@ -115,12 +117,13 @@ Layouts for rows in the content view of mailboxes
      <element value="priority" />
    </property>
    <property name="sortable" type="string">priority</property>
+   <property name="css_class">priorityCell</property>
  </widget>
 
  <widget name="timeleft" meta_type="Time Left Widget">
    <property name="label">cpscourrier_timeleft_label</property>
    <property name="label_edit">cpscourrier_timeleft_label</property>
-   <property name="css_class">timeleft</property>
+   <property name="css_class">timeleft smallCell</property>
    <property name="is_i18n">True</property>
    <property name="is_display_i18n">True</property>
    <property name="fields">

@@ -11,6 +11,7 @@
       <element value="id"/>
     </property>
     <property name="format_string">courrier_user:%s</property>
+    <property name="css_class">smallcell</property>
   </widget>
 
    <widget name="uid" meta_type="String Widget">

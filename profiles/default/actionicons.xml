@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<action-icons>
+ <action-icon category="object" action_id="roadmap_view"
+              title="Default Roadmap" priority="205"
+              icon_expr="roadmap.png"/>
+ <action-icon category="workflow" action_id="close"
+              title="Close" priority="30"
+              icon_expr="mail_close.png"/>
+ <action-icon category="workflow" action_id="handle"
+              title="Handle" priority="31"
+              icon_expr="mail_handle.png"/>
+ <action-icon category="workflow" action_id="discard"
+              title="Discard" priority="32"
+              icon_expr="mail_discard.png"/>
+ <action-icon category="workflow" action_id="reset"
+              title="Reset" priority="33"
+              icon_expr="mail_reset.png"/>
+ <action-icon category="workflow" action_id="forward"
+              title="Forward" priority="34"
+              icon_expr="mail_forward.png"/>
+ <action-icon category="workflow" action_id="answer"
+              title="Answer" priority="35"
+              icon_expr="mail_reply_create.png"/>
+ <action-icon category="workflow"
+              action_id="move_down_delegatees"
+              title="Move Down" priority="36"
+              icon_expr="mail_move_down.png"/>
+ <action-icon category="workflow" action_id="validate"
+              title="Validate" priority="41"
+              icon_expr="mail_accept.png"/>
+ <action-icon category="workflow" action_id="delete"
+              title="Delete" priority="43"
+              icon_expr="mail_delete.png"/>
+ <action-icon category="workflow" action_id="reuse_answer"
+              title="Reuse answer" priority="37"
+              icon_expr="mail_reply_reuse.png"/>
+ <action-icon category="workflow" action_id="send"
+              title="Send" priority="43"
+              icon_expr="mail_send.png"/>
+</action-icons>

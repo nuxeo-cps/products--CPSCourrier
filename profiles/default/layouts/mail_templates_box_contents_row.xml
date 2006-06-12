@@ -12,6 +12,7 @@ Differences are outlined by (search for 'diff')
  <widget name="Checkbox" meta_type="Row Boolean Widget">
   <property name="input_name">ids</property>
   <property name="input_type">checkbox</property>
+  <property name="css_class">smallCell</property>
  </widget>
 
  <widget name="Date" meta_type="Date Widget">
@@ -71,6 +72,7 @@ Differences are outlined by (search for 'diff')
   <property name="icon_true">cpsma_attach_mini.png</property>
   <property name="icon_false">nothing.png</property>
   <property name="sortable" type="string">has_attachment</property>
+  <property name="css_class">smallCell</property>
  </widget>
  <widget name="usages" meta_type="Int Widget">
   <property name="fields">
