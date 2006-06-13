@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-06-08 18:56default\n"
+"POT-Creation-Date: 2006-06-13 17:06default\n"
 "PO-Revision-Date: 2006-05-07 09:40+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -912,24 +912,8 @@ msgstr "-------- Mensaje original ---------"
 msgid "cpscourrier_subject_${portal_title}_${mb_title}_${late_number}"
 msgstr ""
 
-msgid "Page ${current_page} of ${nb_pages}"
-msgstr "Page ${current_page} of ${nb_pages}"
+#~ msgid "Page ${current_page} of ${nb_pages}"
+#~ msgstr "Page ${current_page} of ${nb_pages}"
 
-#, fuzzy
-msgid "cpscourrier_dun_heading"
-msgstr "Mail roadmap"
-
-#, fuzzy
-msgid "cpscourrier_dun_intro"
-msgstr "(Please select a mailbox)"
-
-#, fuzzy
-msgid "cpscourrier_dun_max_reached"
-msgstr "Deadline (maximum)"
-
-#, fuzzy
-msgid "cpscourrier_dun_total"
-msgstr "To"
-
-msgid "cpscourrier_filter_button"
-msgstr "Filtro"
+#~ msgid "cpscourrier_filter_button"
+#~ msgstr "Filtro"

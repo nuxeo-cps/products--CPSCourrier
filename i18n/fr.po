@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-06-08 18:56default\n"
+"POT-Creation-Date: 2006-06-13 17:06default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -51,19 +51,21 @@ msgstr ""
 #.         </span>
 #: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
 msgid "The following ${late_number} mail documents are late:"
-msgstr "Les <strong>${late_number}</strong> courriers suivants sont en retard :"
+msgstr ""
+"Les <strong>${late_number}</strong> courriers suivants sont en retard :"
 
 #.   <span condition="python:options['sort_limit'] == options['late_number']">The following mail documents are late (only the first
 #.           ${late_number (tal content="options/late_number")}
 #.           are displayed):
 #.         </span>
 #: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+#, fuzzy
 msgid ""
 "The following mail documents are late (only the first ${late_number} are "
-"displayed) :"
+"displayed):"
 msgstr ""
-"Les courriers suivants sont en retard (seul les <strong>${late_number}"
-"</strong> premiers sont affichés) :"
+"Les courriers suivants sont en retard (seul les <strong>${late_number}</"
+"strong> premiers sont affichés) :"
 
 #.   <p>
 #.         You'll find below the list of late mail documents in mailbox
@@ -900,4 +902,3 @@ msgstr "-------- Message original ---------"
 msgid "cpscourrier_subject_${portal_title}_${mb_title}_${late_number}"
 msgstr ""
 "[${portal_title}] ${late_number} courriers en retard dans \"${mb_title}\""
-
