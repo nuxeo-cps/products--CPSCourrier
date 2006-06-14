@@ -5,6 +5,7 @@ New features:
 ~~~~~~~~~~~~~
 - Icons for courrier workflow actions
 - Standalone profile and skinning
+- ToDo column based on review state and roamap
 Bug fixes:
 ~~~~~~~~~~
 - DGME #4542: fixed mkdirs/makedirs typo in the archiver

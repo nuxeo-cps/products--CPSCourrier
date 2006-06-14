@@ -24,6 +24,10 @@ from layer import CourrierFunctionalTestCase
 
 from Products.CMFCore.utils import getToolByName, _checkPermission
 from Products.CMFCore.permissions import ModifyPortalContent
+from Products.CPSSchemas.tests.testWidgets import FakeDataModel
+from Products.CPSSchemas.DataStructure import DataStructure
+
+from Products.CPSCourrier.widgets.row_widgets import CPSCourrierToDoRowWidget
 from Products.CPSCourrier.workflows.stacks import CourrierStack
 from Products.CPSCourrier.config import  RELATION_GRAPH_ID, HAS_REPLY, STACK_ID
 
@@ -361,6 +365,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         CourrierFunctionalTestCase.afterSetUp(self)
         self.login('manager')
         self.createIncoming()
+        self.todo_widget = self.portal.portal_layouts.mail_dashboard_row.w__todo
 
     def beforeTearDown(self):
         self.mb.manage_delObjects([self.incoming_id])
@@ -369,14 +374,25 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
     def test_handle_stack_manage(self):
         stack_mod = self.incoming.cpscourrier_stack_modify
 
-        # member1 handles the mail
+        # member1 sees the mail as 'to_handle'
         self.flogin('member1', self.mb)
+        dm = FakeDataModel()
+        dm.proxy = self.incoming
+        ds = DataStructure(datamodel=dm)
+        self.todo_widget.prepare(ds)
+        self.assertEquals(ds['todo'], 'cpscourrier_to_handle')
+
+        # member1 handles the mail
         self.wftool.doActionFor(self.incoming, 'handle')
 
         stack = self.wftool.getStackFor(self.incoming, STACK_ID)
         self.assertEquals(stack.getAllLevels(), [0])
         elt = stack._getLevelContentValues()[0]
         self.assertEquals(elt['directive'], 'handle')
+
+        # member1 sees the mail as to be processed
+        self.todo_widget.prepare(ds)
+        self.assertEquals(ds['todo'], 'cpscourrier_to_process')
 
         # Checking perms for other roles
         wf = self.wftool['incoming_mail_wf']
@@ -387,9 +403,13 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.assert_(wf.isActionSupported(self.incoming, 'manage_delegatees'))
         self.flogin('member2', self.mb)
         self.failIf(wf.isActionSupported(self.incoming, 'manage_delegatees'))
-        self.flogin('member1', self.mb)
+
+        # member2 sees the mail as to... nothing
+        self.todo_widget.prepare(ds)
+        self.assertEquals(ds['todo'], '')
 
         # member1 adds member2 below himself
+        self.flogin('member1', self.mb)
         kws = {'current_var_id': STACK_ID,
                'directive': 'response',
                'level': '-1',
@@ -419,8 +439,14 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.wftool.doActionFor(self.incoming, 'move_down_delegatees',
                                 current_wf_var_id=STACK_ID)
         self.failIf(wf.isActionSupported(self.incoming, 'answer'))
+
+        # member2 cannot answer and sees the mail as to be watched
         self.flogin('member2', self.mb)
         self.failIf(wf.isActionSupported(self.incoming, 'answer'))
+        self.todo_widget.prepare(ds)
+        self.assertEquals(ds['todo'], 'cpscourrier_to_watch')
+
+        # member3 can answer
         self.flogin('member3', self.mbg)
         self.assert_(wf.isActionSupported(self.incoming, 'answer'))
 
