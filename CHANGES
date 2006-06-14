@@ -6,6 +6,7 @@ New features:
 - Icons for courrier workflow actions
 - Standalone profile and skinning
 - ToDo column based on review state and roamap
+- Full creation time gets displayed in listings
 Bug fixes:
 ~~~~~~~~~~
 - DGME #4542: fixed mkdirs/makedirs typo in the archiver
@@ -13,6 +14,7 @@ Bug fixes:
 - DGME #4538: fixed unwanted stack reset on mail closure
 - DGME #4507: fixed i18n for the dun notifier
 - #4523: roadmap specific options were displayed on batch perform pages
+- alerts can be set on Mailbox Groups
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - explicit security checking at archiver instanciation time

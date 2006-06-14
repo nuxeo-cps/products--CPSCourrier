@@ -18,7 +18,6 @@ Row layout for search results in the "reply from existing" view
   <property name="label">cpscourrier_has_attachment_label</property>
   <property name="is_i18n">True</property>
   <property name="icon_true">cpsma_attach_mini.png</property>
-  <property name="icon_false">nothing.png</property>
   <property name="fields">
    <element value="has_attachment"/>
   </property>

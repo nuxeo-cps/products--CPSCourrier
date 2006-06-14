@@ -564,7 +564,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.assertEquals(outgoing.getContent().template_usage, 1)
 
         # cleanings
-        self.mb.manage_delObjects(['re'])
+        self.mb.manage_delObjects(outgoing.getId())
         self.mb2.manage_delObjects(['other'])
 
 def test_suite():

@@ -15,6 +15,9 @@ Layouts for rows in the content view of mailboxes
   <property name="label">cpscourrier_type_label</property>
   <property name="is_i18n">True</property>
   <property name="sortable" type="string">portal_type</property>
+  <property name="fields">
+   <element value="portal_type"/>
+  </property>
  </widget>
 
  <widget name="Title" meta_type="Qualified Link Widget">

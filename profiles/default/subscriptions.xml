@@ -7,6 +7,12 @@
   <event id="workflow_discard">label_workflow_discard</event>
  </context-events>
 
+ <context-events portal_type="Mailbox Group">
+  <event id="workflow_confirm">label_workflow_mail_confirm</event>
+  <event id="workflow_create">label_workflow_create</event>
+  <event id="workflow_discard">label_workflow_discard</event>
+ </context-events>
+
  <area portal_type="Mailbox Group">
   <context-roles portal_type="Mailbox">
    <role id="Contributor">Contributor</role>

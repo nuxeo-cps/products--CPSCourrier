@@ -19,7 +19,6 @@ Layouts for rows in the content view of mailboxes
   <property name="label">cpscourrier_has_attachment_label</property>
   <property name="is_i18n">True</property>
   <property name="icon_true">cpsma_attach_mini.png</property>
-  <property name="icon_false">nothing.png</property>
   <property name="fields">
    <element value="has_attachment"/>
   </property>
@@ -32,6 +31,9 @@ Layouts for rows in the content view of mailboxes
   <property name="label_edit">cpscourrier_type_label</property>
   <property name="is_i18n">True</property>
   <property name="sortable" type="string">portal_type</property>
+  <property name="fields">
+   <element value="portal_type"/>
+  </property>
  </widget>
 
 
@@ -70,9 +72,10 @@ Layouts for rows in the content view of mailboxes
   <property name="sortable" type="string">Title</property>
  </widget>
 
- <widget name="Date" meta_type="Date Widget">
+ <widget name="Date" meta_type="DateTime Widget">
   <property name="label">cpscourrier_creation_date_label</property>
   <property name="label_edit">cpscourrier_creation_date_label</property>
+  <property name="view_format">medium</property>
   <property name="fields">
    <element value="created"/>
   </property>
