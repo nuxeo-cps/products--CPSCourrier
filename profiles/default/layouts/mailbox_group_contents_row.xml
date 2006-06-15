@@ -9,15 +9,14 @@ Layouts for rows in the content view of mailboxes
  <widget name="Checkbox" meta_type="Row Boolean Widget">
   <property name="input_name">ids</property>
   <property name="input_type">checkbox</property>
+  <property
+    name="hidden_if_expr">python: not  portal.portal_membership.checkPermission('Delete objects', proxy)</property>
  </widget>
 
  <widget name="Type" meta_type="Type Icon Widget">
   <property name="label">cpscourrier_type_label</property>
   <property name="is_i18n">True</property>
   <property name="sortable" type="string">portal_type</property>
-  <property name="fields">
-   <element value="portal_type"/>
-  </property>
  </widget>
 
  <widget name="Title" meta_type="Qualified Link Widget">
