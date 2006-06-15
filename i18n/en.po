@@ -365,9 +365,8 @@ msgstr "To"
 msgid "cpscourrier_creation_date_label"
 msgstr "Date"
 
-#, fuzzy
 msgid "cpscourrier_sending_date_label"
-msgstr "Date"
+msgstr "Sending date"
 
 msgid "cpscourrier_form_of_address_label"
 msgstr "Form of address"

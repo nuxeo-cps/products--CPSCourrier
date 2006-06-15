@@ -59,7 +59,6 @@ msgstr ""
 #.           are displayed):
 #.         </span>
 #: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
-#, fuzzy
 msgid ""
 "The following mail documents are late (only the first ${late_number} are "
 "displayed):"
@@ -369,9 +368,8 @@ msgstr "Destinataire"
 msgid "cpscourrier_creation_date_label"
 msgstr "Date"
 
-#, fuzzy
 msgid "cpscourrier_sending_date_label"
-msgstr "Date"
+msgstr "Date d'envoi"
 
 msgid "cpscourrier_form_of_address_label"
 msgstr "Formule de politesse"
