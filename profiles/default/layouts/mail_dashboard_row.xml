@@ -72,15 +72,16 @@ Layouts for rows in the content view of mailboxes
   <property name="sortable" type="string">Title</property>
  </widget>
 
- <widget name="Date" meta_type="DateTime Widget">
+ <widget name="Date" meta_type="Quick Display DateTime Widget">
   <property name="label">cpscourrier_creation_date_label</property>
   <property name="label_edit">cpscourrier_creation_date_label</property>
-  <property name="view_format">medium</property>
   <property name="fields">
    <element value="created"/>
   </property>
   <property name="is_i18n">True</property>
   <property name="sortable" type="string">created</property>
+  <property name="render_format">date_medium</property>
+  <property name="render_format_i18n">True</property>
  </widget>
 
  <widget name="review_state" meta_type="Review State String Widget">
