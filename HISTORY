@@ -1,4 +1,31 @@
 *******************************************
+** CPSCourrier V0.14.0 [R1 build 2006/06/15-17:54 by gracinet]
+** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 46554
+\Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Icons for courrier workflow actions
+- Standalone profile and skinning
+- ToDo column based on review state and roamap
+- Full creation time gets displayed in listings
+Bug fixes:
+~~~~~~~~~~
+- DGME #4542: fixed mkdirs/makedirs typo in the archiver
+- DGME #4146: confirm form for move down on roadmaps
+- DGME #4538: fixed unwanted stack reset on mail closure
+- DGME #4507: fixed i18n for the dun notifier
+- #4523: roadmap specific options were displayed on batch perform pages
+- alerts can be set on Mailbox Groups
+- DGME #4342: added sending date on Outgoing Mail top view
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- explicit security checking at archiver instanciation time
+- explicit security checking at dun notifier instanciation time
+- New CSS classes on tabular displays
+
+*******************************************
 ** CPSCourrier V0.13.2 [R1 build 2006/06/07-18:42 by ogrisel]
 ** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 46321
 Requires:
