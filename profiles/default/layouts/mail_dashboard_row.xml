@@ -72,6 +72,8 @@ Layouts for rows in the content view of mailboxes
   <property name="sortable" type="string">Title</property>
  </widget>
 
+ <!-- upgrading from standard DateTime widget -->
+ <widget name="Date" remove="True"/>
  <widget name="Date" meta_type="Quick Display DateTime Widget">
   <property name="label">cpscourrier_creation_date_label</property>
   <property name="label_edit">cpscourrier_creation_date_label</property>
