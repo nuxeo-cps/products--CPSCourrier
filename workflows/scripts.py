@@ -24,6 +24,8 @@ import logging
 import smtplib
 import socket
 
+from DateTime import DateTime
+
 from email import Encoders
 from email.MIMEAudio import MIMEAudio
 from email.MIMEBase import MIMEBase
@@ -465,9 +467,14 @@ def send_reply(proxy, text_only=False, additionnal_info=''):
     body = compute_reply_body(proxy, additionnal_info=additionnal_info,
                               plain_text=plain_text)
     attachments = _extract_attachments(proxy)
-    return send_mail(doc, mto, mfrom, subject, body,
-                     attachments=attachments, encoding=encoding,
-                     plain_text=plain_text)
+    res= send_mail(doc, mto, mfrom, subject, body,
+                   attachments=attachments, encoding=encoding,
+                   plain_text=plain_text)
+
+    doc = proxy.getEditableContent()
+    doc.edit(EffectiveDate=DateTime())
+
+    return res
 
 def send_mail(context, mto, mfrom, subject, body, attachments=(),
               encoding='iso-8859-15', plain_text=True):
@@ -557,5 +564,3 @@ def send_mail(context, mto, mfrom, subject, body, attachments=(),
     except smtplib.SMTPSenderRefused, e:
         logger.error("error sending email %s" % log_str)
         raise ValueError('invalid_sender_address')
-
-

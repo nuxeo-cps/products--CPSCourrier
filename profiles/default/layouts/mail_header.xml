@@ -79,6 +79,19 @@
   </property>
  </widget>
 
+ <widget name="sending_date" meta_type="DateTime Widget">
+  <property name="fields">
+   <element value="EffectiveDate"/>
+  </property>
+  <property name="label">cpscourrier_sending_date_label</property>
+  <property name="is_i18n">True</property>
+  <property name="view_format">long</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
+ </widget>
+
  <table>
   <row>
    <cell name="object"/>
@@ -91,6 +104,9 @@
   </row>
   <row>
    <cell name="creation_date"/>
+  </row>
+  <row>
+   <cell name="sending_date"/>
   </row>
   <row>
    <cell name="timeleft"/>

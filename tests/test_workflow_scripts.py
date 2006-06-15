@@ -24,8 +24,9 @@ import datetime
 import unittest
 import transaction
 import re
-
 from StringIO import StringIO
+
+from DateTime import DateTime
 from OFS.Image import File
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.tests.layer import IntegrationTestCase
@@ -430,6 +431,13 @@ On %s, bar@foo.com wrote:
             # for some reason there is a ZODB commit in beforeTearDown thus we
             # need get rid of the unpickleable fake MailHost
             del out_mail1.MailHost
+
+        # check that the sending date has been set
+        doc = out_mail1.getContent()
+        dm = doc.getTypeInfo().getDataModel(doc)
+        eff_date = dm['EffectiveDate']
+        time_delta = DateTime() - eff_date
+        self.failIf(time_delta > 10) # should be close enough
 
     def test_send_html_reply(self):
         # faking the MailHost

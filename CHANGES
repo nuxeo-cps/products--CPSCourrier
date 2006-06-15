@@ -1,4 +1,4 @@
-Requires:
+\Requires:
 ~~~~~~~~~
 -
 New features:
@@ -15,6 +15,7 @@ Bug fixes:
 - DGME #4507: fixed i18n for the dun notifier
 - #4523: roadmap specific options were displayed on batch perform pages
 - alerts can be set on Mailbox Groups
+- DGME #4342: added sending date on Outgoing Mail top view
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - explicit security checking at archiver instanciation time
