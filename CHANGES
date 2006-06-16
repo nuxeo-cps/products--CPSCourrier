@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- DGME #4547: use session instead of (too many cookies) on the batch perform
+  pages
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

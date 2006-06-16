@@ -25,13 +25,14 @@ from OFS.CopySupport import CopyError
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CPSCore.EventServiceTool import getPublicEventService
-from Products.CPSSkins.cpsskins_utils import (
-    serializeForCookie, unserializeFromCookie)
 from Products.CPSCourrier.workflows.scripts import reply_to_incoming
+from Products.CPSUtil.session import sessionHasKey
 
 from reuseanswerview import ReuseAnswerView
 
 logger = getLogger('CPSCourrier.browser.batchperformview')
+
+_SESSION_KEY = "CPSCOURRIER_BATCH_PERFORM"
 
 class BatchPerformView(ReuseAnswerView):
 
@@ -39,97 +40,51 @@ class BatchPerformView(ReuseAnswerView):
     rapth = None # rpath of the reply to reuse if answering
     rpaths = () # rpaths of mails as target of the transition
 
-    rpaths_cookie_prefix = "cpscourrier_batch_perform_rpath_"
-    transition_cookie_id = "cpscourrier_batch_perform_transition"
-
     submit_button_prefix = "cpscourrier_batch_"
     # namespace prefix for all the submit buttons that call this view from a
     # mailbox or a dashboard listing
 
     #
-    # Helpers to manage cookies and maintain current session
+    # Helpers to maintain current session
     #
 
-    def _getTransitionId(self):
-        """Compute the transition id from the request parameter and store the
-        result in a cookie"""
-        transition = ''
+    def _storeDataInSession(self, rpaths, transition_id):
+        """Store data in a session to allow for multi screen action"""
+        request = self.request
+        if not sessionHasKey(request, _SESSION_KEY):
+            request.SESSION[_SESSION_KEY] = {}
+        rpath = getToolByName(self.context, 'portal_url').getRpath(self.context)
+        data = {
+            'transition_id': transition_id,
+            'rpaths': rpaths,
+        }
+        request.SESSION[_SESSION_KEY][rpath] = data
 
-        form = self.request.form
+    def _readDataFromSession(self):
+        """Read the request session to find stored rpaths"""
+        request = self.request
+        if not sessionHasKey(request, _SESSION_KEY):
+            return []
+        rpath = getToolByName(self.context, 'portal_url').getRpath(self.context)
+        data = request.SESSION[_SESSION_KEY].get(rpath, {})
+        return data.get('rpaths', []), data.get('transition_id')
 
-        transitions = [key for key in form
-                           if key.startswith(self.submit_button_prefix)]
-        if len(transitions) > 1:
-            raise ValueError("Got more than one transition to perform")
-        if transitions:
-            transition = transitions[0][len(self.submit_button_prefix):]
+    def _expireSession(self):
+        """Expire rpaths info related to the current mailbox"""
+        request = self.request
+        if not sessionHasKey(request, _SESSION_KEY):
+            return
+        rpath = getToolByName(self.context, 'portal_url').getRpath(self.context)
+        del request.SESSION[_SESSION_KEY][rpath]
 
-        if 'answer_submit' in form:
-            transition =  'answer'
+    def _getSessionData(self):
+        """Process the request to extract the list of rpaths and transition id
 
-        # cookie management
-        path = self.request['URLPATH1']
-        cookie_id = self.transition_cookie_id
-
-        if transition:
-            # a transition id could be read from the request, store it in a
-            # cookie for further reuse
-            self.request.RESPONSE.setCookie(cookie_id,
-                                            serializeForCookie(transition),
-                                            path=path)
-        else:
-            # try to read matching cookie if any
-            cookies = self.request.cookies
-            transition = str(unserializeFromCookie(cookies.get(cookie_id, '')))
-        return transition
-
-    def _storeRpathsInCookies(self, rpaths):
-        """Store selected rpaths on the client browser """
-        path = self.request['URLPATH1']
-        cookies = self.request.cookies
-        response = self.request.RESPONSE
-        old = set(id for id in cookies
-                     if id.startswith(self.rpaths_cookie_prefix))
-        # store or update rapths
-        new = set()
-        for i, rpath in enumerate(rpaths):
-            cookie_id = "%s%03d" % (self.rpaths_cookie_prefix, i)
-            response.setCookie(cookie_id, serializeForCookie(rpath), path=path)
-            new.add(cookie_id)
-
-        # clean potential old cookies that were not cleaned elsewhere
-        for cookie_id in old - new:
-            response.expireCookie(cookie_id, path=path)
-
-    def _readRpathsFromCookies(self):
-        """Read the request to find rpaths cookies
-
-        Restricted to those that match potential stored rpaths for the current
-        mailbox
-        """
-        cookies = self.request.cookies.items()
-        return [str(unserializeFromCookie(cookie)) for c_id, cookie in cookies
-                    if c_id.startswith(self.rpaths_cookie_prefix)]
-
-    def _expireCookies(self):
-        """Expire cookies related to the current mailbox"""
-        path = self.request['URLPATH1']
-        cookies = self.request.cookies
-        response = self.request.RESPONSE
-        for cookie_id in cookies:
-            if cookie_id.startswith(self.rpaths_cookie_prefix):
-                response.expireCookie(cookie_id, path=path)
-        if self.transition_cookie_id in cookies:
-            response.expireCookie(self.transition_cookie_id, path=path)
-
-    def _getMailRpaths(self):
-        """Process the request to extract the list of rpath of selected mails
-
-        Also take care of storing/reading/updating the cookie if necessary
+        Also take care of storing/reading/updating the session if necessary
         """
         form = self.request.form
 
-        # read the request data
+        # extract rpaths info from the request
 
         if 'ids' in form:
             utool = getToolByName(self.context, "portal_url")
@@ -138,7 +93,23 @@ class BatchPerformView(ReuseAnswerView):
         else:
             rpaths = form.get('rpaths', ())
 
-        # cookies management
+        # extract transition id info from request
+
+        transitions = [key for key in form
+                           if key.startswith(self.submit_button_prefix)]
+        if len(transitions) > 1:
+            raise ValueError("Got more than one transition to perform")
+        if transitions:
+            transition = transitions[0][len(self.submit_button_prefix):]
+        else:
+            transition = None
+
+        if 'answer_submit' in form:
+            transition =  'answer'
+
+        # session management:
+        #  - store data read from the request
+        #  - read missing data previously stored
 
         # are we at the first call of the batch form or inside a multi screen
         # session?
@@ -151,15 +122,15 @@ class BatchPerformView(ReuseAnswerView):
         if not rpaths and not init_call:
             # nothing was provided in the request, we are probably in a multi
             # screens session:
-            # try to see if some rpaths where previously stored in cookies
-            rpaths = self._readRpathsFromCookies()
+            # try to see if data was previously stored in the session
+            rpaths, transition = self._readDataFromSession()
         else:
             # rpaths were directly provided in the request, store them in
             # cookies for later reuse
-            self._storeRpathsInCookies(rpaths)
+            self._storeDataInSession(rpaths, transition)
 
-        logger.debug('rpaths: %s' % (rpaths,))
-        return rpaths
+        logger.debug('rpaths: %s, transition_id: %s', rpaths, transition)
+        return rpaths, transition
 
     #
     # Cut copy paste management
@@ -223,10 +194,8 @@ class BatchPerformView(ReuseAnswerView):
         """
         # compute the list of incoming mail rpath and store them as attribute
         # of the view instance
-        self.rpaths = self._getMailRpaths()
+        self.rpaths, self.transition = self._getSessionData()
 
-        # guess what is the transition to be performed in the current session
-        self.transition = self._getTransitionId()
         if not self.transition:
             raise ValueError('No transition specified')
 
@@ -320,8 +289,8 @@ class BatchPerformView(ReuseAnswerView):
             for reply in replies:
                 wftool.doActionFor(reply, 'send', comment=kw['comment'])
 
-        # this is the end of the batch session: clean the cookies
-        self._expireCookies()
+        # this is the end of the batch session
+        self._expireSession()
 
         # compute the psm according to what was actually done
         psm = "psm_status_changed"
