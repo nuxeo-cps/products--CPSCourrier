@@ -8,6 +8,8 @@ Bug fixes:
 ~~~~~~~~~~
 - DGME #4547: use session instead of (too many cookies) on the batch perform
   pages
+- DGME #4541: relationships search ignore mail templates when flagging incoming
+  mails answered (some for thread display & archiving)
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

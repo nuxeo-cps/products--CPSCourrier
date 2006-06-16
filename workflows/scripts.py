@@ -216,6 +216,9 @@ def flag_incoming_answered(outgoing_proxy):
         proxy_infos = ptool.getProxyInfosFromDocid(
             str(docid), workflow_vars=('review_state',))
         for info in proxy_infos:
+            # filter out mail templates
+            if info['review_state'] in ('pending', 'published'):
+                continue
             if info['review_state'] != 'sent':
                 # this reply is still not sent: do nothing
                 logger.debug('reply with info: %r not sent: do nothing' %

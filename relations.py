@@ -19,7 +19,6 @@
 """Non restricted code to perform queries on the relations graph
 """
 import logging
-from Acquisition import aq_parent, aq_inner
 
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.config import (
@@ -57,7 +56,13 @@ def _accumulate_proxy_info(graph, start_from, ptool,
     # compute current level
     infos = ptool.getProxyInfosFromDocid(str(start_from),
                                          workflow_vars=('review_state',))
-    infos = [(depth, info) for info in infos if info['visible']]
+
+    # filter out proxies that are used as templates
+    template_states = ('pending', 'published')
+
+    infos = [(depth, info) for info in infos
+                           if info['review_state'] not in template_states
+                              and info['visible']]
 
     # adding depth first children info
     depth += 1
