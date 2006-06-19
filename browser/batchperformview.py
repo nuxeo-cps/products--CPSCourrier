@@ -64,7 +64,7 @@ class BatchPerformView(ReuseAnswerView):
         """Read the request session to find stored rpaths"""
         request = self.request
         if not sessionHasKey(request, _SESSION_KEY):
-            return []
+            return [], None
         rpath = getToolByName(self.context, 'portal_url').getRpath(self.context)
         data = request.SESSION[_SESSION_KEY].get(rpath, {})
         return data.get('rpaths', []), data.get('transition_id')

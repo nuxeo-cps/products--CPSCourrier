@@ -11,6 +11,7 @@ Bug fixes:
 - DGME #4541: relationships search ignore mail templates when flagging incoming
   mails answered (some for thread display & archiving)
 - DGME #3970: removed the Date column on the mailbox group view
+- fix batch perform view bug on session expiration
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
