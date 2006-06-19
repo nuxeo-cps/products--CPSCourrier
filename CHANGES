@@ -12,6 +12,9 @@ Bug fixes:
   mails answered (some for thread display & archiving)
 - DGME #3970: removed the Date column on the mailbox group view
 - fix batch perform view bug on session expiration
+- DGME #4461: the local managers and supervisors no longer can trigger
+  stack protected transitions directly (but they can still manage the stack
+  itself)
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 - Mailbox filter uses tree cache for its voc. Much faster

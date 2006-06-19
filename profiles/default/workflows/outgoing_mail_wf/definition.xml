@@ -234,7 +234,6 @@
     <guard-role>Manager</guard-role>
     <guard-role>LocalManager</guard-role>
     <guard-role>Supervisor</guard-role>
-    <guard-role>Owner</guard-role>
     <guard-role>Contributor</guard-role>
     <guard-role>Reader</guard-role>
     <guard-role>Pilot</guard-role>
@@ -277,7 +276,6 @@
           category="workflow">action_checkout_draft</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>LocalManager</guard-role>
    <guard-role>Pilot</guard-role>
   </guard>
   <transition-behavior behavior_id="checkout"/>
@@ -314,8 +312,6 @@
           category="workflow">action_delete</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>LocalManager</guard-role>
-   <guard-role>Supervisor</guard-role>
    <guard-role>Pilot</guard-role>
   </guard>
   <transition-behavior behavior_id="delete"/>
@@ -327,8 +323,6 @@
           category="workflow">action_invalidate</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>LocalManager</guard-role>
-   <guard-role>Supervisor</guard-role>
    <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -367,8 +361,6 @@
           category="workflow">action_reactivate</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>LocalManager</guard-role>
-   <guard-role>Supervisor</guard-role>
    <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -380,8 +372,6 @@
           category="workflow">action_send</action>
   <guard>
    <guard-role>Manager</guard-role>
-   <guard-role>LocalManager</guard-role>
-   <guard-role>Supervisor</guard-role>
    <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -392,8 +382,6 @@
           category="workflow">action_reset</action>
   <guard>
    <guard-role>Pilot</guard-role>
-   <guard-role>LocalManager</guard-role>
-   <guard-role>Supervisor</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <transition-behavior behavior_id="workflow-reset"/>
@@ -430,8 +418,6 @@
           category="workflow">action_validate</action>
   <guard>
    <guard-role>Pilot</guard-role>
-   <guard-role>Supervisor</guard-role>
-   <guard-role>LocalManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
  </transition>
@@ -441,8 +427,6 @@
              after_script="">
   <guard>
    <guard-role>Pilot</guard-role>
-   <guard-role>Supervisor</guard-role>
-   <guard-role>LocalManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <transition-behavior behavior_id="clone"/>

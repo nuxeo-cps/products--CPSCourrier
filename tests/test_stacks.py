@@ -106,7 +106,7 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.login('manager')
         self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
         self.flogin('wsmanager', self.mb)
-        self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.failIf(wf.isActionSupported(proxy, 'checkout_draft'))
         self.flogin('member2', self.mb)
         self.failIf(wf.isActionSupported(proxy, 'checkout_draft'))
         self.flogin('member1', self.mb)
@@ -143,7 +143,7 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.login('manager')
         self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
         self.flogin('wsmanager', self.mb)
-        self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
+        self.failIf(wf.isActionSupported(proxy, 'checkout_draft'))
         self.flogin('member2', self.mb)
         self.assert_(wf.isActionSupported(proxy, 'checkout_draft'))
         self.flogin('member1', self.mb)
@@ -249,26 +249,25 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         elt = stack._getLevelContentValues()[0]
         self.assertEquals(elt.getId(), 'courrier_user:member1_ftest-mailbox')
 
-        # member1 (the Pilot) and the managers can delete the mail
+        # member1 (the Pilot) can delete the mail
         self.flogin('reader', self.mb)
         self.failIf(wf.isActionSupported(proxy, 'delete'))
         self.login('manager')
         self.assert_(wf.isActionSupported(proxy, 'delete'))
         self.flogin('wsmanager', self.mb)
-        self.assert_(wf.isActionSupported(proxy, 'delete'))
+        self.failIf(wf.isActionSupported(proxy, 'delete'))
         self.flogin('member2', self.mb)
         self.failIf(wf.isActionSupported(proxy, 'delete'))
         self.flogin('member1', self.mb)
         self.assert_(wf.isActionSupported(proxy, 'delete'))
 
-        # member1 (the Pilot) and the managers can then triggers the validate
-        # transition
+        # member1 (the Pilot) can then triggers the validate transition
         self.flogin('reader', self.mb)
         self.failIf(wf.isActionSupported(proxy, 'validate'))
         self.login('manager')
         self.assert_(wf.isActionSupported(proxy, 'validate'))
         self.flogin('wsmanager', self.mb)
-        self.assert_(wf.isActionSupported(proxy, 'validate'))
+        self.failIf(wf.isActionSupported(proxy, 'validate'))
         self.flogin('member2', self.mb)
         self.failIf(wf.isActionSupported(proxy, 'validate'))
         self.flogin('member1', self.mb)
@@ -278,14 +277,13 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.wftool.doActionFor(proxy, 'validate')
         self.assertEquals(self._get_state(proxy), 'validated')
 
-        # member1 (the Pilot) and the managers can then triggers the invalidate
-        # transition
+        # member1 (the Pilot) then triggers the invalidate transition
         self.flogin('reader', self.mb)
         self.failIf(wf.isActionSupported(proxy, 'invalidate'))
         self.login('manager')
         self.assert_(wf.isActionSupported(proxy, 'invalidate'))
         self.flogin('wsmanager', self.mb)
-        self.assert_(wf.isActionSupported(proxy, 'invalidate'))
+        self.failIf(wf.isActionSupported(proxy, 'invalidate'))
         self.flogin('member2', self.mb)
         self.failIf(wf.isActionSupported(proxy, 'invalidate'))
         self.flogin('member1', self.mb)
@@ -335,7 +333,7 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.login('manager')
         self.assert_(wf.isActionSupported(proxy, 'send'))
         self.flogin('wsmanager', self.mb)
-        self.assert_(wf.isActionSupported(proxy, 'send'))
+        self.failIf(wf.isActionSupported(proxy, 'send'))
         self.flogin('member2', self.mb)
         self.failIf(wf.isActionSupported(proxy, 'send'))
         self.flogin('member1', self.mb)

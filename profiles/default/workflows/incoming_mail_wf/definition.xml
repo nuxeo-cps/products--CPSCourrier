@@ -243,8 +243,6 @@
   <guard>
    <guard-role>Pilot</guard-role>
    <guard-role>Manager</guard-role>
-   <guard-role>LocalManager</guard-role>
-   <guard-role>Supervisor</guard-role>
   </guard>
  </transition>
 
@@ -286,8 +284,6 @@
           category="workflow">action_discard</action>
   <guard>
     <guard-role>Manager</guard-role>
-    <guard-role>LocalManager</guard-role>
-    <guard-role>Supervisor</guard-role>
     <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -309,8 +305,6 @@
           category="workflow">action_forward</action>
   <guard>
     <guard-role>Manager</guard-role>
-    <guard-role>LocalManager</guard-role>
-    <guard-role>Supervisor</guard-role>
     <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -319,8 +313,6 @@
              before_script="forward_mail" after_script="">
   <guard>
     <guard-role>Manager</guard-role>
-    <guard-role>Supervisor</guard-role>
-    <guard-role>LocalManager</guard-role>
     <guard-role>Pilot</guard-role>
   </guard>
  </transition>
@@ -329,8 +321,6 @@
              before_script="" after_script="">
   <guard>
     <guard-role>Manager</guard-role>
-    <guard-role>Supervisor</guard-role>
-    <guard-role>LocalManager</guard-role>
     <guard-role>Pilot</guard-role>
   </guard>
   <transition-behavior behavior_id="delete"/>
@@ -367,6 +357,7 @@
   <guard>
    <guard-role>Pilot</guard-role>
    <guard-role>Manager</guard-role>
+    <!-- local managers and supervisors can manage the stack at any moment -->
    <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
   </guard>
@@ -384,6 +375,7 @@
           category="workflow">action_move_down_delegatees</action>
   <guard>
    <guard-role>Pilot</guard-role>
+    <!-- local managers and supervisors can manage the stack at any moment -->
    <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
    <guard-role>Manager</guard-role>
@@ -406,8 +398,6 @@
           category="workflow">action_reset</action>
   <guard>
    <guard-role>Pilot</guard-role>
-   <guard-role>Supervisor</guard-role>
-   <guard-role>LocalManager</guard-role>
    <guard-role>Manager</guard-role>
   </guard>
   <transition-behavior behavior_id="workflow-reset"/>
@@ -424,7 +414,6 @@
    <guard-role>Manager</guard-role>
    <guard-role>Supervisor</guard-role>
    <guard-role>LocalManager</guard-role>
-   <guard-role>Owner</guard-role>
    <guard-role>Contributor</guard-role>
    <guard-role>Reader</guard-role>
    <guard-role>Pilot</guard-role>
