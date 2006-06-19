@@ -23,6 +23,9 @@ from Products.GenericSetup import EXTENSION
 from Products.CMFCore.DirectoryView import registerDirectory
 from Products.CPSCore.interfaces import ICPSSite
 
+from Products.CPSDefault.Portal import CPSDefaultSite
+import factory
+
 # temporary fix for a bug in CPSCore events
 import PatchCPSCoreCPSTypes
 
@@ -56,6 +59,12 @@ ModuleSecurityInfo('Products.CPSCourrier.relations').declarePublic(
 
 registerDirectory('skins', globals())
 
+class CPSCourrierSite(CPSDefaultSite):
+    """ Just a marker.
+
+    I'd rather add constructors to CPSDefault. Don't know if it'd work"""
+    meta_type = 'CPSCourrier Site'
+
 def initialize(registrar):
     # Extension profile registration
     profile_registry.registerProfile(
@@ -84,3 +93,7 @@ def initialize(registrar):
         'CPSCourrier',
         EXTENSION,
         for_=ICPSSite)
+
+    registrar.registerClass(CPSCourrierSite,
+                            constructors=(factory.addConfiguredCPSCourrierSiteForm,
+                                          factory.addConfiguredCPSCourrierSite))
