@@ -14,4 +14,4 @@ Bug fixes:
 - fix batch perform view bug on session expiration
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- Mailbox filter uses tree cache for its voc. Much faster
