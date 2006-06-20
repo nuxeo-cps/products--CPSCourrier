@@ -152,7 +152,7 @@ Layout that presents catalog search results
    <property name="fields">
      <element value="filter_path" />
    </property>
-   <property name="defines_scope">True</property>
+   <property name="defines_scope">False</property>
  </widget>
 
 <widget name="q_ZCText_or" meta_type="String Filter Widget">

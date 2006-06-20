@@ -4,6 +4,7 @@ Requires:
 New features:
 ~~~~~~~~~~~~~
 - specific factory for CPSCourrier and its options
+- Big performance improvement for searches in all mailboxes for Lucene
 Bug fixes:
 ~~~~~~~~~~
 - DGME #4547: use session instead of (too many cookies) on the batch perform
