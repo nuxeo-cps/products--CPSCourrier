@@ -6,6 +6,7 @@ Mail tracking and management system for CPS Platform.
 Dependencies
 ------------
 
+ - CPS >= 3.4.1
  - CPSRelation
  - CPSBayes
  - BayesCore and it's denpendencies (SQLObject and TextIndexNG3 extensions)
@@ -13,14 +14,15 @@ Dependencies
 Installation
 ------------
 
- - install CPS 3.4 and create a `CPS Default Site`
- - add this product to the `Products` directory of your Zope instance and
-   restart Zope. You will also need the CPSRelation, BayesCore and CPSBayes
-   products. Please refer to their README.txt and INSTALL.txt files for more
-   details.
- - In the ZMI, in your CPS instance, goto to the `portal_setup` and select the
-   "Profiles" tab
- - Import the 'CPS Courrier' profile
+ - add this product and its dependencies to the ``Products`` directory of your Zope instance.
+ - (re)start Zope
+ - Select ``CPSCourrier Site`` in the ``Add`` menu and fill the form
+
+Traps
+~~~~~
+
+ - Lucene external indexing: several CPSCourrier sites can't share a
+   Lucene server.
 
 Usage
 -----
@@ -51,3 +53,4 @@ CPSCourrier uses a CPSRelation graph to store the relations between incoming and
 ougoing mail documents (replies). By default this uses the IOBTree (ZODB)
 storage but it can be setup to store the relations in some RDF graph in a MySQL
 database.
+
