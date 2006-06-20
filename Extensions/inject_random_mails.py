@@ -96,7 +96,7 @@ def _populate(where, generator, wftool):
                                      initial_transition='create')
         doc = where[id].getEditableContent()
         doc.edit(info, proxy=where[id])
-        if i % 100 == 0:
+        if i % 10 == 0:
             transaction.commit()
     # necessary with zopectl run:
     transaction.commit()
