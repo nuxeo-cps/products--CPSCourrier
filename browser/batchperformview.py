@@ -17,6 +17,8 @@
 #
 # $Id$
 
+import transaction
+
 from urllib import urlencode
 from logging import getLogger
 
@@ -272,22 +274,25 @@ class BatchPerformView(ReuseAnswerView):
 
         failed = set()
         proxies = [portal.unrestrictedTraverse(rpath) for rpath in self.rpaths]
+        base_rpath = form.get('base_reply_rpath', '')
         for proxy in proxies:
             wf = wftool.getWorkflowsFor(proxy)[0]
+
             if wf.isActionSupported(proxy, transition):
                 wftool.doActionFor(proxy, transition, **kw)
+
+                if transition == 'answer':
+                    # step 2 creating the replies and triggering the send
+                    # transition on them
+                    reply = reply_to_incoming(proxy, base_rpath)
+                    wftool.doActionFor(reply, 'send', comment=kw['comment'])
+
+                # each proxy is independant, thus commit to avoid conflict
+                # errors on portal_proxies between two batch performers
+                transaction.commit()
+
             else:
                 failed.add(proxy)
-
-        if transition == 'answer':
-            # step 2 creating the replies and triggering the send transition on
-            # them
-            replies = []
-            base_rpath = form.get('base_reply_rpath', '')
-            replies = [reply_to_incoming(p, base_rpath) for p in proxies
-                                                        if p not in failed]
-            for reply in replies:
-                wftool.doActionFor(reply, 'send', comment=kw['comment'])
 
         # this is the end of the batch session
         self._expireSession()
