@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<object name="portlet_actions_object" meta_type="CPS Portlet"
+   portal_type="Actions Portlet">
+ <f id="Contributors">
+  <e v="admin"/>
+ </f>
+ <f id="Coverage" v=""/>
+ <f id="CreationDate" v="20060116142259Z"/>
+ <f id="Creator" v="manager"/>
+ <f id="Description" v=""/>
+ <f id="EffectiveDate" v=""/>
+ <f id="ExpirationDate" v=""/>
+ <f id="Format" v="text/html"/>
+ <f id="Language" v=""/>
+ <f id="ModificationDate" v="20060125141710Z"/>
+ <f id="Relation" v=""/>
+ <f id="Rights" v=""/>
+ <f id="Source" v=""/>
+ <f id="Subject"/>
+ <f id="Title" v="Actions Portlet"/>
+ <f id="allow_discussion" v="False"/>
+ <f id="cache_cleanup_date" v="1137421398.01"/>
+ <f id="cache_params"/>
+ <f id="cache_timeout" v="0"/>
+ <f id="categories">
+  <e v="workflow"/>
+ </f>
+ <f id="actions_order" />
+ <f id="disable_override" v="0"/>
+ <f id="dummy" v=""/>
+ <f id="identifier" v="portlet_actions_object"/>
+ <f id="javascript" v=""/>
+ <f id="order" v="40"/>
+ <f id="portlet" v=""/>
+ <f id="preview"/>
+ <f id="provider" v=""/>
+ <f id="show_icons" v="True"/>
+ <f id="slot" v="doc_actions"/>
+ <f id="slot_override" v="0"/>
+ <f id="visibility_range" v="0-0"/>
+</object>

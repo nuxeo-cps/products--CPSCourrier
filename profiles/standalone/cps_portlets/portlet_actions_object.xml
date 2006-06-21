@@ -1,3 +1,7 @@
 <object name="portlet_actions_object">
-  <f id="order" v="60"/>
+  <f id="order" v="50"/>
+  <f id="categories" purge="True">
+    <e v="object"/>
+    <e v="folder"/>
+  </f>
 </object>

@@ -5,4 +5,6 @@
     portal_type="Image Portlet"/>
 <object name="portlet_welcome" meta_type="CPS Portlet"
     portal_type="Text Portlet"/>
+<object name="portlet_workflow_actions" meta_type="CPS Portlet"
+    portal_type="Actions Portlet"/>
 </object>
