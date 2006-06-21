@@ -85,6 +85,7 @@
   </property>
   <property name="label">cpscourrier_sending_date_label</property>
   <property name="is_i18n">True</property>
+  <property name="hidden_empty">True</property>
   <property name="view_format">long</property>
   <property name="hidden_layout_modes">
     <element value="create"/>
