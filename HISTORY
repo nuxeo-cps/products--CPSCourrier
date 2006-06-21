@@ -1,4 +1,32 @@
 *******************************************
+** CPSCourrier V0.15.0 [R1 build 2006/06/21-17:05 by gracinet]
+** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 46692
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- specific factory for CPSCourrier and its options
+- Big performance improvement for searches in all mailboxes for Lucene
+- #1676 (CPSCourrier standalone) wf actions in a separate portlet
+Bug fixes:
+~~~~~~~~~~
+- DGME #4547: use session instead of (too many cookies) on the batch perform
+  pages
+- DGME #4541: relationships search ignore mail templates when flagging incoming
+  mails answered (some for thread display & archiving)
+- DGME #3970: removed the Date column on the mailbox group view
+- fix batch perform view bug on session expiration
+- DGME #4461: the local managers and supervisors no longer can trigger
+  stack protected transitions directly (but they can still manage the stack
+  itself)
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- Mailbox filter uses tree cache for its voc. Much faster
+- [OPTIM]: batch perform now commits for each wf transition to avoid sending
+  emails while the proxy remain in the previous state
+
+*******************************************
 ** CPSCourrier V0.14.0 [R1 build 2006/06/15-17:54 by gracinet]
 ** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 46554
 \Requires:
