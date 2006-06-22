@@ -102,14 +102,14 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
                 doc = out_mail.getEditableContent()
                 # attach files to the outgoing mail
                 ti = doc.getTypeInfo()
-                ti.flexibleAddWidget(doc, 'mail_flexible', 'file')
-                ti.flexibleAddWidget(doc, 'mail_flexible', 'file')
-                doc_def.update({
-                    'file_f0': File('file_f0', 'some_file.txt' ,
-                                    StringIO('This is a test')),
-                    'file_1_f0': File('file_1_f0', 'other_file.txt',
-                                      StringIO('Other test content'))
-                })
+#                ti.flexibleAddWidget(doc, 'mail_flexible', 'file')
+#                ti.flexibleAddWidget(doc, 'mail_flexible', 'file')
+#                doc_def.update({
+#                    'file_f0': File('file_f0', 'some_file.txt' ,
+#                                    StringIO('This is a test')),
+#                    'file_1_f0': File('file_1_f0', 'other_file.txt',
+#                                      StringIO('Other test content'))
+#                })
                 doc.edit(doc_def, out_mail)
 
         # link incoming #1 as a reply of outgoing #1 to get a bigger thread:
