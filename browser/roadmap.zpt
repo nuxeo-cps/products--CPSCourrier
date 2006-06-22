@@ -14,7 +14,7 @@
 			  view_mode python:stack_mode == 'view';
 			  edit_mode python:stack_mode == 'edit';
 			  insert_mode python:stack_mode == 'insert';
-			  self_url string:cpscourrier_roadmap.html;
+			  self_url view/getFormName;
 			  ">
 
     <h1 i18n:translate="cpscourrier_roadmap_heading">
