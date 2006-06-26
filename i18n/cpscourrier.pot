@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-06-15 19:34default\n"
+"POT-Creation-Date: 2006-06-26 15:57default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -306,6 +306,12 @@ msgid "portal_type_Mailbox_title"
 msgstr ""
 
 msgid "portal_type_Mailbox_description"
+msgstr ""
+
+msgid "portal_type_Mail_Templates_Box_title"
+msgstr ""
+
+msgid "portal_type_Mail_Templates_description"
 msgstr ""
 
 msgid "portal_type_IncomingMail_title"

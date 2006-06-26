@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-06-15 19:34default\n"
+"POT-Creation-Date: 2006-06-26 15:57default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -319,6 +319,12 @@ msgstr "Mailbox"
 
 msgid "portal_type_Mailbox_description"
 msgstr "Area to store and manage message documents"
+
+msgid "portal_type_Mail_Templates_Box_title"
+msgstr "Mailbox for template mail documents"
+
+msgid "portal_type_Mail_Templates_description"
+msgstr "Area to store and manage template message documents"
 
 msgid "portal_type_IncomingMail_title"
 msgstr "Incoming mail"

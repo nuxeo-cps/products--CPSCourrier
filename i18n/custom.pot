@@ -32,6 +32,12 @@ msgstr ""
 msgid "portal_type_Mailbox_description"
 msgstr ""
 
+msgid "portal_type_Mail_Templates_Box_title"
+msgstr ""
+
+msgid "portal_type_Mail_Templates_description"
+msgstr ""
+
 msgid "portal_type_IncomingMail_title"
 msgstr ""
 

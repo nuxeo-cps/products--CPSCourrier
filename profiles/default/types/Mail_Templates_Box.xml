@@ -2,8 +2,8 @@
 <!-- This is almost like a Mailbox. Differences are outlined -->
 <object name="Mail Templates Box" meta_type="CPS Flexible Type Information"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">portal_type_Mailbox_title</property>
- <property name="description">portal_type_Mailbox_description</property>
+ <property name="title">portal_type_Mail_Templates_Box_title</property>
+ <property name="description">portal_type_Mail_Templates_description</property>
  <property name="content_icon">mailbox_icon.png</property>
  <property name="content_meta_type">Folder</property>
  <property name="product">CPSDefault</property>

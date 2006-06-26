@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-06-15 19:34default\n"
+"POT-Creation-Date: 2006-06-26 15:57default\n"
 "PO-Revision-Date: 2006-05-07 09:40+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -318,6 +318,14 @@ msgstr "Buzón"
 msgid "portal_type_Mailbox_description"
 msgstr "Espacio dedicado a almacenar y gestionar correos"
 
+#, fuzzy
+msgid "portal_type_Mail_Templates_Box_title"
+msgstr "Mailbox"
+
+#, fuzzy
+msgid "portal_type_Mail_Templates_description"
+msgstr "Area to store and manage message documents"
+
 msgid "portal_type_IncomingMail_title"
 msgstr "Correo entrante"
 
@@ -365,7 +373,7 @@ msgstr "Fecha:"
 
 #, fuzzy
 msgid "cpscourrier_sending_date_label"
-msgstr "Date"
+msgstr "Sending date"
 
 msgid "cpscourrier_form_of_address_label"
 msgstr "Fórmula de cortesía"
