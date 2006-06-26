@@ -31,6 +31,10 @@ from Products.CPSCourrier.widgets.row_widgets import CPSCourrierToDoRowWidget
 from Products.CPSCourrier.workflows.stacks import CourrierStack
 from Products.CPSCourrier.config import  RELATION_GRAPH_ID, HAS_REPLY, STACK_ID
 
+class FakeMailHost:
+    def _send(self, *args):
+        return args
+
 class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
     """ Quasifunctional tests for outgoing mails."""
 
@@ -249,6 +253,10 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         elt = stack._getLevelContentValues()[0]
         self.assertEquals(elt.getId(), 'courrier_user:member1_ftest-mailbox')
 
+        # member1 edit the document to put a "to" email address
+        proxy.getEditableContent().edit(mail_to="noone@nohost.com",
+                                        proxy=proxy)
+
         # member1 (the Pilot) can delete the mail
         self.flogin('reader', self.mb)
         self.failIf(wf.isActionSupported(proxy, 'delete'))
@@ -299,6 +307,62 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.login('manager')
         self.assert_(checkPerm('View', proxy))
 
+        # but nobody except the global manager can modify it
+        self.flogin('reader', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.login('manager')
+        self.assert_(checkPerm('Modify portal content', proxy))
+        self.flogin('wsmanager', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.flogin('member2', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.flogin('member1', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+
+        # member1 (the Pilot) and the managers can trigger the send transition
+        self.flogin('reader', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'send'))
+        self.login('manager')
+        self.assert_(wf.isActionSupported(proxy, 'send'))
+        self.flogin('wsmanager', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'send'))
+        self.flogin('member2', self.mb)
+        self.failIf(wf.isActionSupported(proxy, 'send'))
+        self.flogin('member1', self.mb)
+        self.assert_(wf.isActionSupported(proxy, 'send'))
+
+        # using a disabled MailHost
+        proxy.MailHost = FakeMailHost()
+
+        # member1 sends it
+        self.wftool.doActionFor(proxy, 'send')
+        self.assertEquals(self._get_state(proxy), 'sent')
+
+        # necessary cleaning
+        del proxy.MailHost
+
+        # the other ones can still view the document
+        self.flogin('reader', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.flogin('member2', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.flogin('wsmanager', self.mb)
+        self.assert_(checkPerm('View', proxy))
+        self.login('manager')
+        self.assert_(checkPerm('View', proxy))
+
+        # but nobody except the global manager can modify it
+        self.flogin('reader', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.login('manager')
+        self.assert_(checkPerm('Modify portal content', proxy))
+        self.flogin('wsmanager', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.flogin('member2', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+        self.flogin('member1', self.mb)
+        self.failIf(checkPerm('Modify portal content', proxy))
+
     def test_outgoing_sending_from_scratch(self):
         # this is about the workflow itself not about testing actual
         # sending of reply. For this there is another test in
@@ -320,13 +384,6 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member1', self.mb)
         stack = self.wftool.getStackFor(proxy, STACK_ID)
         stack_mod = proxy.cpscourrier_stack_modify
-
-        # Using a disabled MailHost
-        class FakeMailHost:
-            def _send(self, *args):
-                return args
-        proxy.MailHost = FakeMailHost()
-
         # member1 (the Pilot) and the managers can trigger the send transition
         self.flogin('reader', self.mb)
         self.failIf(wf.isActionSupported(proxy, 'send'))
@@ -339,9 +396,15 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member1', self.mb)
         self.assert_(wf.isActionSupported(proxy, 'send'))
 
+        # Using a disabled MailHost
+        proxy.MailHost = FakeMailHost()
+
         # and member1 does it
         self.wftool.doActionFor(proxy, 'send')
         self.assertEquals(self._get_state(proxy), 'sent')
+
+        # necessary cleaning
+        del proxy.MailHost
 
         # the other ones can still view the document
         self.flogin('reader', self.mb)
@@ -352,9 +415,6 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.assert_(checkPerm('View', proxy))
         self.login('manager')
         self.assert_(checkPerm('View', proxy))
-
-        # necessary cleaning
-        del proxy.MailHost
 
 
 class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):

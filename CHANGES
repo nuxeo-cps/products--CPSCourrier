@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- DGME #4596: validated emails used to raise Unauthorized when trying to set
+  the effective date while running send_reply wf script
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

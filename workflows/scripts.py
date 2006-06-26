@@ -470,12 +470,15 @@ def send_reply(proxy, text_only=False, additionnal_info=''):
     body = compute_reply_body(proxy, additionnal_info=additionnal_info,
                               plain_text=plain_text)
     attachments = _extract_attachments(proxy)
-    res= send_mail(doc, mto, mfrom, subject, body,
-                   attachments=attachments, encoding=encoding,
-                   plain_text=plain_text)
 
     doc = proxy.getEditableContent()
-    doc.edit(EffectiveDate=DateTime())
+    # bypass the ModifyPortalContent permission check for validated mails
+    doc._edit(EffectiveDate=DateTime())
+
+    # send mail at last to avoid side effect in case of uncatched exception
+    res = send_mail(doc, mto, mfrom, subject, body,
+                   attachments=attachments, encoding=encoding,
+                   plain_text=plain_text)
 
     return res
 

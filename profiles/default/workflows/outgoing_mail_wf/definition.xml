@@ -77,7 +77,9 @@
    <permission-role>Supervisor</permission-role>
    <permission-role>Reader</permission-role>
   </permission-map>
-  <permission-map name="Modify portal content" acquired="False"/>
+  <permission-map name="Modify portal content" acquired="False">
+   <permission-role>Manager</permission-role>
+  </permission-map>
   <permission-map name="WebDAV Lock items" acquired="False"/>
   <permission-map name="WebDAV Unlock items" acquired="False"/>
   <stack-definition stackdef_id="Pilots"
@@ -110,7 +112,9 @@
    <permission-role>Contributor</permission-role>
    <permission-role>Reader</permission-role>
   </permission-map>
-  <permission-map name="Modify portal content" acquired="False"/>
+  <permission-map name="Modify portal content" acquired="False">
+    <permission-role>Manager</permission-role>
+  </permission-map>
   <permission-map name="WebDAV Lock items" acquired="False"/>
   <permission-map name="WebDAV Unlock items" acquired="False"/>
   <stack-definition stackdef_id="Pilots"
