@@ -293,7 +293,7 @@ def init_stack_with_user(sci, wf_var_id, prefix='courrier_', **kw):
     # The stack guard will be checked anyway, so that it isn't a hole
     # to call _executeTransition.
 
-    use_default = sci.kwargs.get('use_parent_roadmap', True)
+    use_default = sci.kwargs.get('use_parent_roadmap', False)
     if use_default:
         # get copy of the default roadmap
         mailbox = proxy.aq_inner.aq_parent

@@ -8,6 +8,8 @@ Bug fixes:
 ~~~~~~~~~~
 - DGME #4596: validated emails used to raise Unauthorized when trying to set
   the effective date while running send_reply wf script
+- ADAE #924: default roadmap was systematically added cause browser don't send
+  any value for unchecked checkbox input fields
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

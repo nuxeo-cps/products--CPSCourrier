@@ -48,13 +48,13 @@
             </dl>
             <p>
               <input type="checkbox" id="use_parent_roadmap"
-                name="use_parent_roadmap" checked="true"/>
+                name="use_parent_roadmap" checked="checked" />
               <label for="use_parent_roadmap"
                 i18n:translate="cpscourrier_use_default_roadmap">Use default
                 roadmap</label>
             </p>
-          </metal:handle_params>
-           </metal:block>
+            </metal:handle_params>
+          </metal:block>
 
           <metal:block fill-slot="button">
            <input type="hidden" name="workflow_action" value=""
