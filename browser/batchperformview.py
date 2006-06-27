@@ -20,7 +20,7 @@
 import transaction
 
 from urllib import urlencode
-from logging import getLogger
+from logging import getLogger, DEBUG
 
 from Acquisition import aq_inner, aq_parent
 from OFS.CopySupport import CopyError
@@ -29,6 +29,7 @@ from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CPSCore.EventServiceTool import getPublicEventService
 from Products.CPSCourrier.workflows.scripts import reply_to_incoming
 from Products.CPSUtil.session import sessionHasKey
+from Products.CPSUtil.timer import Timer
 
 from reuseanswerview import ReuseAnswerView
 
@@ -269,6 +270,9 @@ class BatchPerformView(ReuseAnswerView):
     def batchTriggerTransition(self, transition):
         """Do the WF update when possible and return the result as psm"""
 
+        t = Timer('CPSCourrier.browser.batchperformview.batchTriggerTransition',
+                  level=DEBUG)
+
         wftool = getToolByName(self.context, 'portal_workflow')
         portal = getToolByName(self.context, 'portal_url').getPortalObject()
         form = self.request.form
@@ -288,30 +292,48 @@ class BatchPerformView(ReuseAnswerView):
             kw['group'] = form.get('group', '')
             kw['use_parent_roadmap'] = form.get('use_parent_roadmap', '')
 
+        base_rpath = form.get('base_reply_rpath', '')
+
+        t.mark('Process form data')
+
         failed = set()
         proxies = [portal.unrestrictedTraverse(rpath) for rpath in self.rpaths]
-        base_rpath = form.get('base_reply_rpath', '')
-        for proxy in proxies:
+
+        t.mark('Grab proxies')
+
+        for i, proxy in enumerate(proxies):
             wf = wftool.getWorkflowsFor(proxy)[0]
 
             if wf.isActionSupported(proxy, transition):
                 wftool.doActionFor(proxy, transition, **kw)
 
+                t.mark("Do action '%s' for proxy %d" % (transition, i))
+
                 if transition == 'answer':
                     # step 2 creating the replies and triggering the send
                     # transition on them
                     reply = reply_to_incoming(proxy, base_rpath)
+
+                    t.mark('Reply to incoming for proxy %d' % i)
+
                     wftool.doActionFor(reply, 'send', comment=kw['comment'])
+
+                    t.mark("Do action 'send' for proxy %d" % i)
 
                 # each proxy is independant, thus commit to avoid conflict
                 # errors on portal_proxies between two batch performers
                 transaction.commit()
 
+                t.mark('Commit for proxy %d' % i)
+
             else:
                 failed.add(proxy)
 
+
         # this is the end of the batch session
         self._expireSession()
+
+        t.mark('Expire session')
 
         # compute the psm according to what was actually done
         psm = "psm_status_changed"
@@ -322,6 +344,10 @@ class BatchPerformView(ReuseAnswerView):
             psm = mcat("psm_cpscourrier_no_action_performed_for")
             psm = psm.encode('iso-8859-15')
             psm += ', '.join(proxy.Title() for proxy in failed)
+
+        t.mark('Compute psm')
+        t.log()
+
         return self._doRedirect(psm)
 
     def replyPreview(self):
