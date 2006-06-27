@@ -3,7 +3,8 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- batch transition perform now does prefiltering of the documents matching the
+  transition
 Bug fixes:
 ~~~~~~~~~~
 - DGME #4596: validated emails used to raise Unauthorized when trying to set

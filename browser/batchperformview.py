@@ -79,6 +79,18 @@ class BatchPerformView(ReuseAnswerView):
         rpath = getToolByName(self.context, 'portal_url').getRpath(self.context)
         del request.SESSION[_SESSION_KEY][rpath]
 
+    def _filterMatchingRpaths(self, transition, rpaths):
+        """Helper method to filter out non p-matching rpaths"""
+        portal = getToolByName(self.context, 'portal_url').getPortalObject()
+        wftool = getToolByName(self.context, 'portal_workflow')
+        filtered = []
+        for rpath in rpaths:
+            proxy = portal.unrestrictedTraverse(rpath)
+            for wf in wftool.getWorkflowsFor(proxy):
+                if wf.isActionSupported(proxy, transition):
+                    filtered.append(rpath)
+        return filtered
+
     def _getSessionData(self):
         """Process the request to extract the list of rpaths and transition id
 
@@ -108,6 +120,10 @@ class BatchPerformView(ReuseAnswerView):
 
         if 'answer_submit' in form:
             transition =  'answer'
+
+        if transition not in ('cut', 'copy', 'paste', None):
+            # filter out non matching rpaths
+            rpaths = self._filterMatchingRpaths(transition, rpaths)
 
         # session management:
         #  - store data read from the request
