@@ -108,6 +108,7 @@ Layout that presents mailbox contents
   <property name="reject_from_scope">
    <element value="closed"/>
    <element value="trash"/>
+   <element value="sent"/>
   </property>
  </widget>
  <widget name="q_sort" meta_type="Toggable Criterion Widget">

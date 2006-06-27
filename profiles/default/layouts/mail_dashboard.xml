@@ -40,6 +40,7 @@ Layout that presents catalog search results
    <property name="reject_from_scope">
      <element value="closed"/>
      <element value="trash"/>
+     <element value="sent"/>
    </property>
    <property name="translated">False</property>
    <property name="cookie_id">cpscourrier</property>
