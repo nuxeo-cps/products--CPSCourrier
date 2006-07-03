@@ -12,6 +12,8 @@ Bug fixes:
 - ADAE #924: default roadmap was systematically added cause browser don't send
   any value for unchecked checkbox input fields
 - do not display sent mail by default
+- [OPTIM] huge speed up on document creation in big mailboxes by using the new
+  terminal_node blacklisting feature of the tree cache
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
