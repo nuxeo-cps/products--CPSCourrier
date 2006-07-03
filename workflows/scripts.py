@@ -107,14 +107,8 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
         })
 
         # increment the counter of the template reply
-        #GR lower level than doc.edit to bypass permission check
-        template_usage = template_doc['template_usage'] + 1
-        tinfo = template_doc.getTypeInfo()
-        dm = tinfo.getDataModel(template_doc,
-                                proxy=template_proxy)
-        dm['template_usage'] = template_usage
-        dm._commit(check_perms=False)
-        tinfo._notifyModification(template_doc)
+        mapping = {'template_usage': template_doc['template_usage'] + 1}
+        template_doc._edit(mapping, proxy=template_proxy)
 
     ptype = 'Outgoing Mail'
     oid = container.computeId(Title)
@@ -152,7 +146,7 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
         outgoing_doc.edit(**data)
 
 
-    # return the outgoing_proxyt proxy to be able to redirect the user to it
+    # return the outgoing proxy to be able to redirect the user to it
     return outgoing_proxy
 
 
