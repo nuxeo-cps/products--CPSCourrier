@@ -110,9 +110,9 @@ Layout that presents catalog search results
  </widget>
 
  <widget name="q_sort" meta_type="Toggable Criterion Widget">
-   <property name="hidden_layout_modes">create edit</property>
+   <property name="hidden_layout_modes">view search_results</property>
    <property name="widget_mode_expr">string:edit</property>
-   <property name="label">cpscourrier_type_label</property>
+   <property name="label_edit">label_sort_by</property>
    <property name="is_i18n">True</property>
    <property name="cookie_id">cpscourrier</property>
    <property name="toggle_tokens">
@@ -127,20 +127,10 @@ Layout that presents catalog search results
      <element value="filter_sort_order" />
      <element value="filter_sort_ref" />
    </property>
- </widget>
-
-<widget name="default_sort" meta_type="Select Filter Widget">
-   <property name="hidden_layout_modes">view search_results</property>
-   <property name="widget_mode_expr">string:edit</property>
-   <property name="label_edit">label_sort_by</property>
-   <property name="is_i18n">True</property>
+   <property name="filter_button">filter</property>
    <property name="vocabulary">dashboard_sort_criteria</property>
    <property name="translated">False</property>
-   <property name="fields">
-     <element value="filter_sort_on" />
-   </property>
-   <property name="cookie_id">cpscourrier</property>
-</widget>
+ </widget>
 
  <widget name="q_path" meta_type="Select Filter Widget">
    <property name="widget_mode_expr">string:edit</property>
@@ -288,7 +278,7 @@ Layout that presents catalog search results
      <cell name="q_deadline_max"/>
    </row>
    <row>
-     <cell name="default_sort"/>
+     <cell name="q_sort"/>
      <cell name="q_items_nb"/>
    </row>
    <row>
