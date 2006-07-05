@@ -33,6 +33,7 @@ Layout that present mailbox contents
    <property name="label">cpscourrier_type_label</property>
    <property name="is_i18n">True</property>
    <property name="cookie_id">cpscourrier</property>
+   <property name="filter_button">autofilt</property>
    <property name="toggle_tokens">
      <element value="" />
      <element value="reverse" />

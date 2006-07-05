@@ -82,6 +82,7 @@ Layout for searching an answer in existing outgoing mails
      <element value="" />
      <element value="reverse" />
    </property>
+   <property name="filter_button">filter</property>
    <property name="criterion_suffix">-on</property>
    <property name="token_suffix">-order</property>
    <property name="ref_suffix">-col</property>
