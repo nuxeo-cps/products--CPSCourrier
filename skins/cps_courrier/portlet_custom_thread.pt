@@ -1,6 +1,6 @@
 <tal:block define="context_obj nocall:options/context_obj;
                    ptype context_obj/portal_type|nothing;"
-           condition="python:ptype in ['Outgoing Mail', 'Incoming Mail']">
+           condition="python:ptype in ['Outgoing Email', 'Incoming Email', 'Outgoing Pmail', 'Incoming Pmail']">
   <table class="listing"
          tal:define="relations python:modules['Products.CPSCourrier.relations'];
                      infos python:relations.get_thread_for(context_obj);

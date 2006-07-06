@@ -16,10 +16,12 @@
  <property name="cps_proxy_type">btreefolder</property>
 
  <!-- A mailbox is not a regular workspace: it is only used to store mail
-      documents (and potentially sub mailboxes for archiving matters) -->
+      documents (and potentially sub mailboxes for archiving matters)
+      Mail templates are relevant in electronic case only
+   -->
  <property name="allowed_content_types">
-  <element value="Incoming Mail"/>
-  <element value="Outgoing Mail"/>
+  <element value="Incoming Email"/>
+  <element value="Outgoing Email"/>
  </property>
 
  <!-- One schema on top of those of standard workspaces holds default

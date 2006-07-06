@@ -4,7 +4,7 @@
     <property name="default_expr">python:portal.REQUEST.PUBLISHED.context.getContent()['Subject']()</property>
   </field>
   <field name="filter_type" meta_type="CPS String Field">
-    <property name="default_expr">string:Outgoing Mail</property>
+    <property name="default_expr">string:Outgoing Email</property>
   </field>
   <field name="filter_sort_on" meta_type="CPS String Field" />
   <field name="filter_sort_order" meta_type="CPS String Field" />

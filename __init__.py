@@ -86,6 +86,24 @@ def initialize(registrar):
         for_=ICPSSite)
 
     profile_registry.registerProfile(
+        'email',
+        'CPS Courrier Electronic',
+        "CPSCourrier Electronic EMail specifics",
+        'profiles/email',
+        'CPSCourrier',
+        EXTENSION,
+        for_=ICPSSite)
+
+    profile_registry.registerProfile(
+        'paper',
+        'CPS Courrier Paper',
+        "CPSCourrier Electronic Paper Mail specifics",
+        'profiles/paper',
+        'CPSCourrier',
+        EXTENSION,
+        for_=ICPSSite)
+
+    profile_registry.registerProfile(
         'lucene',
         'CPS Courrier Lucene',
         "Add-on configuration for Lucene",

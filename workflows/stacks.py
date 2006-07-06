@@ -403,7 +403,10 @@ class CourrierStack(HierarchicalStack):
 
         # special levels for insert mode (e.g empty or intermediate levels)
         # non mail content are typically mailboxes: slightly different behaviour
-        mail_content = context.portal_type in ['Incoming Mail', 'Outgoing Mail']
+        mail_content = context.portal_type in ['Incoming Email',
+                                               'Outgoing Email',
+                                               'Incoming Pmail',
+                                               'Outgoing Pmail',]
         below_only = mail_content
         if mode == 'insert':
             # get new levels, e.g empty levels between non empty levels, and

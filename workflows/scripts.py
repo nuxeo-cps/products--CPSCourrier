@@ -110,7 +110,8 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
         mapping = {'template_usage': template_doc['template_usage'] + 1}
         template_doc._edit(mapping, proxy=template_proxy)
 
-    ptype = 'Outgoing Mail'
+    #XXX GR this one will have to be based on incoming's portal_type
+    ptype = 'Outgoing Email'
     oid = container.computeId(Title)
     wftool.invokeFactoryFor(container, ptype, oid, **data)
     outgoing_proxy = getattr(container, oid)

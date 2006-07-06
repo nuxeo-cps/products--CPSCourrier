@@ -89,7 +89,7 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
                 'mail_from': 'bar@foo.com',
                 self.archiver.date_field_id: DateTime(),
             }
-            self.wftool.invokeFactoryFor(self.mb, 'Incoming Mail', mail_id,
+            self.wftool.invokeFactoryFor(self.mb, 'Incoming Email', mail_id,
                                          **mail_data)
             in_mail = self.mb[mail_id]
             self.incoming_mails.append(in_mail)
@@ -216,7 +216,7 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
 
         # check general xml content
         object = tree.xpath('/object')[0]
-        self.assertEquals(object.get('portal_type'), 'Incoming Mail')
+        self.assertEquals(object.get('portal_type'), 'Incoming Email')
         title = tree.xpath("//f[@id='Title']")[0]
         self.assertEquals(title.get('v'), 'Test mail 0')
 
@@ -255,7 +255,7 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
 
         # check general xml content
         object = tree.xpath('/object')[0]
-        self.assertEquals(object.get('portal_type'), 'Outgoing Mail')
+        self.assertEquals(object.get('portal_type'), 'Outgoing Email')
         title = tree.xpath("//f[@id='Title']")[0]
         self.assertEquals(title.get('v'), 'Re: Test mail 0')
 
@@ -291,7 +291,7 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
             filepath = os.path.join(self.tmp_archive_dir, filename)
             tree = lxml.etree.parse(filepath)
             object = tree.xpath('/object')[0]
-            self.assertEquals(object.get('portal_type'), 'Incoming Mail')
+            self.assertEquals(object.get('portal_type'), 'Incoming Email')
             title = tree.xpath("//f[@id='Title']")[0]
             self.assertEquals(title.get('v'), 'Test mail %d' % i)
 
@@ -300,7 +300,7 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
             filepath = os.path.join(self.tmp_archive_dir, filename)
             tree = lxml.etree.parse(filepath)
             object = tree.xpath('/object')[0]
-            self.assertEquals(object.get('portal_type'), 'Outgoing Mail')
+            self.assertEquals(object.get('portal_type'), 'Outgoing Email')
             title = tree.xpath("//f[@id='Title']")[0]
             self.assertEquals(title.get('v'), 'Re: Test mail %d' % (i / 2))
 

@@ -46,7 +46,7 @@ ZopeTestCase.installProduct('CPSCourrier')
 ZopeTestCase.installProduct('CPSRelation')
 
 class CPSCourrierLayerClass(ExtensionProfileLayerClass):
-    extension_ids = ('CPSCourrier:default', )
+    extension_ids = ('CPSCourrier:default', 'CPSCourrier:email')
 
 CPSCourrierLayer = CPSCourrierLayerClass(
     __name__,
@@ -158,7 +158,7 @@ class IntegrationTestCase(CommonIntegrationFixture, CPSTestCase):
             },
         }
         for mail_id, mail_data in incoming_mail_data.items():
-            self.wftool.invokeFactoryFor(self.mb, 'Incoming Mail', mail_id,
+            self.wftool.invokeFactoryFor(self.mb, 'Incoming Email', mail_id,
                                     **mail_data)
             setattr(self, mail_id, self.mb[mail_id])
         # this is required for cut/paste integration tests
@@ -206,7 +206,7 @@ class CourrierFunctionalTestCase(CPSTestCase):
         """
         self.createMail(container=container,
                         mail_id=mail_id,
-                        portal_type="Incoming Mail")
+                        portal_type="Incoming Email")
 
     def createOutgoing(self, container=None, mail_id='outgoing'):
         """Create outgoing mail and set it as an attr on self.
@@ -215,7 +215,7 @@ class CourrierFunctionalTestCase(CPSTestCase):
         """
         self.createMail(container=container,
                         mail_id=mail_id,
-                        portal_type="Outgoing Mail")
+                        portal_type="Outgoing Email")
 
     def createMail(self, container=None, mail_id=None, portal_type=None):
         """Create mail and set it as an attr on self using given id

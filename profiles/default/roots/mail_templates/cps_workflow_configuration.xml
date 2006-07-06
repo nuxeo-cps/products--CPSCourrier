@@ -2,8 +2,8 @@
 <object name=".cps_workflow_configuration"
         meta_type="CPS Workflow Configuration">
 
-  <!-- The root of mail templates only hosts outgoing mails -->
+  <!-- The root of mail templates only hosts outgoing Emails -->
   <local-workflows>
-    <type name="Outgoing Mail" wf="mail_template_wf"/>
+    <type name="Outgoing Email" wf="mail_template_wf"/>
   </local-workflows>
 </object>

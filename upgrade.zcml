@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+
+
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:cps="http://namespaces.nuxeo.org/cps">
+
+  <cps:upgradeStep
+      title="Change * Mail documents into * EMail documents"
+      source="0.16.1" destination="0.17.0"
+      handler=".upgrades.up_0160_0170_mail_into_email"
+      category="cpscourrier"/>
+
+</configure>

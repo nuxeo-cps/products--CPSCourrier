@@ -36,7 +36,8 @@ Layout that present the contents of the root of mail templates
  </widget>
 
  <widget name="q_portal_type" meta_type="Fixed Filter Widget">
-   <property name="value">Outgoing Mail</property>
+   <!-- makes sense for Email only -->
+   <property name="value">Outgoing Email</property>
  </widget>
 
  <widget name="q_sort" meta_type="Toggable Criterion Widget">

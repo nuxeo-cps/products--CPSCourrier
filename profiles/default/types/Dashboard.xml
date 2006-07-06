@@ -17,8 +17,6 @@
  none shall ever be created. This is actually to indicate the whole set of
  searchable types -->
  <property name="allowed_content_types">
-  <element value="Incoming Mail"/>
-  <element value="Outgoing Mail"/>
  </property>
 
  <!-- The layouts as clustered use to play well with document portlets -->

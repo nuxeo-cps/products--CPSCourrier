@@ -185,7 +185,8 @@ class Archiver:
     review_states = ['closed', 'trash', 'sent']
 
     # portal types of proxies to be archived
-    portal_types = ['Incoming Mail', 'Outgoing Mail']
+    portal_types = ['Incoming Email', 'Outgoing Email',
+                    'Incoming Email', 'Outgoing Email']
 
     # date attribute used to discriminate
     date_field_id = 'ModificationDate'

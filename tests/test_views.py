@@ -77,7 +77,7 @@ class IntegrationTestReuseAnswerView(IntegrationTestCase):
             self.portal)
 
     def test_dispatchSubmit(self):
-        self.wftool.invokeFactoryFor(self.mb, 'Outgoing Mail', 'outgoing',
+        self.wftool.invokeFactoryFor(self.mb, 'Outgoing Email', 'outgoing',
                                      content='template reply')
         outgoing = self.mb.outgoing
         self.request.form = {'rpath': '/'.join(['mailboxes',

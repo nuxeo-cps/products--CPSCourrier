@@ -38,7 +38,7 @@ class DunNotifier:
     review_states = ('received', 'handled', 'answering', 'answered')
 
     # portal types of proxies to be notified for
-    portal_types = ('Incoming Mail',)
+    portal_types = ('Incoming Email', 'Incoming Pmail')
 
     # date attribute used to discriminate
     date_index_id = 'deadline'

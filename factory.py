@@ -50,16 +50,16 @@ class CPSCourrierSiteConfigurator(CPSSiteMetaConfigurator):
                                           'rpath' : 'MailHost'},
                           },
 
-         'email': {'title': 'E-mail handling specifics',
-                   'extensions': (),
+         'CourrierEmail': {'title': 'E-mail handling specifics',
+                   'extensions': ('CPSCourrier:email',),
                    'optional': True,
                    },
-         'paper': {'title': 'Paper mail handling specifics',
-                   'extensions': (),
+         'CourrierPaper': {'title': 'Paper mail handling specifics',
+                   'extensions': ('CPSCourrier:paper',),
                    'optional': True,},
          }
 
-     metas_order = ('CourrierBase', 'email', 'paper',)
+     metas_order = ('CourrierBase', 'CourrierEmail', 'CourrierPaper',)
      form_heading = "Add CPSCourrier Site"
      post_action = 'addConfiguredCPSCourrierSite'
 

@@ -11,15 +11,13 @@
  <property name="factory">addFolder</property>
  <property name="immediate_view">view</property>
 
+ <!-- A mailbox is not a regular workspace: it is only used to store mail
+      documents (and potentially sub mailboxes for archiving matters)
+      allowed types are defined in the two optional profiles -->
+
+
  <!-- Use a BTree type to scale to potentially large mail collections -->
  <property name="cps_proxy_type">btreefolder</property>
-
- <!-- A mailbox is not a regular workspace: it is only used to store mail
-      documents (and potentially sub mailboxes for archiving matters) -->
- <property name="allowed_content_types">
-  <element value="Incoming Mail"/>
-  <element value="Outgoing Mail"/>
- </property>
 
  <!-- One schema on top of those of standard workspaces holds default
       filtering parameters -->

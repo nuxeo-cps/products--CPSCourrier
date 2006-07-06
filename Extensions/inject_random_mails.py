@@ -92,7 +92,7 @@ def _populate(where, generator, wftool):
             'priority': generator.choiceFromVoc('mail_priority'),
         }
         id = where.computeId(info['Title'])
-        id = wftool.invokeFactoryFor(where, 'Incoming Mail', id,
+        id = wftool.invokeFactoryFor(where, 'Incoming Email', id,
                                      initial_transition='create')
         doc = where[id].getEditableContent()
         doc.edit(info, proxy=where[id])

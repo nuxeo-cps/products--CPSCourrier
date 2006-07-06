@@ -608,7 +608,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
 
         utool = getToolByName(self.portal, 'portal_url')
         self.login('manager')
-        self.wftool.invokeFactoryFor(self.mb2, 'Incoming Mail', 'other',
+        self.wftool.invokeFactoryFor(self.mb2, 'Incoming Email', 'other',
                                      initial_transition='create')
         # here's the point of the test: user cannot modify self.outgoing
         # yet using it as template will increment its usage counter

@@ -19,9 +19,11 @@
       Put here workflow associations for mailbox contents.
       Messages document cannot be directly created at the Mailbox groups level
       since the do not belong to their allowed_content_types property
+
+      XXX this will have to go to the email/paper profiles
     -->
-    <type name="Incoming Mail" wf="incoming_mail_wf"/>
-    <type name="Outgoing Mail" wf="outgoing_mail_wf"/>
+    <type name="Incoming Email" wf="incoming_mail_wf"/>
+    <type name="Outgoing Email" wf="outgoing_mail_wf"/>
 
   </below-workflows>
 </object>
