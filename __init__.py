@@ -23,6 +23,7 @@ from Products.GenericSetup import EXTENSION
 from Products.CMFCore.DirectoryView import registerDirectory
 from Products.CPSCore.interfaces import ICPSSite
 
+from Products.CPSCore.upgrade import registerUpgradeCategory
 from Products.CPSDefault.Portal import CPSDefaultSite
 import factory
 
@@ -58,6 +59,14 @@ ModuleSecurityInfo('Products.CPSCourrier.relations').declarePublic(
     'get_thread_for')
 
 registerDirectory('skins', globals())
+
+registerUpgradeCategory('cpscourrier',
+                        title='CPS Courrier',
+                        floor_version='0.16.0',
+                        ref_product='CPSCourrier',
+                        description='Mail tracking and management system',
+                        portal_attribute='upgraded_cpscourrier_version')
+
 
 class CPSCourrierSite(CPSDefaultSite):
     """ Just a marker.
