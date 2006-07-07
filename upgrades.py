@@ -31,7 +31,6 @@ def luceneUpdateProxiesPType(catalog, old_new):
     Doesn't reindex anything. A profile import is supposed to do it anyway.
     Cleans the store.
     """
-    import pdb; pdb.set_trace()
     b_start = 0
     b_size = 500
     total = 0
