@@ -4,6 +4,8 @@ Requires:
 New features:
 ~~~~~~~~~~~~~
 - Profiles fork to handle paper and/or electronic mail
+- The send reply form accepts additional customisable input elements.
+  Override cpscourrier_send_reply_opt_inputs to leverage it.
 Bug fixes:
 ~~~~~~~~~~
 -

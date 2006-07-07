@@ -39,17 +39,24 @@
         <metal:block
           use-macro="here/content_lib_transition_form/macros/transition_form">
           <metal:block fill-slot="button">
-            <input type="submit" class="standalone"
-              tal:attributes="value string:button_send"
-              i18n:attributes="value" />
-            <input type="button" class="context" onClick="history.back()"
-              value="button_cancel" i18n:attributes="value" />
-	    <input type="checkbox" name="submit_template"/>
-	    <span i18n:translate="cpscourrier_submit_template">
-	      Submit as template
-	    </span>
-          </metal:block>
-        </metal:block>
+	    <tal:optionalInputs
+		define="opt_inputs here/cpscourrier_send_reply_opt_inputs">
+	      <div tal:repeat="input opt_inputs">
+		<input tal:attributes="type input/type;
+		                       name input/name;
+				       id input/name;
+				       checked input/checked|string:"/>
+		<label tal:attributes="for input/name"
+		       tal:content="input/label"/>
+	      </div>
+	    </tal:optionalInputs>
+	    <input type="submit" class="standalone"
+		   tal:attributes="value string:button_send"
+		   i18n:attributes="value" />
+	    <input type="button" class="context" onClick="history.back()"
+		   value="button_cancel" i18n:attributes="value" />
+	  </metal:block>
+	</metal:block>
 
         <metal:block use-macro="here/content_lib_states/macros/states" /><br />
         <metal:block use-macro="here/content_lib_history/macros/history" />
