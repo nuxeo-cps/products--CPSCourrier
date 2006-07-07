@@ -1,6 +1,7 @@
 
 # $Id$
 # CPS 3.4.x
+CPSCore >= 3.33.0
 CPSSchemas > 0.50.2
 CPSDocument >= 0.42.0
 CPSWorkflow > 0.7.0
