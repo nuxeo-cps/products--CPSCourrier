@@ -28,7 +28,7 @@ def up_0160_0170_mail_into_email(portal):
         'CPSCourrier.upgrades.up_0160_0170_mail_into_email')
     m_profiles = getattr(portal, 'meta_profiles', None)
     if m_profiles is not None and 'CourrierBase' in m_profiles:
-        m_profiles += 'CourrierEmail'
+        m_profiles += ('CourrierEmail',)
         portal.manage_changeProperties(meta_profiles=m_profiles)
         logging.info("Added CourrierEmail in meta_profiles for replay.")
 
@@ -66,4 +66,4 @@ def up_0160_0170_mail_into_email(portal):
         cat.manage_clean()
 
     # delete old portal_types
-    ttool.manage_delObjects(old_new.items())
+    ttool.manage_delObjects(old_new.keys())
