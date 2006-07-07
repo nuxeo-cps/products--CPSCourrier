@@ -60,16 +60,6 @@ def up_0160_0170_mail_into_email(portal):
 
     logger = logging.getLogger(
         'CPSCourrier.upgrades.up_0160_0170_mail_into_email')
-    m_profiles = getattr(portal, 'meta_profiles', None)
-    if m_profiles is not None and 'CourrierBase' in m_profiles \
-       and 'CourrierEmail' not in m_profiles:
-
-        m_profiles = list(m_profiles)
-        i = m_profiles.index('CourrierBase')
-        m_profiles.insert(i+1, 'CourrierEmail')
-
-        portal.manage_changeProperties(meta_profiles=m_profiles)
-        logging.info("Added CourrierEmail in meta_profiles for replay.")
 
     # create new portal_types
     from Products.CPSDocument.FlexibleTypeInformation \
