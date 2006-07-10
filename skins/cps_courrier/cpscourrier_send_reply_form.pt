@@ -46,7 +46,8 @@
 		                       name input/name;
 				       id input/name;
 				       checked input/checked|string:"/>
-		<label tal:attributes="for input/name"
+		<label tal:condition="input/label|nothing"
+		       tal:attributes="for input/name"
 		       tal:content="input/label"/>
 	      </div>
 	    </tal:optionalInputs>
