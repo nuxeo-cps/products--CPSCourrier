@@ -159,7 +159,8 @@ class IntegrationTestCase(CommonIntegrationFixture, CPSTestCase):
         }
         for mail_id, mail_data in incoming_mail_data.items():
             self.wftool.invokeFactoryFor(self.mb, 'Incoming Email', mail_id,
-                                    **mail_data)
+                                         initial_transition="create",
+                                         **mail_data)
             setattr(self, mail_id, self.mb[mail_id])
         # this is required for cut/paste integration tests
         transaction.commit()
