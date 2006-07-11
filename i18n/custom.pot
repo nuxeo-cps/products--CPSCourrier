@@ -624,3 +624,6 @@ msgstr ""
 
 msgid "cpscourrier_subject_${portal_title}_${mb_title}_${late_number}"
 msgstr ""
+
+msgid "cpscourrier_final_reply"
+msgstr ""

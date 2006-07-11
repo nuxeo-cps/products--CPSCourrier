@@ -910,3 +910,6 @@ msgstr "-------- Message original ---------"
 msgid "cpscourrier_subject_${portal_title}_${mb_title}_${late_number}"
 msgstr ""
 "[${portal_title}] ${late_number} courriers en retard dans \"${mb_title}\""
+
+msgid "cpscourrier_final_reply"
+msgstr "Réponse finale"
