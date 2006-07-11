@@ -2,25 +2,11 @@
 <object name=".cps_workflow_configuration"
         meta_type="CPS Workflow Configuration">
 
-  <local-workflows>
-    <!-- The root of mailboxes only hosts Mailbox Groups folders -->
-    <type name="Mailbox Group" wf="mailboxgroup_folder_wf"/>
-
-  </local-workflows>
-
   <below-workflows>
-    <!--
-      Mailbox Groups only host mailboxes that cannot get created at the root
-      of mailboxes
-    -->
-    <type name="Mailbox" wf="mailbox_folder_wf"/>
 
-    <!--
-      Put here workflow associations for mailbox contents.
+    <!-- Put here workflow associations for mailbox contents.
       Messages document cannot be directly created at the Mailbox groups level
       since the do not belong to their allowed_content_types property
-
-      XXX this will have to go to the email/paper profiles
     -->
     <type name="Incoming Email" wf="incoming_mail_wf"/>
     <type name="Outgoing Email" wf="outgoing_mail_wf"/>
