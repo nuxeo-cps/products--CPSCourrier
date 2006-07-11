@@ -232,6 +232,27 @@ def flag_incoming_answered(outgoing_proxy, sci_kw=None):
     _trigger_transition_for(incoming_docid, 'flag_answered', 'answering',
                             outgoing_proxy)
 
+def flag_incoming_answering(outgoing_proxy, sci_kw=None):
+    """Flag related incoming proxy answering if in answered state.
+
+    If no incoming mail is found: do nothing (after logging it).
+    Used upon reply reactivation
+    """
+    logger.debug('start flag_incoming_answering')
+
+    rtool = getToolByName(outgoing_proxy, 'portal_relations')
+    ptool = getToolByName(outgoing_proxy, 'portal_proxies')
+
+    # grab the original mail docid
+    incoming_docid = _get_incoming_docid_for(outgoing_proxy)
+    if incoming_docid is None:
+        logger.warning('%r has no related incoming mail: do nothing')
+        return
+
+    # all replies are sent: switch the incoming review state to answered
+    _trigger_transition_for(incoming_docid, 'flag_answering', 'answered',
+                            outgoing_proxy)
+
 
 def flag_incoming_handled(outgoing_proxy):
     """Flag related incoming proxy handled if outgoing_proxy is the last reply

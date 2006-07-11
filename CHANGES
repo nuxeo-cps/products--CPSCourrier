@@ -8,6 +8,8 @@ New features:
   Override cpscourrier_send_reply_opt_inputs to leverage it.
 - An optional final_reply input in send form has the effect
   of closing the related incoming mail.
+- Reactivating a reply has the effect of putting the related incoming
+  back in 'answering' state
 Bug fixes:
 ~~~~~~~~~~
 -

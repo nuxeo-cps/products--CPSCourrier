@@ -7,6 +7,7 @@
  <state state_id="answered" title="">
   <exit-transition transition_id="roadmap_view"/>
   <exit-transition transition_id="answer"/>
+  <exit-transition transition_id="flag_answering"/>
   <exit-transition transition_id="close"/>
   <exit-transition transition_id="manage_delegatees"/>
   <exit-transition transition_id="move_down_delegatees"/>
@@ -295,6 +296,12 @@
  </transition>
  <transition transition_id="flag_handled" title=""
              new_state="handled" trigger="USER"
+             before_script="" after_script="">
+  <guard>
+  </guard>
+ </transition>
+ <transition transition_id="flag_answering" title=""
+             new_state="answering" trigger="USER"
              before_script="" after_script="">
   <guard>
   </guard>

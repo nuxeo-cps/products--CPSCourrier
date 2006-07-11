@@ -360,7 +360,8 @@
  </transition>
  <transition transition_id="reactivate"
              title="Rework a sent mail" new_state="work"
-             trigger="USER" before_script="" after_script="">
+             trigger="USER" before_script=""
+	     after_script="flag_incoming_answering">
   <action url="%(content_url)s/workflow_transition_form?transition=reactivate"
           category="workflow">action_reactivate</action>
   <guard>
@@ -527,6 +528,9 @@
  <script script_id="flag_incoming_answered"
          type="Script (Python)"
          filename="workflows/outgoing_mail_wf/scripts/flag_incoming_answered.py"/>
+ <script script_id="flag_incoming_answering"
+         type="Script (Python)"
+         filename="workflows/outgoing_mail_wf/scripts/flag_incoming_answering.py"/>
  <script script_id="send_reply"
          type="Script (Python)"
          filename="workflows/outgoing_mail_wf/scripts/send_reply.py"/>
