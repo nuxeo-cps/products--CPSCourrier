@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <object name="Incoming Pmail" meta_type="CPS Flexible Type Information"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title">portal_type_IncomingPaperMail_title</property>
- <property name="description">portal_type_IncomingPaperMail_description</property>
+ <property name="title">portal_type_IncomingPmail_title</property>
+ <property name="description">portal_type_IncomingPmail_description</property>
  <property name="content_icon">incoming_mail_icon.png</property>
  <property name="product">CPSDocument</property>
  <property name="immediate_view">cpsdocument_edit_form</property>

@@ -339,6 +339,30 @@ msgstr "Courrier sortant"
 msgid "portal_type_OutgoingMail_description"
 msgstr "Message contenant une réponse à un courrier entrant"
 
+msgid "portal_type_IncomingEmail_title"
+msgstr "Courrier électronique entrant"
+
+msgid "portal_type_IncomingEmail_description"
+msgstr "Message électronique reçu directement dans l'appplication."
+
+msgid "portal_type_OutgoingEmail_title"
+msgstr "Courrier électronique sortant"
+
+msgid "portal_type_OutgoingEmail_description"
+msgstr "Message électronique envoyable depuis l'application."
+
+msgid "portal_type_IncomingPmail_title"
+msgstr "Courrier papier entrant"
+
+msgid "portal_type_IncomingPmail_description"
+msgstr "Document référençant un courrier postal reçu."
+
+msgid "portal_type_OutgoingPmail_title"
+msgstr "Courrier papier sortant"
+
+msgid "portal_type_OutgoingPmail_description"
+msgstr "Document référençant un courrier postal envoyé ou à envoyer,"
+
 msgid "portal_type_Dashboard_title"
 msgstr "Tableau de bord"
 

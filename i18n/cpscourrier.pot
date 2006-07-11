@@ -326,6 +326,30 @@ msgstr ""
 msgid "portal_type_OutgoingMail_description"
 msgstr ""
 
+msgid "portal_type_IncomingEmail_title"
+msgstr ""
+
+msgid "portal_type_IncomingEmail_description"
+msgstr ""
+
+msgid "portal_type_OutgoingEmail_title"
+msgstr ""
+
+msgid "portal_type_OutgoingEmail_description"
+msgstr ""
+
+msgid "portal_type_IncomingPmail_title"
+msgstr ""
+
+msgid "portal_type_IncomingPmail_description"
+msgstr ""
+
+msgid "portal_type_OutgoingPmail_title"
+msgstr ""
+
+msgid "portal_type_OutgoingPmail_description"
+msgstr ""
+
 msgid "portal_type_Dashboard_title"
 msgstr ""
 
