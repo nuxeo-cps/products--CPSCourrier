@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<object name="mailboxes">
+  <object name=".cps_workflow_configuration"
+    meta_type="CPS Workflow Configuration"/>
+</object>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<object name=".cps_workflow_configuration"
+        meta_type="CPS Workflow Configuration">
+
+  <below-workflows>
+    <!--
+      Put here workflow associations for mailbox contents.
+      Messages document cannot be directly created at the Mailbox groups level
+      since the do not belong to their allowed_content_types property
+    -->
+    <type name="Incoming Pmail" wf="incoming_mail_wf"/>
+    <type name="Outgoing Pmail" wf="outgoing_mail_wf"/>
+
+  </below-workflows>
+</object>
