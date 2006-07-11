@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<object name="Outgoing Pmail" meta_type="CPS Flexible Type Information"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+ <property name="title">portal_type_OutgoingPaperMail_title</property>
+ <property name="description">portal_type_OutgoingPaperMail_description</property>
+ <property name="content_icon">outgoing_mail_icon.png</property>
+ <property name="product">CPSDocument</property>
+ <property name="immediate_view">cpsdocument_edit_form</property>
+
+ <!-- Schemas and layout -->
+ <property name="schemas">
+  <element value="metadata"/>
+  <element value="common"/>
+  <element value="mail_common"/>
+  <element value="outgoing_mail" />
+  <element value="flexible_content" />
+ </property>
+ <property name="layouts">
+  <element value="mail_header"/>
+  <element value="mail_common"/>
+  <element value="outgoing_mail"/>
+  <element value="mail_flexible"/>
+ </property>
+ <property name="layout_clusters">
+  <element value="header:mail_header"/>
+  <element value="metadata:mail_metadata"/>
+ </property>
+ <property name="flexible_layouts">
+  <element value="mail_flexible:flexible_content"/>
+ </property>
+
+ <!-- Standard CPSDocument aliases and actions (might change) -->
+ <alias from="(Default)" to="cpsdocument_view"/>
+ <alias from="view" to="cpsdocument_view"/>
+ <action title="action_view" action_id="view" category="object"
+    condition_expr="" url_expr="string:${object_url}/cpsdocument_view"
+    visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="action_edit" action_id="edit" category="object"
+    condition_expr="" url_expr="string:${object_url}/cpsdocument_edit_form"
+    visible="True">
+  <permission value="Modify portal content"/>
+ </action>
+ <action title="action_metadata" action_id="metadata" category="object"
+    condition_expr="not:portal/portal_membership/isAnonymousUser"
+    url_expr="string:${object_url}/cpsdocument_metadata" visible="True">
+  <permission value="View"/>
+ </action>
+ <action title="action_status_history" action_id="status_history"
+    category="workflow"
+    condition_expr="not:portal/portal_membership/isAnonymousUser"
+    url_expr="string:${object_url}/content_status_history" visible="True">
+  <permission value="View"/>
+ </action>
+
+</object>
