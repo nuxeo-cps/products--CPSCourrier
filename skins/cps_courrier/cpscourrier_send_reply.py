@@ -12,7 +12,7 @@ if form.get('submit_template'):
                       initial_transition='submit')
 
 try:
-    wtool.doActionFor(context, 'send', comments=form.get('comments', ''))
+    wtool.doActionFor(context, 'send', **form)
     psm = "psm_cpscourrier_reply_sent"
 except IOError:
     psm = "psm_cpscourrier_reply_could_not_be_sent"

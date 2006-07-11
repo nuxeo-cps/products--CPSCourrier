@@ -186,7 +186,7 @@ def _trigger_transition_for(docid, transition, review_state, context):
         wtool.doActionFor(info['object'], transition)
 
 
-def flag_incoming_answered(outgoing_proxy):
+def flag_incoming_answered(outgoing_proxy, sci_kw=None):
     """Flag related incoming proxy answered if all replies are sent
 
     If no incoming mail is found: do nothing (after logging it)
@@ -201,6 +201,13 @@ def flag_incoming_answered(outgoing_proxy):
     if incoming_docid is None:
         logger.warning('%r has no related incoming mail: do nothing')
         return
+
+    # final reply: don't check anything and close the incoming
+
+    if sci_kw is not None and sci_kw.get('final_reply'):
+      _trigger_transition_for(incoming_docid, 'close', 'answering',
+                              outgoing_proxy)
+      return
 
     # check that all replies to the incoming mail are already sent
     outgoing_docids = rtool.getRelationsFor(RELATION_GRAPH_ID,
@@ -447,7 +454,7 @@ def compute_reply_body(proxy, plain_text=True,additionnal_info=''):
         return HTML_BODY_WRAPPER % body
 
 
-def send_reply(proxy, text_only=False, additionnal_info=''):
+def send_reply(proxy, text_only=False, additionnal_info='', sci_kw=None):
     """Send a reply by SMTP
 
     If text_only is True, any html is stripped to plain text

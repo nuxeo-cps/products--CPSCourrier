@@ -8,4 +8,4 @@
 ##title=
 ##
 from Products.CPSCourrier.workflows.scripts import flag_incoming_answered
-flag_incoming_answered(state_change.object)
+flag_incoming_answered(state_change.object, sci_kw=state_change.kwargs)
