@@ -106,6 +106,9 @@ msgstr ""
 msgid "cpscourrier_to_label"
 msgstr ""
 
+msgid "cpscourrier_msgid_label"
+msgstr ""
+
 msgid "cpscourrier_creation_date_label"
 msgstr ""
 

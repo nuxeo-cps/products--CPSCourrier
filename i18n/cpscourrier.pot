@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-06-26 15:57default\n"
+"POT-Creation-Date: 2006-07-12 12:02default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -161,13 +161,6 @@ msgstr ""
 #.   	  </p>
 #: from ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_select_delegatees"
-msgstr ""
-
-#.   <span>
-#.   	      Submit as template
-#.   	    </span>
-#: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
-msgid "cpscourrier_submit_template"
 msgstr ""
 
 #.   <caption>Thread</caption>
@@ -378,6 +371,9 @@ msgid "cpscourrier_from_label"
 msgstr ""
 
 msgid "cpscourrier_to_label"
+msgstr ""
+
+msgid "cpscourrier_msgid_label"
 msgstr ""
 
 msgid "cpscourrier_creation_date_label"

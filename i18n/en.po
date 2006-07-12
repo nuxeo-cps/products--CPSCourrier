@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-06-26 15:57default\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2006-07-12 12:02default\n"
+"PO-Revision-Date: 2006-07-12 12:17+0200\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
 "MIME-Version: 1.0\n"
@@ -172,13 +172,6 @@ msgstr "Search users"
 msgid "cpscourrier_select_delegatees"
 msgstr "Please select the user(s) to add to the roadmap"
 
-#.   <span>
-#.   	      Submit as template
-#.   	    </span>
-#: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
-msgid "cpscourrier_submit_template"
-msgstr "Submit a copy as template"
-
 #.   <caption>Thread</caption>
 #: from ../skins/cps_courrier/portlet_custom_thread.pt
 msgid "cpscourrier_thread_caption"
@@ -338,6 +331,38 @@ msgstr "Outgoing mail"
 msgid "portal_type_OutgoingMail_description"
 msgstr "Outgoing message that holds an answer to some incoming mail"
 
+#, fuzzy
+msgid "portal_type_IncomingEmail_title"
+msgstr "Incoming mail"
+
+#, fuzzy
+msgid "portal_type_IncomingEmail_description"
+msgstr "Incoming electronic or digitalised message"
+
+#, fuzzy
+msgid "portal_type_OutgoingEmail_title"
+msgstr "Outgoing mail"
+
+#, fuzzy
+msgid "portal_type_OutgoingEmail_description"
+msgstr "Outgoing message that holds an answer to some incoming mail"
+
+#, fuzzy
+msgid "portal_type_IncomingPmail_title"
+msgstr "Incoming mail"
+
+#, fuzzy
+msgid "portal_type_IncomingPmail_description"
+msgstr "Incoming electronic or digitalised message"
+
+#, fuzzy
+msgid "portal_type_OutgoingPmail_title"
+msgstr "Outgoing mail"
+
+#, fuzzy
+msgid "portal_type_OutgoingPmail_description"
+msgstr "Outgoing message that holds an answer to some incoming mail"
+
 msgid "portal_type_Dashboard_title"
 msgstr "Dashboard"
 
@@ -367,6 +392,9 @@ msgstr "From"
 
 msgid "cpscourrier_to_label"
 msgstr "To"
+
+msgid "cpscourrier_msgid_label"
+msgstr "Reference number"
 
 msgid "cpscourrier_creation_date_label"
 msgstr "Date"
@@ -951,3 +979,6 @@ msgstr ""
 
 msgid "cpscourrier_final_reply"
 msgstr "Final reply"
+
+#~ msgid "cpscourrier_submit_template"
+#~ msgstr "Submit a copy as template"

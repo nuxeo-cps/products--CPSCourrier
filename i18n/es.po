@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-06-26 15:57default\n"
+"POT-Creation-Date: 2006-07-12 12:02default\n"
 "PO-Revision-Date: 2006-05-07 09:40+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -173,13 +173,6 @@ msgstr "Búsquedas de usuarios"
 msgid "cpscourrier_select_delegatees"
 msgstr "Por favor, seleccione los elementos a adjuntar a la hoja de ruta"
 
-#.   <span>
-#.   	      Submit as template
-#.   	    </span>
-#: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
-msgid "cpscourrier_submit_template"
-msgstr "Enviar una copia como plantilla"
-
 #.   <caption>Thread</caption>
 #: from ../skins/cps_courrier/portlet_custom_thread.pt
 msgid "cpscourrier_thread_caption"
@@ -320,11 +313,11 @@ msgstr "Espacio dedicado a almacenar y gestionar correos"
 
 #, fuzzy
 msgid "portal_type_Mail_Templates_Box_title"
-msgstr "Mailbox"
+msgstr "Mailbox for template mail documents"
 
 #, fuzzy
 msgid "portal_type_Mail_Templates_description"
-msgstr "Area to store and manage message documents"
+msgstr "Area to store and manage template message documents"
 
 msgid "portal_type_IncomingMail_title"
 msgstr "Correo entrante"
@@ -337,6 +330,38 @@ msgstr "Correo saliente"
 
 msgid "portal_type_OutgoingMail_description"
 msgstr "Mensaje que responde a un correo entrante"
+
+#, fuzzy
+msgid "portal_type_IncomingEmail_title"
+msgstr "Incoming mail"
+
+#, fuzzy
+msgid "portal_type_IncomingEmail_description"
+msgstr "Incoming electronic or digitalised message"
+
+#, fuzzy
+msgid "portal_type_OutgoingEmail_title"
+msgstr "Outgoing mail"
+
+#, fuzzy
+msgid "portal_type_OutgoingEmail_description"
+msgstr "Outgoing message that holds an answer to some incoming mail"
+
+#, fuzzy
+msgid "portal_type_IncomingPmail_title"
+msgstr "Incoming mail"
+
+#, fuzzy
+msgid "portal_type_IncomingPmail_description"
+msgstr "Incoming electronic or digitalised message"
+
+#, fuzzy
+msgid "portal_type_OutgoingPmail_title"
+msgstr "Outgoing mail"
+
+#, fuzzy
+msgid "portal_type_OutgoingPmail_description"
+msgstr "Outgoing message that holds an answer to some incoming mail"
 
 msgid "portal_type_Dashboard_title"
 msgstr "Tablón"
@@ -367,6 +392,10 @@ msgstr "De: "
 
 msgid "cpscourrier_to_label"
 msgstr "Para: "
+
+#, fuzzy
+msgid "cpscourrier_msgid_label"
+msgstr "Size (kB):"
 
 msgid "cpscourrier_creation_date_label"
 msgstr "Fecha:"
@@ -923,6 +952,13 @@ msgstr "-------- Mensaje original ---------"
 
 msgid "cpscourrier_subject_${portal_title}_${mb_title}_${late_number}"
 msgstr ""
+
+#, fuzzy
+msgid "cpscourrier_final_reply"
+msgstr "Final reply"
+
+msgid "cpscourrier_submit_template"
+msgstr "Enviar una copia como plantilla"
 
 #~ msgid "Page ${current_page} of ${nb_pages}"
 #~ msgstr "Page ${current_page} of ${nb_pages}"
