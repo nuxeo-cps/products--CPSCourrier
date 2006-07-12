@@ -9,11 +9,10 @@
 
  <!-- Schemas and layout -->
  <property name="schemas">
-  <element value="metadata_protected_incoming"/>
   <element value="metadata"/>
   <element value="common"/>
   <element value="mail_common" />
-  <element value="incoming_mail" />
+  <element value="incoming_pmail" />
   <element value="flexible_content"/>
  </property>
  <property name="layouts">

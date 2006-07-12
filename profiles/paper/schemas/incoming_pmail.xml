@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<object name="incoming_pmail" meta_type="CPS Schema">
+  <!-- write enabled fields for outgoing paper mails -->
+  <field name="content" meta_type="CPS String Field">
+    <property name="is_searchabletext">True</property>
+  </field>
+  <field name="mail_from" meta_type="CPS String Field">
+    <property name="is_searchabletext">True</property>
+  </field>
+  <field name="mail_to" meta_type="CPS String List Field">
+    <property name="is_searchabletext">True</property>
+  </field>
+</object>
+

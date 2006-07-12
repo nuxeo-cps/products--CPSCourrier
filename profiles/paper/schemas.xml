@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<object name="portal_schemas" meta_type="CPS Schemas Tool">
+ <object name="incoming_pmail" meta_type="CPS Schema"/>
+ <object name="outgoing_pmail" meta_type="CPS Schema"/>
+</object>
