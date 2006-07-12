@@ -389,7 +389,7 @@ msgid "cpscourrier_to_label"
 msgstr "Destinataire"
 
 msgid "cpscourrier_msgid_label"
-msgstr "Num?ro de r?f?rence"
+msgstr "Numéro de référence"
 
 msgid "cpscourrier_creation_date_label"
 msgstr "Date"
