@@ -25,4 +25,7 @@
   <field name="sender_type" meta_type="CPS String Field">
     <property name="default_expr">string:1</property>
   </field>
+  <field name="courrier_msgid" meta_type="CPS String Field">
+    <property name="acl_write_roles">Manager</property>
+  </field>
 </object>

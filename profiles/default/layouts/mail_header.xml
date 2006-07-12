@@ -42,6 +42,18 @@
   </property>
  </widget>
 
+ <widget name="msgid" meta_type="String Widget">
+  <property name="fields">
+   <element value="courrier_msgid"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_msgid_label</property>
+  <property name="is_i18n">True</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+  </property>
+ </widget>
+
  <widget name="creation_date" meta_type="DateTime Widget">
   <property name="fields">
    <element value="CreationDate"/>
@@ -102,6 +114,9 @@
   </row>
   <row>
    <cell name="to"/>
+  </row>
+  <row>
+   <cell name="courrier_msgid"/>
   </row>
   <row>
    <cell name="creation_date"/>
