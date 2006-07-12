@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<object name="outgoing_mail" meta_type="CPS Schema">
+
+  <!-- specific fields for outgoing messages -->
+  <field name="signature" meta_type="CPS String Field">
+    <property name="default_expr">
+      python:portal.portal_membership.getFullnameFromId(str(user))</property>
+  </field>
+  <field name="form_of_address" meta_type="CPS String Field">
+    <property name="default_expr">string:regards</property>
+  </field>
+  <field name="issue_date" meta_type="CPS DateTime Field"/>
+  <field name="is_template" meta_type="CPS Boolean Field"/>
+  <field name="template_usage" meta_type="CPS Int Field"/>
+
+  <!-- write enabled fields for outgoing mails -->
+  <field name="content" meta_type="CPS String Field">
+    <property name="is_searchabletext">True</property>
+  </field>
+  <field name="mail_from" meta_type="CPS String Field">
+    <property name="is_searchabletext">True</property>
+  </field>
+  <field name="mail_to" meta_type="CPS String List Field">
+    <property name="is_searchabletext">True</property>
+  </field>
+</object>
+

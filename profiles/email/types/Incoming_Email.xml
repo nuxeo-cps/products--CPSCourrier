@@ -13,7 +13,7 @@
   <element value="metadata"/>
   <element value="common"/>
   <element value="mail_common" />
-  <element value="incoming_mail" />
+  <element value="incoming_email" />
   <element value="flexible_content"/>
  </property>
  <property name="layouts">

@@ -12,7 +12,7 @@
   <element value="metadata"/>
   <element value="common"/>
   <element value="mail_common"/>
-  <element value="outgoing_mail" />
+  <element value="outgoing_email" />
   <element value="flexible_content" />
  </property>
  <property name="layouts">
