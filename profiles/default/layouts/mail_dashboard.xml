@@ -38,6 +38,8 @@ Layout that presents catalog search results
    <property name="vocabulary">mail_states</property>
    <property name="defines_scope">True</property>
    <property name="reject_from_scope">
+     <!-- pending does not exist by default in CPSCourrier -->
+     <element value="pending"/>
      <element value="closed"/>
      <element value="trash"/>
      <element value="sent"/>

@@ -6,17 +6,19 @@
 
 # why a method if it's hardcoded? To put empty key *first
 l10n = context.translation_service
-vocitems = [(vkey, vkey) for vkey in ('received',
-				      'handled',
-				      'trash',
-				      'answering',
-				      'answered',
-				      'closed',
-				      'work',
-				      'locked',
-				      'draft',
-				      'validated',
-				      'sent')]
+vocitems = [(vkey, vkey) for vkey in ('pending', # not in CPSCourrier by default
+                                      'received',
+                                      'handled',
+                                      'handled',
+                                      'trash',
+                                      'answering',
+                                      'answered',
+                                      'closed',
+                                      'work',
+                                      'locked',
+                                      'draft',
+                                      'validated',
+                                      'sent')]
 res = [(item[0], l10n(item[1]).encode('iso-8859-15'))
        for item in vocitems]
 
