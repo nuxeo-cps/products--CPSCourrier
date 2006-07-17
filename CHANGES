@@ -12,7 +12,7 @@ New features:
   back in 'answering' state
 Bug fixes:
 ~~~~~~~~~~
--
+- mantis:4704: removed close transition on the recevied state
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

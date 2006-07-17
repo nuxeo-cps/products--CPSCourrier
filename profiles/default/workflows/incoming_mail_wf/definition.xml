@@ -175,7 +175,6 @@
  </state>
  <state state_id="received" title="">
   <exit-transition transition_id="handle"/>
-  <exit-transition transition_id="close"/>
   <state-behavior behavior_id="workflow-reset"/>
   <workflow-reset-on-workflow-variable variable_id="Pilots"/>
   <permission-map name="Modify portal content" acquired="False">
