@@ -13,6 +13,7 @@ New features:
 Bug fixes:
 ~~~~~~~~~~
 - mantis:4704: removed close transition on the recevied state
+- mantis:4590: comments were not recorded on send_reply wf transition
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
