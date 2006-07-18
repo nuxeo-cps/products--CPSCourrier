@@ -284,9 +284,11 @@
           category="workflow">action_discard</action>
   <guard>
     <guard-role>Manager</guard-role>
+    <guard-role>LocalManager</guard-role>
+    <guard-role>Supervisor</guard-role>
     <guard-role>Pilot</guard-role>
     <!-- prevent discarding newly injected mail documents -->
-    <guard-expression>python:status != "pending" or (state_change.getDateTime() - state_change.object.CreationDate()) >= 10</guard-expression>
+    <guard-expression>python:state_change.status['review_state'] != "pending" or (state_change.getDateTime() - state_change.object.creation_date) >= 10</guard-expression>
   </guard>
  </transition>
  <transition transition_id="flag_answered" title=""
