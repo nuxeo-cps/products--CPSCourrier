@@ -45,7 +45,8 @@
 		<input tal:attributes="type input/type;
 		                       name input/name;
 				       id input/name;
-				       checked input/checked|string:"/>
+				       checked input/checked|string:;
+				       value input/value|string:"/>
 		<label tal:condition="input/label|nothing"
 		       tal:attributes="for input/name"
 		       tal:content="input/label"/>
