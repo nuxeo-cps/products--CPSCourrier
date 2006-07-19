@@ -29,6 +29,7 @@ import lxml.etree
 import os
 import shutil
 import tempfile
+import transaction
 import unittest
 
 from Products.CMFCore.utils import getToolByName
@@ -72,6 +73,8 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         # use the 'ExpirationDate' field instead of the 'ModificationDate' to
         # simplify the test fixture
         self.archiver.date_field_id = "ExpirationDate"
+        self.archiver.date_index_id = "expires"
+
 
         IntegrationTestCase.fixtureSetUp(self)
 
@@ -141,6 +144,7 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         # delete the test areas
         self.portal.mailboxes.manage_delObjects([self.MBG_ID])
         self.incoming_mails = []
+        transaction.commit()
         self.logout()
 
     def _putMailInPast(self, mail, days):
@@ -153,6 +157,40 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         """Function to help compare list of proxies"""
         rpath = getToolByName(self.portal, 'portal_url').getRpath
         return sorted(rpath(m) for m in proxies)
+
+    def test_triggerAutoTransitions(self):
+        # by default no mail should be affected by the auto transition stuff
+        result = self.archiver._triggerAutoTransitions()
+        self.assertEquals(result, 0)
+        original_ids = sorted(m.getId() for m in self.incoming_mails
+                                                 + self.outgoing_mails)
+        remaining_ids = sorted(self.mb.objectIds())
+        self.assertEquals(remaining_ids, original_ids)
+
+        # put some incoming mails to trash but do not change their date
+        for mail in (self.incoming_mails[0], self.incoming_mails[2],):
+            self.wftool.doActionFor(mail, 'discard')
+
+        # as the proxies are too recent, no transition should be triggered
+        result = self.archiver._triggerAutoTransitions()
+        self.assertEquals(result, 0)
+        original_ids = sorted(m.getId() for m in self.incoming_mails
+                                                 + self.outgoing_mails)
+        remaining_ids = sorted(self.mb.objectIds())
+        self.assertEquals(remaining_ids, original_ids)
+
+        # by putting the mails in the past, the trashed mails are deleted
+        for mail in self.incoming_mails:
+            self._putMailInPast(mail, 500)
+
+        result = self.archiver._triggerAutoTransitions()
+        self.assertEquals(result, 2)
+        expected_ids = sorted(m.getId() for m in self.incoming_mails
+                                                 + self.outgoing_mails)
+        expected_ids.remove(self.incoming_mails[0].getId())
+        expected_ids.remove(self.incoming_mails[2].getId())
+        remaining_ids = sorted(self.mb.objectIds())
+        self.assertEquals(remaining_ids, expected_ids)
 
     def test_getThreadsToArchive(self):
         # by default, no mail is in a state that deserves archiving
@@ -191,7 +229,7 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
 
         # making another thread available for archiving
         mail = self.incoming_mails[3]
-        self._set_state(mail, 'trash')
+        self._set_state(mail, 'closed')
         self._putMailInPast(mail, 300)
         for mail in self.outgoing_mails[6:]: # 6 to 9
             self._set_state(mail, 'sent')
@@ -207,6 +245,16 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         expected1 = self._sortedRpaths([self.incoming_mails[3]]
                                        + self.outgoing_mails[6:8])
         self.assertEquals(result1, expected1)
+
+        # calling it several times should yield the same result
+        threads = list(self.archiver.getThreadsToArchive())
+        self.assertEquals(len(threads), 2)
+
+        threads = list(self.archiver.getThreadsToArchive())
+        self.assertEquals(len(threads), 2)
+
+        threads = list(self.archiver.getThreadsToArchive())
+        self.assertEquals(len(threads), 2)
 
     def test_exportProxyToXml(self):
         # archiving an incoming mail
@@ -269,19 +317,23 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
 
         #TODO: test wf history
 
-    def test_archive(self):
+    def test_archive_without_auto_trigger(self):
         # make 2 threads archivable as previously
         in_mails = [(i, self.incoming_mails[i]) for i in (0, 1, 3)]
         for _, mail in in_mails:
-            self._set_state(mail, 'closed')
+            self.wftool.doActionFor(mail, 'close')
             self._putMailInPast(mail, 300)
         out_mails = [(i, self.outgoing_mails[i]) for i in range(4)+range(6, 8)]
         for _, mail in out_mails:
-            self._set_state(mail, 'sent')
+            self.wftool.doActionFor(mail, 'send')
             self._putMailInPast(mail, 500)
 
+        nb_threads = len(list(self.archiver.getThreadsToArchive()))
+        self.assertEquals(nb_threads, 2)
+
         # archive them
-        self.archiver.archive()
+        nb_archived_mails = self.archiver.archive()
+        self.assertEquals(nb_archived_mails, 9)
 
         # check they are archived:
         path_pattern = "mailboxes/test-mailbox-group/test-mailbox/%s.xml"
@@ -289,6 +341,8 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         for i, mail in in_mails:
             filename = path_pattern % mail.getId()
             filepath = os.path.join(self.tmp_archive_dir, filename)
+            self.assert_(os.path.exists(filepath),
+                         "%s export was not created" % filepath)
             tree = lxml.etree.parse(filepath)
             object = tree.xpath('/object')[0]
             self.assertEquals(object.get('portal_type'), 'Incoming Email')
@@ -298,6 +352,8 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         for i, mail in out_mails:
             filename = path_pattern % mail.getId()
             filepath = os.path.join(self.tmp_archive_dir, filename)
+            self.assert_(os.path.exists(filepath),
+                         "%s export was not created" % filepath)
             tree = lxml.etree.parse(filepath)
             object = tree.xpath('/object')[0]
             self.assertEquals(object.get('portal_type'), 'Outgoing Email')
@@ -319,6 +375,85 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         rtool = getToolByName(self.portal, 'portal_relations')
         g = rtool.getGraph(RELATION_GRAPH_ID)
         for _, mail in in_mails + out_mails:
+            references = g.getRelationsFor(int(mail.getDocid()), IS_REPLY_TO)
+            self.assertEquals(references, ())
+            replies = g.getRelationsFor(int(mail.getDocid()), HAS_REPLY)
+            self.assertEquals(replies, ())
+
+    def test_archive_with_auto_trigger(self):
+        # make 2 threads archivable with some incoming mail trashed
+        in_mails = [(i, self.incoming_mails[i]) for i in (0, 3)]
+        for _, mail in in_mails:
+            self.wftool.doActionFor(mail, 'close')
+            self._putMailInPast(mail, 300)
+
+        trashed_in_mails = [(i, self.incoming_mails[i]) for i in (1,)]
+        for _, mail in trashed_in_mails:
+            self.wftool.doActionFor(mail, 'discard')
+            self._putMailInPast(mail, 300)
+
+        out_mails = [(i, self.outgoing_mails[i]) for i in range(4)+range(6, 8)]
+        for _, mail in out_mails:
+            self.wftool.doActionFor(mail, 'send')
+            self._putMailInPast(mail, 500)
+
+        nb_threads = len(list(self.archiver.getThreadsToArchive()))
+        # only one thread is flagged to archive before cleaning is done through
+        # auto triggers
+        self.assertEquals(nb_threads, 1)
+
+        # archive them (with autho triggering first)
+        nb_archived_mails = self.archiver.archive()
+        self.assertEquals(nb_archived_mails, 8)
+
+        # check they are archived:
+        path_pattern = "mailboxes/test-mailbox-group/test-mailbox/%s.xml"
+
+        for i, mail in in_mails:
+            filename = path_pattern % mail.getId()
+            filepath = os.path.join(self.tmp_archive_dir, filename)
+            self.assert_(os.path.exists(filepath),
+                         "%s export was not created" % filepath)
+            tree = lxml.etree.parse(filepath)
+            object = tree.xpath('/object')[0]
+            self.assertEquals(object.get('portal_type'), 'Incoming Email')
+            title = tree.xpath("//f[@id='Title']")[0]
+            self.assertEquals(title.get('v'), 'Test mail %d' % i)
+
+        for i, mail in out_mails:
+            filename = path_pattern % mail.getId()
+            filepath = os.path.join(self.tmp_archive_dir, filename)
+            self.assert_(os.path.exists(filepath),
+                         "%s export was not created" % filepath)
+            tree = lxml.etree.parse(filepath)
+            object = tree.xpath('/object')[0]
+            self.assertEquals(object.get('portal_type'), 'Outgoing Email')
+            title = tree.xpath("//f[@id='Title']")[0]
+            self.assertEquals(title.get('v'), 'Re: Test mail %d' % (i / 2))
+
+        # check that trashed mails were not archived
+        for i, mail in trashed_in_mails:
+            filename = path_pattern % mail.getId()
+            filepath = os.path.join(self.tmp_archive_dir, filename)
+            self.failIf(os.path.exists(filepath),
+                        "%s export should not have been created" % filepath)
+
+        # check they are all deleted:
+        archived_ids = set(m.getId()
+                           for _, m in in_mails + out_mails + trashed_in_mails)
+        remaining_ids = set(self.mb.objectIds())
+        self.assertEquals(archived_ids & remaining_ids, set())
+
+        # check that the remaining mails were not archived:
+        all_ids = set(m.getId() for m in self.incoming_mails +
+                                         self.outgoing_mails)
+        self.assertEquals(remaining_ids, all_ids - archived_ids)
+
+        # check that the relation tool no longer have reference to archived
+        # mails (nor deleted mails):
+        rtool = getToolByName(self.portal, 'portal_relations')
+        g = rtool.getGraph(RELATION_GRAPH_ID)
+        for _, mail in in_mails + out_mails + trashed_in_mails:
             references = g.getRelationsFor(int(mail.getDocid()), IS_REPLY_TO)
             self.assertEquals(references, ())
             replies = g.getRelationsFor(int(mail.getDocid()), HAS_REPLY)

@@ -10,10 +10,13 @@ New features:
   of closing the related incoming mail.
 - Reactivating a reply has the effect of putting the related incoming
   back in 'answering' state
+- trashed incoming incoming mails are now cleaned at archive time (instead of
+  being archived)
 Bug fixes:
 ~~~~~~~~~~
 - mantis:4704: removed close transition on the recevied state
 - mantis:4590: comments were not recorded on send_reply wf transition
+- bugs fixed in the archiver (mainly wrong catalog requests)
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
