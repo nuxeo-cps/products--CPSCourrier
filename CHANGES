@@ -18,6 +18,8 @@ Bug fixes:
 - mantis:4704: removed close transition on the recevied state
 - mantis:4590: comments were not recorded on send_reply wf transition
 - bugs fixed in the archiver (mainly wrong catalog requests)
+- mantis:4603: the mailbox addresses are now automatically stripped to avoid
+  user input errors
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

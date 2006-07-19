@@ -39,6 +39,7 @@
   <property name="label">cpscourrier_to_label</property>
   <property name="label_edit">cpscourrier_to_label</property>
   <property name="is_i18n">True</property>
+  <property name="auto_strip">True</property>
   <property name="width">70</property>
   <property name="height">5</property>
  </widget>

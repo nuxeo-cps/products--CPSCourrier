@@ -67,6 +67,7 @@ Layout for searching an answer in existing outgoing mails
  <!-- here for preparation only -->
  <widget name="q_review_state" meta_type="Lines Widget">
    <property name="hidden_layout_modes">search_results edit</property>
+   <property name="auto_strip">True</property>
    <property name="fields">
      <element value="filter_review_state" />
    </property>

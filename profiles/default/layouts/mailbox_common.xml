@@ -52,6 +52,7 @@
     <element value="view"/>
   </property>
   <property name="is_i18n">True</property>
+  <property name="auto_strip">True</property>
   <property name="width">35</property>
  </widget>
  <widget name="priority" meta_type="Select Widget">

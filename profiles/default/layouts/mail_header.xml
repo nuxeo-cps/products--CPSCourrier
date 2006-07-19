@@ -36,6 +36,7 @@
   <property name="is_required">True</property>
   <property name="label">cpscourrier_to_label</property>
   <property name="is_i18n">True</property>
+  <property name="auto_strip">True</property>
   <property name="hidden_layout_modes">
     <element value="create"/>
     <element value="edit"/>
