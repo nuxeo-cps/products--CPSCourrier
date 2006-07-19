@@ -105,6 +105,18 @@
   </property>
  </widget>
 
+ <widget name="revision" meta_type="Revision Widget">
+  <property name="fields"/>
+  <property name="label">label_revision</property>
+  <property name="label_edit">label_revision</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_readonly_layout_modes"/>
+  <property
+     name="hidden_if_expr">python:getattr(proxy, 'portal_type', '').startswith('Incoming ')</property>
+ </widget>
+
  <table>
   <row>
    <cell name="object"/>
@@ -129,6 +141,9 @@
   </row>
   <row>
    <cell name="review_state"/>
+  </row>
+  <row>
+   <cell name="revision"/>
   </row>
  </table>
 </object>

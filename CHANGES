@@ -12,6 +12,7 @@ New features:
   back in 'answering' state
 - trashed incoming incoming mails are now cleaned at archive time (instead of
   being archived)
+- new! the revision widget
 Bug fixes:
 ~~~~~~~~~~
 - mantis:4704: removed close transition on the recevied state
