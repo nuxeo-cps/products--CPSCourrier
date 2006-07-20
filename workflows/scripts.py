@@ -417,7 +417,8 @@ def forward_mail(proxy, mto, comment=''):
 
     attachments = _extract_attachments(proxy)
 
-    return send_mail(proxy, mto, mfrom, subject, body, attachments, encoding)
+    return send_mail(proxy, mto, mfrom, subject, body, attachments=attachments,
+                     encoding=encoding)
 
 HTML_BODY_WRAPPER = """\
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -432,7 +433,7 @@ HTML_BODY_WRAPPER = """\
 # make emacs fontifier happy
 dummy = """ " """
 
-def compute_reply_body(proxy, plain_text=True,additionnal_info=''):
+def compute_reply_body(proxy, plain_text=True, additionnal_info=''):
     """Compute the body of a sent outgoing mail
 
     The content of the reply is build from the proxy quoting the original mail
@@ -485,6 +486,7 @@ def send_reply(proxy, text_only=False, additionnal_info='', sci_kw=None):
     encoding = tstool.default_charset
     doc = proxy.getContent()
     mto = doc['mail_to']
+    mcc = doc['mail_cc']
     mfrom = doc['mail_from']
     subject = doc['Title']()
 
@@ -499,13 +501,13 @@ def send_reply(proxy, text_only=False, additionnal_info='', sci_kw=None):
     doc._edit(EffectiveDate=DateTime())
 
     # send mail at last to avoid side effect in case of uncatched exception
-    res = send_mail(doc, mto, mfrom, subject, body,
+    res = send_mail(doc, mto, mfrom, subject, body, mcc=mcc,
                    attachments=attachments, encoding=encoding,
                    plain_text=plain_text)
 
     return res
 
-def send_mail(context, mto, mfrom, subject, body, attachments=(),
+def send_mail(context, mto, mfrom, subject, body, mcc=(), attachments=(),
               encoding='iso-8859-15', plain_text=True):
     """Send a mail
 
@@ -542,9 +544,13 @@ def send_mail(context, mto, mfrom, subject, body, attachments=(),
     else:
         msg = main_msg
 
+    COMMASPACE = ', '
+
     msg['Subject'] = subject
     msg['From'] = mfrom
-    msg['To'] = mto
+    msg['To'] = isinstance(mto, basestring) and mto or COMMASPACE.join(mto)
+    if mcc:
+        msg['Cc'] = isinstance(mcc, basestring) and mcc or COMMASPACE.join(mcc)
     msg.preamble = subject
     # Guarantees the message ends in a newline
     msg.epilogue = ''

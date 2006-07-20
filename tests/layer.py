@@ -149,11 +149,13 @@ class IntegrationTestCase(CommonIntegrationFixture, CPSTestCase):
             'in_mail1': {
                 'Title': 'Test mail 1',
                 'mail_to': ['foo@foo.com'],
+                'mail_cc': ['foo1@foo.com', 'foo2@foo.com'],
                 'mail_from': 'bar@foo.com',
             },
             'in_mail2': {
                 'Title': 'Re: Test mail 1',
                 'mail_to': ['bar2@foo.com', 'toto@email.com'],
+                'mail_cc': ['bar1@foo.com', 'bar2@foo.com'],
                 'mail_from': 'foo@foo.com',
             },
         }

@@ -395,6 +395,7 @@ On %s, bar@foo.com wrote:
             out_mail1.MailHost = FakeMailHost()
             out_mail1_doc_edit = out_mail1.getEditableContent()
             out_mail1_doc_edit.edit(
+                mail_cc=["bar2@foo.com"],
                 content="Please stop trying to fish us!",
                 content_format='text',
                 form_of_address='regards',
@@ -409,6 +410,7 @@ Content-Transfer-Encoding: quoted-printable
 Subject: Re: Test mail 1
 From: test_mailbox@cpscourrier.com
 To: bar@foo.com
+Cc: bar2@foo.com
 
 Please stop trying to fish us!
 
@@ -459,6 +461,7 @@ On %s, bar@foo.com wrote:
             out_mail1.MailHost = FakeMailHost()
             out_mail1_doc_edit = out_mail1.getEditableContent()
             out_mail1_doc_edit.edit(
+                mail_cc=["Toto Truc <toto-truc@fake.org>", "og@nuxeo.com"],
                 content="<em>Please</em> stop trying to fish us!",
                 content_format='html',
                 form_of_address='regards',
@@ -473,6 +476,7 @@ Content-Transfer-Encoding: quoted-printable
 Subject: Re: Test mail 1
 From: test_mailbox@cpscourrier.com
 To: bar@foo.com
+Cc: Toto Truc <toto-truc@fake.org>, og@nuxeo.com
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
