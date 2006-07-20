@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_schemas" meta_type="CPS Schemas Tool">
+ <object name="metadata_protected_incoming" meta_type="CPS Schema"/>
  <object name="incoming_email" meta_type="CPS Schema"/>
  <object name="outgoing_email" meta_type="CPS Schema"/>
 </object>
