@@ -10,7 +10,6 @@
  <!-- Schemas and layout -->
  <property name="schemas">
   <element value="metadata_protected_incoming"/>
-  <element value="metadata"/>
   <element value="common"/>
   <element value="mail_common" />
   <element value="incoming_email" />

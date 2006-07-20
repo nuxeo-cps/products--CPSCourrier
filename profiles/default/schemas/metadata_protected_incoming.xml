@@ -1,6 +1,37 @@
 <?xml version="1.0"?>
 <object name="metadata_protected_incoming" meta_type="CPS Schema">
-  <!-- write protected metadata fields for incoming mails -->
+ <field name="Contributors" meta_type="CPS String List Field">
+  <property
+     name="write_process_expr">python: modules["Products.CPSDefault.utils"].computeContributors(portal, value)</property>
+ </field>
+ <field name="Coverage" meta_type="CPS String Field"/>
+ <field name="CreationDate" meta_type="CPS DateTime Field">
+  <property name="write_ignore_storage">True</property>
+ </field>
+ <field name="Creator" meta_type="CPS String Field">
+  <property name="write_ignore_storage">True</property>
+ </field>
+ <field name="Description" meta_type="CPS String Field">
+  <property name="is_searchabletext">True</property>
+ </field>
+ <field name="EffectiveDate" meta_type="CPS DateTime Field"/>
+ <field name="ExpirationDate" meta_type="CPS DateTime Field"/>
+ <field name="Format" meta_type="CPS String Field">
+  <property name="write_ignore_storage">True</property>
+ </field>
+ <field name="Language" meta_type="CPS String Field">
+  <property
+     name="default_expr">portal/translation_service/getSelectedLanguage|nothing</property>
+  <property name="write_ignore_storage">True</property>
+ </field>
+ <field name="ModificationDate" meta_type="CPS DateTime Field">
+  <property name="write_ignore_storage">True</property>
+ </field>
+ <field name="Relation" meta_type="CPS String Field"/>
+ <field name="Rights" meta_type="CPS String Field"/>
+ <field name="Source" meta_type="CPS String Field"/>
+ <field name="Subject" meta_type="CPS String List Field"/>
+ <!-- write protected metadata fields for incoming mails -->
   <field name="Title" meta_type="CPS String Field">
     <property name="is_searchabletext">True</property>
     <property name="acl_write_roles">Manager</property>
