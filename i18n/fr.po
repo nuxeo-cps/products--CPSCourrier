@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-07-12 12:02default\n"
+"POT-Creation-Date: 2006-07-20 14:05default\n"
 "PO-Revision-Date: 2006-07-12 12:17+0200\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -386,7 +386,10 @@ msgid "cpscourrier_from_label"
 msgstr "Émetteur"
 
 msgid "cpscourrier_to_label"
-msgstr "Destinataire"
+msgstr "Destinataire(s)"
+
+msgid "cpscourrier_cc_label"
+msgstr "Destinataire(s) en copie"
 
 msgid "cpscourrier_msgid_label"
 msgstr "Numéro de référence"

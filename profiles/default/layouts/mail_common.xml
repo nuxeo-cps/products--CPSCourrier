@@ -43,6 +43,21 @@
   <property name="width">70</property>
   <property name="height">5</property>
  </widget>
+ <widget name="cc" meta_type="Lines Widget">
+  <property name="fields">
+   <element value="mail_cc"/>
+  </property>
+  <property name="hidden_layout_modes">
+   <element value="view"/>
+  </property>
+  <property name="is_required">False</property>
+  <property name="label">cpscourrier_cc_label</property>
+  <property name="label_edit">cpscourrier_cc_label</property>
+  <property name="is_i18n">True</property>
+  <property name="auto_strip">True</property>
+  <property name="width">70</property>
+  <property name="height">5</property>
+ </widget>
  <widget name="content" meta_type="Text Widget">
   <property name="fields">
    <element value="content"/>
@@ -81,6 +96,9 @@
    </row>
    <row>
      <cell name="to"/>
+   </row>
+   <row>
+     <cell name="cc"/>
    </row>
    <row>
      <cell name="content"/>

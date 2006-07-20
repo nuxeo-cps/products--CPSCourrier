@@ -13,6 +13,7 @@ New features:
 - trashed incoming incoming mails are now cleaned at archive time (instead of
   being archived)
 - new! the revision widget
+- added CC fields on email documents
 Bug fixes:
 ~~~~~~~~~~
 - mantis:4704: removed close transition on the recevied state

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-07-12 12:02default\n"
+"POT-Creation-Date: 2006-07-20 14:05default\n"
 "PO-Revision-Date: 2006-07-12 12:17+0200\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -331,37 +331,29 @@ msgstr "Outgoing mail"
 msgid "portal_type_OutgoingMail_description"
 msgstr "Outgoing message that holds an answer to some incoming mail"
 
-#, fuzzy
 msgid "portal_type_IncomingEmail_title"
-msgstr "Incoming mail"
+msgstr "Incoming email"
 
-#, fuzzy
 msgid "portal_type_IncomingEmail_description"
-msgstr "Incoming electronic or digitalised message"
+msgstr "Incoming electronic message"
 
-#, fuzzy
 msgid "portal_type_OutgoingEmail_title"
-msgstr "Outgoing mail"
+msgstr "Outgoing email"
 
-#, fuzzy
 msgid "portal_type_OutgoingEmail_description"
-msgstr "Outgoing message that holds an answer to some incoming mail"
+msgstr "Outgoing electronic message that holds an answer to some incoming email"
 
-#, fuzzy
 msgid "portal_type_IncomingPmail_title"
-msgstr "Incoming mail"
+msgstr "Incoming paper mail"
 
-#, fuzzy
 msgid "portal_type_IncomingPmail_description"
-msgstr "Incoming electronic or digitalised message"
+msgstr "Incoming paper-based message (possibly digitalised)"
 
-#, fuzzy
 msgid "portal_type_OutgoingPmail_title"
-msgstr "Outgoing mail"
+msgstr "Outgoing paper mail"
 
-#, fuzzy
 msgid "portal_type_OutgoingPmail_description"
-msgstr "Outgoing message that holds an answer to some incoming mail"
+msgstr "Outgoing message that holds an answer to some incoming paper mail"
 
 msgid "portal_type_Dashboard_title"
 msgstr "Dashboard"
@@ -392,6 +384,9 @@ msgstr "From"
 
 msgid "cpscourrier_to_label"
 msgstr "To"
+
+msgid "cpscourrier_cc_label"
+msgstr "Cc"
 
 msgid "cpscourrier_msgid_label"
 msgstr "Reference number"

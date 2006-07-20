@@ -14,5 +14,9 @@
     <property name="is_searchabletext">True</property>
     <property name="acl_write_roles">Manager</property>
   </field>
+  <field name="mail_cc" meta_type="CPS String List Field">
+    <property name="is_searchabletext">True</property>
+    <property name="acl_write_roles">Manager</property>
+  </field>
 </object>
 
