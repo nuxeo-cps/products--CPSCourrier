@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!-- read only header for the mailboxes -->
 <object name="mailbox_header" meta_type="CPS Layout">
- <widget name="Addresses" meta_type="Lines Widget">
+ <widget name="Addresses" meta_type="Email List Widget">
   <property name="fields">
    <element value="mailbox_addresses"/>
   </property>

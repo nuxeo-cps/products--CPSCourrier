@@ -42,7 +42,7 @@
   <property name="css_class">ddescription</property>
   <property name="width">35</property>
  </widget>
- <widget name="mailbox_addresses" meta_type="Lines Widget">
+ <widget name="mailbox_addresses" meta_type="Email List Widget">
   <property name="fields">
    <element value="mailbox_addresses"/>
   </property>
@@ -53,6 +53,7 @@
   </property>
   <property name="is_i18n">True</property>
   <property name="auto_strip">True</property>
+  <property name="allow_extended_email">False</property>
   <property name="width">35</property>
  </widget>
  <widget name="priority" meta_type="Select Widget">
