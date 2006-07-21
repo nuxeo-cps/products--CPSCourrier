@@ -15,10 +15,11 @@
   <property name="is_i18n">True</property>
   <property name="display_width">70</property>
  </widget>
- <widget name="from" meta_type="String Widget">
+ <widget name="from" meta_type="Email Widget">
   <property name="fields">
    <element value="mail_from"/>
   </property>
+  <property name="allow_extended_email">True</property>
   <property name="hidden_layout_modes">
    <element value="view"/>
   </property>
@@ -28,7 +29,7 @@
   <property name="is_i18n">True</property>
   <property name="display_width">70</property>
  </widget>
- <widget name="to" meta_type="Lines Widget">
+ <widget name="to" meta_type="Email List Widget">
   <property name="fields">
    <element value="mail_to"/>
   </property>
@@ -40,10 +41,11 @@
   <property name="label_edit">cpscourrier_to_label</property>
   <property name="is_i18n">True</property>
   <property name="auto_strip">True</property>
+  <property name="allow_extended_email">True</property>
   <property name="width">70</property>
   <property name="height">5</property>
  </widget>
- <widget name="cc" meta_type="Lines Widget">
+ <widget name="cc" meta_type="Email List Widget">
   <property name="fields">
    <element value="mail_cc"/>
   </property>
@@ -55,6 +57,7 @@
   <property name="label_edit">cpscourrier_cc_label</property>
   <property name="is_i18n">True</property>
   <property name="auto_strip">True</property>
+  <property name="allow_extended_email">True</property>
   <property name="width">70</property>
   <property name="height">5</property>
  </widget>
