@@ -27,5 +27,8 @@
   </field>
   <field name="courrier_msgid" meta_type="CPS String Field">
     <property name="acl_write_roles">Manager</property>
+    <!--  instantiate with computed id that was used as the Zope local id
+    and do it just once -->
+    <property name="write_process_expr">python:not value and proxy and proxy.getId() or value</property>
   </field>
 </object>

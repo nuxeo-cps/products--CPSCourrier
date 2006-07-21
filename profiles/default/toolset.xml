@@ -4,4 +4,6 @@
            class="Products.CPSRelation.relationtool.RelationTool"/>
  <required tool_id="portal_bayes"
            class="Products.CPSBayes.CPSBayesTool.CPSBayesTool"/>
+ <required tool_id="portal_uid"
+           class="Products.CPSUid.uidtool.UidTool"/>
 </tool-setup>

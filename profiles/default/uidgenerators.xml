@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<object name="portal_uid" meta_type="CPS Uid Tool">
+ <object name="cpscourrier" meta_type="Uid Generator"/>
+</object>

@@ -6,6 +6,12 @@
   <dependency step="toolset"/>
   Import relation tool and relation graphs.
  </import-step>
+ <import-step id="uid" version="20060213-01"
+              handler="Products.CPSUid.exportimport.importUidTool"
+              title="Uid Tool">
+  <dependency step="toolset"/>
+  Import uid tool and uid generators
+ </import-step>
  <import-step id="bayes" version="20060302-01"
               handler="Products.CPSBayes.exportimport.importCPSBayes"
               title="CPSBayes">

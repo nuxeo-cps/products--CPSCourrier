@@ -1,6 +1,7 @@
 Requires:
 ~~~~~~~~~
 - CPSCore >= 3.33.0
+- CPSUid >= 0.0.2
 New features:
 ~~~~~~~~~~~~~
 - Profiles fork to handle paper and/or electronic mail

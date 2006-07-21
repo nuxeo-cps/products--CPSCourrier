@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- properties should change -->
+<object name="cpscourrier" meta_type="Uid Generator">
+ <property name="generation_expression">
+  python:'m-%04d-%02d-%02d-%06d' % (year, month, day, number)
+ </property>
+ <property name="generation_criteria">
+  <element value="year"/>
+  <element value="month"/>
+ </property>
+ <property name="generation_keywords">
+  <element value="day"/>
+ </property>
+ <property name="counter_start">1</property>
+</object>
+
