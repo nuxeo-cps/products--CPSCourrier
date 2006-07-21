@@ -16,13 +16,13 @@
   <element value="flexible_content" />
  </property>
  <property name="layouts">
-  <element value="mail_header"/>
-  <element value="mail_common"/>
-  <element value="outgoing_mail"/>
+  <element value="email_header"/>
+  <element value="email_common"/>
+  <element value="outgoing_email"/>
   <element value="mail_flexible"/>
  </property>
  <property name="layout_clusters">
-  <element value="header:mail_header"/>
+  <element value="header:email_header"/>
   <element value="metadata:mail_metadata"/>
  </property>
  <property name="flexible_layouts">

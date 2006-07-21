@@ -1,4 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_layouts">
+ <object name="email_header" meta_type="CPS Layout"/>
+ <object name="email_common" meta_type="CPS Layout"/>
  <object name="outgoing_email" meta_type="CPS Layout"/>
 </object>

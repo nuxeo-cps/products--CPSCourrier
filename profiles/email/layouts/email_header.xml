@@ -147,7 +147,7 @@
    <cell name="cc"/>
   </row>
   <row>
-   <cell name="msgid"/>
+   <cell name="courrier_msgid"/>
   </row>
   <row>
    <cell name="creation_date"/>
