@@ -87,7 +87,7 @@ def up_0160_0170_mail_into_email(portal):
     if cat.meta_type == 'CPS Lucene Catalog Tool':
         n_proxies = luceneUpdateProxiesPType(cat, old_new)
     else:
-        n_proxies = zCatalogUpdateProxiesPtype(cat, old_new)
+        n_proxies = zCatalogUpdateProxiesPType(cat, old_new)
     logger.info("Changed portal_type for %d proxies", n_proxies)
 
     # upgrading repository documents
