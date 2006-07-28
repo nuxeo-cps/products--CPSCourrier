@@ -61,7 +61,7 @@ def bayes_guess_subject(proxy):
     doc.edit(proxy=proxy, Subject=categories)
     # event is needed for statistics to keep Subjects up to date
     evtool = getPublicEventService(proxy)
-    evtool.notifyEvent('workflow_modify', proxy, {})
+    evtool.notifyEvent('cpscourrier_subject_guessed', proxy, {})
 
 
 def bayes_learn_subject(proxy):
