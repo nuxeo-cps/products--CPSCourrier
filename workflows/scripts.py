@@ -37,6 +37,7 @@ from Acquisition import aq_parent, aq_inner
 from AccessControl import getSecurityManager
 
 from Products.CMFCore.utils import getToolByName
+from Products.CPSCore.EventServiceTool import getPublicEventService
 from Products.CPSCourrier.utils import html_to_text
 from Products.CPSCourrier.relations import make_reply_to
 from Products.CPSCourrier.config import (
@@ -58,6 +59,9 @@ def bayes_guess_subject(proxy):
     categories = [category for category, probability in guessed
                            if probability >= BAYES_MIN_PROB]
     doc.edit(proxy=proxy, Subject=categories)
+    # event is needed for statistics to keep Subjects up to date
+    evtool = getPublicEventService(proxy)
+    evtool.notifyEvent('workflow_modify', proxy, {})
 
 
 def bayes_learn_subject(proxy):
