@@ -26,6 +26,7 @@
     <property name="default_expr">string:1</property>
   </field>
   <field name="courrier_msgid" meta_type="CPS String Field">
+    <property name="is_searchabletext">True</property>
     <property name="acl_write_roles">Manager</property>
     <!--  instantiate with computed id that was used as the Zope local id
     and do it just once -->
