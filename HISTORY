@@ -1,4 +1,36 @@
 *******************************************
+** CPSCourrier V0.17.0 [R1 build 2006/07/31-22:34 by gracinet]
+** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 47695
+Requires:
+~~~~~~~~~
+- CPSCore >= 3.33.0
+- CPSUid >= 0.0.2
+New features:
+~~~~~~~~~~~~~
+- Profiles fork to handle paper and/or electronic mail
+- The send reply form accepts additional customisable input elements.
+  Override cpscourrier_send_reply_opt_inputs to leverage it.
+- An optional final_reply input in send form has the effect
+  of closing the related incoming mail.
+- Reactivating a reply has the effect of putting the related incoming
+  back in 'answering' state
+- trashed incoming incoming mails are now cleaned at archive time (instead of
+  being archived)
+- new! the revision widget
+- added CC fields on email documents
+- added a new Injector role that can almost only create new messages. To be put in ZMI.
+Bug fixes:
+~~~~~~~~~~
+- mantis:4704: removed close transition on the recevied state
+- mantis:4590: comments were not recorded on send_reply wf transition
+- bugs fixed in the archiver (mainly wrong catalog requests)
+- mantis:4603: the mailbox addresses are now automatically stripped to avoid
+  user input errors
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCourrier V0.16.1 [R1 build 2006/07/05-07:43 by gracinet]
 ** SVN URL: http://svn/pub/CPS3/products/CPSCourrier/trunk Revision: 46928
 Requires:
