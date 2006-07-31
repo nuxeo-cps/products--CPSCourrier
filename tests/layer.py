@@ -108,6 +108,7 @@ class CPSCourrierFunctionalLayerClass(CommonIntegrationFixture,
                  'member1': 'Contributor',
                  'member2': 'Contributor',
                  'member3': 'Contributor',
+                 'injector': 'Injector',
                  'wsmanager': 'LocalManager',}
         for prefix, role in roles.items():
             for id, folder in ((self.MBG_ID, self.mbg,),

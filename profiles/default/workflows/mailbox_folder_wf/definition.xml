@@ -24,6 +24,7 @@
    <permission-role>Supervisor</permission-role>
    <permission-role>Contributor</permission-role>
    <permission-role>Reader</permission-role>
+   <permission-role>Injector</permission-role>
   </permission-map>
  <!-- stack representing default roadmap.
       Doesn't allow any role on the mailbox: made to be copied -->
@@ -33,12 +34,18 @@
 		   stack_type="Courrier Stack">
    <manager-stack-role name="LocalManager"/>
    <manager-stack-role name="Supervisor"/>
+    <!-- Necessary because wftool will check that we can manage this
+    stack at mail creation time therein. It is confused by
+    state_behavior from incoming_mail_wf -->
+   <manager-stack-role name="Injector"/>
    <manager-stack-role name="Manager"/>
    <empty-stack-manage-guard>
     <guard-role>Owner</guard-role>
     <guard-role>LocalManager</guard-role>
     <guard-role>Supervisor</guard-role>
     <guard-role>Manager</guard-role>
+    <!-- See comment above -->
+    <guard-role>Injector</guard-role>
     <guard-role></guard-role>
    </empty-stack-manage-guard>
    <edit-stack-element-guard>

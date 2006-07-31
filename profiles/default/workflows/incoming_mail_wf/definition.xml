@@ -179,6 +179,8 @@
   <workflow-reset-on-workflow-variable variable_id="Pilots"/>
   <permission-map name="Modify portal content" acquired="False">
    <permission-role>Manager</permission-role>
+   <!-- for bayes_guess -->
+   <permission-role>Injector</permission-role>
   </permission-map>
  </state>
  <state state_id="trash" title="">
@@ -205,7 +207,8 @@
     <guard-role>Supervisor</guard-role>
     <guard-role>LocalManager</guard-role>
     <guard-role>Manager</guard-role>
-    <guard-role></guard-role>
+    <!-- Necessary at creation time -->
+    <guard-role>Injector</guard-role>
    </empty-stack-manage-guard>
    <edit-stack-element-guard>
    </edit-stack-element-guard>
@@ -251,6 +254,7 @@
              before_script="" after_script="bayes_guess_subject">
   <guard>
    <guard-role>Manager</guard-role>
+   <guard-role>Injector</guard-role>
   </guard>
   <transition-behavior behavior_id="initial-create"/>
   <transition-behavior behavior_id="workflow-reset"/>

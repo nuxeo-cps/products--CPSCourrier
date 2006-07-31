@@ -15,6 +15,7 @@ New features:
   being archived)
 - new! the revision widget
 - added CC fields on email documents
+- added a new Injector role that can almost only create new messages. To be put in ZMI.
 Bug fixes:
 ~~~~~~~~~~
 - mantis:4704: removed close transition on the recevied state

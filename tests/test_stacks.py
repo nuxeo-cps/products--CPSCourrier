@@ -418,6 +418,7 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
 
 
 class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
+    # This has become a full workflow functional test case
 
     def afterSetUp(self):
         CourrierFunctionalTestCase.afterSetUp(self)
@@ -428,6 +429,23 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
     def beforeTearDown(self):
         self.mb.manage_delObjects([self.incoming_id])
         self.logout()
+
+    def test_injector_create(self):
+        self.flogin('injector', self.mb)
+
+        # sanity check
+        mtool = getToolByName(self.mb, 'portal_membership')
+        roles = mtool.getMergedLocalRoles(self.mb)
+        self.assert_('user:injector_ftest-mailbox' in roles)
+        self.failIf('Manager' in  roles['user:injector_ftest-mailbox'])
+
+        # injector can create
+        mail_id = self.wftool.invokeFactoryFor(self.mb, 'Incoming Email',
+                                               'injected',
+                                               initial_transition='create')
+        # cleanup
+        self.login('manager')
+        self.mb.manage_delObjects(['injected'])
 
     def test_handle_stack_manage(self):
         stack_mod = self.incoming.cpscourrier_stack_modify
