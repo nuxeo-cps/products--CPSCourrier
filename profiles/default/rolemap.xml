@@ -3,6 +3,7 @@
 
   <roles>
     <role name="Pilot"/>
+    <role name="Injector"/>
     <role name="LocalManager"/>
     <role name="Supervisor"/>
   </roles>
