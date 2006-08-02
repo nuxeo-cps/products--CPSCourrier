@@ -9,7 +9,6 @@ l10n = context.translation_service
 vocitems = [(vkey, vkey) for vkey in ('pending', # not in CPSCourrier by default
                                       'received',
                                       'handled',
-                                      'handled',
                                       'trash',
                                       'answering',
                                       'answered',
