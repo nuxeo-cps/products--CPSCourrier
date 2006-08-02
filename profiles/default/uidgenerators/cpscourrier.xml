@@ -2,7 +2,7 @@
 <!-- properties should change -->
 <object name="cpscourrier" meta_type="Uid Generator">
  <property name="generation_expression">
-  python:'m-%04d-%02d-%02d-%06d' % (year, month, day, number)
+  python:'M%02X-%04d%02d%02d-%06d' % (random()*256, year, month, day, number)
  </property>
  <property name="generation_criteria">
   <element value="year"/>
