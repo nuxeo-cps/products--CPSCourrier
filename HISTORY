@@ -1,4 +1,20 @@
 *******************************************
+** CPSCourrier V0.17.1 [R1 build 2006/08/03-09:43 by fermigier]
+** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 47875
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Minor fixes.
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCourrier V0.17.0 [R1 build 2006/07/31-22:34 by gracinet]
 ** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 47695
 Requires:
