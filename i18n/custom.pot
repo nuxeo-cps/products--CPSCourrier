@@ -549,6 +549,9 @@ msgstr ""
 msgid "help_batch_workflow_delete"
 msgstr ""
 
+msgid "create_pending"
+msgstr ""
+
 #
 # Workflow states
 #
