@@ -6,7 +6,8 @@ New features:
 -
 Bug fixes:
 ~~~~~~~~~~
--
+- Destruction of proxy caused a Site Error in non-CPSCourrier instances
+  if CPSCourrier present in Products
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

@@ -49,6 +49,9 @@ def removedProxy(ob, event):
                  (ob, docid))
     rtool = getToolByName(ob, 'portal_relations', None)
     if rtool is not None:
-        rtool.removeAllRelationsFor(RELATION_GRAPH_ID, int(docid))
-
+        try:
+            rtool.removeAllRelationsFor(RELATION_GRAPH_ID, int(docid))
+        except KeyError, err:
+            if str(err) != "'%s'" % RELATION_GRAPH_ID:
+                raise
 
