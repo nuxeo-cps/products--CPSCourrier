@@ -34,6 +34,6 @@
  <!-- write protected metadata fields for incoming mails -->
   <field name="Title" meta_type="CPS String Field">
     <property name="is_searchabletext">True</property>
-    <property name="acl_write_roles">Manager</property>
+    <property name="acl_write_roles">Manager; Injector</property>
   </field>
 </object>
