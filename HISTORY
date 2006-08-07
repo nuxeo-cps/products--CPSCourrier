@@ -1,4 +1,21 @@
 *******************************************
+** CPSCourrier V0.17.2 [R1 build 2006/08/07-16:47 by fermigier]
+** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 48074
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+-
+Bug fixes:
+~~~~~~~~~~
+- Destruction of proxy caused a Site Error in non-CPSCourrier instances
+  if CPSCourrier present in Products
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+-
+
+*******************************************
 ** CPSCourrier V0.17.1 [R1 build 2006/08/03-09:43 by fermigier]
 ** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 47875
 Requires:
