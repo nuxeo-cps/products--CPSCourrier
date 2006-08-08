@@ -16,10 +16,12 @@
   <element value="flexible_content"/>
  </property>
  <property name="layouts">
+  <element value="pmail_common"/>
+  <element value="pmail_header"/>
   <element value="mail_flexible"/>
  </property>
  <property name="layout_clusters">
-   <!-- Todo: add layouts for the header cluster -->
+   <element value="header:pmail_header"/>
    <element value="metadata:mail_metadata"/>
  </property>
  <property name="flexible_layouts">

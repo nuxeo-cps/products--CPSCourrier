@@ -1,4 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_layouts">
  <object name="outgoing_pmail" meta_type="CPS Layout"/>
+ <object name="pmail_common" meta_type="CPS Layout"/>
+ <object name="pmail_header" meta_type="CPS Layout"/>
 </object>

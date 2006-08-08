@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!-- common view for all mail documents -->
+<object name="email_common" meta_type="CPS Layout">
+ <property name="layout_view_method">layout_mail_view</property>
+ <widget name="object" meta_type="String Widget">
+  <property name="fields">
+   <element value="Title"/>
+  </property>
+  <property name="hidden_layout_modes">
+   <element value="view"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_object_label</property>
+  <property name="label_edit">cpscourrier_object_label</property>
+  <property name="is_i18n">True</property>
+  <property name="display_width">70</property>
+ </widget>
+ <widget name="from" meta_type="String Widget">
+  <property name="fields">
+   <element value="mail_from"/>
+  </property>
+  <property name="hidden_layout_modes">
+   <element value="view"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_from_label</property>
+  <property name="label_edit">cpscourrier_from_label</property>
+  <property name="is_i18n">True</property>
+  <property name="display_width">70</property>
+ </widget>
+ <widget name="to" meta_type="Text Widget">
+  <property name="fields">
+   <element value="mail_to"/>
+  </property>
+  <property name="hidden_layout_modes">
+   <element value="view"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_to_label</property>
+  <property name="label_edit">cpscourrier_to_label</property>
+  <property name="is_i18n">True</property>
+  <property name="width">70</property>
+  <property name="height">5</property>
+ </widget>
+ <widget name="cc" meta_type="Lines Widget">
+  <property name="fields">
+   <element value="mail_cc"/>
+  </property>
+  <property name="hidden_layout_modes">
+   <element value="view"/>
+  </property>
+  <property name="is_required">False</property>
+  <property name="label">cpscourrier_cc_label</property>
+  <property name="label_edit">cpscourrier_cc_label</property>
+  <property name="is_i18n">True</property>
+  <property name="width">70</property>
+  <property name="height">5</property>
+ </widget>
+ <widget name="content" meta_type="Text Widget">
+  <property name="fields">
+   <element value="content"/>
+   <element value="content_position"/>
+   <element value="content_format"/>
+  </property>
+  <property name="label_edit">cpsdoc_flex_content_label_edit</property>
+  <property name="is_i18n">True</property>
+  <property name="css_class">dcontent</property>
+  <property name="width">72</property>
+  <property name="height">20</property>
+  <property name="file_uploader">False</property>
+  <property name="render_format">text</property>
+  <property name="configurable">format</property>
+ </widget>
+ <widget name="subject" meta_type="Mail Topics Widget">
+  <property name="fields">
+   <element value="Subject"/>
+  </property>
+  <property name="label">cpsdoc_NewsItem_label_related_subjects</property>
+  <property
+     name="label_edit">cpsdoc_NewsItem_label_related_subjects</property>
+  <property name="is_i18n">True</property>
+  <property name="css_class">mailTopics</property>
+  <property name="hidden_empty">False</property>
+  <property name="vocabulary">subject_voc</property>
+  <property name="translated">True</property>
+  <property name="widget_mode_expr">python:portal.portal_membership.checkPermission('Modify portal content', proxy) and 'edit' or 'view'</property>
+ </widget>
+ <table>
+   <row>
+     <cell name="object"/>
+   </row>
+   <row>
+     <cell name="from"/>
+   </row>
+   <row>
+     <cell name="to"/>
+   </row>
+   <row>
+     <cell name="cc"/>
+   </row>
+   <row>
+     <cell name="content"/>
+   </row>
+   <row>
+     <cell name="subject"/>
+   </row>
+  </table>
+ </object>

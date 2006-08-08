@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<object name="email_header" meta_type="CPS Layout">
+ <property name="style_prefix">layout_default_</property>
+
+ <widget name="object" meta_type="String Widget">
+  <property name="fields">
+   <element value="Title"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_object_label</property>
+  <property name="is_i18n">True</property>
+  <property name="css_class">mailObject</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
+ </widget>
+
+ <widget name="from" meta_type="String Widget">
+  <property name="fields">
+   <element value="mail_from"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_from_label</property>
+  <property name="is_i18n">True</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
+ </widget>
+
+ <widget name="to" meta_type="Lines Widget">
+  <property name="fields">
+   <element value="mail_to"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_to_label</property>
+  <property name="is_i18n">True</property>
+  <property name="auto_strip">True</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
+ </widget>
+
+ <widget name="cc" meta_type="Lines Widget">
+  <property name="fields">
+   <element value="mail_cc"/>
+  </property>
+  <property name="is_required">False</property>
+  <property name="label">cpscourrier_cc_label</property>
+  <property name="is_i18n">True</property>
+  <property name="auto_strip">True</property>
+  <property name="hidden_empty">True</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
+ </widget>
+
+ <widget name="msgid" meta_type="String Widget">
+  <property name="fields">
+   <element value="courrier_msgid"/>
+  </property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_msgid_label</property>
+  <property name="is_i18n">True</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+  </property>
+ </widget>
+
+ <widget name="creation_date" meta_type="DateTime Widget">
+  <property name="fields">
+   <element value="CreationDate"/>
+  </property>
+  <property name="label">cpscourrier_creation_date_label</property>
+  <property name="is_i18n">True</property>
+  <property name="view_format">long</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
+ </widget>
+
+ <widget name="timeleft" meta_type="Time Left Widget">
+  <property name="fields">
+   <element value="deadline"/>
+  </property>
+  <property name="label">cpscourrier_timeleft_label</property>
+  <property name="is_i18n">True</property>
+  <property name="is_display_i18n">True</property>
+  <property name="css_class">timeleft</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
+ </widget>
+
+ <widget name="review_state" meta_type="Workflow Variable Widget">
+  <property name="label">cpscourrier_review_state_label</property>
+  <property name="is_i18n">True</property>
+  <property name="wf_var_id">review_state</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
+ </widget>
+
+ <widget name="sending_date" meta_type="DateTime Widget">
+  <property name="fields">
+   <element value="EffectiveDate"/>
+  </property>
+  <property name="label">cpscourrier_sending_date_label</property>
+  <property name="is_i18n">True</property>
+  <property name="hidden_empty">True</property>
+  <property name="view_format">long</property>
+  <property name="hidden_layout_modes">
+    <element value="create"/>
+    <element value="edit"/>
+  </property>
+ </widget>
+
+ <widget name="revision" meta_type="Revision Widget">
+  <property name="fields"/>
+  <property name="label">label_revision</property>
+  <property name="label_edit">label_revision</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_readonly_layout_modes"/>
+  <property
+     name="hidden_if_expr">python:getattr(proxy, 'portal_type', '').startswith('Incoming ')</property>
+ </widget>
+
+ <table>
+  <row>
+   <cell name="object"/>
+  </row>
+  <row>
+   <cell name="from"/>
+  </row>
+  <row>
+   <cell name="to"/>
+  </row>
+  <row>
+   <cell name="cc"/>
+  </row>
+  <row>
+   <cell name="courrier_msgid"/>
+  </row>
+  <row>
+   <cell name="creation_date"/>
+  </row>
+  <row>
+   <cell name="sending_date"/>
+  </row>
+  <row>
+   <cell name="timeleft"/>
+  </row>
+  <row>
+   <cell name="review_state"/>
+  </row>
+  <row>
+   <cell name="revision"/>
+  </row>
+ </table>
+</object>
