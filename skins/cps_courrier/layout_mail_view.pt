@@ -29,6 +29,13 @@
   </tal:block>
   </td><td id="cpscourrierEditablePanel"
            style="width:10em; text-align:left; border:1px solid black;">
+  <h4 tal:define="label editable_cell/widget/label;
+		  i18n editable_cell/widget/is_i18n"
+      tal:condition="label">
+    <tal:block condition="i18n" content="label"
+	       i18n:translate=""/>
+    <tal:block condition="not:i18n" content="label"/>
+  </h4>
   <form action="cpsdocument_edit" method="post" id="editForm"
     enctype="multipart/form-data" class="workflow">
     <tal:block replace="structure editable_cell/widget_rendered" />

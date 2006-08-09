@@ -3,7 +3,7 @@ Requires:
 -
 New features:
 ~~~~~~~~~~~~~
--
+- Subject widget on mail view page now comes with its label in a <h4>
 Bug fixes:
 ~~~~~~~~~~
 -
