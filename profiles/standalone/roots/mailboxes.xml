@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="mailboxes">
+  <object name=".cps_portlets" />
+  <!-- every mailbox must be able to acquire at least one Subscription Container -->
+  <object name=".cps_subscriptions"
+    meta_type="CPS PlaceFull Subscription Container"/>
+</object>

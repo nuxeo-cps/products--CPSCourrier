@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<object name=".cps_portlets">
+ <!-- portlet rendering the mail header
+      XXX: would have been logical to put in default profile but I
+      can't right now because of impact on a project.
+   -->
+<object name="portlet_document_header" meta_type="CPS Portlet"
+   portal_type="Document Portlet"/>
+</object>

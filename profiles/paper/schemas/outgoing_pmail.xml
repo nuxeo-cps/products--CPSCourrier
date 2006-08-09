@@ -16,5 +16,7 @@
   <field name="mail_cc" meta_type="CPS String List Field">
     <property name="is_searchabletext">True</property>
   </field>
+  <!-- GR this one is actually common with outgoing_email -->
+  <field name="template_usage" meta_type="CPS Int Field"/>
 </object>
 

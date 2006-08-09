@@ -16,7 +16,6 @@
   <element value="flexible_content" />
  </property>
  <property name="layouts">
-  <element value="email_header"/>
   <element value="email_common"/>
   <element value="outgoing_email"/>
   <element value="mail_flexible"/>

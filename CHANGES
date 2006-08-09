@@ -6,7 +6,7 @@ New features:
 - Subject widget on mail view page now comes with its label in a <h4>
 Bug fixes:
 ~~~~~~~~~~
--
+- Mail header and thread rendering in standalone profile.
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -
