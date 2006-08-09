@@ -46,6 +46,7 @@ from Products.CPSCourrier.config import (
     HAS_REPLY,
     BAYES_MIN_PROB,
     STACK_ID,
+    REPLY_PTYPE_MAPPING,
 )
 
 logger = logging.getLogger('CPSCourrier.workflows.scripts')
@@ -84,6 +85,7 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
     utool = getToolByName(incoming_proxy, 'portal_url')
     portal = utool.getPortalObject()
     incoming_doc = incoming_proxy.getContent()
+    incoming_ptype = incoming_doc.portal_type
     container = aq_parent(aq_inner(incoming_proxy))
     container_doc = container.getContent()
 
@@ -103,19 +105,24 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
         # initialise it's content with a template or a previously sent reply
         template_proxy = portal.unrestrictedTraverse(base_reply_rpath)
         template_doc = template_proxy.getEditableContent()
-        data.update({
-            'content': template_doc['content'],
-            'content_format': template_doc['content_format'],
-            'Subject': template_doc['Subject'](),
-            'form_of_address': template_doc['form_of_address'],
-        })
+
+        if incoming_ptype == 'Incoming Email':
+            # GR I don't see the point of copying the template's Subject.
+            # Could even be harmful in case the template just says:
+            # "sorry we can't do anything for you" and has for obvious reasons
+            # an empty Subject
+            data.update({
+                'content': template_doc['content'],
+                'content_format': template_doc['content_format'],
+                'Subject': template_doc['Subject'](),
+                'form_of_address': template_doc['form_of_address'],
+                })
 
         # increment the counter of the template reply
         mapping = {'template_usage': template_doc['template_usage'] + 1}
         template_doc._edit(mapping, proxy=template_proxy)
 
-    #XXX GR this one will have to be based on incoming's portal_type
-    ptype = 'Outgoing Email'
+    ptype = REPLY_PTYPE_MAPPING[incoming_ptype]
     oid = container.computeId(Title)
     wftool.invokeFactoryFor(container, ptype, oid, **data)
     outgoing_proxy = getattr(container, oid)
@@ -486,6 +493,8 @@ def send_reply(proxy, text_only=False, additionnal_info='', sci_kw=None):
     If text_only is True, any html is stripped to plain text
     Otherwise, the content type is deduced from the document.
     """
+    if proxy.portal_type == 'Outgoing Pmail':
+        return
     tstool = getToolByName(proxy, 'translation_service')
     encoding = tstool.default_charset
     doc = proxy.getContent()

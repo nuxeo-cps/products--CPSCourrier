@@ -30,6 +30,7 @@ from DateTime import DateTime
 from OFS.Image import File
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.tests.layer import IntegrationTestCase
+from Products.CPSCourrier.tests.layer import PaperIntegrationTestCase
 
 # import things to test
 from Products.CPSCourrier.workflows.scripts import (
@@ -112,9 +113,9 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
         # add 'Re:' to the incoming mail title
         wtool.doActionFor(self.in_mail1, 'handle')
-        out_mail1 = reply_to_incoming(self.in_mail1)
+        self.out_mail1 = out_mail1 = reply_to_incoming(self.in_mail1)
         self.assertEquals(out_mail1.Title(), 'Re: Test mail 1')
-        doc1 = out_mail1.getContent()
+        self.outgoing_doc1 = doc1 = out_mail1.getContent()
         self.assertEquals(doc1['mail_from'], 'test_mailbox@cpscourrier.com')
         self.assertEquals(doc1['mail_to'], ['bar@foo.com'])
 
@@ -128,7 +129,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         # do not add the 'Re:' prefix twice
         wtool.doActionFor(self.in_mail2, 'handle')
         out_mail2 = reply_to_incoming(self.in_mail2)
-        doc2 = out_mail2.getContent()
+        self.outgoing_doc2 = doc2 = out_mail2.getContent()
         self.assertEquals(out_mail2.Title(), 'Re: Test mail 1')
         self.assertEquals(doc2['mail_from'], 'test_mailbox@cpscourrier.com')
         self.assertEquals(doc2['mail_to'], ['foo@foo.com'])
@@ -149,7 +150,7 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         wtool.doActionFor(self.in_mail1, 'handle')
         template = reply_to_incoming(self.in_mail1)
         self.assertEquals(template.Title(), 'Re: Test mail 1')
-        doc1 = template.getEditableContent()
+        self.outgoing_doc1 = doc1 = template.getEditableContent()
         self.assertEquals(doc1['mail_from'], 'test_mailbox@cpscourrier.com')
         self.assertEquals(doc1['mail_to'], ['bar@foo.com'])
 
@@ -182,12 +183,11 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
         # check fields init
         self.assertEquals(second_reply.Title(), 'Re: Test mail 1')
-        doc2 = second_reply.getContent()
+        self.outgoing_doc2 = doc2 = second_reply.getContent()
         self.assertEquals(doc2['mail_from'], 'test_mailbox@cpscourrier.com')
         self.assertEquals(doc2['mail_to'], ['bar@foo.com'])
-        self.assertEquals(sorted(doc2['Subject']()),
-                          sorted(("subject1", "subject2",)))
-        self.assertEquals(doc2['content'], doc1['content'])
+
+      # common
         attached = getattr(doc2, 'file_f0', None)
         self.failIf(attached is None)
         self.assertEquals(attached.data, 'This is a test')
@@ -731,7 +731,43 @@ On %s, bar@foo.com wrote:
         self.assertEquals(elt['directive'], 'handle')
         self.logout()
 
+class WorkflowScriptsPaperIntegrationTestCase(
+    PaperIntegrationTestCase,
+    WorkflowScriptsIntegrationTestCase):
+
+    def test_reply_to_incoming(self):
+        WorkflowScriptsIntegrationTestCase.test_reply_to_incoming(self)
+        self.assertEquals(self.out_mail1.portal_type, 'Outgoing Pmail')
+
+    def test_send_reply(self):
+        in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
+        out_mail1 = reply_to_incoming(in_mail1)
+        result = send_reply(out_mail1)
+        self.assert_(result is None)
+
+    def test_send_html_reply(self):
+        pass
+
+class WorkflowScriptsEmailIntegrationTestCase(
+    WorkflowScriptsIntegrationTestCase):
+
+    def test_reply_to_incoming(self):
+        WorkflowScriptsIntegrationTestCase.test_reply_to_incoming(self)
+        self.assertEquals(self.outgoing_doc2.portal_type, 'Outgoing Email')
+
+    def test_reply_to_incoming_with_template(self):
+        WorkflowScriptsIntegrationTestCase.test_reply_to_incoming_with_template(self)
+        doc1 = self.outgoing_doc1
+        doc2 = self.outgoing_doc2
+        self.assertEquals(sorted(doc2['Subject']()),
+                          sorted(("subject1", "subject2",)))
+        self.assertEquals(doc2['content'], doc1['content'])
 
 
 def test_suite():
-    return unittest.makeSuite(WorkflowScriptsIntegrationTestCase)
+    return unittest.TestSuite((
+        unittest.makeSuite(WorkflowScriptsEmailIntegrationTestCase),
+        unittest.makeSuite(WorkflowScriptsPaperIntegrationTestCase),
+        ))

@@ -46,7 +46,8 @@ ZopeTestCase.installProduct('CPSCourrier')
 ZopeTestCase.installProduct('CPSRelation')
 
 class CPSCourrierLayerClass(ExtensionProfileLayerClass):
-    extension_ids = ('CPSCourrier:default', 'CPSCourrier:email')
+    extension_ids = ('CPSCourrier:default', 'CPSCourrier:email',
+                     'CPSCourrier:paper')
 
 CPSCourrierLayer = CPSCourrierLayerClass(
     __name__,
@@ -142,6 +143,9 @@ class IntegrationTestCase(CommonIntegrationFixture, CPSTestCase):
     MB_ID = 'test-mailbox'
     MB2_ID = 'test-mailbox2'
 
+    INCOMING_PTYPE = 'Incoming Email'
+    INITIAL_TRANSITION = 'create'
+    
     def afterSetUp(self):
         self.login('manager')
         CommonIntegrationFixture.fixtureSetUp(self)
@@ -161,8 +165,9 @@ class IntegrationTestCase(CommonIntegrationFixture, CPSTestCase):
             },
         }
         for mail_id, mail_data in incoming_mail_data.items():
-            self.wftool.invokeFactoryFor(self.mb, 'Incoming Email', mail_id,
-                                         initial_transition="create",
+            self.wftool.invokeFactoryFor(self.mb, self.INCOMING_PTYPE, mail_id,
+                                         initial_transition=\
+                                                       self.INITIAL_TRANSITION,
                                          **mail_data)
             setattr(self, mail_id, self.mb[mail_id])
         # this is required for cut/paste integration tests
@@ -181,6 +186,9 @@ class IntegrationTestCase(CommonIntegrationFixture, CPSTestCase):
         transaction.commit()
         self.logout()
 
+class PaperIntegrationTestCase(IntegrationTestCase):
+    INCOMING_PTYPE = 'Incoming Pmail'
+    INITIAL_TRANSITION = 'create'
 
 class CourrierFunctionalTestCase(CPSTestCase):
 

@@ -45,3 +45,9 @@ ARCHIVE_HOME = ARCHIVE_HOME.replace("$INSTANCE_HOME", INSTANCE_HOME)
 
 # Minimum number of days for mails to get archived
 ARCHIVE_MIN_AGE = 60
+
+# Mappping of incoming -> outgoing for replies
+REPLY_PTYPE_MAPPING = {
+    'Incoming Email': 'Outgoing Email',
+    'Incoming Pmail': 'Outgoing Pmail',
+    }
