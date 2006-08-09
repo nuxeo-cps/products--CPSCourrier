@@ -35,7 +35,7 @@ if workflow_action is not None:
 if REQUEST is not None:
     folder = context.aq_inner.aq_parent
     id = context.getId()
-    if id in folder.objectIds():
+    if folder.hasObject(id):
         url = context.absolute_url()
     else:
         url = folder.absolute_url()

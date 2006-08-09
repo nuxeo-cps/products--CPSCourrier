@@ -55,7 +55,7 @@ else:
 if REQUEST is not None and do_redirect:
     # If the object has been deleted, we can't redirect to it.
     if url is None:
-        if id in folder.objectIds():
+        if folder.hasObject(id):
             url = context.absolute_url()
         else:
             url = folder.absolute_url()
