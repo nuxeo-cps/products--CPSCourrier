@@ -42,7 +42,8 @@
               <dd><input name="target_emailaddress" id="target_emailaddress" 
                   type="text"/></dd>
             </dl>
-	    <select name="target_mailbox" id="target_mailbox">
+	    <select name="target_mailbox" id="target_mailbox"
+		    tal:condition="python:here.portal_type.endswith('Pmail')">
 	      <option tal:repeat="mb here/getAllMailboxesList"
 		      tal:attributes="value python:mb[0];
 	selected python:repeat['mb'].start and 'selected' or None"
