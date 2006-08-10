@@ -330,6 +330,9 @@ msgstr ""
 msgid "help_workflow_forward"
 msgstr ""
 
+msgid "help_workflow_forwardPmail"
+msgstr ""
+
 msgid "button_forward"
 msgstr ""
 

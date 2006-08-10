@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-08-04 11:14default\n"
+"POT-Creation-Date: 2006-08-10 16:35default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -593,6 +593,9 @@ msgid "heading_workflow_forward_of ${item_id}"
 msgstr ""
 
 msgid "help_workflow_forward"
+msgstr ""
+
+msgid "help_workflow_forwardPmail"
 msgstr ""
 
 msgid "button_forward"

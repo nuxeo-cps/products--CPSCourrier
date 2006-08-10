@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-08-04 11:14default\n"
+"POT-Creation-Date: 2006-08-10 16:35default\n"
 "PO-Revision-Date: 2006-05-07 09:40+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -628,6 +628,13 @@ msgstr ""
 "Está a punto de remitir el correo a otro buzón <strong>o</strong>  a una "
 "dirección de correo externa. Al enviar el documento de correo a una "
 "dirección externa se cerrará la copia local del documento."
+
+#, fuzzy
+msgid "help_workflow_forwardPmail"
+msgstr ""
+"You are about to forward (move) the mail to another Mailbox <strong>or</"
+"strong> to an external email address. Forwarding the mail document to an "
+"external email address will close the local copy of the document."
 
 msgid "button_forward"
 msgstr "Remitir"
