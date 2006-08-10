@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
- <object name="mail_dashboard_row">
-   <!-- Transtyping for temporary fix.
-   Breaks compatibility with email profile -->
-   <widget name="To" meta_type="String Widget"/>
- </object>

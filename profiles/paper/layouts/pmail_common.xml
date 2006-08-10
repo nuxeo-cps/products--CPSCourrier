@@ -58,7 +58,7 @@
  </widget>
  <widget name="notes" meta_type="Text Widget">
   <property name="fields">
-   <element value="content"/>
+   <element value="notes"/>
    <element value="content_position"/>
    <element value="content_format"/>
   </property>
