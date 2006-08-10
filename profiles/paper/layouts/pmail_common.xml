@@ -56,20 +56,20 @@
   <property name="width">70</property>
   <property name="height">5</property>
  </widget>
- <widget name="content" meta_type="Text Widget">
+ <widget name="notes" meta_type="Text Widget">
   <property name="fields">
    <element value="content"/>
    <element value="content_position"/>
    <element value="content_format"/>
   </property>
-  <property name="label_edit">cpsdoc_flex_content_label_edit</property>
+  <property name="label_edit">cpscourrier_notes_label</property>
+  <property name="label_edit">cpscourrier_notes_label</property>
   <property name="is_i18n">True</property>
   <property name="css_class">dcontent</property>
   <property name="width">72</property>
-  <property name="height">20</property>
+  <property name="height">10</property>
   <property name="file_uploader">False</property>
   <property name="render_format">text</property>
-  <property name="configurable">format</property>
  </widget>
  <widget name="subject" meta_type="Mail Topics Widget">
   <property name="fields">
@@ -99,7 +99,7 @@
      <cell name="cc"/>
    </row>
    <row>
-     <cell name="content"/>
+     <cell name="notes"/>
    </row>
    <row>
      <cell name="subject"/>

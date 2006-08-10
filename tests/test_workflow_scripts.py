@@ -329,185 +329,6 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         flag_incoming_handled(out_mail1)
         self.assertEquals(self._get_state(in_mail1), 'handled')
 
-    def test_forward_mail(self):
-        # faking the MailHost
-        class FakeMailHost:
-            def _send(self, *args):
-                return args
-
-        # preparing in_mail1 to get forwarded
-        in_mail1 = self.in_mail1
-        wtool = getToolByName(self.portal, 'portal_workflow')
-        wtool.doActionFor(in_mail1, 'handle')
-        in_mail1_doc_edit = in_mail1.getEditableContent()
-        in_mail1_doc_edit.edit(
-            {'content': "content line 1\ncontent line 2\n"}, proxy=in_mail1,)
-
-        try:
-            in_mail1.MailHost = FakeMailHost()
-
-            # ensure the current mailbox has the required 'from' address
-            mb_doc = self.mb.getEditableContent()
-            mb_doc.edit({'from': 'mailbox@example.com'}, proxy=self.mb)
-
-            # forwdaring in_mail1
-            result = forward_mail(in_mail1, 'toto@example.com',
-                                  comment='Please handle that request')
-            expected = ('mailbox@example.com', 'toto@example.com', """\
-Content-Type: text/plain; charset="iso-8859-15"
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Subject: Fwd: Test mail 1
-From: mailbox@example.com
-To: toto@example.com
-
-Please handle that request
-
-On %s, bar@foo.com wrote:
-> content line 1
-> content line 2
->=20\
-""" % datetime.datetime.now().strftime('%Y-%m-%d'))
-
-            self.assertEquals(result, expected)
-        finally:
-            # for some reason there is a ZODB commit in beforeTearDown thus
-            # we need get rid of the unpickleable fake MailHost
-            del in_mail1.MailHost
-
-    def test_send_reply(self):
-        # faking the MailHost
-        class FakeMailHost:
-            def _send(self, *args):
-                return args
-
-        in_mail1 = self.in_mail1
-        wtool = getToolByName(self.portal, 'portal_workflow')
-        wtool.doActionFor(in_mail1, 'handle')
-        in_mail1_doc_edit = in_mail1.getEditableContent()
-        in_mail1_doc_edit.edit({
-            'content': "Hi!\nPlease go to http://www.paipal.com and confirm"
-                       " your password!\n  Regards,\n  The Paipal team"},
-            proxy=in_mail1,
-        )
-        out_mail1 = reply_to_incoming(in_mail1)
-        try:
-            out_mail1.MailHost = FakeMailHost()
-            out_mail1_doc_edit = out_mail1.getEditableContent()
-            out_mail1_doc_edit.edit(
-                mail_cc=["bar2@foo.com"],
-                content="Please stop trying to fish us!",
-                content_format='text',
-                form_of_address='regards',
-                proxy=out_mail1,
-            )
-
-            result = send_reply(out_mail1)
-            expected = ('test_mailbox@cpscourrier.com', 'bar@foo.com', """\
-Content-Type: text/plain; charset="iso-8859-15"
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: Test mail 1
-From: test_mailbox@cpscourrier.com
-To: bar@foo.com
-Cc: bar2@foo.com
-
-Please stop trying to fish us!
-
-Best regards, =
-
-
--- =
-
-CPS Manager
-
-
-On %s, bar@foo.com wrote:
-> Hi!
-> Please go to http://www.paipal.com and confirm your password!
->   Regards,
->   The Paipal team""" % datetime.datetime.now().strftime('%Y-%m-%d'))
-
-            self.assertEquals(result, expected)
-        finally:
-            # for some reason there is a ZODB commit in beforeTearDown thus we
-            # need get rid of the unpickleable fake MailHost
-            del out_mail1.MailHost
-
-        # check that the sending date has been set
-        doc = out_mail1.getContent()
-        dm = doc.getTypeInfo().getDataModel(doc)
-        eff_date = dm['EffectiveDate']
-        time_delta = DateTime() - eff_date
-        self.failIf(time_delta > 10) # should be close enough
-
-    def test_send_html_reply(self):
-        # faking the MailHost
-        class FakeMailHost:
-            def _send(self, *args):
-                return args
-
-        in_mail1 = self.in_mail1
-        wtool = getToolByName(self.portal, 'portal_workflow')
-        wtool.doActionFor(in_mail1, 'handle')
-        in_mail1_doc_edit = in_mail1.getEditableContent()
-        in_mail1_doc_edit.edit({
-            'content': "Hi!\nPlease go to http://www.paipal.com and confirm"
-                       " your password!\n  Regards,\n  The Paipal team"},
-            proxy=in_mail1,
-        )
-        out_mail1 = reply_to_incoming(in_mail1)
-        try:
-            out_mail1.MailHost = FakeMailHost()
-            out_mail1_doc_edit = out_mail1.getEditableContent()
-            out_mail1_doc_edit.edit(
-                mail_cc=["Toto Truc <toto-truc@fake.org>", "og@nuxeo.com"],
-                content="<em>Please</em> stop trying to fish us!",
-                content_format='html',
-                form_of_address='regards',
-                proxy=out_mail1,
-            )
-
-            result = send_reply(out_mail1)
-            expected = ('test_mailbox@cpscourrier.com', 'bar@foo.com', """\
-Content-Type: text/html; charset="iso-8859-15"
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: Test mail 1
-From: test_mailbox@cpscourrier.com
-To: bar@foo.com
-Cc: Toto Truc <toto-truc@fake.org>, og@nuxeo.com
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-  <meta content=3D"text/html;charset=3DISO-8859-15" http-equiv=3D"Content-T=
-ype">
-  <title></title>
-</head>
-<body bgcolor=3D"#ffffff" text=3D"#000000"><em>Please</em> stop trying to f=
-ish us!<br/><br/>Best regards, <br/><br/>-- <br/>CPS Manager<br/>
-<pre>
-
-On %s, bar@foo.com wrote:
-> Hi!
-> Please go to http://www.paipal.com and confirm your password!
->   Regards,
->   The Paipal team</pre>
-</body>
-</html>""" % datetime.datetime.now().strftime('%Y-%m-%d'))
-
-            dummy = """ " """ # for Emacs editor
-
-            self.assertEquals(result[0], expected[0])
-            self.assertEquals(result[1], expected[1])
-            ### XXX GR regexp is bogus, will correct later
-            self.assert_(re.sub(r'====.+==', '====(boundary)==', result[2]),
-                         expected[2])
-        finally:
-            # for some reason there is a ZODB commit in beforeTearDown thus we
-            # need get rid of the unpickleable fake MailHost
-            del out_mail1.MailHost
 
     #
     # the following tests are for workflow scripts but general events.
@@ -764,6 +585,186 @@ class WorkflowScriptsEmailIntegrationTestCase(
         self.assertEquals(sorted(doc2['Subject']()),
                           sorted(("subject1", "subject2",)))
         self.assertEquals(doc2['content'], doc1['content'])
+
+    def test_forward_mail(self):
+        # faking the MailHost
+        class FakeMailHost:
+            def _send(self, *args):
+                return args
+
+        # preparing in_mail1 to get forwarded
+        in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
+        in_mail1_doc_edit = in_mail1.getEditableContent()
+        in_mail1_doc_edit.edit(
+            {'content': "content line 1\ncontent line 2\n"}, proxy=in_mail1,)
+
+        try:
+            in_mail1.MailHost = FakeMailHost()
+
+            # ensure the current mailbox has the required 'from' address
+            mb_doc = self.mb.getEditableContent()
+            mb_doc.edit({'from': 'mailbox@example.com'}, proxy=self.mb)
+
+            # forwdaring in_mail1
+            result = forward_mail(in_mail1, 'toto@example.com',
+                                  comment='Please handle that request')
+            expected = ('mailbox@example.com', 'toto@example.com', """\
+Content-Type: text/plain; charset="iso-8859-15"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Subject: Fwd: Test mail 1
+From: mailbox@example.com
+To: toto@example.com
+
+Please handle that request
+
+On %s, bar@foo.com wrote:
+> content line 1
+> content line 2
+>=20\
+""" % datetime.datetime.now().strftime('%Y-%m-%d'))
+
+            self.assertEquals(result, expected)
+        finally:
+            # for some reason there is a ZODB commit in beforeTearDown thus
+            # we need get rid of the unpickleable fake MailHost
+            del in_mail1.MailHost
+
+    def test_send_reply(self):
+        # faking the MailHost
+        class FakeMailHost:
+            def _send(self, *args):
+                return args
+
+        in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
+        in_mail1_doc_edit = in_mail1.getEditableContent()
+        in_mail1_doc_edit.edit({
+            'content': "Hi!\nPlease go to http://www.paipal.com and confirm"
+                       " your password!\n  Regards,\n  The Paipal team"},
+            proxy=in_mail1,
+        )
+        out_mail1 = reply_to_incoming(in_mail1)
+        try:
+            out_mail1.MailHost = FakeMailHost()
+            out_mail1_doc_edit = out_mail1.getEditableContent()
+            out_mail1_doc_edit.edit(
+                mail_cc=["bar2@foo.com"],
+                content="Please stop trying to fish us!",
+                content_format='text',
+                form_of_address='regards',
+                proxy=out_mail1,
+            )
+
+            result = send_reply(out_mail1)
+            expected = ('test_mailbox@cpscourrier.com', 'bar@foo.com', """\
+Content-Type: text/plain; charset="iso-8859-15"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: Test mail 1
+From: test_mailbox@cpscourrier.com
+To: bar@foo.com
+Cc: bar2@foo.com
+
+Please stop trying to fish us!
+
+Best regards, =
+
+
+-- =
+
+CPS Manager
+
+
+On %s, bar@foo.com wrote:
+> Hi!
+> Please go to http://www.paipal.com and confirm your password!
+>   Regards,
+>   The Paipal team""" % datetime.datetime.now().strftime('%Y-%m-%d'))
+
+            self.assertEquals(result, expected)
+        finally:
+            # for some reason there is a ZODB commit in beforeTearDown thus we
+            # need get rid of the unpickleable fake MailHost
+            del out_mail1.MailHost
+
+        # check that the sending date has been set
+        doc = out_mail1.getContent()
+        dm = doc.getTypeInfo().getDataModel(doc)
+        eff_date = dm['EffectiveDate']
+        time_delta = DateTime() - eff_date
+        self.failIf(time_delta > 10) # should be close enough
+
+    def test_send_html_reply(self):
+        # faking the MailHost
+        class FakeMailHost:
+            def _send(self, *args):
+                return args
+
+        in_mail1 = self.in_mail1
+        wtool = getToolByName(self.portal, 'portal_workflow')
+        wtool.doActionFor(in_mail1, 'handle')
+        in_mail1_doc_edit = in_mail1.getEditableContent()
+        in_mail1_doc_edit.edit({
+            'content': "Hi!\nPlease go to http://www.paipal.com and confirm"
+                       " your password!\n  Regards,\n  The Paipal team"},
+            proxy=in_mail1,
+        )
+        out_mail1 = reply_to_incoming(in_mail1)
+        try:
+            out_mail1.MailHost = FakeMailHost()
+            out_mail1_doc_edit = out_mail1.getEditableContent()
+            out_mail1_doc_edit.edit(
+                mail_cc=["Toto Truc <toto-truc@fake.org>", "og@nuxeo.com"],
+                content="<em>Please</em> stop trying to fish us!",
+                content_format='html',
+                form_of_address='regards',
+                proxy=out_mail1,
+            )
+
+            result = send_reply(out_mail1)
+            expected = ('test_mailbox@cpscourrier.com', 'bar@foo.com', """\
+Content-Type: text/html; charset="iso-8859-15"
+MIME-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: Test mail 1
+From: test_mailbox@cpscourrier.com
+To: bar@foo.com
+Cc: Toto Truc <toto-truc@fake.org>, og@nuxeo.com
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content=3D"text/html;charset=3DISO-8859-15" http-equiv=3D"Content-T=
+ype">
+  <title></title>
+</head>
+<body bgcolor=3D"#ffffff" text=3D"#000000"><em>Please</em> stop trying to f=
+ish us!<br/><br/>Best regards, <br/><br/>-- <br/>CPS Manager<br/>
+<pre>
+
+On %s, bar@foo.com wrote:
+> Hi!
+> Please go to http://www.paipal.com and confirm your password!
+>   Regards,
+>   The Paipal team</pre>
+</body>
+</html>""" % datetime.datetime.now().strftime('%Y-%m-%d'))
+
+            dummy = """ " """ # for Emacs editor
+
+            self.assertEquals(result[0], expected[0])
+            self.assertEquals(result[1], expected[1])
+            ### XXX GR regexp is bogus, will correct later
+            self.assert_(re.sub(r'====.+==', '====(boundary)==', result[2]),
+                         expected[2])
+        finally:
+            # for some reason there is a ZODB commit in beforeTearDown thus we
+            # need get rid of the unpickleable fake MailHost
+            del out_mail1.MailHost
 
 
 def test_suite():

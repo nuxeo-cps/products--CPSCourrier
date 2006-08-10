@@ -67,6 +67,13 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         CatalogTool._original_call = CatalogTool.__call__
         CatalogTool.__call__ = _batching_call
 
+        # patch workflow script: we don't want to actually send mails by smtp
+        from Products.CPSCourrier.workflows import scripts
+        self.old_send_script = scripts.send_reply
+        def send_reply(*args, **kwargs):
+            pass
+        scripts.send_reply = send_reply
+
         # create an archiver instance
         self.tmp_archive_dir = tempfile.mkdtemp()
         self.archiver = Archiver(self.portal, archive_home=self.tmp_archive_dir)
@@ -128,6 +135,10 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         # unpatch the catalog
         CatalogTool.__call__ = CatalogTool._original_call
         delattr(CatalogTool, '_original_call')
+
+        # unpatch workflow scripts
+        from Products.CPSCourrier.workflows import scripts
+        scripts.send_reply = self.old_send_script
 
         # clean temp dir
         shutil.rmtree(self.tmp_archive_dir)

@@ -53,6 +53,10 @@ logger = logging.getLogger('CPSCourrier.workflows.scripts')
 
 def bayes_guess_subject(proxy):
     """Update the Subject field with the CPSBayesTool predictions """
+
+    if proxy.portal_type.endswith('Pmail'):
+        return
+
     btool = getToolByName(proxy, 'portal_bayes')
     doc = proxy.getEditableContent()
     data = "%s %s" % (doc['Title'](), doc['content'])
@@ -67,6 +71,8 @@ def bayes_guess_subject(proxy):
 
 def bayes_learn_subject(proxy):
     """Update the bayesian model according to the Subject field value"""
+    if proxy.portal_type.endswith('Pmail'):
+        return
     btool = getToolByName(proxy, 'portal_bayes')
     doc = proxy.getContent()
     data = "%s %s" % (doc['Title'](), doc['content'])
