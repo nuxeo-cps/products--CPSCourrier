@@ -109,6 +109,9 @@ msgstr ""
 msgid "cpscourrier_cc_label"
 msgstr ""
 
+msgid "cpscourrier_notes_label"
+msgstr ""
+
 msgid "cpscourrier_msgid_label"
 msgstr ""
 
