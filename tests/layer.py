@@ -192,6 +192,9 @@ class PaperIntegrationTestCase(IntegrationTestCase):
 
 class CourrierFunctionalTestCase(CPSTestCase):
 
+    INCOMING_PTYPE = 'Incoming Email'
+    OUTGOING_PTYPE = 'Outgoing Email'
+
     layer = CPSCourrierFunctionalLayer
 
     def afterSetUp(self):
@@ -218,7 +221,7 @@ class CourrierFunctionalTestCase(CPSTestCase):
         """
         self.createMail(container=container,
                         mail_id=mail_id,
-                        portal_type="Incoming Email")
+                        portal_type=self.INCOMING_PTYPE)
 
     def createOutgoing(self, container=None, mail_id='outgoing'):
         """Create outgoing mail and set it as an attr on self.
@@ -227,7 +230,7 @@ class CourrierFunctionalTestCase(CPSTestCase):
         """
         self.createMail(container=container,
                         mail_id=mail_id,
-                        portal_type="Outgoing Email")
+                        portal_type=self.OUTGOING_PTYPE)
 
     def createMail(self, container=None, mail_id=None, portal_type=None):
         """Create mail and set it as an attr on self using given id
@@ -262,4 +265,10 @@ class CourrierFunctionalTestCase(CPSTestCase):
 
     def _set_state(self, ob, state):
         ob.workflow_history.values()[0][-1]['review_state'] = state
+
+class CourrierPaperFunctionalTestCase(CourrierFunctionalTestCase):
+
+    INCOMING_PTYPE = 'Incoming Pmail'
+    OUTGOING_PTYPE = 'Outgoing Pmail'
+
 

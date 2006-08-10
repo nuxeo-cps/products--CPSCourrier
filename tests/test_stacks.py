@@ -21,6 +21,7 @@
 import unittest
 from zope.testing import doctest
 from layer import CourrierFunctionalTestCase
+from layer import CourrierPaperFunctionalTestCase
 
 from Products.CMFCore.utils import getToolByName, _checkPermission
 from Products.CMFCore.permissions import ModifyPortalContent
@@ -440,7 +441,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.failIf('Manager' in  roles['user:injector_ftest-mailbox'])
 
         # injector can create
-        mail_id = self.wftool.invokeFactoryFor(self.mb, 'Incoming Email',
+        mail_id = self.wftool.invokeFactoryFor(self.mb, self.INCOMING_PTYPE,
                                                'injected',
                                                initial_transition='create')
         # cleanup
@@ -626,7 +627,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
 
         utool = getToolByName(self.portal, 'portal_url')
         self.login('manager')
-        self.wftool.invokeFactoryFor(self.mb2, 'Incoming Email', 'other',
+        self.wftool.invokeFactoryFor(self.mb2, self.INCOMING_PTYPE, 'other',
                                      initial_transition='create')
         # here's the point of the test: user cannot modify self.outgoing
         # yet using it as template will increment its usage counter
@@ -643,10 +644,26 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.mb.manage_delObjects(outgoing.getId())
         self.mb2.manage_delObjects(['other'])
 
+class CourrierOutgoingPaperStackFunctionalTestCase(
+    CourrierPaperFunctionalTestCase,
+    CourrierOutgoingStackFunctionalTestCase):
+
+    def test_portal_type_test(self):
+        self.assertEquals(self.outgoing.portal_type, 'Outgoing Pmail')
+
+class CourrierIncomingPaperStackFunctionalTestCase(
+    CourrierPaperFunctionalTestCase,
+    CourrierIncomingStackFunctionalTestCase):
+
+    def test_portal_type_test(self):
+        self.assertEquals(self.incoming.portal_type, 'Incoming Pmail')
+
 def test_suite():
     return unittest.TestSuite((
         unittest.makeSuite(CourrierOutgoingStackFunctionalTestCase),
         unittest.makeSuite(CourrierIncomingStackFunctionalTestCase),
+        unittest.makeSuite(CourrierOutgoingPaperStackFunctionalTestCase),
+        unittest.makeSuite(CourrierIncomingPaperStackFunctionalTestCase),
         doctest.DocTestSuite('Products.CPSCourrier.workflows.stacks'),
         doctest.DocFileTest(
             'doc/developer/stacks.txt',
