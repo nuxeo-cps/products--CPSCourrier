@@ -4,6 +4,7 @@ Requires:
 New features:
 ~~~~~~~~~~~~~
 - Subject widget on mail view page now comes with its label in a <h4>
+- Auto handle at creation time for Incoming Paper Mail
 Bug fixes:
 ~~~~~~~~~~
 - Mail header and thread rendering in standalone profile.
