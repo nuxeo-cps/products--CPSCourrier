@@ -8,6 +8,8 @@ Bug fixes:
 ~~~~~~~~~~
 - Mail header and thread rendering in standalone profile.
 - [OPTIM] fixed abusive tests like 'id in folder.objectIds()'
+- make the Mail2Email upgrade step able to re-run if interupted before
+  completion
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
 -

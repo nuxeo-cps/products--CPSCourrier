@@ -73,6 +73,10 @@ def up_0160_0170_mail_into_email(portal):
         fti = getattr(ttool, old_id, None)
         if fti is None:
             continue
+	if ttool.hasObject(new_id):
+            # the upgrade step was already run once but did not run
+            # till completion: no need the recreate the fti
+            continue
 
         fti.getId() # force lazy __dict__ to work
         attrs = fti.__dict__.copy()
