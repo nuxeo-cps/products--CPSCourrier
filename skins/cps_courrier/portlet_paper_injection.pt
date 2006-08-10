@@ -1,0 +1,10 @@
+<form action="cpscourrier_inject_pmail">
+  <select name="target_mailbox" id="portlet_injection_target_mailbox">
+    <option tal:repeat="mb here/getAllMailboxesList"
+	    tal:attributes="value python:mb[0];
+			    selected python:repeat['mb'].start and 'selected' or None"
+	    tal:content="python:mb[1]">
+    </option>
+  </select>
+  <input type="submit" name="create" value="Ok"/>
+</form>

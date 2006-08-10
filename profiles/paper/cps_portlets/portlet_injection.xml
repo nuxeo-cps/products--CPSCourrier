@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<object name="portlet_custom_thread" meta_type="CPS Portlet"
+   portal_type="Custom Portlet">
+ <f id="Title" v="Injection"/>
+ <f id="custom_cache_params">
+  <e v="no-cache"/>
+ </f>
+ <f id="order" v="5"/>
+ <f id="render_method" v="portlet_paper_injection"/>
+ <f id="slot" v="treeview"/>
+ <guard groups="" permissions="" roles="Injector; Manager"/>
+</object>
