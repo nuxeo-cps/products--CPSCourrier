@@ -37,6 +37,8 @@ from Acquisition import aq_parent, aq_inner
 from AccessControl import getSecurityManager
 
 from Products.CMFCore.utils import getToolByName
+from Products.CMFCore.WorkflowCore import WorkflowException
+
 from Products.CPSCore.EventServiceTool import getPublicEventService
 from Products.CPSCourrier.utils import html_to_text
 from Products.CPSCourrier.relations import make_reply_to
@@ -298,6 +300,23 @@ def flag_incoming_handled(outgoing_proxy):
     # this is the last reply, we can trigger the transition for matching proxies
     _trigger_transition_for(incoming_docid, 'flag_handled', 'answering',
                             outgoing_proxy)
+
+def paper_auto_handle(proxy):
+    """Trigger handling from default roadmap and go down.
+
+    The idea is that creation are made by the injector."""
+
+    wftool = getToolByName(proxy, 'portal_workflow')
+    wftool.doActionFor(proxy, 'handle',
+                       use_parent_roadmap=True)
+    try:
+        wftool.doActionFor(proxy, 'move_down_delegatees',
+                           current_wf_var_id=STACK_ID)
+    except WorkflowException:
+        # This should mean that parent roadmap is empty
+        logger.warn(
+            "mode_down_delegatees failed for %s (default roadmap empty?)",
+            proxy.absolute_url())
 
 
 def init_stack_with_user(sci, wf_var_id, prefix='courrier_', **kw):

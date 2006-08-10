@@ -251,7 +251,7 @@
 
  <transition transition_id="create" title=""
              new_state="received" trigger="USER"
-             before_script="" after_script="bayes_guess_subject">
+             before_script="" after_script="dispatch_after_create">
   <guard>
    <guard-role>Manager</guard-role>
    <guard-role>Injector</guard-role>
@@ -516,13 +516,19 @@
  <script script_id="bayes_learn_subject"
          type="Script (Python)"
          filename="workflows/incoming_mail_wf/scripts/bayes_learn_subject.py"/>
- <script script_id="bayes_guess_subject"
+
+ <script script_id="dispatch_after_create"
          type="Script (Python)"
-         filename="workflows/incoming_mail_wf/scripts/bayes_guess_subject.py"/>
+         filename="workflows/incoming_mail_wf/scripts/dispatch_after_create.py"/>
  <script script_id="forward_mail"
          type="Script (Python)"
          filename="workflows/incoming_mail_wf/scripts/forward_mail.py"/>
  <script script_id="reply_to_incoming"
          type="Script (Python)"
          filename="workflows/incoming_mail_wf/scripts/reply_to_incoming.py"/>
+ <!-- GR kept for BBB. Might still be referred to by customizing
+         products profiles -->
+ <script script_id="bayes_guess_subject"
+         type="Script (Python)"
+         filename="workflows/incoming_mail_wf/scripts/bayes_guess_subject.py"/>
 </cps-workflow>

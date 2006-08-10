@@ -48,6 +48,7 @@ ModuleSecurityInfo(wf_scripts_module).declarePublic('init_stack_with_user')
 ModuleSecurityInfo(wf_scripts_module).declarePublic('forward_mail')
 ModuleSecurityInfo(wf_scripts_module).declarePublic('send_reply')
 ModuleSecurityInfo(wf_scripts_module).declarePublic('compute_reply_body')
+ModuleSecurityInfo(wf_scripts_module).declarePublic('paper_auto_handle')
 
 utils_module = 'Products.CPSCourrier.utils'
 ModuleSecurityInfo(utils_module).declarePublic('hasFlexibleFields')

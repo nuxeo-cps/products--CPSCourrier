@@ -221,7 +221,8 @@ class CourrierFunctionalTestCase(CPSTestCase):
         """
         self.createMail(container=container,
                         mail_id=mail_id,
-                        portal_type=self.INCOMING_PTYPE)
+                        portal_type=self.INCOMING_PTYPE,
+                        no_handle=True)
 
     def createOutgoing(self, container=None, mail_id='outgoing'):
         """Create outgoing mail and set it as an attr on self.
@@ -232,7 +233,7 @@ class CourrierFunctionalTestCase(CPSTestCase):
                         mail_id=mail_id,
                         portal_type=self.OUTGOING_PTYPE)
 
-    def createMail(self, container=None, mail_id=None, portal_type=None):
+    def createMail(self, container=None, mail_id=None, portal_type=None, **kw):
         """Create mail and set it as an attr on self using given id
 
         Default container is self.mb
@@ -243,7 +244,8 @@ class CourrierFunctionalTestCase(CPSTestCase):
         mail_id = self.wftool.invokeFactoryFor(self.mb,
                                                portal_type,
                                                mail_id,
-                                               initial_transition='create'
+                                               initial_transition='create',
+                                               **kw
                                                )
 
         mail = container[mail_id]

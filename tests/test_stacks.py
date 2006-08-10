@@ -527,7 +527,7 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member3', self.mbg)
         self.assert_(wf.isActionSupported(self.incoming, 'answer'))
 
-    def test_default_roadmap(self):
+    def build_default_roadmap(self):
         stack_mod = self.mb.cpscourrier_stack_modify
 
         # Test that we don't fail if we try and handle from default roadmap
@@ -564,6 +564,10 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         insert_render = stack.getStackContentForRender(self.mb,
                                                        mode='insert')
         self.assertEquals(insert_render[0], [1, 0, '-1_0', -1, -2])
+
+    def test_default_roadmap(self):
+
+        self.build_default_roadmap()
 
         # member2 logs in and handles the incoming mail
         self.flogin('member2', self.mb)
@@ -628,7 +632,8 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         utool = getToolByName(self.portal, 'portal_url')
         self.login('manager')
         self.wftool.invokeFactoryFor(self.mb2, self.INCOMING_PTYPE, 'other',
-                                     initial_transition='create')
+                                     initial_transition='create',
+                                     no_handle="True")
         # here's the point of the test: user cannot modify self.outgoing
         # yet using it as template will increment its usage counter
         self.flogin('wsmanager', self.mb2)
@@ -657,6 +662,41 @@ class CourrierIncomingPaperStackFunctionalTestCase(
 
     def test_portal_type_test(self):
         self.assertEquals(self.incoming.portal_type, 'Incoming Pmail')
+
+    def test_default_roadmap(self):
+        # In paper case, creations have to trigger handling and use
+        # default roadmap automatically
+
+        self.build_default_roadmap()
+
+        # injector creates an incoming mail
+        self.flogin('injector', self.mb)
+        self.wftool.invokeFactoryFor(self.mb,
+                                    self.INCOMING_PTYPE,
+                                    'incoming_default_roadmap')
+        incoming = self.mb.incoming_default_roadmap
+
+        # incoming is in 'handled' state
+        self.assertEquals(self.wftool.getInfoFor(incoming, 'review_state'),
+                          'handled')
+
+        # assertions on mail's stack
+        # stack holds: -1:member1, 0:member3, 1:injector
+        stack = self.wftool.getStackFor(incoming, STACK_ID)
+        self.assertEquals(stack.getAllLevels(), [-1,0,1])
+        for_render = stack.getStackContentForRender(self.incoming)
+        self.assertEquals(for_render[1][0]['items'][0]['identite'],
+                          'member3_ftest-mailbox-group')
+        self.assertEquals(for_render[1][1]['items'][0]['identite'],
+                          'injector_ftest-mailbox')
+        self.assertEquals(for_render[1][-1]['items'][0]['identite'],
+                          'member1_ftest-mailbox')
+
+        # Moreover, the mail has already gone to the next level
+        self.assertEquals(stack.getCurrentLevel(), 0)
+
+        # cleanings
+        self.mb.manage_delObjects([incoming.getId()])
 
 def test_suite():
     return unittest.TestSuite((
