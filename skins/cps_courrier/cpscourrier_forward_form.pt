@@ -11,7 +11,8 @@
 
       <metal:help fill-slot="help">
         <span i18n:translate=""
-          tal:content="string:help_workflow_${transition}"></span>
+	  tal:define="suffix python:here.portal_type.endswith('Pmail') and 'Pmail' or ''"
+          tal:content="string:help_workflow_${transition}${suffix}"/>
       </metal:help>
 
       <metal:main fill-slot="main"
@@ -27,7 +28,7 @@
           use-macro="here/content_lib_transition_form/macros/transition_form">
 
           <metal:block fill-slot="fields">
-            <dl>
+            <dl tal:condition="python:here.portal_type.endswith('Email')">
               <dt><label for="target_mailbox" i18n:translate=""
                   >cpscourrier_forward_to_mailbox</label></dt>
               <dd><select name="target_mailbox" id="target_mailbox">
@@ -41,6 +42,12 @@
               <dd><input name="target_emailaddress" id="target_emailaddress" 
                   type="text"/></dd>
             </dl>
+	    <select name="target_mailbox" id="target_mailbox">
+	      <option tal:repeat="mb here/getAllMailboxesList"
+		      tal:attributes="value python:mb[0];
+	selected python:repeat['mb'].start and 'selected' or None"
+		      tal:content="python:mb[1]"></option>
+	    </select>
 
           </metal:block>
           <metal:block fill-slot="button">
