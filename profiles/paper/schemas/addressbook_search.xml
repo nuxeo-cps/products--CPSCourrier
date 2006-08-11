@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="addressbook_search" meta_type="CPS Schema">
+ <field name="email" meta_type="CPS String Field"/>
+ <field name="givenName" meta_type="CPS String Field"/>
+ <field name="id" meta_type="CPS String Field"/>
+ <field name="sn" meta_type="CPS String Field"/>
+</object>

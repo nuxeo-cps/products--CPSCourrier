@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<object name="addressbook" meta_type="CPS Schema">
+ <field name="email" meta_type="CPS String Field"/>
+ <field name="fullname" meta_type="CPS String Field">
+  <property name="read_ignore_storage">True</property>
+  <property
+     name="read_process_expr">python:(givenName + " " + sn).strip()</property>
+  <property name="read_process_dependent_fields">
+   <element value="givenName"/>
+   <element value="sn"/>
+   <element value="id"/>
+  </property>
+  <property name="write_ignore_storage">True</property>
+ </field>
+ <field name="givenName" meta_type="CPS String Field"/>
+ <field name="id" meta_type="CPS String Field"/>
+ <field name="mails_sent" meta_type="CPS Int Field"/>
+ <field name="sn" meta_type="CPS String Field"/>
+</object>

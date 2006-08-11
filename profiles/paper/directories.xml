@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<object name="portal_directories" meta_type="CPS Directory Tool">
+ <property name="title"></property>
+ <object name="addressbook" meta_type="CPS ZODB Directory"/>
+</object>

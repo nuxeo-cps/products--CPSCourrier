@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<object name="addressbook_search" meta_type="CPS Layout">
+ <property name="layout_create_method"></property>
+ <property name="layout_edit_method"></property>
+ <property name="layout_view_method"></property>
+ <property name="style_prefix">layout_dir_</property>
+ <property name="flexible_widgets"/>
+ <property name="validate_values_expr"></property>
+ <widget name="email" meta_type="String Widget">
+  <property name="fields">
+   <element value="email"/>
+  </property>
+  <property name="label">label_email</property>
+  <property name="label_edit">label_email</property>
+  <property name="is_i18n">True</property>
+  <property name="display_width">30</property>
+ </widget>
+ <widget name="givenName" meta_type="String Widget">
+  <property name="fields">
+   <element value="givenName"/>
+  </property>
+  <property name="label">label_first_name</property>
+  <property name="label_edit">label_first_name</property>
+  <property name="is_i18n">True</property>
+ </widget>
+ <widget name="id" meta_type="String Widget">
+  <property name="fields">
+   <element value="id"/>
+  </property>
+  <property name="label">label_user_name</property>
+  <property name="label_edit">label_user_name</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes">
+   <element value="edit"/>
+  </property>
+ </widget>
+ <widget name="sn" meta_type="String Widget">
+  <property name="fields">
+   <element value="sn"/>
+  </property>
+  <property name="label">label_last_name</property>
+  <property name="label_edit">label_last_name</property>
+  <property name="is_i18n">True</property>
+ </widget>
+ <table>
+  <row>
+   <cell name="id" ncols="2"/>
+  </row>
+  <row>
+   <cell name="email" ncols="2"/>
+  </row>
+  <row>
+   <cell name="givenName" ncols="2"/>
+  </row>
+  <row>
+   <cell name="sn" ncols="2"/>
+  </row>
+ </table>
+</object>
