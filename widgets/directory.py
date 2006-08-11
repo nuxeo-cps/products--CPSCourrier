@@ -73,3 +73,121 @@ class CPSDirectoryMultiIdWidget(CPSProgrammerCompoundWidget):
 
 InitializeClass(CPSDirectoryMultiIdWidget)
 widgetRegistry.register(CPSDirectoryMultiIdWidget)
+
+class CPSPaperMailRecipientWidget(CPSWidget):
+    """ A select with links to directories.
+
+    Dispatch to two widgets that *must* share the same field with this one.
+    """
+
+    render_method = 'widget_paper_mail_recipient_render'
+    meta_type = 'Paper Mail Recipient Widget'
+    _properties = CPSWidget._properties + (
+        {'id': 'widget_local_id', 'type': 'string', 'mode': 'w',
+         'label': 'Sub widget for local directory'},
+        {'id': 'widget_global_id', 'type': 'string', 'mode': 'w',
+         'label': 'Sub widget for global directory'},
+        )
+
+    widget_local_id = ''
+    widget_global_id = ''
+
+    def prepare(self, ds, **kw):
+        dm = ds.getDataModel()
+
+        # prevent sub widget preparation to happen after ours
+        # should be done in CPSCompoundWidget too, if I get it right
+        # GR: ugly, but only thing I could do
+
+        value = dm[self.fields[0]]
+        if value.startswith('local:'):
+            value = value[6:]
+            ds[self.widget_local_id] = value
+            ds[self.widget_global_id] = ''
+            ds[self.getWidgetId()+ '_is_local'] = True # for render()
+        elif value.startswith('global:'):
+            value = value[7:]
+            ds[self.widget_local_id] = ''
+            ds[self.widget_global_id] = value
+        else:
+            # useful mostly for init
+            ds[self.widget_local_id] = ds[self.widget_global_id] = value
+
+    def validate(self, ds, **kw):
+        dm = ds.getDataModel()
+        local_v = ds.get(self.widget_local_id)
+        global_v = ds.get(self.widget_global_id)
+
+        # select appropriate subwidget
+        if local_v and global_v:
+            ds.setError(self.getWidgetId(),
+                        "Vous ne pouvez choisir dans les deux annuaires simultan\xe9ment")
+            return False
+        elif local_v:
+            wid = self.widget_local_id
+        else: # global_v by default, say
+            wid = self.widget_global_id
+
+        # let the subwidget validate
+        layout = self.aq_inner.aq_parent
+        widget = layout[wid]
+        ok = widget.validate(ds, **kw)
+
+        # putting right prefixes
+        field_id = self.fields[0]
+        if local_v :
+            dm[field_id] = 'local:%s' % dm[field_id]
+        else:
+            dm[field_id] = 'global:%s' % dm[field_id]
+        return True
+
+    def render(self, mode, datastructure, **kw):
+        # need to ensure that we prepare after subwidgets preparation
+        # this is ugly, I'd prefer to change layout.prepareLayoutWidgets
+        # to check on _forbidden_widgets.
+        self.prepare(datastructure)
+        meth = getattr(self, self.render_method, None)
+        if meth is None:
+            msg = "Unknown Render Method %s for widget type %s. " \
+            + "Please set or change the 'render_method' attribute on " \
+            + "your widget declaration."
+            raise RuntimeError(msg % (self.render_method, self.getId()))
+
+        layout = aq_parent(aq_inner(self))
+        if mode in ['edit', 'create']:
+            widget_ids = (self.widget_global_id, self.widget_local_id)
+
+            # GR big copy/paste from CPSCompoundWidget. Subclassing would be
+            # better, and better to make subwidgets generic. Another time
+
+            cells = []
+            widget_infos = kw['widget_infos']
+            for widget_id in widget_ids:
+                cell = {}
+                # widget, widget_mode, css_class
+                cell.update(widget_infos[widget_id])
+                widget = layout[widget_id]
+                widget_mode = cell['widget_mode']
+                if widget_mode == 'hidden':
+                    continue
+                rendered = widget.render(widget_mode, datastructure, **kw)
+                rendered = rendered.strip()
+                cell['widget_rendered'] = rendered
+                if not widget.hidden_empty or rendered:
+                    # do not add widgets to be hidden when empty
+                    cells.append(cell)
+            return meth(mode=mode, datastructure=datastructure,
+                        cells=cells, **kw)
+            # end C/P
+        elif mode == 'view':
+            wid = self.getWidgetId()
+            if datastructure.get(wid+'_is_local'):
+                widget = layout[self.widget_local_id]
+            else:
+                widget = layout[self.widget_global_id]
+            return widget.render(mode, datastructure, **kw)
+
+
+
+InitializeClass(CPSPaperMailRecipientWidget)
+widgetRegistry.register(CPSPaperMailRecipientWidget)
