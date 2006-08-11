@@ -17,7 +17,7 @@
 #
 # $Id$
 
-"""Directory MultiId Widget
+"""Directory Related Widgets (for Paper setup)
 """
 from Globals import InitializeClass
 from Acquisition import aq_parent, aq_inner
