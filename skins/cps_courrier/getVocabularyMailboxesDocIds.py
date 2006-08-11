@@ -12,7 +12,6 @@ lang = l10n.getLanguage()
 
 if key is not None:
     pxtool = context.portal_proxies
-    import pdb; pdb.set_trace()
     try:
         info = pxtool.getProxyInfosFromDocid(key)[0]
     except KeyError, IndexError:
