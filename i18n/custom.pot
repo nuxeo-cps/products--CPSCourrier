@@ -646,6 +646,16 @@ msgid "label_workflow_discard"
 msgstr ""
 
 #
+# Directories
+#
+
+msgid "label_local_address_book"
+msgstr ""
+
+msgid "label_address_book"
+msgstr ""
+
+#
 # Misc
 #
 
@@ -666,3 +676,4 @@ msgstr ""
 
 msgid "cpscourrier_final_reply"
 msgstr ""
+

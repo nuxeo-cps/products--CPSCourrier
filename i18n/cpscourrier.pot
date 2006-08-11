@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-08-10 18:02default\n"
+"POT-Creation-Date: 2006-08-11 15:58default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -899,6 +899,15 @@ msgid "label_workflow_mail_confirm"
 msgstr ""
 
 msgid "label_workflow_discard"
+msgstr ""
+
+#
+# Directories
+#
+msgid "label_local_address_book"
+msgstr ""
+
+msgid "label_address_book"
 msgstr ""
 
 #

@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-08-10 18:02default\n"
+"POT-Creation-Date: 2006-08-11 15:58default\n"
 "PO-Revision-Date: 2006-07-12 12:17+0200\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -972,6 +972,16 @@ msgstr "Reception and confirmation"
 
 msgid "label_workflow_discard"
 msgstr "Trashing"
+
+#
+# Directories
+#
+msgid "label_local_address_book"
+msgstr ""
+
+#, fuzzy
+msgid "label_address_book"
+msgstr "To do"
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr "On ${y}-${m}-${d}, ${name} wrote:"
