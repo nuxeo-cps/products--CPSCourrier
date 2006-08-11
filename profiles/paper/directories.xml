@@ -2,4 +2,5 @@
 <object name="portal_directories" meta_type="CPS Directory Tool">
  <property name="title"></property>
  <object name="addressbook" meta_type="CPS ZODB Directory"/>
+ <object name="local_addressbook" meta_type="CPS ZODB Directory"/>
 </object>

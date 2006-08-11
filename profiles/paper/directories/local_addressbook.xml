@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<object name="local_addressbook" meta_type="CPS ZODB Directory">
+ <property name="title">label_local_address_book</property>
+ <property name="schemas">
+   <element value="addressbook"/>
+   <element value="local_addressbook"/>
+</property>
+ <property name="schemas_search">
+   <element value="addressbook_search"/>
+   <element value="local_addressbook_search"/>
+</property>
+ <property name="layout">local_addressbook</property>
+ <property name="layout_search">local_addressbook_search</property>
+ <property name="acl_directory_view_roles">Manager; Member</property>
+ <property name="acl_entry_create_roles">Manager</property>
+ <property name="acl_entry_delete_roles">Manager</property>
+ <property name="acl_entry_view_roles">Manager; Member</property>
+ <property name="acl_entry_edit_roles">Manager</property>
+ <property name="id_field">id</property>
+ <property name="title_field">fullname</property>
+ <property name="search_substring_fields">
+  <element value="fullname"/>
+  <element value="email"/>
+  <element value="id"/>
+  <element value="sn"/>
+ </property>
+ <property name="is_hierarchical">False</property>
+ <property name="password_field"></property>
+ <cache-manager name="None"/>
+</object>

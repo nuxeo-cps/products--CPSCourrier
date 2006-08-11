@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<object name="local_addressbook_search" meta_type="CPS Schema">
+ <field name="local_id" meta_type="CPS String Field"/>
+ <field name="ou" meta_type="CPS Int Field"/>
+</object>
