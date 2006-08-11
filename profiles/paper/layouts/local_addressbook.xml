@@ -50,16 +50,18 @@
    <element value="edit"/>
   </property>
  </widget>
- <widget name="mailbox" meta_type="String Widget">
+ <widget name="mailbox" meta_type="Select Widget">
   <property name="fields">
    <element value="ou"/>
   </property>
   <property name="label">portal_type_Mailbox_title</property>
   <property name="label_edit">portal_type_Mailbox_title</property>
   <property name="is_i18n">True</property>
- <property name="readonly_layout_modes">
-  <element value="edit"/>
- </property>
+  <property name="readonly_layout_modes">
+   <element value="edit"/>
+  </property>
+  <property name="translated">False</property>
+  <property name="vocabulary">mailboxes_docids</property>
  </widget>
  <widget name="id" meta_type="Directory Multi Id Widget">
  <property name="fields">
