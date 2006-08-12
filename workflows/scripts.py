@@ -108,6 +108,10 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
         'mail_from': container_doc['from'],
         'Subject': incoming_doc['Subject'](),
     }
+    if incoming_doc.portal_type.endswith('Pmail'):
+        # bal's email address not relevant. Use two fields for compat later ?
+        incoming_to = incoming_doc['mail_to']
+        data['mail_from'] = incoming_to and incoming_to[0] or ''
 
     if base_reply_rpath:
         # initialise it's content with a template or a previously sent reply
@@ -475,6 +479,9 @@ def compute_reply_body(proxy, plain_text=True, additionnal_info=''):
     The content of the reply is build from the proxy quoting the original mail
     thanks to the relation graph.
     """
+    if proxy.portal_type.endswith('Pmail'):
+        return ''
+
     tstool = getToolByName(proxy, 'translation_service')
     encoding = tstool.default_charset
     vtool = getToolByName(proxy, 'portal_vocabularies')
