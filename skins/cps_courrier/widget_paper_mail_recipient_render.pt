@@ -1,16 +1,21 @@
 <div tal:repeat="cell options/cells">
 
-  <tal:comment condition="nothing">
-    What follows is almost straight from layout_dir_view
-  </tal:comment>
-
-  <tal:block define="widget cell/widget">
+  <tal:block define="widget cell/widget;
+		    mode cell/widget_mode">
       <span class="dlabel">
-	<span i18n:translate="" tal:condition="widget/is_i18n"
-	      tal:content="widget/label">label</span
-	      ><span tal:condition="not:widget/is_i18n"
-	      tal:content="widget/label">label</span
-	      >&nbsp;:
+	<tal:block condition="python:mode == 'view'">
+	  <span i18n:translate="" tal:condition="widget/is_i18n"
+		tal:content="widget/label">label</span
+		><span tal:condition="not:widget/is_i18n"
+		tal:content="widget/label">label</span>
+	</tal:block>
+	<tal:block condition="python:mode != 'view'">
+	  <span i18n:translate="" tal:condition="widget/is_i18n"
+		tal:content="widget/label_edit">label</span
+		><span tal:condition="not:widget/is_i18n"
+		tal:content="widget/label_edit">label</span>
+	  &nbsp;:
+	</tal:block>
       </span>
       <span tal:attributes="class widget/css_class|nothing">
 	<tal:block replace="structure cell/widget_rendered" />
