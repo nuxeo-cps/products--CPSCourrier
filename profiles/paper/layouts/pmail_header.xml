@@ -16,17 +16,46 @@
   </property>
  </widget>
 
- <widget name="from" meta_type="String Widget">
+ <widget name="from" meta_type="Paper Mail Recipient Widget">
   <property name="fields">
    <element value="mail_from"/>
   </property>
+  <property name="hidden_layout_modes">
+  </property>
+  <property name="widget_local_id">from_local</property>
+  <property name="widget_global_id">from_global</property>
   <property name="is_required">True</property>
   <property name="label">cpscourrier_from_label</property>
+  <property name="label_edit">cpscourrier_from_label</property>
   <property name="is_i18n">True</property>
-  <property name="hidden_layout_modes">
-    <element value="create"/>
-    <element value="edit"/>
+ </widget>
+
+<widget name="from_global" meta_type="Directory Link Select Widget">
+  <property name="fields">
+   <element value="mail_from"/>
   </property>
+  <property name="label_edit">cpscourrier_paper_from_global_label</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_readonly_layout_modes"/>
+  <property name="vocabulary">addressbook</property>
+  <property name="directory">addressbook</property>
+  <property name="sorted">True</property>
+</widget>
+
+ <widget name="from_local" meta_type="Directory Link Select Widget">
+  <property name="fields">
+   <element value="mail_from"/>
+  </property>
+  <property name="label_edit">cpscourrier_paper_from_local_label</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_readonly_layout_modes"/>
+  <property name="vocabulary">mailbox_addressbook</property>
+  <property name="directory">local_addressbook</property>
+  <property name="sorted">True</property>
  </widget>
 
  <widget name="to" meta_type="Lines Widget">
