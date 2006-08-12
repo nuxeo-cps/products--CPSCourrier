@@ -6,6 +6,10 @@ New features:
 - Subject widget on mail view page now comes with its label in a <h4>
 - Auto handle at creation time for Incoming Paper Mail
 - Injection portlet (visible for global injector across the portal)
+- mail from and to linked to specific directories in paper setup:
+  local_addressbook for mailbox level contacts
+  addressbook for global contacts
+  groups for internal recipients
 Bug fixes:
 ~~~~~~~~~~
 - Mail header and thread rendering in standalone profile.
