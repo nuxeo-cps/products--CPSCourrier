@@ -101,6 +101,8 @@ class CPSPaperMailRecipientWidget(CPSWidget):
         dm = ds.getDataModel()
 
         value = dm[self.fields[0]]
+        if isinstance(value, list):
+            value = value and value[0] or ''
         if value.startswith('local:'):
             value = value[6:]
             ds[self.widget_local_id] = value
@@ -132,14 +134,14 @@ class CPSPaperMailRecipientWidget(CPSWidget):
         internal_v = ds.get(self.widget_internal_id)
 
         # select appropriate subwidget
-        if local_v and global_v:
+        if local_v and global_v and not internal_v:
             ds.setError(self.getWidgetId(),
                         "Vous ne pouvez choisir dans les deux annuaires simultan\xe9ment")
             return False
-        elif local_v:
-            wid = self.widget_local_id
         elif internal_v:
             wid = self.widget_internal_id
+        elif local_v:
+            wid = self.widget_local_id
         else: # global_v by default, say
             wid = self.widget_global_id
 
@@ -151,7 +153,7 @@ class CPSPaperMailRecipientWidget(CPSWidget):
         # putting right prefixes
         if local_v:
             dm[field_id] = 'local:%s' % dm[field_id]
-        if internal_v:
+        elif internal_v:
             dm[field_id] = 'internal:%s' % dm[field_id]
         else:
             dm[field_id] = 'global:%s' % dm[field_id]
@@ -225,9 +227,18 @@ class CPSDirectoryLinkSelectWidget(CPSSelectWidget):
     _properties = CPSSelectWidget._properties + (
         {'id': 'directory', 'type': 'string', 'mode': 'w',
          'label': 'Directory to link to'},
+        {'id': 'skip_prepare', 'type': 'boolean', 'mode': 'w',
+         'label': 'Skip preparation (you know what you are doing)'}
         )
 
     directory = ''
+    skip_prepare = False
+
+    def prepare(self, ds, **kw):
+        # no need (and harmul) to prepare if subwidget of
+        # Paper Mail Recipient Widget
+        if not self.skip_prepare:
+            return CPSSelectWidget.prepare(self, ds, **kw)
 
     def render(self, mode, ds, **kw):
         base_url = getToolByName(self, 'portal_url').getBaseUrl()
