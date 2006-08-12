@@ -97,10 +97,6 @@ class CPSPaperMailRecipientWidget(CPSWidget):
     def prepare(self, ds, **kw):
         dm = ds.getDataModel()
 
-        # prevent sub widget preparation to happen after ours
-        # should be done in CPSCompoundWidget too, if I get it right
-        # GR: ugly, but only thing I could do
-
         value = dm[self.fields[0]]
         if value.startswith('local:'):
             value = value[6:]
