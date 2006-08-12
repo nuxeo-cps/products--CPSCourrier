@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<object name="mailbox_addressbook" meta_type="CPS Method Vocabulary">
+<object name="addressbook" meta_type="CPS Method Vocabulary">
  <property name="title"></property>
  <property name="title_msgid"></property>
  <property name="description"></property>
- <property name="get_vocabulary_method">getVocabularyLocalAddressBook</property>
+ <property name="directory">addressbook</property>
  <property name="add_empty_key">True</property>
  <property name="empty_key_value"></property>
  <property name="empty_key_pos">first</property>

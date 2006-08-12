@@ -1,3 +1,4 @@
+
 # (C) Copyright 2006 Nuxeo SAS <http://nuxeo.com>
 # Author: Georges Racinet <gracinet@nuxeo.com>
 #
@@ -115,6 +116,9 @@ class CPSPaperMailRecipientWidget(CPSWidget):
 
     def validate(self, ds, **kw):
         dm = ds.getDataModel()
+        field_id = self.fields[0]
+        use_lists = isinstance(dm[self.fields[0]], list)
+
         local_v = ds.get(self.widget_local_id)
         global_v = ds.get(self.widget_global_id)
 
@@ -134,11 +138,13 @@ class CPSPaperMailRecipientWidget(CPSWidget):
         ok = widget.validate(ds, **kw)
 
         # putting right prefixes
-        field_id = self.fields[0]
         if local_v :
             dm[field_id] = 'local:%s' % dm[field_id]
         else:
             dm[field_id] = 'global:%s' % dm[field_id]
+        if use_lists:
+            dm[field_id] = [dm[field_id]]
+
         return True
 
     def render(self, mode, datastructure, **kw):

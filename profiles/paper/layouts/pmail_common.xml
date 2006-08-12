@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- common view for all mail documents -->
-<object name="email_common" meta_type="CPS Layout">
+<object name="pmail_common" meta_type="CPS Layout">
  <property name="layout_view_method">layout_mail_view</property>
  <widget name="object" meta_type="String Widget">
   <property name="fields">
@@ -15,19 +15,45 @@
   <property name="is_i18n">True</property>
   <property name="display_width">70</property>
  </widget>
- <widget name="from" meta_type="String Widget">
+ <widget name="from" meta_type="Paper Mail Recipient Widget">
   <property name="fields">
    <element value="mail_from"/>
   </property>
   <property name="hidden_layout_modes">
    <element value="view"/>
   </property>
+  <property name="widget_local_id">from_local</property>
+  <property name="widget_global_id">from_global</property>
   <property name="is_required">True</property>
   <property name="label">cpscourrier_from_label</property>
   <property name="label_edit">cpscourrier_from_label</property>
   <property name="is_i18n">True</property>
-  <property name="display_width">70</property>
  </widget>
+
+<widget name="from_global" meta_type="Select Widget">
+  <property name="fields">
+   <element value="mail_from"/>
+  </property>
+  <property name="label_edit">cpscourrier_paper_from_global_label</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_readonly_layout_modes"/>
+  <property name="vocabulary">addressbook</property>
+  <property name="sorted">True</property>
+</widget>
+ <widget name="from_local" meta_type="Select Widget">
+  <property name="fields">
+   <element value="mail_from"/>
+  </property>
+  <property name="label_edit">cpscourrier_paper_from_local_label</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_readonly_layout_modes"/>
+  <property name="vocabulary">mailbox_addressbook</property>
+  <property name="sorted">True</property>
+ </widget>
+
+
  <widget name="to" meta_type="Lines Widget">
   <property name="fields">
    <element value="mail_to"/>

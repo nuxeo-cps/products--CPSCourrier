@@ -2,6 +2,8 @@
 #$Id$
 
 # This is to be called from a Select Widget on a mail document
+# behavior if key is not None has nothing special. The real point is to list
+# relevant entries if key is None 
 
 # XXX how to get cleany rid of hardcoded directory name ?
 ldir = context.portal_directories['local_addressbook']
@@ -20,18 +22,21 @@ mbox_ptype = getattr(mailbox, 'portal_type', None)
 if mbox_ptype != 'Mailbox':
     raise ValueError(mbox_ptype)
 
-query = {'ou': mailbox.getDocid()}
-
 if key is not None:
-    query['local_id'] = key
-    entry_ids = ldir.searchEntries(**query)
-    return entry_ids and ldir.getEntry(entry_ids[0])[title_field] or None
+    # this directory ids have the form local_id, ou
+    # add sanity check ?
+    return ldir.getEntry(key)[title_field]
 
 # return_fields don't go through read_expr, and entry title field is typically
 # a fullname...
+query = {'ou': mailbox.getDocid()}
 entry_ids = ldir.searchEntries(**query)
-return [(e_id, ldir.getEntry(e_id)[title_field]) for e_id in entry_ids]
+items = [(e_id, ldir.getEntry(e_id)[title_field]) for e_id in entry_ids]
+return items
 
+items.insert(0, ('', ''))
+
+return items
 
 
 
