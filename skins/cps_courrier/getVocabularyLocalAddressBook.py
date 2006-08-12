@@ -14,7 +14,14 @@ title_field = ldir.title_field
 # creation or the mail in case of edition/view
 
 if context.portal_type == 'Mailbox':
-    mailbox = context
+    mailbox = proxy
+elif hasattr(context.aq_explicit, 'getRID'):
+    #GR Shame on me this is a brain. We are called from a row layout on a
+    # Catalog Tabular Widget. Cannot avoid this for now, do the costly thing
+    # getObject doesn't even work.
+    utool = context.portal_url
+    path = context.relative_path.split('/')[:-1]
+    mailbox = utool.getPortalObject().restrictedTraverse(path)
 else:
     mailbox = context.aq_inner.aq_parent
 

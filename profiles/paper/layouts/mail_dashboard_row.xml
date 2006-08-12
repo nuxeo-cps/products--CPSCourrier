@@ -1,0 +1,126 @@
+<object name="mail_dashboard_row" meta_type="CPS Layout">
+ <!-- Using the widgets that understand addressbooks
+      XXX This breaks compat between email and paper profiles
+ -->
+
+ <!-- transtyping not happy -->
+ <widget name="From" remove="True"/>
+ <widget name="To" remove="True"/>
+
+ <widget name="From" meta_type="Paper Mail Recipient Widget">
+  <property name="fields">
+   <element value="mail_from"/>
+  </property>
+  <property name="widget_local_id">from_local</property>
+  <property name="widget_global_id">from_global</property>
+  <property name="widget_internal_id">from_internal</property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_from_label</property>
+  <property name="label_edit">cpscourrier_from_label</property>
+  <property name="is_i18n">True</property>
+ </widget>
+
+<widget name="from_global" meta_type="Directory Link Select Widget">
+  <property name="skip_prepare">True</property>
+  <property name="fields">
+   <element value="mail_from"/>
+  </property>
+  <property name="label_edit">cpscourrier_paper_from_global_label</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_readonly_layout_modes"/>
+  <property name="vocabulary">addressbook</property>
+  <property name="directory">addressbook</property>
+  <property name="sorted">True</property>
+</widget>
+
+ <widget name="from_local" meta_type="Directory Link Select Widget">
+  <property name="skip_prepare">True</property>
+  <property name="fields">
+   <element value="mail_from"/>
+  </property>
+  <property name="label_edit">cpscourrier_paper_from_local_label</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_readonly_layout_modes"/>
+  <property name="vocabulary">mailbox_addressbook</property>
+  <property name="directory">local_addressbook</property>
+  <property name="sorted">True</property>
+ </widget>
+
+ <widget name="from_internal" meta_type="Directory Link Select Widget">
+  <property name="skip_prepare">True</property>
+  <property name="fields">
+   <element value="mail_from"/>
+  </property>
+  <property name="label_edit">cpscourrier_paper_from_internal_label</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_readonly_layout_modes"/>
+  <property name="vocabulary">groups</property>
+  <property name="directory">groups</property>
+  <property name="sorted">True</property>
+ </widget>
+
+ <widget name="To" meta_type="Paper Mail Recipient Widget">
+  <property name="fields">
+   <element value="mail_to"/>
+  </property>
+  <property name="widget_local_id">to_local</property>
+  <property name="widget_global_id">to_global</property>
+  <property name="widget_internal_id">to_internal</property>
+  <property name="is_required">True</property>
+  <property name="label">cpscourrier_to_label</property>
+  <property name="label_edit">cpscourrier_to_label</property>
+  <property name="is_i18n">True</property>
+ </widget>
+
+<widget name="to_global" meta_type="Directory Link Select Widget">
+  <property name="skip_prepare">True</property>
+  <property name="fields">
+   <element value="mail_to"/>
+  </property>
+  <property name="label_edit">cpscourrier_paper_from_global_label</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_readonly_layout_modes"/>
+  <property name="vocabulary">addressbook</property>
+  <property name="directory">addressbook</property>
+  <property name="sorted">True</property>
+</widget>
+
+ <widget name="to_local" meta_type="Directory Link Select Widget">
+  <property name="skip_prepare">True</property>
+  <property name="fields">
+   <element value="mail_to"/>
+  </property>
+  <property name="label_edit">cpscourrier_paper_from_local_label</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_readonly_layout_modes"/>
+  <property name="vocabulary">mailbox_addressbook</property>
+  <property name="directory">local_addressbook</property>
+  <property name="sorted">True</property>
+ </widget>
+
+ <widget name="to_internal" meta_type="Directory Link Select Widget">
+  <property name="skip_prepare">True</property>
+  <property name="fields">
+   <element value="mail_to"/>
+  </property>
+  <property name="label_edit">cpscourrier_paper_from_internal_label</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_readonly_layout_modes"/>
+  <property name="vocabulary">groups</property>
+  <property name="directory">groups</property>
+  <property name="sorted">True</property>
+ </widget>
+
+</object>
