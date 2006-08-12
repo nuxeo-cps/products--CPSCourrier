@@ -89,10 +89,13 @@ class CPSPaperMailRecipientWidget(CPSWidget):
          'label': 'Sub widget for local directory'},
         {'id': 'widget_global_id', 'type': 'string', 'mode': 'w',
          'label': 'Sub widget for global directory'},
+        {'id': 'widget_internal_id', 'type': 'string', 'mode': 'w',
+         'label': 'Sub widget for internal recipient directory'},
         )
 
     widget_local_id = ''
     widget_global_id = ''
+    widget_internal_id = ''
 
     def prepare(self, ds, **kw):
         dm = ds.getDataModel()
@@ -102,14 +105,22 @@ class CPSPaperMailRecipientWidget(CPSWidget):
             value = value[6:]
             ds[self.widget_local_id] = value
             ds[self.widget_global_id] = ''
+            ds[self.widget_internal_id] = ''
             ds[self.getWidgetId()+ '_is_local'] = True # for render()
         elif value.startswith('global:'):
             value = value[7:]
             ds[self.widget_local_id] = ''
+            ds[self.widget_internal_id] = ''
             ds[self.widget_global_id] = value
+        elif value.startswith('internal:'):
+            value = value[9:]
+            ds[self.widget_local_id] = ''
+            ds[self.widget_internal_id] = value
+            ds[self.widget_global_id] = ''
+            ds[self.getWidgetId()+ '_is_internal'] = True # for render()
         else:
             # useful mostly for init
-            ds[self.widget_local_id] = ds[self.widget_global_id] = value
+            ds[self.widget_local_id] = ds[self.widget_global_id] = ds[self.widget_internal_id] = value
 
     def validate(self, ds, **kw):
         dm = ds.getDataModel()
@@ -118,6 +129,7 @@ class CPSPaperMailRecipientWidget(CPSWidget):
 
         local_v = ds.get(self.widget_local_id)
         global_v = ds.get(self.widget_global_id)
+        internal_v = ds.get(self.widget_internal_id)
 
         # select appropriate subwidget
         if local_v and global_v:
@@ -126,6 +138,8 @@ class CPSPaperMailRecipientWidget(CPSWidget):
             return False
         elif local_v:
             wid = self.widget_local_id
+        elif internal_v:
+            wid = self.widget_internal_id
         else: # global_v by default, say
             wid = self.widget_global_id
 
@@ -135,8 +149,10 @@ class CPSPaperMailRecipientWidget(CPSWidget):
         ok = widget.validate(ds, **kw)
 
         # putting right prefixes
-        if local_v :
+        if local_v:
             dm[field_id] = 'local:%s' % dm[field_id]
+        if internal_v:
+            dm[field_id] = 'internal:%s' % dm[field_id]
         else:
             dm[field_id] = 'global:%s' % dm[field_id]
         if use_lists:
@@ -158,7 +174,10 @@ class CPSPaperMailRecipientWidget(CPSWidget):
 
         layout = aq_parent(aq_inner(self))
         if mode in ['edit', 'create']:
-            widget_ids = (self.widget_global_id, self.widget_local_id)
+            # global/local vs internal will be controlled by visibility expr
+            # in subwidgets config
+            widget_ids = (self.widget_global_id, self.widget_local_id,
+                          self.widget_internal_id)
 
             # GR big copy/paste from CPSCompoundWidget. Subclassing would be
             # better, and better to make subwidgets generic. Another time
@@ -186,6 +205,8 @@ class CPSPaperMailRecipientWidget(CPSWidget):
             wid = self.getWidgetId()
             if datastructure.get(wid+'_is_local'):
                 widget = layout[self.widget_local_id]
+            elif datastructure.get(wid+'_is_internal'):
+                widget = layout[self.widget_internal_id]
             else:
                 widget = layout[self.widget_global_id]
             return widget.render(mode, datastructure, **kw)

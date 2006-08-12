@@ -15,6 +15,7 @@
   <property name="is_i18n">True</property>
   <property name="display_width">70</property>
  </widget>
+
  <widget name="from" meta_type="Paper Mail Recipient Widget">
   <property name="fields">
    <element value="mail_from"/>
@@ -24,6 +25,7 @@
   </property>
   <property name="widget_local_id">from_local</property>
   <property name="widget_global_id">from_global</property>
+  <property name="widget_internal_id">from_internal</property>
   <property name="is_required">True</property>
   <property name="label">cpscourrier_from_label</property>
   <property name="label_edit">cpscourrier_from_label</property>
@@ -39,6 +41,8 @@
   <property name="readonly_layout_modes"/>
   <property name="hidden_layout_modes"/>
   <property name="hidden_readonly_layout_modes"/>
+  <!-- could have added portal_type to context, too -->
+  <property name="hidden_if_expr">python:layout_mode == 'create' and context.REQUEST.form['type_name'].startswith('Outgoing') or proxy and proxy.portal_type.startswith('Outgoing')</property>
   <property name="vocabulary">addressbook</property>
   <property name="directory">addressbook</property>
   <property name="sorted">True</property>
@@ -51,10 +55,26 @@
   <property name="label_edit">cpscourrier_paper_from_local_label</property>
   <property name="is_i18n">True</property>
   <property name="readonly_layout_modes"/>
+  <property name="hidden_if_expr">python:layout_mode == 'create' and context.REQUEST.form['type_name'].startswith('Outgoing') or proxy and proxy.portal_type.startswith('Outgoing')</property>
   <property name="hidden_layout_modes"/>
   <property name="hidden_readonly_layout_modes"/>
   <property name="vocabulary">mailbox_addressbook</property>
   <property name="directory">local_addressbook</property>
+  <property name="sorted">True</property>
+ </widget>
+
+ <widget name="from_internal" meta_type="Directory Link Select Widget">
+  <property name="fields">
+   <element value="mail_from"/>
+  </property>
+  <property name="label_edit">cpscourrier_paper_from_internal_label</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes"/>
+  <property name="hidden_layout_modes"/>
+  <property name="hidden_if_expr">python:layout_mode == 'create' and context.REQUEST.form['type_name'].startswith('Incoming') or proxy and proxy.portal_type.startswith('Incoming')</property>
+  <property name="hidden_readonly_layout_modes"/>
+  <property name="vocabulary">groups</property>
+  <property name="directory">groups</property>
   <property name="sorted">True</property>
  </widget>
 
