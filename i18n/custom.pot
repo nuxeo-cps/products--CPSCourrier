@@ -103,6 +103,12 @@ msgstr ""
 msgid "cpscourrier_from_label"
 msgstr ""
 
+msgid "cpscourrier_paper_from_local_label"
+msgstr ""
+
+msgid "cpscourrier_paper_from_global_label"
+msgstr ""
+
 msgid "cpscourrier_to_label"
 msgstr ""
 
