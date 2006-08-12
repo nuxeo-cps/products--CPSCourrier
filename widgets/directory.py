@@ -29,6 +29,7 @@ from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSSchemas.BasicWidgets import CPSProgrammerCompoundWidget
+from Products.CPSSchemas.BasicWidgets import CPSSelectWidget
 
 
 class CPSDirectoryMultiIdWidget(CPSProgrammerCompoundWidget):
@@ -197,3 +198,37 @@ class CPSPaperMailRecipientWidget(CPSWidget):
 
 InitializeClass(CPSPaperMailRecipientWidget)
 widgetRegistry.register(CPSPaperMailRecipientWidget)
+
+
+class CPSDirectoryLinkSelectWidget(CPSSelectWidget):
+    """Select widget rendering with links to a directory according to mode."""
+
+    meta_type = "Directory Link Select Widget"
+
+    _properties = CPSSelectWidget._properties + (
+        {'id': 'directory', 'type': 'string', 'mode': 'w',
+         'label': 'Directory to link to'},
+        )
+
+    directory = ''
+
+    def render(self, mode, ds, **kw):
+        base_url = getToolByName(self, 'portal_url').getBaseUrl()
+        dtool_url = '%sportal_directories/%s' % (base_url, self.directory)
+        vocabulary = self._getVocabulary(ds)
+        value = ds[self.getWidgetId()]
+        if mode == 'view':
+            if self.translated:
+                cpsmcat = getToolByName(self, 'translation_service')
+                contents = cpsmcat(vocabulary.getMsgid(value, value)).encode('ISO-8859-15', 'ignore')
+            else:
+                contents = vocabulary.get(value, value)
+            href = '%s/cpsdirectory_entry_view?dirname=%s&id=%s' % (dtool_url,
+                                                                    self.directory,
+                                                                    value)
+            return renderHtmlTag('a', href=href, contents=contents)
+        # Todo: add a link to create form if perms are ok
+        return CPSSelectWidget.render(self, mode, ds, **kw)
+
+InitializeClass(CPSDirectoryLinkSelectWidget)
+widgetRegistry.register(CPSDirectoryLinkSelectWidget)

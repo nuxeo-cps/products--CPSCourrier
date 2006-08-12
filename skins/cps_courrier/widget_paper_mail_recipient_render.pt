@@ -5,14 +5,14 @@
       <span class="dlabel">
 	<tal:block condition="python:mode == 'view'">
 	  <span i18n:translate="" tal:condition="widget/is_i18n"
-		tal:content="widget/label">label</span
-		><span tal:condition="not:widget/is_i18n"
+		tal:content="widget/label">label</span>
+	  <span tal:condition="not:widget/is_i18n"
 		tal:content="widget/label">label</span>
 	</tal:block>
 	<tal:block condition="python:mode != 'view'">
 	  <span i18n:translate="" tal:condition="widget/is_i18n"
-		tal:content="widget/label_edit">label</span
-		><span tal:condition="not:widget/is_i18n"
+		tal:content="widget/label_edit">label</span>
+	  <span tal:condition="not:widget/is_i18n"
 		tal:content="widget/label_edit">label</span>
 	  &nbsp;:
 	</tal:block>
