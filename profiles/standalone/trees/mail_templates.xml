@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<object name="mail_templates" meta_type="CPS Tree Cache">
+ <!-- tree cache for the mail_templates hierarchy
+   Some integration products setup their own system for that. That's
+   why it's in standalone
+   -->
+ <property name="title"></property>
+ <property name="root">mail_templates</property>
+ <property name="type_names">
+  <element value="Mail Templates Box"/>
+ </property>
+ <property name="meta_types">
+  <element value="CPS Proxy Folder"/>
+  <element value="CPS Proxy BTree Folder"/>
+ </property>
+ <property name="excluded_rpaths"/>
+ <property name="info_method">getFolderInfo</property>
+ <property name="terminal_nodes">
+  <element value="Mail Templates Box"/>
+ </property>
+</object>
