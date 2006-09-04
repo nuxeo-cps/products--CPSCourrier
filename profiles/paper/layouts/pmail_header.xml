@@ -161,9 +161,25 @@
      name="hidden_if_expr">python:getattr(proxy, 'portal_type', '').startswith('Incoming ')</property>
  </widget>
 
+<widget name="confidential" meta_type="Boolean Widget">
+ <property name="fields">
+  <element value="confidential"/>
+ </property>
+ <property name="label">cpscourrier_confidential_label</property>
+ <property name="label_edit">cpscourrier_confidential_label</property>
+ <property name="is_i18n">True</property>
+ <property name="readonly_layout_modes"/>
+ <property name="hidden_layout_modes">
+   <element value="create"/>
+   <element value="edit"/>
+ </property>
+ <property name="hidden_readonly_layout_modes"/>
+</widget>
+
  <table>
   <row>
    <cell name="object"/>
+   <cell name="confidential"/>
   </row>
   <row>
    <cell name="from"/>

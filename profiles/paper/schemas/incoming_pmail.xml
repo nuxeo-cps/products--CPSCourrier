@@ -13,5 +13,6 @@
   <field name="mail_cc" meta_type="CPS String List Field">
     <property name="is_searchabletext">True</property>
   </field>
+  <field name="confidential" meta_type="CPS Boolean Field"/>
 </object>
 
