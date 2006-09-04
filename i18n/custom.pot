@@ -97,6 +97,9 @@ msgstr ""
 msgid "cpscourrier_creator_label"
 msgstr ""
 
+msgid "cpscourrier_confidential_label"
+msgstr ""
+
 msgid "cpscourrier_object_label"
 msgstr ""
 
@@ -104,6 +107,9 @@ msgid "cpscourrier_from_label"
 msgstr ""
 
 msgid "cpscourrier_paper_from_local_label"
+msgstr ""
+
+msgid "cpscourrier_paper_from_internal_label"
 msgstr ""
 
 msgid "cpscourrier_paper_from_global_label"
