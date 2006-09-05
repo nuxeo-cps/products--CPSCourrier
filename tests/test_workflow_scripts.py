@@ -112,11 +112,19 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         wtool = getToolByName(self.portal, 'portal_workflow')
 
         # add 'Re:' to the incoming mail title
-        wtool.doActionFor(self.in_mail1, 'handle')
+        if wtool.getInfoFor(self.in_mail1, 'review_state') == 'received':
+            wtool.doActionFor(self.in_mail1, 'handle')
         self.out_mail1 = out_mail1 = reply_to_incoming(self.in_mail1)
         self.assertEquals(out_mail1.Title(), 'Re: Test mail 1')
         self.outgoing_doc1 = doc1 = out_mail1.getContent()
-        self.assertEquals(doc1['mail_from'], 'test_mailbox@cpscourrier.com')
+
+        if doc1.portal_type.endswith('Email'):
+            # Mailbox sending address
+            self.assertEquals(doc1['mail_from'], 'test_mailbox@cpscourrier.com')
+        else:
+            # Recipient of the incoming mail
+            self.assertEquals(doc1['mail_from'], 'foo@foo.com')
+
         self.assertEquals(doc1['mail_to'], ['bar@foo.com'])
 
         # check that they are related
@@ -127,11 +135,19 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         self.assertEquals(expected, res)
 
         # do not add the 'Re:' prefix twice
-        wtool.doActionFor(self.in_mail2, 'handle')
+        if wtool.getInfoFor(self.in_mail2, 'review_state') == 'received':
+            # Email only
+            wtool.doActionFor(self.in_mail2, 'handle')
         out_mail2 = reply_to_incoming(self.in_mail2)
         self.outgoing_doc2 = doc2 = out_mail2.getContent()
         self.assertEquals(out_mail2.Title(), 'Re: Test mail 1')
-        self.assertEquals(doc2['mail_from'], 'test_mailbox@cpscourrier.com')
+        if doc1.portal_type.endswith('Email'):
+            self.assertEquals(doc2['mail_from'], 'test_mailbox@cpscourrier.com')
+        else:
+            # first in the list. In real life paper use the list would be
+            # a singleton
+            self.assertEquals(doc2['mail_from'], 'bar2@foo.com')
+
         self.assertEquals(doc2['mail_to'], ['foo@foo.com'])
 
         # check that they are related
@@ -147,11 +163,16 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         utool = getToolByName(self.portal, 'portal_url')
 
         # create a first reply and use it a template for a second reply
-        wtool.doActionFor(self.in_mail1, 'handle')
+        state = wtool.getInfoFor(self.in_mail1, 'review_state')
+        if state == 'received': # Email only
+            wtool.doActionFor(self.in_mail1, 'handle')
         template = reply_to_incoming(self.in_mail1)
         self.assertEquals(template.Title(), 'Re: Test mail 1')
         self.outgoing_doc1 = doc1 = template.getEditableContent()
-        self.assertEquals(doc1['mail_from'], 'test_mailbox@cpscourrier.com')
+        if doc1.portal_type.endswith('Email'):
+            self.assertEquals(doc1['mail_from'], 'test_mailbox@cpscourrier.com')
+        else:
+            self.assertEquals(doc1['mail_from'], 'foo@foo.com')
         self.assertEquals(doc1['mail_to'], ['bar@foo.com'])
 
         # check that they are related
@@ -184,7 +205,10 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         # check fields init
         self.assertEquals(second_reply.Title(), 'Re: Test mail 1')
         self.outgoing_doc2 = doc2 = second_reply.getContent()
-        self.assertEquals(doc2['mail_from'], 'test_mailbox@cpscourrier.com')
+        if doc1.portal_type.endswith('Email'):
+            self.assertEquals(doc2['mail_from'], 'test_mailbox@cpscourrier.com')
+        else:
+            self.assertEquals(doc2['mail_from'], 'foo@foo.com')
         self.assertEquals(doc2['mail_to'], ['bar@foo.com'])
 
       # common
@@ -206,7 +230,9 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         wtool = getToolByName(self.portal, 'portal_workflow')
         # the replying scenario with only one reply to in_mail1
         in_mail1 = self.in_mail1
-        wtool.doActionFor(in_mail1, 'handle')
+        state = wtool.getInfoFor(self.in_mail1, 'review_state')
+        if state == 'received': # Email only
+            wtool.doActionFor(in_mail1, 'handle')
         out_mail1 = reply_to_incoming(in_mail1)
 
         # initial states after creation
@@ -243,7 +269,9 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         # the replying scenario with several (2) replies to an incoming mail
         in_mail1 = self.in_mail1
         wtool = getToolByName(self.portal, 'portal_workflow')
-        wtool.doActionFor(in_mail1, 'handle')
+        state = wtool.getInfoFor(self.in_mail1, 'review_state')
+        if state == 'received': # Email only
+            wtool.doActionFor(in_mail1, 'handle')
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail2 = reply_to_incoming(in_mail1)
 
@@ -295,7 +323,9 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
     def test_flag_incoming_handled(self):
         in_mail1 = self.in_mail1
         wtool = getToolByName(self.portal, 'portal_workflow')
-        wtool.doActionFor(in_mail1, 'handle')
+        state = wtool.getInfoFor(self.in_mail1, 'review_state')
+        if state == 'received': # Email only
+            wtool.doActionFor(in_mail1, 'handle')
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail2 = reply_to_incoming(in_mail1)
         out_mail3 = reply_to_incoming(in_mail1)
@@ -353,7 +383,9 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
     def test_event_delete_2(self):
         in_mail1 = self.in_mail1
         wtool = getToolByName(self.portal, 'portal_workflow')
-        wtool.doActionFor(in_mail1, 'handle')
+        state = wtool.getInfoFor(in_mail1, 'review_state')
+        if state == 'received': # Email only
+            wtool.doActionFor(in_mail1, 'handle')
         in_mail1_docid = int(in_mail1.getDocid())
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail1_docid = int(out_mail1.getDocid())
@@ -376,7 +408,9 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
     def test_event_delete_3(self):
         in_mail1 = self.in_mail1
         wtool = getToolByName(self.portal, 'portal_workflow')
-        wtool.doActionFor(in_mail1, 'handle')
+        state = wtool.getInfoFor(self.in_mail1, 'review_state')
+        if state == 'received': # Email only
+            wtool.doActionFor(in_mail1, 'handle')
         in_mail1_docid = int(in_mail1.getDocid())
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail1_docid = int(out_mail1.getDocid())
@@ -409,7 +443,9 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         # smoke test: on proxy move, the relation graph should not change
         in_mail1 = self.in_mail1
         wtool = getToolByName(self.portal, 'portal_workflow')
-        wtool.doActionFor(in_mail1, 'handle')
+        state = wtool.getInfoFor(self.in_mail1, 'review_state')
+        if state == 'received': # Email only
+            wtool.doActionFor(in_mail1, 'handle')
         in_mail1_docid = int(in_mail1.getDocid())
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail1_docid = int(out_mail1.getDocid())
@@ -451,7 +487,9 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         # change
         in_mail1 = self.in_mail1
         wtool = getToolByName(self.portal, 'portal_workflow')
-        wtool.doActionFor(in_mail1, 'handle')
+        state = wtool.getInfoFor(self.in_mail1, 'review_state')
+        if state == 'received': # Email only
+            wtool.doActionFor(in_mail1, 'handle')
         in_mail1_docid = int(in_mail1.getDocid())
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail1_docid = int(out_mail1.getDocid())
@@ -493,7 +531,9 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         # test the integration of WF delete events and scripts
         in_mail1 = self.in_mail1
         wtool = getToolByName(self.portal, 'portal_workflow')
-        wtool.doActionFor(in_mail1, 'handle')
+        state = wtool.getInfoFor(self.in_mail1, 'review_state')
+        if state == 'received': # Email only
+            wtool.doActionFor(in_mail1, 'handle')
         out_mail1 = reply_to_incoming(in_mail1)
         out_mail2 = reply_to_incoming(in_mail1)
         out_mail3 = reply_to_incoming(in_mail1)
@@ -544,6 +584,11 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         self.login('manager')
         wftool = getToolByName(self.portal, 'portal_workflow')
 
+        state = wftool.getInfoFor(self.in_mail1, 'review_state')
+        if state != 'received':
+            # Not an email
+            return
+
         wftool.doActionFor(in_mail, 'handle')
 
         stack = wftool.getStackFor(in_mail, 'Pilots')
@@ -557,18 +602,26 @@ class WorkflowScriptsPaperIntegrationTestCase(
     WorkflowScriptsIntegrationTestCase):
 
     def test_reply_to_incoming(self):
+        self.in_mail1.getEditableContent().edit(confidential=True,
+                                                proxy = self.in_mail1)
         WorkflowScriptsIntegrationTestCase.test_reply_to_incoming(self)
+        doc = self.out_mail1.getContent()
         self.assertEquals(self.out_mail1.portal_type, 'Outgoing Pmail')
+        self.assertEquals(doc.confidential, True)
 
     def test_send_reply(self):
         in_mail1 = self.in_mail1
         wtool = getToolByName(self.portal, 'portal_workflow')
-        wtool.doActionFor(in_mail1, 'handle')
+        if wtool.getInfoFor(in_mail1, 'review_state') == 'received':
+            wtool.doActionFor(in_mail1, 'handle')
         out_mail1 = reply_to_incoming(in_mail1)
         result = send_reply(out_mail1)
         self.assert_(result is None)
 
     def test_send_html_reply(self):
+        pass
+
+    def test_init_stack_with_user(self):
         pass
 
 class WorkflowScriptsEmailIntegrationTestCase(

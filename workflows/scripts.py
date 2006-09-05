@@ -112,6 +112,7 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
         # bal's email address not relevant. Use two fields for compat later ?
         incoming_to = incoming_doc['mail_to']
         data['mail_from'] = incoming_to and incoming_to[0] or ''
+        data['confidential'] = incoming_doc['confidential']
 
     if base_reply_rpath:
         # initialise it's content with a template or a previously sent reply
