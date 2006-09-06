@@ -61,7 +61,7 @@
    <element value="edit"/>
   </property>
   <property name="translated">False</property>
-  <property name="vocabulary">mailboxes_docids</property>
+  <property name="vocabulary">mailboxes_ous</property>
  </widget>
  <widget name="id" meta_type="Directory Multi Id Widget">
  <property name="fields">

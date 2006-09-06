@@ -23,6 +23,7 @@ import base64
 import re
 
 from Products.CPSSkins import minjson as json
+from Products.CPSUtil.text import toAscii
 
 
 def hasFlexibleFields(data):
@@ -108,3 +109,43 @@ def html_to_text(html_data):
                        ('<[^>]*>(?i)(?m)', ''),
                        )
     return converter.convert(html_data)
+
+
+def computeMailboxOu(portal, title):
+    """Compute an unique ou for a new mailbox.
+
+    >>> class FakePortal:
+    ...      existing = []
+    ...      def portal_catalog(self, ou=None):
+    ...          if ou in self.existing:
+    ...               return[ou]
+    ...          return []
+    >>> portal = FakePortal()
+    >>> portal.existing = ['spam', 'bacon']
+    >>> portal.portal_catalog(ou='spam')
+    ['spam']
+
+    >>> computeMailboxOu(portal, 'truc')
+    'truc'
+    >>> ou = computeMailboxOu(portal, 'spam')
+    >>> print ou; portal.existing.append(ou)
+    spam_1
+    >>> ou = computeMailboxOu(portal, 'spam')
+    >>> print ou; portal.existing.append(ou)
+    spam_2
+    >>> computeMailboxOu(portal, 'bacon')
+    'bacon_1'
+    """
+
+    catalog = portal.portal_catalog
+
+    current = cleaned = toAscii(title).lower()
+    i = 1
+    existing = True
+    while existing:
+        existing = catalog(ou=current)
+        if not existing:
+            break
+        current = '%s_%d' % (cleaned, i)
+        i += 1
+    return current

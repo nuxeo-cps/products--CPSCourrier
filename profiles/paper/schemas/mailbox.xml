@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="mailbox">
+  <field name="ou" meta_type="CPS String Field">
+    <property
+	name="write_process_expr">python:not value and modules['Products.CPSCourrier.utils'].computeMailboxOu(portal, data['Title'])</property>
+  </field>
+</object>

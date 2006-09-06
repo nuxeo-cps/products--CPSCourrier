@@ -28,6 +28,11 @@
  <index name="mailbox_addresses" meta_type="FieldIndex">
   <indexed_attr value="mailbox_addresses"/>
  </index>
+ <!-- Used to find mailboxes from their corresponding ou -->
+ <index name="ou" meta_type="FieldIndex">
+  <indexed_attr value="ou"/>
+ </index>
+
  <column value="mailbox_addresses"/>
  <column value="has_attachment"/>
  <column value="priority"/>
@@ -35,4 +40,5 @@
  <column value="mail_to"/>
  <column value="deadline"/>
  <column value="template_usage"/>
+ <column value="ou"/>
 </object>

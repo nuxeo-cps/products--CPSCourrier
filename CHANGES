@@ -10,6 +10,8 @@ New features:
   local_addressbook for mailbox level contacts
   addressbook for global contacts
   groups for internal recipients
+- mailboxes local roles are mapped to corresponding entry
+  local roles in local_addressbook
 Bug fixes:
 ~~~~~~~~~~
 - Mail header and thread rendering in standalone profile.
@@ -18,4 +20,5 @@ Bug fixes:
   completion
 New internal features:
 ~~~~~~~~~~~~~~~~~~~~~~
--
+- unique 'ou' field on mailboxes for easy retrieval. Corresponds
+  to 'ou' entry field in local_addressbook

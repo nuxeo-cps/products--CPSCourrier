@@ -12,10 +12,10 @@
  <property name="layout">local_addressbook</property>
  <property name="layout_search">local_addressbook_search</property>
  <property name="acl_directory_view_roles">Manager; Member</property>
- <property name="acl_entry_create_roles">Manager</property>
- <property name="acl_entry_delete_roles">Manager</property>
- <property name="acl_entry_view_roles">Manager; Member</property>
- <property name="acl_entry_edit_roles">Manager</property>
+ <property name="acl_entry_create_roles">Manager; Injector; Contributor; Supervisor; LocalManager</property>
+ <property name="acl_entry_delete_roles">Manager; LocalManager;</property>
+ <property name="acl_entry_view_roles">Manager; Member; Injector; Contributor; Reader; Supervisor; LocalManager</property>
+ <property name="acl_entry_edit_roles">Manager; Injector; Contributor; Supervisor; LocalManager</property>
  <property name="id_field">id</property>
  <property name="title_field">fullname</property>
  <property name="search_substring_fields">
@@ -27,4 +27,10 @@
  <property name="is_hierarchical">False</property>
  <property name="password_field"></property>
  <cache-manager name="None"/>
+ <entry-local-role
+    role="Contributor">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, ou, 'Contributor')</entry-local-role>
+ <entry-local-role
+    role="Supervisor">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, ou, 'Supervisor')</entry-local-role>
+ <entry-local-role
+    role="LocalManager">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, ou, 'LocalManager')</entry-local-role>
 </object>

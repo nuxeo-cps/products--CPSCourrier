@@ -52,6 +52,10 @@ ModuleSecurityInfo(wf_scripts_module).declarePublic('paper_auto_handle')
 
 utils_module = 'Products.CPSCourrier.utils'
 ModuleSecurityInfo(utils_module).declarePublic('hasFlexibleFields')
+ModuleSecurityInfo(utils_module).declarePublic('computeMailboxOu')
+
+dirutils_module = 'Products.CPSCourrier.directoryutils'
+ModuleSecurityInfo(dirutils_module).declarePublic('hasLocalAddressBookRole')
 
 # Stack API
 ModuleSecurityInfo(wf_scripts_module).declarePublic('init_stack_with_user')

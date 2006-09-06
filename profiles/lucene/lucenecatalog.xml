@@ -11,6 +11,13 @@
       analyzer="standard"
       />
 
+  <field
+      name="ou"
+      attr="ou"
+      type="Keyword"
+      analyzer="standard"
+      />
+
     <field
 	name="mail_from"
 	attr="mail_from"
@@ -90,6 +97,7 @@
 
   <!-- Brain's  Metadata -->
 
+  <column value="ou"/>
   <column value="has_attachment"/>
   <column value="priority"/>
   <column value="mail_from"/>
