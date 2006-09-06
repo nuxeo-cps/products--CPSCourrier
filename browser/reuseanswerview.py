@@ -21,7 +21,7 @@ import logging
 
 from Products.CMFCore.utils import getToolByName
 
-from searchview import SearchView
+from Products.CPSDashboards.browser.searchview import SearchView
 
 logger = logging.getLogger('CPSCourrier.browser.reuseanswerview')
 
