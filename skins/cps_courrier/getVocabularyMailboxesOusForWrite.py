@@ -33,7 +33,7 @@ brains = catalog(**query)
 
 def intersects(list1, list2):
     """No set in restricted code (sigh)."""
-    
+
     for x in list1:
         if x in list2:
             return True
