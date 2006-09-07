@@ -667,6 +667,9 @@ msgstr ""
 msgid "label_address_book"
 msgstr ""
 
+msgid "cpscourrier_new_addressbook_entry"
+msgstr ""
+
 #
 # Misc
 #

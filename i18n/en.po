@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-09-04 16:50default\n"
+"POT-Creation-Date: 2006-09-07 12:16default\n"
 "PO-Revision-Date: 2006-07-12 12:17+0200\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -374,9 +374,8 @@ msgstr "Template Replies"
 msgid "cpscourrier_creator_label"
 msgstr "Creator"
 
-#, fuzzy
 msgid "cpscourrier_confidential_label"
-msgstr "Deadline"
+msgstr "Confidential"
 
 #
 # Layout labels
@@ -387,17 +386,14 @@ msgstr "Object"
 msgid "cpscourrier_from_label"
 msgstr "From"
 
-#, fuzzy
 msgid "cpscourrier_paper_from_local_label"
-msgstr "From"
+msgstr "From local addressbook"
 
-#, fuzzy
 msgid "cpscourrier_paper_from_internal_label"
 msgstr "From"
 
-#, fuzzy
 msgid "cpscourrier_paper_from_global_label"
-msgstr "From"
+msgstr "From global addressbbok"
 
 msgid "cpscourrier_to_label"
 msgstr "To"
@@ -998,6 +994,9 @@ msgstr ""
 #, fuzzy
 msgid "label_address_book"
 msgstr "To do"
+
+msgid "cpscourrier_new_addressbook_entry"
+msgstr "New"
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr "On ${y}-${m}-${d}, ${name} wrote:"
