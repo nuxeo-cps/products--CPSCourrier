@@ -1,6 +1,8 @@
 <tal:block define="context_obj nocall:options/context_obj;
-                   ptype context_obj/portal_type|nothing;"
-           condition="python:ptype in ['Outgoing Email', 'Incoming Email', 'Outgoing Pmail', 'Incoming Pmail']">
+                   ptype context_obj/portal_type|nothing;
+		   email python:ptype.endswith('Email');
+		   paper not:email;"
+	   condition="python:ptype in ['Outgoing Email', 'Incoming Email', 'Outgoing Pmail', 'Incoming Pmail']">
   <table class="listing"
          tal:define="relations python:modules['Products.CPSCourrier.relations'];
                      infos python:relations.get_thread_for(context_obj);
@@ -11,14 +13,14 @@
     <tbody>
       <tal:block repeat="info infos">
         <tr tal:define="depth python:info[0];
-                        proxy python:info[1]['object'];
+			info  python:info[1];
+                        proxy nocall:info/object;
                         title proxy/title_or_id;
-                        doc   proxy/getContent;
-                        from  doc/mail_from;
-                        rpath python:info[1]['rpath'];
+                        from  info/from;
+                        rpath info/rpath;
                         style python:here_rpath == rpath and 'font-weight:bold' or None;
                         url   python:base_url+rpath;
-                        state python:info[1]['review_state'];
+                        state info/review_state;
                         class python:repeat['info'].odd() and 'odd' or 'even'"
             tal:attributes="style style; class class">
           <td>
@@ -26,7 +28,10 @@
             <a tal:attributes="href url"
                tal:content='title'>Title of the mail</a>
           </td>
-          <td tal:content="from">Somebody</td>
+          <td tal:condition="email"
+	      tal:content="from">Somebody</td>
+          <td tal:condition="paper"
+	      tal:content="structure from">Somebody</td>
           <td style="width:8em">
             <span tal:content="state"
               tal:attributes="class state"

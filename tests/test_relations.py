@@ -66,6 +66,7 @@ class RelationsIntegrationTestCase(IntegrationTestCase):
         for d, px in proxy_structure:
             (info,) = ptool.getProxyInfosFromDocid(
                 px.getDocid(), workflow_vars=('review_state',))
+            info['from'] = px.getContent().mail_from
             self.expected_infos.append((d, info))
 
 

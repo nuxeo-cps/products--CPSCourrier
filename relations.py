@@ -21,6 +21,7 @@
 import logging
 
 from Products.CMFCore.utils import getToolByName
+from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSCourrier.config import (
     RELATION_GRAPH_ID, IS_REPLY_TO, HAS_REPLY)
 
@@ -47,7 +48,7 @@ def _find_root(graph, start_from, relation_id=IS_REPLY_TO):
 
 
 def _accumulate_proxy_info(graph, start_from, ptool,
-                           depth=0, relation_id=HAS_REPLY):
+                           depth=0, relation_id=HAS_REPLY, from_widget=None):
     """Recursively accumulate proxy info by walking down the relation_id tree
     depth-first
 
@@ -63,6 +64,17 @@ def _accumulate_proxy_info(graph, start_from, ptool,
     infos = [(depth, info) for info in infos
                            if info['review_state'] not in template_states
                               and info['visible']]
+
+    for info in infos:
+        proxy = info[1]['object']
+        doc = proxy.getContent()
+        if from_widget is not None and doc.portal_type.endswith('Pmail'):
+            dm = doc.getDataModel(proxy=proxy)
+            ds = DataStructure(datamodel=dm)
+            from_widget.prepare(ds)
+            info[1]['from'] = from_widget.render('view', ds)
+        else:
+            info[1]['from'] = doc.mail_from
 
     # adding depth first children info
     depth += 1
@@ -91,8 +103,15 @@ def get_thread_for(proxy):
     root_id = _find_root(g, int(proxy.getDocid()), IS_REPLY_TO)
     logger.debug('root found: %d' % root_id)
 
+    # try and find a rendering widget for the mail_from field
+    from_widget = None
+    ltool = getToolByName(proxy, 'portal_layouts')
+    if proxy.portal_type.endswith('Pmail'):
+        from_widget = ltool['pmail_common']['from']
+
     # walk back down collecting proxy infos
-    infos = _accumulate_proxy_info(g, root_id, ptool, relation_id=HAS_REPLY)
+    infos = _accumulate_proxy_info(g, root_id, ptool, relation_id=HAS_REPLY,
+                                   from_widget=from_widget)
     logger.debug('collected thread infos: %r' % infos)
 
     return infos
