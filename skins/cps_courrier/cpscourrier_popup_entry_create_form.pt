@@ -1,0 +1,46 @@
+<tal:block define="
+  global dirname request/dirname|string:members;
+  global dir here/portal_directories/?dirname;
+  global dirtitle dir/title_or_id;
+  global emptybody python:True;
+  "/>
+<metal:block use-macro="here/main_template_popup/macros/master">
+  <metal:block fill-slot="style_slot">
+    <link rel="Stylesheet" type="text/css" href=""
+      tal:attributes="href string:${base_url}document.css" />
+  </metal:block>
+
+  <metal:block fill-slot="body">
+    <h1>
+      <span i18n:translate="" tal:content="dirtitle" />:
+      <span i18n:translate="cpsdir_label_create_entry">create entry</span>
+    </h1>
+    <div class="description">
+    </div>
+  </metal:block>
+
+  <metal:block fill-slot="main" tal:define="
+      dummy dir/checkCreateEntryAllowed;
+      validate python: request.has_key('cpscourrier_popup_entry_create_form');
+      res python: dir.renderCreateEntryDetailed(
+          validate=validate, request=request,
+          created_callback='cpscourrier_popup_entry_created');
+      global rendered_main python: res[0];
+      rendered_ok python: res[1];
+      ds python: res[2];
+      global portal_status_message python: validate and (rendered_ok and
+        'psm_content_changed' or 'psm_content_error') or
+	request.get('portal_status_message', '');">
+
+    <metal:block
+	use-macro="here/generic_lib_portal_message/macros/portal_message"/>
+
+    <div tal:replace="structure rendered_main">Rendered main...</div>
+
+    <div style="float:right">
+      <button onclick="window.close()"
+	      i18n:translate="button_close">Fermer</button>
+    </div>
+
+  </metal:block>
+</metal:block>

@@ -295,11 +295,9 @@ class CPSDirectoryLinkSelectWidget(CPSSelectWidget):
         if self.create_form_prefill:
             args_base += '&%s=%s' % (widgetname('mailbox'), ou)
         href = '%s/cpsdirectory_entry_create_form?%s' % (dtool_url, args_base)
-        if self.create_form_prefill:
-            # trigger validation from request
-            href += '&cpsdirectory_entry_create_form=trigger'
-        href_popup = '%s/cpsdirectory_entry_create_form?%s' % (dtool_url,
-                                                               args_base)
+        args_popup = args_base + '&formaction=cpscourrier_popup_entry_create_form'
+        href_popup = '%s/cpscourrier_popup_entry_create_form?%s' % (dtool_url,
+                                                                    args_popup)
 
         onclick = "window.open('%s', 'Entry Create', 'location=0,toolbar=0,width=640,height=480,resizable=1;dependent=1');return false" % href_popup
         link_render = renderHtmlTag('a', href=href,
