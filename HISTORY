@@ -1,3 +1,35 @@
+===========================================================
+Package: CPSCourrier 0.18.0
+===========================================================
+First release built by: gracinet at: 2006-09-13T11:57:11
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.18.0
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@48908
+
+Requires:
+~~~~~~~~~
+-
+New features:
+~~~~~~~~~~~~~
+- Subject widget on mail view page now comes with its label in a <h4>
+- Auto handle at creation time for Incoming Paper Mail
+- Injection portlet (visible for global injector across the portal)
+- mail from and to linked to specific directories in paper setup:
+  local_addressbook for mailbox level contacts
+  addressbook for global contacts
+  groups for internal recipients
+- mailboxes local roles are mapped to corresponding entry
+  local roles in local_addressbook
+Bug fixes:
+~~~~~~~~~~
+- Mail header and thread rendering in standalone profile.
+- [OPTIM] fixed abusive tests like 'id in folder.objectIds()'
+- make the Mail2Email upgrade step able to re-run if interupted before
+  completion
+New internal features:
+~~~~~~~~~~~~~~~~~~~~~~
+- unique 'ou' field on mailboxes for easy retrieval. Corresponds
+  to 'ou' entry field in local_addressbook
+
 *******************************************
 ** CPSCourrier V0.17.2 [R1 build 2006/08/07-16:47 by fermigier]
 ** SVN URL: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk Revision: 48074
