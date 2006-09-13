@@ -3,7 +3,7 @@ Requires
 -
 New features
 ~~~~~~~~~~~~
--
+- Injector role manageable through the roles directory
 Bug fixes
 ~~~~~~~~~
 -
