@@ -4,6 +4,7 @@ Requires
 New features
 ~~~~~~~~~~~~
 - Injector role manageable through the roles directory in standalone setup
+- Link to create new entries in addressbooks from mail edit form
 Bug fixes
 ~~~~~~~~~
 -

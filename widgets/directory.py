@@ -21,12 +21,13 @@
 """Directory Related Widgets (for Paper setup)
 """
 from Globals import InitializeClass
-from Acquisition import aq_parent, aq_inner
+from Acquisition import aq_parent, aq_inner, aq_base
 
 from Products.CMFCore.utils import getToolByName
 
 from Products.CPSSchemas.Widget import widgetRegistry
 from Products.CPSSchemas.Widget import CPSWidget
+from Products.CPSSchemas.Widget import widgetname
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSSchemas.BasicWidgets import CPSProgrammerCompoundWidget
 from Products.CPSSchemas.BasicWidgets import CPSSelectWidget
@@ -220,7 +221,13 @@ widgetRegistry.register(CPSPaperMailRecipientWidget)
 
 
 class CPSDirectoryLinkSelectWidget(CPSSelectWidget):
-    """Select widget rendering with links to a directory according to mode."""
+    """Select widget rendering with links to a directory according to mode.
+
+    CPSCourrier specifics lie in the creation links:
+       - pick ou from the parent
+       - fetch in the url for form prefill
+    This could become configurable. Link part should be a subwidget actually
+    """
 
     meta_type = "Directory Link Select Widget"
 
@@ -228,11 +235,14 @@ class CPSDirectoryLinkSelectWidget(CPSSelectWidget):
         {'id': 'directory', 'type': 'string', 'mode': 'w',
          'label': 'Directory to link to'},
         {'id': 'skip_prepare', 'type': 'boolean', 'mode': 'w',
-         'label': 'Skip preparation (you know what you are doing)'}
+         'label': 'Skip preparation (you know what you are doing)'},
+        {'id': 'create_form_prefill', 'type': 'boolean', 'mode': 'w',
+         'label': 'Prefill popup with value of ou field from parent'}
         )
 
     directory = ''
     skip_prepare = False
+    create_form_prefill = False
 
     def prepare(self, ds, **kw):
         # no need (and harmul) to prepare if subwidget of
@@ -251,12 +261,51 @@ class CPSDirectoryLinkSelectWidget(CPSSelectWidget):
                 contents = cpsmcat(vocabulary.getMsgid(value, value)).encode('ISO-8859-15', 'ignore')
             else:
                 contents = vocabulary.get(value, value)
-            href = '%s/cpsdirectory_entry_view?dirname=%s&id=%s' % (dtool_url,
-                                                                    self.directory,
-                                                                    value)
+            href = '%s/cpsdirectory_entry_view?dirname=%s&id=%s' % (
+                dtool_url,
+                self.directory,
+                value)
             return renderHtmlTag('a', href=href, contents=contents)
-        # Todo: add a link to create form if perms are ok
-        return CPSSelectWidget.render(self, mode, ds, **kw)
+
+        base_render = CPSSelectWidget.render(self, mode, ds, **kw)
+
+        ## Now add a link to create form if perms are ok
+
+        # get ou
+        ou = None
+        if self.create_form_prefill:
+            proxy = ds.getDataModel().getProxy()
+            if proxy is not None:
+                mbox = aq_parent(aq_inner(proxy))
+                if mbox.portal_type == 'Mailbox':
+                    ou = mbox.getContent().ou
+
+        #  check perms
+        dtool = getToolByName(self, 'portal_directories')
+        dir_ = dtool[self.directory]
+        if not dir_.isCreateEntryAllowed({'ou':ou}):
+            return base_render
+
+        # render
+        cpsmcat = getToolByName(self, 'translation_service')
+        contents = cpsmcat('cpscourrier_new_addressbook_entry').encode(
+            self.default_charset)
+
+        args_base = 'dirname=%s' % self.directory
+        if self.create_form_prefill:
+            args_base += '&%s=%s' % (widgetname('mailbox'), ou)
+        href = '%s/cpsdirectory_entry_create_form?%s' % (dtool_url, args_base)
+        if self.create_form_prefill:
+            # trigger validation from request
+            href += '&cpsdirectory_entry_create_form=trigger'
+        href_popup = '%s/cpsdirectory_entry_create_form?%s' % (dtool_url,
+                                                               args_base)
+
+        onclick = "window.open('%s', 'Entry Create', 'location=0,toolbar=0,width=640,height=480,resizable=1;dependent=1');return false" % href_popup
+        link_render = renderHtmlTag('a', href=href,
+                                    contents=contents, onclick=onclick)
+
+        return '\n'.join((base_render, link_render))
 
 InitializeClass(CPSDirectoryLinkSelectWidget)
 widgetRegistry.register(CPSDirectoryLinkSelectWidget)
