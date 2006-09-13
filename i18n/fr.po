@@ -306,7 +306,7 @@ msgid "portal_type_MailboxGroup_title"
 msgstr "Groupement de boîtes aux lettres"
 
 msgid "portal_type_MailboxGroup_description"
-msgstr "Espace regroupant un ensemble de boîtes aux lettre "
+msgstr "Espace regroupant un ensemble de boîtes aux lettres"
 
 msgid "portal_type_Mailbox_title"
 msgstr "Boîte aux lettres"
