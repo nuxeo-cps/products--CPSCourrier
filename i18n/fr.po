@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-09-07 12:16default\n"
+"POT-Creation-Date: 2006-09-18 15:03default\n"
 "PO-Revision-Date: 2006-07-12 12:17+0200\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -186,6 +186,11 @@ msgstr "Fil de discussion"
 #: from ../skins/cps_courrier/cpscourrier_handle_form.pt
 msgid "cpscourrier_use_default_roadmap"
 msgstr "Utiliser la feuille de route par défaut"
+
+#.   <span>create entry</span>
+#: from ../skins/cps_courrier/cpscourrier_popup_entry_create_form.pt
+msgid "cpsdir_label_create_entry"
+msgstr ""
 
 #.   <h2 condition="insert_mode">
 #.   	  Add delegatees: search results
@@ -462,6 +467,42 @@ msgstr "Responsables"
 
 msgid "label_search_todo"
 msgstr "Action"
+
+msgid "label_addressbook_email"
+msgstr "Adresse de mél du contact"
+
+msgid "label_addressbook_full_name"
+msgstr "Nom complet du contact"
+
+msgid "label_addressbook_first_name"
+msgstr "Prénom du contact"
+
+msgid "label_addressbook_user_name"
+msgstr "Identifiant"
+
+msgid "label_addressbook_last_name"
+msgstr "Nom du contact"
+
+msgid "label_addressbook_telephoneNumber"
+msgstr "Numéro de téléphone du contact"
+
+msgid "label_addressbook_postalCode"
+msgstr "Code postal"
+
+msgid "label_addressbook_postalAddress"
+msgstr "Adresse postale"
+
+msgid "label_addressbook_description"
+msgstr "Description"
+
+msgid "label_addressbook_post_office"
+msgstr "Bureau distributeur"
+
+msgid "label_addressbook_fax_number"
+msgstr "Numéro de fax"
+
+msgid "label_addressbook_ou"
+msgstr "Organisation"
 
 msgid "cpscourrier_items_nb_label"
 msgstr "Courriers par page"

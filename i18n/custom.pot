@@ -179,6 +179,46 @@ msgid "label_search_todo"
 msgstr ""
 
 #
+# Addressbooks layouts labels
+#
+
+msgid "label_addressbook_email"
+msgstr ""
+
+msgid "label_addressbook_full_name"
+msgstr ""
+
+msgid "label_addressbook_first_name"
+msgstr ""
+
+msgid "label_addressbook_user_name"
+msgstr ""
+
+msgid "label_addressbook_last_name"
+msgstr ""
+
+msgid "label_addressbook_telephoneNumber"
+msgstr ""
+
+msgid "label_addressbook_postalCode"
+msgstr ""
+
+msgid "label_addressbook_postalAddress"
+msgstr ""
+
+msgid "label_addressbook_description"
+msgstr ""
+
+msgid "label_addressbook_post_office"
+msgstr ""
+
+msgid "label_addressbook_fax_number"
+msgstr ""
+
+msgid "label_addressbook_ou"
+msgstr ""
+
+#
 # Tabular widgets labels
 #
 msgid "cpscourrier_items_nb_label"

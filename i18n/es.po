@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-09-07 12:16default\n"
+"POT-Creation-Date: 2006-09-18 15:03default\n"
 "PO-Revision-Date: 2006-05-07 09:40+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -183,6 +183,11 @@ msgstr "Hilo de discusión"
 #: from ../skins/cps_courrier/cpscourrier_handle_form.pt
 msgid "cpscourrier_use_default_roadmap"
 msgstr "Utilice la hoja de ruta por defecto"
+
+#.   <span>create entry</span>
+#: from ../skins/cps_courrier/cpscourrier_popup_entry_create_form.pt
+msgid "cpsdir_label_create_entry"
+msgstr ""
 
 #.   <h2 condition="insert_mode">
 #.   	  Add delegatees: search results
@@ -384,7 +389,7 @@ msgstr "Creador"
 
 #, fuzzy
 msgid "cpscourrier_confidential_label"
-msgstr "Deadline"
+msgstr "Confidential"
 
 #
 # Layout labels
@@ -397,7 +402,7 @@ msgstr "De: "
 
 #, fuzzy
 msgid "cpscourrier_paper_from_local_label"
-msgstr "From"
+msgstr "From local addressbook"
 
 #, fuzzy
 msgid "cpscourrier_paper_from_internal_label"
@@ -405,7 +410,7 @@ msgstr "From"
 
 #, fuzzy
 msgid "cpscourrier_paper_from_global_label"
-msgstr "From"
+msgstr "From global addressbbok"
 
 msgid "cpscourrier_to_label"
 msgstr "Para: "
@@ -476,6 +481,54 @@ msgstr "Responsables"
 
 msgid "label_search_todo"
 msgstr "Acción"
+
+#, fuzzy
+msgid "label_addressbook_email"
+msgstr "To do"
+
+#, fuzzy
+msgid "label_addressbook_full_name"
+msgstr "To do"
+
+#, fuzzy
+msgid "label_addressbook_first_name"
+msgstr "To do"
+
+#, fuzzy
+msgid "label_addressbook_user_name"
+msgstr "To do"
+
+#, fuzzy
+msgid "label_addressbook_last_name"
+msgstr "To do"
+
+#, fuzzy
+msgid "label_addressbook_telephoneNumber"
+msgstr "To do"
+
+#, fuzzy
+msgid "label_addressbook_postalCode"
+msgstr "To do"
+
+#, fuzzy
+msgid "label_addressbook_postalAddress"
+msgstr "To do"
+
+#, fuzzy
+msgid "label_addressbook_description"
+msgstr "To do"
+
+#, fuzzy
+msgid "label_addressbook_post_office"
+msgstr "To do"
+
+#, fuzzy
+msgid "label_addressbook_fax_number"
+msgstr "To do"
+
+#, fuzzy
+msgid "label_addressbook_ou"
+msgstr "To do"
 
 #, fuzzy
 msgid "cpscourrier_items_nb_label"
@@ -987,7 +1040,7 @@ msgstr "To do"
 
 #, fuzzy
 msgid "cpscourrier_new_addressbook_entry"
-msgstr "Form of address"
+msgstr "New"
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr "El ${d}-${m}-${y}, ${name} escribió:"
