@@ -9,7 +9,7 @@
 
  <widget name="email" meta_type="String Widget">
   <property name="fields">
-   <element value="email"/>
+   <element value="mail"/>
   </property>
   <property name="label">label_addressbook_email</property>
   <property name="label_edit">label_addressbook_email</property>
