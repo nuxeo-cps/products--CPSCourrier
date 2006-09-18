@@ -14,6 +14,5 @@
  </field>
  <field name="givenName" meta_type="CPS String Field"/>
  <field name="id" meta_type="CPS String Field"/>
- <field name="mails_sent" meta_type="CPS Int Field"/>
  <field name="sn" meta_type="CPS String Field"/>
 </object>
