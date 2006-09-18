@@ -16,13 +16,17 @@
  <property name="acl_entry_delete_roles">Manager; LocalManager;</property>
  <property name="acl_entry_view_roles">Manager; Member; Injector; Contributor; Reader; Supervisor; LocalManager</property>
  <property name="acl_entry_edit_roles">Manager; Injector; Contributor; Supervisor; LocalManager</property>
- <property name="id_field">id</property>
- <property name="title_field">fullname</property>
+ <property name="id_field">uid</property>
+ <property name="title_field">cn</property>
  <property name="search_substring_fields">
-  <element value="fullname"/>
-  <element value="email"/>
-  <element value="id"/>
+  <element value="cn"/>
+  <element value="mail"/>
+  <element value="local_id"/>
   <element value="sn"/>
+  <element value="postalAddress"/>
+  <element value="physicalDeliveryOfficeName"/>
+  <element value="ou"/>
+  <element value="description"/>
  </property>
  <property name="is_hierarchical">False</property>
  <property name="password_field"></property>

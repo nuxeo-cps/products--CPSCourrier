@@ -6,23 +6,9 @@
  <property name="style_prefix">layout_dir_</property>
  <property name="flexible_widgets"/>
  <property name="validate_values_expr"></property>
- <widget name="email" meta_type="String Widget">
-  <property name="fields">
-   <element value="email"/>
-  </property>
-  <property name="label">label_email</property>
-  <property name="label_edit">label_email</property>
-  <property name="is_i18n">True</property>
-  <property name="display_width">30</property>
- </widget>
- <widget name="givenName" meta_type="String Widget">
-  <property name="fields">
-   <element value="givenName"/>
-  </property>
-  <property name="label">label_first_name</property>
-  <property name="label_edit">label_first_name</property>
-  <property name="is_i18n">True</property>
- </widget>
+
+ <!-- Specific to local_addressbook -->
+
  <widget name="local_id" meta_type="String Widget">
   <property name="fields">
    <element value="local_id"/>
@@ -34,26 +20,124 @@
    <element value="edit"/>
   </property>
  </widget>
+
+ <widget name="mailbox" meta_type="Select Widget">
+  <property name="fields">
+   <element value="mailbox"/>
+  </property>
+  <property name="label">portal_type_Mailbox_title</property>
+  <property name="label_edit">portal_type_Mailbox_title</property>
+  <property name="is_i18n">True</property>
+  <property name="translated">False</property>
+  <property name="vocabulary">mailboxes_ous_for_write</property>
+ </widget>
+
+<!-- Taken from addressbook.xml:
+   all widgets save 'id' and 'description'
+   changed labels for flexibility
+   -->
+
+<widget name="email" meta_type="String Widget">
+  <property name="fields">
+   <element value="mail"/>
+  </property>
+  <property name="label">label_local_addressbook_email</property>
+  <property name="label_edit">label_local_addressbook_email</property>
+  <property name="is_i18n">True</property>
+  <property name="display_width">30</property>
+ </widget>
+
+ <widget name="givenName" meta_type="String Widget">
+  <property name="fields">
+   <element value="givenName"/>
+  </property>
+  <property name="label">label_local_addressbook_first_name</property>
+  <property name="label_edit">label_local_addressbook_first_name</property>
+  <property name="is_i18n">True</property>
+ </widget>
+
  <widget name="sn" meta_type="String Widget">
   <property name="fields">
    <element value="sn"/>
   </property>
-  <property name="label">label_last_name</property>
-  <property name="label_edit">label_last_name</property>
+  <property name="label">label_local_addressbook_last_name</property>
+  <property name="label_edit">label_local_addressbook_last_name</property>
   <property name="is_i18n">True</property>
  </widget>
+
+ <widget name="ou" meta_type="String Widget">
+  <property name="fields">
+   <element value="ou"/>
+  </property>
+  <property name="label">label_local_addressbook_ou</property>
+  <property name="label_edit">label_local_addressbook_ou</property>
+  <property name="is_i18n">True</property>
+  <property name="display_width">30</property>
+  <property name="size_max">0</property>
+ </widget>
+
+ <widget name="postalAddress" meta_type="String Widget">
+  <property name="fields">
+   <element value="postalAddress"/>
+  </property>
+  <property name="label">label_local_addressbook_postalAddress</property>
+  <property name="label_edit">label_local_addressbook_postalAddress</property>
+  <property name="is_i18n">True</property>
+  <property name="display_width">30</property>
+ </widget>
+
+ <widget name="post_office" meta_type="String Widget">
+  <property name="fields">
+   <element value="physicalDeliveryOfficeName"/>
+  </property>
+  <property name="label">label_local_addressbook_post_office</property>
+  <property name="label_edit">label_local_addressbook_post_office</property>
+  <property name="is_i18n">True</property>
+  <property name="display_width">30</property>
+  <property name="size_max">0</property>
+ </widget>
+
+ <widget name="postalCode" meta_type="String Widget">
+  <property name="fields">
+   <element value="postalCode"/>
+  </property>
+  <property name="label">label_local_addressbook_postalCode</property>
+  <property name="label_edit">label_local_addressbook_postalCode</property>
+  <property name="is_i18n">True</property>
+  <property name="display_width">8</property>
+  <property name="size_max">0</property>
+ </widget>
+
  <table>
   <row>
    <cell name="local_id" ncols="2"/>
   </row>
+<!--
+  Not done yet, we'd need a vocabulary with empty entry
   <row>
-   <cell name="email" ncols="2"/>
+   <cell name="mailbox" ncols="2"/>
+  </row>
+-->
+  <row>
+   <cell name="ou" ncols="2"/>
+  </row>
+  <row>
+   <cell name="postalAddress" ncols="2"/>
+  </row>
+  <row>
+   <cell name="postalCode" ncols="2"/>
+  </row>
+  <row>
+   <cell name="post_office" ncols="2"/>
+  </row>
+  <row>
+   <cell name="sn" ncols="2"/>
   </row>
   <row>
    <cell name="givenName" ncols="2"/>
   </row>
   <row>
-   <cell name="sn" ncols="2"/>
+   <cell name="email" ncols="2"/>
   </row>
  </table>
 </object>

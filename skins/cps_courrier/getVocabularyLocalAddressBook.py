@@ -36,7 +36,7 @@ if key is not None:
 
 # return_fields don't go through read_expr, and entry title field is typically
 # a fullname...
-query = {'ou': mailbox.getContent().getDataModel()['ou']}
+query = {'mailbox': mailbox.getContent().getDataModel()['ou']}
 entry_ids = ldir.searchEntries(**query)
 items = [(e_id, ldir.getEntry(e_id)[title_field]) for e_id in entry_ids]
 return items
