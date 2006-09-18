@@ -18,7 +18,7 @@
 
 from Products.CMFCore.utils import getToolByName
 
-from localrolesview import LocalRolesView
+from Products.CPSDashboards.browser.localrolesview import LocalRolesView
 
 class RoadmapView(LocalRolesView):
 
