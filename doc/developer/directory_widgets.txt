@@ -1,0 +1,126 @@
+=================
+Directory Widgets
+=================
+
+:Revision: $Id$
+
+.. contents:: :depth: 1
+.. sectnum::
+
+
+Directory Multi Entry Widget
+----------------------------
+
+This widget is a quick and easy hack to provide hierarchical support
+for any directory. Just use it to govern the id field.
+
+The idea is to aggregate several fields into one at validation
+time. Therefore, this is a compound widget. Let's instanciate one,
+together with some subwidgets::
+
+    >>> import Products.CPSCourrier.widgets
+    >>> import Products.CPSSchemas.BasicWidgets
+    >>> from Products.CPSSchemas.Layout import CPSLayout
+    >>> layout = CPSLayout('the_layout')
+    >>> layout.manage_addCPSWidget('multi_entry', 'Directory Multi Id Widget')
+    <CPSDirectoryMultiIdWidget at the_layout/w__multi_entry>
+    >>> layout.manage_addCPSWidget('wid1', 'String Widget')
+    <CPSStringWidget at the_layout/w__wid1>
+    >>> layout.manage_addCPSWidget('wid2', 'String Widget')
+    <CPSStringWidget at the_layout/w__wid2>
+    >>> layout.manage_addCPSWidget('wid3', 'String Widget')
+    <CPSStringWidget at the_layout/w__wid3>
+
+Now set subswidgets properties::
+
+    >>> wid1 = layout['wid1']
+    >>> wid1.fields = ['local_id']
+    >>> wid2 = layout['wid2']
+    >>> wid2.fields = ['mailbox']
+    >>> wid3 = layout['wid3']
+    >>> wid3.fields = ['mbgroup']
+
+And finally the master widget's (we use two subwidgets for now)::
+
+    >>> widget = layout['multi_entry']
+    >>> widget.fields = ['uid', 'local_id', 'mailbox']
+    >>> widget.widget_ids = ['wid1', 'wid2']
+
+Preparation
+~~~~~~~~~~~
+
+    The widget itself is not prepared, but subwidgets are::
+
+    >>> from Products.CPSSchemas.tests.testWidgets import FakeDataModel
+    >>> from Products.CPSSchemas.tests.testWidgets import FakeDataStructure
+    >>> dm = FakeDataModel(dm={'uid': '', 'local_id': 'contact',
+    ...                    'mailbox': 'box1', 'mbgroup' : ''})
+    >>> ds = FakeDataStructure(dm)
+    >>> widget.prepare(ds)
+    >>> from pprint import PrettyPrinter
+    >>> pprint=PrettyPrinter(width=50).pprint
+    >>> pprint(ds)
+    {'wid1': 'contact', 'wid2': 'box1'}
+
+
+Validation
+~~~~~~~~~~
+
+    Sub widgets validation is standard:
+
+    >>> ds = FakeDataStructure(dm)
+    >>> ds.update({'wid1': 'the_id', 'wid2': 'box2'})
+    >>> widget.validate(ds)
+    True
+    >>> dm['local_id']
+    'the_id'
+    >>> dm['mailbox']
+    'box2'
+
+    The widget's first field is used as 'id' field for the directory. By
+    default, it's almost a concatenation of others::
+
+    >>> dm['uid']
+    'the_id,box2'
+
+    If the ``ldap_syntax`` property is ``True``, we get something more suited
+    for LDAP backing directories::
+
+    >>> widget.ldap_syntax = True
+    >>> widget.validate(ds)
+    True
+    >>> dm['uid']
+    'the_id,mailbox=box2'
+
+    The ``LDAPBackingDirectory`` will append its base DN to
+    ``uid=the_id,mailbox=box2``. This the hack.
+
+    One might want a bit of renaming here, especially since ``ou``
+    is also an attribute in inetOrgPerson schema that one might want
+    to differenciate from its occurence in the DN (attribute of the
+    parent). Let's demonstrate the full case with three subwidgets.
+
+    >>> widget.fields.append('mbgroup')
+    >>> widget.widget_ids.append('wid3')
+    >>> widget.ldap_renamings = 'mailbox:ou,mbgroup:o'
+    >>> ds['wid3'] = 'grp'
+    >>> widget.validate(ds)
+    True
+    >>> dm['mbgroup']
+    'grp'
+    >>> dm['uid']
+    'the_id,ou=box2,o=grp'
+
+Rendering
+~~~~~~~~~
+
+   Nothing to be said here: the ``CPSCompoundProgrammerWidget`` base class
+   does all the job.
+
+
+.. Emacs
+.. Local Variables:
+.. mode: rst
+.. End:
+.. Vim
+.. vim: set filetype=rst:

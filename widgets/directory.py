@@ -43,9 +43,12 @@ class CPSDirectoryMultiIdWidget(CPSProgrammerCompoundWidget):
     _properties = CPSProgrammerCompoundWidget._properties + (
         {'id': 'ldap_syntax', 'type': 'boolean', 'mode': 'w',
          'label': 'Use ldap dn syntax?'},
+        {'id': 'ldap_renamings', 'type': 'boolean', 'mode': 'w',
+         'label': 'Ldap dn renaming (<field id>:<dn part>, comma separated). Does not apply to rdn'},
         )
 
     ldap_syntax = False
+    ldap_renamings = ''
     render_method = 'widget_directory_multi_id_render'
 
     def _getPrepareValidateMethod(self):
@@ -65,8 +68,14 @@ class CPSDirectoryMultiIdWidget(CPSProgrammerCompoundWidget):
         layout = aq_parent(aq_inner(self))
         subfields = self.fields[1:]
         if self.ldap_syntax:
-            items = ['%s=%s' % (field_id, dm[field_id])
-                     for field_id in subfields]
+            if self.ldap_renamings:
+                mapping = dict(mapp.strip().split(':')
+                               for mapp in self.ldap_renamings.strip().split(','))
+            else:
+                mapping = {}
+            items = ['%s=%s' % (mapping.get(field_id, field_id), dm[field_id])
+                     for field_id in subfields[1:]]
+            items.insert(0, dm[subfields[0]])
         else:
             items = [dm[field_id] for field_id in subfields]
 

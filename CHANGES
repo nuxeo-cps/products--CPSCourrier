@@ -10,4 +10,4 @@ Bug fixes
 - Thread portlet display of sender in paper setup
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
-- 
+- Directory Multi Id Widget is capable of field renamning for LDAP dn syntax.
