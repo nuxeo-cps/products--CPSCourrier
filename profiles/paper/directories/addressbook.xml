@@ -10,12 +10,12 @@
  <property name="acl_entry_delete_roles">Manager</property>
  <property name="acl_entry_view_roles">Manager; Member</property>
  <property name="acl_entry_edit_roles">Manager</property>
- <property name="id_field">id</property>
+ <property name="id_field">uid</property>
  <property name="title_field">ou</property>
  <property name="search_substring_fields">
   <element value="cn"/>
   <element value="mail"/>
-  <element value="id"/>
+  <element value="uid"/>
   <element value="sn"/>
   <element value="postalAddress"/>
   <element value="physicalDeliveryOfficeName"/>

@@ -51,7 +51,7 @@ others can be both (should'nt be :/)
 
  <widget name="id" meta_type="Identifier Widget">
   <property name="fields">
-   <element value="id"/>
+   <element value="uid"/>
   </property>
   <property name="is_required">True</property>
   <property name="label">label_addressbook_user_name</property>
