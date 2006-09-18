@@ -6,6 +6,7 @@
  <property name="style_prefix">layout_dir_</property>
  <property name="flexible_widgets"/>
  <property name="validate_values_expr"></property>
+
  <widget name="email" meta_type="String Widget">
   <property name="fields">
    <element value="email"/>
@@ -15,6 +16,7 @@
   <property name="is_i18n">True</property>
   <property name="display_width">30</property>
  </widget>
+
  <widget name="givenName" meta_type="String Widget">
   <property name="fields">
    <element value="givenName"/>
@@ -23,6 +25,7 @@
   <property name="label_edit">label_first_name</property>
   <property name="is_i18n">True</property>
  </widget>
+
  <widget name="id" meta_type="String Widget">
   <property name="fields">
    <element value="id"/>
@@ -34,6 +37,7 @@
    <element value="edit"/>
   </property>
  </widget>
+
  <widget name="sn" meta_type="String Widget">
   <property name="fields">
    <element value="sn"/>
@@ -42,6 +46,7 @@
   <property name="label_edit">label_last_name</property>
   <property name="is_i18n">True</property>
  </widget>
+
  <table>
   <row>
    <cell name="id" ncols="2"/>
