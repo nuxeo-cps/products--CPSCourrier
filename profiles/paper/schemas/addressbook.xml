@@ -1,18 +1,25 @@
 <?xml version="1.0"?>
 <object name="addressbook" meta_type="CPS Schema">
- <field name="email" meta_type="CPS String Field"/>
- <field name="fullname" meta_type="CPS String Field">
-  <property name="read_ignore_storage">True</property>
+ <field name="mail" meta_type="CPS String Field"/>
+
+ <field name="cn" meta_type="CPS String Field">
+  <property name="read_ignore_storage">False</property>
   <property
-     name="read_process_expr">python:(givenName + " " + sn).strip()</property>
-  <property name="read_process_dependent_fields">
-   <element value="givenName"/>
-   <element value="sn"/>
-   <element value="id"/>
-  </property>
-  <property name="write_ignore_storage">True</property>
+     name="write_process_expr">python:(givenName + " " + sn).strip() or id</property>
  </field>
+
  <field name="givenName" meta_type="CPS String Field"/>
  <field name="id" meta_type="CPS String Field"/>
  <field name="sn" meta_type="CPS String Field"/>
+ <!-- the name of organisation (unit) the contact belongs to
+      independent from organizationUnit objects in the LDAP database.
+   -->
+ <field name="ou" meta_type="CPS String Field"/>
+
+ <field name="description" meta_type="CPS String Field"/>
+ <field name="postalAddress" meta_type="CPS String Field"/>
+ <field name="postalCode" meta_type="CPS String Field"/>
+ <field name="telephoneNumber" meta_type="CPS String Field"/>
+ <field name="facsimileTelephoneNumber" meta_type="CPS String Field"/>
+ <field name="physicalDeliveryOfficeName" meta_type="CPS String Field"/>
 </object>

@@ -1,7 +1,14 @@
 <?xml version="1.0"?>
 <object name="addressbook_search" meta_type="CPS Schema">
- <field name="email" meta_type="CPS String Field"/>
+ <field name="mail" meta_type="CPS String Field"/>
  <field name="givenName" meta_type="CPS String Field"/>
  <field name="id" meta_type="CPS String Field"/>
  <field name="sn" meta_type="CPS String Field"/>
+
+ <field name="ou" meta_type="CPS String Field"/>
+
+ <field name="postalAddress" meta_type="CPS String Field"/>
+ <field name="postalCode" meta_type="CPS String Field"/>
+ <field name="facsimileTelephoneNumber" meta_type="CPS String Field"/>
+ <field name="physicalDeliveryOfficeName" meta_type="CPS String Field"/>
 </object>
