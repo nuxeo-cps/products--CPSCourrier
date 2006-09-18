@@ -218,6 +218,42 @@ msgstr ""
 msgid "label_addressbook_ou"
 msgstr ""
 
+msgid "label_local_addressbook_email"
+msgstr ""
+
+msgid "label_local_addressbook_full_name"
+msgstr ""
+
+msgid "label_local_addressbook_first_name"
+msgstr ""
+
+msgid "label_local_addressbook_user_name"
+msgstr ""
+
+msgid "label_local_addressbook_last_name"
+msgstr ""
+
+msgid "label_local_addressbook_telephoneNumber"
+msgstr ""
+
+msgid "label_local_addressbook_postalCode"
+msgstr ""
+
+msgid "label_local_addressbook_postalAddress"
+msgstr ""
+
+msgid "label_local_addressbook_description"
+msgstr ""
+
+msgid "label_local_addressbook_post_office"
+msgstr ""
+
+msgid "label_local_addressbook_fax_number"
+msgstr ""
+
+msgid "label_local_addressbook_ou"
+msgstr ""
+
 #
 # Tabular widgets labels
 #

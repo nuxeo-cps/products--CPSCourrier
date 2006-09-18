@@ -3,7 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-09-18 15:03default\n"
+"POT-Creation-Date: 2006-09-18 
+21:04default\n"
 "PO-Revision-Date: 2006-07-12 12:17+0200\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -503,6 +504,46 @@ msgstr "Numéro de fax"
 
 msgid "label_addressbook_ou"
 msgstr "Organisation"
+
+msgid "label_local_addressbook_email"
+msgstr "Adresse de mél du contact"
+
+msgid "label_local_addressbook_full_name"
+msgstr "Nom complet du contact"
+
+msgid "label_local_addressbook_first_name"
+msgstr "Prénom du contact"
+
+msgid "label_local_addressbook_user_name"
+msgstr "Identifiant"
+
+msgid "label_local_addressbook_last_name"
+msgstr "Nom du contact"
+
+msgid "label_local_addressbook_telephoneNumber"
+msgstr "Numéro de téléphone du contact"
+
+msgid "label_local_addressbook_postalCode"
+msgstr "Code postal"
+
+msgid "label_local_addressbook_postalAddress"
+msgstr "Adresse postale"
+
+msgid "label_local_addressbook_description"
+msgstr "Description"
+
+msgid "label_local_addressbook_post_office"
+msgstr "Bureau distributeur"
+
+msgid "label_local_addressbook_fax_number"
+msgstr "Numéro de fax"
+
+#
+# Directories
+#
+#, fuzzy
+msgid "label_local_addressbook_ou"
+msgstr "Correspondants ponctuels"
 
 msgid "cpscourrier_items_nb_label"
 msgstr "Courriers par page"

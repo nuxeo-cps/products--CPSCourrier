@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-09-18 15:03default\n"
+"POT-Creation-Date: 2006-09-18 21:04default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -487,6 +487,42 @@ msgid "label_addressbook_fax_number"
 msgstr ""
 
 msgid "label_addressbook_ou"
+msgstr ""
+
+msgid "label_local_addressbook_email"
+msgstr ""
+
+msgid "label_local_addressbook_full_name"
+msgstr ""
+
+msgid "label_local_addressbook_first_name"
+msgstr ""
+
+msgid "label_local_addressbook_user_name"
+msgstr ""
+
+msgid "label_local_addressbook_last_name"
+msgstr ""
+
+msgid "label_local_addressbook_telephoneNumber"
+msgstr ""
+
+msgid "label_local_addressbook_postalCode"
+msgstr ""
+
+msgid "label_local_addressbook_postalAddress"
+msgstr ""
+
+msgid "label_local_addressbook_description"
+msgstr ""
+
+msgid "label_local_addressbook_post_office"
+msgstr ""
+
+msgid "label_local_addressbook_fax_number"
+msgstr ""
+
+msgid "label_local_addressbook_ou"
 msgstr ""
 
 #
