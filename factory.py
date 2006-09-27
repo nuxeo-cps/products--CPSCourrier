@@ -29,8 +29,7 @@ def upgradeCatalog(site, **kw):
 
 
 class CPSCourrierSiteConfigurator(CPSSiteMetaConfigurator):
-     """ CPS Courrier configurator.
-     """
+     """CPS Courrier configurator"""
 
      meta_profiles = {
          'CourrierBase': {'title' : 'Common set of components',
@@ -49,7 +48,17 @@ class CPSCourrierSiteConfigurator(CPSSiteMetaConfigurator):
                                                    'MailHost.MailHost',
                                           'rpath' : 'MailHost'},
                           },
-
+         'Lucene': {'title' : 'Lucene external indexing',
+                    'extensions' : ('CPSLuceneCatalog:default',
+                                    'CPSCourrier:lucene'),
+                    'parameters' : {'properties' : ('server_url',),
+                                    'class': 'Products.CPSLuceneCatalog.'
+                                    'catalog.CPSLuceneCatalogTool',
+                                    'rpath': 'portal_catalog',
+                                  },
+                    'optional' : True,
+                    'before_import' : upgradeCatalog,
+                    },
          'CourrierEmail': {'title': 'E-mail handling specifics',
                    'extensions': ('CPSCourrier:email',),
                    'optional': True,
@@ -59,7 +68,7 @@ class CPSCourrierSiteConfigurator(CPSSiteMetaConfigurator):
                    'optional': True,},
          }
 
-     metas_order = ('CourrierBase', 'CourrierEmail', 'CourrierPaper',)
+     metas_order = ('CourrierBase', 'Lucene', 'CourrierEmail', 'CourrierPaper',)
      form_heading = "Add CPSCourrier Site"
      post_action = 'addConfiguredCPSCourrierSite'
 

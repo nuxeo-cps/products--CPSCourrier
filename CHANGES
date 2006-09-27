@@ -6,6 +6,7 @@ New features
 - Injector role manageable through the roles directory in standalone setup
 - Link to create new entries in addressbooks from mail edit form
 - Added many fields/widgets to addressbooks
+- Added optional Lucene cataloging to the factory
 Bug fixes
 ~~~~~~~~~
 - Thread portlet display of sender in paper setup
