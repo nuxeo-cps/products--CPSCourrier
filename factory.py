@@ -48,6 +48,28 @@ class CPSCourrierSiteConfigurator(CPSSiteMetaConfigurator):
                                                    'MailHost.MailHost',
                                           'rpath' : 'MailHost'},
                           },
+         'LDAP': {
+             'title' : ('External LDAP directory storage for members and'
+                        'contacts'),
+             'extensions' : (
+                 'CPSLDAPSetup:default',
+                 # TODO: add CPSCourrier:ldap here to store the contacts
+                 # directories
+             ),
+             'parameters' : {
+                 'properties' : (
+                     'ldap_server',
+                     'ldap_port',
+                     'ldap_bind_dn',
+                     'ldap_bind_password',
+                     'ldap_base',
+                     'ldap_base_creation',
+                 ),
+                 'class': 'Products.CPSDirectory.LDAPBackingDirectory',
+                 'rpath': 'portal_directories/members_ldap',
+             },
+             'optional' : True,
+         },
          'Lucene': {'title' : 'Lucene external indexing',
                     'extensions' : ('CPSLuceneCatalog:default',
                                     'CPSCourrier:lucene'),
@@ -68,7 +90,7 @@ class CPSCourrierSiteConfigurator(CPSSiteMetaConfigurator):
                    'optional': True,},
          }
 
-     metas_order = ('CourrierBase', 'Lucene', 'CourrierEmail', 'CourrierPaper',)
+     metas_order = ('CourrierBase', 'Lucene', 'LDAP', 'CourrierEmail', 'CourrierPaper',)
      form_heading = "Add CPSCourrier Site"
      post_action = 'addConfiguredCPSCourrierSite'
 
