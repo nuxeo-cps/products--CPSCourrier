@@ -1,4 +1,27 @@
 ===========================================================
+Package: CPSCourrier 0.19.0
+===========================================================
+First release built by: gracinet at: 2006-09-29T13:32:54
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.19.0
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@49256
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+- Injector role manageable through the roles directory in standalone setup
+- Link to create new entries in addressbooks from mail edit form
+- Added many fields/widgets to addressbooks
+- Added optional Lucene cataloging to the factory
+Bug fixes
+~~~~~~~~~
+- Thread portlet display of sender in paper setup
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- Directory Multi Id Widget is capable of field renamning for LDAP dn syntax.
+
+===========================================================
 Package: CPSCourrier 0.18.0
 ===========================================================
 First release built by: gracinet at: 2006-09-13T11:57:11
