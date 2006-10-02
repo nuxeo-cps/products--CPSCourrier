@@ -14,5 +14,8 @@
     <property name="is_searchabletext">True</property>
   </field>
   <field name="confidential" meta_type="CPS Boolean Field"/>
+  <field name="ack_sent" meta_type="CPS Boolean Field"/>
+  <!-- Text of the acknowledgement -->
+  <field name="acknowledgement" meta_type="CPS String Field"/>
 </object>
 

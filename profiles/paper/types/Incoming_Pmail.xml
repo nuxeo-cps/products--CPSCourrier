@@ -22,6 +22,7 @@
  <property name="layout_clusters">
    <element value="header:pmail_header"/>
    <element value="metadata:mail_metadata"/>
+   <element value="ack:mail_paper_ack"/>
  </property>
  <property name="flexible_layouts">
   <element value="mail_flexible:flexible_content"/>

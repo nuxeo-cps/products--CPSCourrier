@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<object name="pmail_ack" meta_type="CPS Layout">
+ <property name="layout_view_print_method" type="str">layout_mail_paper_ack_print</property>
+
+ <widget name="Title" meta_type="Heading Widget">
+  <property name="fields">
+   <element value="Title"/>
+  </property>
+  <property name="label_edit">cpsdoc_title_label_edit</property>
+  <property name="is_i18n">True</property>
+  <property name="readonly_layout_modes">
+    <element value="edit"/>
+  </property>
+  <property name="hidden_layout_modes">
+    <element value="view_print"/>
+  </property>
+  <property name="hidden_readonly_layout_modes"/>
+  <property name="size_max">200</property>
+  <property name="level">2</property>
+ </widget>
+
+ <widget name="content" meta_type="Text Widget">
+  <property name="fields">
+   <element value="acknowledgement"/>
+  </property>
+  <property name="label_edit">cpsdoc_flex_content_label_edit</property>
+  <property name="is_i18n">True</property>
+  <property name="css_class">dcontent</property>
+  <property name="width">72</property>
+  <property name="height">50</property>
+  <property name="render_format">html</property>
+  <property name="configurable">nothing</property>
+  <property name="html_editor_position">embedded</property>
+ </widget>
+
+ <table>
+   <row><cell name="Title"/></row>
+   <row><cell name="content"/></row>
+ </table>
+</object>
