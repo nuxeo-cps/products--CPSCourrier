@@ -43,7 +43,7 @@ class PaperAckView(BrowserView):
 
     layout_id = 'pmail_ack'
     content_wid = 'content'
-    flag_field = 'flag_ack'
+    flag_field = 'ack_sent'
 
     def __init__(self, context, request):
         BrowserView.__init__(self, context, request)
