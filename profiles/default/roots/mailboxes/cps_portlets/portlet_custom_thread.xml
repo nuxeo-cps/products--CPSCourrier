@@ -8,4 +8,6 @@
  <f id="order" v="5"/>
  <f id="render_method" v="portlet_custom_thread"/>
  <f id="slot" v="content_well"/>
+ <guard groups="" permissions=""
+    roles="">python:published != 'cpscourrier_paper_ack.html'</guard>
 </object>

@@ -10,5 +10,5 @@
  <!-- would be better to be able to access the list of mail types.
    good enough for now -->
  <guard groups="" permissions=""
-    roles="">python: here.portal_type.endswith('mail')</guard>
+    roles="">python: here.portal_type.endswith('mail') and published != 'cpscourrier_paper_ack.html'</guard>
 </object>
