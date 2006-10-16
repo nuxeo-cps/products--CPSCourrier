@@ -48,6 +48,8 @@ class PaperAckView(BrowserView):
     def __init__(self, context, request):
         BrowserView.__init__(self, context, request)
         self.html_wid = widgetname(self.content_wid)
+        # Would be slightly better to introspect theme page
+        self.is_print = bool(request.form.get('pp'))
 
     def getId(self):
         # useful for portlet guards

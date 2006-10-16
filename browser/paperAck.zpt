@@ -6,24 +6,27 @@
   </metal:block>
 
   <metal:block fill-slot="header">
-    <h1 i18n:translate="cpscourrier_paper_ack_prepare_heading">
+    <h1 tal:condition="not:view/is_print"
+	i18n:translate="cpscourrier_paper_ack_prepare_heading">
       Prepare an acknowledgement
     </h1>
   </metal:block>
 
   <metal:block fill-slot="main">
 
-    <form 
-	tal:attributes="action string:${here/absolute_url}/cpscourrier_paper_ack">
+    <form tal:omit-tag="view/is_print"
+	  tal:attributes="action string:${here/absolute_url}/cpscourrier_paper_ack">
       <tal:block replace="structure view/renderLayout"/>
-      <input type="submit" name="print_ack"
-	     class="standalone"
-	     value="cpscourrier_button_print_ack"
-	     i18n:attributes="value"/>
-      <input type="submit" name="email_ack"
-	     class="standalone"
-	     value="cpscourrier_button_email_ack"
-	     i18n:attributes="value"/>
+      <tal:block condition="not:view/is_print">
+	<input type="submit" name="print_ack"
+	       class="standalone"
+	       value="cpscourrier_button_print_ack"
+	       i18n:attributes="value"/>
+	<input type="submit" name="email_ack"
+	       class="standalone"
+	       value="cpscourrier_button_email_ack"
+	       i18n:attributes="value"/>
+      </tal:block>
     </form>
   </metal:block>
 </metal:block>
