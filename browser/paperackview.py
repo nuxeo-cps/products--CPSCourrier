@@ -44,9 +44,14 @@ class PaperAckView(BrowserView):
     layout_id = 'pmail_ack'
     content_wid = 'content'
     flag_field = 'flag_ack'
+
     def __init__(self, context, request):
         BrowserView.__init__(self, context, request)
         self.html_wid = widgetname(self.content_wid)
+
+    def getId(self):
+        # useful for portlet guards
+        return self.__name__
 
     def renderLayout(self):
         """render the layout with prefilled info in the content text widget."""
