@@ -55,4 +55,20 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      for="Products.CPSCore.interfaces.ICPSProxy"
+      name="cpscourrier_paper_ack.html"
+      class=".browser.paperackview.PaperAckView"
+      template="browser/paperAck.zpt"
+      permission="cmf.ModifyPortalContent"
+      />
+
+  <browser:page
+      for="Products.CPSCore.interfaces.ICPSProxy"
+      name="cpscourrier_paper_ack"
+      class=".browser.paperackview.PaperAckView"
+      attribute="dispatchSubmit"
+      permission="cmf.ModifyPortalContent"
+      />
+
 </configure>

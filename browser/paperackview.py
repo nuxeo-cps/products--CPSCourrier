@@ -18,6 +18,7 @@
 # $Id$
 
 import logging
+from urllib import urlencode
 
 from Products.Five.browser import BrowserView
 
@@ -25,6 +26,7 @@ from Products.CMFCore.utils import getToolByName
 
 from Products.CPSSchemas.Widget import widgetname
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
+from Products.CPSDocument.utils import getFormUidUrlArg
 from Products.CPSDashboards.utils import unserializeFromCookie
 
 logger = logging.getLogger('CPSCourrier.browser.paperackview')
@@ -46,29 +48,24 @@ class PaperAckView(BrowserView):
         BrowserView.__init__(self, context, request)
         self.html_wid = widgetname(self.content_wid)
 
-    def renderPrepare(self):
+    def renderLayout(self):
         """render the layout with prefilled info in the content text widget."""
         doc = getattr(self, 'doc', None)
         if doc is None:
             self.doc = self.context.getContent()
         html_wid = widgetname(self.content_wid)
-        self.request.form.update({html_wid: self.prefill()})
-        return self.doc.render(layout_mode='edit',
+
+        form = self.request.form
+        mode = form.get('mode', 'edit')
+        if mode != 'view_print' and not form.get('html_wid'):
+            form.update({html_wid: self.prefill()})
+
+        return self.doc.render(layout_mode=mode,
                                layout_id=self.layout_id,
                                proxy=self.context,
+                               use_session=mode == 'edit',
+                               no_form=True,
                                request=self.request)
-
-    def renderPrint(self):
-        """render the layout with posted info, in view_print mode.
-
-        We use the layout mode to exclude other widgets than content
-        """
-        self.flagAcked()
-        return self.doc.validateStoreRender(layout_mode_err='edit',
-                                            layout_mode_ok='view_print',
-                                            cluster=self.cluster,
-                                            proxy=self.context,
-                                            )
 
     def emailAck(self, printable=False):
         """send the ack via email with posted info.
@@ -94,3 +91,28 @@ class PaperAckView(BrowserView):
         doc = self.context.getEditableContent()
         doc.edit(mapping={self.flag_field:True})
         self.doc = doc
+
+    def dispatchSubmit(self):
+        form = self.request.form
+        resp = self.request.RESPONSE
+        url = '/'.join((self.context.absolute_url(), self.__name__+'.html'))
+        if 'print_ack' in form:
+            doc = self.context.getContent()
+            valid, ds = doc.validate(layout_id=self.layout_id,
+                                     proxy=self.context,
+                                     request=self.request,
+                                     use_session=True)
+            if valid:
+                self.flagAcked()
+                resp.redirect('%s?pp=1&mode=view_print' % url)
+            else:
+                psm = 'psm_content_error'
+                args = getFormUidUrlArg(REQUEST)
+                args['portal_status_message'] = psm
+                resp.redirect('%s?%s' % (url, urlencode(args)))
+
+        elif 'email_ack' in form:
+            raise NotImplementedError
+        else:
+            self.request.RESPONSE.redirect(url)
+            return ''

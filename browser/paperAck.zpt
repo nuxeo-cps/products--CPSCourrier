@@ -3,26 +3,6 @@
   <metal:block fill-slot="style_slot">
     <script type="text/javascript" src="cpsschemas.js"
       tal:attributes="src string:${base_url}cpsschemas.js"></script>
-    <tal:block condition="python:modules['Products.CPSUtil.integration'].isProductPresent('Products.FCKeditor')">
-      <script type="text/javascript">
-        var popup_editor_form = 'popup_fckeditor_form';
-        var width = 640;
-        var height = 520;
-      </script>
-    </tal:block>
-    <script type="text/javascript">
-     function popup_rte(input_id, label_edit) {
-       var args, value;
-       value = document.getElementById(input_id).value;
-       args = '?input_id='+input_id+'&amp;label_edit='+escape(label_edit);
-       str_window_features = 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=1,dependent=1,width=' + width + ',height=' + height;
-       popup = window.open(popup_editor_form + args, input_id, str_window_features);
-       if (!popup.opener) {
-         popup.opener = window;
-       }
-       return false;
-     }
-   </script>
   </metal:block>
 
   <metal:block fill-slot="header">
@@ -33,7 +13,17 @@
 
   <metal:block fill-slot="main">
 
-    <tal:block replace="structure view/renderPrepare"/>
-
+    <form 
+	tal:attributes="action string:${here/absolute_url}/cpscourrier_paper_ack">
+      <tal:block replace="structure view/renderLayout"/>
+      <input type="submit" name="print_ack"
+	     class="standalone"
+	     value="cpscourrier_button_print_ack"
+	     i18n:attributes="value"/>
+      <input type="submit" name="email_ack"
+	     class="standalone"
+	     value="cpscourrier_button_email_ack"
+	     i18n:attributes="value"/>
+    </form>
   </metal:block>
 </metal:block>

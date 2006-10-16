@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <object name="pmail_ack" meta_type="CPS Layout">
- <property name="layout_view_print_method" type="str">layout_mail_paper_ack_print</property>
+ <property name="layout_view_print_method" type="str">layout_default_view</property>
 
  <widget name="Title" meta_type="Heading Widget">
   <property name="fields">
