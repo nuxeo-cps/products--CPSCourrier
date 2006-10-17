@@ -44,6 +44,7 @@ class PaperAckView(BrowserView):
     layout_id = 'pmail_ack'
     content_wid = 'content'
     flag_field = 'ack_sent'
+    prefill_cluster = 'header'
 
     def __init__(self, context, request):
         BrowserView.__init__(self, context, request)
@@ -86,9 +87,10 @@ class PaperAckView(BrowserView):
         doc = getattr(self, 'doc', None)
         if doc is None:
             doc = self.doc = self.context.getContent()
-        # To complete
-        return '<h3> This is the prefilled content </h3>'
-
+        return doc.render(cluster=self.prefill_cluster,
+                          context=self.context,
+                          layout_mode="view_ack",
+                          proxy=self.context)
 
     def flagAcked(self):
         """flag the doc as acked.

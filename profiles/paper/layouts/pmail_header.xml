@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <object name="email_header" meta_type="CPS Layout">
  <property name="style_prefix">layout_default_</property>
+ <property name="layout_view_ack_method" type="string">layout_default_view</property>
 
  <widget name="object" meta_type="String Widget">
   <property name="fields">
@@ -177,6 +178,7 @@
   <property name="hidden_layout_modes">
     <element value="create"/>
     <element value="edit"/>
+    <element value="view_ack"/>
   </property>
  </widget>
 
@@ -185,6 +187,7 @@
   <property name="is_i18n">True</property>
   <property name="wf_var_id">review_state</property>
   <property name="hidden_layout_modes">
+    <element value="view_ack"/>
     <element value="create"/>
     <element value="edit"/>
   </property>
