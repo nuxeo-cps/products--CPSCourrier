@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-10-18 16:38default\n"
+"POT-Creation-Date: 2006-10-18 17:06default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -1050,4 +1050,7 @@ msgid "cpscourrier_subject_${portal_title}_${mb_title}_${late_number}"
 msgstr ""
 
 msgid "cpscourrier_final_reply"
+msgstr ""
+
+msgid "action_paper_ack"
 msgstr ""

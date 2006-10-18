@@ -781,3 +781,5 @@ msgstr ""
 msgid "cpscourrier_final_reply"
 msgstr ""
 
+msgid "action_paper_ack"
+msgstr ""

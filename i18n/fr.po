@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-10-18 16:38default\n"
+"POT-Creation-Date: 2006-10-18 17:06default\n"
 "PO-Revision-Date: 2006-07-12 12:17+0200\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -490,16 +490,16 @@ msgstr "Haut de page par défaut des accusés de réception"
 
 msgid "cpscourrier_paper_ack_default_header_help"
 msgstr ""
-"Ce texte est utilisé pour préremplir les accusés de réception, "
-"au dessus des références du courrier concerné."
+"Ce texte est utilisé pour préremplir les accusés de réception, au dessus des "
+"références du courrier concerné."
 
 msgid "cpscourrier_paper_ack_default_footer_label"
 msgstr "Bas de page par défaut des accusés de réception"
 
 msgid "cpscourrier_paper_ack_default_footer_help"
 msgstr ""
-"Ce texte est utilisé pour préremplir des accusés de réception, "
-"en dessous des références du courrier concerné."
+"Ce texte est utilisé pour préremplir des accusés de réception, en dessous "
+"des références du courrier concerné."
 
 msgid "label_addressbook_email"
 msgstr "Adresse de mél du contact"
@@ -1086,6 +1086,9 @@ msgstr ""
 
 msgid "cpscourrier_final_reply"
 msgstr "Réponse finale"
+
+msgid "action_paper_ack"
+msgstr "Accuser réception"
 
 #~ msgid "cpscourrier_submit_template"
 #~ msgstr "Proposer comme réponse-type"

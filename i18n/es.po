@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-10-18 16:38default\n"
+"POT-Creation-Date: 2006-10-18 17:06default\n"
 "PO-Revision-Date: 2006-10-10 18:53+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -1094,6 +1094,10 @@ msgstr ""
 
 msgid "cpscourrier_final_reply"
 msgstr "Respuesta final"
+
+#, fuzzy
+msgid "action_paper_ack"
+msgstr "Reply"
 
 msgid "cpscourrier_submit_template"
 msgstr "Enviar una copia como plantilla"
