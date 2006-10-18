@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<object name="mailbox_common" meta_type="CPS Layout">
+ 
+<widget name="incoming_ack_header" meta_type="Text Widget">
+ <property name="fields">
+  <element value="incoming_ack_header"/>
+ </property>
+ <property
+    name="label_edit">cpscourrier_paper_ack_default_header_label</property>
+ <property name="help">cpscourrier_paper_ack_default_header_help</property>
+ <property name="is_i18n">True</property>
+ <property name="readonly_layout_modes"/>
+ <property name="hidden_layout_modes">
+  <element value="view"/>
+ </property>
+ <property name="hidden_readonly_layout_modes"/>
+ <property name="width">72</property>
+ <property name="xhtml_sanitize">True</property>
+ <property name="html_editor_position">popup</property>
+ <property name="render_format">html</property>
+</widget>
+
+<widget name="incoming_ack_footer" meta_type="Text Widget">
+ <property name="fields">
+  <element value="incoming_ack_footer"/>
+ </property>
+ <property
+    name="label_edit">cpscourrier_paper_ack_default_footer_label</property>
+ <property name="help">cpscourrier_paper_ack_default_footer_help</property>
+ <property name="is_i18n">True</property>
+ <property name="readonly_layout_modes"/>
+ <property name="hidden_layout_modes">
+  <element value="view"/>
+ </property>
+ <property name="hidden_readonly_layout_modes"/>
+ <property name="width">72</property>
+ <property name="xhtml_sanitize">True</property>
+ <property name="render_format">html</property>
+</widget>
+ <table purge="False">
+  <row>
+   <cell name="incoming_ack_header"/>
+  </row>
+  <row>
+   <cell name="incoming_ack_footer"/>
+  </row>
+ </table>
+</object>

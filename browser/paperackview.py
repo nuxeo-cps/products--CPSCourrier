@@ -20,11 +20,13 @@
 import logging
 from urllib import urlencode
 
+from Acquisition import aq_inner, aq_parent
 from Products.Five.browser import BrowserView
 
 from Products.CMFCore.utils import getToolByName
 
 from Products.CPSSchemas.Widget import widgetname
+from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSDocument.utils import getFormUidUrlArg
 from Products.CPSDashboards.utils import unserializeFromCookie
@@ -39,12 +41,20 @@ class PaperAckView(BrowserView):
     - The content widget's is standard, or at least :
         - its getWidgetModeFromLayoutMode() reacts to prefixes
         - its getHtmlWidgetId is the standard one.
+
+    Calls the prefill cluster on current doc and (directly)
+    two widgets from 'parent_layout' on parent to render the prefilled content.
+    This is a bit low level, but two layouts was not satisfactory either
+    (too heavy)
     """
 
     layout_id = 'pmail_ack'
     content_wid = 'content'
     flag_field = 'ack_sent'
     prefill_cluster = 'header'
+    parent_layout = 'mailbox_common'
+    header_widget = 'incoming_ack_header'
+    footer_widget = 'incoming_ack_footer'
 
     def __init__(self, context, request):
         BrowserView.__init__(self, context, request)
@@ -83,14 +93,40 @@ class PaperAckView(BrowserView):
         raise NotImplementedError
 
     def prefill(self):
-        """Compute prefilled data."""
+        """Compute prefilled data.
+
+        XXX hardcoded reference to parent's widget
+        """
         doc = getattr(self, 'doc', None)
         if doc is None:
             doc = self.doc = self.context.getContent()
-        return doc.render(cluster=self.prefill_cluster,
+        mbox = aq_parent(aq_inner(self.context))
+        if mbox.portal_type != 'Mailbox':
+            header = footer = ''
+        else:
+            ltool = getToolByName(self.context, 'portal_layouts')
+            layout = ltool[self.parent_layout]
+            header = self._renderWidgetFor(layout[self.header_widget],
+                                           proxy=mbox)
+            footer = self._renderWidgetFor(layout[self.footer_widget])
+        main = doc.render(cluster=self.prefill_cluster,
                           context=self.context,
                           layout_mode="view_ack",
                           proxy=self.context)
+        return '\n'.join((header, main, footer))
+
+    def _renderWidgetFor(self, widget, proxy=None):
+        """Render a widget in view mode.
+
+        If proxy is not specified, this assumes this isn't the first call.
+        The previous one is used.
+        """
+        if proxy is not None:
+            doc = proxy.getContent()
+            dm = doc.getDataModel(proxy=proxy, context=proxy)
+            self.parent_ds = DataStructure(datamodel=dm)
+        widget.prepare(self.parent_ds)
+        return widget.render('view', self.parent_ds)
 
     def flagAcked(self):
         """flag the doc as acked.

@@ -4,4 +4,6 @@
     <property
 	name="write_process_expr">python:not value and modules['Products.CPSCourrier.utils'].computeMailboxOu(portal, data['Title'])</property>
   </field>
+  <field name="incoming_ack_header" meta_type="CPS String Field"/>
+  <field name="incoming_ack_footer" meta_type="CPS String Field"/>
 </object>
