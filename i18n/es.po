@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-09-18 21:04default\n"
+"POT-Creation-Date: 2006-10-18 16:38default\n"
 "PO-Revision-Date: 2006-10-10 18:53+0100\n"
 "Last-Translator: Jesús Martín <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -30,7 +30,8 @@ msgstr ""
 #: from ../skins/cps_courrier/cpscourrier_forward_form.pt
 #: ../skins/cps_courrier/cpscourrier_handle_form.pt
 #: ../skins/cps_courrier/workflow_transition_form.pt
-msgid "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
+msgid ""
+"<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
 
 #.   <h1>
@@ -57,16 +58,22 @@ msgstr "Los siguientes ${late_number} correos llegan tarde:"
 #.           are displayed):
 #.         </span>
 #: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
-msgid "The following mail documents are late (only the first ${late_number} are displayed):"
-msgstr "Los siguientes correos llegan tarden (sólo se muestra el primero ${late_number}):"
+msgid ""
+"The following mail documents are late (only the first ${late_number} are "
+"displayed):"
+msgstr ""
+"Los siguientes correos llegan tarden (sólo se muestra el primero "
+"${late_number}):"
 
 #.   <p>
 #.         You'll find below the list of late mail documents in mailbox
 #.         ${mailbox_title (tal content="options/mb_title")}
 #.       </p>
 #: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
-msgid "You'll find below the list of late mail documents in mailbox ${mailbox_title}"
-msgstr "Encontrarás la lista de correos con retraso en la bandeja ${mailbox_title}"
+msgid ""
+"You'll find below the list of late mail documents in mailbox ${mailbox_title}"
+msgstr ""
+"Encontrarás la lista de correos con retraso en la bandeja ${mailbox_title}"
 
 #.   <input condition="view/canMoveDown" type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
 #.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
@@ -92,6 +99,18 @@ msgstr "Validar"
 #: from ../browser/reuseAnswer.zpt
 msgid "cpscourrier_answer_from_existing"
 msgstr "Responder a partir de una respuesta existente"
+
+#.   <input type="submit" name="email_ack" value="cpscourrier_button_email_ack" class="standalone" />
+#: from ../browser/paperAck.zpt
+#, fuzzy
+msgid "cpscourrier_button_email_ack"
+msgstr "(Please select a mailbox)"
+
+#.   <input type="submit" name="print_ack" value="cpscourrier_button_print_ack" class="standalone" />
+#: from ../browser/paperAck.zpt
+#, fuzzy
+msgid "cpscourrier_button_print_ack"
+msgstr "To process"
 
 #.   <h2 condition="insert_mode">
 #.         Please select a level to insert the new delegatee
@@ -121,6 +140,14 @@ msgstr "Transferir a una caja del portal"
 #: from ../skins/cps_courrier/cpscourrier_handle_form.pt
 msgid "cpscourrier_help_handle_select_group"
 msgstr "Ocuparse del documento en nombre de un grupo"
+
+#.   <h1 condition="not:view/is_print">
+#.         Prepare an acknowledgement
+#.       </h1>
+#: from ../browser/paperAck.zpt
+#, fuzzy
+msgid "cpscourrier_paper_ack_prepare_heading"
+msgstr "Reply preview"
 
 #.   <h3>cpscourrier_response_preview_heading</h3>
 #: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
@@ -459,6 +486,22 @@ msgstr "Responsables"
 msgid "label_search_todo"
 msgstr "Acción"
 
+#, fuzzy
+msgid "cpscourrier_paper_ack_default_header_label"
+msgstr "SMTP Headers"
+
+#, fuzzy
+msgid "cpscourrier_paper_ack_default_header_help"
+msgstr "Use default roadmap"
+
+#, fuzzy
+msgid "cpscourrier_paper_ack_default_footer_label"
+msgstr "From"
+
+#, fuzzy
+msgid "cpscourrier_paper_ack_default_footer_help"
+msgstr "From"
+
 msgid "label_addressbook_email"
 msgstr "Libreta de direcciones"
 
@@ -676,7 +719,9 @@ msgid "heading_workflow_handle_of ${item_id}"
 msgstr "Manejar ${item_id}"
 
 msgid "help_workflow_handle"
-msgstr "Al optar por gestionar los documentos de correo seleccionados, se hará cargo del procesamiento futuro de los correos (responder, delegar, borrar...)."
+msgstr ""
+"Al optar por gestionar los documentos de correo seleccionados, se hará cargo "
+"del procesamiento futuro de los correos (responder, delegar, borrar...)."
 
 msgid "button_handle"
 msgstr "Tratar"
@@ -691,10 +736,17 @@ msgid "heading_workflow_forward_of ${item_id}"
 msgstr "Remitir ${item_id}"
 
 msgid "help_workflow_forward"
-msgstr "Está a punto de remitir el correo a otro buzón <strong>o</strong>  a una dirección de correo externa. Al enviar el documento de correo a una dirección externa se cerrará la copia local del documento."
+msgstr ""
+"Está a punto de remitir el correo a otro buzón <strong>o</strong>  a una "
+"dirección de correo externa. Al enviar el documento de correo a una "
+"dirección externa se cerrará la copia local del documento."
 
 msgid "help_workflow_forwardPmail"
-msgstr "Estás a punto de transferir un correo entrante a otra bandeja de correo <strong>o</strong> a una dirección de correo externa. El envío de una documento de correo a una dirección de corre externa cerrará la copia local del documento."
+msgstr ""
+"Estás a punto de transferir un correo entrante a otra bandeja de correo "
+"<strong>o</strong> a una dirección de correo externa. El envío de una "
+"documento de correo a una dirección de corre externa cerrará la copia local "
+"del documento."
 
 msgid "button_forward"
 msgstr "Remitir"
@@ -748,7 +800,9 @@ msgid "heading_workflow_answer_of ${item_id}"
 msgstr "Responder ${item_id}"
 
 msgid "help_workflow_answer"
-msgstr "Al responder al documento de correo, creará un nuevo correo saliente enlazado al correo de entrada original."
+msgstr ""
+"Al responder al documento de correo, creará un nuevo correo saliente "
+"enlazado al correo de entrada original."
 
 msgid "button_answer"
 msgstr "Responder"
@@ -769,7 +823,11 @@ msgid "heading_workflow_close_of ${item_id}"
 msgstr "Cerrar ${item_id}"
 
 msgid "help_workflow_close"
-msgstr "Cierra la entrada de correos al final del proceso de respuestas. Note que los documentos de correo cerrados están, por defecto, ocultos en los buzones. Debe, explícitamente, configurar el parámetro del filtro  \"estado\" a  \"cerrado\" para ver la lista de documentos de correo cerrados."
+msgstr ""
+"Cierra la entrada de correos al final del proceso de respuestas. Note que "
+"los documentos de correo cerrados están, por defecto, ocultos en los "
+"buzones. Debe, explícitamente, configurar el parámetro del filtro  \"estado"
+"\" a  \"cerrado\" para ver la lista de documentos de correo cerrados."
 
 msgid "button_close"
 msgstr "Cerrar"
@@ -853,7 +911,9 @@ msgid "heading_workflow_reset_of ${item_id}"
 msgstr "Restaurar ${item_id}"
 
 msgid "help_workflow_reset"
-msgstr "Al restaurar el correo volverá a ponerlo en su estado iniciar y limpiará la hoja de ruta"
+msgstr ""
+"Al restaurar el correo volverá a ponerlo en su estado iniciar y limpiará la "
+"hoja de ruta"
 
 msgid "button_reset"
 msgstr "Restaruar"
@@ -886,13 +946,18 @@ msgstr "Descender"
 # Workflows
 #
 msgid "help_workflow_move_down_delegatees"
-msgstr "Está a punto de permitir a los usuarios del siguiente nivel gestionar el documento de correo. Si no forma parte del mismo o si no es administrador local, no volverá a poder acceder a ese documento."
+msgstr ""
+"Está a punto de permitir a los usuarios del siguiente nivel gestionar el "
+"documento de correo. Si no forma parte del mismo o si no es administrador "
+"local, no volverá a poder acceder a ese documento."
 
 msgid "heading_batch_workflow_handle"
 msgstr "Manejar un lote de documentos entrantes"
 
 msgid "help_batch_workflow_handle"
-msgstr "Al optar por gestionar los documentos de correo seleccionados, se hará cargo del procesamiento futuro de los correos (responder, delegar, borrar...)."
+msgstr ""
+"Al optar por gestionar los documentos de correo seleccionados, se hará cargo "
+"del procesamiento futuro de los correos (responder, delegar, borrar...)."
 
 msgid "heading_batch_workflow_discard"
 msgstr "Descartar un lote de documentos entrantes"
@@ -904,7 +969,9 @@ msgid "heading_batch_workflow_answer"
 msgstr "Responder a un grupo de documentos entrantes"
 
 msgid "help_batch_workflow_answer"
-msgstr "Al responder a los documentos, creará un nuevo enlace de correo saliente para cada documento entrante seleccionado. "
+msgstr ""
+"Al responder a los documentos, creará un nuevo enlace de correo saliente "
+"para cada documento entrante seleccionado. "
 
 msgid "heading_batch_workflow_delete"
 msgstr "Borrar por lotes"
@@ -967,16 +1034,23 @@ msgid "psm_cpscourrier_choose_at_least_mailbox_or_emailaddress"
 msgstr "Seleccione al menos un buzón o introduzca una dirección de correo"
 
 msgid "psm_cpscourrier_choose_either_mailbox_or_emailaddress"
-msgstr "Seleccione o un buzón o una dirección de correoChoose either a mailbox or an email address"
+msgstr ""
+"Seleccione o un buzón o una dirección de correoChoose either a mailbox or an "
+"email address"
 
 msgid "psm_cpscourrier_mail_forwarded"
 msgstr "Correo enviado con éxito"
 
 msgid "psm_cpscourrier_reply_could_not_be_sent"
-msgstr "Debido a un problema de configuración, la respuesta no puede ser enviada. Por favor, póngase en contacto con el administrador del portal para arreglar el problema."
+msgstr ""
+"Debido a un problema de configuración, la respuesta no puede ser enviada. "
+"Por favor, póngase en contacto con el administrador del portal para arreglar "
+"el problema."
 
 msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_recipients_address"
-msgstr "Direcciones inválidas de los destinatarios: la respuesta no puedo ser enviada."
+msgstr ""
+"Direcciones inválidas de los destinatarios: la respuesta no puedo ser "
+"enviada."
 
 msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_sender_address"
 msgstr "Dirección del emisor inválida: no se ha podido enviar la respuesta"
@@ -1026,6 +1100,6 @@ msgstr "Enviar una copia como plantilla"
 
 #~ msgid "Page ${current_page} of ${nb_pages}"
 #~ msgstr "Page ${current_page} of ${nb_pages}"
+
 #~ msgid "cpscourrier_filter_button"
 #~ msgstr "Filtro"
-

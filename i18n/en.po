@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-09-18 21:04default\n"
+"POT-Creation-Date: 2006-10-18 16:38default\n"
 "PO-Revision-Date: 2006-07-12 12:17+0200\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -97,6 +97,18 @@ msgstr "Validate"
 msgid "cpscourrier_answer_from_existing"
 msgstr "Reply from an existing reply"
 
+#.   <input type="submit" name="email_ack" value="cpscourrier_button_email_ack" class="standalone" />
+#: from ../browser/paperAck.zpt
+#, fuzzy
+msgid "cpscourrier_button_email_ack"
+msgstr "(Please select a mailbox)"
+
+#.   <input type="submit" name="print_ack" value="cpscourrier_button_print_ack" class="standalone" />
+#: from ../browser/paperAck.zpt
+#, fuzzy
+msgid "cpscourrier_button_print_ack"
+msgstr "To process"
+
 #.   <h2 condition="insert_mode">
 #.         Please select a level to insert the new delegatee
 #.       </h2>
@@ -125,6 +137,14 @@ msgstr "Forward to a mailbox"
 #: from ../skins/cps_courrier/cpscourrier_handle_form.pt
 msgid "cpscourrier_help_handle_select_group"
 msgstr "Handle the document as a group of users"
+
+#.   <h1 condition="not:view/is_print">
+#.         Prepare an acknowledgement
+#.       </h1>
+#: from ../browser/paperAck.zpt
+#, fuzzy
+msgid "cpscourrier_paper_ack_prepare_heading"
+msgstr "Reply preview"
 
 #.   <h3>cpscourrier_response_preview_heading</h3>
 #: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
@@ -465,6 +485,22 @@ msgstr "Managers"
 
 msgid "label_search_todo"
 msgstr "To do"
+
+#, fuzzy
+msgid "cpscourrier_paper_ack_default_header_label"
+msgstr "SMTP Headers"
+
+#, fuzzy
+msgid "cpscourrier_paper_ack_default_header_help"
+msgstr "Use default roadmap"
+
+#, fuzzy
+msgid "cpscourrier_paper_ack_default_footer_label"
+msgstr "From"
+
+#, fuzzy
+msgid "cpscourrier_paper_ack_default_footer_help"
+msgstr "From"
 
 #, fuzzy
 msgid "label_addressbook_email"

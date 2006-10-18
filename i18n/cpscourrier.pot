@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-09-18 21:04default\n"
+"POT-Creation-Date: 2006-10-18 16:38default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -97,6 +97,16 @@ msgstr ""
 msgid "cpscourrier_answer_from_existing"
 msgstr ""
 
+#.   <input type="submit" name="email_ack" value="cpscourrier_button_email_ack" class="standalone" />
+#: from ../browser/paperAck.zpt
+msgid "cpscourrier_button_email_ack"
+msgstr ""
+
+#.   <input type="submit" name="print_ack" value="cpscourrier_button_print_ack" class="standalone" />
+#: from ../browser/paperAck.zpt
+msgid "cpscourrier_button_print_ack"
+msgstr ""
+
 #.   <h2 condition="insert_mode">
 #.         Please select a level to insert the new delegatee
 #.       </h2>
@@ -121,6 +131,13 @@ msgstr ""
 #.                     Please select a group</label>
 #: from ../skins/cps_courrier/cpscourrier_handle_form.pt
 msgid "cpscourrier_help_handle_select_group"
+msgstr ""
+
+#.   <h1 condition="not:view/is_print">
+#.         Prepare an acknowledgement
+#.       </h1>
+#: from ../browser/paperAck.zpt
+msgid "cpscourrier_paper_ack_prepare_heading"
 msgstr ""
 
 #.   <h3>cpscourrier_response_preview_heading</h3>
@@ -448,6 +465,18 @@ msgid "cpscourrier_label_managers"
 msgstr ""
 
 msgid "label_search_todo"
+msgstr ""
+
+msgid "cpscourrier_paper_ack_default_header_label"
+msgstr ""
+
+msgid "cpscourrier_paper_ack_default_header_help"
+msgstr ""
+
+msgid "cpscourrier_paper_ack_default_footer_label"
+msgstr ""
+
+msgid "cpscourrier_paper_ack_default_footer_help"
 msgstr ""
 
 #

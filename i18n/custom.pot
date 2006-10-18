@@ -178,6 +178,19 @@ msgstr ""
 msgid "label_search_todo"
 msgstr ""
 
+msgid "cpscourrier_paper_ack_default_header_label"
+msgstr ""
+
+msgid "cpscourrier_paper_ack_default_header_help"
+msgstr ""
+
+msgid "cpscourrier_paper_ack_default_footer_label"
+msgstr ""
+
+msgid "cpscourrier_paper_ack_default_footer_help"
+msgstr ""
+
+
 #
 # Addressbooks layouts labels
 #
