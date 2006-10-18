@@ -29,6 +29,12 @@
  </property>
 
  <!-- Specific CPSCourrier actions -->
+ <action title="action_paper_ack" action_id="paper_ack"
+    category="workflow"
+    condition_expr="python: not object.getContent().ack_sent"
+    url_expr="string:${object_url}/cpscourrier_paper_ack.html" visible="True">
+  <permission value="Modify Portal Content"/>
+ </action>
 
 
  <!-- Standard CPSDocument aliases and actions (might change) -->
