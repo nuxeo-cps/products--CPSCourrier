@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<object name="borderedleft" meta_type="Area Shape">
+ <property name="title">borderedleft</property>
+ <property name="default">False</property>
+ <property name="Area_border_style">none none none solid</property>
+ <property name="Area_border_width">1px</property>
+ <property name="Area_text_transform">none</property>
+</object>

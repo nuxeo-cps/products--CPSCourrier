@@ -41,4 +41,5 @@
  <object name="412144907" meta_type="Font Color"/>
  <object name="460823880" meta_type="Area Color"/>
  <object name="1325969180" meta_type="Area Shape"/>
+ <object name="borderedleft" meta_type="Area Shape"/>
 </object>

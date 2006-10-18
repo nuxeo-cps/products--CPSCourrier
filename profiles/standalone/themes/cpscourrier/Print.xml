@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<object name="Print" meta_type="Theme Page">
+ <property name="title"></property>
+ <property name="default">False</property>
+ <property name="preview"></property>
+ <property name="renderer">default</property>
+ <property name="macroless">False</property>
+ <property name="tableless">False</property>
+ <property name="align"></property>
+ <property name="shape"></property>
+ <property name="color"></property>
+ <property name="margin">0.5em</property>
+ <object name="Main" meta_type="Page Block"/>
+</object>

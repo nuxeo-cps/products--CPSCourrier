@@ -14,4 +14,5 @@
  <object name="styles" meta_type="Theme Folder"/>
  <object name="palettes" meta_type="Theme Folder"/>
  <object name="Default" meta_type="Theme Page"/>
+ <object name="Print" meta_type="Theme Page"/>
 </object>

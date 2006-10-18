@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<object name="Main" meta_type="Page Block">
+ <property name="title">Page Block</property>
+ <property name="closed">False</property>
+ <property name="width">100%</property>
+ <property name="height"></property>
+ <property name="maxcols">1</property>
+ <property name="shape">NoBorder</property>
+ <property name="color">Transparent</property>
+ <object name="logo_courrier" meta_type="Portlet Box Templet"/>
+ <object name="portlet_main_AR" meta_type="Portal Box Group Templet"/>
+</object>

@@ -60,7 +60,7 @@ class PaperAckView(BrowserView):
         BrowserView.__init__(self, context, request)
         self.html_wid = widgetname(self.content_wid)
         # Would be slightly better to introspect theme page
-        self.is_print = bool(request.form.get('pp'))
+        self.is_print = request.form.get('page') == 'Print'
 
     def getId(self):
         # useful for portlet guards
@@ -149,7 +149,7 @@ class PaperAckView(BrowserView):
                                      use_session=True)
             if valid:
                 self.flagAcked()
-                resp.redirect('%s?pp=1&mode=view_print' % url)
+                resp.redirect('%s?page=Print&mode=view_print' % url)
             else:
                 psm = 'psm_content_error'
                 args = getFormUidUrlArg(REQUEST)
