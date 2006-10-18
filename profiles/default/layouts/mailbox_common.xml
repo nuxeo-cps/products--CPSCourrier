@@ -80,7 +80,6 @@
   </property>
   <property name="is_i18n">True</property>
   <property name="display_width">35</property>
-  <property name="is_required">True</property>
  </widget>
  <widget name="allowed_reply_time" meta_type="Int Widget">
   <property name="fields">

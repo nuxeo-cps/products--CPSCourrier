@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<object name="mailbox_common" meta_type="CPS Layout">
+ <widget name="from">
+  <property name="is_required">True</property>
+ </widget>
+</object>
