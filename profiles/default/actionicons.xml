@@ -18,12 +18,15 @@
  <action-icon category="workflow" action_id="forward"
               title="Forward" priority="34"
               icon_expr="mail_forward.png"/>
+ <action-icon category="workflow" action_id="paper_ack"
+              title="Send Ack" priority="35"
+              icon_expr="actionicon_paper_ack.gif"/>
  <action-icon category="workflow" action_id="answer"
-              title="Answer" priority="35"
+              title="Answer" priority="36"
               icon_expr="mail_reply_create.png"/>
  <action-icon category="workflow"
               action_id="move_down_delegatees"
-              title="Move Down" priority="36"
+              title="Move Down" priority="37"
               icon_expr="mail_move_down.png"/>
  <action-icon category="workflow" action_id="validate"
               title="Validate" priority="41"
