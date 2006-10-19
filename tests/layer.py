@@ -145,7 +145,7 @@ class IntegrationTestCase(CommonIntegrationFixture, CPSTestCase):
 
     INCOMING_PTYPE = 'Incoming Email'
     INITIAL_TRANSITION = 'create'
-    
+
     def afterSetUp(self):
         self.login('manager')
         CommonIntegrationFixture.fixtureSetUp(self)
