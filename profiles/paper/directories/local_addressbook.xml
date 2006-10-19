@@ -30,7 +30,7 @@
  </property>
  <property name="is_hierarchical">False</property>
  <property name="password_field"></property>
- <cache-manager name="None"/>
+ <cache-manager name="dir_ramcache"/>
  <entry-local-role
     role="Contributor">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, ou, 'Contributor')</entry-local-role>
  <entry-local-role
