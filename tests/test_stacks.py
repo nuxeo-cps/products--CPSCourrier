@@ -527,8 +527,8 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.flogin('member3', self.mbg)
         self.assert_(wf.isActionSupported(self.incoming, 'answer'))
 
-    def build_default_roadmap(self):
-        stack_mod = self.mb.cpscourrier_stack_modify
+    def test_default_roadmap(self):
+
 
         # Test that we don't fail if we try and handle from default roadmap
         # and there isn't any
@@ -541,33 +541,14 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
                           'member1_ftest-mailbox')
         self.wftool.doActionFor(self.incoming, 'reset')
 
-        # wsmanager of mb logs in and builds the default roadmap:
-        # -1:member1, 0:member3
-        self.flogin('wsmanager', self.mb)
-        kws = {'current_var_id': STACK_ID,
-               'directive': 'response',
-               'level': '0',
-               'workflow_action_form': 'cpscourrier_roadmap',
-               'submit_add': 'Valider',
-               'push_ids': ['courrier_user:member3_ftest-mailbox-group']}
-        stack_mod(**kws)
-        kws = {'current_var_id': STACK_ID,
-               'directive': 'response',
-               'level': '-1',
-               'workflow_action_form': 'cpscourrier_roadmap',
-               'submit_add': 'Valider',
-               'push_ids': ['courrier_user:member1_ftest-mailbox']}
-        stack_mod(**kws)
+        # Now let's go
+        self.build_default_roadmap()
 
-        # we can insert above current level (should go in unit tests)
+        # we can insert above current level (should go in separate test case)
         stack = self.wftool.getStackFor(self.mb, STACK_ID)
         insert_render = stack.getStackContentForRender(self.mb,
                                                        mode='insert')
         self.assertEquals(insert_render[0], [1, 0, '-1_0', -1, -2])
-
-    def test_default_roadmap(self):
-
-        self.build_default_roadmap()
 
         # member2 logs in and handles the incoming mail
         self.flogin('member2', self.mb)
@@ -660,21 +641,23 @@ class CourrierIncomingPaperStackFunctionalTestCase(
     CourrierPaperFunctionalTestCase,
     CourrierIncomingStackFunctionalTestCase):
 
+    def afterSetUp(self):
+        CourrierIncomingStackFunctionalTestCase.afterSetUp(self)
+        self.paperSetUp()
+
     def test_portal_type_test(self):
         self.assertEquals(self.incoming.portal_type, 'Incoming Pmail')
 
     def test_default_roadmap(self):
         # In paper case, creations have to trigger handling and use
         # default roadmap automatically
+        # reminder, this default roadmap was constructed in module layer.py
 
-        self.build_default_roadmap()
-
-        # injector creates an incoming mail
+        # injector can create an incoming mail
         self.flogin('injector', self.mb)
-        self.wftool.invokeFactoryFor(self.mb,
-                                    self.INCOMING_PTYPE,
-                                    'incoming_default_roadmap')
-        incoming = self.mb.incoming_default_roadmap
+        self.createIncoming(mail_id='new_incoming', no_handle=False)
+
+        incoming = self.new_incoming
 
         # incoming is in 'handled' state
         self.assertEquals(self.wftool.getInfoFor(incoming, 'review_state'),

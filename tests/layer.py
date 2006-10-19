@@ -27,6 +27,7 @@ from Products.GenericSetup import profile_registry
 from Products.GenericSetup import EXTENSION
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCore.interfaces import ICPSSite
+from Products.CPSCourrier.config import  RELATION_GRAPH_ID, HAS_REPLY, STACK_ID
 
 
 from Products.CPSSchemas.tests.testWidgets import (
@@ -214,15 +215,21 @@ class CourrierFunctionalTestCase(CPSTestCase):
         self.login('%s_%s' % (prefix, object.getId()))
 
 
-    def createIncoming(self, container=None, mail_id='incoming'):
+    def createIncoming(self, container=None,
+                       mail_id='incoming', no_handle=True):
         """Create incoming mail and set it as an attr on self.
 
-        Default container is self.mb,
+        Default container is self.mb.
+        By default, no automatic handling is done, so that the
+        tests can handle with an explicit member.
+
+        Reminder: automatic handling depends on the default roadmap.
+        Check build_default_roadmap() for self.mb
         """
         self.createMail(container=container,
                         mail_id=mail_id,
                         portal_type=self.INCOMING_PTYPE,
-                        no_handle=True)
+                        no_handle=no_handle)
 
     def createOutgoing(self, container=None, mail_id='outgoing'):
         """Create outgoing mail and set it as an attr on self.
@@ -261,6 +268,31 @@ class CourrierFunctionalTestCase(CPSTestCase):
         user_id = getSecurityManager().getUser().getId()
         return roles, roles.get('user:%s' %user_id)
 
+    def build_default_roadmap(self):
+        """Construct a default roadmap on self.mb.
+
+        Does some assertions, too. Could go, without assertions to layer ?"""
+
+        stack_mod = self.mb.cpscourrier_stack_modify
+
+        # wsmanager of mb logs in and builds the default roadmap:
+        # -1:member1, 0:member3
+        self.flogin('wsmanager', self.mb)
+        kws = {'current_var_id': STACK_ID,
+               'directive': 'response',
+               'level': '0',
+               'workflow_action_form': 'cpscourrier_roadmap',
+               'submit_add': 'Valider',
+               'push_ids': ['courrier_user:member3_ftest-mailbox-group']}
+        stack_mod(**kws)
+        kws = {'current_var_id': STACK_ID,
+               'directive': 'response',
+               'level': '-1',
+               'workflow_action_form': 'cpscourrier_roadmap',
+               'submit_add': 'Valider',
+               'push_ids': ['courrier_user:member1_ftest-mailbox']}
+        stack_mod(**kws)
+
     # make tests less verbose by using custom accessor for WF state
     def _get_state(self, ob):
         return ob.workflow_history.values()[0][-1]['review_state']
@@ -274,3 +306,5 @@ class CourrierPaperFunctionalTestCase(CourrierFunctionalTestCase):
     OUTGOING_PTYPE = 'Outgoing Pmail'
 
 
+    def paperSetUp(self):
+        self.build_default_roadmap()
