@@ -737,6 +737,19 @@ msgid "psm_cpscourrier_no_action_performed_for"
 msgstr ""
 
 #
+# Other status messages
+#
+
+msgid "psm_cpscourrier_smtp_error"
+msgstr ""
+
+msgid "psm_cpscourrier_ack_email_sent"
+msgstr ""
+
+msgid "psm_cpscourrier_missing_email_address"
+msgstr ""
+
+#
 # Subscriptions
 #
 
@@ -782,4 +795,7 @@ msgid "cpscourrier_final_reply"
 msgstr ""
 
 msgid "action_paper_ack"
+msgstr ""
+
+msgid "cpscourrier_paper_ack_subject_${mail_subject}"
 msgstr ""

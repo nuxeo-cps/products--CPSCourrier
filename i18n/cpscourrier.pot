@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-10-18 17:06default\n"
+"POT-Creation-Date: 2006-10-19 16:26default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -1014,6 +1014,18 @@ msgid "psm_cpscourrier_no_action_performed_for"
 msgstr ""
 
 #
+# Other status messages
+#
+msgid "psm_cpscourrier_smtp_error"
+msgstr ""
+
+msgid "psm_cpscourrier_ack_email_sent"
+msgstr ""
+
+msgid "psm_cpscourrier_missing_email_address"
+msgstr ""
+
+#
 # Subscriptions
 #
 msgid "label_workflow_mail_confirm"
@@ -1053,4 +1065,7 @@ msgid "cpscourrier_final_reply"
 msgstr ""
 
 msgid "action_paper_ack"
+msgstr ""
+
+msgid "cpscourrier_paper_ack_subject_${mail_subject}"
 msgstr ""

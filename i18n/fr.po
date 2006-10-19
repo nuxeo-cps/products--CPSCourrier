@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-10-18 17:06default\n"
+"POT-Creation-Date: 2006-10-19 16:26default\n"
 "PO-Revision-Date: 2006-07-12 12:17+0200\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -1053,6 +1053,15 @@ msgstr "Réponse envoyée"
 msgid "psm_cpscourrier_no_action_performed_for"
 msgstr "Les courriers suivants n'ont pas été affectés par l'opération&nbsp;: "
 
+msgid "psm_cpscourrier_smtp_error"
+msgstr "Le courrier électronique n'a pu être envoyé"
+
+msgid "psm_cpscourrier_ack_email_sent"
+msgstr "Accusé de réception envoyé."
+
+msgid "psm_cpscourrier_missing_email_address"
+msgstr "Courrier électronique non envoyé pour cause d'absence de destinataire."
+
 msgid "label_workflow_mail_confirm"
 msgstr "Réception et confirmation"
 
@@ -1089,6 +1098,9 @@ msgstr "Réponse finale"
 
 msgid "action_paper_ack"
 msgstr "Accuser réception"
+
+msgid "cpscourrier_paper_ack_subject_${mail_subject}"
+msgstr "Accusé de réception pour «${mail_subject}»"
 
 #~ msgid "cpscourrier_submit_template"
 #~ msgstr "Proposer comme réponse-type"

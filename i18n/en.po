@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-10-18 17:06default\n"
+"POT-Creation-Date: 2006-10-19 16:26default\n"
 "PO-Revision-Date: 2006-07-12 12:17+0200\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -1116,6 +1116,18 @@ msgstr "Reply sent"
 msgid "psm_cpscourrier_no_action_performed_for"
 msgstr "The following mail documents were left unchanged: "
 
+#, fuzzy
+msgid "psm_cpscourrier_smtp_error"
+msgstr "Reply sent"
+
+#, fuzzy
+msgid "psm_cpscourrier_ack_email_sent"
+msgstr "Reply sent"
+
+#, fuzzy
+msgid "psm_cpscourrier_missing_email_address"
+msgstr "Mail forwarded"
+
 msgid "label_workflow_mail_confirm"
 msgstr "Reception and confirmation"
 
@@ -1154,6 +1166,10 @@ msgstr "Final reply"
 #, fuzzy
 msgid "action_paper_ack"
 msgstr "Reply"
+
+#, fuzzy
+msgid "cpscourrier_paper_ack_subject_${mail_subject}"
+msgstr "SMTP Headers"
 
 #~ msgid "cpscourrier_submit_template"
 #~ msgstr "Submit a copy as template"
