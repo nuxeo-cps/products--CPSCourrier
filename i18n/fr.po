@@ -104,7 +104,7 @@ msgstr "Répondre à partir d'une réponse existante"
 #.   <input type="submit" name="email_ack" value="cpscourrier_button_email_ack" class="standalone" />
 #: from ../browser/paperAck.zpt
 msgid "cpscourrier_button_email_ack"
-msgstr "Envoyer par courrier éléctronique"
+msgstr "Envoyer par courrier électronique"
 
 #.   <input type="submit" name="print_ack" value="cpscourrier_button_print_ack" class="standalone" />
 #: from ../browser/paperAck.zpt
