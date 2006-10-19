@@ -30,6 +30,7 @@ from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSDocument.utils import getFormUidUrlArg
 from Products.CPSDashboards.utils import unserializeFromCookie
+from Products.CPSCourrier.workflows.scripts import send_mail
 
 logger = logging.getLogger('CPSCourrier.browser.paperackview')
 
@@ -56,25 +57,32 @@ class PaperAckView(BrowserView):
     header_widget = 'incoming_ack_header'
     footer_widget = 'incoming_ack_footer'
 
+    email_ack_subject = 'cpscourrier_paper_ack_subject_${mail_subject}'
+
     def __init__(self, context, request):
         BrowserView.__init__(self, context, request)
         self.html_wid = widgetname(self.content_wid)
         # Would be slightly better to introspect theme page
-        self.is_print = request.form.get('page') == 'Print'
+        self.is_print = request.form.get('page')=='Print'
 
     def getId(self):
         # useful for portlet guards
         return self.__name__
 
-    def renderLayout(self):
-        """render the layout with prefilled info in the content text widget."""
+    def _getDoc(self):
         doc = getattr(self, 'doc', None)
         if doc is None:
-            self.doc = self.context.getContent()
+            doc = self.doc = self.context.getContent()
+        return doc
+
+    def renderLayout(self, mode=None):
+        """render the layout with prefilled info in the content text widget."""
         html_wid = widgetname(self.content_wid)
 
+        doc = self._getDoc()
         form = self.request.form
-        mode = form.get('mode', 'edit')
+        if mode is None:
+            mode = form.get('mode', 'edit')
         if mode != 'view_print' and not form.get('html_wid'):
             form.update({html_wid: self.prefill()})
 
@@ -97,9 +105,7 @@ class PaperAckView(BrowserView):
 
         XXX hardcoded reference to parent's widget
         """
-        doc = getattr(self, 'doc', None)
-        if doc is None:
-            doc = self.doc = self.context.getContent()
+        doc = self._getDoc()
         mbox = aq_parent(aq_inner(self.context))
         if mbox.portal_type != 'Mailbox':
             header = footer = ''
@@ -134,30 +140,87 @@ class PaperAckView(BrowserView):
         Store doc on self to avoid yet another getContent, even from cache."""
 
         doc = self.context.getEditableContent()
-        doc.edit(mapping={self.flag_field:True})
+        doc.edit(mapping={self.flag_field:True}, proxy=self.context)
         self.doc = doc
+
+    def prepareEmailAck(self):
+        """Compute to,from,subject and body of ack email"""
+
+        doc = self._getDoc()
+
+        # Subject
+        cpsmcat = getToolByName(self.context, 'translation_service')
+        portal = getToolByName(self.context, 'portal_url').getPortalObject()
+        subject = cpsmcat(self.email_ack_subject, {'mail_subject': doc.Title()}
+                          ).encode(portal.default_charset)
+
+        # From : parent or portal wide
+        parent_doc = aq_parent(aq_inner(self.context))
+        mail_from = parent_doc['from'] or portal.email_from_name
+
+        # To : find the subwidget, and read the dir id in its properties
+        sender_type, entry_id = doc.mail_from.split(':')
+        ltool = getToolByName(self.context, 'portal_layouts')['pmail_common']
+        dir_id = ltool['from_%s' % sender_type].directory
+        dtool = getToolByName(self.context, 'portal_directories')
+        try:
+            entry = dtool[dir_id].getEntry(entry_id, {})
+        except Unauthorized:
+            mail_to = None
+        else:
+            mail_to = entry.get('mail')
+
+        # Body
+        body = self.renderLayout(mode='view_print')
+
+        return mail_to, mail_from, subject, body
 
     def dispatchSubmit(self):
         form = self.request.form
         resp = self.request.RESPONSE
         url = '/'.join((self.context.absolute_url(), self.__name__+'.html'))
-        if 'print_ack' in form:
-            doc = self.context.getContent()
-            valid, ds = doc.validate(layout_id=self.layout_id,
-                                     proxy=self.context,
-                                     request=self.request,
-                                     use_session=True)
-            if valid:
-                self.flagAcked()
-                resp.redirect('%s?page=Print&mode=view_print' % url)
-            else:
-                psm = 'psm_content_error'
-                args = getFormUidUrlArg(REQUEST)
-                args['portal_status_message'] = psm
-                resp.redirect('%s?%s' % (url, urlencode(args)))
 
+        if 'print_ack' in form:
+            action = 'print'
         elif 'email_ack' in form:
-            raise NotImplementedError
+            action = 'email'
         else:
-            self.request.RESPONSE.redirect(url)
+            resp.redirect(url)
             return ''
+
+        doc = self._getDoc()
+        valid, ds = doc.validate(layout_id=self.layout_id,
+                                 proxy=self.context,
+                                 request=self.request,
+                                 use_session=True)
+        if not valid:
+            psm = 'psm_content_error'
+            args = getFormUidUrlArg(self.request)
+            args['portal_status_message'] = psm
+            resp.redirect('%s?%s' % (url, urlencode(args)))
+            return
+
+        if action == 'print':
+            self.flagAcked()
+            args = {'page': 'Print', 'mode': 'view_print'}
+        elif action == 'email':
+            mail_to, mail_from, subject, body = self.prepareEmailAck()
+
+            if not mail_to:
+                args = {'portal_status_message':
+                        'psm_cpscourrier_missing_email_address'}
+                resp.redirect('%s?%s' % (url, urlencode(args)))
+                return
+
+            try:
+                send_mail(self.context, mail_to, mail_from, subject, body,
+                          plain_text=False)
+            except (IOError, ValueError):
+                args = {'portal_status_message': 'psm_cpscourrier_smtp_error'}
+            else:
+                self.flagAcked()
+                args = {
+                    'portal_status_message': 'psm_cpscourrier_ack_email_sent'}
+
+        resp.redirect('%s?%s' % (url, urlencode(args)))
+        return

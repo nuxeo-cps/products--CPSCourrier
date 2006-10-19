@@ -24,11 +24,13 @@ import unittest
 from zope.testing import doctest
 
 from Products.CPSCourrier.tests.layer import IntegrationTestCase
+from Products.CPSCourrier.tests.layer import CourrierPaperFunctionalTestCase
 from Products.CPSDashboards.testing import FakeRequestWithCookies
 
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.browser.roadmapview import RoadmapView
 from Products.CPSCourrier.browser.reuseanswerview import ReuseAnswerView
+from Products.CPSCourrier.browser.paperackview import PaperAckView
 from Products.CPSCourrier.config import RELATION_GRAPH_ID, HAS_REPLY
 
 class IntegrationTestRoadmapView(IntegrationTestCase):
@@ -106,11 +108,49 @@ class IntegrationTestReuseAnswerView(IntegrationTestCase):
         self.request.form = {'sort-on': 'column', 'rpath': '/some/rpath'}
         self.assertEquals(self.view.dispatchSubmit(), '')
 
+class FunctionalTestPaperAck(CourrierPaperFunctionalTestCase):
+
+    def afterSetUp(self):
+        CourrierPaperFunctionalTestCase.afterSetUp(self)
+        self.flogin('injector', self.mb)
+        self.createIncoming()
+        self.flogin('member1', self.mb)
+        self.wftool.doActionFor(self.incoming, 'handle')
+
+        self.request = FakeRequestWithCookies()
+        self.view = PaperAckView(self.incoming, self.request).__of__(
+            self.portal)
+
+    def test_renderLayout(self):
+        self.view.renderLayout()
+
+    def test_flagAcked(self):
+        # login according to the stack
+        doc = self.incoming.getContent()
+        self.view.flagAcked()
+        self.assertEquals(doc.ack_sent, True)
+
+    def test_prepareEmailAck(self):
+        self.login('manager')
+        dtool = getToolByName(self.portal, 'portal_directories')
+        global_dir = dtool.addressbook
+        global_dir.createEntry({'uid': 'sender',
+                                'mail': 'original.sender@nohost.com'})
+        self.incoming.getEditableContent()._edit(mail_from='global:sender')
+        self.mb.getEditableContent()._edit(mapping={'from': 'ze.mb@nohost.com'})
+        self.flogin('member3', self.mb)
+
+        mail_to, mail_from, subject, body = self.view.prepareEmailAck()
+
+        self.assertEquals(mail_to, 'original.sender@nohost.com')
+        self.assertEquals(mail_from, 'ze.mb@nohost.com')
+        self.assert_(body)
 
 def test_suite():
     return unittest.TestSuite((
         unittest.makeSuite(IntegrationTestRoadmapView),
         unittest.makeSuite(IntegrationTestReuseAnswerView),
+        unittest.makeSuite(FunctionalTestPaperAck),
         doctest.DocFileTest('doc/developer/views.txt',
                             package='Products.CPSCourrier'),
         ))
