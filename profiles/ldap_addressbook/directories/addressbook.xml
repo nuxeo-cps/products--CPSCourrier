@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<object name="addressbook" meta_type="CPS Stacking Directory">
+ <property name="title">label_address_book</property>
+ <property name="schema">addressbook</property>
+ <property name="schema_search">addressbook_search</property>
+ <property name="layout">addressbook</property>
+ <property name="layout_search">addressbook_search</property>
+ <property name="acl_directory_view_roles">Manager; Member</property>
+ <property name="acl_entry_create_roles">Manager</property>
+ <property name="acl_entry_delete_roles">Manager</property>
+ <property name="acl_entry_view_roles">Manager; Member</property>
+ <property name="acl_entry_edit_roles">Manager</property>
+ <property name="id_field">uid</property>
+ <property name="title_field">ou</property>
+ <property name="search_substring_fields">
+  <element value="cn"/>
+  <element value="mail"/>
+  <element value="uid"/>
+  <element value="sn"/>
+  <element value="postalAddress"/>
+  <element value="physicalDeliveryOfficeName"/>
+  <element value="ou"/>
+  <element value="description"/>
+ </property>
+
+ <property name="backing_dirs">
+  <element value="addressbook_ldap"/>
+ </property>
+ <property name="creation_dir">addressbook_ldap </property>
+
+ <cache-manager name="dir_ramcache"/>
+</object>

@@ -49,12 +49,9 @@ class CPSCourrierSiteConfigurator(CPSSiteMetaConfigurator):
                                           'rpath' : 'MailHost'},
                           },
          'LDAP': {
-             'title' : ('External LDAP directory storage for members and'
-                        'contacts'),
+             'title' : 'External LDAP directory storage for members',
              'extensions' : (
                  'CPSLDAPSetup:default',
-                 # TODO: add CPSCourrier:ldap here to store the contacts
-                 # directories
              ),
              'parameters' : {
                  'properties' : (
@@ -67,6 +64,25 @@ class CPSCourrierSiteConfigurator(CPSSiteMetaConfigurator):
                  ),
                  'class': 'Products.CPSDirectory.LDAPBackingDirectory',
                  'rpath': 'portal_directories/members_ldap',
+             },
+             'optional' : True,
+         },
+         'LDAP_Addressbook': {
+             'title' : 'External LDAP directory storage for global addressbook. Requires Paper option',
+             'extensions' : (
+                 'CPSCourrier:ldap_addressbook',
+             ),
+             'parameters' : {
+                 'properties' : (
+                     'ldap_server',
+                     'ldap_port',
+                     'ldap_bind_dn',
+                     'ldap_bind_password',
+                     'ldap_base',
+                     'ldap_base_creation',
+                 ),
+                 'class': 'Products.CPSDirectory.LDAPBackingDirectory',
+                 'rpath': 'portal_directories/addressbook_ldap',
              },
              'optional' : True,
          },
@@ -90,7 +106,13 @@ class CPSCourrierSiteConfigurator(CPSSiteMetaConfigurator):
                    'optional': True,},
          }
 
-     metas_order = ('CourrierBase', 'Lucene', 'LDAP', 'CourrierEmail', 'CourrierPaper',)
+     metas_order = ('CourrierBase',
+                    'Lucene',
+                    'LDAP',
+                    'CourrierEmail',
+                    'CourrierPaper',
+                    'LDAP_Addressbook',
+                    )
      form_heading = "Add CPSCourrier Site"
      post_action = 'addConfiguredCPSCourrierSite'
 

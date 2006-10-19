@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<object name="addressbook_ldap" meta_type="CPS LDAP Backing Directory">
+ <property name="title">label_address_book_ldap</property>
+ <property name="schema">addressbook</property>
+ <property name="schemas"/>
+ <property name="schema_search">addressbook_search</property>
+ <property name="schemas_search"/>
+ <property name="layout"></property>
+ <property name="layout_search"></property>
+ <property name="acl_directory_view_roles">Nobody</property>
+ <property name="acl_entry_create_roles">Manager</property>
+ <property name="acl_entry_delete_roles">Manager</property>
+ <property name="acl_entry_view_roles">Manager; Member</property>
+ <property name="acl_entry_edit_roles">Manager</property>
+ <property name="title_field">ou</property>
+ <property name="search_substring_fields">
+  <element value="cn"/>
+  <element value="mail"/>
+  <element value="uid"/>
+  <element value="sn"/>
+  <element value="postalAddress"/>
+  <element value="physicalDeliveryOfficeName"/>
+  <element value="ou"/>
+  <element value="description"/>
+ </property>
+ <property name="is_hierarchical">False</property>
+ <property name="password_field"></property>
+ <property name="password_encryption">none</property>
+ <property name="ldap_server">localhost</property>
+ <property name="ldap_port">389</property>
+ <property name="ldap_use_ssl">False</property>
+ <property
+    name="ldap_base">ou=global,o=cpscourriercontacts,dc=mysite,dc=net</property>
+ <property
+    name="ldap_base_creation">ou=global,o=cpscourriercontacts,dc=mysite,dc=net</property>
+ <property name="ldap_scope">SUBTREE</property>
+ <property name="ldap_search_classes">inetOrgPerson</property>
+ <property name="ldap_search_filter"></property>
+ <property
+    name="ldap_bind_dn">cn=cps,ou=applications,dc=mysite,dc=net</property>
+ <property name="ldap_bind_password">changeme</property>
+ <property name="ldap_rdn_attr">uid</property>
+ <property
+    name="ldap_object_classes">top, person, organizationalPerson, inetOrgPerson</property>
+ <property name="children_attr">None</property>
+ <property name="children_id_attr">cn</property>
+ <cache-manager name="dir_ramcache"/>
+</object>

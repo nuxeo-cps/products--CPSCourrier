@@ -3,6 +3,7 @@ Requires
 -
 New features
 ~~~~~~~~~~~~
+- New profile for Global addressbook in LDAP
 - New view on paper incoming mails to prepare/print/send
   acknowledgements.
 - Specific printable page theme by tibo.

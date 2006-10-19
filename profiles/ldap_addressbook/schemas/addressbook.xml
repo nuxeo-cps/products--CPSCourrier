@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<object name="addressbook" meta_type="CPS Schema">
+  <field name="dn" meta_type="CPS String Field"/>
+</object>
