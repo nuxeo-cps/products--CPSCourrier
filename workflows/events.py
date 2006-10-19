@@ -25,6 +25,7 @@ import logging
 
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.config import RELATION_GRAPH_ID
+from Products.CPSCourrier.relations import clean_relations_for
 
 logger = logging.getLogger('CPSCourrier.workflows.events')
 
@@ -50,7 +51,7 @@ def removedProxy(ob, event):
     rtool = getToolByName(ob, 'portal_relations', None)
     if rtool is not None:
         try:
-            rtool.removeAllRelationsFor(RELATION_GRAPH_ID, int(docid))
+            clean_relations_for(ob)
         except KeyError, err:
             if str(err) != "'%s'" % RELATION_GRAPH_ID:
                 raise

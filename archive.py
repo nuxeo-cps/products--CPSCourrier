@@ -39,13 +39,15 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.utils import _checkPermission
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CPSCourrier.config import (
-    ARCHIVE_MIN_AGE, ARCHIVE_HOME, HAS_REPLY, IS_REPLY_TO, RELATION_GRAPH_ID)
+    ARCHIVE_MIN_AGE, ARCHIVE_HOME, HAS_REPLY, RELATION_PREFIX, RELATION_GRAPH_ID)
 from Products.CPSCourrier.relations import get_thread_for
 from Products.CPSDocument.exportimport import getCPSObjectValues
 from Products.GenericSetup.context import DirectoryExportContext
 from Products.GenericSetup.utils import XMLAdapterBase
 from Products.GenericSetup.interfaces import IBody
 from Products.GenericSetup.interfaces import ISetupEnviron
+from Products.CPSRelation.interfaces import IVersionHistoryResource
+from Products.CPSRelation.node import PrefixedResource
 
 from Products.CPSCore.interfaces import ICPSProxy
 
@@ -57,7 +59,7 @@ class CPSProxyXMLAdapter(XMLAdapterBase):
     Store the Proxy data such as WF history and the document data in the
     same XML file (+ subfiles).
 
-    This also export the IS_REPLY_TO and HAS_REPLY relations.
+    This also export the HAS_REPLY relation.
     """
 
     adapts(ICPSProxy, ISetupEnviron)
@@ -84,8 +86,7 @@ class CPSProxyXMLAdapter(XMLAdapterBase):
         ob = self.context
         exporter = zapi.queryMultiAdapter((ob.getContent(), self.environ), IBody)
         node.appendChild(self._extractWorkflowHistory())
-        node.appendChild(self._extractRelation(IS_REPLY_TO))
-        node.appendChild(self._extractRelation(HAS_REPLY))
+        node.appendChild(self._extractRelation())
         node.appendChild(exporter._extractObjects())
         node.appendChild(exporter._extractDocumentFields())
         msg = "Proxy %r exported." % self.context.getId()
@@ -119,16 +120,17 @@ class CPSProxyXMLAdapter(XMLAdapterBase):
             fragment.appendChild(node)
         return fragment
 
-    def _extractRelation(self, relation_id):
+    def _extractRelation(self):
         fragment = self._doc.createDocumentFragment()
         node = self._doc.createElement('relation')
-        node.setAttribute('name', relation_id)
+        node.setAttribute('name', "%s:%s" % (RELATION_PREFIX, HAS_REPLY))
         rtool = getToolByName(self.context, 'portal_relations')
         ptool = getToolByName(self.context, 'portal_proxies')
         g = rtool.getGraph(RELATION_GRAPH_ID)
-        docids = g.getRelationsFor(int(self.context.getDocid()), relation_id)
-        for docid in docids:
-            infos = ptool.getProxyInfosFromDocid(str(docid))
+        replies = g.getObjects(IVersionHistoryResource(self.context),
+                               PrefixedResource(RELATION_PREFIX, HAS_REPLY))
+        for reply in replies:
+            infos = ptool.getProxyInfosFromDocid(reply.docid)
             for info in infos:
                 child = self._doc.createElement('target')
                 child.setAttribute('rpath', info['rpath'])

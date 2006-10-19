@@ -37,8 +37,11 @@ from Products.CMFCore.CatalogTool import CatalogTool
 from Products.CPSCourrier.tests.layer import IntegrationTestCase
 from Products.CPSCourrier.workflows.scripts import reply_to_incoming
 from Products.CPSCourrier.relations import make_reply_to
+from Products.CPSRelation.node import PrefixedResource
+from Products.CPSRelation.interfaces import IVersionHistoryResource
 from Products.CPSCourrier.config import (
-    RELATION_GRAPH_ID, IS_REPLY_TO, HAS_REPLY)
+    RELATION_GRAPH_ID, RELATION_PREFIX, HAS_REPLY)
+from Products.CPSCourrier.relations import clean_relations_for
 
 
 # import things to test
@@ -150,8 +153,7 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
 
         # ensure the graph is clean
         for mail in chain(self.incoming_mails, self.outgoing_mails):
-            self.portal.portal_relations.removeAllRelationsFor(
-                RELATION_GRAPH_ID, int(mail.getDocid()))
+            clean_relations_for(mail)
         # delete the test areas
         self.portal.mailboxes.manage_delObjects([self.MBG_ID])
         self.incoming_mails = []
@@ -271,7 +273,8 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         # archiving an incoming mail
         self.archiver.exportProxyToXml(self.incoming_mails[0])
         filename = "mailboxes/test-mailbox-group/test-mailbox/in_mail0.xml"
-        tree = lxml.etree.parse(os.path.join(self.tmp_archive_dir, filename))
+        tree = lxml.etree.parse(os.path.join(self.tmp_archive_dir,
+                                             filename))
 
         # check general xml content
         object = tree.xpath('/object')[0]
@@ -284,8 +287,6 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         for reply in replies:
             _, id = reply.get('rpath').rsplit('/', 1)
             self.assert_(id.startswith("re-test-mail-0"))
-        references = tree.xpath("//relation[@name='is_reply_to']/target")
-        self.assertEquals(references, [])
 
         # check wf history export
         histories = tree.xpath("//wf_history")
@@ -321,10 +322,6 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         # check relations
         replies = tree.xpath("//relation[@name='has_reply']/target")
         self.assertEquals(len(replies), 0)
-        references = tree.xpath("//relation[@name='is_reply_to']/target")
-        self.assertEquals(len(references), 1)
-        _, id = references[0].get('rpath').rsplit('/', 1)
-        self.assertEquals(id, "in_mail0")
 
         #TODO: test wf history
 
@@ -334,7 +331,8 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         for _, mail in in_mails:
             self.wftool.doActionFor(mail, 'close')
             self._putMailInPast(mail, 300)
-        out_mails = [(i, self.outgoing_mails[i]) for i in range(4)+range(6, 8)]
+        out_mails = [(i, self.outgoing_mails[i])
+                     for i in range(4)+range(6, 8)]
         for _, mail in out_mails:
             self.wftool.doActionFor(mail, 'send')
             self._putMailInPast(mail, 500)
@@ -386,10 +384,11 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         rtool = getToolByName(self.portal, 'portal_relations')
         g = rtool.getGraph(RELATION_GRAPH_ID)
         for _, mail in in_mails + out_mails:
-            references = g.getRelationsFor(int(mail.getDocid()), IS_REPLY_TO)
-            self.assertEquals(references, ())
-            replies = g.getRelationsFor(int(mail.getDocid()), HAS_REPLY)
-            self.assertEquals(replies, ())
+            replies = g.getObjects(
+                IVersionHistoryResource(mail),
+                PrefixedResource(RELATION_PREFIX, HAS_REPLY),
+            )
+            self.assertEquals(tuple(replies), ())
 
     def test_archive_with_auto_trigger(self):
         # make 2 threads archivable with some incoming mail trashed
@@ -465,10 +464,9 @@ class ArchiverIntegrationTestCase(IntegrationTestCase):
         rtool = getToolByName(self.portal, 'portal_relations')
         g = rtool.getGraph(RELATION_GRAPH_ID)
         for _, mail in in_mails + out_mails + trashed_in_mails:
-            references = g.getRelationsFor(int(mail.getDocid()), IS_REPLY_TO)
-            self.assertEquals(references, ())
-            replies = g.getRelationsFor(int(mail.getDocid()), HAS_REPLY)
-            self.assertEquals(replies, ())
+            replies = g.getObjects(IVersionHistoryResource(mail),
+                                   PrefixedResource(RELATION_PREFIX, HAS_REPLY))
+            self.assertEquals(tuple(replies), ())
 
 
 def test_suite():

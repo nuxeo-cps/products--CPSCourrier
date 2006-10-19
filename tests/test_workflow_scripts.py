@@ -42,8 +42,11 @@ from Products.CPSCourrier.workflows.scripts import (
     forward_mail,
     send_reply,
     init_stack_with_user)
-from Products.CPSCourrier.config import (
-    RELATION_GRAPH_ID, IS_REPLY_TO, HAS_REPLY)
+from Products.CPSCourrier.relations import (
+    unlink,
+    get_original_message_docid,
+    get_replies_docids,
+)
 
 class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
@@ -108,7 +111,6 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 #        self.assertEquals(subject2, expected)
 
     def test_reply_to_incoming(self):
-        rtool = getToolByName(self.portal, 'portal_relations')
         wtool = getToolByName(self.portal, 'portal_workflow')
 
         # add 'Re:' to the incoming mail title
@@ -120,7 +122,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
 
         if doc1.portal_type.endswith('Email'):
             # Mailbox sending address
-            self.assertEquals(doc1['mail_from'], 'test_mailbox@cpscourrier.com')
+            self.assertEquals(doc1['mail_from'],
+                              'test_mailbox@cpscourrier.com')
         else:
             # Recipient of the incoming mail
             self.assertEquals(doc1['mail_from'], 'foo@foo.com')
@@ -128,10 +131,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         self.assertEquals(doc1['mail_to'], ['bar@foo.com'])
 
         # check that they are related
-        res = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                int(out_mail1.getDocid()),
-                                IS_REPLY_TO)
-        expected = (int(self.in_mail1.getDocid()),)
+        res = get_original_message_docid(out_mail1)
+        expected = self.in_mail1.getDocid()
         self.assertEquals(expected, res)
 
         # do not add the 'Re:' prefix twice
@@ -142,7 +143,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         self.outgoing_doc2 = doc2 = out_mail2.getContent()
         self.assertEquals(out_mail2.Title(), 'Re: Test mail 1')
         if doc1.portal_type.endswith('Email'):
-            self.assertEquals(doc2['mail_from'], 'test_mailbox@cpscourrier.com')
+            self.assertEquals(doc2['mail_from'],
+                              'test_mailbox@cpscourrier.com')
         else:
             # first in the list. In real life paper use the list would be
             # a singleton
@@ -151,14 +153,11 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         self.assertEquals(doc2['mail_to'], ['foo@foo.com'])
 
         # check that they are related
-        res = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                int(out_mail2.getDocid()),
-                                IS_REPLY_TO)
-        expected = (int(self.in_mail2.getDocid()),)
+        res = get_original_message_docid(out_mail2)
+        expected = self.in_mail2.getDocid()
         self.assertEquals(expected, res)
 
     def test_reply_to_incoming_with_template(self):
-        rtool = getToolByName(self.portal, 'portal_relations')
         wtool = getToolByName(self.portal, 'portal_workflow')
         utool = getToolByName(self.portal, 'portal_url')
 
@@ -176,10 +175,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         self.assertEquals(doc1['mail_to'], ['bar@foo.com'])
 
         # check that they are related
-        res = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                int(template.getDocid()),
-                                IS_REPLY_TO)
-        expected = (int(self.in_mail1.getDocid()),)
+        res = get_original_message_docid(template)
+        expected = self.in_mail1.getDocid()
         self.assertEquals(expected, res)
 
         # edit the template reply, and attach two files
@@ -220,10 +217,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         self.assertEquals(attached.data, 'Other foo file')
 
         # check that they are related
-        res = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                int(second_reply.getDocid()),
-                                IS_REPLY_TO)
-        expected = (int(self.in_mail1.getDocid()),)
+        res = get_original_message_docid(second_reply)
+        expected = self.in_mail1.getDocid()
         self.assertEquals(expected, res)
 
     def test_flag_incoming_answered_1(self):
@@ -331,31 +326,23 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         out_mail3 = reply_to_incoming(in_mail1)
         self._set_state(in_mail1, 'answering')
 
-        # flag_incoming_answered must change the in_mail1 state only if there
-        # is only one reply remaining
+        # flag_incoming_answered must change the in_mail1 state only if
+        # there is only one reply remaining
         flag_incoming_answered(out_mail1)
         self.assertEquals(self._get_state(in_mail1), 'answering')
 
         # unlink out_mail2, and retry
-        rtool = getToolByName(in_mail1, 'portal_relations')
-        rtool.deleteRelationFor(RELATION_GRAPH_ID,
-                                int(out_mail2.getDocid()),
-                                IS_REPLY_TO,
-                                int(in_mail1.getDocid()))
+        unlink(in_mail1, out_mail2)
         flag_incoming_answered(out_mail1)
         self.assertEquals(self._get_state(in_mail1), 'answering')
 
         # unlink out_mail3, and retry
-        rtool = getToolByName(in_mail1, 'portal_relations')
-        rtool.deleteRelationFor(RELATION_GRAPH_ID,
-                                int(out_mail3.getDocid()),
-                                IS_REPLY_TO,
-                                int(in_mail1.getDocid()))
-        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                int(in_mail1.getDocid()),
-                                HAS_REPLY)
-        # out_mail1 is the last reply: the transition on in_mail1 is triggered
-        self.assertEquals(linked_replies, (int(out_mail1.getDocid()),))
+        unlink(in_mail1, out_mail3)
+
+        # out_mail1 is the last reply: the transition on in_mail1 is
+        # triggered
+        linked_replies = get_replies_docids(in_mail1)
+        self.assertEquals(linked_replies, [out_mail1.getDocid()])
         flag_incoming_handled(out_mail1)
         self.assertEquals(self._get_state(in_mail1), 'handled')
 
@@ -366,19 +353,18 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
     #
 
     def test_event_delete_1(self):
-        # remove a proxy that is not linked to anything in the rtool (smoke
-        # test)
+        # remove a proxy that is not linked to anything in the relation
+        # tool (smoke test)
         in_mail1 = self.in_mail1
-        rtool = getToolByName(in_mail1, 'portal_relations')
-        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                int(in_mail1.getDocid()),
-                                HAS_REPLY)
-        self.assertEquals(linked_replies, ())
+        linked_replies = get_replies_docids(in_mail1)
+        self.assertEquals(linked_replies, [])
         self.mb.manage_delObjects([in_mail1.getId()])
 
         # the deletion of other proxies such as the mailbox should produce
         # anything weird either
         self.mbg.manage_delObjects([self.mb.getId()])
+        linked_replies = get_replies_docids(in_mail1)
+        self.assertEquals(linked_replies, [])
 
     def test_event_delete_2(self):
         in_mail1 = self.in_mail1
@@ -388,22 +374,18 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
             wtool.doActionFor(in_mail1, 'handle')
         in_mail1_docid = int(in_mail1.getDocid())
         out_mail1 = reply_to_incoming(in_mail1)
-        out_mail1_docid = int(out_mail1.getDocid())
-        rtool = getToolByName(in_mail1, 'portal_relations')
+        out_mail1_docid = out_mail1.getDocid()
 
         # out_mail1 is linked has a reply to in_mail1
-        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, HAS_REPLY)
-
-        self.assertEquals(linked_replies, (out_mail1_docid,))
+        linked_replies = get_replies_docids(in_mail1)
+        self.assertEquals(linked_replies, [out_mail1_docid])
 
         # trigger the deletion event
         self.mb.manage_delObjects([out_mail1.getId()])
 
         # after deletion in_mail1 is no longer linked to anything
-        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, HAS_REPLY)
-        self.assertEquals(linked_replies, ())
+        linked_replies = get_replies_docids(in_mail1)
+        self.assertEquals(linked_replies, [])
 
     def test_event_delete_3(self):
         in_mail1 = self.in_mail1
@@ -413,14 +395,12 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
             wtool.doActionFor(in_mail1, 'handle')
         in_mail1_docid = int(in_mail1.getDocid())
         out_mail1 = reply_to_incoming(in_mail1)
-        out_mail1_docid = int(out_mail1.getDocid())
+        out_mail1_docid = out_mail1.getDocid()
         out_mail2 = reply_to_incoming(in_mail1)
-        out_mail2_docid = int(out_mail2.getDocid())
-        rtool = getToolByName(in_mail1, 'portal_relations')
+        out_mail2_docid = out_mail2.getDocid()
 
         # out_mail1 and 2 are linked has a reply to in_mail1
-        linked_replies = sorted(rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, HAS_REPLY))
+        linked_replies = sorted(get_replies_docids(in_mail1))
         expected = sorted((out_mail1_docid, out_mail2_docid))
         self.assertEquals(linked_replies, expected)
 
@@ -428,16 +408,14 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         self.mb.manage_delObjects([out_mail1.getId()])
 
         # after deletion in_mail1 is no longer linked to out_mail2
-        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, HAS_REPLY)
-        self.assertEquals(linked_replies, (out_mail2_docid,))
+        linked_replies = get_replies_docids(in_mail1)
+        self.assertEquals(linked_replies, [out_mail2_docid])
 
-        # deleting the container should delete children and clean the relation
-        # graph
+        # deleting the container should delete children and clean the
+        # relation graph
         self.mbg.manage_delObjects([self.mb.getId()])
-        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, HAS_REPLY)
-        self.assertEquals(linked_replies, ())
+        linked_replies = get_replies_docids(in_mail1)
+        self.assertEquals(linked_replies, [])
 
     def test_event_delete_move(self):
         # smoke test: on proxy move, the relation graph should not change
@@ -448,13 +426,11 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
             wtool.doActionFor(in_mail1, 'handle')
         in_mail1_docid = int(in_mail1.getDocid())
         out_mail1 = reply_to_incoming(in_mail1)
-        out_mail1_docid = int(out_mail1.getDocid())
-        rtool = getToolByName(in_mail1, 'portal_relations')
+        out_mail1_docid = out_mail1.getDocid()
 
         # out_mail1 is linked has a reply to in_mail1
-        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, HAS_REPLY)
-        self.assertEquals(linked_replies, (out_mail1_docid,))
+        linked_replies = get_replies_docids(in_mail1)
+        self.assertEquals(linked_replies, [out_mail1_docid])
 
         # target mailboxes for moving proxies around
         mb1 = self.mb
@@ -467,9 +443,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         transaction.commit()
 
         # relations should not have changed
-        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, HAS_REPLY)
-        self.assertEquals(linked_replies, (out_mail1_docid,))
+        linked_replies = get_replies_docids(in_mail1)
+        self.assertEquals(linked_replies, [out_mail1_docid])
 
         # cut an paste objects at Zope level (ZMI for instance)
         cut = mb1.manage_cutObjects([out_mail1.getId()])
@@ -478,9 +453,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
         transaction.commit()
 
         # relations should not have changed either
-        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, HAS_REPLY)
-        self.assertEquals(linked_replies, (out_mail1_docid,))
+        linked_replies = get_replies_docids(in_mail1)
+        self.assertEquals(linked_replies, [out_mail1_docid])
 
     def test_event_delete_checkout(self):
         # smoke test: on checkout draft move, the relation graph should not
@@ -492,14 +466,12 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
             wtool.doActionFor(in_mail1, 'handle')
         in_mail1_docid = int(in_mail1.getDocid())
         out_mail1 = reply_to_incoming(in_mail1)
-        out_mail1_docid = int(out_mail1.getDocid())
-        rtool = getToolByName(self.portal, 'portal_relations')
+        out_mail1_docid = out_mail1.getDocid()
         wtool = getToolByName(self.portal, 'portal_workflow')
 
         # out_mail1 is linked has a reply to in_mail1
-        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, HAS_REPLY)
-        self.assertEquals(linked_replies, (out_mail1_docid,))
+        linked_replies = get_replies_docids(in_mail1)
+        self.assertEquals(linked_replies, [out_mail1_docid])
 
         # create a draft
         wtool.doActionFor(out_mail1, 'checkout_draft',
@@ -507,9 +479,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
                           initial_transition='checkout_draft_in')
 
         # out_mail1 should still be linked has a reply to in_mail1
-        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, HAS_REPLY)
-        self.assertEquals(linked_replies, (out_mail1_docid,))
+        linked_replies = get_replies_docids(in_mail1)
+        self.assertEquals(linked_replies, [out_mail1_docid])
 
         # check draft back in
         draft = self.mb[out_mail1.getId()+'_1']
@@ -519,9 +490,8 @@ class WorkflowScriptsIntegrationTestCase(IntegrationTestCase):
                           checkin_transition="unlock")
 
         # out_mail1 should still be linked has a reply to in_mail1
-        linked_replies = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                in_mail1_docid, HAS_REPLY)
-        self.assertEquals(linked_replies, (out_mail1_docid,))
+        linked_replies = get_replies_docids(in_mail1)
+        self.assertEquals(linked_replies, [out_mail1_docid])
 
     #
     # integration between wf scripts and events

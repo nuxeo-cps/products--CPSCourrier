@@ -9,8 +9,7 @@
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
+## You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 # 02111-1307, USA.
@@ -38,7 +37,7 @@ from Products.CPSDefault.tests.CPSTestCase import (
     ExtensionProfileLayerClass)
 
 from Products.CPSCourrier.tests import stackelements
-from Products.CPSCourrier.config import RELATION_GRAPH_ID
+from Products.CPSCourrier.relations import clean_relations_for
 
 
 # register profiles
@@ -177,11 +176,11 @@ class IntegrationTestCase(CommonIntegrationFixture, CPSTestCase):
     def beforeTearDown(self):
         # ensure the catalog is clean
         self.portal.portal_catalog.refreshCatalog(clear=1)
+
         # ensure the graph is clean
-        self.portal.portal_relations.removeAllRelationsFor(
-            RELATION_GRAPH_ID, int(self.in_mail1.getDocid()))
-        self.portal.portal_relations.removeAllRelationsFor(
-            RELATION_GRAPH_ID, int(self.in_mail2.getDocid()))
+        clean_relations_for(self.in_mail1)
+        clean_relations_for(self.in_mail2)
+
         # delete the test areas
         self.portal.mailboxes.manage_delObjects([self.MBG_ID])
         transaction.commit()

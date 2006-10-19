@@ -27,8 +27,9 @@ properties.
 # and their responses
 RELATION_GRAPH_ID = "cpscourrier"
 
-# Outgoing Mail -> Incoming Mail relation id (one to one)
-IS_REPLY_TO = 'is_reply_to'
+# CPSRelation resources can be prefixed to avoid namespace polution on RDF
+# based backends
+RELATION_PREFIX = 'cpscourrier'
 
 # Incoming Mail -> Outgoing Mail relation id (one to many)
 HAS_REPLY = 'has_reply'

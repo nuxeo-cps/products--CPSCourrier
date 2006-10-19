@@ -30,8 +30,8 @@ from Products.CPSDashboards.testing import FakeRequestWithCookies
 from Products.CMFCore.utils import getToolByName
 from Products.CPSCourrier.browser.roadmapview import RoadmapView
 from Products.CPSCourrier.browser.reuseanswerview import ReuseAnswerView
+from Products.CPSCourrier.relations import get_replies_docids
 from Products.CPSCourrier.browser.paperackview import PaperAckView
-from Products.CPSCourrier.config import RELATION_GRAPH_ID, HAS_REPLY
 
 class IntegrationTestRoadmapView(IntegrationTestCase):
 
@@ -90,12 +90,9 @@ class IntegrationTestReuseAnswerView(IntegrationTestCase):
         self.view.dispatchSubmit()
 
         # retrieve the answer (should factorize this)
-        rtool = getToolByName(self.portal, 'portal_relations')
-        outgoing_docids= rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                               int(self.in_mail1.getDocid()),
-                                               HAS_REPLY)
+        outgoing_docids = get_replies_docids(self.in_mail1)
         self.assertEquals(len(outgoing_docids), 1)
-        docid = str(outgoing_docids[0])
+        docid = outgoing_docids[0]
         pxtool = getToolByName(self.portal, 'portal_proxies')
         proxies = pxtool.listProxies(docid=docid)
         self.assertEquals(len(proxies), 1)

@@ -43,13 +43,12 @@ from Products.CPSCore.EventServiceTool import getPublicEventService
 from Products.CPSCourrier.utils import html_to_text
 from Products.CPSCourrier.relations import make_reply_to
 from Products.CPSCourrier.config import (
-    RELATION_GRAPH_ID,
-    IS_REPLY_TO,
-    HAS_REPLY,
     BAYES_MIN_PROB,
     STACK_ID,
     REPLY_PTYPE_MAPPING,
 )
+from Products.CPSCourrier.relations import get_original_message_docid
+from Products.CPSCourrier.relations import get_replies_docids
 
 logger = logging.getLogger('CPSCourrier.workflows.scripts')
 
@@ -99,7 +98,8 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
 
     Title = incoming_doc.Title()
     title_lower = Title.lower()
-    if not (title_lower.startswith('re:') or title_lower.startswith('ref:')):
+    if not (title_lower.startswith('re:')
+            or title_lower.startswith('ref:')):
         Title = 'Re: %s' % Title
 
     data = {
@@ -109,7 +109,8 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
         'Subject': incoming_doc['Subject'](),
     }
     if incoming_doc.portal_type.endswith('Pmail'):
-        # bal's email address not relevant. Use two fields for compat later ?
+        # bal's email address not relevant. Use two fields for compat
+        # later ?
         incoming_to = incoming_doc['mail_to']
         data['mail_from'] = incoming_to and incoming_to[0] or ''
         data['confidential'] = incoming_doc['confidential']
@@ -122,8 +123,8 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
         if incoming_ptype == 'Incoming Email':
             # GR I don't see the point of copying the template's Subject.
             # Could even be harmful in case the template just says:
-            # "sorry we can't do anything for you" and has for obvious reasons
-            # an empty Subject
+            # "sorry we can't do anything for you" and has for obvious
+            # reasons an empty Subject
             data.update({
                 'content': template_doc['content'],
                 'content_format': template_doc['content_format'],
@@ -175,26 +176,6 @@ def reply_to_incoming(incoming_proxy, base_reply_rpath=''):
     return outgoing_proxy
 
 
-def _get_incoming_docid_for(outgoing_proxy):
-    """Helper function that returns the docid of the related incoming mail
-
-    Return None is no related docid is found
-    """
-    rtool = getToolByName(outgoing_proxy, 'portal_relations')
-    # get the related incoming mail
-    incoming_docids = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                            int(outgoing_proxy.getDocid()),
-                                            IS_REPLY_TO)
-    logger.debug('incoming docids: %r' % (incoming_docids,))
-    if not incoming_docids:
-        # the related incoming mail has been deleted
-        return None
-    # a is_reply_to is a "many to one" relation
-    (incoming_docid,) = incoming_docids
-    logger.debug('incoming docid: %r' % (incoming_docid,))
-    return incoming_docid
-
-
 def _trigger_transition_for(docid, transition, review_state, context):
     """Trigger the transition for proxies with matching docid and review_state"""
     ptool = getToolByName(context, 'portal_proxies')
@@ -202,8 +183,8 @@ def _trigger_transition_for(docid, transition, review_state, context):
     for info in ptool.getProxyInfosFromDocid(
         str(docid), workflow_vars=('review_state',)):
         if info['review_state'] != review_state:
-            # incoming mail can already have changed state for several reasons,
-            # in that case, just ignore it
+            # incoming mail can already have changed state for several
+            # reasons, in that case, just ignore it
             logger.debug('ignoring proxy with info %r' % info)
             continue
         logger.debug('trigger %s transition for %r' % (transition, info))
@@ -217,11 +198,10 @@ def flag_incoming_answered(outgoing_proxy, sci_kw=None):
     """
     logger.debug('start flag_incoming_answered')
 
-    rtool = getToolByName(outgoing_proxy, 'portal_relations')
     ptool = getToolByName(outgoing_proxy, 'portal_proxies')
 
     # grab the original mail docid
-    incoming_docid = _get_incoming_docid_for(outgoing_proxy)
+    incoming_docid = get_original_message_docid(outgoing_proxy)
     if incoming_docid is None:
         logger.warning('%r has no related incoming mail: do nothing')
         return
@@ -229,14 +209,13 @@ def flag_incoming_answered(outgoing_proxy, sci_kw=None):
     # final reply: don't check anything and close the incoming
 
     if sci_kw is not None and sci_kw.get('final_reply'):
-      _trigger_transition_for(incoming_docid, 'close', 'answering',
-                              outgoing_proxy)
-      return
+        _trigger_transition_for(incoming_docid, 'close', 'answering',
+                                outgoing_proxy)
+        return
 
     # check that all replies to the incoming mail are already sent
-    outgoing_docids = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                            int(incoming_docid),
-                                            HAS_REPLY)
+    outgoing_docids = get_replies_docids(incoming_docid,
+                                         context=outgoing_proxy)
     logger.debug('outgoing docids: %r' % (outgoing_docids,))
     for docid in outgoing_docids:
         proxy_infos = ptool.getProxyInfosFromDocid(
@@ -264,11 +243,10 @@ def flag_incoming_answering(outgoing_proxy, sci_kw=None):
     """
     logger.debug('start flag_incoming_answering')
 
-    rtool = getToolByName(outgoing_proxy, 'portal_relations')
     ptool = getToolByName(outgoing_proxy, 'portal_proxies')
 
     # grab the original mail docid
-    incoming_docid = _get_incoming_docid_for(outgoing_proxy)
+    incoming_docid = get_original_message_docid(outgoing_proxy)
     if incoming_docid is None:
         logger.warning('%r has no related incoming mail: do nothing')
         return
@@ -285,18 +263,15 @@ def flag_incoming_handled(outgoing_proxy):
     """
     logger.debug('start flag_incoming_handled')
 
-    rtool = getToolByName(outgoing_proxy, 'portal_relations')
-
     # grab the original mail docid
-    incoming_docid = _get_incoming_docid_for(outgoing_proxy)
+    incoming_docid = get_original_message_docid(outgoing_proxy)
     if incoming_docid is None:
         logger.warning('%r has no related incoming mail: do nothing')
         return
 
     # check that outgoing_proxy is the last reply to be deleted
-    outgoing_docids = rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                            int(incoming_docid),
-                                            HAS_REPLY)
+    outgoing_docids = get_replies_docids(incoming_docid,
+                                         context=outgoing_proxy)
     if len(outgoing_docids) > 1:
         logger.debug('several remaining docids %r: do nothing' %
                      (outgoing_docids,))
@@ -503,7 +478,7 @@ def compute_reply_body(proxy, plain_text=True, additionnal_info=''):
     body += sig_wrapper % (foa , doc['signature'], additionnal_info)
 
     # get the original content for quoting
-    incoming_docid = _get_incoming_docid_for(proxy)
+    incoming_docid = get_original_message_docid(proxy)
     if incoming_docid is None:
         logger.warning('%r has no related incoming mail: do not include'
                        'original mail in reply' % proxy)

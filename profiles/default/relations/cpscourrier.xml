@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <object name="cpscourrier" meta_type="IOBTree Graph">
- <property name="title"></property>
- <relation name="is_reply_to" meta_type="IOBTree Relation">
-  <property name="title">Reply To</property>
-  <property name="inverse_id">has_reply</property>
- </relation>
+
+ <property name="synchronous">True</property>
+
  <relation name="has_reply" meta_type="IOBTree Relation">
-  <property name="title">Reply To (Inverse)</property>
-  <property name="inverse_id">is_reply_to</property>
+  <property name="prefix">cpscourrier</property>
+  <property name="subject_prefix">docid</property>
+  <property name="object_prefix">docid</property>
  </relation>
+
 </object>

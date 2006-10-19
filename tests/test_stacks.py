@@ -28,9 +28,9 @@ from Products.CMFCore.permissions import ModifyPortalContent
 from Products.CPSSchemas.tests.testWidgets import FakeDataModel
 from Products.CPSSchemas.DataStructure import DataStructure
 
-from Products.CPSCourrier.widgets.row_widgets import CPSCourrierToDoRowWidget
 from Products.CPSCourrier.workflows.stacks import CourrierStack
-from Products.CPSCourrier.config import  RELATION_GRAPH_ID, HAS_REPLY, STACK_ID
+from Products.CPSCourrier.config import STACK_ID
+from Products.CPSCourrier.relations import get_replies_docids
 
 class FakeMailHost:
     def _send(self, *args):
@@ -588,12 +588,9 @@ class CourrierIncomingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.wftool.doActionFor(self.incoming, 'answer')
 
         # retrieve the answer
-        rtool = getToolByName(self.portal, 'portal_relations')
-        outgoing_docids= rtool.getRelationsFor(RELATION_GRAPH_ID,
-                                               int(self.incoming.getDocid()),
-                                               HAS_REPLY)
+        outgoing_docids = get_replies_docids(self.incoming)
         self.assertEquals(len(outgoing_docids), 1)
-        docid = str(outgoing_docids[0])
+        docid = outgoing_docids[0]
         pxtool = getToolByName(self.portal, 'portal_proxies')
         proxies = pxtool.listProxies(docid=docid)
         self.assertEquals(len(proxies), 1)

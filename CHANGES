@@ -11,4 +11,4 @@ Bug fixes
 - Updated Spanish translation thanks to Jesús Martín.
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
-- 
+- Refactored the whole relations management to use the new CPSRelation API
