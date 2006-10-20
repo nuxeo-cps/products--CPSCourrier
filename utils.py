@@ -22,9 +22,9 @@ import base64
 
 import re
 
+from Products.CMFCore.utils import getToolByName
 from Products.CPSSkins import minjson as json
 from Products.CPSUtil.text import toAscii
-
 
 def hasFlexibleFields(data):
     """True if the passed dict looks like a datamodel with flexible fields.
@@ -110,6 +110,13 @@ def html_to_text(html_data):
                        )
     return converter.convert(html_data)
 
+def createOuInLDAP(ldir, ou):
+    """Create a new ou in given ldap backing directory."""
+
+    dn = 'ou=%s,%s' % (ou, ldir.ldap_base_creation)
+    attrs = {'objectClass': ['top', 'organizationalUnit'],
+             'ou': ou}
+    ldir.insertLDAP(dn, attrs)
 
 def computeMailboxOu(portal, title):
     """Compute an unique ou for a new mailbox.
@@ -148,4 +155,9 @@ def computeMailboxOu(portal, title):
             break
         current = '%s_%d' % (cleaned, i)
         i += 1
+    dtool = getToolByName(portal, 'portal_directories', None)
+    if dtool is not None: # not in unit tests
+        ldir = getattr(dtool, 'local_addressbook_ldap', None)
+        if ldir is not None:
+            createOuInLDAP(ldir, current)
     return current

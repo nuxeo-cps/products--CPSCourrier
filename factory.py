@@ -68,7 +68,8 @@ class CPSCourrierSiteConfigurator(CPSSiteMetaConfigurator):
              'optional' : True,
          },
          'LDAP_Addressbook': {
-             'title' : 'External LDAP directory storage for global addressbook. Requires Paper option',
+             'title' : ('External LDAP directory storage for global '
+                        'addressbook. Requires Paper option'),
              'extensions' : (
                  'CPSCourrier:ldap_addressbook',
              ),
@@ -83,6 +84,26 @@ class CPSCourrierSiteConfigurator(CPSSiteMetaConfigurator):
                  ),
                  'class': 'Products.CPSDirectory.LDAPBackingDirectory',
                  'rpath': 'portal_directories/addressbook_ldap',
+             },
+             'optional' : True,
+         },
+         'LDAP_LocalAddressbooks': {
+             'title' : ('External LDAP directory storage for mailbox '
+                        'dependent addressbooks. Requires Paper option'),
+             'extensions' : (
+                 'CPSCourrier:ldap_local_addressbooks',
+             ),
+             'parameters' : {
+                 'properties' : (
+                     'ldap_server',
+                     'ldap_port',
+                     'ldap_bind_dn',
+                     'ldap_bind_password',
+                     'ldap_base',
+                     'ldap_base_creation',
+                 ),
+                 'class': 'Products.CPSDirectory.LDAPBackingDirectory',
+                 'rpath': 'portal_directories/local_addressbook_ldap',
              },
              'optional' : True,
          },

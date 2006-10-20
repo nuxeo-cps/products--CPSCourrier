@@ -3,6 +3,7 @@ Requires
 -
 New features
 ~~~~~~~~~~~~
+- New profile for Local addressbooks in LDAP
 - New profile for Global addressbook in LDAP
 - New view on paper incoming mails to prepare/print/send
   acknowledgements.

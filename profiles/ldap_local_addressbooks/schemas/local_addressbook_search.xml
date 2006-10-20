@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<object name="local_addressbook" meta_type="CPS Schema">
+ <field name="local_id" meta_type="CPS String Field" remove="True"/>
+ <field name="uid" meta_type="CPS String Field"/>
+ <!-- in LDAP setups this field is used for the 'ou' in which the entry stays,
+ thanks to the hack provided by the Directory Multi Id Widget -->
+ <field name="mailbox" meta_type="CPS String Field"/>
+</object>

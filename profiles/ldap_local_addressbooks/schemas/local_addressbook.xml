@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<object name="local_addressbook" meta_type="CPS Schema">
+
+  <!-- mailbox field is deduced from dn -->
+  <field name="mailbox">
+    <property name="write_ignore_storage">True</property>
+    <property name="read_ignore_storage">True</property>
+    <property name="read_process_expr">python:data['dn'].split(',',2)[1].split('=')[1]</property>
+    <property name="read_process_dependent_fields">
+      <element value="dn"/>
+    </property>
+  </field>
+
+  <field name="rdn" meta_type="CPS String Field">
+    <property name="write_ignore_storage">True</property>
+    <property name="read_ignore_storage">True</property>
+    <property name="read_process_expr">python:','.join(data['dn'].split(',', 2)[:2])</property>
+    <property name="read_process_dependent_fields">
+      <element value="dn"/>
+    </property>
+  </field>
+
+  <field name="dn" meta_type="CPS String Field">
+    <!-- XXXXXXX proof of concept with hardcoded base_dn -->
+    <property
+	name="write_process_expr">string:${value},ou=local,o=cpscourriercontacts,dc=mysite,dc=net</property>
+  </field>
+
+  <!-- This is simply uid in dn syntax. Might change this to cn -->
+  <field name="local_id" meta_type="CPS String Field" remove="True"/>
+
+</object>

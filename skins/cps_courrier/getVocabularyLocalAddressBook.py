@@ -6,7 +6,8 @@
 # relevant entries if key is None 
 
 # XXX how to get cleany rid of hardcoded directory name ?
-ldir = context.portal_directories['local_addressbook']
+dtool = context.portal_directories
+ldir = dtool['local_addressbook']
 title_field = ldir.title_field
 
 # Context is then supposed to
@@ -36,7 +37,14 @@ if key is not None:
 
 # return_fields don't go through read_expr, and entry title field is typically
 # a fullname...
-query = {'mailbox': mailbox.getContent().getDataModel()['ou']}
+
+ou =  mailbox.getContent().getDataModel()['ou']
+
+if dtool.hasObject('local_addressbook_ldap'):
+    query = {'dn': '*,ou=%s,*'}
+else:
+    query = {'mailbox': ou}
+
 entry_ids = ldir.searchEntries(**query)
 items = [(e_id, ldir.getEntry(e_id)[title_field]) for e_id in entry_ids]
 return items

@@ -1,14 +1,19 @@
 <?xml version="1.0"?>
-<object name="local_addressbook" meta_type="CPS ZODB Directory">
+<object name="local_addressbook" meta_type="CPS Stacking Directory">
  <property name="title">label_local_address_book</property>
 
+ <property name="backing_dirs">
+  <element value="local_addressbook_ldap"/>
+ </property>
+ <property name="creation_dir">local_addressbook_ldap</property>
+
  <property name="schemas">
-   <element value="addressbook"/>
    <element value="local_addressbook"/>
+   <element value="addressbook"/>
 </property>
  <property name="schemas_search">
-   <element value="addressbook_search"/>
    <element value="local_addressbook_search"/>
+   <element value="addressbook_search"/>
 </property>
  <property name="layout">local_addressbook</property>
  <property name="layout_search">local_addressbook_search</property>
@@ -19,26 +24,26 @@
  <property name="acl_entry_view_roles">Manager; Member; Injector; Contributor; Reader; Supervisor; LocalManager</property>
  <property name="acl_entry_edit_roles">Manager; Injector; Contributor; Supervisor; LocalManager</property>
 
- <property name="id_field">uid</property>
+ <property name="id_field">rdn</property>
  <property name="title_field">cn</property>
  <property name="search_substring_fields">
   <element value="cn"/>
   <element value="mail"/>
-  <element value="local_id"/>
+  <element value="uid"/>
   <element value="sn"/>
   <element value="postalAddress"/>
   <element value="physicalDeliveryOfficeName"/>
   <element value="ou"/>
   <element value="description"/>
  </property>
- <property name="is_hierarchical">False</property>
 
  <entry-local-role
-    role="Contributor">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, ou, 'Contributor')</entry-local-role>
+    role="Contributor">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, mailbox, 'Contributor')</entry-local-role>
  <entry-local-role
-    role="Supervisor">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, ou, 'Supervisor')</entry-local-role>
+    role="Supervisor">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, mailbox, 'Supervisor')</entry-local-role>
  <entry-local-role
-    role="LocalManager">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, ou, 'LocalManager')</entry-local-role>
+    role="LocalManager">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, mailbox, 'LocalManager')</entry-local-role>
  <entry-local-role
-    role="Reader">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, ou, 'Reader')</entry-local-role>
+    role="Reader">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, mailbox, 'Reader')</entry-local-role>
+
 </object>

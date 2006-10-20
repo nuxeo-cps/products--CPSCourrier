@@ -136,6 +136,15 @@ def initialize(registrar):
         EXTENSION,
         for_=ICPSSite)
 
+    profile_registry.registerProfile(
+        'ldap_local_addressbooks',
+        'CPS Courrier LDAP Local Addressbooks',
+        "Mailbox dependent addressbooks LDAP configuration for CPSCourrier (Paper)",
+        'profiles/ldap_local_addressbooks',
+        'CPSCourrier',
+        EXTENSION,
+        for_=ICPSSite)
+
     registrar.registerClass(CPSCourrierSite,
                             constructors=(factory.addConfiguredCPSCourrierSiteForm,
                                           factory.addConfiguredCPSCourrierSite))

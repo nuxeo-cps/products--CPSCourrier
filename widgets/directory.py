@@ -43,7 +43,7 @@ class CPSDirectoryMultiIdWidget(CPSProgrammerCompoundWidget):
     _properties = CPSProgrammerCompoundWidget._properties + (
         {'id': 'ldap_syntax', 'type': 'boolean', 'mode': 'w',
          'label': 'Use ldap dn syntax?'},
-        {'id': 'ldap_renamings', 'type': 'boolean', 'mode': 'w',
+        {'id': 'ldap_renamings', 'type': 'string', 'mode': 'w',
          'label': 'Ldap dn renaming (<field id>:<dn part>, comma separated). Does not apply to rdn'},
         )
 
@@ -74,8 +74,7 @@ class CPSDirectoryMultiIdWidget(CPSProgrammerCompoundWidget):
             else:
                 mapping = {}
             items = ['%s=%s' % (mapping.get(field_id, field_id), dm[field_id])
-                     for field_id in subfields[1:]]
-            items.insert(0, dm[subfields[0]])
+                     for field_id in subfields]
         else:
             items = [dm[field_id] for field_id in subfields]
 

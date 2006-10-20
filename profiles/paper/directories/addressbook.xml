@@ -23,6 +23,5 @@
   <element value="description"/>
  </property>
  <property name="is_hierarchical">False</property>
- <property name="password_field"></property>
  <cache-manager name="dir_ramcache"/>
 </object>
