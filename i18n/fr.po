@@ -573,9 +573,8 @@ msgstr "Numéro de fax"
 #
 # Directories
 #
-#, fuzzy
 msgid "label_local_addressbook_ou"
-msgstr "Correspondants ponctuels"
+msgstr "Organisation"
 
 msgid "cpscourrier_items_nb_label"
 msgstr "Courriers par page"
