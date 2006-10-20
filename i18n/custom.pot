@@ -94,6 +94,9 @@ msgstr ""
 # Layout labels
 #
 
+msgid "cpscourrier_layout_mail_dashboard_label_edit"
+msgstr ""
+
 msgid "cpscourrier_creator_label"
 msgstr ""
 

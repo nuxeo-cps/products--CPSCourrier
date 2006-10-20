@@ -8,6 +8,8 @@ Layout that presents mailbox contents
  <property name="layout_edit_method"></property>
  <property name="layout_view_method">layout_tabular_view</property>
  <property name="style_prefix">layout_default_</property>
+ <property name="label_edit" type="string">cpscourrier_layout_mail_dashboard_label_edit</property>
+ <property name="is_i18n" type="boolean">True</property>
  <property name="flexible_widgets"/>
  <property name="validate_values_expr"></property>
  <widget name="Table" meta_type="Catalog Tabular Widget">
