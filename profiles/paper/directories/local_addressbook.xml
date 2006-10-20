@@ -37,4 +37,6 @@
     role="Supervisor">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, ou, 'Supervisor')</entry-local-role>
  <entry-local-role
     role="LocalManager">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, ou, 'LocalManager')</entry-local-role>
+ <entry-local-role
+    role="Reader">python:not entry or modules['Products.CPSCourrier.directoryutils'].hasLocalAddressBookRole(portal, ou, 'Reader')</entry-local-role>
 </object>
