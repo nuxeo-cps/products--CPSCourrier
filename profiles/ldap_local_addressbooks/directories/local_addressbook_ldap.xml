@@ -54,7 +54,6 @@
  <property name="children_attr">None</property>
  <property name="children_id_attr">cn</property>
 
- <!-- Should use a dedicated ram cache for local addressbook -->
- <cache-manager name="dir_ramcache"/>
+ <cache-manager name="local_addressbook_ramcache"/>
 
 </object>

@@ -37,6 +37,7 @@ class CPSCourrierSiteConfigurator(CPSSiteMetaConfigurator):
                                          'CPSSubscriptions:fr',
                                          'CPSDashboards:default',
                                          'CPSCourrier:default',
+                                         'CPSDashboards:activation',
                                          'CPSCourrier:standalone',
                                          ),
                           'optional' : False,

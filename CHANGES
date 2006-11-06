@@ -3,6 +3,7 @@ Requires
 -
 New features
 ~~~~~~~~~~~~
+- #1751: specific advanced search, savable as dashboard
 - New profile for Local addressbooks in LDAP
 - New profile for Global addressbook in LDAP
 - New view on paper incoming mails to prepare/print/send

@@ -55,6 +55,8 @@
       permission="zope2.View"
       />
 
+  <!-- ack composition helper for paper setup -->
+
   <browser:page
       for="Products.CPSCore.interfaces.ICPSProxy"
       name="cpscourrier_paper_ack.html"
@@ -70,5 +72,14 @@
       attribute="dispatchSubmit"
       permission="cmf.ModifyPortalContent"
       />
+
+  <browser:page
+      for="Products.CPSDefault.ICPSSite"
+      name="cpscourrier_search.html"
+      class=".browser.mailsearchview.MailSearchView"
+      template="../CPSDashboards/browser/advancedSearch.zpt"
+      permission="zope2.View"
+      />
+
 
 </configure>

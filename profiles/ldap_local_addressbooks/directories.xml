@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <object name="portal_directories" meta_type="CPS Directory Tool">
+ <object name="local_addressbook_ramcache" meta_type="RAM Cache Manager"/>
  <object name="local_addressbook" meta_type="CPS ZODB Directory" remove="True"/>
  <object name="local_addressbook_ldap" meta_type="CPS LDAP Backing Directory"/>
  <object name="local_addressbook" meta_type="CPS Stacking Directory"/>

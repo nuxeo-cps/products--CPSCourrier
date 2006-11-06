@@ -3,9 +3,14 @@
 """Return a portal type vocabulary, used as MethodVocabulary."""
 
 # We use the list of types allowed in container as searchable types
+# Could be replaced by a static vocabulary that'd be filled by the paper and
+# email profiles now.
 
 ttool = context.portal_types
-type_ids = ttool[context.portal_type].allowed_content_types
+context_type = context.portal_type
+if context_type == 'Portal':
+        context_type = 'Mailbox'
+type_ids = ttool[context_type].allowed_content_types
 types = [ttool[tid] for tid in type_ids]
 
 l10n = context.translation_service
