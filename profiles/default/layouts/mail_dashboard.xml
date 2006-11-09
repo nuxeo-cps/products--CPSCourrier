@@ -15,6 +15,7 @@ Layout that presents catalog search results
   <property name="empty_message">cpscourrier_no_result_msg</property>
   <property name="is_empty_message_i18n">True</property>
   <property name="actions_category">object_cpscourrier_batch</property>
+  <property name="batch_perform_view_name">cpscourrier_batchperform.html</property>
   <property name="cookie_id">cpscourrier</property>
   <property name="filter_button">filter</property>
   <property name="filter_items_per_page">items_nb</property>

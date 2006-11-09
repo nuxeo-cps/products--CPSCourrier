@@ -39,7 +39,7 @@
 
   <browser:page
       for="Products.CPSCore.interfaces.ICPSProxy"
-      name="batch_perform.html"
+      name="cpscourrier_batchperform.html"
       class=".browser.batchperformview.BatchPerformView"
       template="browser/batchPerform.zpt"
       permission="zope2.View"

@@ -3,17 +3,17 @@
   <metal:main fill-slot="main">
     <tal:dispatch_submit define="submit_result view/dispatchSubmit">
       <tal:no_redirect condition="python: submit_result != 'do_redirect'"
-                       define="transition view/transition">
+                       define="action view/action">
 
         <metal:std_main use-macro="here/content_lib_std_main/macros/std_main">
 
           <metal:title fill-slot="title" i18n:translate="">
-            <span tal:replace="string:heading_batch_workflow_${transition}" />
+            <span tal:replace="string:heading_batch_workflow_${action}" />
           </metal:title>
 
           <metal:help fill-slot="help">
             <tal:help i18n:translate=""
-              content="string:help_batch_workflow_${transition}"></tal:help>
+              content="string:help_batch_workflow_${action}"></tal:help>
             <ul>
               <li tal:repeat="mail_info view/getMailInfo">
                 [<a tal:attributes="href mail_info/mailbox_url" target="_blank"
@@ -67,10 +67,10 @@
             </tal:search_form>
 
             <tal:confirm_form tal:condition="view/showConfirmationForm"
-              tal:define="workflow_action_script string:batch_perform.html;
+              tal:define="workflow_action_script string:cpscourrier_batchperform.html;
               proxy nocall:here">
               <!--
-              simple confirmation form for any other transition
+              simple confirmation form for any other action
               -->
               <pre tal:condition="request/rpath|nothing"
                    tal:content="view/replyPreview">
@@ -78,7 +78,7 @@
               <metal:transition_form
                 use-macro="here/content_lib_transition_form/macros/transition_form">
                 <metal:block fill-slot="fields">
-		  <tal:block condition="python:transition=='handle'">
+		  <tal:block condition="python:action=='handle'">
                   <metal:block
 		      use-macro="here/cpscourrier_handle_form/macros/handle_params"
                     />
@@ -90,9 +90,9 @@
                   <input type="hidden" name="base_reply_rpath"
                     tal:attributes="value request/rpath|string:"/>
                   <input type="hidden" name="trigger_transition"
-                    tal:attributes="value transition" />
+                    tal:attributes="value action" />
                   <input type="submit" class="standalone"
-                    tal:attributes="value string:button_${transition}"
+                    tal:attributes="value string:button_${action}"
                     i18n:attributes="value" />
                   <input type="button" class="context" onClick="history.back()"
                     value="button_cancel" i18n:attributes="value" />
