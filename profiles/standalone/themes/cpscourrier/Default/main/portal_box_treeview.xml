@@ -26,5 +26,5 @@
  <property name="boxlayout">standard</property>
  <property name="box_group">treeview</property>
  <property name="macroless">False</property>
- <property name="box_title_i18n">False</property>
+ <property name="box_title_i18n">True</property>
 </object>
