@@ -1102,7 +1102,7 @@ msgid "LocalManager"
 msgstr "Responsable local"
 
 msgid "Supervisor"
-msgstr "Superviseurr"
+msgstr "Superviseur"
 
 msgid "Contributor"
 msgstr "Contributeur"
