@@ -1,0 +1,1072 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CPSCourrier\n"
+"POT-Creation-Date: 2006-08-04 11:14default\n"
+"PO-Revision-Date: 2006-11-16 13:34+0100\n"
+"Last-Translator: Jesus Martin <jesusmartin@lasalle.es>\n"
+"Language-Team: euskera <perikoalkain@lasalle.es>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Preferred-encodings: latin9 utf-8\n"
+"Domain: default\n"
+"Language-Code: es\n"
+"Language-Name: Spanish\n"
+"X-Poedit-Language: basque\n"
+"X-Poedit-Country: SPAIN\n"
+
+#.   <title fill-slot="title">
+#.               <span replace="string:heading_batch_workflow_${transition}" />
+#.             </title>
+#: from ../browser/batchPerform.zpt
+msgid "<span replace=\"string:heading_batch_workflow_${transition}\" />"
+msgstr ""
+
+#.   <title fill-slot="title">
+#.           <span replace="string:heading_workflow_${transition}_of" />
+#.           ${item_id (tal replace="here/title_or_id")}
+#.         </title>
+#: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+#: ../skins/cps_courrier/cpscourrier_handle_form.pt
+#: ../skins/cps_courrier/workflow_transition_form.pt
+msgid "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
+msgstr ""
+
+#.   <h1>
+#.         Late documents on ${portal_title (tal content="options/portal_title")}
+#.       </h1>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+msgid "Late documents on ${portal_title}"
+msgstr "Azken dokumentuak hemen"
+
+#.   <span content="state" attributes="class state">State</span>
+#: from ../skins/cps_courrier/portlet_custom_thread.pt
+msgid "State"
+msgstr "Egoera"
+
+#.   <span condition="python:options['sort_limit'] != options['late_number']">The following ${late_number (tal content="options/late_number")}
+#.         mail documents are late:
+#.         </span>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+msgid "The following ${late_number} mail documents are late:"
+msgstr "Ondoko ${late_number} postak berandu dabiltza:"
+
+#.   <span condition="python:options['sort_limit'] == options['late_number']">The following mail documents are late (only the first
+#.           ${late_number (tal content="options/late_number")}
+#.           are displayed):
+#.         </span>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+msgid "The following mail documents are late (only the first ${late_number} are displayed):"
+msgstr "Hurrengo postak berandu dabiltza (lehenengo hauek bakarrik ${late_number} agertu dira):"
+
+#.   <p>
+#.         You'll find below the list of late mail documents in mailbox
+#.         ${mailbox_title (tal content="options/mb_title")}
+#.       </p>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+msgid "You'll find below the list of late mail documents in mailbox ${mailbox_title}"
+msgstr "Zuk behean honako postontzian ${mailbox_title} aurki dezakezu azken posta-zerrenda "
+
+#.   <input condition="view/canMoveDown" type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
+#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "button_move_down_delegatees"
+msgstr "Behera eraman"
+
+#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "button_update_stackelts"
+msgstr "Aldaketak aplikatu"
+
+#.   <input type="submit" name="answer_submit" value="button_validate" class="standalone" />
+#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
+#: from ../browser/batchPerform.zpt ../browser/reuseAnswer.zpt
+#: ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "button_validate"
+msgstr "Baliozkotu"
+
+#.   <h1>
+#.                Reply from existing reply
+#.             </h1>
+#: from ../browser/reuseAnswer.zpt
+msgid "cpscourrier_answer_from_existing"
+msgstr "Dauden erantzunez baliaturik erantzun"
+
+#.   <input type="submit" name="email_ack" value="cpscourrier_button_email_ack" class="standalone" />
+#: from ../browser/paperAck.zpt
+msgid "cpscourrier_button_email_ack"
+msgstr "Posta elektronikoaz bidali"
+
+#.   <input type="submit" name="print_ack" value="cpscourrier_button_print_ack" class="standalone" />
+#: from ../browser/paperAck.zpt
+msgid "cpscourrier_button_print_ack"
+msgstr "Inprimatu"
+
+#.   <h2 condition="insert_mode">
+#.         Please select a level to insert the new delegatee
+#.       </h2>
+#.   <h2 condition="python:mode=='insert'">
+#.         Please select a level to insert the new delegatee
+#.       </h2>
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "cpscourrier_choose_insertion_level"
+msgstr "Hautatu txertatze-maila"
+
+#.   <label for="target_emailaddress">cpscourrier_forward_to_emailaddress</label>
+#: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+msgid "cpscourrier_forward_to_emailaddress"
+msgstr "Posta-kontu batera kargatu"
+
+#.   <label for="target_mailbox">cpscourrier_forward_to_mailbox</label>
+#: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+msgid "cpscourrier_forward_to_mailbox"
+msgstr "Atariko kaxa batera kargatu"
+
+#
+# Layout labels
+#
+#.   <label for="group_selection">
+#.                     Please select a group</label>
+#: from ../skins/cps_courrier/cpscourrier_handle_form.pt
+msgid "cpscourrier_help_handle_select_group"
+msgstr "Talde baten izenean dokumentu batez arduratzea"
+
+#.   <h1 condition="not:view/is_print">
+#.         Prepare an acknowledgement
+#.       </h1>
+#: from ../browser/paperAck.zpt
+msgid "cpscourrier_paper_ack_prepare_heading"
+msgstr "Hartu-agiriaren prestaketa"
+
+#.   <h3>cpscourrier_response_preview_heading</h3>
+#: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
+msgid "cpscourrier_response_preview_heading"
+msgstr "Erantzuna bistaratu"
+
+#.   <h1>
+#.         Mail Handling Roadmap
+#.       </h1>
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "cpscourrier_roadmap_heading"
+msgstr "Bide-orria"
+
+#
+# Layout labels
+#
+#.   <h3 condition="not:searching">
+#.         Search groups
+#.       </h3>
+#.   <h3 condition="edit_mode">
+#.   	  Search groups
+#.   	</h3>
+#: from ../browser/folderLocalRoles.zpt ../browser/roadmap.zpt
+msgid "cpscourrier_search_groups"
+msgstr "Taldeen bilaketa"
+
+#
+# Layout labels
+#
+#.   <h3 condition="not:searching">
+#.         Search users
+#.       </h3>
+#.   <h3 condition="edit_mode">
+#.   	  Search users
+#.   	</h3>
+#: from ../browser/folderLocalRoles.zpt ../browser/roadmap.zpt
+#: ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "cpscourrier_search_users"
+msgstr "Erabiltzaileen bilaketa"
+
+#.   <p condition="search_members">
+#.   	    Please select the member to insert in the roadmap
+#.   	  </p>
+#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "cpscourrier_select_delegatees"
+msgstr "Mesedez, hauta itzazu bide-orrira eransteko elementuak"
+
+#.   <caption>Thread</caption>
+#: from ../skins/cps_courrier/portlet_custom_thread.pt
+msgid "cpscourrier_thread_caption"
+msgstr "Elkarrizketaren haria"
+
+#.   <label for="use_parent_roadmap">Use default
+#.                   roadmap</label>
+#: from ../skins/cps_courrier/cpscourrier_handle_form.pt
+msgid "cpscourrier_use_default_roadmap"
+msgstr "Erabili lehenetsitako bide-orria"
+
+#.   <span>create entry</span>
+#: from ../skins/cps_courrier/cpscourrier_popup_entry_create_form.pt
+msgid "cpsdir_label_create_entry"
+msgstr ""
+
+#.   <h2 condition="insert_mode">
+#.   	  Add delegatees: search results
+#.   	</h2>
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "delegatees_search_results"
+msgstr "Bilaketaren emaitzak"
+
+#.   <title fill-slot="title">
+#.           heading_workflow_send_of
+#.           ${item_id (tal replace="here/title_or_id")}
+#.         </title>
+#: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
+msgid "heading_workflow_send_of ${item_id}"
+msgstr "Bidaltzeko posta bidali: ${item_id}"
+
+#.   <p>
+#.         Below, stands the members / groups which have been already added to this
+#.         workflow stack.
+#.       </p>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+#: ../skins/cps_courrier/stack_simple_method.pt
+msgid "label_delegatees_below"
+msgstr ""
+
+#.   <block>
+#.         Current level delegatees are highlighted
+#.       </block>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+msgid "label_delegatees_current_level_delegatees_highlighted"
+msgstr ""
+
+#.   <strong>
+#.         There are no delegatees within this workflow stack yet
+#.       </strong>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+#: ../skins/cps_courrier/stack_simple_method.pt
+msgid "label_delegatees_stack_empty"
+msgstr "Oraindik ez dago lan-fluxu gehiegi duten ordezakaririk"
+
+#.   <block>
+#.                     User in charge
+#.                   </block>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+msgid "label_delegatees_user_in_charge"
+msgstr ""
+
+#.   <th>
+#.         Delegation Date
+#.       </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_delegation_date"
+msgstr "Ordezkatze-data"
+
+#.   <th>
+#.         Directive
+#.       </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_directive"
+msgstr "Direktiba"
+
+#.   <th>
+#.         Comment
+#.       </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_directive_comment"
+msgstr "Iruzkina"
+
+#.   <th>
+#.         Identite
+#.       </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_identite"
+msgstr "Identitatea"
+
+#.   <label for="push_directive">
+#.      	  Directive to give these users
+#.   	</label>
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "label_push_directive"
+msgstr "Erabiltzaile hauei emateko direktiba"
+
+#.   <h2>
+#.         Reviewers
+#.       </h2>
+#: from ../skins/cps_courrier/layout_schedule_view.pt
+msgid "label_reviewers"
+msgstr "Berrikusleak"
+
+#.   <p>
+#.       Sorry, no members matched your search.
+#.    </p>
+#: from ../skins/cps_courrier/stack_members_search_results.pt
+msgid "legend_local_roles_no_results_members"
+msgstr "Sentitzen dugu, baino ez dago kiderik zure bilaketarekin bat datorrenik"
+
+#.   <h2 condition="edit_mode">
+#.   	  Add new delegatees to the roadmap
+#.   	</h2>
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "search_for_delegatees"
+msgstr "Bide-orrira ordezkari berriak erantsi"
+
+#.   <h2 condition="view/is_results">
+#.                     Search results
+#.                   </h2>
+#.   <h2 condition="view/is_results">
+#.                 Search results
+#.               </h2>
+#: from ../browser/batchPerform.zpt ../browser/reuseAnswer.zpt
+msgid "search_results"
+msgstr "Bilaketaren emaitzak"
+
+#
+# Document types labels
+#
+msgid "portal_type_MailboxGroup_title"
+msgstr "Postontzi-taldea"
+
+msgid "portal_type_MailboxGroup_description"
+msgstr "Postontzi-talde baten azalpena"
+
+msgid "portal_type_Mailbox_title"
+msgstr "Postontzia"
+
+msgid "portal_type_Mailbox_description"
+msgstr "Posta biltegiratzeko eta kudeatzeko azalpena"
+
+msgid "portal_type_Mail_Templates_Box_title"
+msgstr "Posta-txantiloien postontzia"
+
+msgid "portal_type_Mail_Templates_description"
+msgstr "Posta-txaniloiak biltegiratzeko eta kudeatzeko area"
+
+msgid "portal_type_IncomingMail_title"
+msgstr "Posta hartzekoa"
+
+msgid "portal_type_IncomingMail_description"
+msgstr "Posta elektroniko edo digitalizatua"
+
+msgid "portal_type_OutgoingMail_title"
+msgstr "Posta bidaltzekoa"
+
+msgid "portal_type_OutgoingMail_description"
+msgstr "Posta hartzekoari erantzuten dion mezua"
+
+msgid "portal_type_IncomingEmail_title"
+msgstr "Posta hartzekoaren izena"
+
+msgid "portal_type_IncomingEmail_description"
+msgstr "Posta hartzeko elektonikoak"
+
+msgid "portal_type_OutgoingEmail_title"
+msgstr "Posta bidaltzekoaren izena"
+
+msgid "portal_type_OutgoingEmail_description"
+msgstr "Posta hartzeko bati erantzuna blokeatzen dion bidaltzeko mezu elektronikoa "
+
+msgid "portal_type_IncomingPmail_title"
+msgstr "Posta hartzekoaren izena"
+
+msgid "portal_type_IncomingPmail_description"
+msgstr "Paperezko mezu hartzekoa (digitaliza daitekeena)"
+
+msgid "portal_type_OutgoingPmail_title"
+msgstr "Posta"
+
+msgid "portal_type_OutgoingPmail_description"
+msgstr "Posta hartzeko bati erantzuna blokeatzen dion bidaltzeko mezua"
+
+msgid "portal_type_Dashboard_title"
+msgstr "Aginte-panela"
+
+msgid "portal_type_Dashboard_description"
+msgstr "Bilaketaren emaitzen dokumentua"
+
+#
+# Root of mailboxes area
+#
+msgid "mailboxes_root_title"
+msgstr "Postontziak"
+
+msgid "mail_templates_root_title"
+msgstr "Erantzun-txantiloia"
+
+msgid "cpscourrier_layout_mail_dashboard_label_edit"
+msgstr "Lehenetsitako iragazte-parametroak"
+
+msgid "cpscourrier_creator_label"
+msgstr "Sortzailea"
+
+msgid "cpscourrier_confidential_label"
+msgstr "Isilekoa"
+
+#
+# Layout labels
+#
+msgid "cpscourrier_object_label"
+msgstr "Objektua:"
+
+msgid "cpscourrier_from_label"
+msgstr "Igorlea: "
+
+msgid "cpscourrier_paper_from_local_label"
+msgstr "Hautatu kaxa honetako solaskideren bat"
+
+msgid "cpscourrier_paper_from_internal_label"
+msgstr "Hautatu erabiltzaile-talde bat"
+
+msgid "cpscourrier_paper_from_global_label"
+msgstr "Hautatu ohiko solaskideren bat"
+
+msgid "cpscourrier_to_label"
+msgstr "Nori: "
+
+msgid "cpscourrier_cc_label"
+msgstr "Kopiaren hartzailea(k)"
+
+msgid "cpscourrier_notes_label"
+msgstr "Oharrak"
+
+msgid "cpscourrier_msgid_label"
+msgstr "Erreferentzi zenbakia"
+
+msgid "cpscourrier_creation_date_label"
+msgstr "Data:"
+
+msgid "cpscourrier_sending_date_label"
+msgstr "Data bidaltzen"
+
+msgid "cpscourrier_form_of_address_label"
+msgstr "Gizalege-esaldia"
+
+msgid "cpscourrier_signature_label"
+msgstr "Sinadura:"
+
+msgid "cpscourrier_size_label"
+msgstr "Tamaina (kB):"
+
+msgid "cpscourrier_deadline_label"
+msgstr "Iraungitze-data:"
+
+msgid "cpscourrier_priority_label"
+msgstr "Lehentasuna: "
+
+msgid "cpscourrier_smtp_headers_label"
+msgstr "SMTP goiburuak: "
+
+msgid "cpscourrier_mailbox_addresses_label"
+msgstr "Postontziaren helbideak: "
+
+#
+# Layout labels
+#
+msgid "cpscourrier_search_path_label"
+msgstr "Aipatutako kaxak"
+
+msgid "cpscourrier_template_usage_col"
+msgstr "Erabilpena"
+
+msgid "cpscourrier_modification_date_label"
+msgstr "Azken edizioa"
+
+msgid "cpscourrier_reply_type_label"
+msgstr "Mota"
+
+msgid "cpscourrier_simple_reply"
+msgstr "Erantzun arrunta"
+
+msgid "cpscourrier_mail_template"
+msgstr "Erantzun-txantiloia"
+
+msgid "cpscourrier_label_managers"
+msgstr "Arduradunak"
+
+msgid "label_search_todo"
+msgstr "Ekintza"
+
+msgid "cpscourrier_paper_ack_default_header_label"
+msgstr "Lehenetsitako hartu-agiriaren goiburua"
+
+msgid "cpscourrier_paper_ack_default_header_help"
+msgstr "Testu hau hartu-agiriak maketatzeko erabiltzen da, bertako goiko aldean."
+
+msgid "cpscourrier_paper_ack_default_footer_label"
+msgstr "Hartu-agiriaren lehenetsitako orri-oina"
+
+msgid "cpscourrier_paper_ack_default_footer_help"
+msgstr "Testu hau maketatzeko erabiltzen da, bertako beheko aldean."
+
+msgid "label_addressbook_email"
+msgstr "Helbide-liburua"
+
+msgid "label_addressbook_full_name"
+msgstr "Izen-abizenak"
+
+msgid "label_addressbook_first_name"
+msgstr "Izena:"
+
+msgid "label_addressbook_user_name"
+msgstr "Identifikatzailea:"
+
+msgid "label_addressbook_last_name"
+msgstr "Abizenak:"
+
+msgid "label_addressbook_telephoneNumber"
+msgstr "Telefono-zenbakia"
+
+msgid "label_addressbook_postalCode"
+msgstr "Posta-kodea"
+
+msgid "label_addressbook_postalAddress"
+msgstr "Helbidea"
+
+msgid "label_addressbook_description"
+msgstr "Deskribapena"
+
+msgid "label_addressbook_post_office"
+msgstr "Posta-bulegoa"
+
+msgid "label_addressbook_fax_number"
+msgstr "Fax-zenbakia"
+
+msgid "label_addressbook_ou"
+msgstr "Erakundea"
+
+msgid "label_local_addressbook_email"
+msgstr "Bertako helbide-liburua"
+
+msgid "label_local_addressbook_full_name"
+msgstr "Izen-abizenak"
+
+msgid "label_local_addressbook_first_name"
+msgstr "Izena"
+
+msgid "label_local_addressbook_user_name"
+msgstr "Erabiltzaile-izena"
+
+msgid "label_local_addressbook_last_name"
+msgstr "Abizenak"
+
+msgid "label_local_addressbook_telephoneNumber"
+msgstr "Telefono-zenbakia"
+
+msgid "label_local_addressbook_postalCode"
+msgstr "Posta-kodea"
+
+msgid "label_local_addressbook_postalAddress"
+msgstr "Helbidea"
+
+msgid "label_local_addressbook_description"
+msgstr "Deskribapena"
+
+msgid "label_local_addressbook_post_office"
+msgstr "Posta-bulegoa"
+
+msgid "label_local_addressbook_fax_number"
+msgstr "Fax-zenbakia"
+
+#
+# Directories
+#
+msgid "label_local_addressbook_ou"
+msgstr "Erakundea"
+
+msgid "cpscourrier_items_nb_label"
+msgstr "Item-kopurua orrialdeko"
+
+msgid "cpscourrier_type_label"
+msgstr "Mota"
+
+msgid "cpscourrier_review_state_label"
+msgstr "Egoera"
+
+msgid "cpscourrier_empty_box_msg"
+msgstr "Ez dago postarik bilaketa-irizpideei erantzuten dienik."
+
+msgid "cpscourrier_empty_boxgroup_msg"
+msgstr "Postontzi-multzoa hutsik dago"
+
+msgid "cpscourrier_no_result_msg"
+msgstr "Ez dago irizpideei erantzuten dien postarik ."
+
+msgid "cpscourrier_timeleft_label"
+msgstr "Gelditzen den denbora"
+
+msgid "cpscourrier_has_attachment_label"
+msgstr "Adj."
+
+msgid "cpscourrier_fulltext_search"
+msgstr "Gako-hitzak"
+
+msgid "cpscourrier_mailbox_priority_label"
+msgstr "Lehenetsitako larritasun-maila"
+
+msgid "cpscourrier_mailbox_from_label"
+msgstr "Bidaltzailearen lehenetsitako helbidea"
+
+msgid "cpscourrier_allowed_reply_time"
+msgstr "Baimendutako lehentsitako denbora-tartea"
+
+msgid "cpscourrier_mailbox_addresses_row_label"
+msgstr "Helbideak"
+
+msgid "cpscourrier_min_template_usage"
+msgstr "Erabilita gutxienez"
+
+#
+# Layout labels
+#
+msgid "cpscourrier_no_user_found"
+msgstr "Ez dago erabiltzailerik zure bilaketa-irizpidearekin bat datorrenik"
+
+msgid "cpscourrier_no_group_found"
+msgstr "Ez dago talderik zure bilaketa-irizpidearekin bat datorrenik"
+
+msgid "cpscourrier_todo_label"
+msgstr "Egiteko"
+
+msgid "cpscourrier_to_process"
+msgstr "Prozesatzeko"
+
+msgid "cpscourrier_to_handle"
+msgstr "Ardura hartzeko"
+
+msgid "cpscourrier_to_watch"
+msgstr "Kontsultatzeko"
+
+msgid "cpscourrier_created_min_label"
+msgstr "Sortze-data (minimoa)"
+
+msgid "cpscourrier_created_max_label"
+msgstr "Sortze-data (maximoa)"
+
+msgid "cpscourrier_deadline_min_label"
+msgstr "Azken lerroa (minimoa)"
+
+msgid "cpscourrier_deadline_max_label"
+msgstr "Azken lerroa (maximoa)"
+
+msgid "cpscourrier_foa_voc_regards"
+msgstr "Onena opa dizut, "
+
+msgid "cpscourrier_foa_voc_sincerely"
+msgstr "Adeitasunez, "
+
+msgid "cpscourrier_mp_voc_low"
+msgstr "Baxua"
+
+msgid "cpscourrier_mp_voc_normal"
+msgstr "Normala"
+
+msgid "cpscourrier_mp_voc_high"
+msgstr "Altua"
+
+msgid "cpscourrier_mp_voc_very_high"
+msgstr "Oso altua"
+
+msgid "cpscourrier_all_boxes"
+msgstr "Guztiak"
+
+msgid "cpscourrier_subject_label"
+msgstr "Gaia"
+
+msgid "cpscourrier_all_subjects"
+msgstr "Guztiak"
+
+msgid "cpscourrier_initiate_handling"
+msgstr "Ardura hartu"
+
+msgid "cpscourrier_for_reply"
+msgstr "Erantzuteko"
+
+msgid "cpscourrier_for_advice"
+msgstr "Ohartarazteko"
+
+msgid "cpscourrier_sender_type_label"
+msgstr "Igorlearen tipologia"
+
+msgid "cpscourrier_st_voc_individual"
+msgstr "Norbanakoa"
+
+msgid "cpscourrier_st_voc_professional"
+msgstr "Profesionala"
+
+msgid "cpscourrier_st_voc_corporate_body"
+msgstr "Pertsona juridikoak"
+
+msgid "cpscourrier_st_voc_administration"
+msgstr "Administrazioa"
+
+msgid "action_roadmap"
+msgstr "Bide-orria"
+
+msgid "action_default_roadmap"
+msgstr "Lehenetsitako bide-orria"
+
+msgid "init_stack"
+msgstr "Bide-orria hasieratu"
+
+msgid "use_default_roadmap"
+msgstr "Lehenetsitako bide-orria erabili"
+
+#
+# Workflows
+#
+msgid "heading_workflow_handle_of ${item_id}"
+msgstr "${item_id}erabili"
+
+msgid "help_workflow_handle"
+msgstr "Hautatutako postak kudeatzeko aukera hartzeagatik, geroko posta prozesatzeko ardura hartuko duzu (erantzun, ordezkatu,ezabatu...)"
+
+msgid "button_handle"
+msgstr "Tratatu"
+
+msgid "action_handle"
+msgstr "Tratatu"
+
+msgid "handle"
+msgstr "Tratatzen"
+
+msgid "heading_workflow_forward_of ${item_id}"
+msgstr " ${item_id} birbidali"
+
+msgid "help_workflow_forward"
+msgstr "Posta beste postontzi batera bidaltzear zaude <strong>edota</strong>  kanpoko posta-helbide batera. Posta kanpoko helbide batera bidaltzerakoan bertako dokumentuaren kopia itxi egingo da."
+
+msgid "help_workflow_forwardPmail"
+msgstr "Posta-hartzekoa beste posta-karpeta batera bidaltzear zaude <strong>edota</strong> kanpoko posta-helbide batera. Posta kanpoko helbide batera bidaltzeak itxi egiten du bertako dokumentuaren kopia."
+
+msgid "button_forward"
+msgstr "Birbidali"
+
+msgid "action_forward"
+msgstr "Birbidali"
+
+msgid "forward"
+msgstr "Bidaltzailea"
+
+msgid "forward_move"
+msgstr "Postontzira birbidali"
+
+msgid "forward_email"
+msgstr "Birbidali honako postara"
+
+msgid "cpscourrier_no_mailbox"
+msgstr "(Mesedez, postontzia hautatu)"
+
+msgid "heading_workflow_discard_of ${item_id}"
+msgstr "${item_id} birbidali"
+
+msgid "help_workflow_discard"
+msgstr "Posta zakarrontzira bidaltzear zaude"
+
+msgid "button_discard"
+msgstr "Baztertu"
+
+msgid "action_discard"
+msgstr "Baztertu"
+
+msgid "discard"
+msgstr "Baztertzen"
+
+msgid "heading_workflow_delete_of ${item_id}"
+msgstr "${item_id} ezabatu"
+
+msgid "help_workflow_delete"
+msgstr "Posta betiko ezabatzera zoaz"
+
+msgid "button_delete"
+msgstr "Ezabatu"
+
+msgid "action_delete"
+msgstr "Ezabatu"
+
+msgid "delete"
+msgstr "Ezabatuta"
+
+msgid "heading_workflow_answer_of ${item_id}"
+msgstr "${item_id} erantzun"
+
+msgid "help_workflow_answer"
+msgstr "Posta-dokumentuari erantzutean, jatorrizko postari estekatutako bidaltzeko posta berri bat sortuko duzu. "
+
+msgid "button_answer"
+msgstr "Erantzun"
+
+msgid "action_answer"
+msgstr "Erantzun"
+
+msgid "answer"
+msgstr "Erantzuna"
+
+msgid "action_reuse_answer"
+msgstr "Dauden erantzunez baliaturik erantzun"
+
+msgid "reuse_answer"
+msgstr "Dauden erantzunez baliaturik erantzun"
+
+msgid "heading_workflow_close_of ${item_id}"
+msgstr "${item_id} itxi"
+
+msgid "help_workflow_close"
+msgstr "Posta-sarrera itxi egiten du erantzunen prozesuaren amaieran. Gogoan hartu itxitako posta-dokumentuak, postontzietan ezkutatuta daudela hala dagoelako lehenetsita. Itxitako posta-dokumentuak ikusi nahi izanez gero, \"egoera\" iragazkiaren parametroa \"itxita\"-ra konfiguratu behar duzu. "
+
+msgid "button_close"
+msgstr "Itxi"
+
+msgid "action_close"
+msgstr "Itxi"
+
+msgid "close"
+msgstr "Ixtea"
+
+msgid "heading_workflow_reopen_of ${item_id}"
+msgstr "${item_id} berrireki"
+
+msgid "help_workflow_reopen"
+msgstr "Posta  hartzekoa irekitzear zaude"
+
+msgid "button_reopen"
+msgstr "Berrireki"
+
+msgid "action_reopen"
+msgstr "Berrireki"
+
+msgid "reopen"
+msgstr "Berrirekitzea"
+
+msgid "heading_workflow_validate_of ${item_id}"
+msgstr "${item_id} baliozkotu"
+
+msgid "help_workflow_validate"
+msgstr "Posta baliozkotzear zaude"
+
+msgid "action_validate"
+msgstr "Baliozkotu"
+
+msgid "validate"
+msgstr "Baliozkotzea"
+
+msgid "heading_workflow_invalidate_of ${item_id}"
+msgstr "${item_id} baliogabetu"
+
+msgid "help_workflow_invalidate"
+msgstr "Posta baliogabetzear zaude eta \"idazketa\" modura itzultzear "
+
+msgid "button_invalidate"
+msgstr "Baliogabetu"
+
+msgid "action_invalidate"
+msgstr "Baliogabetu"
+
+msgid "invalidate"
+msgstr "Baliogabetzea"
+
+msgid "help_workflow_send"
+msgstr "Posta bere hartzaileei bidaltzear zaude "
+
+msgid "button_send"
+msgstr "Bidali"
+
+msgid "action_send"
+msgstr "Bidali"
+
+msgid "send"
+msgstr "Bidaltzea"
+
+msgid "heading_workflow_reactivate_of ${item_id}"
+msgstr "Honako posta bidaltzekoa «${item_id}» berraktibatu"
+
+msgid "help_workflow_reactivate"
+msgstr "Posta berraktibatzear zaude"
+
+msgid "button_reactivate"
+msgstr "Berraktibatu"
+
+msgid "action_reactivate"
+msgstr "Berraktibatu"
+
+msgid "reactivate"
+msgstr "Berraktibatzea"
+
+msgid "heading_workflow_reset_of ${item_id}"
+msgstr "${item_id} berrezarri"
+
+msgid "help_workflow_reset"
+msgstr "Posta berrezartzean bere hasierako egoeran jarriko eta bere bide-orria garbituko duzu "
+
+msgid "button_reset"
+msgstr "Berrezarri"
+
+msgid "action_reset"
+msgstr "Berrezarri"
+
+msgid "reset"
+msgstr "Berrezartze"
+
+msgid "flag_handled"
+msgstr "Erantzuna(k) ezeztatuta"
+
+msgid "flag_answered"
+msgstr "Erantzuna(k) bidalita"
+
+msgid "move_down_delegatees"
+msgstr "Hurrengo mailara jaitsi"
+
+msgid "action_move_down_delegatees"
+msgstr "Jaitsi"
+
+msgid "heading_workflow_move_down_delegatees_of ${item_id}"
+msgstr "«${item_id}» posta jaitsi"
+
+msgid "button move_down_delegatees"
+msgstr "Jaitsi"
+
+#
+# Workflows
+#
+msgid "help_workflow_move_down_delegatees"
+msgstr "Posta kudeatzeko baimena hurrengo mailakoei ematear zaude. Ez bazara haren partaide edota bertako administratzaile ezin izango duzu berriro posta-dokumentu horretan sartu."
+
+msgid "heading_batch_workflow_handle"
+msgstr "Hartzeko dokumentu multzo baten ardura hartu "
+
+msgid "help_batch_workflow_handle"
+msgstr "Hautatutako posta-dokumentuak kudeatzeko aukera hartzeagatik, geroko posta prozesatzeko ardura hartuko duzu (erantzun, ordezkatu, ezabatu...)."
+
+msgid "heading_batch_workflow_discard"
+msgstr "Hartzeko dokumentu-multzo bat baztertu"
+
+msgid "help_batch_workflow_discard"
+msgstr "Hautatutako dokumentuak zakarrontzira botatzear zaude"
+
+msgid "heading_batch_workflow_answer"
+msgstr "Hartzeko dokumentu-multzo bati erantzun"
+
+msgid "help_batch_workflow_answer"
+msgstr "Dokumentuei erantzutean, sartzeko dokumentu hautatu bakoitzeko bidaltzeko posta-esteka berri bat sortuko du. "
+
+msgid "heading_batch_workflow_delete"
+msgstr "Multzoka ezabatu"
+
+msgid "help_batch_workflow_delete"
+msgstr "Honako postak ezabatzear zaude"
+
+msgid "create_pending"
+msgstr "Sorkuntza berretsi gabea"
+
+#
+# Workflow states
+#
+msgid "received"
+msgstr "jasota"
+
+msgid "handled"
+msgstr "Arduraduna"
+
+msgid "trash"
+msgstr "zakarrontzia"
+
+msgid "answering"
+msgstr "erantzuten"
+
+msgid "answered"
+msgstr "erantzunda"
+
+msgid "closed"
+msgstr "itxita"
+
+msgid "validated"
+msgstr "baliozkotuta"
+
+msgid "sent"
+msgstr "bidalita"
+
+msgid "manage_delegatees"
+msgstr "Bide-orria gaurkotuta"
+
+#
+# Workflow status messages
+#
+msgid "psm_select_a_level"
+msgstr "Maila hautatu"
+
+msgid "psm_roadmap_changed"
+msgstr "Bide-orria aldatuta"
+
+msgid "psm_stack_elements_edited"
+msgstr "Bide-orriaren elementuak aldatuta"
+
+msgid "psm_cannot_manage_stack"
+msgstr "Ez duzu baimenik bide-orria aldatzeko"
+
+msgid "psm_select_at_least_one_item"
+msgstr "Elementu bat, gutxienez, hautatu"
+
+msgid "psm_cpscourrier_choose_at_least_mailbox_or_emailaddress"
+msgstr "Postontzi bat, gutxienez, hautatu edota posta-helbide bat sartu"
+
+msgid "psm_cpscourrier_choose_either_mailbox_or_emailaddress"
+msgstr "Postontzi bat edota beste posta-helbidea hautatu"
+
+msgid "psm_cpscourrier_mail_forwarded"
+msgstr "Posta arrakastaz bidalita"
+
+msgid "psm_cpscourrier_reply_could_not_be_sent"
+msgstr "Konfigurazio-arazo bat dela eta, ezin da erantzuna bidali. Mesedez, jarri zaitez harremanetan atariko administratzailearekin arazoa konpontzeko. "
+
+msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_recipients_address"
+msgstr "Hartzaileen baliogabeko helbideak: erantzuna ezin da bidali."
+
+msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_sender_address"
+msgstr "Bidaltzailearen baliogabeko helbidea:ezin izan da erantzuna bidali."
+
+msgid "psm_cpscourrier_reply_sent"
+msgstr "Erantzuna bidalita"
+
+msgid "psm_cpscourrier_no_action_performed_for"
+msgstr "Honako posta-dokumentu hauek ez dute aldaketarik izan:"
+
+msgid "psm_cpscourrier_smtp_error"
+msgstr "Posta elektronika ezin izan da bidali"
+
+msgid "psm_cpscourrier_ack_email_sent"
+msgstr "Hartu-agiria bidalita"
+
+msgid "psm_cpscourrier_missing_email_address"
+msgstr "Posta elektronikoa bidali gabea hartzaile ezezaguna izateagatik"
+
+msgid "label_workflow_mail_confirm"
+msgstr "Hartu eta berretsi"
+
+msgid "label_workflow_discard"
+msgstr "Zabortzat jo"
+
+#
+# Directories
+#
+msgid "label_local_address_book"
+msgstr "Bertako helbide-liburua"
+
+msgid "label_address_book"
+msgstr "Helbide-liburu orokorra"
+
+msgid "cpscourrier_new_addressbook_entry"
+msgstr "Berria"
+
+msgid "On ${y}-${m}-${d}, ${name} wrote:"
+msgstr "{d}-${m}-${y}, ${name}-k idatzi zuen:"
+
+#, fuzzy
+msgid "cpscourrier_timeleft:${plus_sign}${d}"
+msgstr "D${plus_sign}${d}"
+
+msgid "cpscourrier_fake_original_msg"
+msgstr "-------- Jatorrizko mezua ---------"
+
+msgid "cpscourrier_subject_${portal_title}_${mb_title}_${late_number}"
+msgstr ""
+
+msgid "cpscourrier_final_reply"
+msgstr "Azken erantzuna"
+
+msgid "action_paper_ack"
+msgstr "Hartu-agiria"
+
+msgid "cpscourrier_paper_ack_subject_${mail_subject}"
+msgstr "Hartu-agiria «${mail_subject}»-rentzat"
+
