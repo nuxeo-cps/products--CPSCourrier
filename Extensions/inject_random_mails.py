@@ -26,7 +26,7 @@ from random import randint, sample, choice
 
 IN_MAILS_PER_MAILBOX = 20
 OUT_MAILS_PER_MAILBOX = 20
-EMAIL_PATTERN = "ogrisel+%s@nuxeo.com"
+EMAIL_PATTERN = "gracinet+%s@nuxeo.com"
 COMMENT_PATTERN = "Test comment for transition %s"
 
 def _buid_tree(gen):
@@ -91,11 +91,13 @@ def _populate(where, generator, wftool):
             'Subject': generator.sampleFromVoc('subject_voc', corpus=corpus),
             'priority': generator.choiceFromVoc('mail_priority'),
         }
-        id = where.computeId(info['Title'])
-        id = wftool.invokeFactoryFor(where, 'Incoming Email', id,
-                                     initial_transition='create')
-        doc = where[id].getEditableContent()
-        doc.edit(info, proxy=where[id])
+        dt = DateTime()
+        m_id = where.portal_uid.getUid('cpscourrier', year=dt.year(),
+                                       month=dt.month(), day=dt.day())
+        m_id = wftool.invokeFactoryFor(where, 'Incoming Email', m_id,
+                                       initial_transition='create')
+        doc = where[m_id].getEditableContent()
+        doc.edit(info, proxy=where[m_id])
         if i % 10 == 0:
             transaction.commit()
     # necessary with zopectl run:
