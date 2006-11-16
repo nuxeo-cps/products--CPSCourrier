@@ -1,4 +1,29 @@
 ===========================================================
+Package: CPSCourrier 0.20.0
+===========================================================
+First release built by: gracinet at: 2006-11-16T18:22:13
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.20.0
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@50009
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+- #1751: specific advanced search, savable as dashboard
+- New profile for Local addressbooks in LDAP
+- New profile for Global addressbook in LDAP
+- New view on paper incoming mails to prepare/print/send
+  acknowledgements.
+- Specific printable page theme by tibo.
+Bug fixes
+~~~~~~~~~
+- Updated Spanish translation thanks to Jesús Martín.
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- Refactored the whole relations management to use the new CPSRelation API
+
+===========================================================
 Package: CPSCourrier 0.19.0
 ===========================================================
 First release built by: gracinet at: 2006-09-29T13:32:54
