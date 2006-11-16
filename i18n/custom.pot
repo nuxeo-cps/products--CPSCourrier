@@ -802,3 +802,17 @@ msgstr ""
 
 msgid "cpscourrier_paper_ack_subject_${mail_subject}"
 msgstr ""
+
+# Roles
+msgid "LocalManager"
+msgstr ""
+
+msgid "Supervisor"
+msgstr ""
+
+msgid "Contributor"
+msgstr ""
+
+msgid "Reader"
+msgstr ""
+

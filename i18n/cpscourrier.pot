@@ -3,7 +3,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: default\n"
-"POT-Creation-Date: 2006-10-20 19:13default\n"
+"POT-Creation-Date: 2006-11-16 13:53default\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Your Name <your@email>\n"
 "Language-Team: Name <email>\n"
@@ -17,10 +17,10 @@ msgstr ""
 "Domain: default\n"
 
 #.   <title fill-slot="title">
-#.               <span replace="string:heading_batch_workflow_${transition}" />
+#.               <span replace="string:heading_batch_workflow_${action}" />
 #.             </title>
 #: from ../browser/batchPerform.zpt
-msgid "<span replace=\"string:heading_batch_workflow_${transition}\" />"
+msgid "<span replace=\"string:heading_batch_workflow_${action}\" />"
 msgstr ""
 
 #.   <title fill-slot="title">
@@ -152,24 +152,17 @@ msgstr ""
 msgid "cpscourrier_roadmap_heading"
 msgstr ""
 
-#.   <h3 condition="not:searching">
-#.         Search groups
-#.       </h3>
 #.   <h3 condition="edit_mode">
 #.   	  Search groups
 #.   	</h3>
-#: from ../browser/folderLocalRoles.zpt ../browser/roadmap.zpt
+#: from ../browser/roadmap.zpt
 msgid "cpscourrier_search_groups"
 msgstr ""
 
-#.   <h3 condition="not:searching">
-#.         Search users
-#.       </h3>
 #.   <h3 condition="edit_mode">
 #.   	  Search users
 #.   	</h3>
-#: from ../browser/folderLocalRoles.zpt ../browser/roadmap.zpt
-#: ../skins/cps_courrier/cpscourrier_roadmap.pt
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_search_users"
 msgstr ""
 
@@ -1071,4 +1064,17 @@ msgid "action_paper_ack"
 msgstr ""
 
 msgid "cpscourrier_paper_ack_subject_${mail_subject}"
+msgstr ""
+
+# Roles
+msgid "LocalManager"
+msgstr ""
+
+msgid "Supervisor"
+msgstr ""
+
+msgid "Contributor"
+msgstr ""
+
+msgid "Reader"
 msgstr ""
