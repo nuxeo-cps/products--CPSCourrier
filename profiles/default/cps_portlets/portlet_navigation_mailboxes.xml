@@ -2,9 +2,9 @@
 <object name="portlet_mailboxes" meta_type="CPS Portlet"
    portal_type="Navigation Portlet">
  <f id="Description" v="(mailboxes)"/>
- <f id="Title" v="Navigation"/>
+ <f id="Title" v="mailboxes_root_title"/>
  <f id="allow_discussion" v="False"/>
- <f id="display" v="expandable_tree"/>
+ <f id="display" v="dynamic_tree"/>
  <f id="display_description" v="False"/>
  <f id="display_hidden_folders" v="False"/>
  <f id="display_managers" v="0"/>
