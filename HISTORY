@@ -1,4 +1,24 @@
 ===========================================================
+Package: CPSCourrier 0.20.1
+===========================================================
+First release built by: gracinet at: 2006-11-17T18:35:52
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.20.1
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@50141
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- Basque translation
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSCourrier 0.20.0
 ===========================================================
 First release built by: gracinet at: 2006-11-16T18:22:13
