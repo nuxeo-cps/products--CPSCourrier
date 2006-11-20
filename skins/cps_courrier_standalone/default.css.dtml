@@ -1,0 +1,1042 @@
+<dtml-comment>
+CSS directives conforming to the CSS 2.1 spec.
+Those CSS directives are suppported by user agents such as Mozilla/Firefox, MSIE6, MSIE5.x, etc.
+$Id$
+</dtml-comment>
+
+<dtml-let last_modified="_.DateTime()-14" expires="_.DateTime()+1" >
+<dtml-call "REQUEST.RESPONSE.setHeader( 'Content-Type', 'text/css' )">
+<dtml-call "REQUEST.RESPONSE.setHeader( 'Last-Modified', last_modified.toZone('GMT').rfc822() )">
+<dtml-call "REQUEST.RESPONSE.setHeader( 'Cache-Control', 'max-age=36000, must-revalidate' )">
+<dtml-call "REQUEST.RESPONSE.setHeader( 'Expires', expires.toZone('GMT').rfc822() )" >
+</dtml-let>
+
+<dtml-with stylesheet_properties>
+
+<dtml-comment>
+BASIC ELEMENTS ------------------------------
+</dtml-comment>
+
+body {
+  font: <dtml-var mainFont>;
+  background: <dtml-var mainBackground>;
+  color: <dtml-var mainFontColor>;
+  margin: 0;
+  padding: 0;
+}
+
+body .popup {
+  font: <dtml-var mainFont>;
+}
+
+a {
+  text-decoration: none;
+  color: <dtml-var mainLinkColor>;
+  background-color: transparent;
+}
+
+a.strong {
+  font-weight: bold;
+}
+
+img {
+  border: 0;
+  vertical-align: middle;
+}
+
+p {
+  margin: 0.5em 0 1em 0;
+  line-height: 133%;
+}
+p a {
+  text-decoration: underline;
+}
+p a:visited {
+  color: <dtml-var contentLinkVisitedColor>;
+  background-color: transparent;
+}
+p a:active {
+  color: <dtml-var contentLinkActiveColor>;
+  background-color: transparent;
+}
+a:hover {
+  text-decoration: none;
+}
+p img {
+  border: <dtml-var contentImageBorder>;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: <dtml-var headingFontColor>;
+  background-color: transparent;
+  font: <dtml-var headingFont>;
+  font-weight: bold;
+  margin: 0;
+  padding-top: 0.5em;
+}
+h1 {
+  font-size: <dtml-var headingSize1>;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+h2 {
+  font-size: <dtml-var headingSize2>;
+  margin-bottom: 1em;
+}
+h3 {
+  font-size: <dtml-var headingSize3>;
+}
+h4 {
+  font-size: <dtml-var headingSize4>;
+}
+h5 {
+  font-size: <dtml-var headingSize5>;
+}
+h6 {
+  font-size: <dtml-var headingSize6>;
+}
+
+ol, ul {
+  padding: 0;
+  margin: 0;
+  line-height: 133%;
+}
+ul a, ol a {
+  text-decoration: underline;
+}
+
+dt {
+  font-weight: bold;
+  padding-left: 1em;
+}
+dt a {
+  text-decoration: none;
+}
+dd {
+  margin: 0;
+  padding: 0.3em 0 0 2em;
+}
+
+<dtml-comment>
+Display the language of a link if specified
+</dtml-comment>
+
+a[hreflang]:after {
+  content: "\0000a0[" attr(hreflang) "]";
+  color: #663300;
+  background: transparent;
+}
+
+legend {
+  background: <dtml-var mainBackground>;
+  padding: 0.5em 0em 0.5em 0em;
+}
+
+textarea {
+  color: <dtml-var mainFontColor>;
+  background-color: white;
+  font: <dtml-var inputFont>;
+}
+input {
+  font: <dtml-var inputFont>;
+  color: <dtml-var mainFontColor>;
+  background-color: white;
+  vertical-align: middle;
+}
+select {
+  font: <dtml-var inputFont>;
+  vertical-align: top;
+}
+abbr, acronym, .explain {
+  color: <dtml-var mainFontColor>;
+  background-color: transparent;
+}
+q, blockquote {
+  font-style: italic;
+  font-size: 100%;
+}
+code {
+  font-size: 100%;
+  color: <dtml-var mainFontColor>;
+  background-color: <dtml-var preBackground>;
+}
+pre {
+  font-size: 100%;
+  padding: 1em;
+  border: <dtml-var preBorder>;
+  color: <dtml-var mainFontColor>;
+  background-color: <dtml-var preBackground>;
+  overflow: auto;
+}
+
+<dtml-comment>
+Classes ------------------------------
+</dtml-comment>
+
+#idioma p {
+  margin-top: 0;
+}
+
+.logo {
+  margin: <dtml-var logoMargin>;
+  padding: <dtml-var logoPadding>;
+}
+
+.note {
+  font-size: smaller;
+}
+
+.even {
+  background-color: <dtml-var boxEvenBackground>;
+}
+
+.odd {
+  background-color: <dtml-var boxOddBackground>;
+}
+
+.pending {
+  font-weight: bold;
+  color: #ffa500;
+}
+
+.work {
+  font-weight: bold;
+  color: blue;
+}
+
+.draft {
+  font-weight: bold;
+  color: #5555ff;
+}
+
+.published {
+  font-weight: bold;
+  color: #22a522;
+}
+
+.deferred {
+  font-weight: bold;
+  color: #ff6600;
+}
+
+.expired {
+  font-weight: bold;
+  color: #ff0033;
+}
+
+.locked {
+  border: 1px solid #ff6600;
+  color: #ff6600;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+
+.url {
+  color: <dtml-var urlFontColor>
+}
+
+
+
+<dtml-comment>
+DIVs ------------------------------
+</dtml-comment>
+
+div.batchLayout {
+  text-align: right;
+  background-color: <dtml-var boxEvenBackground>;
+}
+
+div.pageNavigationLayout {
+  text-align: center;
+  background-color: <dtml-var boxEvenBackground>;
+}
+
+.contact {
+  text-align: center;
+  margin: 0;
+  padding: 1px 0 1px 0;
+}
+
+div.message {
+  background: <dtml-var messageBackground>;
+  color: <dtml-var mainFontColor>;
+  font: <dtml-var messageFont>;
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  vertical-align: middle;
+}
+
+div.message a {
+  background: <dtml-var messageBackground>;
+  color: <dtml-var mainFontColor>;
+  text-decoration: underline;
+}
+
+div.description {
+  font: <dtml-var descriptionFont>;
+  display: block;
+  margin-bottom: 0.5em;
+  line-height: 133%;
+}
+
+div.documentActions {
+  float: right;
+  margin-top: 1em;
+}
+
+div.documentActions li {
+  display: inline;
+}
+
+div.searchBox {
+  float: right;
+  text-align: right;
+  padding: <dtml-var searchPadding>;
+  margin: <dtml-var searchMargin>;
+  clear: right;
+  background-color: transparent;
+  color: <dtml-var searchFontColor>;
+  text-transform: <dtml-var textTransform>;
+  width: 40%;
+}
+
+div.headerActions {
+  float: right;
+  text-align: right;
+  margin-top: 1em;
+  margin-right: 1em;
+  margin-bottom: 4px;
+}
+
+div.headerActions li {
+  display: inline;
+}
+
+div.pathBar {
+  padding: 1px 1em 1px 1em;
+  text-transform: <dtml-var textTransform>;
+}
+
+div.row {
+  clear: both;
+}
+
+div.label {
+  font-weight: bold;
+}
+
+div.field {
+  padding: 0;
+  text-align: left;
+  margin-top: 0.2em;
+  margin-bottom: 0.6em;
+}
+
+span.legend {
+  font-weight: bold;
+}
+
+div.popupImg {
+  padding: 10px;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.hiddenItem {
+  background-color: <dtml-var boxEvenBackground>;
+}
+
+<dtml-comment>
+Documents language selection
+</dtml-comment>
+
+span.selectedLang {
+  background: #003a6b;
+  color: #ffffff;
+  font-weight: bold;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+a.availableLang {
+  text-decoration: underline;
+}
+a.availableLang:hover {
+  text-decoration: none;
+}
+
+<dtml-comment>
+Accessibility statement and usage
+</dtml-comment>
+
+div.accesskeys, div.accesskeysUsage {
+  border: 1px solid #999999;
+  background-color: #dddddd;
+  padding: 1em;
+  margin: 0.5em 0 2em 0;
+}
+
+<dtml-comment>
+Contact info and conformance statement
+</dtml-comment>
+
+.contactInfo li {
+  display: inline;
+  margin: 1em;
+}
+
+.conformanceStatement {
+  text-align: center;
+}
+
+.conformanceStatement li {
+  display: inline;
+}
+
+.conformanceStatement img {
+  margin: 1em;
+}
+
+<dtml-comment>
+CMF Calendar
+</dtml-comment>
+
+.CalendarArrow {
+  font-weight: bold;
+  text-decoration: none;
+  color: #000000;
+}
+
+.CalendarTitle {
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  color: #000000;
+}
+
+p.help {
+  font-style: italic;
+}
+
+table.calendar td {
+  white-space: nowrap;
+  background-color: white;
+  width: 1.5em;
+}
+
+table.calendar a {
+  text-decoration: none;
+  color: black;
+}
+
+table.calendar td.event {
+  background-color: <dtml-var boxEvenBackground>;
+  text-decoration: none;
+}
+
+table.calendar td.todayevent {
+  background-color: <dtml-var boxEvenBackground>;
+}
+
+table.calendar td.weekdays {
+  background-color: <dtml-var boxEvenBackground>;
+}
+
+table.calendar th {
+  background-color: <dtml-var boxEvenBackground>;
+  white-space: nowrap;
+}
+
+table.localRoleForm th {
+  text-align: left;
+}
+
+span.highlightedSearchTerm {
+  background-color: #ffff00;
+}
+
+span.searchFor {
+  font-weight: bold;
+}
+
+/* hack for IE6 bugs */
+/* Hides from IE5-mac \*/
+* html .group {height: 1%}
+* html div.box {height: 1%}
+* html div.box .content {height: 1%}
+* html div.document {height: 1%}
+/* End hide from IE-mac */
+
+.netscape4 {
+  display: none;
+}
+
+table {
+  font-size: 100%;
+}
+
+hr {
+  height: 1px;
+  color: <dtml-var mainTabBorderColorSelected>;
+  background-color: transparent;
+}
+
+h1, h2 {
+  border-bottom: 1px solid <dtml-var mainTabBorderColor>;
+}
+
+form {
+  border: none;
+}
+
+textarea {
+  border: <dtml-var inputBorder>;
+  padding: 0.1em;
+}
+input {
+  border: <dtml-var inputBorder>;
+  margin-bottom: 1px; /* IE bug fix */
+  padding: 0.1em;
+}
+select {
+  font: <dtml-var inputFont>;
+  border: <dtml-var inputBorder>;
+  vertical-align: top;
+}
+
+abbr, acronym, .explain {
+  border-bottom: 1px dotted <dtml-var mainFontColor>;
+  cursor: help;
+}
+
+ol, ul {
+  padding-left: 3em;
+  margin: 0;
+}
+
+.content li, #content li {
+  padding: 0em 0em 0.4em 0em;
+}
+
+ul.fileChoice {
+  padding-left: 0;
+  list-style-type: None;
+}
+
+button {
+  background: <dtml-var contextButtonBackground>;
+  border: <dtml-var contextButtonBorder>;
+  margin: 0.2em;
+  padding: 0.1em;
+  font: <dtml-var inputFont>;
+}
+
+button:hover {
+  background: <dtml-var buttonBackgroundHover>;
+}
+
+input.standalone, button.standalone, input.context {
+  background: <dtml-var standaloneButtonBackground>;
+  cursor: pointer;
+  font: <dtml-var inputFont>;
+  font-weight: <dtml-var buttonWeight>;
+  padding: <dtml-var standaloneButtonPadding>;
+  text-transform: <dtml-var textTransform>;
+  border:1px outset #454545;
+}
+
+input.standalone:hover, button.standalone:hover, input.context:hover {
+  background: <dtml-var standaloneButtonBackgroundHover>;
+}
+
+
+input.destructive {
+  background: <dtml-var destructiveButtonBackground>;
+  border: <dtml-var destructiveButtonBorder>;
+  cursor: pointer;
+  font: <dtml-var inputFont>;
+  font-weight: <dtml-var buttonWeight>;
+  padding: <dtml-var destructiveButtonPadding>;
+  text-transform: <dtml-var textTransform>;
+}
+
+input.destructive:hover {
+  background: <dtml-var destructiveButtonBackgroundHover>;
+  border: <dtml-var destructiveButtonBorderHover>;
+}
+
+input.noborder {
+  background: transparent;
+  border: <dtml-var noBorder>;
+  margin: 0;
+}
+
+input.searchButton {
+  font-size: 100% ! important;
+  margin-bottom: 1px ! important;
+}
+
+input.moveUp {
+  background: <dtml-var moveUpButtonBackground>;
+}
+input.moveDown {
+  background: <dtml-var moveDownButtonBackground>;
+}
+input.moveTop {
+  background: <dtml-var moveTopButtonBackground>;
+}
+input.moveBottom {
+  background: <dtml-var moveBottomButtonBackground>;
+}
+
+<dtml-comment>
+Forms ------------------------------
+</dtml-comment>
+
+form {
+  margin: 0;
+}
+
+form.workflow {
+  padding: 0 0 0.8em 0;
+}
+
+form.workflow dl {
+  font-weight: bold;
+}
+
+form.workflow dd {
+  margin-left: 0;
+}
+
+<dtml-comment>
+Generic table definitions
+</dtml-comment>
+
+table.columns td.left {
+  background: <dtml-var columnsLeftBackground>;
+}
+table.columns td.right {
+  background: <dtml-var columnsRightBackground>;
+}
+
+table.listing {
+  width: 100%;
+  margin-bottom:15px;
+}
+
+
+table.listing caption {
+  font-weight: bold;
+}
+
+table.listing td {
+  padding: 0.4em;
+}
+
+table.listing thead tr th {
+  text-align: center;
+}
+
+table.listing thead td {
+  background-color: <dtml-var listingHeaderBackground>;
+  color: <dtml-var listingHeaderColor>;
+  text-align: center;
+  font-weight: bold;
+}
+
+table.listing tbody td {
+  background-color: <dtml-var listingCellBackground>;
+  color: <dtml-var listingCellColor>;
+}
+
+table.listing tbody tr.odd td {
+  background-color: <dtml-var listingCellOddBackground>;
+  color: <dtml-var listingCellOddColor>;
+}
+
+table.listing tbody tr.even td {
+  background-color: <dtml-var listingCellEvenBackground>;
+  color: <dtml-var listingCellEvenColor>;
+}
+
+table.listing .action {
+  font-weight: bold;
+  text-align: left;
+}
+
+<dtml-comment>
+Specific table definitions
+</dtml-comment>
+
+form#loginForm {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 30em;
+}
+table#login th {
+  width: 12em;
+}
+
+table#portalConfiguration th {
+  width: 18em;
+  padding-bottom: 1em;
+}
+table#portalConfiguration td {
+  width: 18em;
+  padding-bottom: 1em;
+}
+
+table#subscriptions td {
+  text-align: center;
+}
+
+table#subscriptions .action {
+  text-align: left;
+}
+
+table.localRolesAssignment {
+  width: 100%;
+  padding: 0;
+  margin: 0.4em;
+  margin-bottom: 2em;
+  border: 0.1em solid black;
+}
+
+table.localRolesAssignment td.assignedRole {
+  text-align: center;
+}
+
+table.localRolesAssignment td.inheritedRole {
+  text-align: center;
+  background: <dtml-var inheritedRole>;
+}
+
+span.inheritedRole {
+  background: <dtml-var inheritedRole>;
+}
+
+table.localRolesAssignment td.inheritedBlockedRole {
+  text-align: center;
+  background: <dtml-var inheritedBlockedRole>;
+}
+
+span.inheritedBlockedRole {
+  background: <dtml-var inheritedBlockedRole>;
+}
+
+<dtml-comment>
+DIVs ------------------------------
+</dtml-comment>
+
+div.top {
+  background: <dtml-var topBackground>;
+  margin: <dtml-var topMargin>;
+  padding: <dtml-var topPadding>;
+  width: 100%;
+}
+
+.contact {
+  background: <dtml-var footerBackground>;
+  border-top: <dtml-var footerBorder>;
+  border-bottom: <dtml-var footerBorder>;
+  width: 100%;
+}
+
+div.document {
+  font: <dtml-var contentFont>;
+  background: <dtml-var contentBackground>;
+}
+
+div.message {
+  border: <dtml-var messageBorder>;
+}
+
+div.pathBar {
+  border-bottom-color: <dtml-var mainTabBorderColorSelected>;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+
+div.row {
+  margin: 0em 0em 0.5em 0em;
+  position:relative;
+}
+
+div.label {
+  font-weight: bold;
+  display: inline;
+}
+
+.required {
+  padding-right: 0.5em;
+  background: <dtml-var requiredField>;
+}
+
+.error {
+  background: <dtml-var messageBackground>;
+  border: <dtml-var messageBorder>;
+  padding: 1em;
+  margin: 0em;
+}
+
+span.legend {
+  background: <dtml-var contentBackground>;
+  font-size: <dtml-var legendFontSize>;
+  padding: 0.5em 0em 0.5em 0em;
+  position : relative;
+  top: -0.8em;
+  left: 0;
+}
+
+<dtml-comment>
+The "group" class is used to group together the HTML fields of a form.
+</dtml-comment>
+.group {
+
+  padding:10px;
+
+}
+
+.comment_box {
+  border: 1px solid #bcbcbc;
+  margin: 1em 0 1em 1em;
+  padding: 5px 10px 10px 20px;
+}
+
+.user_roles {
+  margin: 1em 0 1em 0;
+  padding: 0.7em 0em 0.7em 0em;
+}
+
+.header_roles {
+  font-weight: bold;
+  background: #b1acb2;
+}
+
+.assign_roles {
+  padding-top: 0.7em;
+}
+
+table.calendar {
+  border: <dtml-var boxBorder>;
+  text-align: right;
+}
+
+table.calendar a:hover {
+  text-decoration: none;
+}
+
+table.calendar th {
+  border: none;
+  font-weight: bold;
+  text-align: center;
+}
+
+table.calendar td {
+  width: 1.5em;
+}
+
+table.calendar td.weekdays {
+  border: <dtml-var boxBorder>;
+  border-style: solid none;
+  text-align: center;
+}
+
+table.calendar td.event {
+  font-weight: bold;
+}
+
+table.calendar td.todayevent {
+  border: <dtml-var boxHighlight>;
+  font-weight: bold;
+}
+
+table.calendar td.todaynoevent {
+  border-collapse: collapse;
+  border: <dtml-var boxHighlight>;
+}
+
+<dtml-comment>
+Tooltips
+</dtml-comment>
+
+.tooltipControl {
+  color: #000000;
+  background: #ffffe1;
+  border: 1px solid #000000;
+
+  margin-left: 1em;
+}
+
+.tooltipControl:hover {
+  background: #ffffb8;
+}
+
+.tooltipArea {
+  color: #000000;
+  background: #ffffe1;
+  border: 1px solid #000000;
+  padding: 0.8em;
+  font-weight: normal;
+  font-size: 80%;
+  text-align: left;
+
+  position: inherit;
+  left: -15em;
+  top: 1.5em;
+  width: 20em;
+
+  visibility: hidden;
+  display: none;
+  z-index: 1000;
+}
+
+<dtml-comment>
+XXX: CPSMailBoxer definitions that should not be here but in a dedicated file
+</dtml-comment>
+
+div.mailboxerNoArchive {
+  border-top: solid;
+  border-width: 1px;
+}
+
+td.mailboxerMonth {
+  background-color: <dtml-var boxEvenBackground>;
+  text-align: center;
+}
+
+<dtml-comment>
+Books
+</dtml-comment>
+
+div.bookSummary {
+  width: 100%;
+  border: 1px solid black;
+  padding: 0.5em;
+}
+
+div.bookSummaryNav {
+  text-align: center;
+  width: 100%;
+  background-color: <dtml-var boxEvenBackground>;
+}
+
+li.summaryEntries {
+  margin: 0.5em;
+}
+
+div.bookPageHeader {
+  border-bottom: 1px solid black;
+}
+
+div.bookPageNavigation {
+}
+
+div.bookPageInfo {
+  float: right;
+}
+
+<dtml-comment>
+Hide stuff by id and make it available in source
+</dtml-comment>
+
+#bylineFolder {
+  clear: both;
+  text-align: left;
+}
+
+#byline {
+  clear: both;
+  text-align: right;
+  margin-top: 2em;
+}
+
+<dtml-comment>
+javascript use for block toggle
+</dtml-comment>
+
+div.hidden {
+  visibility: hidden;
+  display: none;
+}
+
+div.visible {
+  visibility: visible;
+  display: block;
+}
+
+<dtml-comment>
+Advanced search form
+</dtml-comment>
+
+#advancedSearchForm {
+  font-size: 90%;
+}
+
+#advancedSearchZCText {
+  text-align: right;
+}
+
+p.advancedSearchButton {
+  text-align: right;
+}
+
+#advancedSearchForm fieldset {
+  border: none;
+  border-left: <dtml-var boxBorder>;
+  border-bottom: <dtml-var boxBorder>;
+  padding: 0.5em 0em 0.5em 0em;
+  margin: 0.5em;
+}
+
+span.advancedSearchColumn {
+  padding-left: 1em;
+  float:left;
+  width:12em;
+}
+
+div.drophover {
+  border-bottom: 3px solid black;
+}
+
+div.drophover-in {
+  background: #ffe68f;
+  border: 1px solid black;
+}
+
+#ajax_psm {
+  background: #ffac0b;
+  color: white;
+  padding: 8px;
+  border: 1px solid black;
+  float: right;
+  font-weight: bold;
+  position: absolute;
+  <dtml-if "isUserAgentGecko(REQUEST)">
+  -moz-border-radius: 4px;
+  </dtml-if>
+}
+
+div.draggable:hover {
+  background: #efefef;
+}
+
+div.more_block {
+  padding-left: 10px;
+}
+
+div.batchLayout, div.pageNavigationLayout {
+  color: #666666;
+  margin: 0 2px 0 2px;
+  padding: 3px 20px 3px 0;
+}
+
+table.folderButtons {
+  padding-top: 1.2em;
+}
+
+</dtml-with>

@@ -9,9 +9,25 @@ $Id$
 <dtml-call "REQUEST.RESPONSE.setHeader( 'Expires', expires.toZone('GMT').rfc822() )" >
 </dtml-let>
 
-/* Tabular widgets */
 
-td.smallCell {
+.cpsDashboardsFilter {
+border:1px solid #009900;
+margin:5px 0 10px 0;
+}
+
+.cpsDashboardsFilter legend{
+padding:5px;
+font:bold 14px Verdana, sans-serif;
+color:#666;
+}
+
+.cpsDashboardsFilter input.context{
+border-color: #009900;
+float:right;
+}
+
+
+td.smallcell {
 width:20px;
 text-align:center;
 }
@@ -28,3 +44,23 @@ width:72px;
 td.stateCell {
 width:50px;
 }
+table.listing, table.listing tr {
+border:1px solid #333;
+border-collapse:collapse;
+}
+
+table.listing, table.listing th {
+background:#009900;
+padding:5px 3px 5px 3px;
+}
+
+table.listing, table.listing th a, table.listing, table.listing th a:hover {
+color:#FFF;
+}
+
+table.listing tbody tr.unread td {
+background-color:#e0ecff;
+font-weight:bold;
+}
+
+
