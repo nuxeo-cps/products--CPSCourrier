@@ -8,6 +8,7 @@ Layout that presents mailbox contents
  <property name="layout_edit_method"></property>
  <property name="layout_view_method">layout_tabular_view</property>
  <property name="style_prefix">layout_default_</property>
+ <property name="label">cpsdashboards_layout_tabular_label</property>
  <property name="label_edit" type="string">cpscourrier_layout_mail_dashboard_label_edit</property>
  <property name="is_i18n" type="boolean">True</property>
  <property name="flexible_widgets"/>
