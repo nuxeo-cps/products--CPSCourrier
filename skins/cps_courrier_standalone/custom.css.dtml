@@ -63,4 +63,30 @@ background-color:#e0ecff;
 font-weight:bold;
 }
 
+<dtml-comment>
+        This should go to cpsdashboards once loading of stylesheets
+        is more flexible
+</dtml-comment>
 
+.tabularActions {
+margin:0 0 20px 0;
+}
+
+.batchingGadget {
+background:#f1f2f3;
+border:1px dotted #009900;
+margin:20px 0 10px 0;
+padding:8px;
+text-align:center;
+font-weight:bold;
+color:#333;
+font-size:14px;
+}
+
+.batchingGadget span {
+font-weight:normal;
+font-size:10px;
+color:#666;
+margin:3px;
+display:block;
+}
