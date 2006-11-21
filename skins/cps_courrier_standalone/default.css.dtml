@@ -351,6 +351,13 @@ div.popupImg {
 }
 
 <dtml-comment>
+ It'd better to have CPSSkins manage this one
+</dtml-comment>
+div.nodeselected {
+  background-color: #ffc02a;
+}
+
+<dtml-comment>
 Documents language selection
 </dtml-comment>
 
