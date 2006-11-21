@@ -1,0 +1,159 @@
+# TODO: I want comments in this file!
+
+plone_skin:string=Nuxeo CPS Default
+
+mainFont:string=70% Arial, sans-serif, Verdana, Helvetica
+mainBackground:string=#ffffff
+mainFontColor:string=black
+mainLinkColor:string=#436976
+mainTabBorderColor:string=#838183
+mainTabBorderColorSelected:string=#838183
+mainTabBackground:string=#003a6b
+mainTabBackgroundNotSelected:string=#9cb2cd
+# FIXME: remove since it is not used ?
+#mainTabBackdrop:string=transparent
+mainTabFontWeight:string=normal
+mainTabFontColor:string=white
+mainTabFontColorSelected:string=white
+
+headingFont:string=100% Arial, sans-serif, Verdana, Helvetica
+headingFontColor:string=black
+headingSize1:string=140%
+headingSize2:string=130%
+headingSize3:string=120%
+headingSize4:string=110%
+headingSize5:string=105%
+headingSize6:string=100%
+
+descriptionFont:string=100% Arial, sans-serif, Verdana, Helvetica
+
+contentFont:string=120% Arial, sans-serif, Verdana, Helvetica
+contentBackground:string=White
+contentImageBorder:string=0
+contentLinkActiveColor:string=Red
+contentLinkVisitedColor:string=Purple
+# FIXME: remove since it is not used ?
+#contentTabBorder:string=1px solid #74ae0b
+contentTabBackground:string=#cde2a7
+contentTabBackgroundNotSelected:string=transparent
+contentTabBackdrop:string=transparent
+contentTabFontWeight:string=normal
+contentTabFontColor:string=#578308
+contentTabFontColorSelected:string=#578308
+
+preBorder:string=0px none
+preBackground:string=#eeeeee
+
+messageFont:string=normal 110% Arial, sans-serif, Verdana, Helvetica
+messageBackground:string=#ffca31
+messageBorder:string=2px solid #333333
+
+textTransform:string=none
+noBorder:string=none
+groupBorder:string=0px none transparent
+requiredField:string=url(required.png) right no-repeat
+
+inputFont:string=100% Arial, sans-serif, Verdana, Helvetica
+inputBorder:string=1px inset #757575
+# FIXME: not used
+#inputBackground:string=#f7f9fa
+
+buttonBackground:string=#f1f2f3 4px 4px no-repeat
+buttonBackgroundHover:string=#ddd url(buttonbg_bc.png) bottom left repeat-x
+buttonBorder:string=1px outset #757575
+
+contextButtonBackground:string=#f1f2f3 url(buttonbg_e7.png) bottom left repeat-x
+contextButtonBackgroundHover:string=#ddd url(buttonbg_bc.png) bottom left repeat-x
+contextButtonPadding:string=2px 5px 2px 5px
+contextButtonFontColor:string=#454545
+contextButtonBorder:string=1px outset #999999
+
+standaloneButtonBackground:string=#f1f2f3 url(buttonbg_e7.png) bottom left repeat-x
+standaloneButtonBackgroundHover:string=#ddd url(buttonbg_bc.png) bottom left repeat-x
+standaloneButtonPadding:string=2px 5px 2px 5px
+standaloneButtonFontColor:string=#454545
+standaloneButtonBorder:string=1px outset #999999
+
+destructiveButtonBackground:string=#f1f2f3 url(buttonbg_e7.png) bottom left repeat-x
+destructiveButtonBackgroundHover:string=#ddd url(buttonbg_bc.png) bottom left repeat-x
+destructiveButtonPadding:string=2px 5px 2px 5px;
+destructiveButtonBorder:string=1px outset #757575;
+destructiveButtonBorderHover:string=1px solid #ff0000
+destructiveButtonFontColor:string=#454545
+
+moveUpButtonBackground:string=#f1f2f3 url(buttonbg_e7.png) bottom left repeat-x
+moveDownButtonBackground:string=#f1f2f3 url(buttonbg_e7.png) bottom left repeat-x
+moveTopButtonBackground:string=#f1f2f3 url(buttonbg_e7.png) bottom left repeat-x
+moveBottomButtonBackground:string=#f1f2f3 url(buttonbg_e7.png) bottom left repeat-x
+
+buttonWeight:string=normal
+
+boxBorder:string=0px solid #838183
+boxHeaderBackground:string=#003a6b
+boxHeaderFontColor:string=white
+# FIXME: Not used
+#boxLinkBackground:string=transparent
+#boxLinkColor:string=#436976
+boxEvenBackground:string=#eeeeee
+boxOddBackground:string=white
+boxHighlight:string=2px solid #ffa500
+
+# FIXME: Not used
+#listingBorder:string=1px solid #838183
+#listingHeaderBackground:string=#003a6b
+#listingHeaderFontColor:string=black
+#listingLinkHover:string=underline
+
+topBackground:string=#ffffff
+topMargin:string=0
+topPadding:string=0
+
+logoMargin:string=0.2em 0em 0.3em 1em
+logoPadding:string=0
+
+searchMargin:string=0
+searchPadding:string=0
+searchFontColor:string=black
+
+footerBackground:string=#eeeeee
+footerBorder:string=1px solid #003a6b
+
+columnsLeftBackground:string=#9cb2cd
+columnsRightBackground:string=#eeeeee url('rightcol_bg.png') repeat-y
+
+columnsLeftBackgroundNS4:string=#9cb2cd
+columnsRightBackgroundNS4:string=#eeeeee
+
+workspaceBackground:string=#cde2a7
+workspaceBackgroundSelected:string=#297b28
+urlFontColor:string=#666666
+
+legendFontSize:string=80%
+
+# Layout properties used to display listing type tables (this layout is used for
+# history and subscriptions tables).
+listingHeaderBackground:string=#003a6b
+listingHeaderColor:string=white
+listingCellBackground:string=#f1f2f3
+listingCellColor:string=black
+listingCellOddBackground:string=#ffffff
+listingCellOddColor:string=black
+listingCellEvenBackground:string=#f1f2f3
+listingCellEvenColor:string=black
+
+# Layout properties used to display RSS/Syndication logos (those logos
+# typically appear in each box).
+rssBorder:string=0.1em outset #ff6600
+rssBackground:string=#ff6600
+rssColor:string=#ffffff
+rssFont:string=bold 70% 'Lucida Grande', Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif
+
+# Layout properties used to display Atom/Syndication logos (those logos
+# typically appear in each box).
+atomBorder:string=0.1em outset #ff6600
+atomBackground:string=#ff6600
+atomColor:string=#ffffff
+atomFont:string=bold 70% 'Lucida Grande', Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif
+
+inheritedRole:string=#ffff99
+inheritedBlockedRole:string=#ff9999
