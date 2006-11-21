@@ -90,7 +90,7 @@ Validation
     >>> widget.validate(ds)
     True
     >>> dm['uid']
-    'the_id,mailbox=box2'
+    'local_id=the_id,mailbox=box2'
 
     The ``LDAPBackingDirectory`` will append its base DN to
     ``uid=the_id,mailbox=box2``. This the hack.
@@ -109,7 +109,7 @@ Validation
     >>> dm['mbgroup']
     'grp'
     >>> dm['uid']
-    'the_id,ou=box2,o=grp'
+    'local_id=the_id,ou=box2,o=grp'
 
 Rendering
 ~~~~~~~~~
