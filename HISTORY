@@ -1,4 +1,25 @@
 ===========================================================
+Package: CPSCourrier 0.20.2
+===========================================================
+First release built by: gracinet at: 2006-11-23T21:03:36
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.20.2
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@50246
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- UI styling improvements
+- Fixed .po file headers.
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSCourrier 0.20.1
 ===========================================================
 First release built by: gracinet at: 2006-11-17T18:35:52
