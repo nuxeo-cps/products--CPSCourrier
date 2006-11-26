@@ -1,8 +1,9 @@
 ##parameters=key=None
 #$Id$
-"""Return a vocabulary ou -> Mailbox Title
+"""Return the vocabulary (ou > title) for mailboxes in which user can write.
 
-Used as MethodVocabulary in CPSCourrier paper."""
+Used as MethodVocabulary in CPSCourrier paper for entry creation in local
+addressbooks."""
 
 import logging
 from AccessControl import getSecurityManager
