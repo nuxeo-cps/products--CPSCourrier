@@ -1,6 +1,8 @@
 ##parameters=key=None
 #$Id$
-"""Return a portal type vocabulary, used as MethodVocabulary."""
+"""Return a vocabulary ou -> Mailbox Title
+
+Used as MethodVocabulary in CPSCourrier paper."""
 
 import logging
 from AccessControl import getSecurityManager
