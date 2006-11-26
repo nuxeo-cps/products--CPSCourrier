@@ -1,6 +1,8 @@
 ##parameters=key=None
 #$Id$
-"""Return a portal type vocabulary, used as MethodVocabulary."""
+ """Return the vocabulary ou -> Title of all mailboxes
+
+Used as MethodVocabulary in CPSCourrier paper."""
 
 import logging
 logger = logging.getLogger('getVocabularyMailboxesOus')
