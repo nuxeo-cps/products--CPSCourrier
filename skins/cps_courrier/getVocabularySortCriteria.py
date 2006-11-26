@@ -1,8 +1,8 @@
 ##parameters=key=None
 #$Id$
-"""Return a portal type vocabulary, used as MethodVocabulary."""
+"""Return a portal vocabulary of relevent sort keys in mail related dashboards.
 
-# We use the list of types allowed in container as searchable types
+Used as MethodVocabulary. Should be aggressively cached (static in prod)"""
 
 ltool = context.portal_layouts
 layout = ltool['mail_dashboard_row']
