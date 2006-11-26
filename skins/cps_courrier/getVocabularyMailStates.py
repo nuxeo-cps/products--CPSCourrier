@@ -1,10 +1,9 @@
 ##parameters=key=None
 #$Id$
-"""Return a portal type vocabulary, used as MethodVocabulary."""
-
-# TODO: use same lookup as for portal_types and then ask corresponding wfs
-
-# why a method if it's hardcoded? To put empty key *first
+"""Return the vocabulary of relevant review states for *mail documents.
+"""
+# why a method if it's hardcoded? To put empty key first
+# XXX This is now obsolete
 l10n = context.translation_service
 vocitems = [(vkey, vkey) for vkey in ('pending', # not in CPSCourrier by default
                                       'received',
