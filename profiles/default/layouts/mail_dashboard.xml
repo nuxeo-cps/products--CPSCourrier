@@ -5,6 +5,7 @@ Layout that presents catalog search results
 
 <object name="mail_dashboard" meta_type="CPS Layout">
  <property name="layout_view_method">layout_tabular_view</property>
+ <property name="layout_search_results_method" type="string">layout_tabular_view</property>
  <property name="style_prefix">layout_default_</property>
  <property name="label_edit" type="string">cpscourrier_layout_mail_dashboard_label_edit</property>
  <property name="is_i18n" type="boolean">True</property>
