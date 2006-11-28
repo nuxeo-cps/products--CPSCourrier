@@ -129,7 +129,6 @@ a[hreflang]:after {
 }
 
 legend {
-  background: <dtml-var mainBackground>;
   padding: 0.5em 0em 0.5em 0em;
 }
 
@@ -791,7 +790,6 @@ div.label {
 }
 
 span.legend {
-  background: <dtml-var contentBackground>;
   font-size: <dtml-var legendFontSize>;
   padding: 0.5em 0em 0.5em 0em;
   position : relative;
