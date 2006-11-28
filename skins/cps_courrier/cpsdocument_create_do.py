@@ -9,6 +9,8 @@ Returns the created object (usually a proxy).
 """
 from Products.CMFCore.utils import getToolByName
 
+# XXX GR: It's much better to hook this through the 'create_do' alias !
+
 # start CPSCourrier specifics
 
 is_mail = False
@@ -46,6 +48,7 @@ allow_discussion = ti.allowDiscussion()
 # Datamodel is passed so that flexti can initialize the object.
 new_id = context.invokeFactory(type_name, id, datamodel=datamodel,
                                language=language,
+                               initial_transition='create',
                                allow_discussion=allow_discussion)
 if new_id is not None:
     id = new_id
