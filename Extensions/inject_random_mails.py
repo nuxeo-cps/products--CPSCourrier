@@ -15,7 +15,9 @@ bin/zopectl run Products/CPSCourrier/Extensions/inject_random_mails.py [portal_r
 
 The default portal_rpath is "cps"
 """
-
+import os
+from StringIO import StringIO
+from OFS.Image import File
 from Products.CMFCore.utils import getToolByName
 from Products.CPSUtil.text import toAscii
 from DateTime import DateTime
@@ -98,6 +100,13 @@ def _populate(where, generator, wftool):
                                        initial_transition='create')
         doc = where[m_id].getEditableContent()
         doc.edit(info, proxy=where[m_id])
+
+        attachments = generator.randomFiles(corpus=corpus, wid='file')
+        for _ in xrange(len(attachments)):
+            doc.flexibleAddWidget('mail_flexible', 'file')
+        if attachments:
+            doc.edit(dict(attachments), proxy=where[m_id])
+
         if i % 10 == 0:
             transaction.commit()
     # necessary with zopectl run:
@@ -523,9 +532,25 @@ for corpus_name, text in RAW_TEXTS:
     sentences = tuple(sentences)
     CORPUS += ((corpus_name, sentences),)
 
+FILES_ROOT = os.path.join('Products', 'CPSCourrier', 'file_samples')
+FILE_DIRS = (('aquariophilie', 'aqua'),
+              ('godel', 'godel'),
+              ('guerre', 'guerre'))
+
+FILES_CORPUS = {}
+for corpus, dirname in FILE_DIRS:
+    files = FILES_CORPUS.setdefault(corpus, [])
+    dirpath = os.path.join(INSTANCE_HOME, FILES_ROOT, dirname)
+    for fname in os.listdir(dirpath):
+        if not fname.startswith('.'):
+            f = open(os.path.join(dirpath, fname), 'r')
+            files.append((fname, StringIO(f.read())))
+            f.close()
+
 class RandomContentGenerator(object):
 
     def __init__(self, usernames=USERNAMES, corpus=CORPUS,
+                 files_corpus=FILES_CORPUS,
                  email_pattern=EMAIL_PATTERN, portal=None):
         self._email_pattern = email_pattern
         self._usernames = usernames
@@ -533,6 +558,7 @@ class RandomContentGenerator(object):
         self._simple_emails = tuple(self.makeEmail(name, simple=True)
                                     for name in usernames)
         self._corpus = dict(corpus)
+        self._files_corpus = files_corpus
         self._corpus_indexes = dict((name, i )
                                     for i, (name, _) in enumerate(corpus))
         self._portal = portal
@@ -569,6 +595,22 @@ class RandomContentGenerator(object):
     def randomText(self, n=3, corpus=None):
         return '\n\n'.join(self.randomParagrah(randint(3, 6), corpus=corpus)
                            for _ in xrange(n))
+
+    def randomFile(self, corpus=corpus):
+        if corpus is None:
+            corpus = choice(self._files_corpus.keys())
+        return choice(self._files_corpus[corpus])
+
+    def randomFiles(self, n=None, corpus=None, wid=None):
+        """Return a list of pairs field_id, File instance."""
+        if n is None:
+            n = randint(0, 2)
+        res = []
+        for i in xrange(n):
+            fid = i and '%s_%d_f0' % (wid, i) or '%s_f0' % wid
+            res.append((fid, File(fid, *self.randomFile(corpus=corpus))))
+
+        return res
 
     def makeEmail(self, name, simple=False):
         email = self._email_pattern % '-'.join(toAscii(name).lower().split())
