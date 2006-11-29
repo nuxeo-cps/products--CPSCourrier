@@ -1,4 +1,24 @@
 ===========================================================
+Package: CPSCourrier 0.21.0
+===========================================================
+First release built by: gracinet at: 2006-11-29T01:53:22
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.21.0
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@50353
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- new search form based on CPSDashboards didn't work
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- random injector generates attachments, too 
+
+===========================================================
 Package: CPSCourrier 0.20.2
 ===========================================================
 First release built by: gracinet at: 2006-11-23T21:03:36
