@@ -7,4 +7,10 @@
  <widget name="timeleft">
    <property name="sortable">deadline_sort</property>
  </widget>
+ <widget name="Date">
+   <property name="fields">
+     <element value="CreationDate"/>
+   </property>
+   <property name="sortable">created_sort</property>
+ </widget>
 </object>

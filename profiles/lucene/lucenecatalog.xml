@@ -95,6 +95,13 @@
 	analyzer="Standard"
       />
 
+    <field
+	name="created_sort"
+	attr="CreationDate"
+	type="Sort"
+	analyzer="Standard"
+      />
+
   <!-- Brain's  Metadata -->
 
   <column value="ou"/>
