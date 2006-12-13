@@ -6,16 +6,17 @@
 # Could be replaced by a static vocabulary that'd be filled by the paper and
 # email profiles now.
 
+import pdb; pdb.set_trace()
 ttool = context.portal_types
 context_type = context.portal_type
 if context_type == 'Portal':
         context_type = 'Mailbox'
 type_ids = ttool[context_type].allowed_content_types
-types = [ttool[tid] for tid in type_ids]
+types = [getattr(ttool, tid, None) for tid in type_ids]
 
 l10n = context.translation_service
 res = [(item.getId(), l10n(item.Title()).encode('iso-8859-15'))
-       for item in types]
+       for item in types if item is not None]
 
 res.insert(0, ('', l10n('label_all').encode('iso-8859-15')))
 
