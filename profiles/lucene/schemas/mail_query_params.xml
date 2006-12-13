@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<object name="mail_query_params">
+  <field name="filter_sort_on" meta_type="CPS String Field">
+    <property name="default_expr">string:created_sort</property>
+  </field>
+</object>
