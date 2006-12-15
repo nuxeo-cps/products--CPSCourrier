@@ -6,7 +6,6 @@
 # Could be replaced by a static vocabulary that'd be filled by the paper and
 # email profiles now.
 
-import pdb; pdb.set_trace()
 ttool = context.portal_types
 context_type = context.portal_type
 if context_type == 'Portal':
