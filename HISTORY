@@ -1,4 +1,24 @@
 ===========================================================
+Package: CPSCourrier 0.21.3
+===========================================================
+First release built by: gracinet at: 2006-12-17T23:25:07
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.21.3
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@50623
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- Lucene profiles are now imported last.
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSCourrier 0.21.2
 ===========================================================
 First release built by: gracinet at: 2006-12-15T11:15:39
