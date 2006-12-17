@@ -129,11 +129,11 @@ class CPSCourrierSiteConfigurator(CPSSiteMetaConfigurator):
          }
 
      metas_order = ('CourrierBase',
-                    'Lucene',
                     'LDAP',
                     'CourrierEmail',
                     'CourrierPaper',
                     'LDAP_Addressbook',
+                    'Lucene',
                     )
      form_heading = "Add CPSCourrier Site"
      post_action = 'addConfiguredCPSCourrierSite'
