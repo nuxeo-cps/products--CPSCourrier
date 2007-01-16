@@ -108,5 +108,5 @@ def up_0160_0170_mail_into_email(portal):
 
     # delete old portal_types
     ftis = ttool.objectIds()
-    remaining = [old_id for old_id in old_new.keys() if old_id not in ftis]
+    remaining = [old_id for old_id in old_new.keys() if old_id in ftis]
     ttool.manage_delObjects(remaining)
