@@ -248,7 +248,10 @@ class CourrierFunctionalTestCase(CPSTestCase):
         if container is None:
             container = self.mb
 
-        mail_id = self.wftool.invokeFactoryFor(self.mb,
+        # problems of teardown because of txn commit. Make real sure here.
+        if container.hasObject(mail_id):
+            container.manage_delObjects([mail_id])
+        mail_id = self.wftool.invokeFactoryFor(container,
                                                portal_type,
                                                mail_id,
                                                initial_transition='create',
