@@ -1,4 +1,24 @@
 ===========================================================
+Package: CPSCourrier 0.21.5
+===========================================================
+First release built by: gracinet at: 2007-02-06T14:47:52
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.21.5
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@50983
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- Avoid a zodb fetch on mail listings with Lucene
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSCourrier 0.21.4
 ===========================================================
 First release built by: div at: 2007-01-16T18:03:42
