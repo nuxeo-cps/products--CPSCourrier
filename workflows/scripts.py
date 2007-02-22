@@ -372,7 +372,7 @@ def _quote_mail(proxy, encoding='iso-8859-15', plain_text=True):
                            'm': month,
                            'd': day,
                            'name': doc['mail_from'],
-                          }).encode(encoding)
+                          })
     body = '\n\n%s\n' % quote_header
     lines =  doc['content'].split('\n')
     body += '\n'.join('> %s' % line for line in lines)
@@ -461,7 +461,7 @@ def compute_reply_body(proxy, plain_text=True, additionnal_info=''):
     tstool = getToolByName(proxy, 'translation_service')
     encoding = tstool.default_charset
     vtool = getToolByName(proxy, 'portal_vocabularies')
-    mcat = lambda label: tstool(label).encode(encoding)
+    mcat = lambda label: tstool(label)
     doc = proxy.getContent()
     body = doc['content']
 

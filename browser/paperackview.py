@@ -152,7 +152,7 @@ class PaperAckView(BrowserView):
         cpsmcat = getToolByName(self.context, 'translation_service')
         portal = getToolByName(self.context, 'portal_url').getPortalObject()
         subject = cpsmcat(self.email_ack_subject, {'mail_subject': doc.Title()}
-                          ).encode(portal.default_charset)
+                          )
 
         # From : parent or portal wide
         parent_doc = aq_parent(aq_inner(self.context))

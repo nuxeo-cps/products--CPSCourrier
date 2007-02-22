@@ -634,7 +634,7 @@ class WorkflowScriptsEmailIntegrationTestCase(
             result = forward_mail(in_mail1, 'toto@example.com',
                                   comment='Please handle that request')
             expected = ('mailbox@example.com', 'toto@example.com', """\
-Content-Type: text/plain; charset="iso-8859-15"
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Subject: Fwd: Test mail 1
