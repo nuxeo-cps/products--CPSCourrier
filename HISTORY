@@ -1,4 +1,24 @@
 ===========================================================
+Package: CPSCourrier 0.22.0-rel821095958
+===========================================================
+First release built by: div at: 2007-02-26T20:36:51
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.22.0-rel821095958
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/branches/rel821095958@51246
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+-
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- The random mails injector use unicode now
+
+===========================================================
 Package: CPSCourrier 0.21.5
 ===========================================================
 First release built by: gracinet at: 2007-02-06T14:47:52
