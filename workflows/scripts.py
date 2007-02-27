@@ -546,7 +546,7 @@ def send_mail(context, mto, mfrom, subject, body, mcc=(), attachments=(),
     # building the formatted email message
     if not mto:
         raise ValueError('Empty To field forbidden')
-    if not isinstance(mto, str):
+    if not isinstance(mto, basestring):
         mto = ', '.join(mto)
 
     # prepare main content
