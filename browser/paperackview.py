@@ -222,7 +222,7 @@ class PaperAckView(BrowserView):
                 ob = self.context 
                 docid = ob.getDocid()
                 wfh = repotool.getHistory(docid) or ()
-                status = wfh[-1]
+                status = wfh[-1].copy()
                 status['action'] = 'send_ack' 
                 status['comments'] = '' 
                 status['time'] = DateTime() 
