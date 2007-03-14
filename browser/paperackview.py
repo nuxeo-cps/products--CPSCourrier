@@ -222,8 +222,9 @@ class PaperAckView(BrowserView):
                 ob = self.context 
                 docid = ob.getDocid()
                 wfh = repotool.getHistory(docid) or ()
-                status = deepcopy(wfh[-1])
+                status = wfh[-1]
                 status['action'] = 'send_ack' 
+                status['comments'] = '' 
                 status['time'] = DateTime() 
                 wfh += (status,)
                 repotool.setHistory(docid, wfh)
