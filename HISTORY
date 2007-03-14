@@ -1,4 +1,24 @@
 ===========================================================
+Package: CPSCourrier 0.22.0
+===========================================================
+First release built by: div at: 2007-03-14T17:03:34
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.22.0
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@51368
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+-
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- Added an entry in history when ack sent 
+
+===========================================================
 Package: CPSCourrier 0.21.5
 ===========================================================
 First release built by: gracinet at: 2007-02-06T14:47:52
