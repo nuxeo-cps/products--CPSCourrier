@@ -1,4 +1,24 @@
 ===========================================================
+Package: CPSCourrier 0.22.2-rel821095958
+===========================================================
+First release built by: div at: 2007-03-15T11:47:58
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.22.2-rel821095958
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/branches/rel821095958@51380
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- small update to function that saves the entry in history on ack
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+-
+
+===========================================================
 Package: CPSCourrier 0.22.1-rel821095958
 ===========================================================
 First release built by: div at: 2007-02-27T14:27:04
