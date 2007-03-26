@@ -1,4 +1,24 @@
 ===========================================================
+Package: CPSCourrier 0.23.0
+===========================================================
+First release built by: div at: 2007-03-26T20:49:00
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.23.0
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@51414
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+- When ack sent an entry in the mail history is added
+Bug fixes
+~~~~~~~~~
+-
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSCourrier 0.22.0
 ===========================================================
 First release built by: div at: 2007-03-14T17:03:34
