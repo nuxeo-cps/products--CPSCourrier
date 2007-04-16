@@ -6,7 +6,8 @@ New features
 -
 Bug fixes
 ~~~~~~~~~
--
+- related to #1830: updated "write_process_dependent_fields"
+  in default schemas
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
 - 

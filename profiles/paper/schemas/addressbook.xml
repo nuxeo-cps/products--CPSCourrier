@@ -7,7 +7,7 @@
   <property
      name="write_process_expr">python:(givenName + " " + sn).strip() or id</property>
  </field>
-
+ <property name="write_process_dependent_fields">givenName sn</property>
  <field name="givenName" meta_type="CPS String Field"/>
  <field name="uid" meta_type="CPS String Field"/>
  <field name="sn" meta_type="CPS String Field"/>
