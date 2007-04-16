@@ -1,4 +1,25 @@
 ===========================================================
+Package: CPSCourrier 0.23.1
+===========================================================
+First release built by: div at: 2007-04-16T20:16:35
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.23.1
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@51539
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- related to #1830: updated "write_process_dependent_fields"
+  in default schemas
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSCourrier 0.23.0
 ===========================================================
 First release built by: div at: 2007-03-26T20:49:00
