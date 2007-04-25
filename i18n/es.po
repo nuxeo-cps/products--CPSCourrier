@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-12-08 10:37default\n"
+"POT-Creation-Date: 2007-04-25 12:27default\n"
 "PO-Revision-Date: 2006-11-27 17:50+0100\n"
 "Last-Translator: Jesus Martin <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -75,19 +75,19 @@ msgid ""
 msgstr ""
 "Encontrarás la lista de correos con retraso en la bandeja ${mailbox_title}"
 
-#.   <input condition="view/canMoveDown" type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
-#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
+#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" condition="view/canMoveDown" />
+#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
 msgstr "Desplazar hacia abajo"
 
-#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
+#.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_update_stackelts"
 msgstr "Aplicar cambios"
 
-#.   <input type="submit" name="answer_submit" value="button_validate" class="standalone" />
-#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
+#.   <input name="answer_submit" type="submit" class="standalone" value="button_validate" />
+#.   <input name="submit_add" type="submit" class="context" value="button_validate" />
 #: from ../browser/batchPerform.zpt ../browser/reuseAnswer.zpt
 #: ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
@@ -100,12 +100,12 @@ msgstr "Validar"
 msgid "cpscourrier_answer_from_existing"
 msgstr "Responder a partir de una respuesta existente"
 
-#.   <input type="submit" name="email_ack" value="cpscourrier_button_email_ack" class="standalone" />
+#.   <input name="email_ack" type="submit" class="standalone" value="cpscourrier_button_email_ack" />
 #: from ../browser/paperAck.zpt
 msgid "cpscourrier_button_email_ack"
 msgstr "Enviar por correo electrónico"
 
-#.   <input type="submit" name="print_ack" value="cpscourrier_button_print_ack" class="standalone" />
+#.   <input name="print_ack" type="submit" class="standalone" value="cpscourrier_button_print_ack" />
 #: from ../browser/paperAck.zpt
 msgid "cpscourrier_button_print_ack"
 msgstr "Imprimir"
