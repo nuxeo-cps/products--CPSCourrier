@@ -32,6 +32,9 @@ from Products.CPSDocument.utils import getFormUidUrlArg
 from Products.CPSDashboards.utils import unserializeFromCookie
 from Products.CPSCourrier.workflows.scripts import send_mail
 
+from copy import deepcopy
+from DateTime import DateTime
+
 logger = logging.getLogger('CPSCourrier.browser.paperackview')
 
 class PaperAckView(BrowserView):
@@ -215,6 +218,17 @@ class PaperAckView(BrowserView):
             try:
                 send_mail(self.context, mail_to, mail_from, subject, body,
                           plain_text=False)
+                repotool = getToolByName(self, 'portal_repository')
+                ob = self.context 
+                docid = ob.getDocid()
+                wfh = repotool.getHistory(docid) or ()
+                status = wfh[-1].copy()
+                status['action'] = 'send_ack' 
+                status['comments'] = '' 
+                status['time'] = DateTime() 
+                wfh += (status,)
+                repotool.setHistory(docid, wfh)
+
             except (IOError, ValueError):
                 args = {'portal_status_message': 'psm_cpscourrier_smtp_error'}
             else:

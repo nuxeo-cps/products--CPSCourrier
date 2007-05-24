@@ -2,7 +2,8 @@
 <object name="mailbox">
   <field name="ou" meta_type="CPS String Field">
     <property
-	name="write_process_expr">python:not value and modules['Products.CPSCourrier.utils'].computeMailboxOu(portal, data['Title']) or value</property>
+	name="write_process_expr">python:not value and modules['Products.CPSCourrier.utils'].computeMailboxOu(portal, Title) or value</property>
+    <property name="write_process_dependent_fields">Title</property>
   </field>
 
   <field name="incoming_ack_header" meta_type="CPS String Field"/>

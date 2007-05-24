@@ -1073,3 +1073,6 @@ msgstr ""
 
 msgid "Reader"
 msgstr ""
+
+msgid "send_ack"
+msgstr ""

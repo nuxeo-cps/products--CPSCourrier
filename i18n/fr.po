@@ -1104,3 +1104,8 @@ msgstr "Contributeur"
 
 msgid "Reader"
 msgstr "Lecteur"
+
+msgid "send_ack"
+msgstr "Envoi d'un Accusé de Réception"
+
+
