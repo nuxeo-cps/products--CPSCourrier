@@ -1,0 +1,1072 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CPSCourrier\n"
+"POT-Creation-Date: 2006-12-08 10:37default\n"
+"PO-Revision-Date: 2007-06-01 12:56+0100\n"
+"Last-Translator: Jesus Martin <jesusmartin@lasalle.es>\n"
+"Language-Team: valencià/català. <juangus@lasalle.es>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Preferred-encodings: latin9 utf-8\n"
+"Domain: default\n"
+"Language-Code: ca\n"
+"Language-Name: valencià/català\n"
+"X-Poedit-Language: Catalan\n"
+"X-Poedit-Country: SPAIN\n"
+
+#.   <title fill-slot="title">
+#.               <span replace="string:heading_batch_workflow_${action}" />
+#.             </title>
+#: from ../browser/batchPerform.zpt
+msgid "<span replace=\"string:heading_batch_workflow_${action}\" />"
+msgstr ""
+
+#.   <title fill-slot="title">
+#.           <span replace="string:heading_workflow_${transition}_of" />
+#.           ${item_id (tal replace="here/title_or_id")}
+#.         </title>
+#: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+#: ../skins/cps_courrier/cpscourrier_handle_form.pt
+#: ../skins/cps_courrier/workflow_transition_form.pt
+msgid "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
+msgstr ""
+
+#.   <h1>
+#.         Late documents on ${portal_title (tal content="options/portal_title")}
+#.       </h1>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+msgid "Late documents on ${portal_title}"
+msgstr "Últims documents el  ${portal_title}"
+
+#.   <span content="state" attributes="class state">State</span>
+#: from ../skins/cps_courrier/portlet_custom_thread.pt
+msgid "State"
+msgstr ""
+
+#.   <span condition="python:options['sort_limit'] != options['late_number']">The following ${late_number (tal content="options/late_number")}
+#.         mail documents are late:
+#.         </span>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+msgid "The following ${late_number} mail documents are late:"
+msgstr "Els següents  ${late_number} correus arriben tard:"
+
+#.   <span condition="python:options['sort_limit'] == options['late_number']">The following mail documents are late (only the first
+#.           ${late_number (tal content="options/late_number")}
+#.           are displayed):
+#.         </span>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+msgid "The following mail documents are late (only the first ${late_number} are displayed):"
+msgstr "Els següents correus arriben tard (només es mostra el primer  ${late_number}):"
+
+#.   <p>
+#.         You'll find below the list of late mail documents in mailbox
+#.         ${mailbox_title (tal content="options/mb_title")}
+#.       </p>
+#: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
+msgid "You'll find below the list of late mail documents in mailbox ${mailbox_title}"
+msgstr "Trobaràs la llista de correus amb retard en la safata  ${mailbox_title}"
+
+#.   <input condition="view/canMoveDown" type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
+#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "button_move_down_delegatees"
+msgstr "Desplaçar cap avall "
+
+#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "button_update_stackelts"
+msgstr "Aplicar canvis "
+
+#.   <input type="submit" name="answer_submit" value="button_validate" class="standalone" />
+#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
+#: from ../browser/batchPerform.zpt ../browser/reuseAnswer.zpt
+#: ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "button_validate"
+msgstr "Validar"
+
+#.   <h1>
+#.                Reply from existing reply
+#.             </h1>
+#: from ../browser/reuseAnswer.zpt
+msgid "cpscourrier_answer_from_existing"
+msgstr "Respondre a partir d'una resposta existent "
+
+#.   <input type="submit" name="email_ack" value="cpscourrier_button_email_ack" class="standalone" />
+#: from ../browser/paperAck.zpt
+msgid "cpscourrier_button_email_ack"
+msgstr "Enviar per correu electrònic "
+
+#.   <input type="submit" name="print_ack" value="cpscourrier_button_print_ack" class="standalone" />
+#: from ../browser/paperAck.zpt
+msgid "cpscourrier_button_print_ack"
+msgstr "Imprimir"
+
+#.   <h2 condition="insert_mode">
+#.         Please select a level to insert the new delegatee
+#.       </h2>
+#.   <h2 condition="python:mode=='insert'">
+#.         Please select a level to insert the new delegatee
+#.       </h2>
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "cpscourrier_choose_insertion_level"
+msgstr "Seleccionar el nivell d'inserció "
+
+#.   <label for="target_emailaddress">cpscourrier_forward_to_emailaddress</label>
+#: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+msgid "cpscourrier_forward_to_emailaddress"
+msgstr "Transferir a un compte de correu "
+
+#.   <label for="target_mailbox">cpscourrier_forward_to_mailbox</label>
+#: from ../skins/cps_courrier/cpscourrier_forward_form.pt
+msgid "cpscourrier_forward_to_mailbox"
+msgstr "Transferir a una caixa del portal "
+
+#
+# Layout labels
+#
+#.   <label for="group_selection">
+#.                     Please select a group</label>
+#: from ../skins/cps_courrier/cpscourrier_handle_form.pt
+msgid "cpscourrier_help_handle_select_group"
+msgstr "Ocupar-se del document en nom d'un grup "
+
+#.   <h1 condition="not:view/is_print">
+#.         Prepare an acknowledgement
+#.       </h1>
+#: from ../browser/paperAck.zpt
+msgid "cpscourrier_paper_ack_prepare_heading"
+msgstr "Preparació d'un justificant de recepció "
+
+#.   <h3>cpscourrier_response_preview_heading</h3>
+#: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
+msgid "cpscourrier_response_preview_heading"
+msgstr "Previsualitzar la resposta"
+
+#.   <h1>
+#.         Mail Handling Roadmap
+#.       </h1>
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "cpscourrier_roadmap_heading"
+msgstr "Full de ruta "
+
+#
+# Layout labels
+#
+#.   <h3 condition="edit_mode">
+#.   	  Search groups
+#.   	</h3>
+#: from ../browser/roadmap.zpt
+msgid "cpscourrier_search_groups"
+msgstr "Recerca de grups"
+
+#
+# Layout labels
+#
+#.   <h3 condition="edit_mode">
+#.   	  Search users
+#.   	</h3>
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "cpscourrier_search_users"
+msgstr "Recerca d'usuaris"
+
+#.   <p condition="search_members">
+#.   	    Please select the member to insert in the roadmap
+#.   	  </p>
+#: from ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "cpscourrier_select_delegatees"
+msgstr "Per favor, trie els elements a adjuntar al full de ruta"
+
+#.   <caption>Thread</caption>
+#: from ../skins/cps_courrier/portlet_custom_thread.pt
+msgid "cpscourrier_thread_caption"
+msgstr "Fil de discussió "
+
+#.   <label for="use_parent_roadmap">Use default
+#.                   roadmap</label>
+#: from ../skins/cps_courrier/cpscourrier_handle_form.pt
+msgid "cpscourrier_use_default_roadmap"
+msgstr "Utilitze la full de ruta per defecte "
+
+#.   <h2 condition="insert_mode">
+#.   	  Add delegatees: search results
+#.   	</h2>
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "delegatees_search_results"
+msgstr "Resultats de la recerca "
+
+#.   <title fill-slot="title">
+#.           heading_workflow_send_of
+#.           ${item_id (tal replace="here/title_or_id")}
+#.         </title>
+#: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
+msgid "heading_workflow_send_of ${item_id}"
+msgstr "Enviar el correu d'eixida: ${item_id}"
+
+#.   <p>
+#.         Below, stands the members / groups which have been already added to this
+#.         workflow stack.
+#.       </p>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+#: ../skins/cps_courrier/stack_simple_method.pt
+msgid "label_delegatees_below"
+msgstr ""
+
+#.   <block>
+#.         Current level delegatees are highlighted
+#.       </block>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+msgid "label_delegatees_current_level_delegatees_highlighted"
+msgstr ""
+
+#.   <strong>
+#.         There are no delegatees within this workflow stack yet
+#.       </strong>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+#: ../skins/cps_courrier/stack_simple_method.pt
+msgid "label_delegatees_stack_empty"
+msgstr "Encara no hi ha delegats amb excessiu flux de treball "
+
+#.   <block>
+#.                     User in charge
+#.                   </block>
+#: from ../skins/cps_courrier/stack_hierarchical_method.pt
+msgid "label_delegatees_user_in_charge"
+msgstr ""
+
+#.   <th>
+#.         Delegation Date
+#.       </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_delegation_date"
+msgstr "Data de delegació "
+
+#.   <th>
+#.         Directive
+#.       </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_directive"
+msgstr "Directiva"
+
+#.   <th>
+#.         Comment
+#.       </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_directive_comment"
+msgstr "Comentari"
+
+#.   <th>
+#.         Identite
+#.       </th>
+#: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
+msgid "label_identite"
+msgstr "Identitat"
+
+#.   <label for="push_directive">
+#.      	  Directive to give these users
+#.   	</label>
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "label_push_directive"
+msgstr "Directiva a donar a estos usuaris "
+
+#.   <h2>
+#.         Reviewers
+#.       </h2>
+#: from ../skins/cps_courrier/layout_schedule_view.pt
+msgid "label_reviewers"
+msgstr "Revisors"
+
+#.   <p>
+#.       Sorry, no members matched your search.
+#.    </p>
+#: from ../skins/cps_courrier/stack_members_search_results.pt
+msgid "legend_local_roles_no_results_members"
+msgstr "Ho sentim, però cap membre coincideix amb la seua recerca "
+
+#.   <h2 condition="edit_mode">
+#.   	  Add new delegatees to the roadmap
+#.   	</h2>
+#: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
+msgid "search_for_delegatees"
+msgstr "Afegir nous delegats a la full de ruta "
+
+#.   <h2 condition="view/is_results">
+#.                     Search results
+#.                   </h2>
+#.   <h2 condition="view/is_results">
+#.                 Search results
+#.               </h2>
+#: from ../browser/batchPerform.zpt ../browser/reuseAnswer.zpt
+msgid "search_results"
+msgstr "Resultats de la recerca "
+
+#
+# Document types labels
+#
+msgid "portal_type_MailboxGroup_title"
+msgstr "Grup de bústies "
+
+msgid "portal_type_MailboxGroup_description"
+msgstr "Espai que integra a un conjunt de bústies "
+
+msgid "portal_type_Mailbox_title"
+msgstr "Bustia"
+
+msgid "portal_type_Mailbox_description"
+msgstr "Espai dedicat a emmagatzemar i gestionar correus "
+
+msgid "portal_type_Mail_Templates_Box_title"
+msgstr "Safata per als models de correu "
+
+msgid "portal_type_Mail_Templates_description"
+msgstr "Espai per a emmagatzemar i gestionar les plantilles de correu "
+
+msgid "portal_type_IncomingMail_title"
+msgstr "Correu entrant "
+
+msgid "portal_type_IncomingMail_description"
+msgstr "Missatge electrònic o digitalitzat "
+
+msgid "portal_type_OutgoingMail_title"
+msgstr "Correu d'eixida"
+
+msgid "portal_type_OutgoingMail_description"
+msgstr "Missatge que respon a un correu entrant "
+
+msgid "portal_type_IncomingEmail_title"
+msgstr "Correu electrònic entrant "
+
+msgid "portal_type_IncomingEmail_description"
+msgstr "Missatge electrònic entrant directament des de l'aplicació "
+
+msgid "portal_type_OutgoingEmail_title"
+msgstr "Correu electrònic eixint"
+
+msgid "portal_type_OutgoingEmail_description"
+msgstr "Missatge electrònic sortint en resposta a correus entrants "
+
+msgid "portal_type_IncomingPmail_title"
+msgstr "Correu de paper entrant "
+
+msgid "portal_type_IncomingPmail_description"
+msgstr "Missatge en format paper entrant (probablement digitalitzat) "
+
+msgid "portal_type_OutgoingPmail_title"
+msgstr "Correu de paper eixint"
+
+msgid "portal_type_OutgoingPmail_description"
+msgstr "Missatge eixint en resposta a correus de paper entrants "
+
+msgid "portal_type_Dashboard_title"
+msgstr "Tauló "
+
+msgid "portal_type_Dashboard_description"
+msgstr "Document amb els resultats de les recerques "
+
+#
+# Root of mailboxes area
+#
+msgid "mailboxes_root_title"
+msgstr "Bústies "
+
+msgid "mail_templates_root_title"
+msgstr "Plantilla de Respostes "
+
+msgid "cpscourrier_layout_mail_dashboard_label_edit"
+msgstr "Paràmetres de filtrat per defecte"
+
+msgid "cpscourrier_creator_label"
+msgstr "Creador"
+
+msgid "cpscourrier_confidential_label"
+msgstr "Confidencial"
+
+#
+# Layout labels
+#
+msgid "cpscourrier_object_label"
+msgstr "Objecte:"
+
+msgid "cpscourrier_from_label"
+msgstr "Emissor: "
+
+msgid "cpscourrier_paper_from_local_label"
+msgstr "Seleccione un interlocutor d'esta caixa "
+
+msgid "cpscourrier_paper_from_internal_label"
+msgstr "Seleccionar un grup d'usuaris "
+
+msgid "cpscourrier_paper_from_global_label"
+msgstr "Seleccione un interlocutor regular "
+
+msgid "cpscourrier_to_label"
+msgstr "Destinatari(s): "
+
+msgid "cpscourrier_cc_label"
+msgstr "Destinatari(s) de la còpia"
+
+msgid "cpscourrier_notes_label"
+msgstr "Notes"
+
+msgid "cpscourrier_msgid_label"
+msgstr "Número de referència"
+
+msgid "cpscourrier_creation_date_label"
+msgstr "Data:"
+
+msgid "cpscourrier_sending_date_label"
+msgstr "Data d'enviament "
+
+msgid "cpscourrier_form_of_address_label"
+msgstr "Fórmula de cortesia "
+
+msgid "cpscourrier_signature_label"
+msgstr "Signatura:"
+
+msgid "cpscourrier_size_label"
+msgstr "Grandària (kB):"
+
+msgid "cpscourrier_deadline_label"
+msgstr "Data de caducitat:"
+
+msgid "cpscourrier_priority_label"
+msgstr "Prioritat: "
+
+msgid "cpscourrier_smtp_headers_label"
+msgstr "Capçaleres SMTP: "
+
+msgid "cpscourrier_mailbox_addresses_label"
+msgstr "Adreces de la bústia: "
+
+#
+# Layout labels
+#
+msgid "cpscourrier_search_path_label"
+msgstr "Caixes referides "
+
+msgid "cpscourrier_template_usage_col"
+msgstr "Ús "
+
+msgid "cpscourrier_modification_date_label"
+msgstr "Última edició "
+
+msgid "cpscourrier_reply_type_label"
+msgstr "Tipus"
+
+msgid "cpscourrier_simple_reply"
+msgstr "Resposta normal "
+
+msgid "cpscourrier_mail_template"
+msgstr "Resposta-plantilla"
+
+msgid "cpscourrier_label_managers"
+msgstr "Responsables"
+
+msgid "label_search_todo"
+msgstr "Acció"
+
+msgid "cpscourrier_paper_ack_default_header_label"
+msgstr "Capçalera de pàgina per defecte del justificant de recepció "
+
+msgid "cpscourrier_paper_ack_default_header_help"
+msgstr "Este text s'utilitza per a maquetar els justificants de recepció, en la part superior del mateix. "
+
+msgid "cpscourrier_paper_ack_default_footer_label"
+msgstr "De"
+
+msgid "cpscourrier_paper_ack_default_footer_help"
+msgstr "Este text s'utilitza per a maquetar els justificants de recepció, en la part inferior del mateix. "
+
+msgid "label_addressbook_email"
+msgstr "Llibreta d'adreces "
+
+msgid "label_addressbook_full_name"
+msgstr "Nom complet "
+
+msgid "label_addressbook_first_name"
+msgstr "Nom:"
+
+msgid "label_addressbook_user_name"
+msgstr "Identificador:"
+
+msgid "label_addressbook_last_name"
+msgstr "Cognoms:"
+
+msgid "label_addressbook_telephoneNumber"
+msgstr "Número de telèfon"
+
+msgid "label_addressbook_postalCode"
+msgstr "Codi postal "
+
+msgid "label_addressbook_postalAddress"
+msgstr "Adreça postal "
+
+msgid "label_addressbook_description"
+msgstr "Descripció"
+
+msgid "label_addressbook_post_office"
+msgstr "Oficina de correus"
+
+msgid "label_addressbook_fax_number"
+msgstr "Número de fax"
+
+msgid "label_addressbook_ou"
+msgstr "Organització"
+
+msgid "label_local_addressbook_email"
+msgstr "Llibreta local d'adreces "
+
+msgid "label_local_addressbook_full_name"
+msgstr "Nom complet"
+
+msgid "label_local_addressbook_first_name"
+msgstr "Nom"
+
+msgid "label_local_addressbook_user_name"
+msgstr "Nom de l'usuari"
+
+msgid "label_local_addressbook_last_name"
+msgstr "Cognoms"
+
+msgid "label_local_addressbook_telephoneNumber"
+msgstr "Número de telèfon"
+
+msgid "label_local_addressbook_postalCode"
+msgstr "Códi postal"
+
+msgid "label_local_addressbook_postalAddress"
+msgstr "Adreça postal "
+
+msgid "label_local_addressbook_description"
+msgstr "Descripció"
+
+msgid "label_local_addressbook_post_office"
+msgstr "Oficina de correus "
+
+msgid "label_local_addressbook_fax_number"
+msgstr "Número de fax"
+
+#
+# Directories
+#
+msgid "label_local_addressbook_ou"
+msgstr "Organització"
+
+msgid "cpscourrier_items_nb_label"
+msgstr "Ítem per pàgina"
+
+msgid "cpscourrier_type_label"
+msgstr "Tipus"
+
+msgid "cpscourrier_review_state_label"
+msgstr "Estat"
+
+msgid "cpscourrier_empty_box_msg"
+msgstr "No hi ha cap correu que responga als criteris de recerca "
+
+msgid "cpscourrier_empty_boxgroup_msg"
+msgstr "El grup de bústies està buit "
+
+msgid "cpscourrier_no_result_msg"
+msgstr "Cap correu respon als criteris. "
+
+msgid "cpscourrier_timeleft_label"
+msgstr "Temps restant "
+
+msgid "cpscourrier_has_attachment_label"
+msgstr "Adj."
+
+msgid "cpscourrier_fulltext_search"
+msgstr "Paraules clau "
+
+msgid "cpscourrier_mailbox_priority_label"
+msgstr "Grau d'urgència per defecte "
+
+msgid "cpscourrier_mailbox_from_label"
+msgstr "Adreça per defecte de l'emissor "
+
+msgid "cpscourrier_allowed_reply_time"
+msgstr "Interval de temps permès per defecte "
+
+msgid "cpscourrier_mailbox_addresses_row_label"
+msgstr "Adreces "
+
+msgid "cpscourrier_min_template_usage"
+msgstr "Utilitzat almenys "
+
+#
+# Layout labels
+#
+msgid "cpscourrier_no_user_found"
+msgstr "Cap usuari coincideix amb el teu criteri de recerca "
+
+msgid "cpscourrier_no_group_found"
+msgstr "Cap grup coincideix amb el teu criteri de recerca"
+
+msgid "cpscourrier_todo_label"
+msgstr "Per fer"
+
+msgid "cpscourrier_to_process"
+msgstr "Per processar "
+
+msgid "cpscourrier_to_handle"
+msgstr "Per encarregar-se "
+
+msgid "cpscourrier_to_watch"
+msgstr "Per consultar"
+
+msgid "cpscourrier_created_min_label"
+msgstr "Data de creació (mínima) "
+
+msgid "cpscourrier_created_max_label"
+msgstr "Data de creació (màxima)"
+
+msgid "cpscourrier_deadline_min_label"
+msgstr "Data mínima de venciment "
+
+msgid "cpscourrier_deadline_max_label"
+msgstr "Data màxima de venciment "
+
+msgid "cpscourrier_foa_voc_regards"
+msgstr "Els meus millors desitjos,"
+
+msgid "cpscourrier_foa_voc_sincerely"
+msgstr "Seu, sincerament, "
+
+msgid "cpscourrier_mp_voc_low"
+msgstr "Baixa "
+
+msgid "cpscourrier_mp_voc_normal"
+msgstr "Normal"
+
+msgid "cpscourrier_mp_voc_high"
+msgstr "Alta"
+
+msgid "cpscourrier_mp_voc_very_high"
+msgstr "Molt alta"
+
+msgid "cpscourrier_all_boxes"
+msgstr "Tots"
+
+msgid "cpscourrier_subject_label"
+msgstr "Tema"
+
+msgid "cpscourrier_all_subjects"
+msgstr "Tots"
+
+msgid "cpscourrier_initiate_handling"
+msgstr "Fer-se càrrec "
+
+msgid "cpscourrier_for_reply"
+msgstr "Per a respondre "
+
+msgid "cpscourrier_for_advice"
+msgstr "Per a avisar "
+
+msgid "cpscourrier_sender_type_label"
+msgstr "Tipologia de l'emissor "
+
+msgid "cpscourrier_st_voc_individual"
+msgstr "Individual"
+
+msgid "cpscourrier_st_voc_professional"
+msgstr "Professional "
+
+msgid "cpscourrier_st_voc_corporate_body"
+msgstr "Persones jurídiques "
+
+msgid "cpscourrier_st_voc_administration"
+msgstr "Administració"
+
+msgid "action_roadmap"
+msgstr "Full de ruta "
+
+msgid "action_default_roadmap"
+msgstr "Full de ruta per defecte "
+
+msgid "init_stack"
+msgstr "Inicialitzar la full de ruta "
+
+msgid "use_default_roadmap"
+msgstr "Utilitze la full de ruta per defecte "
+
+#
+# Workflows
+#
+msgid "heading_workflow_handle_of ${item_id}"
+msgstr "Manejar ${item_id}"
+
+msgid "help_workflow_handle"
+msgstr "A l'optar per gestionar els documents de correu seleccionats, es farà càrrec del processament futur dels correus (respondre, delegar, esborrar...). "
+
+msgid "button_handle"
+msgstr "Fer-se càrrec "
+
+msgid "action_handle"
+msgstr "Fer-se càrrec "
+
+msgid "handle"
+msgstr "Fent-se càrrec "
+
+msgid "heading_workflow_forward_of ${item_id}"
+msgstr "Remetre ${item_id}"
+
+msgid "help_workflow_forward"
+msgstr "Està a punt de remetre el correu a altra bústia <strong>o</strong> a una adreça de correu externa. A l'enviar el document de correu a una adreça externa es tancarà la còpia local del document. "
+
+msgid "help_workflow_forwardPmail"
+msgstr "Estàs a punt de transferir un correu entrant a altra safata de correu <strong>o</strong> a una adreça de correu externa. L'enviament d'un document de correu a una adreça de correu externa tancarà la còpia local del document. "
+
+msgid "button_forward"
+msgstr "Remetre "
+
+msgid "action_forward"
+msgstr "Remetre "
+
+msgid "forward"
+msgstr "Remitent "
+
+msgid "forward_move"
+msgstr "Remetre a la bústia "
+
+msgid "forward_email"
+msgstr "Remetre al correu"
+
+msgid "cpscourrier_no_mailbox"
+msgstr "(Per favor, seleccione una bústia) "
+
+msgid "heading_workflow_discard_of ${item_id}"
+msgstr "Remetre ${item_id}"
+
+msgid "help_workflow_discard"
+msgstr "Està a punt de posar el correu en la paperera "
+
+msgid "button_discard"
+msgstr "Descartar"
+
+msgid "action_discard"
+msgstr "Descartar"
+
+msgid "discard"
+msgstr "Descartant"
+
+msgid "heading_workflow_delete_of ${item_id}"
+msgstr "Esborrar ${item_id}"
+
+msgid "help_workflow_delete"
+msgstr "Està a punt d'esborrar permanentment el correu "
+
+msgid "button_delete"
+msgstr "Esborrar"
+
+msgid "action_delete"
+msgstr "Esborrar"
+
+msgid "delete"
+msgstr "Esborrat"
+
+msgid "heading_workflow_answer_of ${item_id}"
+msgstr "Respondre ${item_id}"
+
+msgid "help_workflow_answer"
+msgstr "Al respondre al document de correu, crearà un nou correu eixint enllaçat al correu d'entrada original. "
+
+msgid "button_answer"
+msgstr "Respondre"
+
+msgid "action_answer"
+msgstr "Respondre"
+
+msgid "answer"
+msgstr "Resposta"
+
+msgid "action_reuse_answer"
+msgstr "Respondre des de l'existent "
+
+msgid "reuse_answer"
+msgstr "RRespondre a partir d'un existent "
+
+msgid "heading_workflow_close_of ${item_id}"
+msgstr "Tancar ${item_id}"
+
+msgid "help_workflow_close"
+msgstr "Tanca l'entrada de correus al final del procés de respostes. Note que els documents de correu tancats estan, per defecte, ocults en les bústies. Ha de, explícitament, configurar el paràmetre del filtre \"estat\" a  \"tancat\" per a vore la llista de documents de correu tancats."
+
+msgid "button_close"
+msgstr "Tancar"
+
+msgid "action_close"
+msgstr "Tancar"
+
+msgid "close"
+msgstr "Tancament"
+
+msgid "heading_workflow_reopen_of ${item_id}"
+msgstr "Reobrir ${item_id}"
+
+msgid "help_workflow_reopen"
+msgstr "Està a punt de reobrir el correu entrant "
+
+msgid "button_reopen"
+msgstr "Reobrir"
+
+msgid "action_reopen"
+msgstr "Reobrir"
+
+msgid "reopen"
+msgstr "Reobertura "
+
+msgid "heading_workflow_validate_of ${item_id}"
+msgstr "Validar ${item_id}"
+
+msgid "help_workflow_validate"
+msgstr "Està a punt de validar el correu "
+
+msgid "action_validate"
+msgstr "Validar"
+
+msgid "validate"
+msgstr "Validació"
+
+msgid "heading_workflow_invalidate_of ${item_id}"
+msgstr "Invalidar ${item_id}"
+
+msgid "help_workflow_invalidate"
+msgstr "Està a punt d'invalidar el correu i de tornar a la manera \"redacció\""
+
+msgid "button_invalidate"
+msgstr "Invalidar"
+
+msgid "action_invalidate"
+msgstr "Invalidar"
+
+msgid "invalidate"
+msgstr "Invalidació"
+
+msgid "help_workflow_send"
+msgstr "Està a punt d'enviar un correu als seus destinataris "
+
+msgid "button_send"
+msgstr "Enviar"
+
+msgid "action_send"
+msgstr "Enviar"
+
+msgid "send"
+msgstr "Enviament"
+
+msgid "heading_workflow_reactivate_of ${item_id}"
+msgstr "Reactivar el correu d'eixida «${item_id}»"
+
+msgid "help_workflow_reactivate"
+msgstr "Està a punt de reactivar el correu "
+
+msgid "button_reactivate"
+msgstr "Reactivar"
+
+msgid "action_reactivate"
+msgstr "Reactivar"
+
+msgid "reactivate"
+msgstr "Reactivació"
+
+msgid "heading_workflow_reset_of ${item_id}"
+msgstr "Restaurar ${item_id}"
+
+msgid "help_workflow_reset"
+msgstr "Al restaurar el correu tornarà a posar-lo en el seu estat iniciar i netejarà la full de ruta "
+
+msgid "button_reset"
+msgstr "Restaruar"
+
+msgid "action_reset"
+msgstr "Restaurar"
+
+msgid "reset"
+msgstr "Restauració"
+
+msgid "flag_handled"
+msgstr "Resposta(s) suprimida(s)"
+
+msgid "flag_answered"
+msgstr "Resposta(s) enviada(s)"
+
+msgid "move_down_delegatees"
+msgstr "Moure al següent nivell "
+
+msgid "action_move_down_delegatees"
+msgstr "Baixar"
+
+msgid "heading_workflow_move_down_delegatees_of ${item_id}"
+msgstr "Descarregar el correu «${item_id}»"
+
+msgid "button move_down_delegatees"
+msgstr "Baixar"
+
+#
+# Workflows
+#
+msgid "help_workflow_move_down_delegatees"
+msgstr "Està a punt de permetre als usuaris del següent nivell gestionar el document de correu. Si no forma part del mateix o si no és administrador local, no tornarà a poder accedir a este document. "
+
+msgid "heading_batch_workflow_handle"
+msgstr "Fer-se càrrec d'un lot de documents entrants "
+
+msgid "help_batch_workflow_handle"
+msgstr "A l'optar per gestionar els documents de correu seleccionats, es farà càrrec del processament futur dels correus (respondre, delegar, esborrar...). "
+
+msgid "heading_batch_workflow_discard"
+msgstr "Descartar un lot de documents entrants"
+
+msgid "help_batch_workflow_discard"
+msgstr "Està a punt de posar els documents seleccionats en la paperera"
+
+msgid "heading_batch_workflow_answer"
+msgstr "Respondre a un grup de documents entrants "
+
+msgid "help_batch_workflow_answer"
+msgstr "Al respondre als documents, crearà un nou enllaç de correu eixint per a cada document entrant seleccionat"
+
+msgid "heading_batch_workflow_delete"
+msgstr "Esborrar per lots"
+
+msgid "help_batch_workflow_delete"
+msgstr "Es disposa a suprimir els correus següents"
+
+msgid "create_pending"
+msgstr "Creació no confirmada"
+
+#
+# Workflow states
+#
+msgid "received"
+msgstr "rebut"
+
+msgid "handled"
+msgstr "Encarregat"
+
+msgid "trash"
+msgstr "paperera"
+
+msgid "answering"
+msgstr "responent "
+
+msgid "answered"
+msgstr "respost "
+
+msgid "closed"
+msgstr "tancat"
+
+msgid "validated"
+msgstr "validat"
+
+msgid "sent"
+msgstr "enviat"
+
+msgid "manage_delegatees"
+msgstr "Actualitzar el full de ruta "
+
+#
+# Workflow status messages
+#
+msgid "psm_select_a_level"
+msgstr "Trie un nivell"
+
+msgid "psm_roadmap_changed"
+msgstr "Full de ruta modificada "
+
+msgid "psm_stack_elements_edited"
+msgstr "Elements de la full de ruta modificats"
+
+msgid "psm_cannot_manage_stack"
+msgstr "No té permisos per a modificar la full de ruta "
+
+msgid "psm_select_at_least_one_item"
+msgstr "Trie almenys un element "
+
+msgid "psm_cpscourrier_choose_at_least_mailbox_or_emailaddress"
+msgstr "Trie almenys una bústia o introdueixca una adreça de correu "
+
+msgid "psm_cpscourrier_choose_either_mailbox_or_emailaddress"
+msgstr "Trie  una bústia o una adreça de correu "
+
+msgid "psm_cpscourrier_mail_forwarded"
+msgstr "Correu enviat amb èxit "
+
+msgid "psm_cpscourrier_reply_could_not_be_sent"
+msgstr "A causa d'un problema de configuració, la resposta no pot ser enviada. Per favor, pose's en contacte amb l'administrador del portal per a arreglar el problema. "
+
+msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_recipients_address"
+msgstr "Adreces invàlides dels destinataris: la resposta no puc ser enviada. "
+
+msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_sender_address"
+msgstr "Adreça de l'emissor invàlida: no s'ha pogut enviar la resposta "
+
+msgid "psm_cpscourrier_reply_sent"
+msgstr "Resposta enviada "
+
+msgid "psm_cpscourrier_no_action_performed_for"
+msgstr "Els següents documents de correu no han patit canvis: "
+
+msgid "psm_cpscourrier_smtp_error"
+msgstr "El correu electrònic no ha pogut ser enviat "
+
+msgid "psm_cpscourrier_ack_email_sent"
+msgstr "Justificant de recepció enviat "
+
+msgid "psm_cpscourrier_missing_email_address"
+msgstr "Correu electrònic no enviat per desconeixement del destinatari "
+
+msgid "label_workflow_mail_confirm"
+msgstr "Recepció i confirmació "
+
+msgid "label_workflow_discard"
+msgstr "Posar com deixalla "
+
+#
+# Directories
+#
+msgid "label_local_address_book"
+msgstr "Llibreta local d'adreces "
+
+msgid "label_address_book"
+msgstr "Llibreta global d'adreces "
+
+msgid "cpscourrier_new_addressbook_entry"
+msgstr "Nou"
+
+msgid "On ${y}-${m}-${d}, ${name} wrote:"
+msgstr "El ${d}-${m}-${y}, ${name} va escriure:"
+
+msgid "cpscourrier_timeleft:${plus_sign}${d}"
+msgstr "D${plus_sign}${d}"
+
+msgid "cpscourrier_fake_original_msg"
+msgstr "-------- Missatge original ---------"
+
+msgid "cpscourrier_subject_${portal_title}_${mb_title}_${late_number}"
+msgstr "[${portal_title}] ${late_number} correus amb retard en \"${mb_title}\""
+
+msgid "cpscourrier_final_reply"
+msgstr "Resposta final"
+
+msgid "action_paper_ack"
+msgstr "Justificant de recepció"
+
+msgid "cpscourrier_paper_ack_subject_${mail_subject}"
+msgstr "Justificant de recepció per a «${mail_subject}»"
+
+# Roles
+msgid "LocalManager"
+msgstr "Responsable local"
+
+msgid "Supervisor"
+msgstr "Supervisor"
+
+msgid "Contributor"
+msgstr "Col·laborador "
+
+msgid "Reader"
+msgstr "Lector"
+
