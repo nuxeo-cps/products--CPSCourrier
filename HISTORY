@@ -1,4 +1,24 @@
 ===========================================================
+Package: CPSCourrier 0.23.0-rel821095958
+===========================================================
+First release built by: div at: 2007-06-14T14:32:48
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.23.0-rel821095958
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/branches/rel821095958@51831
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+-
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- Merged with the trunk
+
+===========================================================
 Package: CPSCourrier 0.22.2-rel821095958
 ===========================================================
 First release built by: div at: 2007-03-15T11:47:58
