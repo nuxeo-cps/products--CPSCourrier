@@ -1,4 +1,24 @@
 ===========================================================
+Package: CPSCourrier 0.24.0
+===========================================================
+First release built by: madarche at: 2007-07-03T10:03:44
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.24.0
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@51885
+
+Requires
+~~~~~~~~
+- CPSI18n >= 1.0.0
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+-
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSCourrier 0.23.1
 ===========================================================
 First release built by: div at: 2007-04-16T20:16:35
