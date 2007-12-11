@@ -426,6 +426,9 @@ msgstr "Date"
 msgid "cpscourrier_sending_date_label"
 msgstr "Sending date"
 
+msgid "cpscourrier_original_date_label"
+msgstr "Original date"
+
 msgid "cpscourrier_form_of_address_label"
 msgstr "Form of address"
 

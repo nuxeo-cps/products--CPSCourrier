@@ -136,6 +136,9 @@ msgstr ""
 msgid "cpscourrier_sending_date_label"
 msgstr ""
 
+msgid "cpscourrier_original_date_label"
+msgstr ""
+
 msgid "cpscourrier_form_of_address_label"
 msgstr ""
 
