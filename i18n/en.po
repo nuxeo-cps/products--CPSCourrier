@@ -1177,14 +1177,6 @@ msgstr ""
 #~ msgstr "Handle"
 
 #, fuzzy
-#~ msgid "button_cancel"
-#~ msgstr "Handle"
-
-#, fuzzy
-#~ msgid "button_search"
-#~ msgstr "Reply"
-
-#, fuzzy
 #~ msgid "heading_local_roles_search_results"
 #~ msgstr "Add delegatees: search results"
 
