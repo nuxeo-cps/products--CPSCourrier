@@ -408,7 +408,7 @@ msgid "cpscourrier_paper_from_internal_label"
 msgstr "Choisissez un groupe d'utilisateurs"
 
 msgid "cpscourrier_paper_from_global_label"
-msgstr "Choississez un correspondant régulier"
+msgstr "Choisissez un correspondant régulier"
 
 msgid "cpscourrier_to_label"
 msgstr "Destinataire(s)"

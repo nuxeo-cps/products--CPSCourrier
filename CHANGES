@@ -6,6 +6,7 @@ New features
 -
 Bug fixes
 ~~~~~~~~~
+- Fixed the French translation for cpscourrier_paper_from_global_label.
 - Made the inject_random_mails easier to customize, for example to test on
   "Incoming Pmail" document types.
 New internal features
