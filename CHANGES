@@ -6,7 +6,8 @@ New features
 -
 Bug fixes
 ~~~~~~~~~
--
+- Made the inject_random_mails easier to customize, for example to test on
+  "Incoming Pmail" document types.
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
 - 

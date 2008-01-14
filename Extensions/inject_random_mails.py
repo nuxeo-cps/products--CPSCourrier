@@ -1,4 +1,6 @@
 # -*- coding: iso-8859-15 -*-
+#
+# $Id$
 """Utility script to inject random mails in the instance
 
 This is for developpers / testers only.
@@ -30,6 +32,8 @@ IN_MAILS_PER_MAILBOX = 20
 OUT_MAILS_PER_MAILBOX = 20
 EMAIL_PATTERN = "gracinet+%s@nuxeo.com"
 COMMENT_PATTERN = "Test comment for transition %s"
+MAIL_PORTAL_TYPE = 'Incoming Email'
+#MAIL_PORTAL_TYPE = 'Incoming Pmail'
 
 def _buid_tree(gen):
     return  {
@@ -96,7 +100,7 @@ def _populate(where, generator, wftool):
         dt = DateTime()
         m_id = where.portal_uid.getUid('cpscourrier', year=dt.year(),
                                        month=dt.month(), day=dt.day())
-        m_id = wftool.invokeFactoryFor(where, 'Incoming Email', m_id,
+        m_id = wftool.invokeFactoryFor(where, MAIL_PORTAL_TYPE, m_id,
                                        initial_transition='create')
         doc = where[m_id].getEditableContent()
         doc.edit(info, proxy=where[m_id])
