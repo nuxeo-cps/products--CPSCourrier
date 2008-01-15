@@ -532,6 +532,27 @@ ul.fileChoice {
   list-style-type: None;
 }
 
+<dtml-comment>
+CPSDirectory start ------------------------------
+</dtml-comment>
+
+ul.cpsDirectories {
+  margin-top: 1em;
+  padding-left: 0;
+}
+
+ul.cpsDirectories li {
+  font-weight: bold;
+  margin-top: 0.5em;
+  list-style-type: none;
+  padding-left: 20px;
+  background-repeat: no-repeat;
+}
+
+<dtml-comment>
+CPSDirectory end ------------------------------
+</dtml-comment>
+
 button {
   background: <dtml-var contextButtonBackground>;
   border: <dtml-var contextButtonBorder>;
