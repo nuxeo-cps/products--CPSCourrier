@@ -775,6 +775,9 @@ msgstr ""
 msgid "cpscourrier_new_addressbook_entry"
 msgstr ""
 
+msgid "label_cpsdir_roles_Injector"
+msgstr ""
+
 #
 # Misc
 #

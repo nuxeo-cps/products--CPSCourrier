@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2007-04-25 12:27default\n"
+"POT-Creation-Date: 2008-01-16 12:05default\n"
 "PO-Revision-Date: 2006-11-27 17:50+0100\n"
 "Last-Translator: Jesus Martin <jesusmartin@lasalle.es>\n"
 "Language-Team: español <jesusmartin@lasalle.es>\n"
@@ -1077,6 +1077,9 @@ msgstr "Libreta global de direcciones"
 
 msgid "cpscourrier_new_addressbook_entry"
 msgstr "Nuevo"
+
+msgid "label_cpsdir_roles_Injector"
+msgstr ""
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr "El ${d}-${m}-${y}, ${name} escribió:"

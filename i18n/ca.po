@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2006-12-08 10:37default\n"
+"POT-Creation-Date: 2008-01-16 12:05default\n"
 "PO-Revision-Date: 2007-06-01 12:56+0100\n"
 "Last-Translator: Jesus Martin <jesusmartin@lasalle.es>\n"
 "Language-Team: valencià/català. <juangus@lasalle.es>\n"
@@ -30,7 +30,8 @@ msgstr ""
 #: from ../skins/cps_courrier/cpscourrier_forward_form.pt
 #: ../skins/cps_courrier/cpscourrier_handle_form.pt
 #: ../skins/cps_courrier/workflow_transition_form.pt
-msgid "<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
+msgid ""
+"<span replace=\"string:heading_workflow_${transition}_of\" /> ${item_id}"
 msgstr ""
 
 #.   <h1>
@@ -57,30 +58,36 @@ msgstr "Els següents  ${late_number} correus arriben tard:"
 #.           are displayed):
 #.         </span>
 #: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
-msgid "The following mail documents are late (only the first ${late_number} are displayed):"
-msgstr "Els següents correus arriben tard (només es mostra el primer  ${late_number}):"
+msgid ""
+"The following mail documents are late (only the first ${late_number} are "
+"displayed):"
+msgstr ""
+"Els següents correus arriben tard (només es mostra el primer  "
+"${late_number}):"
 
 #.   <p>
 #.         You'll find below the list of late mail documents in mailbox
 #.         ${mailbox_title (tal content="options/mb_title")}
 #.       </p>
 #: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
-msgid "You'll find below the list of late mail documents in mailbox ${mailbox_title}"
-msgstr "Trobaràs la llista de correus amb retard en la safata  ${mailbox_title}"
+msgid ""
+"You'll find below the list of late mail documents in mailbox ${mailbox_title}"
+msgstr ""
+"Trobaràs la llista de correus amb retard en la safata  ${mailbox_title}"
 
-#.   <input condition="view/canMoveDown" type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
-#.   <input type="submit" class="context" value="button_move_down_delegatees" name="submit_move_down" />
+#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" condition="view/canMoveDown" />
+#.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
 msgstr "Desplaçar cap avall "
 
-#.   <input type="submit" class="context" value="button_update_stackelts" name="submit_edit" />
+#.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_update_stackelts"
 msgstr "Aplicar canvis "
 
-#.   <input type="submit" name="answer_submit" value="button_validate" class="standalone" />
-#.   <input type="submit" class="context" value="button_validate" name="submit_add" />
+#.   <input name="answer_submit" type="submit" class="standalone" value="button_validate" />
+#.   <input name="submit_add" type="submit" class="context" value="button_validate" />
 #: from ../browser/batchPerform.zpt ../browser/reuseAnswer.zpt
 #: ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_validate"
@@ -93,12 +100,12 @@ msgstr "Validar"
 msgid "cpscourrier_answer_from_existing"
 msgstr "Respondre a partir d'una resposta existent "
 
-#.   <input type="submit" name="email_ack" value="cpscourrier_button_email_ack" class="standalone" />
+#.   <input name="email_ack" type="submit" class="standalone" value="cpscourrier_button_email_ack" />
 #: from ../browser/paperAck.zpt
 msgid "cpscourrier_button_email_ack"
 msgstr "Enviar per correu electrònic "
 
-#.   <input type="submit" name="print_ack" value="cpscourrier_button_print_ack" class="standalone" />
+#.   <input name="print_ack" type="submit" class="standalone" value="cpscourrier_button_print_ack" />
 #: from ../browser/paperAck.zpt
 msgid "cpscourrier_button_print_ack"
 msgstr "Imprimir"
@@ -470,13 +477,17 @@ msgid "cpscourrier_paper_ack_default_header_label"
 msgstr "Capçalera de pàgina per defecte del justificant de recepció "
 
 msgid "cpscourrier_paper_ack_default_header_help"
-msgstr "Este text s'utilitza per a maquetar els justificants de recepció, en la part superior del mateix. "
+msgstr ""
+"Este text s'utilitza per a maquetar els justificants de recepció, en la part "
+"superior del mateix. "
 
 msgid "cpscourrier_paper_ack_default_footer_label"
 msgstr "De"
 
 msgid "cpscourrier_paper_ack_default_footer_help"
-msgstr "Este text s'utilitza per a maquetar els justificants de recepció, en la part inferior del mateix. "
+msgstr ""
+"Este text s'utilitza per a maquetar els justificants de recepció, en la part "
+"inferior del mateix. "
 
 msgid "label_addressbook_email"
 msgstr "Llibreta d'adreces "
@@ -698,7 +709,9 @@ msgid "heading_workflow_handle_of ${item_id}"
 msgstr "Manejar ${item_id}"
 
 msgid "help_workflow_handle"
-msgstr "A l'optar per gestionar els documents de correu seleccionats, es farà càrrec del processament futur dels correus (respondre, delegar, esborrar...). "
+msgstr ""
+"A l'optar per gestionar els documents de correu seleccionats, es farà càrrec "
+"del processament futur dels correus (respondre, delegar, esborrar...). "
 
 msgid "button_handle"
 msgstr "Fer-se càrrec "
@@ -713,10 +726,17 @@ msgid "heading_workflow_forward_of ${item_id}"
 msgstr "Remetre ${item_id}"
 
 msgid "help_workflow_forward"
-msgstr "Està a punt de remetre el correu a altra bústia <strong>o</strong> a una adreça de correu externa. A l'enviar el document de correu a una adreça externa es tancarà la còpia local del document. "
+msgstr ""
+"Està a punt de remetre el correu a altra bústia <strong>o</strong> a una "
+"adreça de correu externa. A l'enviar el document de correu a una adreça "
+"externa es tancarà la còpia local del document. "
 
 msgid "help_workflow_forwardPmail"
-msgstr "Estàs a punt de transferir un correu entrant a altra safata de correu <strong>o</strong> a una adreça de correu externa. L'enviament d'un document de correu a una adreça de correu externa tancarà la còpia local del document. "
+msgstr ""
+"Estàs a punt de transferir un correu entrant a altra safata de correu "
+"<strong>o</strong> a una adreça de correu externa. L'enviament d'un document "
+"de correu a una adreça de correu externa tancarà la còpia local del "
+"document. "
 
 msgid "button_forward"
 msgstr "Remetre "
@@ -770,7 +790,9 @@ msgid "heading_workflow_answer_of ${item_id}"
 msgstr "Respondre ${item_id}"
 
 msgid "help_workflow_answer"
-msgstr "Al respondre al document de correu, crearà un nou correu eixint enllaçat al correu d'entrada original. "
+msgstr ""
+"Al respondre al document de correu, crearà un nou correu eixint enllaçat al "
+"correu d'entrada original. "
 
 msgid "button_answer"
 msgstr "Respondre"
@@ -791,7 +813,11 @@ msgid "heading_workflow_close_of ${item_id}"
 msgstr "Tancar ${item_id}"
 
 msgid "help_workflow_close"
-msgstr "Tanca l'entrada de correus al final del procés de respostes. Note que els documents de correu tancats estan, per defecte, ocults en les bústies. Ha de, explícitament, configurar el paràmetre del filtre \"estat\" a  \"tancat\" per a vore la llista de documents de correu tancats."
+msgstr ""
+"Tanca l'entrada de correus al final del procés de respostes. Note que els "
+"documents de correu tancats estan, per defecte, ocults en les bústies. Ha "
+"de, explícitament, configurar el paràmetre del filtre \"estat\" a  \"tancat"
+"\" per a vore la llista de documents de correu tancats."
 
 msgid "button_close"
 msgstr "Tancar"
@@ -875,7 +901,9 @@ msgid "heading_workflow_reset_of ${item_id}"
 msgstr "Restaurar ${item_id}"
 
 msgid "help_workflow_reset"
-msgstr "Al restaurar el correu tornarà a posar-lo en el seu estat iniciar i netejarà la full de ruta "
+msgstr ""
+"Al restaurar el correu tornarà a posar-lo en el seu estat iniciar i netejarà "
+"la full de ruta "
 
 msgid "button_reset"
 msgstr "Restaruar"
@@ -908,13 +936,18 @@ msgstr "Baixar"
 # Workflows
 #
 msgid "help_workflow_move_down_delegatees"
-msgstr "Està a punt de permetre als usuaris del següent nivell gestionar el document de correu. Si no forma part del mateix o si no és administrador local, no tornarà a poder accedir a este document. "
+msgstr ""
+"Està a punt de permetre als usuaris del següent nivell gestionar el document "
+"de correu. Si no forma part del mateix o si no és administrador local, no "
+"tornarà a poder accedir a este document. "
 
 msgid "heading_batch_workflow_handle"
 msgstr "Fer-se càrrec d'un lot de documents entrants "
 
 msgid "help_batch_workflow_handle"
-msgstr "A l'optar per gestionar els documents de correu seleccionats, es farà càrrec del processament futur dels correus (respondre, delegar, esborrar...). "
+msgstr ""
+"A l'optar per gestionar els documents de correu seleccionats, es farà càrrec "
+"del processament futur dels correus (respondre, delegar, esborrar...). "
 
 msgid "heading_batch_workflow_discard"
 msgstr "Descartar un lot de documents entrants"
@@ -926,7 +959,9 @@ msgid "heading_batch_workflow_answer"
 msgstr "Respondre a un grup de documents entrants "
 
 msgid "help_batch_workflow_answer"
-msgstr "Al respondre als documents, crearà un nou enllaç de correu eixint per a cada document entrant seleccionat"
+msgstr ""
+"Al respondre als documents, crearà un nou enllaç de correu eixint per a cada "
+"document entrant seleccionat"
 
 msgid "heading_batch_workflow_delete"
 msgstr "Esborrar per lots"
@@ -995,7 +1030,10 @@ msgid "psm_cpscourrier_mail_forwarded"
 msgstr "Correu enviat amb èxit "
 
 msgid "psm_cpscourrier_reply_could_not_be_sent"
-msgstr "A causa d'un problema de configuració, la resposta no pot ser enviada. Per favor, pose's en contacte amb l'administrador del portal per a arreglar el problema. "
+msgstr ""
+"A causa d'un problema de configuració, la resposta no pot ser enviada. Per "
+"favor, pose's en contacte amb l'administrador del portal per a arreglar el "
+"problema. "
 
 msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_recipients_address"
 msgstr "Adreces invàlides dels destinataris: la resposta no puc ser enviada. "
@@ -1036,6 +1074,9 @@ msgstr "Llibreta global d'adreces "
 msgid "cpscourrier_new_addressbook_entry"
 msgstr "Nou"
 
+msgid "label_cpsdir_roles_Injector"
+msgstr ""
+
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr "El ${d}-${m}-${y}, ${name} va escriure:"
 
@@ -1069,4 +1110,3 @@ msgstr "Col·laborador "
 
 msgid "Reader"
 msgstr "Lector"
-

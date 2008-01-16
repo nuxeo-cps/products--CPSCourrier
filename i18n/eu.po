@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CPSCourrier\n"
-"POT-Creation-Date: 2007-04-25 12:27default\n"
+"POT-Creation-Date: 2008-01-16 12:05default\n"
 "PO-Revision-Date: 2006-11-16 13:34+0100\n"
 "Last-Translator: Jesus Martin <jesusmartin@lasalle.es>\n"
 "Language-Team: euskera <perikoalkain@lasalle.es>\n"
@@ -1071,6 +1071,9 @@ msgstr "Helbide-liburu orokorra"
 
 msgid "cpscourrier_new_addressbook_entry"
 msgstr "Berria"
+
+msgid "label_cpsdir_roles_Injector"
+msgstr ""
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
 msgstr "{d}-${m}-${y}, ${name}-k idatzi zuen:"
