@@ -1,6 +1,7 @@
-
-# (C) Copyright 2006 Nuxeo SAS <http://nuxeo.com>
-# Author: Georges Racinet <gracinet@nuxeo.com>
+# (C) Copyright 2006-2008 Nuxeo SAS <http://nuxeo.com>
+# Authors:
+# Georges Racinet <gracinet@nuxeo.com>
+# M.-A. Darche <madarche@nuxeo.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 2 as published
@@ -30,7 +31,7 @@ from Products.CPSSchemas.Widget import CPSWidget
 from Products.CPSSchemas.Widget import widgetname
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSSchemas.BasicWidgets import CPSProgrammerCompoundWidget
-from Products.CPSSchemas.BasicWidgets import CPSSelectWidget
+from Products.CPSSchemas.BasicWidgets import CPSSelectWidget, CPSMultiSelectWidget
 
 
 class CPSDirectoryMultiIdWidget(CPSProgrammerCompoundWidget):
@@ -111,6 +112,8 @@ class CPSPaperMailRecipientWidget(CPSWidget):
 
         value = dm[self.fields[0]]
         if isinstance(value, list):
+            # MA DARCHE : the use_lists seems to be used here only to harden
+            # the code, but not to really treat a value of type list.
             value = value and value[0] or ''
         if value.startswith('local:'):
             value = value[6:]
@@ -166,8 +169,8 @@ class CPSPaperMailRecipientWidget(CPSWidget):
             dm[field_id] = 'internal:%s' % dm[field_id]
         else:
             dm[field_id] = 'global:%s' % dm[field_id]
-        if use_lists:
-            dm[field_id] = [dm[field_id]]
+##         if use_lists and not isinstance(dm[field_id], list):
+##             dm[field_id] = list(dm[field_id])
 
         return True
 
@@ -228,58 +231,22 @@ InitializeClass(CPSPaperMailRecipientWidget)
 widgetRegistry.register(CPSPaperMailRecipientWidget)
 
 
-class CPSDirectoryLinkSelectWidget(CPSSelectWidget):
-    """Select widget rendering with links to a directory according to mode.
-
-    CPSCourrier specifics lie in the creation links:
-       - pick ou from the parent
-       - fetch in the url for form prefill
-    This could become configurable. Link part should be a subwidget actually
-    """
-
-    meta_type = "Directory Link Select Widget"
-
-    _properties = CPSSelectWidget._properties + (
-        {'id': 'directory', 'type': 'string', 'mode': 'w',
-         'label': 'Directory to link to'},
-        {'id': 'skip_prepare', 'type': 'boolean', 'mode': 'w',
-         'label': 'Skip preparation (you know what you are doing)'},
-        {'id': 'create_form_prefill', 'type': 'boolean', 'mode': 'w',
-         'label': 'Prefill popup with value of ou field from parent'}
-        )
+class LinkSelectWidgetMixin:
 
     directory = ''
     skip_prepare = False
     create_form_prefill = False
 
     def prepare(self, ds, **kw):
-        # no need (and harmul) to prepare if subwidget of
+        # No need (and harmul) to prepare if subwidget of
         # Paper Mail Recipient Widget
         if not self.skip_prepare:
-            return CPSSelectWidget.prepare(self, ds, **kw)
+            # TODO: dynamically find the parent class instead would be cleaner
+            klass = getattr(self, 'base_widget_class')
+            klass.prepare(self, ds, **kw)
 
-    def render(self, mode, ds, **kw):
-        base_url = getToolByName(self, 'portal_url').getBaseUrl()
-        dtool_url = '%sportal_directories/%s' % (base_url, self.directory)
-        vocabulary = self._getVocabulary(ds)
-        value = ds[self.getWidgetId()]
-        if mode == 'view':
-            if self.translated:
-                cpsmcat = getToolByName(self, 'translation_service')
-                contents = cpsmcat(vocabulary.getMsgid(value, value)).encode('ISO-8859-15', 'ignore')
-            else:
-                contents = vocabulary.get(value, value)
-            href = '%s/cpsdirectory_entry_view?dirname=%s&id=%s' % (
-                dtool_url,
-                self.directory,
-                value)
-            return renderHtmlTag('a', href=href, contents=contents)
-
-        base_render = CPSSelectWidget.render(self, mode, ds, **kw)
-
-        ## Now add a link to create form if perms are ok
-
-        # get ou
+    def addLinkRender(self, base_render, dtool_url):
+        # Get the "ou"
         ou = None
         if self.create_form_prefill:
             proxy = ds.getDataModel().getProxy()
@@ -288,13 +255,13 @@ class CPSDirectoryLinkSelectWidget(CPSSelectWidget):
                 if mbox.portal_type == 'Mailbox':
                     ou = mbox.getContent().ou
 
-        #  check perms
+        # Check perms
         dtool = getToolByName(self, 'portal_directories')
         dir_ = dtool[self.directory]
         if not dir_.isCreateEntryAllowed({'ou':ou}):
             return base_render
 
-        # render
+        # Doing the actual rendering
         cpsmcat = getToolByName(self, 'translation_service')
         contents = cpsmcat('cpscourrier_new_addressbook_entry').encode(
             self.default_charset)
@@ -313,5 +280,92 @@ class CPSDirectoryLinkSelectWidget(CPSSelectWidget):
 
         return '\n'.join((base_render, link_render))
 
+    def renderEntryHtml(self, value, vocabulary, dtool_url):
+        if self.translated:
+            cpsmcat = getToolByName(self, 'translation_service')
+            contents = cpsmcat(vocabulary.getMsgid(value, value)).encode('ISO-8859-15', 'ignore')
+        else:
+            contents = vocabulary.get(value, value)
+            href = '%s/cpsdirectory_entry_view?dirname=%s&id=%s' % (
+                dtool_url, self.directory, value)
+        return renderHtmlTag('a', href=href, contents=contents)
+
+
+class CPSDirectoryLinkSelectWidget(CPSSelectWidget, LinkSelectWidgetMixin):
+    """Select widget rendering with links to a directory according to mode.
+
+    CPSCourrier specifics lie in the creation links:
+       - pick "ou" (organizationalUnit) from the parent
+       - fetch in the url for form prefill
+    This could become configurable. Link part should be a subwidget actually
+    """
+    # TODO: dynamically find the parent class instead would be cleaner
+    base_widget_class = CPSSelectWidget
+    meta_type = 'Directory Link Select Widget'
+
+    _properties = CPSSelectWidget._properties + (
+        {'id': 'directory', 'type': 'string', 'mode': 'w',
+         'label': 'Directory to link to'},
+        {'id': 'skip_prepare', 'type': 'boolean', 'mode': 'w',
+         'label': 'Skip preparation (you know what you are doing)'},
+        {'id': 'create_form_prefill', 'type': 'boolean', 'mode': 'w',
+         'label': 'Prefill popup with value of ou field from parent'}
+        )
+
+    def render(self, mode, ds, **kw):
+        base_url = getToolByName(self, 'portal_url').getBaseUrl()
+        dtool_url = '%sportal_directories/%s' % (base_url, self.directory)
+        vocabulary = self._getVocabulary(ds)
+        value = ds[self.getWidgetId()]
+        if mode == 'view':
+            return LinkSelectWidgetMixin.renderEntryHtml(
+                self, value, vocabulary, dtool_url)
+        base_render = CPSSelectWidget.render(self, mode, ds, **kw)
+
+        ## Now add a link to create form if perms are ok
+        return self.addLinkRender(base_render, dtool_url)
+
 InitializeClass(CPSDirectoryLinkSelectWidget)
 widgetRegistry.register(CPSDirectoryLinkSelectWidget)
+
+
+class CPSDirectoryLinkMultiSelectWidget(CPSMultiSelectWidget, LinkSelectWidgetMixin):
+    """Select widget rendering with links to a directory according to mode.
+
+    CPSCourrier specifics lie in the creation links:
+       - pick "ou" (organizationalUnit) from the parent
+       - fetch in the url for form prefill
+    This could become configurable. Link part should be a subwidget actually
+    """
+    # TODO: dynamically find the parent class instead would be cleaner
+    base_widget_class = CPSMultiSelectWidget
+    meta_type = 'Directory Link Multi Select Widget'
+
+    _properties = CPSSelectWidget._properties + (
+        {'id': 'directory', 'type': 'string', 'mode': 'w',
+         'label': 'Directory to link to'},
+        {'id': 'skip_prepare', 'type': 'boolean', 'mode': 'w',
+         'label': 'Skip preparation (you know what you are doing)'},
+        {'id': 'create_form_prefill', 'type': 'boolean', 'mode': 'w',
+         'label': 'Prefill popup with value of ou field from parent'}
+        )
+
+    def render(self, mode, ds, **kw):
+        base_url = getToolByName(self, 'portal_url').getBaseUrl()
+        dtool_url = '%sportal_directories/%s' % (base_url, self.directory)
+        vocabulary = self._getVocabulary(ds)
+        value = ds[self.getWidgetId()]
+        if mode == 'view':
+            render = ''
+            for v in value:
+                render += LinkSelectWidgetMixin.renderEntryHtml(
+                    self, v, vocabulary, dtool_url)
+            return render
+        base_render = CPSMultiSelectWidget.render(self, mode, ds, **kw)
+
+        ## Now add a link to create form if perms are ok
+        return self.addLinkRender(base_render, dtool_url)
+
+
+InitializeClass(CPSDirectoryLinkMultiSelectWidget)
+widgetRegistry.register(CPSDirectoryLinkMultiSelectWidget)
