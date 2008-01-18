@@ -341,7 +341,7 @@ class CPSDirectoryLinkMultiSelectWidget(CPSMultiSelectWidget, LinkSelectWidgetMi
     base_widget_class = CPSMultiSelectWidget
     meta_type = 'Directory Link Multi Select Widget'
 
-    _properties = CPSSelectWidget._properties + (
+    _properties = CPSMultiSelectWidget._properties + (
         {'id': 'directory', 'type': 'string', 'mode': 'w',
          'label': 'Directory to link to'},
         {'id': 'skip_prepare', 'type': 'boolean', 'mode': 'w',
