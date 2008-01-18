@@ -2,11 +2,13 @@
 <!-- Close to what's in workspaces
 Supervisor can do what LocalManager can except change perms-->
 <rolemap>
+
   <permissions>
     <permission name="Add portal content" acquire="False">
       <role name="Manager"/>
       <role name="LocalManager"/>
       <role name="Supervisor"/>
+      <role name="Injector"/>
     </permission>
     <permission name="Add portal folders" acquire="False">
       <role name="Manager"/>

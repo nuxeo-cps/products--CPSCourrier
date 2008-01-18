@@ -11,6 +11,7 @@ Bug fixes
   "Incoming Pmail" document types.
 - Brought default.css in sync with the source from CPSDefault regarding the
   changeset [51751].
+- Made it possible for the Injector role to create mails in the mailboxes.
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
 - 
