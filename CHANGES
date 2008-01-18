@@ -3,16 +3,10 @@ Requires
 -
 New features
 ~~~~~~~~~~~~
-- Added a "Directory Link Multi Select Widget" and attempt to make the
-  "Paper Mail Recipient Widget" accept multiple recipients.
+-
 Bug fixes
 ~~~~~~~~~
-- Fixed the French translation for cpscourrier_paper_from_global_label.
-- Made the inject_random_mails easier to customize, for example to test on
-  "Incoming Pmail" document types.
-- Brought default.css in sync with the source from CPSDefault regarding the
-  changeset [51751].
-- Made it possible for the Injector role to create mails in the mailboxes.
+-
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
 - 
