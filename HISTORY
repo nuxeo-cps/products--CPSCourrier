@@ -1,4 +1,24 @@
 ===========================================================
+Package: CPSCourrier 0.25.1
+===========================================================
+First release built by: madarche at: 2008-01-19T10:53:40
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.25.1
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@52496
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- Fixed typo in "Directory Link Multi Select Widget" properties.
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSCourrier 0.25.0
 ===========================================================
 First release built by: madarche at: 2008-01-18T21:38:45
