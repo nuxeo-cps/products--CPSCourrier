@@ -45,8 +45,9 @@ preBorder:string=0px none
 preBackground:string=#eeeeee
 
 messageFont:string=normal 110% Arial, sans-serif, Verdana, Helvetica
-messageBackground:string=#ffca31
+messageBackground:string=#d1e2ff
 messageBorder:string=2px solid #333333
+messageErrorBackground:string=#ffca31
 
 textTransform:string=none
 noBorder:string=none

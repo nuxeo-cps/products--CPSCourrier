@@ -6,6 +6,8 @@ New features
 -
 Bug fixes
 ~~~~~~~~~
+- Updated the CSS files with CPSDefault and removed the customized
+  default.css.dtml which seems now useless.
 - Fixed broken profile XML file.
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
