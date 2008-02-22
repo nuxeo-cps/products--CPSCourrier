@@ -1,4 +1,26 @@
 ===========================================================
+Package: CPSCourrier 0.25.2
+===========================================================
+First release built by: madarche at: 2008-02-22T15:57:53
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.25.2
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@52586
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- Updated the CSS files with CPSDefault and removed the customized
+  default.css.dtml which seems now useless.
+- Fixed broken profile XML file.
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSCourrier 0.25.1
 ===========================================================
 First release built by: madarche at: 2008-01-19T10:53:40
