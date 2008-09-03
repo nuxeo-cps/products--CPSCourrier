@@ -4,17 +4,17 @@ msgstr ""
 "POT-Creation-Date: 2008-01-16 12:05default\n"
 "PO-Revision-Date: 2007-06-01 12:56+0100\n"
 "Last-Translator: Jesus Martin <jesusmartin@lasalle.es>\n"
-"Language-Team: valenci‡/catal‡. <juangus@lasalle.es>\n"
+"Language-Team: valenci√†/catal√†. <juangus@lasalle.es>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Preferred-encodings: latin9 utf-8\n"
-"Domain: default\n"
-"Language-Code: ca\n"
-"Language-Name: valenci‡/catal‡\n"
 "X-Poedit-Language: Catalan\n"
 "X-Poedit-Country: SPAIN\n"
+"Language-Code: ca\n"
+"Language-Name: ca\n"
+"Domain: default\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Preferred-Encodings: utf-8\n"
 
 #.   <title fill-slot="title">
 #.               <span replace="string:heading_batch_workflow_${action}" />
@@ -39,7 +39,7 @@ msgstr ""
 #.       </h1>
 #: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
 msgid "Late documents on ${portal_title}"
-msgstr "⁄ltims documents el  ${portal_title}"
+msgstr "√öltims documents el  ${portal_title}"
 
 #.   <span content="state" attributes="class state">State</span>
 #: from ../skins/cps_courrier/portlet_custom_thread.pt
@@ -51,7 +51,7 @@ msgstr ""
 #.         </span>
 #: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
 msgid "The following ${late_number} mail documents are late:"
-msgstr "Els seg¸ents  ${late_number} correus arriben tard:"
+msgstr "Els seg√ºents  ${late_number} correus arriben tard:"
 
 #.   <span condition="python:options['sort_limit'] == options['late_number']">The following mail documents are late (only the first
 #.           ${late_number (tal content="options/late_number")}
@@ -62,7 +62,7 @@ msgid ""
 "The following mail documents are late (only the first ${late_number} are "
 "displayed):"
 msgstr ""
-"Els seg¸ents correus arriben tard (nomÈs es mostra el primer  "
+"Els seg√ºents correus arriben tard (nom√©s es mostra el primer  "
 "${late_number}):"
 
 #.   <p>
@@ -73,13 +73,13 @@ msgstr ""
 msgid ""
 "You'll find below the list of late mail documents in mailbox ${mailbox_title}"
 msgstr ""
-"Trobar‡s la llista de correus amb retard en la safata  ${mailbox_title}"
+"Trobar√†s la llista de correus amb retard en la safata  ${mailbox_title}"
 
 #.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" condition="view/canMoveDown" />
 #.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "button_move_down_delegatees"
-msgstr "DesplaÁar cap avall "
+msgstr "Despla√ßar cap avall "
 
 #.   <input name="submit_edit" type="submit" class="context" value="button_update_stackelts" />
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
@@ -103,7 +103,7 @@ msgstr "Respondre a partir d'una resposta existent "
 #.   <input name="email_ack" type="submit" class="standalone" value="cpscourrier_button_email_ack" />
 #: from ../browser/paperAck.zpt
 msgid "cpscourrier_button_email_ack"
-msgstr "Enviar per correu electrÚnic "
+msgstr "Enviar per correu electr√≤nic "
 
 #.   <input name="print_ack" type="submit" class="standalone" value="cpscourrier_button_print_ack" />
 #: from ../browser/paperAck.zpt
@@ -118,7 +118,7 @@ msgstr "Imprimir"
 #.       </h2>
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_choose_insertion_level"
-msgstr "Seleccionar el nivell d'inserciÛ "
+msgstr "Seleccionar el nivell d'inserci√≥ "
 
 #.   <label for="target_emailaddress">cpscourrier_forward_to_emailaddress</label>
 #: from ../skins/cps_courrier/cpscourrier_forward_form.pt
@@ -144,7 +144,7 @@ msgstr "Ocupar-se del document en nom d'un grup "
 #.       </h1>
 #: from ../browser/paperAck.zpt
 msgid "cpscourrier_paper_ack_prepare_heading"
-msgstr "PreparaciÛ d'un justificant de recepciÛ "
+msgstr "Preparaci√≥ d'un justificant de recepci√≥ "
 
 #.   <h3>cpscourrier_response_preview_heading</h3>
 #: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
@@ -188,7 +188,7 @@ msgstr "Per favor, trie els elements a adjuntar al full de ruta"
 #.   <caption>Thread</caption>
 #: from ../skins/cps_courrier/portlet_custom_thread.pt
 msgid "cpscourrier_thread_caption"
-msgstr "Fil de discussiÛ "
+msgstr "Fil de discussi√≥ "
 
 #.   <label for="use_parent_roadmap">Use default
 #.                   roadmap</label>
@@ -247,7 +247,7 @@ msgstr ""
 #.       </th>
 #: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
 msgid "label_delegation_date"
-msgstr "Data de delegaciÛ "
+msgstr "Data de delegaci√≥ "
 
 #.   <th>
 #.         Directive
@@ -289,7 +289,7 @@ msgstr "Revisors"
 #.    </p>
 #: from ../skins/cps_courrier/stack_members_search_results.pt
 msgid "legend_local_roles_no_results_members"
-msgstr "Ho sentim, perÚ cap membre coincideix amb la seua recerca "
+msgstr "Ho sentim, per√≤ cap membre coincideix amb la seua recerca "
 
 #.   <h2 condition="edit_mode">
 #.   	  Add new delegatees to the roadmap
@@ -312,10 +312,10 @@ msgstr "Resultats de la recerca "
 # Document types labels
 #
 msgid "portal_type_MailboxGroup_title"
-msgstr "Grup de b˙sties "
+msgstr "Grup de b√∫sties "
 
 msgid "portal_type_MailboxGroup_description"
-msgstr "Espai que integra a un conjunt de b˙sties "
+msgstr "Espai que integra a un conjunt de b√∫sties "
 
 msgid "portal_type_Mailbox_title"
 msgstr "Bustia"
@@ -333,7 +333,7 @@ msgid "portal_type_IncomingMail_title"
 msgstr "Correu entrant "
 
 msgid "portal_type_IncomingMail_description"
-msgstr "Missatge electrÚnic o digitalitzat "
+msgstr "Missatge electr√≤nic o digitalitzat "
 
 msgid "portal_type_OutgoingMail_title"
 msgstr "Correu d'eixida"
@@ -342,16 +342,16 @@ msgid "portal_type_OutgoingMail_description"
 msgstr "Missatge que respon a un correu entrant "
 
 msgid "portal_type_IncomingEmail_title"
-msgstr "Correu electrÚnic entrant "
+msgstr "Correu electr√≤nic entrant "
 
 msgid "portal_type_IncomingEmail_description"
-msgstr "Missatge electrÚnic entrant directament des de l'aplicaciÛ "
+msgstr "Missatge electr√≤nic entrant directament des de l'aplicaci√≥ "
 
 msgid "portal_type_OutgoingEmail_title"
-msgstr "Correu electrÚnic eixint"
+msgstr "Correu electr√≤nic eixint"
 
 msgid "portal_type_OutgoingEmail_description"
-msgstr "Missatge electrÚnic sortint en resposta a correus entrants "
+msgstr "Missatge electr√≤nic sortint en resposta a correus entrants "
 
 msgid "portal_type_IncomingPmail_title"
 msgstr "Correu de paper entrant "
@@ -366,7 +366,7 @@ msgid "portal_type_OutgoingPmail_description"
 msgstr "Missatge eixint en resposta a correus de paper entrants "
 
 msgid "portal_type_Dashboard_title"
-msgstr "TaulÛ "
+msgstr "Taul√≥ "
 
 msgid "portal_type_Dashboard_description"
 msgstr "Document amb els resultats de les recerques "
@@ -375,13 +375,13 @@ msgstr "Document amb els resultats de les recerques "
 # Root of mailboxes area
 #
 msgid "mailboxes_root_title"
-msgstr "B˙sties "
+msgstr "B√∫sties "
 
 msgid "mail_templates_root_title"
 msgstr "Plantilla de Respostes "
 
 msgid "cpscourrier_layout_mail_dashboard_label_edit"
-msgstr "Par‡metres de filtrat per defecte"
+msgstr "Par√†metres de filtrat per defecte"
 
 msgid "cpscourrier_creator_label"
 msgstr "Creador"
@@ -411,13 +411,13 @@ msgid "cpscourrier_to_label"
 msgstr "Destinatari(s): "
 
 msgid "cpscourrier_cc_label"
-msgstr "Destinatari(s) de la cÚpia"
+msgstr "Destinatari(s) de la c√≤pia"
 
 msgid "cpscourrier_notes_label"
 msgstr "Notes"
 
 msgid "cpscourrier_msgid_label"
-msgstr "N˙mero de referËncia"
+msgstr "N√∫mero de refer√®ncia"
 
 msgid "cpscourrier_creation_date_label"
 msgstr "Data:"
@@ -426,13 +426,13 @@ msgid "cpscourrier_sending_date_label"
 msgstr "Data d'enviament "
 
 msgid "cpscourrier_form_of_address_label"
-msgstr "FÛrmula de cortesia "
+msgstr "F√≥rmula de cortesia "
 
 msgid "cpscourrier_signature_label"
 msgstr "Signatura:"
 
 msgid "cpscourrier_size_label"
-msgstr "Grand‡ria (kB):"
+msgstr "Grand√†ria (kB):"
 
 msgid "cpscourrier_deadline_label"
 msgstr "Data de caducitat:"
@@ -441,10 +441,10 @@ msgid "cpscourrier_priority_label"
 msgstr "Prioritat: "
 
 msgid "cpscourrier_smtp_headers_label"
-msgstr "CapÁaleres SMTP: "
+msgstr "Cap√ßaleres SMTP: "
 
 msgid "cpscourrier_mailbox_addresses_label"
-msgstr "Adreces de la b˙stia: "
+msgstr "Adreces de la b√∫stia: "
 
 #
 # Layout labels
@@ -453,10 +453,10 @@ msgid "cpscourrier_search_path_label"
 msgstr "Caixes referides "
 
 msgid "cpscourrier_template_usage_col"
-msgstr "⁄s "
+msgstr "√ös "
 
 msgid "cpscourrier_modification_date_label"
-msgstr "⁄ltima ediciÛ "
+msgstr "√öltima edici√≥ "
 
 msgid "cpscourrier_reply_type_label"
 msgstr "Tipus"
@@ -471,14 +471,14 @@ msgid "cpscourrier_label_managers"
 msgstr "Responsables"
 
 msgid "label_search_todo"
-msgstr "AcciÛ"
+msgstr "Acci√≥"
 
 msgid "cpscourrier_paper_ack_default_header_label"
-msgstr "CapÁalera de p‡gina per defecte del justificant de recepciÛ "
+msgstr "Cap√ßalera de p√†gina per defecte del justificant de recepci√≥ "
 
 msgid "cpscourrier_paper_ack_default_header_help"
 msgstr ""
-"Este text s'utilitza per a maquetar els justificants de recepciÛ, en la part "
+"Este text s'utilitza per a maquetar els justificants de recepci√≥, en la part "
 "superior del mateix. "
 
 msgid "cpscourrier_paper_ack_default_footer_label"
@@ -486,7 +486,7 @@ msgstr "De"
 
 msgid "cpscourrier_paper_ack_default_footer_help"
 msgstr ""
-"Este text s'utilitza per a maquetar els justificants de recepciÛ, en la part "
+"Este text s'utilitza per a maquetar els justificants de recepci√≥, en la part "
 "inferior del mateix. "
 
 msgid "label_addressbook_email"
@@ -505,25 +505,25 @@ msgid "label_addressbook_last_name"
 msgstr "Cognoms:"
 
 msgid "label_addressbook_telephoneNumber"
-msgstr "N˙mero de telËfon"
+msgstr "N√∫mero de tel√®fon"
 
 msgid "label_addressbook_postalCode"
 msgstr "Codi postal "
 
 msgid "label_addressbook_postalAddress"
-msgstr "AdreÁa postal "
+msgstr "Adre√ßa postal "
 
 msgid "label_addressbook_description"
-msgstr "DescripciÛ"
+msgstr "Descripci√≥"
 
 msgid "label_addressbook_post_office"
 msgstr "Oficina de correus"
 
 msgid "label_addressbook_fax_number"
-msgstr "N˙mero de fax"
+msgstr "N√∫mero de fax"
 
 msgid "label_addressbook_ou"
-msgstr "OrganitzaciÛ"
+msgstr "Organitzaci√≥"
 
 msgid "label_local_addressbook_email"
 msgstr "Llibreta local d'adreces "
@@ -541,31 +541,31 @@ msgid "label_local_addressbook_last_name"
 msgstr "Cognoms"
 
 msgid "label_local_addressbook_telephoneNumber"
-msgstr "N˙mero de telËfon"
+msgstr "N√∫mero de tel√®fon"
 
 msgid "label_local_addressbook_postalCode"
-msgstr "CÛdi postal"
+msgstr "C√≥di postal"
 
 msgid "label_local_addressbook_postalAddress"
-msgstr "AdreÁa postal "
+msgstr "Adre√ßa postal "
 
 msgid "label_local_addressbook_description"
-msgstr "DescripciÛ"
+msgstr "Descripci√≥"
 
 msgid "label_local_addressbook_post_office"
 msgstr "Oficina de correus "
 
 msgid "label_local_addressbook_fax_number"
-msgstr "N˙mero de fax"
+msgstr "N√∫mero de fax"
 
 #
 # Directories
 #
 msgid "label_local_addressbook_ou"
-msgstr "OrganitzaciÛ"
+msgstr "Organitzaci√≥"
 
 msgid "cpscourrier_items_nb_label"
-msgstr "Õtem per p‡gina"
+msgstr "√çtem per p√†gina"
 
 msgid "cpscourrier_type_label"
 msgstr "Tipus"
@@ -577,7 +577,7 @@ msgid "cpscourrier_empty_box_msg"
 msgstr "No hi ha cap correu que responga als criteris de recerca "
 
 msgid "cpscourrier_empty_boxgroup_msg"
-msgstr "El grup de b˙sties est‡ buit "
+msgstr "El grup de b√∫sties est√† buit "
 
 msgid "cpscourrier_no_result_msg"
 msgstr "Cap correu respon als criteris. "
@@ -592,13 +592,13 @@ msgid "cpscourrier_fulltext_search"
 msgstr "Paraules clau "
 
 msgid "cpscourrier_mailbox_priority_label"
-msgstr "Grau d'urgËncia per defecte "
+msgstr "Grau d'urg√®ncia per defecte "
 
 msgid "cpscourrier_mailbox_from_label"
-msgstr "AdreÁa per defecte de l'emissor "
+msgstr "Adre√ßa per defecte de l'emissor "
 
 msgid "cpscourrier_allowed_reply_time"
-msgstr "Interval de temps permËs per defecte "
+msgstr "Interval de temps perm√®s per defecte "
 
 msgid "cpscourrier_mailbox_addresses_row_label"
 msgstr "Adreces "
@@ -628,16 +628,16 @@ msgid "cpscourrier_to_watch"
 msgstr "Per consultar"
 
 msgid "cpscourrier_created_min_label"
-msgstr "Data de creaciÛ (mÌnima) "
+msgstr "Data de creaci√≥ (m√≠nima) "
 
 msgid "cpscourrier_created_max_label"
-msgstr "Data de creaciÛ (m‡xima)"
+msgstr "Data de creaci√≥ (m√†xima)"
 
 msgid "cpscourrier_deadline_min_label"
-msgstr "Data mÌnima de venciment "
+msgstr "Data m√≠nima de venciment "
 
 msgid "cpscourrier_deadline_max_label"
-msgstr "Data m‡xima de venciment "
+msgstr "Data m√†xima de venciment "
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Els meus millors desitjos,"
@@ -667,7 +667,7 @@ msgid "cpscourrier_all_subjects"
 msgstr "Tots"
 
 msgid "cpscourrier_initiate_handling"
-msgstr "Fer-se c‡rrec "
+msgstr "Fer-se c√†rrec "
 
 msgid "cpscourrier_for_reply"
 msgstr "Per a respondre "
@@ -685,10 +685,10 @@ msgid "cpscourrier_st_voc_professional"
 msgstr "Professional "
 
 msgid "cpscourrier_st_voc_corporate_body"
-msgstr "Persones jurÌdiques "
+msgstr "Persones jur√≠diques "
 
 msgid "cpscourrier_st_voc_administration"
-msgstr "AdministraciÛ"
+msgstr "Administraci√≥"
 
 msgid "action_roadmap"
 msgstr "Full de ruta "
@@ -710,32 +710,32 @@ msgstr "Manejar ${item_id}"
 
 msgid "help_workflow_handle"
 msgstr ""
-"A l'optar per gestionar els documents de correu seleccionats, es far‡ c‡rrec "
+"A l'optar per gestionar els documents de correu seleccionats, es far√† c√†rrec "
 "del processament futur dels correus (respondre, delegar, esborrar...). "
 
 msgid "button_handle"
-msgstr "Fer-se c‡rrec "
+msgstr "Fer-se c√†rrec "
 
 msgid "action_handle"
-msgstr "Fer-se c‡rrec "
+msgstr "Fer-se c√†rrec "
 
 msgid "handle"
-msgstr "Fent-se c‡rrec "
+msgstr "Fent-se c√†rrec "
 
 msgid "heading_workflow_forward_of ${item_id}"
 msgstr "Remetre ${item_id}"
 
 msgid "help_workflow_forward"
 msgstr ""
-"Est‡ a punt de remetre el correu a altra b˙stia <strong>o</strong> a una "
-"adreÁa de correu externa. A l'enviar el document de correu a una adreÁa "
-"externa es tancar‡ la cÚpia local del document. "
+"Est√† a punt de remetre el correu a altra b√∫stia <strong>o</strong> a una "
+"adre√ßa de correu externa. A l'enviar el document de correu a una adre√ßa "
+"externa es tancar√† la c√≤pia local del document. "
 
 msgid "help_workflow_forwardPmail"
 msgstr ""
-"Est‡s a punt de transferir un correu entrant a altra safata de correu "
-"<strong>o</strong> a una adreÁa de correu externa. L'enviament d'un document "
-"de correu a una adreÁa de correu externa tancar‡ la cÚpia local del "
+"Est√†s a punt de transferir un correu entrant a altra safata de correu "
+"<strong>o</strong> a una adre√ßa de correu externa. L'enviament d'un document "
+"de correu a una adre√ßa de correu externa tancar√† la c√≤pia local del "
 "document. "
 
 msgid "button_forward"
@@ -748,19 +748,19 @@ msgid "forward"
 msgstr "Remitent "
 
 msgid "forward_move"
-msgstr "Remetre a la b˙stia "
+msgstr "Remetre a la b√∫stia "
 
 msgid "forward_email"
 msgstr "Remetre al correu"
 
 msgid "cpscourrier_no_mailbox"
-msgstr "(Per favor, seleccione una b˙stia) "
+msgstr "(Per favor, seleccione una b√∫stia) "
 
 msgid "heading_workflow_discard_of ${item_id}"
 msgstr "Remetre ${item_id}"
 
 msgid "help_workflow_discard"
-msgstr "Est‡ a punt de posar el correu en la paperera "
+msgstr "Est√† a punt de posar el correu en la paperera "
 
 msgid "button_discard"
 msgstr "Descartar"
@@ -775,7 +775,7 @@ msgid "heading_workflow_delete_of ${item_id}"
 msgstr "Esborrar ${item_id}"
 
 msgid "help_workflow_delete"
-msgstr "Est‡ a punt d'esborrar permanentment el correu "
+msgstr "Est√† a punt d'esborrar permanentment el correu "
 
 msgid "button_delete"
 msgstr "Esborrar"
@@ -791,7 +791,7 @@ msgstr "Respondre ${item_id}"
 
 msgid "help_workflow_answer"
 msgstr ""
-"Al respondre al document de correu, crear‡ un nou correu eixint enllaÁat al "
+"Al respondre al document de correu, crear√† un nou correu eixint enlla√ßat al "
 "correu d'entrada original. "
 
 msgid "button_answer"
@@ -814,9 +814,9 @@ msgstr "Tancar ${item_id}"
 
 msgid "help_workflow_close"
 msgstr ""
-"Tanca l'entrada de correus al final del procÈs de respostes. Note que els "
-"documents de correu tancats estan, per defecte, ocults en les b˙sties. Ha "
-"de, explÌcitament, configurar el par‡metre del filtre \"estat\" a  \"tancat"
+"Tanca l'entrada de correus al final del proc√©s de respostes. Note que els "
+"documents de correu tancats estan, per defecte, ocults en les b√∫sties. Ha "
+"de, expl√≠citament, configurar el par√†metre del filtre \"estat\" a  \"tancat"
 "\" per a vore la llista de documents de correu tancats."
 
 msgid "button_close"
@@ -832,7 +832,7 @@ msgid "heading_workflow_reopen_of ${item_id}"
 msgstr "Reobrir ${item_id}"
 
 msgid "help_workflow_reopen"
-msgstr "Est‡ a punt de reobrir el correu entrant "
+msgstr "Est√† a punt de reobrir el correu entrant "
 
 msgid "button_reopen"
 msgstr "Reobrir"
@@ -847,19 +847,19 @@ msgid "heading_workflow_validate_of ${item_id}"
 msgstr "Validar ${item_id}"
 
 msgid "help_workflow_validate"
-msgstr "Est‡ a punt de validar el correu "
+msgstr "Est√† a punt de validar el correu "
 
 msgid "action_validate"
 msgstr "Validar"
 
 msgid "validate"
-msgstr "ValidaciÛ"
+msgstr "Validaci√≥"
 
 msgid "heading_workflow_invalidate_of ${item_id}"
 msgstr "Invalidar ${item_id}"
 
 msgid "help_workflow_invalidate"
-msgstr "Est‡ a punt d'invalidar el correu i de tornar a la manera \"redacciÛ\""
+msgstr "Est√† a punt d'invalidar el correu i de tornar a la manera \"redacci√≥\""
 
 msgid "button_invalidate"
 msgstr "Invalidar"
@@ -868,10 +868,10 @@ msgid "action_invalidate"
 msgstr "Invalidar"
 
 msgid "invalidate"
-msgstr "InvalidaciÛ"
+msgstr "Invalidaci√≥"
 
 msgid "help_workflow_send"
-msgstr "Est‡ a punt d'enviar un correu als seus destinataris "
+msgstr "Est√† a punt d'enviar un correu als seus destinataris "
 
 msgid "button_send"
 msgstr "Enviar"
@@ -883,10 +883,10 @@ msgid "send"
 msgstr "Enviament"
 
 msgid "heading_workflow_reactivate_of ${item_id}"
-msgstr "Reactivar el correu d'eixida ´${item_id}ª"
+msgstr "Reactivar el correu d'eixida ¬´${item_id}¬ª"
 
 msgid "help_workflow_reactivate"
-msgstr "Est‡ a punt de reactivar el correu "
+msgstr "Est√† a punt de reactivar el correu "
 
 msgid "button_reactivate"
 msgstr "Reactivar"
@@ -895,14 +895,14 @@ msgid "action_reactivate"
 msgstr "Reactivar"
 
 msgid "reactivate"
-msgstr "ReactivaciÛ"
+msgstr "Reactivaci√≥"
 
 msgid "heading_workflow_reset_of ${item_id}"
 msgstr "Restaurar ${item_id}"
 
 msgid "help_workflow_reset"
 msgstr ""
-"Al restaurar el correu tornar‡ a posar-lo en el seu estat iniciar i netejar‡ "
+"Al restaurar el correu tornar√† a posar-lo en el seu estat iniciar i netejar√† "
 "la full de ruta "
 
 msgid "button_reset"
@@ -912,7 +912,7 @@ msgid "action_reset"
 msgstr "Restaurar"
 
 msgid "reset"
-msgstr "RestauraciÛ"
+msgstr "Restauraci√≥"
 
 msgid "flag_handled"
 msgstr "Resposta(s) suprimida(s)"
@@ -921,13 +921,13 @@ msgid "flag_answered"
 msgstr "Resposta(s) enviada(s)"
 
 msgid "move_down_delegatees"
-msgstr "Moure al seg¸ent nivell "
+msgstr "Moure al seg√ºent nivell "
 
 msgid "action_move_down_delegatees"
 msgstr "Baixar"
 
 msgid "heading_workflow_move_down_delegatees_of ${item_id}"
-msgstr "Descarregar el correu ´${item_id}ª"
+msgstr "Descarregar el correu ¬´${item_id}¬ª"
 
 msgid "button move_down_delegatees"
 msgstr "Baixar"
@@ -937,40 +937,40 @@ msgstr "Baixar"
 #
 msgid "help_workflow_move_down_delegatees"
 msgstr ""
-"Est‡ a punt de permetre als usuaris del seg¸ent nivell gestionar el document "
-"de correu. Si no forma part del mateix o si no Ès administrador local, no "
-"tornar‡ a poder accedir a este document. "
+"Est√† a punt de permetre als usuaris del seg√ºent nivell gestionar el document "
+"de correu. Si no forma part del mateix o si no √©s administrador local, no "
+"tornar√† a poder accedir a este document. "
 
 msgid "heading_batch_workflow_handle"
-msgstr "Fer-se c‡rrec d'un lot de documents entrants "
+msgstr "Fer-se c√†rrec d'un lot de documents entrants "
 
 msgid "help_batch_workflow_handle"
 msgstr ""
-"A l'optar per gestionar els documents de correu seleccionats, es far‡ c‡rrec "
+"A l'optar per gestionar els documents de correu seleccionats, es far√† c√†rrec "
 "del processament futur dels correus (respondre, delegar, esborrar...). "
 
 msgid "heading_batch_workflow_discard"
 msgstr "Descartar un lot de documents entrants"
 
 msgid "help_batch_workflow_discard"
-msgstr "Est‡ a punt de posar els documents seleccionats en la paperera"
+msgstr "Est√† a punt de posar els documents seleccionats en la paperera"
 
 msgid "heading_batch_workflow_answer"
 msgstr "Respondre a un grup de documents entrants "
 
 msgid "help_batch_workflow_answer"
 msgstr ""
-"Al respondre als documents, crear‡ un nou enllaÁ de correu eixint per a cada "
+"Al respondre als documents, crear√† un nou enlla√ß de correu eixint per a cada "
 "document entrant seleccionat"
 
 msgid "heading_batch_workflow_delete"
 msgstr "Esborrar per lots"
 
 msgid "help_batch_workflow_delete"
-msgstr "Es disposa a suprimir els correus seg¸ents"
+msgstr "Es disposa a suprimir els correus seg√ºents"
 
 msgid "create_pending"
-msgstr "CreaciÛ no confirmada"
+msgstr "Creaci√≥ no confirmada"
 
 #
 # Workflow states
@@ -1015,49 +1015,49 @@ msgid "psm_stack_elements_edited"
 msgstr "Elements de la full de ruta modificats"
 
 msgid "psm_cannot_manage_stack"
-msgstr "No tÈ permisos per a modificar la full de ruta "
+msgstr "No t√© permisos per a modificar la full de ruta "
 
 msgid "psm_select_at_least_one_item"
 msgstr "Trie almenys un element "
 
 msgid "psm_cpscourrier_choose_at_least_mailbox_or_emailaddress"
-msgstr "Trie almenys una b˙stia o introdueixca una adreÁa de correu "
+msgstr "Trie almenys una b√∫stia o introdueixca una adre√ßa de correu "
 
 msgid "psm_cpscourrier_choose_either_mailbox_or_emailaddress"
-msgstr "Trie  una b˙stia o una adreÁa de correu "
+msgstr "Trie  una b√∫stia o una adre√ßa de correu "
 
 msgid "psm_cpscourrier_mail_forwarded"
-msgstr "Correu enviat amb Ëxit "
+msgstr "Correu enviat amb √®xit "
 
 msgid "psm_cpscourrier_reply_could_not_be_sent"
 msgstr ""
-"A causa d'un problema de configuraciÛ, la resposta no pot ser enviada. Per "
+"A causa d'un problema de configuraci√≥, la resposta no pot ser enviada. Per "
 "favor, pose's en contacte amb l'administrador del portal per a arreglar el "
 "problema. "
 
 msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_recipients_address"
-msgstr "Adreces inv‡lides dels destinataris: la resposta no puc ser enviada. "
+msgstr "Adreces inv√†lides dels destinataris: la resposta no puc ser enviada. "
 
 msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_sender_address"
-msgstr "AdreÁa de l'emissor inv‡lida: no s'ha pogut enviar la resposta "
+msgstr "Adre√ßa de l'emissor inv√†lida: no s'ha pogut enviar la resposta "
 
 msgid "psm_cpscourrier_reply_sent"
 msgstr "Resposta enviada "
 
 msgid "psm_cpscourrier_no_action_performed_for"
-msgstr "Els seg¸ents documents de correu no han patit canvis: "
+msgstr "Els seg√ºents documents de correu no han patit canvis: "
 
 msgid "psm_cpscourrier_smtp_error"
-msgstr "El correu electrÚnic no ha pogut ser enviat "
+msgstr "El correu electr√≤nic no ha pogut ser enviat "
 
 msgid "psm_cpscourrier_ack_email_sent"
-msgstr "Justificant de recepciÛ enviat "
+msgstr "Justificant de recepci√≥ enviat "
 
 msgid "psm_cpscourrier_missing_email_address"
-msgstr "Correu electrÚnic no enviat per desconeixement del destinatari "
+msgstr "Correu electr√≤nic no enviat per desconeixement del destinatari "
 
 msgid "label_workflow_mail_confirm"
-msgstr "RecepciÛ i confirmaciÛ "
+msgstr "Recepci√≥ i confirmaci√≥ "
 
 msgid "label_workflow_discard"
 msgstr "Posar com deixalla "
@@ -1093,10 +1093,10 @@ msgid "cpscourrier_final_reply"
 msgstr "Resposta final"
 
 msgid "action_paper_ack"
-msgstr "Justificant de recepciÛ"
+msgstr "Justificant de recepci√≥"
 
 msgid "cpscourrier_paper_ack_subject_${mail_subject}"
-msgstr "Justificant de recepciÛ per a ´${mail_subject}ª"
+msgstr "Justificant de recepci√≥ per a ¬´${mail_subject}¬ª"
 
 # Roles
 msgid "LocalManager"
@@ -1106,7 +1106,7 @@ msgid "Supervisor"
 msgstr "Supervisor"
 
 msgid "Contributor"
-msgstr "Col∑laborador "
+msgstr "Col¬∑laborador "
 
 msgid "Reader"
 msgstr "Lector"

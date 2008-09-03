@@ -4,17 +4,17 @@ msgstr ""
 "POT-Creation-Date: 2008-01-16 12:05default\n"
 "PO-Revision-Date: 2006-11-27 17:50+0100\n"
 "Last-Translator: Jesus Martin <jesusmartin@lasalle.es>\n"
-"Language-Team: espaÒol <jesusmartin@lasalle.es>\n"
+"Language-Team: espa√±ol <jesusmartin@lasalle.es>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-15\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Preferred-encodings: latin9 utf-8\n"
-"Domain: default\n"
-"Language-Code: es\n"
-"Language-Name: Spanish\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-Country: SPAIN\n"
+"Language-Code: es\n"
+"Language-Name: Spanish\n"
+"Domain: default\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Preferred-Encodings: utf-8\n"
 
 #.   <title fill-slot="title">
 #.               <span replace="string:heading_batch_workflow_${action}" />
@@ -39,7 +39,7 @@ msgstr ""
 #.       </h1>
 #: from ../skins/cps_courrier/cpscourrier_dun_notification_render.pt
 msgid "Late documents on ${portal_title}"
-msgstr "⁄ltimos documentos el ${portal_title}"
+msgstr "√öltimos documentos el ${portal_title}"
 
 #.   <span content="state" attributes="class state">State</span>
 #: from ../skins/cps_courrier/portlet_custom_thread.pt
@@ -62,7 +62,7 @@ msgid ""
 "The following mail documents are late (only the first ${late_number} are "
 "displayed):"
 msgstr ""
-"Los siguientes correos llegan tarde (sÛlo se muestra el primero "
+"Los siguientes correos llegan tarde (s√≥lo se muestra el primero "
 "${late_number}):"
 
 #.   <p>
@@ -73,7 +73,7 @@ msgstr ""
 msgid ""
 "You'll find below the list of late mail documents in mailbox ${mailbox_title}"
 msgstr ""
-"Encontrar·s la lista de correos con retraso en la bandeja ${mailbox_title}"
+"Encontrar√°s la lista de correos con retraso en la bandeja ${mailbox_title}"
 
 #.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" condition="view/canMoveDown" />
 #.   <input name="submit_move_down" type="submit" class="context" value="button_move_down_delegatees" />
@@ -103,7 +103,7 @@ msgstr "Responder a partir de una respuesta existente"
 #.   <input name="email_ack" type="submit" class="standalone" value="cpscourrier_button_email_ack" />
 #: from ../browser/paperAck.zpt
 msgid "cpscourrier_button_email_ack"
-msgstr "Enviar por correo electrÛnico"
+msgstr "Enviar por correo electr√≥nico"
 
 #.   <input name="print_ack" type="submit" class="standalone" value="cpscourrier_button_print_ack" />
 #: from ../browser/paperAck.zpt
@@ -118,7 +118,7 @@ msgstr "Imprimir"
 #.       </h2>
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_choose_insertion_level"
-msgstr "Seleccionar el nivel de inserciÛn"
+msgstr "Seleccionar el nivel de inserci√≥n"
 
 #.   <label for="target_emailaddress">cpscourrier_forward_to_emailaddress</label>
 #: from ../skins/cps_courrier/cpscourrier_forward_form.pt
@@ -144,7 +144,7 @@ msgstr "Ocuparse del documento en nombre de un grupo"
 #.       </h1>
 #: from ../browser/paperAck.zpt
 msgid "cpscourrier_paper_ack_prepare_heading"
-msgstr "PreparaciÛn de un acuse de recibo"
+msgstr "Preparaci√≥n de un acuse de recibo"
 
 #.   <h3>cpscourrier_response_preview_heading</h3>
 #: from ../skins/cps_courrier/cpscourrier_send_reply_form.pt
@@ -166,7 +166,7 @@ msgstr "Hoja de ruta"
 #.   	</h3>
 #: from ../browser/roadmap.zpt
 msgid "cpscourrier_search_groups"
-msgstr "B˙squeda de grupos"
+msgstr "B√∫squeda de grupos"
 
 #
 # Layout labels
@@ -176,7 +176,7 @@ msgstr "B˙squeda de grupos"
 #.   	</h3>
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "cpscourrier_search_users"
-msgstr "B˙squedas de usuarios"
+msgstr "B√∫squedas de usuarios"
 
 #.   <p condition="search_members">
 #.   	    Please select the member to insert in the roadmap
@@ -188,7 +188,7 @@ msgstr "Por favor, seleccione los elementos a adjuntar a la hoja de ruta"
 #.   <caption>Thread</caption>
 #: from ../skins/cps_courrier/portlet_custom_thread.pt
 msgid "cpscourrier_thread_caption"
-msgstr "Hilo de discusiÛn"
+msgstr "Hilo de discusi√≥n"
 
 #.   <label for="use_parent_roadmap">Use default
 #.                   roadmap</label>
@@ -201,7 +201,7 @@ msgstr "Utilice la hoja de ruta por defecto"
 #.   	</h2>
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "delegatees_search_results"
-msgstr "Resultados de la b˙squeda"
+msgstr "Resultados de la b√∫squeda"
 
 #.   <title fill-slot="title">
 #.           heading_workflow_send_of
@@ -233,7 +233,7 @@ msgstr ""
 #: from ../skins/cps_courrier/stack_hierarchical_method.pt
 #: ../skins/cps_courrier/stack_simple_method.pt
 msgid "label_delegatees_stack_empty"
-msgstr "TodavÌa no hay delegados con excesivo flujo de trabajo"
+msgstr "Todav√≠a no hay delegados con excesivo flujo de trabajo"
 
 #.   <block>
 #.                     User in charge
@@ -247,7 +247,7 @@ msgstr ""
 #.       </th>
 #: from ../skins/cps_courrier/stack_hierarchical_data_render.pt
 msgid "label_delegation_date"
-msgstr "Fecha de delegaciÛn"
+msgstr "Fecha de delegaci√≥n"
 
 #.   <th>
 #.         Directive
@@ -289,14 +289,14 @@ msgstr "Revisores"
 #.    </p>
 #: from ../skins/cps_courrier/stack_members_search_results.pt
 msgid "legend_local_roles_no_results_members"
-msgstr "Lo sentimos, pero ning˙n miembro coincide con su b˙squeda"
+msgstr "Lo sentimos, pero ning√∫n miembro coincide con su b√∫squeda"
 
 #.   <h2 condition="edit_mode">
 #.   	  Add new delegatees to the roadmap
 #.   	</h2>
 #: from ../browser/roadmap.zpt ../skins/cps_courrier/cpscourrier_roadmap.pt
 msgid "search_for_delegatees"
-msgstr "AÒadir nuevos delegados a la hoja de ruta"
+msgstr "A√±adir nuevos delegados a la hoja de ruta"
 
 #.   <h2 condition="view/is_results">
 #.                     Search results
@@ -306,7 +306,7 @@ msgstr "AÒadir nuevos delegados a la hoja de ruta"
 #.               </h2>
 #: from ../browser/batchPerform.zpt ../browser/reuseAnswer.zpt
 msgid "search_results"
-msgstr "Resultados de la b˙squeda"
+msgstr "Resultados de la b√∫squeda"
 
 #
 # Document types labels
@@ -318,7 +318,7 @@ msgid "portal_type_MailboxGroup_description"
 msgstr "Espacio que integra a un conjunto de buzones"
 
 msgid "portal_type_Mailbox_title"
-msgstr "BuzÛn"
+msgstr "Buz√≥n"
 
 msgid "portal_type_Mailbox_description"
 msgstr "Espacio dedicado a almacenar y gestionar correos"
@@ -333,7 +333,7 @@ msgid "portal_type_IncomingMail_title"
 msgstr "Correo entrante"
 
 msgid "portal_type_IncomingMail_description"
-msgstr "Mensaje electrÛnico o digitalizado"
+msgstr "Mensaje electr√≥nico o digitalizado"
 
 msgid "portal_type_OutgoingMail_title"
 msgstr "Correo saliente"
@@ -342,16 +342,16 @@ msgid "portal_type_OutgoingMail_description"
 msgstr "Mensaje que responde a un correo entrante"
 
 msgid "portal_type_IncomingEmail_title"
-msgstr "Correo electrÛnico entrante"
+msgstr "Correo electr√≥nico entrante"
 
 msgid "portal_type_IncomingEmail_description"
-msgstr "Mensaje electrÛnico entrante directamente desde la aplicaciÛn"
+msgstr "Mensaje electr√≥nico entrante directamente desde la aplicaci√≥n"
 
 msgid "portal_type_OutgoingEmail_title"
-msgstr "Correo electrÛnico saliente"
+msgstr "Correo electr√≥nico saliente"
 
 msgid "portal_type_OutgoingEmail_description"
-msgstr "Mensaje electrÛnico saliente en respuesta a correos entrantes"
+msgstr "Mensaje electr√≥nico saliente en respuesta a correos entrantes"
 
 msgid "portal_type_IncomingPmail_title"
 msgstr "Correo de papel entrante"
@@ -366,10 +366,10 @@ msgid "portal_type_OutgoingPmail_description"
 msgstr "Mensaje saliente en respuesta a correos de papel entrantes"
 
 msgid "portal_type_Dashboard_title"
-msgstr "TablÛn"
+msgstr "Tabl√≥n"
 
 msgid "portal_type_Dashboard_description"
-msgstr "Documento con los resultados de las b˙squedas"
+msgstr "Documento con los resultados de las b√∫squedas"
 
 #
 # Root of mailboxes area
@@ -381,7 +381,7 @@ msgid "mail_templates_root_title"
 msgstr "Plantilla de Respuestas"
 
 msgid "cpscourrier_layout_mail_dashboard_label_edit"
-msgstr "Par·metros de filtrado por defecto"
+msgstr "Par√°metros de filtrado por defecto"
 
 msgid "cpscourrier_creator_label"
 msgstr "Creador"
@@ -417,22 +417,22 @@ msgid "cpscourrier_notes_label"
 msgstr "Notas"
 
 msgid "cpscourrier_msgid_label"
-msgstr "N˙mero de referencia"
+msgstr "N√∫mero de referencia"
 
 msgid "cpscourrier_creation_date_label"
 msgstr "Fecha:"
 
 msgid "cpscourrier_sending_date_label"
-msgstr "Fecha de envÌo"
+msgstr "Fecha de env√≠o"
 
 msgid "cpscourrier_form_of_address_label"
-msgstr "FÛrmula de cortesÌa"
+msgstr "F√≥rmula de cortes√≠a"
 
 msgid "cpscourrier_signature_label"
 msgstr "Firma:"
 
 msgid "cpscourrier_size_label"
-msgstr "TamaÒo (kB):"
+msgstr "Tama√±o (kB):"
 
 msgid "cpscourrier_deadline_label"
 msgstr "Fecha de caducidad:"
@@ -444,7 +444,7 @@ msgid "cpscourrier_smtp_headers_label"
 msgstr "Cabeceras SMTP: "
 
 msgid "cpscourrier_mailbox_addresses_label"
-msgstr "Direcciones del buzÛn: "
+msgstr "Direcciones del buz√≥n: "
 
 #
 # Layout labels
@@ -456,7 +456,7 @@ msgid "cpscourrier_template_usage_col"
 msgstr "Uso"
 
 msgid "cpscourrier_modification_date_label"
-msgstr "⁄ltima ediciÛn"
+msgstr "√öltima edici√≥n"
 
 msgid "cpscourrier_reply_type_label"
 msgstr "Tipo"
@@ -471,10 +471,10 @@ msgid "cpscourrier_label_managers"
 msgstr "Responsables"
 
 msgid "label_search_todo"
-msgstr "AcciÛn"
+msgstr "Acci√≥n"
 
 msgid "cpscourrier_paper_ack_default_header_label"
-msgstr "Cabecera de p·gina por defecto del acuse de recibo"
+msgstr "Cabecera de p√°gina por defecto del acuse de recibo"
 
 msgid "cpscourrier_paper_ack_default_header_help"
 msgstr ""
@@ -505,25 +505,25 @@ msgid "label_addressbook_last_name"
 msgstr "Apellidos:"
 
 msgid "label_addressbook_telephoneNumber"
-msgstr "N˙mero de telÈfono"
+msgstr "N√∫mero de tel√©fono"
 
 msgid "label_addressbook_postalCode"
-msgstr "CÛdigo postal"
+msgstr "C√≥digo postal"
 
 msgid "label_addressbook_postalAddress"
-msgstr "DirecciÛn postal"
+msgstr "Direcci√≥n postal"
 
 msgid "label_addressbook_description"
-msgstr "DescripciÛn"
+msgstr "Descripci√≥n"
 
 msgid "label_addressbook_post_office"
 msgstr "Oficina de correos"
 
 msgid "label_addressbook_fax_number"
-msgstr "N˙mero de fax"
+msgstr "N√∫mero de fax"
 
 msgid "label_addressbook_ou"
-msgstr "OrganizaciÛn"
+msgstr "Organizaci√≥n"
 
 msgid "label_local_addressbook_email"
 msgstr "Libreta local de direcciones"
@@ -541,31 +541,31 @@ msgid "label_local_addressbook_last_name"
 msgstr "Apellidos"
 
 msgid "label_local_addressbook_telephoneNumber"
-msgstr "N˙mero de telÈfono"
+msgstr "N√∫mero de tel√©fono"
 
 msgid "label_local_addressbook_postalCode"
-msgstr "CÛdigo postal"
+msgstr "C√≥digo postal"
 
 msgid "label_local_addressbook_postalAddress"
-msgstr "DirecciÛn postal"
+msgstr "Direcci√≥n postal"
 
 msgid "label_local_addressbook_description"
-msgstr "DescripciÛn"
+msgstr "Descripci√≥n"
 
 msgid "label_local_addressbook_post_office"
 msgstr "Oficina de correos"
 
 msgid "label_local_addressbook_fax_number"
-msgstr "N˙mero de fax"
+msgstr "N√∫mero de fax"
 
 #
 # Directories
 #
 msgid "label_local_addressbook_ou"
-msgstr "OrganizaciÛn"
+msgstr "Organizaci√≥n"
 
 msgid "cpscourrier_items_nb_label"
-msgstr "Õtem por p·gina"
+msgstr "√çtem por p√°gina"
 
 msgid "cpscourrier_type_label"
 msgstr "Tipo"
@@ -574,13 +574,13 @@ msgid "cpscourrier_review_state_label"
 msgstr "Estado"
 
 msgid "cpscourrier_empty_box_msg"
-msgstr "No hay ning˙n correo que responda a los criterios de b˙squeda"
+msgstr "No hay ning√∫n correo que responda a los criterios de b√∫squeda"
 
 msgid "cpscourrier_empty_boxgroup_msg"
-msgstr "El grupo de buzones est· vacÌo"
+msgstr "El grupo de buzones est√° vac√≠o"
 
 msgid "cpscourrier_no_result_msg"
-msgstr "Ning˙n correo responde a los criterios."
+msgstr "Ning√∫n correo responde a los criterios."
 
 msgid "cpscourrier_timeleft_label"
 msgstr "Tiempo restante"
@@ -595,7 +595,7 @@ msgid "cpscourrier_mailbox_priority_label"
 msgstr "Grado de urgencia por defecto"
 
 msgid "cpscourrier_mailbox_from_label"
-msgstr "DirecciÛn por defecto del emisor"
+msgstr "Direcci√≥n por defecto del emisor"
 
 msgid "cpscourrier_allowed_reply_time"
 msgstr "Intervalo de tiempo permitido por defecto"
@@ -610,10 +610,10 @@ msgstr "Utilizado por lo menos"
 # Layout labels
 #
 msgid "cpscourrier_no_user_found"
-msgstr "Ning˙n usuario coincide con tu criterio de b˙squeda"
+msgstr "Ning√∫n usuario coincide con tu criterio de b√∫squeda"
 
 msgid "cpscourrier_no_group_found"
-msgstr "Ning˙n grupo coincide con tu criterio de b˙squeda"
+msgstr "Ning√∫n grupo coincide con tu criterio de b√∫squeda"
 
 msgid "cpscourrier_todo_label"
 msgstr "Por hacer"
@@ -628,16 +628,16 @@ msgid "cpscourrier_to_watch"
 msgstr "Por consultar"
 
 msgid "cpscourrier_created_min_label"
-msgstr "Fecha de creaciÛn (mÌnima)"
+msgstr "Fecha de creaci√≥n (m√≠nima)"
 
 msgid "cpscourrier_created_max_label"
-msgstr "Fecha de creaciÛn (m·xima)"
+msgstr "Fecha de creaci√≥n (m√°xima)"
 
 msgid "cpscourrier_deadline_min_label"
-msgstr "Fecha mÌnima de vencimiento"
+msgstr "Fecha m√≠nima de vencimiento"
 
 msgid "cpscourrier_deadline_max_label"
-msgstr "Fecha m·xima de vencimiento"
+msgstr "Fecha m√°xima de vencimiento"
 
 msgid "cpscourrier_foa_voc_regards"
 msgstr "Mis mejores deseos, "
@@ -676,7 +676,7 @@ msgid "cpscourrier_for_advice"
 msgstr "Para avisar"
 
 msgid "cpscourrier_sender_type_label"
-msgstr "TipologÌa del emisor"
+msgstr "Tipolog√≠a del emisor"
 
 msgid "cpscourrier_st_voc_individual"
 msgstr "Individual"
@@ -685,10 +685,10 @@ msgid "cpscourrier_st_voc_professional"
 msgstr "Profesional"
 
 msgid "cpscourrier_st_voc_corporate_body"
-msgstr "Personas jurÌdicas"
+msgstr "Personas jur√≠dicas"
 
 msgid "cpscourrier_st_voc_administration"
-msgstr "AdministraciÛn"
+msgstr "Administraci√≥n"
 
 msgid "action_roadmap"
 msgstr "Hoja de ruta"
@@ -710,7 +710,7 @@ msgstr "Manejar ${item_id}"
 
 msgid "help_workflow_handle"
 msgstr ""
-"Al optar por gestionar los documentos de correo seleccionados, se har· cargo "
+"Al optar por gestionar los documentos de correo seleccionados, se har√° cargo "
 "del procesamiento futuro de los correos (responder, delegar, borrar...)."
 
 msgid "button_handle"
@@ -720,22 +720,22 @@ msgid "action_handle"
 msgstr "Hacerse cargo"
 
 msgid "handle"
-msgstr "HaciÈndose cargo"
+msgstr "Haci√©ndose cargo"
 
 msgid "heading_workflow_forward_of ${item_id}"
 msgstr "Remitir ${item_id}"
 
 msgid "help_workflow_forward"
 msgstr ""
-"Est· a punto de remitir el correo a otro buzÛn <strong>o</strong>  a una "
-"direcciÛn de correo externa. Al enviar el documento de correo a una "
-"direcciÛn externa se cerrar· la copia local del documento."
+"Est√° a punto de remitir el correo a otro buz√≥n <strong>o</strong>  a una "
+"direcci√≥n de correo externa. Al enviar el documento de correo a una "
+"direcci√≥n externa se cerrar√° la copia local del documento."
 
 msgid "help_workflow_forwardPmail"
 msgstr ""
-"Est·s a punto de transferir un correo entrante a otra bandeja de correo "
-"<strong>o</strong> a una direcciÛn de correo externa. El envÌo de una "
-"documento de correo a una direcciÛn de corre externa cerrar· la copia local "
+"Est√°s a punto de transferir un correo entrante a otra bandeja de correo "
+"<strong>o</strong> a una direcci√≥n de correo externa. El env√≠o de una "
+"documento de correo a una direcci√≥n de corre externa cerrar√° la copia local "
 "del documento."
 
 msgid "button_forward"
@@ -748,19 +748,19 @@ msgid "forward"
 msgstr "Remitente"
 
 msgid "forward_move"
-msgstr "Remitir al buzÛn"
+msgstr "Remitir al buz√≥n"
 
 msgid "forward_email"
 msgstr "Remitir al correo"
 
 msgid "cpscourrier_no_mailbox"
-msgstr "(Por favor, seleccione un buzÛn)"
+msgstr "(Por favor, seleccione un buz√≥n)"
 
 msgid "heading_workflow_discard_of ${item_id}"
 msgstr "Remitir ${item_id}"
 
 msgid "help_workflow_discard"
-msgstr "Est· a punto de poner el correo en la papelera"
+msgstr "Est√° a punto de poner el correo en la papelera"
 
 msgid "button_discard"
 msgstr "Descartar"
@@ -775,7 +775,7 @@ msgid "heading_workflow_delete_of ${item_id}"
 msgstr "Borrar ${item_id}"
 
 msgid "help_workflow_delete"
-msgstr "Est· a punto de borrar permanentemente el correo"
+msgstr "Est√° a punto de borrar permanentemente el correo"
 
 msgid "button_delete"
 msgstr "Borrar"
@@ -791,7 +791,7 @@ msgstr "Responder ${item_id}"
 
 msgid "help_workflow_answer"
 msgstr ""
-"Al responder al documento de correo, crear· un nuevo correo saliente "
+"Al responder al documento de correo, crear√° un nuevo correo saliente "
 "enlazado al correo de entrada original."
 
 msgid "button_answer"
@@ -815,8 +815,8 @@ msgstr "Cerrar ${item_id}"
 msgid "help_workflow_close"
 msgstr ""
 "Cierra la entrada de correos al final del proceso de respuestas. Note que "
-"los documentos de correo cerrados est·n, por defecto, ocultos en los "
-"buzones. Debe, explÌcitamente, configurar el par·metro del filtro  \"estado"
+"los documentos de correo cerrados est√°n, por defecto, ocultos en los "
+"buzones. Debe, expl√≠citamente, configurar el par√°metro del filtro  \"estado"
 "\" a  \"cerrado\" para ver la lista de documentos de correo cerrados."
 
 msgid "button_close"
@@ -832,7 +832,7 @@ msgid "heading_workflow_reopen_of ${item_id}"
 msgstr "Reabrir ${item_id}"
 
 msgid "help_workflow_reopen"
-msgstr "Est· a punto de reabrir el correo entrante"
+msgstr "Est√° a punto de reabrir el correo entrante"
 
 msgid "button_reopen"
 msgstr "Reabrir"
@@ -847,19 +847,19 @@ msgid "heading_workflow_validate_of ${item_id}"
 msgstr "Validar ${item_id}"
 
 msgid "help_workflow_validate"
-msgstr "Est· a punto de validar el correo"
+msgstr "Est√° a punto de validar el correo"
 
 msgid "action_validate"
 msgstr "Validar"
 
 msgid "validate"
-msgstr "ValidaciÛn"
+msgstr "Validaci√≥n"
 
 msgid "heading_workflow_invalidate_of ${item_id}"
 msgstr "Invalidar ${item_id}"
 
 msgid "help_workflow_invalidate"
-msgstr "Est· a punto de invalidar el correo y de volver al modo \"redacciÛn\""
+msgstr "Est√° a punto de invalidar el correo y de volver al modo \"redacci√≥n\""
 
 msgid "button_invalidate"
 msgstr "Invalidar"
@@ -868,10 +868,10 @@ msgid "action_invalidate"
 msgstr "Invalidar"
 
 msgid "invalidate"
-msgstr "InvalidaciÛn"
+msgstr "Invalidaci√≥n"
 
 msgid "help_workflow_send"
-msgstr "Est· a punto de enviar un correo a sus destinatarios"
+msgstr "Est√° a punto de enviar un correo a sus destinatarios"
 
 msgid "button_send"
 msgstr "Enviar"
@@ -880,13 +880,13 @@ msgid "action_send"
 msgstr "Enviar"
 
 msgid "send"
-msgstr "EnvÌo"
+msgstr "Env√≠o"
 
 msgid "heading_workflow_reactivate_of ${item_id}"
-msgstr "Reactivar el correo saliente ´${item_id}ª"
+msgstr "Reactivar el correo saliente ¬´${item_id}¬ª"
 
 msgid "help_workflow_reactivate"
-msgstr "Est· a punto de reactivar el correo"
+msgstr "Est√° a punto de reactivar el correo"
 
 msgid "button_reactivate"
 msgstr "Reactivar"
@@ -895,14 +895,14 @@ msgid "action_reactivate"
 msgstr "Reactivar"
 
 msgid "reactivate"
-msgstr "ReactivaciÛn"
+msgstr "Reactivaci√≥n"
 
 msgid "heading_workflow_reset_of ${item_id}"
 msgstr "Restaurar ${item_id}"
 
 msgid "help_workflow_reset"
 msgstr ""
-"Al restaurar el correo volver· a ponerlo en su estado iniciar y limpiar· la "
+"Al restaurar el correo volver√° a ponerlo en su estado iniciar y limpiar√° la "
 "hoja de ruta"
 
 msgid "button_reset"
@@ -912,7 +912,7 @@ msgid "action_reset"
 msgstr "Restaurar"
 
 msgid "reset"
-msgstr "RestauraciÛn"
+msgstr "Restauraci√≥n"
 
 msgid "flag_handled"
 msgstr "Respuesta(s) suprimida(s)"
@@ -927,7 +927,7 @@ msgid "action_move_down_delegatees"
 msgstr "Bajar"
 
 msgid "heading_workflow_move_down_delegatees_of ${item_id}"
-msgstr "Descargar el correo ´${item_id}ª"
+msgstr "Descargar el correo ¬´${item_id}¬ª"
 
 msgid "button move_down_delegatees"
 msgstr "Bajar"
@@ -937,30 +937,30 @@ msgstr "Bajar"
 #
 msgid "help_workflow_move_down_delegatees"
 msgstr ""
-"Est· a punto de permitir a los usuarios del siguiente nivel gestionar el "
+"Est√° a punto de permitir a los usuarios del siguiente nivel gestionar el "
 "documento de correo. Si no forma parte del mismo o si no es administrador "
-"local, no volver· a poder acceder a ese documento."
+"local, no volver√° a poder acceder a ese documento."
 
 msgid "heading_batch_workflow_handle"
 msgstr "Hacerse cargo de un lote de documentos entrantes"
 
 msgid "help_batch_workflow_handle"
 msgstr ""
-"Al optar por gestionar los documentos de correo seleccionados, se har· cargo "
+"Al optar por gestionar los documentos de correo seleccionados, se har√° cargo "
 "del procesamiento futuro de los correos (responder, delegar, borrar...)."
 
 msgid "heading_batch_workflow_discard"
 msgstr "Descartar un lote de documentos entrantes"
 
 msgid "help_batch_workflow_discard"
-msgstr "Est· a punto de poner los documentos seleccionados en la papelera"
+msgstr "Est√° a punto de poner los documentos seleccionados en la papelera"
 
 msgid "heading_batch_workflow_answer"
 msgstr "Responder a un grupo de documentos entrantes"
 
 msgid "help_batch_workflow_answer"
 msgstr ""
-"Al responder a los documentos, crear· un nuevo enlace de correo saliente "
+"Al responder a los documentos, crear√° un nuevo enlace de correo saliente "
 "para cada documento entrante seleccionado. "
 
 msgid "heading_batch_workflow_delete"
@@ -970,7 +970,7 @@ msgid "help_batch_workflow_delete"
 msgstr "Se dispone a suprimir los correos siguientes"
 
 msgid "create_pending"
-msgstr "CreaciÛn no confirmada"
+msgstr "Creaci√≥n no confirmada"
 
 #
 # Workflow states
@@ -1021,29 +1021,29 @@ msgid "psm_select_at_least_one_item"
 msgstr "Seleccione al menos un elemento"
 
 msgid "psm_cpscourrier_choose_at_least_mailbox_or_emailaddress"
-msgstr "Seleccione al menos un buzÛn o introduzca una direcciÛn de correo"
+msgstr "Seleccione al menos un buz√≥n o introduzca una direcci√≥n de correo"
 
 msgid "psm_cpscourrier_choose_either_mailbox_or_emailaddress"
 msgstr ""
-"Seleccione o un buzÛn o una direcciÛn de correoChoose either a mailbox or an "
+"Seleccione o un buz√≥n o una direcci√≥n de correoChoose either a mailbox or an "
 "email address"
 
 msgid "psm_cpscourrier_mail_forwarded"
-msgstr "Correo enviado con Èxito"
+msgstr "Correo enviado con √©xito"
 
 msgid "psm_cpscourrier_reply_could_not_be_sent"
 msgstr ""
-"Debido a un problema de configuraciÛn, la respuesta no puede ser enviada. "
-"Por favor, pÛngase en contacto con el administrador del portal para arreglar "
+"Debido a un problema de configuraci√≥n, la respuesta no puede ser enviada. "
+"Por favor, p√≥ngase en contacto con el administrador del portal para arreglar "
 "el problema."
 
 msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_recipients_address"
 msgstr ""
-"Direcciones inv·lidas de los destinatarios: la respuesta no puedo ser "
+"Direcciones inv√°lidas de los destinatarios: la respuesta no puedo ser "
 "enviada."
 
 msgid "psm_cpscourrier_reply_could_not_be_sent_invalid_sender_address"
-msgstr "DirecciÛn del emisor inv·lida: no se ha podido enviar la respuesta"
+msgstr "Direcci√≥n del emisor inv√°lida: no se ha podido enviar la respuesta"
 
 msgid "psm_cpscourrier_reply_sent"
 msgstr "Respuesta enviada"
@@ -1052,16 +1052,16 @@ msgid "psm_cpscourrier_no_action_performed_for"
 msgstr "Los siguientes documentos de correo no han sufrido cambios:"
 
 msgid "psm_cpscourrier_smtp_error"
-msgstr "El correo electrÛnico no ha podido ser enviado"
+msgstr "El correo electr√≥nico no ha podido ser enviado"
 
 msgid "psm_cpscourrier_ack_email_sent"
 msgstr "Acuse de recibo enviado"
 
 msgid "psm_cpscourrier_missing_email_address"
-msgstr "Correo electrÛnico no enviado por desconocimiento del destinatario"
+msgstr "Correo electr√≥nico no enviado por desconocimiento del destinatario"
 
 msgid "label_workflow_mail_confirm"
-msgstr "RecepciÛn y confirmaciÛn"
+msgstr "Recepci√≥n y confirmaci√≥n"
 
 msgid "label_workflow_discard"
 msgstr "Poner como desecho"
@@ -1082,7 +1082,7 @@ msgid "label_cpsdir_roles_Injector"
 msgstr ""
 
 msgid "On ${y}-${m}-${d}, ${name} wrote:"
-msgstr "El ${d}-${m}-${y}, ${name} escribiÛ:"
+msgstr "El ${d}-${m}-${y}, ${name} escribi√≥:"
 
 msgid "cpscourrier_timeleft:${plus_sign}${d}"
 msgstr "D${plus_sign}${d}"
@@ -1101,7 +1101,7 @@ msgid "action_paper_ack"
 msgstr "Acuse de recibo"
 
 msgid "cpscourrier_paper_ack_subject_${mail_subject}"
-msgstr "Acuse de recibo para ´${mail_subject}ª"
+msgstr "Acuse de recibo para ¬´${mail_subject}¬ª"
 
 # Roles
 msgid "LocalManager"
