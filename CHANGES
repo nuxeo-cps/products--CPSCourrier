@@ -6,7 +6,7 @@ New features
 -
 Bug fixes
 ~~~~~~~~~
--
+- #1948: move sending mail utility to CPSUtil
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
 - 

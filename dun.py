@@ -28,7 +28,7 @@ from DateTime import DateTime
 from Products.CMFCore.permissions import ManagePortal
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.utils import _checkPermission
-from Products.CPSCourrier.workflows.scripts import send_mail
+from Products.CPSUtil.mail import send_mail
 
 logger = logging.getLogger('CPSCourrier.dun')
 

@@ -633,7 +633,7 @@ class WorkflowScriptsEmailIntegrationTestCase(
             # forwdaring in_mail1
             result = forward_mail(in_mail1, 'toto@example.com',
                                   comment='Please handle that request')
-            expected = ('mailbox@example.com', 'toto@example.com', """\
+            expected = ('mailbox@example.com', ['toto@example.com'], """\
 Content-Type: text/plain; charset="iso-8859-15"
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
@@ -683,7 +683,7 @@ On %s, bar@foo.com wrote:
             )
 
             result = send_reply(out_mail1)
-            expected = ('test_mailbox@cpscourrier.com', 'bar@foo.com', """\
+            expected = ('test_mailbox@cpscourrier.com', ['bar@foo.com'], """\
 Content-Type: text/plain; charset="iso-8859-15"
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
@@ -749,7 +749,7 @@ On %s, bar@foo.com wrote:
             )
 
             result = send_reply(out_mail1)
-            expected = ('test_mailbox@cpscourrier.com', 'bar@foo.com', """\
+            expected = ('test_mailbox@cpscourrier.com', ['bar@foo.com'], """\
 Content-Type: text/html; charset="iso-8859-15"
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable

@@ -75,41 +75,6 @@ def unserializeFromCookie(string='', default=None, charset='ascii'):
     return value
 
 
-class retransform:
-    """abstract class for regex transforms (re.sub wrapper)"""
-
-    inputs  = ('text/html',)
-    output = 'text/plain'
-
-    def __init__(self, name, *args):
-        self.__name__ = name
-        self.regexes = []
-        for pat, repl in args:
-            self.addRegex(pat, repl)
-
-    def name(self):
-        return self.__name__
-
-    def addRegex(self, pat, repl):
-        r = re.compile(pat)
-        self.regexes.append((r, repl))
-
-    def convert(self, orig):
-        for r, repl in self.regexes:
-            orig = r.sub(repl, orig)
-        return orig
-
-
-def html_to_text(html_data):
-    converter=retransform("html_to_text",
-                       ('<br/?>', '\n'),
-                       ('<script [^>]>.*</script>(?im)', ''),
-                       ('<style [^>]>.*</style>(?im)', ''),
-                       ('<head [^>]>.*</head>(?im)', ''),
-                       ('<[^>]*>(?i)(?m)', ''),
-                       )
-    return converter.convert(html_data)
-
 def createOuInLDAP(ldir, ou):
     """Create a new ou in given ldap backing directory."""
 

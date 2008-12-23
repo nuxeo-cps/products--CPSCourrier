@@ -21,17 +21,8 @@
 These functions are usually called by workflow scripts.
 """
 import logging
-import smtplib
-import socket
 
 from DateTime import DateTime
-
-from email import Encoders
-from email.MIMEAudio import MIMEAudio
-from email.MIMEBase import MIMEBase
-from email.MIMEImage import MIMEImage
-from email.MIMEMultipart import MIMEMultipart
-from email.MIMEText import MIMEText
 
 from Acquisition import aq_parent, aq_inner
 from AccessControl import getSecurityManager
@@ -39,8 +30,8 @@ from AccessControl import getSecurityManager
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 
+from Products.CPSUtil.mail import send_mail
 from Products.CPSCore.EventServiceTool import getPublicEventService
-from Products.CPSCourrier.utils import html_to_text
 from Products.CPSCourrier.relations import make_reply_to
 from Products.CPSCourrier.config import (
     BAYES_MIN_PROB,
@@ -528,95 +519,3 @@ def send_reply(proxy, text_only=False, additionnal_info='', sci_kw=None):
 
     return res
 
-def send_mail(context, mto, mfrom, subject, body, mcc=(), attachments=(),
-              encoding='iso-8859-15', plain_text=True):
-    """Send a mail
-
-    body is plain text or html according to plain_text kwarg
-
-    Optional attachments are (filename, content-type, data) tuples.
-
-    This function does not do any error handling if the Mailhost fails to send
-    it properly. This will be handled by the skins script along with the
-    redirect if needed.
-    """
-    mailhost = getToolByName(context, 'MailHost')
-    attachments = list(attachments)
-
-    # building the formatted email message
-    if not mto:
-        raise ValueError('Empty To field forbidden')
-    if not isinstance(mto, str):
-        mto = ', '.join(mto)
-
-    # prepare main content
-    content_type = plain_text and 'text/plain' or 'text/html'
-    if plain_text:
-        main_msg = MIMEText(body, _subtype='plain', _charset=encoding)
-    else:
-        alt_html = MIMEText(body, _subtype='html', _charset=encoding)
-        alt_plain = MIMEText(html_to_text(body), _charset=encoding)
-        main_msg = MIMEMultipart(_subtype='alternative',
-                                 _subparts=[alt_plain, alt_html])
-
-    if attachments:
-        msg = MIMEMultipart()
-        msg.attach(main_msg)
-    else:
-        msg = main_msg
-
-    COMMASPACE = ', '
-
-    msg['Subject'] = subject
-    msg['From'] = mfrom
-    msg['To'] = isinstance(mto, basestring) and mto or COMMASPACE.join(mto)
-    if mcc:
-        msg['Cc'] = isinstance(mcc, basestring) and mcc or COMMASPACE.join(mcc)
-    msg.preamble = subject
-    # Guarantees the message ends in a newline
-    msg.epilogue = ''
-
-    # attachment management (if any)
-    for title, ctype, data in attachments:
-        if ctype is None:
-            # No guess could be made, or the file is encoded (compressed), so
-            # use a generic bag-of-bits type.
-            ctype = 'application/octet-stream'
-        maintype, subtype = ctype.split('/', 1)
-        if maintype == 'text':
-            sub_msg = MIMEText(data, _subtype=subtype)
-        elif maintype == 'image':
-            sub_msg = MIMEImage(data, _subtype=subtype)
-        elif maintype == 'audio':
-            sub_msg = MIMEAudio(data, _subtype=subtype)
-        else:
-            sub_msg = MIMEBase(maintype, subtype)
-            sub_msg.set_payload(data)
-            # Encode the payload using Base64
-            Encoders.encode_base64(sub_msg)
-        # Set the filename parameter
-        sub_msg.add_header('Content-Disposition', 'attachment',
-                           filename=title)
-        msg.attach(sub_msg)
-
-    # loggin string
-    attachment_log = list((title, ctype) for title, ctype, _ in attachments)
-    mail_data = (mto, mfrom, subject, body, attachment_log)
-    log_str = 'to: %r, from: %r, subject: %r, body: %r, att: %r' % mail_data
-    logger.debug("sending email %s" % log_str)
-
-    # sending and error casting
-    try:
-        return mailhost._send(mfrom, mto, msg.as_string())
-    # if anything went wrong: log the error for the admin and raise an exception
-    # of type IOError or ValueError that will be catched by the skins script in
-    # order to build a friendly user message
-    except (socket.error, smtplib.SMTPServerDisconnected), e:
-        logger.error("error sending email %s" % log_str)
-        raise IOError(e)
-    except smtplib.SMTPRecipientsRefused, e:
-        logger.error("error sending email %s" % log_str)
-        raise ValueError('invalid_recipients_address')
-    except smtplib.SMTPSenderRefused, e:
-        logger.error("error sending email %s" % log_str)
-        raise ValueError('invalid_sender_address')

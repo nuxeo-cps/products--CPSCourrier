@@ -25,12 +25,12 @@ from Products.Five.browser import BrowserView
 
 from Products.CMFCore.utils import getToolByName
 
+from Products.CPSUtil.mail import send_mail
 from Products.CPSSchemas.Widget import widgetname
 from Products.CPSSchemas.DataStructure import DataStructure
 from Products.CPSSchemas.BasicWidgets import renderHtmlTag
 from Products.CPSDocument.utils import getFormUidUrlArg
 from Products.CPSDashboards.utils import unserializeFromCookie
-from Products.CPSCourrier.workflows.scripts import send_mail
 
 from copy import deepcopy
 from DateTime import DateTime
