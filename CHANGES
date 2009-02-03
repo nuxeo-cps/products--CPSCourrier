@@ -6,6 +6,8 @@ New features
 -
 Bug fixes
 ~~~~~~~~~
+- #1967: impossible to remove documents if CPSCourrier is uninitialized 
+  but CPSRelations is
 - #1948: move sending mail utility to CPSUtil
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~

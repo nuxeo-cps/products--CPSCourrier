@@ -35,7 +35,10 @@ logger = logging.getLogger('CPSCourrier.relations')
 
 def _get_graph(context):
     rtool = getToolByName(context, 'portal_relations')
-    return rtool.getGraph(RELATION_GRAPH_ID)
+    graph = rtool.getGraph(RELATION_GRAPH_ID)
+    if graph is None:
+        raise KeyError(RELATION_GRAPH_ID)
+    return graph
 
 #
 # Adding new statements to the graph
