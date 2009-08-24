@@ -18,7 +18,7 @@
        solutions-->
   <field name="has_attachment" meta_type="CPS Int Field">
     <property name="write_process_expr">
-      python:modules['Products.CPSCourrier.utils'].hasFlexibleFields(data)
+      python:modules['Products.CPSCourrier.utils'].hasVisibleFlexibleWidget(object)
     </property>
   </field>
   <field name="content_position" meta_type="CPS String Field"/>
