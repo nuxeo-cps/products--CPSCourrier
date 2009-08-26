@@ -1,4 +1,24 @@
 ===========================================================
+Package: CPSCourrier 0.24.1-rel821095958
+===========================================================
+First release built by: gracinet at: 2009-08-26T12:25:26
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.24.1-rel821095958
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/branches/rel821095958@53795
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- #2016: has_attachment logic now based on widgets
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSCourrier 0.24.0-rel821095958
 ===========================================================
 First release built by: gracinet at: 2007-12-17T01:29:48
