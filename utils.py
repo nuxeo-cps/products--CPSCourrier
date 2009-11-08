@@ -25,11 +25,12 @@ import re
 from Products.CMFCore.utils import getToolByName
 from Products.CPSSkins import minjson as json
 from Products.CPSUtil.text import toAscii
+from Products.CPSSchemas.BasicWidgets import CPSFileWidget
 
 def hasFlexibleFields(data):
     """True if the passed dict looks like a datamodel with flexible fields.
 
-    Used in write expression for 'has_attachment' field
+    Was used in write expression for 'has_attachment' field
     """
 
     regexp = '_f[0..9]+$'
@@ -40,6 +41,30 @@ def hasFlexibleFields(data):
 
     return int(bool([fid for fid in data
                      if re.search(regexp, fid) and data[fid] is not None]))
+
+def hasVisibleFlexibleWidget(doc):
+    """True if the passed CPSDocument instance has a visible flexible widget.
+
+    Used in write expression for 'has_attachment' field. Hidden widgets would
+    correspond to embedded images.
+    Normally, the flexible widget and fields are created at once, by means
+    of addFlexibleWidget method of FlexibleTypeInformation.
+
+    This returns an integer instead of a boolean, in order to be compatible
+    with all indexing solutions.
+    """
+
+    try:
+        layout, _ = doc.getTypeInfo()._getFlexibleLayoutAndSchemaFor(
+            doc, 'mail_flexible')
+    except AttributeError: # no flexible layout or schema
+        return 0
+    for widget in layout.objectValues():
+        if not isinstance(widget, CPSFileWidget):
+            continue
+        if not 'view' in widget.hidden_layout_modes: # not hidden
+            return 1
+    return 0
 
 
 # based on CPSSkins versions, but can handle non ascii-chars

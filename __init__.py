@@ -52,6 +52,7 @@ ModuleSecurityInfo(wf_scripts_module).declarePublic('paper_auto_handle')
 
 utils_module = 'Products.CPSCourrier.utils'
 ModuleSecurityInfo(utils_module).declarePublic('hasFlexibleFields')
+ModuleSecurityInfo(utils_module).declarePublic('hasVisibleFlexibleWidget')
 ModuleSecurityInfo(utils_module).declarePublic('computeMailboxOu')
 
 dirutils_module = 'Products.CPSCourrier.directoryutils'
