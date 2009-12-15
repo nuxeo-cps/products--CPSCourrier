@@ -1,4 +1,27 @@
 ===========================================================
+Package: CPSCourrier 0.25.4
+===========================================================
+First release built by: gracinet at: 2009-12-15T12:27:17
+SVN Tag: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/tags/0.25.4
+Build from: https://svn.nuxeo.org/pub/CPS3/products/CPSCourrier/trunk@54101
+
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- #1967: impossible to remove documents if CPSCourrier is uninitialized 
+  but CPSRelations is
+- #1948: move sending mail utility to CPSUtil
+- #2016: has_attachment logic now based on widgets
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSCourrier 0.25.3
 ===========================================================
 First release built by: madarche at: 2008-11-23T22:00:03
