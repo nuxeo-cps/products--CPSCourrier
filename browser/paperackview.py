@@ -35,6 +35,9 @@ from Products.CPSDashboards.utils import unserializeFromCookie
 from copy import deepcopy
 from DateTime import DateTime
 
+from copy import deepcopy
+from DateTime import DateTime
+
 logger = logging.getLogger('CPSCourrier.browser.paperackview')
 
 class PaperAckView(BrowserView):
@@ -155,7 +158,7 @@ class PaperAckView(BrowserView):
         cpsmcat = getToolByName(self.context, 'translation_service')
         portal = getToolByName(self.context, 'portal_url').getPortalObject()
         subject = cpsmcat(self.email_ack_subject, {'mail_subject': doc.Title()}
-                          ).encode(portal.default_charset)
+                          )
 
         # From : parent or portal wide
         parent_doc = aq_parent(aq_inner(self.context))

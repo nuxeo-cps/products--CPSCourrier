@@ -13,6 +13,12 @@
   <field name="mail_to" meta_type="CPS String List Field">
     <property name="is_searchabletext">True</property>
     <property name="acl_write_roles">Manager; Injector</property>
+  </field> 
+  <!-- Date conversion is done by the write_expr, because DateTime instances
+       can't go through xmlrpc. 
+       This works because there is no actual type checking done beforehand -->
+  <field name="mail_date" meta_type="CPS DateTime Field">
+    <property name="write_process_expr">python:DateTime(value)</property>
   </field>
   <field name="mail_cc" meta_type="CPS String List Field">
     <property name="is_searchabletext">True</property>
