@@ -57,6 +57,13 @@
       />
 
     <field
+	name="mail_date"
+	attr="mail_date"
+	type="Date"
+	analyzer="Standard"
+      />
+
+    <field
 	name="template_usage"
 	attr="template_usage"
 	type="Keyword"
@@ -102,6 +109,13 @@
 	analyzer="Standard"
       />
 
+    <field
+	name="mail_date_sort"
+	attr="mail_date"
+	type="Sort"
+	analyzer="Standard"
+      />
+
   <!-- Brain's  Metadata -->
 
   <column value="ou"/>
@@ -109,6 +123,7 @@
   <column value="priority"/>
   <column value="mail_from"/>
   <column value="mail_to"/>
+  <column value="mail_date"/>
   <column value="deadline"/>
   <column value="template_usage"/>
 

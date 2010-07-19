@@ -73,15 +73,15 @@ Validation
     >>> widget.validate(ds)
     True
     >>> dm['local_id']
-    'the_id'
+    u'the_id'
     >>> dm['mailbox']
-    'box2'
+    u'box2'
 
     The widget's first field is used as 'id' field for the directory. By
     default, it's almost a concatenation of others::
 
     >>> dm['uid']
-    'the_id,box2'
+    u'the_id,box2'
 
     If the ``ldap_syntax`` property is ``True``, we get something more suited
     for LDAP backing directories::
@@ -90,7 +90,7 @@ Validation
     >>> widget.validate(ds)
     True
     >>> dm['uid']
-    'local_id=the_id,mailbox=box2'
+    u'local_id=the_id,mailbox=box2'
 
     The ``LDAPBackingDirectory`` will append its base DN to
     ``uid=the_id,mailbox=box2``. This the hack.
@@ -107,9 +107,9 @@ Validation
     >>> widget.validate(ds)
     True
     >>> dm['mbgroup']
-    'grp'
+    u'grp'
     >>> dm['uid']
-    'local_id=the_id,ou=box2,o=grp'
+    u'local_id=the_id,ou=box2,o=grp'
 
 Rendering
 ~~~~~~~~~
