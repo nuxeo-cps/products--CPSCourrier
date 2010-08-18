@@ -36,7 +36,7 @@ from Products.CPSSchemas.tests.testWidgets import (
 from Products.CPSDefault.tests.CPSTestCase import (
     CPSTestCase,
     ExtensionProfileLayerClass)
-
+from Products.CPSUtil.text import OLD_CPS_ENCODING
 from Products.CPSCourrier.tests import stackelements
 from Products.CPSCourrier.relations import clean_relations_for
 
@@ -59,6 +59,10 @@ class CommonIntegrationFixture:
     """ Things like site structure and such."""
 
     def fixtureSetUp(self):
+        # still using latin 9 to avoid base64 serializations
+        # (cumbersome for tests)
+        self.portal.default_charset = OLD_CPS_ENCODING
+
         # create test sandboxes in the mailboxes space
         self.wftool = wftool = getToolByName(self.portal, 'portal_workflow')
         self.ttool = ttool = getToolByName(self.portal, 'portal_types')

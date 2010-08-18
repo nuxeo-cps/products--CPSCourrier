@@ -29,6 +29,7 @@ from StringIO import StringIO
 from DateTime import DateTime
 from OFS.Image import File
 from Products.CMFCore.utils import getToolByName
+from Products.CPSUtil.text import get_final_encoding
 from Products.CPSCourrier.tests.layer import IntegrationTestCase
 from Products.CPSCourrier.tests.layer import PaperIntegrationTestCase
 
@@ -615,6 +616,7 @@ class WorkflowScriptsEmailIntegrationTestCase(
             def _send(self, *args):
                 return args
 
+        encoding = get_final_encoding(self.portal)
         # preparing in_mail1 to get forwarded
         in_mail1 = self.in_mail1
         wtool = getToolByName(self.portal, 'portal_workflow')
@@ -634,7 +636,7 @@ class WorkflowScriptsEmailIntegrationTestCase(
             result = forward_mail(in_mail1, 'toto@example.com',
                                   comment='Please handle that request')
             expected = ('mailbox@example.com', ['toto@example.com'], """\
-Content-Type: text/plain; charset="iso-8859-15"
+Content-Type: text/plain; charset="%s"
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Subject: Fwd: Test mail 1
@@ -647,7 +649,7 @@ On %s, bar@foo.com wrote:
 > content line 1
 > content line 2
 >=20\
-""" % datetime.datetime.now().strftime('%Y-%m-%d'))
+""" % (encoding, datetime.datetime.now().strftime('%Y-%m-%d')))
 
             self.assertEquals(result, expected)
         finally:
@@ -660,6 +662,8 @@ On %s, bar@foo.com wrote:
         class FakeMailHost:
             def _send(self, *args):
                 return args
+
+        encoding = get_final_encoding(self.portal)
 
         in_mail1 = self.in_mail1
         wtool = getToolByName(self.portal, 'portal_workflow')
@@ -684,7 +688,7 @@ On %s, bar@foo.com wrote:
 
             result = send_reply(out_mail1)
             expected = ('test_mailbox@cpscourrier.com', ['bar@foo.com'], """\
-Content-Type: text/plain; charset="iso-8859-15"
+Content-Type: text/plain; charset="%s"
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Subject: Re: Test mail 1
@@ -706,7 +710,7 @@ On %s, bar@foo.com wrote:
 > Hi!
 > Please go to http://www.paipal.com and confirm your password!
 >   Regards,
->   The Paipal team""" % datetime.datetime.now().strftime('%Y-%m-%d'))
+>   The Paipal team""" % (encoding, datetime.datetime.now().strftime('%Y-%m-%d')))
 
             self.assertEquals(result, expected)
         finally:
@@ -727,6 +731,7 @@ On %s, bar@foo.com wrote:
             def _send(self, *args):
                 return args
 
+        encoding = get_final_encoding(self.portal)
         in_mail1 = self.in_mail1
         wtool = getToolByName(self.portal, 'portal_workflow')
         wtool.doActionFor(in_mail1, 'handle')
@@ -750,7 +755,7 @@ On %s, bar@foo.com wrote:
 
             result = send_reply(out_mail1)
             expected = ('test_mailbox@cpscourrier.com', ['bar@foo.com'], """\
-Content-Type: text/html; charset="iso-8859-15"
+Content-Type: text/html; charset="%s"
 MIME-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Subject: Re: Test mail 1
@@ -761,7 +766,7 @@ Cc: Toto Truc <toto-truc@fake.org>, og@nuxeo.com
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-  <meta content=3D"text/html;charset=3DISO-8859-15" http-equiv=3D"Content-T=
+  <meta content=3D"text/html;charset=3D%s" http-equiv=3D"Content-T=
 ype">
   <title></title>
 </head>
@@ -775,7 +780,7 @@ On %s, bar@foo.com wrote:
 >   Regards,
 >   The Paipal team</pre>
 </body>
-</html>""" % datetime.datetime.now().strftime('%Y-%m-%d'))
+</html>""" % (encoding, encoding.upper(), datetime.datetime.now().strftime('%Y-%m-%d')))
 
             dummy = """ " """ # for Emacs editor
 

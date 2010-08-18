@@ -31,6 +31,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 
 from Products.CPSUtil.mail import send_mail
+from Products.CPSUtil.text import get_final_encoding, OLD_CPS_ENCODING
 from Products.CPSCore.EventServiceTool import getPublicEventService
 from Products.CPSCourrier.relations import make_reply_to
 from Products.CPSCourrier.config import (
@@ -352,7 +353,7 @@ def init_stack_with_user(sci, wf_var_id, prefix='courrier_', **kw):
 # Mail sending operation
 #
 
-def _quote_mail(proxy, encoding='iso-8859-15', plain_text=True):
+def _quote_mail(proxy, encoding=OLD_CPS_ENCODING, plain_text=True):
     """Helper function to quote a mail in a reply or a forward"""
     tstool = getToolByName(proxy, 'translation_service')
     doc = proxy.getContent()
@@ -413,7 +414,7 @@ def _extract_attachments(proxy, filters=None):
 def forward_mail(proxy, mto, comment=''):
     """Forward an incoming mail to another external mailbox"""
     tstool = getToolByName(proxy, 'translation_service')
-    encoding = tstool.default_charset
+    encoding = get_final_encoding(tstool)
 
     mailbox_doc = aq_parent(aq_inner(proxy)).getContent()
     mfrom = mailbox_doc['from']
@@ -431,7 +432,7 @@ HTML_BODY_WRAPPER = """\
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-  <meta content="text/html;charset=ISO-8859-15" http-equiv="Content-Type">
+  <meta content="text/html;charset=%s" http-equiv="Content-Type">
   <title></title>
 </head>
 <body bgcolor="#ffffff" text="#000000">%s</body>
@@ -450,7 +451,7 @@ def compute_reply_body(proxy, plain_text=True, additionnal_info=''):
         return ''
 
     tstool = getToolByName(proxy, 'translation_service')
-    encoding = tstool.default_charset
+    encoding = get_final_encoding(tstool)
     vtool = getToolByName(proxy, 'portal_vocabularies')
     mcat = lambda label: tstool(label).encode(encoding)
     doc = proxy.getContent()
@@ -483,7 +484,7 @@ def compute_reply_body(proxy, plain_text=True, additionnal_info=''):
     if plain_text:
         return body
     else:
-        return HTML_BODY_WRAPPER % body
+        return HTML_BODY_WRAPPER % (encoding.upper(), body)
 
 
 def send_reply(proxy, text_only=False, additionnal_info='', sci_kw=None):
@@ -495,7 +496,7 @@ def send_reply(proxy, text_only=False, additionnal_info='', sci_kw=None):
     if proxy.portal_type == 'Outgoing Pmail':
         return
     tstool = getToolByName(proxy, 'translation_service')
-    encoding = tstool.default_charset
+    encoding = get_final_encoding(tstool)
     doc = proxy.getContent()
     mto = doc['mail_to']
     mcc = doc['mail_cc']
