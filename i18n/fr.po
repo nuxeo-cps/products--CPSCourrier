@@ -429,7 +429,7 @@ msgid "cpscourrier_sending_date_label"
 msgstr "Date d'envoi"
 
 msgid "cpscourrier_original_date_label"
-msgstr "Date d'émission"
+msgstr "Date d'Ã©mission"
 
 msgid "cpscourrier_form_of_address_label"
 msgstr "Formule de politesse"
