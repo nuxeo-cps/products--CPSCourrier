@@ -255,7 +255,7 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         self.assertEquals(elt.getId(), 'courrier_user:member1_ftest-mailbox')
 
         # member1 edit the document to put a "to" email address
-        proxy.getEditableContent().edit(mail_to="noone@nohost.com",
+        proxy.getEditableContent().edit(mail_to=["noone@nohost.com"],
                                         proxy=proxy)
 
         # member1 (the Pilot) can delete the mail
@@ -380,7 +380,7 @@ class CourrierOutgoingStackFunctionalTestCase(CourrierFunctionalTestCase):
         # XXX add invokeFactory kwargs to self.createOutgoing()
         # send_mail rejects mails with no recipients
         self.login('manager')
-        proxy.getEditableContent().edit(mail_to="noone@nohost.com",
+        proxy.getEditableContent().edit(mail_to=["noone@nohost.com"],
                                         proxy=proxy)
         self.flogin('member1', self.mb)
         stack = self.wftool.getStackFor(proxy, STACK_ID)
