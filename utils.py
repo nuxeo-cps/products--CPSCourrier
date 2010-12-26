@@ -26,6 +26,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.CPSSkins import minjson as json
 from Products.CPSUtil.text import toAscii
 from Products.CPSSchemas.BasicWidgets import CPSFileWidget
+from Products.CPSSchemas.widgets.indirect import IndirectWidget
 
 def hasFlexibleFields(data):
     """True if the passed dict looks like a datamodel with flexible fields.
@@ -52,6 +53,9 @@ def hasVisibleFlexibleWidget(doc):
 
     This returns an integer instead of a boolean, in order to be compatible
     with all indexing solutions.
+
+    XXX this is not directly tested, but workflow scripts tests for
+    reply_to_incoming with a template do indirectly rely on this to work.
     """
 
     try:
@@ -60,6 +64,8 @@ def hasVisibleFlexibleWidget(doc):
     except AttributeError: # no flexible layout or schema
         return 0
     for widget in layout.objectValues():
+        if isinstance(widget, IndirectWidget):
+            widget = widget.getWorkerWidget()
         if not isinstance(widget, CPSFileWidget):
             continue
         if not 'view' in widget.hidden_layout_modes: # not hidden
