@@ -1,4 +1,21 @@
 ===========================================================
+Package: CPSCourrier 0.27.1
+===========================================================
+First release built by: gracinet at: 2010-12-30T13:07:53
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- #851: adapted flexible widget introspection (for has_attachment)
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSCourrier 0.27.0
 ===========================================================
 First release built by: gracinet at: 2010-10-03T11:46:55
