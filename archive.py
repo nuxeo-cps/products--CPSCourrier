@@ -147,7 +147,8 @@ def exportCPSObjectsWithDoc(obj, parent_path, context):
     Also use the 'subdir' kw of context.writeDataFile to play nicely with
     DirectoryExportContext.
     """
-    exporter = zapi.queryMultiAdapter((obj, context), IBody)
+    exporter = zapi.queryMultiAdapter((obj, context), IBody,
+                                      'cpscourrier_archive')
     id = obj.getId().replace(' ', '_')
     if exporter:
         if exporter.name:

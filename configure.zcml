@@ -13,6 +13,7 @@
       provides="Products.GenericSetup.interfaces.IBody"
       for="Products.CPSCore.interfaces.ICPSProxy
            Products.GenericSetup.interfaces.ISetupEnviron"
+      name="cpscourrier_archive"
       />
     <!--
       The relations between docids are automatically cleaned at document
