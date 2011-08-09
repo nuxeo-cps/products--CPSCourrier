@@ -1,4 +1,21 @@
 ===========================================================
+Package: CPSCourrier 0.27.2
+===========================================================
+First release built by: gracinet at: 2011-08-09T19:38:19
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- #2420: adapter conflict with CPSDefault
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+- 
+
+===========================================================
 Package: CPSCourrier 0.27.1
 ===========================================================
 First release built by: gracinet at: 2010-12-30T13:07:53
