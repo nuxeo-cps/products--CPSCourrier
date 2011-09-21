@@ -6,7 +6,7 @@ New features
 -
 Bug fixes
 ~~~~~~~~~
--
+- #2451: used the new upgrade step category availability checker
 New internal features
 ~~~~~~~~~~~~~~~~~~~~~
-- 
+-

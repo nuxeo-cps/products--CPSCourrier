@@ -20,6 +20,7 @@ import logging
 
 import transaction
 
+
 def zCatalogUpdateProxiesPType(catalog, mapping):
     """Update portal_type of all proxies. Use the given catalog for lookup."""
     raise NotImplementedError

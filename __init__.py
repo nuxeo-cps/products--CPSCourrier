@@ -67,19 +67,31 @@ ModuleSecurityInfo('Products.CPSCourrier.relations').declarePublic(
 
 registerDirectory('skins', globals())
 
-registerUpgradeCategory('cpscourrier',
-                        title='CPS Courrier',
-                        floor_version='0.16.0',
-                        ref_product='CPSCourrier',
-                        description='Mail tracking and management system',
-                        portal_attribute='upgraded_cpscourrier_version')
-
-
 class CPSCourrierSite(CPSDefaultSite):
     """ Just a marker.
 
     I'd rather add constructors to CPSDefault. Don't know if it'd work"""
     meta_type = 'CPSCourrier Site'
+
+def is_category_applicable(portal):
+    """True if this product's upgrade step category is relevant.
+
+    Allows only subclasses of CPSCourrierSite. Portals that need more lax
+    checking can change it in the category registry.
+
+    Also, later versions of categories themselves may allow zcml registration
+    to postpone imports.
+    """
+    return isinstance(portal, CPSCourrierSite)
+
+registerUpgradeCategory('cpscourrier',
+                        title='CPS Courrier',
+                        floor_version='0.16.0',
+                        ref_product='CPSCourrier',
+                        description='Mail tracking and management system',
+                        is_applicable=is_category_applicable,
+                        portal_attribute='upgraded_cpscourrier_version')
+
 
 def initialize(registrar):
     # Extension profile registration
