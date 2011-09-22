@@ -1,4 +1,21 @@
 ===========================================================
+Package: CPSCourrier 0.27.3
+===========================================================
+First release built by: gracinet at: 2011-09-23T00:28:40
+Requires
+~~~~~~~~
+-
+New features
+~~~~~~~~~~~~
+-
+Bug fixes
+~~~~~~~~~
+- #2451: used the new upgrade step category availability checker
+New internal features
+~~~~~~~~~~~~~~~~~~~~~
+-
+
+===========================================================
 Package: CPSCourrier 0.27.2
 ===========================================================
 First release built by: gracinet at: 2011-08-09T19:38:19
